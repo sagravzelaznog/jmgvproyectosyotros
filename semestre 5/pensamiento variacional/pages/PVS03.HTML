@@ -244,14 +244,17 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion3', async (score, percentage) => {
-                alert(`¡Quiz terminado! Guardando progreso... Puntaje: ${score}`);
-                if(percentage >= 50) AppController.markSessionCompleted('sesion3');
-                
-                const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
-                localStorage.setItem('pv_student_id', tempStudentId);
-                
-                await saveProgressToFirebase(tempStudentId, 'sesion3', score, percentage >= 50);
-                window.location.href = '../index.html';
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion3');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion3', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    alert(`Obtuviste un ${percentage}%. Se requiere 100% para completar la sesión. ¡Inténtalo de nuevo!`);
+                    window.location.reload();
+                }
             });
         });
     </script>

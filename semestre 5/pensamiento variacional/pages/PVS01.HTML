@@ -139,21 +139,17 @@
         // Iniciar Quiz Kahoot
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion1', async (score, percentage) => {
-                alert(`¡Quiz terminado! Guardando progreso... Puntaje: ${score}`);
-                
-                // Marcar en local (App global)
-                if(percentage >= 50) {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion1');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion1', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    alert(`Obtuviste un ${percentage}%. Se requiere 100% para completar la sesión. ¡Inténtalo de nuevo!`);
+                    window.location.reload();
                 }
-                
-                // Guardar en Firebase
-                // Usamos un ID de estudiante temporal para la demo
-                const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
-                localStorage.setItem('pv_student_id', tempStudentId);
-                
-                await saveProgressToFirebase(tempStudentId, 'sesion1', score, percentage >= 50);
-                alert('Progreso guardado exitosamente en Firebase y de forma local.');
-                window.location.href = '../index.html';
             });
         });
     </script>

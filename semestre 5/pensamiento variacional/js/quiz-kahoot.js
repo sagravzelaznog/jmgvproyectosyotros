@@ -45,12 +45,19 @@ export class KahootQuiz {
         }
 
         const q = this.questions[this.currentQIndex];
+        
+        if (!q.shuffledOptions) {
+            const correctAnswerText = q.options[q.answerIndex];
+            q.shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            q.shuffledAnswerIndex = q.shuffledOptions.indexOf(correctAnswerText);
+        }
+
         document.getElementById('quiz-question').innerText = q.question;
         
         // Actualizar contador
         document.querySelector('.question-counter').innerText = `Pregunta ${this.currentQIndex + 1}/${this.questions.length}`;
 
-        const optionsHtml = q.options.map((opt, i) => `
+        const optionsHtml = q.shuffledOptions.map((opt, i) => `
             <button class="option-btn color-${i}" data-index="${i}">${opt}</button>
         `).join('');
         
@@ -92,7 +99,7 @@ export class KahootQuiz {
     checkAnswer(selectedIndex, btnNodes) {
         clearInterval(this.timer);
         const q = this.questions[this.currentQIndex];
-        const correctIndex = q.answerIndex;
+        const correctIndex = q.shuffledAnswerIndex;
 
         btnNodes.forEach(btn => {
             btn.disabled = true;
@@ -119,15 +126,15 @@ export class KahootQuiz {
 
     showResults() {
         const percentage = Math.round((this.score / this.questions.length) * 100);
-        let msg = percentage >= 80 ? "¡Excelente Trabajo! 🏆" : percentage >= 50 ? "¡Buen Intento! 👍" : "Sigue Practicando 📚";
+        let msg = percentage === 100 ? "¡Excelente Trabajo! 🏆" : "Debes lograr el 100% 🔄";
 
         document.getElementById('quiz-content').innerHTML = `
             <div class="quiz-score-board">
                 <h2>${msg}</h2>
                 <p>Tu puntuación es:</p>
                 <div style="font-size: 4em; font-weight: 900; color: white;">${this.score} / ${this.questions.length}</div>
-                <div style="margin: 20px 0; font-size: 1.2em; color: #10b981;">Aciertos: ${percentage}%</div>
-                <button class="btn-next-level" id="finish-btn">Guardar y Finalizar</button>
+                <div style="margin: 20px 0; font-size: 1.2em; color: ${percentage === 100 ? '#10b981' : '#ef4444'};">Aciertos: ${percentage}%</div>
+                <button class="btn-next-level" id="finish-btn">${percentage === 100 ? 'Guardar y Finalizar' : 'Reintentar Quiz'}</button>
             </div>
         `;
 

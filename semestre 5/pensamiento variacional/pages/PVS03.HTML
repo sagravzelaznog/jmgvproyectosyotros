@@ -71,6 +71,15 @@
             0% { transform: translateY(0); }
             100% { transform: translateY(-3px); }
         }
+        @keyframes pulseBolt {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #eab308); }
+            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px #eab308); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 5px #eab308); }
+        }
+        @keyframes loadEnergy {
+            0% { width: 30%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+            100% { width: 90%; background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+        }
 
         .math-box {
             background: rgba(0,0,0,0.2);
@@ -171,7 +180,13 @@
                     </li>
                     <li>
                         <b>Consumo Eléctrico Promedio Semanal:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Representa la variación de kilovatios por hora (kWh) que gasta una vivienda. Monitorear esta tasa nos permite predecir si el próximo recibo de luz llegará más alto.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Representa la variación de kilovatios por hora (kWh) que gasta una vivienda. Monitorear esta tasa nos permite predecir si el próximo recibo de luz llegará más alto.</p>
+                        <div class="css-graphic" style="justify-content: center; align-items: center; flex-direction: column;">
+                            <div style="font-size: 2.5em; animation: pulseBolt 1.5s infinite;">⚡</div>
+                            <div style="width: 80%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 15px;">
+                                <div style="height: 100%; border-radius: 3px; animation: loadEnergy 3s infinite alternate;"></div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </section>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 7: Rectángulos Circunscritos | Cálculo Integral</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∫</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>📚 Cálculo Integral</h3>
+                <p>Módulo 1: Fundamentos</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link">Sesión 2: Propiedades Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades de Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica de Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link">Sesión 5: Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link active">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 8: Práctica de Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 9: Fórmulas de Sumas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 10: La Antiderivada</a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <p>Progreso del Módulo 1</p>
+                <div class="progress-bar">
+                    <div class="progress progress-70"></div>
+                </div>
+                <p class="progress-text">7/10 sesiones</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Sesión 7: Rectángulos Circunscritos</h1>
+                <p class="session-subtitle">Cálculo de Área con Sumas Superiores (Puntos Derechos)</p>
+                <p class="session-description">Aprende a aproximar áreas bajo curvas utilizando rectángulos circunscritos y comprende cómo se relacionan con las sumas superiores de Riemann.</p>
+            </div>
+
+            <!-- Recordatorio -->
+            <div class="content-section">
+                <h2>📌 Recordatorio</h2>
+                <p>En la sesión anterior vimos cómo aproximar el área bajo una curva usando <strong>rectángulos inscritos</strong> (sumas inferiores). Hoy veremos el método complementario: <strong>rectángulos circunscritos</strong> (sumas superiores).</p>
+                
+                <div class="theorem">
+                    <p>Para una función creciente en un intervalo <em>[a, b]</em>:</p>
+                    <ul>
+                        <li>Los <strong>rectángulos inscritos</strong> usan el valor de la función en el <em>extremo izquierdo</em> de cada subintervalo.</li>
+                        <li>Los <strong>rectángulos circunscritos</strong> usan el valor de la función en el <em>extremo derecho</em> de cada subintervalo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Definición -->
+            <div class="content-section">
+                <h2>📐 Rectángulos Circunscritos</h2>
+                <p>Los rectángulos circunscritos son aquellos que se dibujan de manera que la función pase por la esquina superior derecha de cada rectángulo, quedando siempre por encima de la curva (para funciones crecientes).</p>
+                
+                <div class="formula-box">
+                    <p>La suma de Riemann por la derecha (suma superior) se calcula como:</p>
+                    <div class="formula">
+                        $$\text{Área} \approx \sum_{i=1}^{n} f(x_i^*) \Delta x$$
+                    </div>
+                    <p>donde:</p>
+                    <ul>
+                        <li>$$x_i^* = x_i$$ (punto derecho del subintervalo)</li>
+                        <li>$$\Delta x = \frac{b-a}{n}$$ (ancho de cada subintervalo)</li>
+                        <li>$$n$$ = número de rectángulos</li>
+                    </ul>
+                </div>
+                
+                <div class="note">
+                    <p>💡 <strong>Nota importante:</strong> Para funciones crecientes, las sumas superiores sobrestiman el área real bajo la curva, mientras que las sumas inferiores la subestiman.</p>
+                </div>
+            </div>
+
+            <!-- Ejemplo Completo -->
+            <div class="content-section">
+                <h2>🎯 Ejemplo Completo</h2>
+                <p>Calculemos el área bajo la curva $$f(x) = x^2$$ en el intervalo $$[0, 2]$$ usando 4 rectángulos circunscritos.</p>
+                
+                <div class="step">
+                    <h3>Paso 1: Dividir el intervalo</h3>
+                    <p>Dividimos el intervalo $$[0, 2]$$ en 4 subintervalos iguales:</p>
+                    <p>$$\Delta x = \frac{2-0}{4} = 0.5$$</p>
+                    <p>Los puntos de división son: 0, 0.5, 1.0, 1.5, 2.0</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Paso 2: Identificar los puntos derechos</h3>
+                    <p>Para rectángulos circunscritos, usamos el punto derecho de cada subintervalo:</p>
+                    <ul>
+                        <li>Primer rectángulo: $$x_1^* = 0.5$$</li>
+                        <li>Segundo rectángulo: $$x_2^* = 1.0$$</li>
+                        <li>Tercer rectángulo: $$x_3^* = 1.5$$</li>
+                        <li>Cuarto rectángulo: $$x_4^* = 2.0$$</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h3>Paso 3: Calcular las alturas</h3>
+                    <p>Evaluamos la función en cada punto derecho:</p>
+                    <ul>
+                        <li>$$f(0.5) = (0.5)^2 = 0.25$$</li>
+                        <li>$$f(1.0) = (1.0)^2 = 1.0$$</li>
+                        <li>$$f(1.5) = (1.5)^2 = 2.25$$</li>
+                        <li>$$f(2.0) = (2.0)^2 = 4.0$$</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h3>Paso 4: Calcular las áreas de los rectángulos</h3>
+                    <p>Cada rectángulo tiene un ancho de $$\Delta x = 0.5$$:</p>
+                    <ul>
+                        <li>Primer rectángulo: $$0.25 \times 0.5 = 0.125$$</li>
+                        <li>Segundo rectángulo: $$1.0 \times 0.5 = 0.5$$</li>
+                        <li>Tercer rectángulo: $$2.25 \times 0.5 = 1.125$$</li>
+                        <li>Cuarto rectángulo: $$4.0 \times 0.5 = 2.0$$</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h3>Paso 5: Sumar las áreas</h3>
+                    <p>Sumamos las áreas de todos los rectángulos:</p>
+                    <p>$$\text{Área} \approx 0.125 + 0.5 + 1.125 + 2.0 = 3.75$$</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Análisis del resultado</h3>
+                    <p>El valor exacto del área bajo $$f(x) = x^2$$ de 0 a 2 es:</p>
+                    <p>$$\int_{0}^{2} x^2 \, dx = \left. \frac{x^3}{3} \right|_0^2 = \frac{8}{3} \approx 2.667$$</p>
+                    <p>Comparación:</p>
+                    <ul>
+                        <li><strong>Área exacta:</strong> 2.667</li>
+                        <li><strong>Suma inferior (sesión 6):</strong> 1.75 (subestimación)</li>
+                        <li><strong>Suma superior (hoy):</strong> 3.75 (sobrestimación)</li>
+                        <li><strong>Error absoluto:</strong> |3.75 - 2.667| = 1.083</li>
+                    </ul>
+                    <p>Observamos que para esta función creciente, la suma superior sobrestima el área real.</p>
+                </div>
+            </div>
+
+            <!-- Visualización interactiva -->
+            <div class="content-section">
+                <h2>📊 Visualización Interactiva</h2>
+                <p>Experimenta con diferentes números de rectángulos para ver cómo mejora la aproximación. Los rectángulos <span class="highlight-blue">azules</span> muestran los rectángulos circunscritos.</p>
+
+                <div class="visualization-container">
+                    <div class="visualization-controls">
+                        <div class="control-group">
+                            <label for="circumscribed-rects">Número de Rectángulos:</label>
+                            <input type="range" id="circumscribed-rects" min="2" max="20" value="4" step="1">
+                            <span id="circumscribed-rects-value">4</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="function-selector">Seleccionar función:</label>
+                            <select id="function-selector" class="function-selector" aria-label="Seleccionar función matemática">
+                                <option value="x*x">f(x) = x²</option>
+                                <option value="Math.sin(x)">f(x) = sen(x)</option>
+                                <option value="Math.sqrt(x)">f(x) = √x</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="circumscribed-canvas" width="600" height="300"></canvas>
+                    </div>
+                    
+                    <div class="visualization-stats">
+                        <div class="stat">
+                            <span class="stat-label">Área Aproximada:</span>
+                            <span id="circumscribed-approx-area" class="stat-value">3.750</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Área Exacta:</span>
+                            <span id="circumscribed-exact-area" class="stat-value">2.667</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Error:</span>
+                            <span id="circumscribed-error" class="stat-value">1.083</span>
+                        </div>
+                    </div>
+                    
+                    <div class="visualization-legend">
+                        <div class="legend-item">
+                            <span class="legend-color blue"></span>
+                            <span>Rectángulos Circunscritos (Derechos)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color emerald"></span>
+                            <span>Rectángulos Inscritos (Izquierdos)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color blue-transparent"></span>
+                            <span>Área Aproximada</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p>💡 <strong>Observa</strong> cómo al aumentar el número de rectángulos, la diferencia entre las sumas superiores e inferiores disminuye, y ambas se acercan al área real bajo la curva.</p>
+                </div>
+            </div>
+
+            <!-- Ejercicios Prácticos -->
+            <div class="content-section">
+                <h2>🧩 Ejercicios Prácticos</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="exercise">
+                    <h3>Ejercicio 1: Cálculo de Sumas Superiores</h3>
+                    <p>Calcula la suma superior (usando rectángulos circunscritos) para aproximar el área bajo la curva $$f(x) = 2x + 1$$ desde $$x = 1$$ hasta $$x = 3$$ con 4 subintervalos.</p>
+                    
+                    <div class="exercise-options">
+                        <button class="btn-hint" onclick="showHint('exercise7_1')">Mostrar Pista</button>
+                        <div id="hint-exercise7_1" class="hint hidden"></div>
+                    </div>
+                    
+                    <div class="exercise-solution">
+                        <button class="btn-solution" onclick="toggleSolution('solution7_1')">Mostrar Solución</button>
+                        <div id="solution7_1" class="solution hidden">
+                            <p><strong>Paso 1:</strong> Calcular $$\Delta x = \frac{3-1}{4} = 0.5$$</p>
+                            <p><strong>Paso 2:</strong> Identificar los puntos derechos: 1.5, 2.0, 2.5, 3.0</p>
+                            <p><strong>Paso 3:</strong> Calcular las alturas:
+                                <ul>
+                                    <li>$$f(1.5) = 2(1.5) + 1 = 4.0$$</li>
+                                    <li>$$f(2.0) = 2(2.0) + 1 = 5.0$$</li>
+                                    <li>$$f(2.5) = 2(2.5) + 1 = 6.0$$</li>
+                                    <li>$$f(3.0) = 2(3.0) + 1 = 7.0$$</li>
+                                </ul>
+                            </p>
+                            <p><strong>Paso 4:</strong> Calcular las áreas: $$4.0×0.5 + 5.0×0.5 + 6.0×0.5 + 7.0×0.5 = 11.0$$</p>
+                            <p><strong>Respuesta:</strong> 11.0 (sobrestimación del área real que es 10)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ejercicio 2 -->
+                <div class="exercise">
+                    <h3>Ejercicio 2: Comparación de Métodos</h3>
+                    <p>Para la función $$f(x) = x^2$$ en el intervalo [0, 2], ¿cuál de las siguientes afirmaciones es correcta cuando usamos 4 rectángulos?</p>
+                    
+                    <div class="exercise-options">
+                        <button class="option-btn" onclick="checkAnswer('exercise7_2', 'a')">a) La suma inferior es 3.5</button>
+                        <button class="option-btn" onclick="checkAnswer('exercise7_2', 'b')">b) La suma superior es 3.75</button>
+                        <button class="option-btn" onclick="checkAnswer('exercise7_2', 'c')">c) La suma superior es menor que la suma inferior</button>
+                        <button class="option-btn" onclick="checkAnswer('exercise7_2', 'd')">d) Ambas sumas dan el mismo resultado</button>
+                    </div>
+                    
+                    <div id="feedback-exercise7_2" class="feedback hidden"></div>
+                    
+                    <div class="exercise-options">
+                        <button class="btn-hint" onclick="showHint('exercise7_2')">Mostrar Pista</button>
+                        <div id="hint-exercise7_2" class="hint hidden"></div>
+                    </div>
+                </div>
+                
+                <!-- Ejercicio 3 -->
+                <div class="exercise">
+                    <h3>Ejercicio 3: Cálculo de Suma Superior</h3>
+                    <p>Calcula la suma superior para aproximar el área bajo $$f(x) = 3x - 1$$ desde $$x = 1$$ hasta $$x = 4$$ usando 3 rectángulos.</p>
+                    
+                    <div class="input-group">
+                        <input type="number" id="exercise7_3-input" class="input-answer" placeholder="Ingresa tu respuesta">
+                        <button class="btn-check" onclick="checkCircumscribedSum()">Verificar</button>
+                    </div>
+                    
+                    <div id="feedback-exercise7_3" class="feedback hidden"></div>
+                    
+                    <div class="exercise-options">
+                        <button class="btn-hint" onclick="showHint('exercise7_3')">Mostrar Pista</button>
+                        <div id="hint-exercise7_3" class="hint hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="content-section">
+                <h2>🔍 Aplicaciones</h2>
+                <p>Las sumas superiores (rectángulos circunscritos) son particularmente útiles cuando queremos asegurar que no estamos subestimando una cantidad. Algunas aplicaciones incluyen:</p>
+                
+                <div class="application">
+                    <h3>1. Cálculo de materiales</h3>
+                    <p>En ingeniería civil, al calcular la cantidad de material necesario para una estructura curva, usar sumas superiores asegura que no falte material.</p>
+                </div>
+                
+                <div class="application">
+                    <h3>2. Estimación de costos</h3>
+                    <p>En economía, al estimar costos totales que aumentan con la producción, las sumas superiores proporcionan un límite superior conservador.</p>
+                </div>
+                
+                <div class="application">
+                    <h3>3. Cálculo de dosis de medicamentos</h3>
+                    <p>En farmacología, al calcular la concentración total de un fármaco en el torrente sanguíneo a lo largo del tiempo, las sumas superiores ayudan a evitar sobredosis.</p>
+                </div>
+                
+                <div class="note">
+                    <p>💡 <strong>Dato curioso:</strong> El concepto de integral definida como límite de sumas de Riemann fue formalizado por Bernhard Riemann en 1854, aunque los conceptos subyacentes se remontan a Arquímedes en la antigua Grecia.</p>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section summary">
+                <h2>📋 Resumen de la Sesión</h2>
+                
+                <div class="summary-points">
+                    <div class="summary-point">
+                        <h3>📌 Concepto Clave</h3>
+                        <p>Los <strong>rectángulos circunscritos</strong> usan el valor de la función en el <strong>extremo derecho</strong> de cada subintervalo, lo que para funciones crecientes produce una <strong>suma superior</strong> que sobrestima el área real.</p>
+                    </div>
+                    
+                    <div class="summary-point">
+                        <h3>📝 Pasos para Calcular Sumas Superiores</h3>
+                        <ol>
+                            <li>Dividir el intervalo en subintervalos iguales.</li>
+                            <li>Identificar el punto derecho de cada subintervalo.</li>
+                            <li>Calcular la altura de la función en cada punto derecho.</li>
+                            <li>Multiplicar cada altura por el ancho del subintervalo.</li>
+                            <li>Sumar todas las áreas de los rectángulos.</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="summary-point">
+                        <h3>🔍 Comparación con Sumas Inferiores</h3>
+                        <ul>
+                            <li>Para funciones crecientes: Suma inferior ≤ Área real ≤ Suma superior</li>
+                            <li>Para funciones decrecientes: Suma superior ≤ Área real ≤ Suma inferior</li>
+                            <li>Ambos métodos convergen al área exacta cuando el número de rectángulos tiende a infinito</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="summary-formula">
+                    <h3>📐 Fórmula de la Suma Superior</h3>
+                    <div class="formula">
+                        $$\text{Suma Superior} = \sum_{i=1}^{n} f(x_i) \Delta x$$
+                        <p>donde $$x_i$$ es el punto derecho del i-ésimo subintervalo y $$\Delta x = \frac{b-a}{n}$$</p>
+                    </div>
+                </div>
+                
+                <div class="summary-next">
+                    <h3>➡️ Próxima Sesión: Práctica de Sumas de Riemann</h3>
+                    <p>En la próxima sesión practicaremos con diferentes funciones y compararemos los métodos de suma inferior y superior, preparándonos para el concepto de integral definida.</p>
+                </div>
+            </div>
+            
+            <!-- Navegación entre sesiones -->
+            <div class="session-navigation">
+                <a href="sesion6.html" class="btn-nav prev">← Sesión Anterior: Rectángulos Inscritos</a>
+                <a href="#" class="btn-nav next disabled">Siguiente Sesión: Práctica de Sumas de Riemann →</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>🧮 Cálculo Integral - Sesión 7</h3>
+            <p>Rectángulos Circunscritos (Sumas Superiores)</p>
+            
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Inicio</a>
+                <a href="sesion1.html" class="footer-link">Sesión 1</a>
+                <a href="sesion5.html" class="footer-link">Sesión 5</a>
+                <a href="sesion6.html" class="footer-link">Sesión 6</a>
+                <a href="#" class="footer-link">Sesión 7</a>
+            </div>
+            
+            <div class="footer-copyright">
+                &copy; JMGV-PTEL 2025. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="interactividad.js"></script>
+    
+    <script>
+        // Inicialización específica de la sesión 7
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar la visualización de rectángulos circunscritos
+            if (document.getElementById('circumscribed-canvas')) {
+                updateCircumscribedVisualization();
+                document.getElementById('circumscribed-rects').addEventListener('input', updateCircumscribedVisualization);
+                document.getElementById('function-selector').addEventListener('change', updateCircumscribedVisualization);
+            }
+            
+            // Actualizar el valor mostrado del slider
+            const rectsSlider = document.getElementById('circumscribed-rects');
+            const rectsValue = document.getElementById('circumscribed-rects-value');
+            if (rectsSlider && rectsValue) {
+                rectsSlider.addEventListener('input', function() {
+                    rectsValue.textContent = this.value;
+                });
+            }
+        });
+        
+        // Función para verificar la suma de rectángulos circunscritos (ejercicio 3)
+        function checkCircumscribedSum() {
+            const input = document.getElementById('exercise7_3-input');
+            const userAnswer = input?.value.trim();
+            const feedbackElement = document.getElementById('feedback-exercise7_3');
+
+            if (!userAnswer || !feedbackElement) return;
+
+            // Respuesta correcta: Suma de Riemann para f(x) = 3x - 1 de 1 a 4 con n=3 usando puntos derechos
+            // Δx = 1, puntos: 2, 3, 4
+            // f(2)=5, f(3)=8, f(4)=11
+            // Suma: 5×1 + 8×1 + 11×1 = 24
+            const correctAnswer = '24';
+            const isCorrect = userAnswer === correctAnswer;
+
+            feedbackElement.classList.remove('hidden');
+            feedbackElement.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+
+            if (isCorrect) {
+                feedbackElement.innerHTML = '✅ ¡Correcto! Excelente cálculo de sumas superiores.';
+                input.disabled = true;
+                input.classList.add('correct-answer');
+            } else {
+                feedbackElement.innerHTML = `❌ Respuesta incorrecta. El resultado es 24. <br>
+                    Cálculo paso a paso:<br>
+                    1. Δx = (4-1)/3 = 1.0<br>
+                    2. Puntos derechos: 2.0, 3.0, 4.0<br>
+                    3. f(2.0) = 5, f(3.0) = 8, f(4.0) = 11<br>
+                    4. Suma: 5×1 + 8×1 + 11×1 = 24`;
+            }
+        }
+        
+        // Hacer la función accesible globalmente
+        window.checkCircumscribedSum = checkCircumscribedSum;
+    </script>
+</body>
+</html>

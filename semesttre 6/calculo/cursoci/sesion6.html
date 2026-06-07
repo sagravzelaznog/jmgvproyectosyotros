@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 6: Rectángulos Inscritos | Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar con navegación -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>🧮 Cálculo Integral</h1>
+                <p>64 Sesiones Completas</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                </li>
+
+                <!-- Módulo 1: Los Fundamentos -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        📚 Módulo 1: Fundamentos (1-21)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link">Sesión 2: Propiedades Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link">Sesión 5: Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link active">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link">Sesión 8: Práctica Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion9.html" class="nav-link">Sesión 9: Fórmulas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion10.html" class="nav-link">Sesión 10: Antiderivada</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Sesión 6: Rectángulos Inscritos</h1>
+                <p class="session-subtitle">Cálculo de Área con Sumas Inferiores (Puntos Izquierdos)</p>
+                <p class="session-description">
+                    Aprenderemos a calcular áreas bajo curvas usando rectángulos que quedan completamente debajo de la función.
+                    Esta técnica, conocida como sumas inferiores o método de puntos izquierdos, nos da una subestimación del área real.
+                </p>
+            </div>
+
+            <!-- Recordatorio de la sesión anterior -->
+            <div class="content-section">
+                <h2>🔗 Recordatorio: El Problema del Área</h2>
+                <p>
+                    En la Sesión 5 descubrimos que el área bajo una curva puede aproximarse dividiendo el intervalo en rectángulos.
+                    Ahora nos enfocaremos específicamente en los <strong>rectángulos inscritos</strong>, que siempre quedan por debajo de la función.
+                </p>
+                <div class="math-example">
+                    <p><strong>Definición:</strong> Los rectángulos inscritos usan los <em>puntos izquierdos</em> de cada subintervalo para determinar la altura de cada rectángulo.</p>
+                </div>
+            </div>
+
+            <!-- Teoría principal -->
+            <div class="content-section">
+                <h2>📐 Rectángulos Inscritos (Sumas Inferiores)</h2>
+                <p>
+                    Cuando calculamos áreas con rectángulos inscritos, cada rectángulo toca la función en su esquina superior izquierda.
+                    Esto garantiza que los rectángulos siempre queden <strong>dentro</strong> del área bajo la curva.
+                </p>
+
+                <div class="highlight-box">
+                    <h3>📊 Ventajas y Desventajas</h3>
+                    <div class="highlight-content">
+                        <p><strong>✅ Ventajas:</strong></p>
+                        <ul>
+                            <li>Siempre subestima el área real (suma inferior)</li>
+                            <li>Fácil de calcular con puntos conocidos</li>
+                            <li>Útil para garantizar límites inferiores</li>
+                        </ul>
+                        <p><strong>❌ Desventajas:</strong></p>
+                        <ul>
+                            <li>Menos precisa que otros métodos</li>
+                            <li>No aprovecha la información completa de la función</li>
+                            <li>Error sistemático cuando la función es creciente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplo paso a paso -->
+            <div class="content-section">
+                <h2>🎯 Ejemplo: Área bajo \( f(x) = x^2 \) de 0 a 2</h2>
+                <p>
+                    Calculemos el área bajo \( f(x) = x^2 \) en el intervalo \([0, 2]\) usando 4 rectángulos inscritos.
+                </p>
+
+                <div class="step-by-step">
+                    <h3>📋 Pasos:</h3>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Dividir el intervalo</h4>
+                            <p>Intervalo: \([0, 2]\) con \( n = 4 \) subintervalos</p>
+                            <p>\( \Delta x = \frac{b-a}{n} = \frac{2-0}{4} = 0.5 \)</p>
+                            <p>Subintervalos: \([0, 0.5], [0.5, 1.0], [1.0, 1.5], [1.5, 2.0]\)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Calcular puntos izquierdos</h4>
+                            <p>Para cada subintervalo, tomamos el punto izquierdo:</p>
+                            <ul>
+                                <li>Subintervalo 1: \( x_1 = 0.0 \)</li>
+                                <li>Subintervalo 2: \( x_2 = 0.5 \)</li>
+                                <li>Subintervalo 3: \( x_3 = 1.0 \)</li>
+                                <li>Subintervalo 4: \( x_4 = 1.5 \)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class-step-content">
+                            <h4>Evaluar la función</h4>
+                            <p>Calculamos \( f(x) = x^2 \) en cada punto izquierdo:</p>
+                            <div class="math-formula">
+                                \[
+                                \begin{align*}
+                                f(0.0) &= (0.0)^2 = 0.00 \\
+                                f(0.5) &= (0.5)^2 = 0.25 \\
+                                f(1.0) &= (1.0)^2 = 1.00 \\
+                                f(1.5) &= (1.5)^2 = 2.25
+                                \end{align*}
+                                \]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Calcular áreas de rectángulos</h4>
+                            <p>Área de cada rectángulo: \( \text{ancho} \times \text{alto} = \Delta x \times f(x_i) \)</p>
+                            <div class="math-formula">
+                                \[
+                                \begin{align*}
+                                A_1 &= 0.5 \times 0.00 = 0.000 \\
+                                A_2 &= 0.5 \times 0.25 = 0.125 \\
+                                A_3 &= 0.5 \times 1.00 = 0.500 \\
+                                A_4 &= 0.5 \times 2.25 = 1.125
+                                \end{align*}
+                                \]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Suma total (aproximación)</h4>
+                            <div class="math-formula">
+                                \[
+                                \text{Área aproximada} = \sum_{i=1}^{4} A_i = 0.000 + 0.125 + 0.500 + 1.125 = 1.750
+                                \]
+                            </div>
+                            <p><strong>Resultado:</strong> El área bajo \( f(x) = x^2 \) de 0 a 2 usando 4 rectángulos inscritos es aproximadamente 1.750 unidades cuadradas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison">
+                    <p><strong>💡 Comparación:</strong></p>
+                    <ul>
+                        <li><strong>Área exacta:</strong> \( \int_0^2 x^2 \, dx = \frac{8}{3} \approx 2.667 \)</li>
+                        <li><strong>Suma inferior (nuestra aproximación):</strong> 1.750</li>
+                        <li><strong>Error:</strong> \( 2.667 - 1.750 = 0.917 \) (subestimación)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Visualización interactiva -->
+            <div class="content-section">
+                <h2>📊 Visualización Interactiva</h2>
+                <p>
+                    Experimenta con diferentes números de rectángulos para ver cómo mejora la aproximación.
+                    Los rectángulos <span class="highlight-emerald">verdes</span> muestran los rectángulos inscritos.
+                </p>
+
+                <div class="visualization-container">
+                    <div class="visualization-controls">
+                        <div class="control-group">
+                            <label for="inscribed-rects">Número de Rectángulos:</label>
+                            <input type="range" id="inscribed-rects" min="2" max="20" value="4" step="1">
+                            <span id="inscribed-rects-value">4</span>
+                        </div>
+                        <div class="control-group">
+                            <button onclick="updateInscribedVisualization()" class="interactive-btn">Actualizar</button>
+                        </div>
+                    </div>
+
+                    <canvas id="inscribed-canvas" width="600" height="300" class="visualization-canvas"></canvas>
+
+                    <div class="visualization-info">
+                        <div class="info-item">
+                            <span class="info-label">Área Aproximada:</span>
+                            <span id="inscribed-approx-area" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Área Exacta:</span>
+                            <span id="inscribed-exact-area" class="info-value">2.667</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Error:</span>
+                            <span id="inscribed-error" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicios interactivos -->
+            <div class="content-section">
+                <h2>🧮 Ejercicios Prácticos</h2>
+
+                <!-- Ejercicio 6.1 -->
+                <div class="exercise-container">
+                    <h3>Ejercicio 6.1: Suma Inferior Básica</h3>
+                    <p>
+                        Calcular el área bajo \( f(x) = x + 1 \) en \([0, 2]\) usando 4 rectángulos inscritos.
+                    </p>
+
+                    <div class="multiple-choice">
+                        <p><strong>¿Cuál es la aproximación del área?</strong></p>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_1', 'a')">A) 3.0</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_1', 'b')">B) 4.0</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_1', 'c')">C) 5.0</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_1', 'd')">D) 6.0</button>
+                    </div>
+
+                    <div id="feedback-exercise6_1" class="feedback hidden"></div>
+                    <button class="hint-btn" onclick="showHint('exercise6_1')">💡 Ver pista</button>
+                    <div id="hint-exercise6_1" class="hint hidden"></div>
+                </div>
+
+                <!-- Ejercicio 6.2 -->
+                <div class="exercise-container">
+                    <h3>Ejercicio 6.2: Comparación de Métodos</h3>
+                    <p>
+                        Si calculamos el área bajo \( f(x) = x^2 \) en \([0, 1]\) usando rectángulos inscritos,
+                        ¿qué podemos decir sobre la aproximación?
+                    </p>
+
+                    <div class="multiple-choice">
+                        <p><strong>¿Qué afirmación es correcta?</strong></p>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_2', 'a')">A) Siempre sobreestima el área</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_2', 'b')">B) Siempre subestima el área</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_2', 'c')">C) Puede sobre o subestimar</button>
+                        <button class="interactive-btn" onclick="checkAnswer('exercise6_2', 'd')">D) No se puede determinar</button>
+                    </div>
+
+                    <div id="feedback-exercise6_2" class="feedback hidden"></div>
+                    <button class="hint-btn" onclick="showHint('exercise6_2')">💡 Ver pista</button>
+                    <div id="hint-exercise6_2" class="hint hidden"></div>
+                </div>
+
+                <!-- Ejercicio 6.3 -->
+                <div class="exercise-container">
+                    <h3>Ejercicio 6.3: Cálculo Numérico</h3>
+                    <p>
+                        Calcular \( S = \sum_{i=0}^{3} f(x_i) \Delta x \) donde \( f(x) = 2x + 1 \), \( [1, 3] \), \( n = 4 \).
+                    </p>
+
+                    <div class="input-exercise">
+                        <label for="exercise6_3-input">Escribe tu respuesta:</label>
+                        <input type="text" id="exercise6_3-input" placeholder="Ej: 8.5">
+                        <button class="interactive-btn" onclick="checkInscribedSum()">Verificar</button>
+                    </div>
+
+                    <div id="feedback-exercise6_3" class="feedback hidden"></div>
+                    <button class="hint-btn" onclick="showHint('exercise6_3')">💡 Ver pista</button>
+                    <div id="hint-exercise6_3" class="hint hidden"></div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="content-section">
+                <h2>🔬 Aplicaciones en la Vida Real</h2>
+                <div class="applications-grid">
+                    <div class="application-card">
+                        <h4>📊 Análisis de Datos</h4>
+                        <p>Las sumas inferiores garantizan que no sobreestimamos recursos en planificación.</p>
+                    </div>
+                    <div class="application-card">
+                        <h4>🏗️ Ingeniería Civil</h4>
+                        <p>Cálculo conservador de materiales para construcción de estructuras.</p>
+                    </div>
+                    <div class="application-card">
+                        <h4>💰 Finanzas</h4>
+                        <p>Estimaciones conservadoras de ingresos mínimos en presupuestos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section">
+                <h2>📋 Resumen de la Sesión</h2>
+                <div class="summary-box">
+                    <h3>🎯 Conceptos Clave Aprendidos:</h3>
+                    <ul>
+                        <li><strong>Rectángulos Inscritos:</strong> Usan puntos izquierdos, siempre subestiman el área</li>
+                        <li><strong>Sumas Inferiores:</strong> Garantizan una cota inferior del área real</li>
+                        <li><strong>Método Sistemático:</strong> Dividir, evaluar, multiplicar y sumar</li>
+                        <li><strong>Error Controlado:</strong> El error disminuye al aumentar el número de rectángulos</li>
+                    </ul>
+
+                    <h3>🔗 Conexión con Sesiones Anteriores:</h3>
+                    <p>
+                        Esta sesión aplica directamente los conceptos de sumas de Riemann de la Sesión 5,
+                        pero se enfoca específicamente en el método de puntos izquierdos para garantizar sumas inferiores.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="content-section">
+                <div class="navigation-buttons">
+                    <p class="nav-subtitle">¿Listo para continuar?</p>
+                    <a href="sesion7.html" class="interactive-btn btn-nav">
+                        ➡️ Continuar a Sesión 7: Rectángulos Circunscritos
+                    </a>
+                </div>
+
+                <div class="navigation-buttons">
+                    <a href="sesion5.html" class="interactive-btn btn-secondary">⬅️ Repasar Sesión 5</a>
+                    <a href="index.html" class="interactive-btn btn-secondary">🏠 Volver al Inicio</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>🧮 Cálculo Integral - Sesión 6</h3>
+            <p>Rectángulos Inscritos (Sumas Inferiores)</p>
+            <p>¡Has dominado el método de sumas inferiores!</p>
+
+            <div class="footer-links">
+                <a href="sesion7.html" class="footer-link">Continuar → Sesión 7</a>
+                <a href="sesion5.html" class="footer-link">⬅️ Sesión 5</a>
+                <a href="index.html" class="footer-link">🏠 Inicio</a>
+            </div>
+
+            <div class="footer-copyright">
+                <p>&copy; JMGV-PTEL 2025. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="interactividad.js"></script>
+</body>
+</html>

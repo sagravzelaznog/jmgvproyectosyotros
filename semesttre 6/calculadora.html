@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		/* Reset básico para asegurar consistencia */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+/* Centramos la calculadora en la pantalla */
+body {
+    display: flex; /* Usamos Flexbox para centrar */
+    justify-content: center;/* Centramos horizontalmente */
+    align-items: center;/* Centramos verticalmente */
+    height: 100vh; /* Hacemos que la altura ocupe toda la pantalla */
+    background-color: #e0e5ec; /* Color de fondo */
+}
+
+/* Contenedor principal de la calculadora */
+.calculadora {
+    background-color: #8dfa8d; /* Color de fondo */
+    width: 280px; /* Ancho de la calculadora */
+    padding: 20px; /* Espacio interno */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra */
+    display: flex; /* Usamos Flexbox */
+    flex-direction: column; /* Organizamos verticalmente */
+    gap: 15px; /* Espacio entre elementos */
+}
+
+/* Área de la pantalla */
+.numeros {
+    width: 100%;
+}
+
+/* El input de la pantalla */
+#entrada {
+    width: 100%; /* Ancho completo */
+    height: 60px; /* Altura de la pantalla */
+    background-color: #da9808; /* Color de fondo */
+    border: none; /* Sin bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 28px; /* Tamaño de fuente */
+    text-align: right; /* Alineación del texto */
+    padding: 10px 15px; /* Espacio interno */
+    color: #2c3e50; /* Color del texto */
+    outline: none; /* Sin resaltado */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); /* Sombra */
+}
+
+
+/* Contenedor del teclado */
+.botones {
+	display: flex; /* Usamos Flexbox */
+	flex-direction: column; /* Organizamos verticalmente */
+	gap: 30px; /* Espacio entre filas */
+}
+
+/* Configuración de cada fila usando Flexbox */
+.fila1 {
+	display: flex; /* Usamos Flexbox */
+	justify-content: space-between; /* Distribución equitativa */
+	gap: 20px; /* Espacio entre botones */
+	background-color: transparent; /* Sobrescribimos el fondo del HTML original */
+	height: auto;
+	width: 100%;
+}
+.fila2 {
+	display: flex; /* Usamos Flexbox */
+    justify-content: space-between; /* Distribución equitativa */
+    gap: 20px; /* Espacio entre botones */
+    background-color: transparent; /* Sobrescribimos el fondo del HTML original */
+    height: auto; /* Altura automática */
+    width: 100%; /* Ancho completo */
+			}
+.fila3 {
+    display: flex; /* Usamos Flexbox */
+    justify-content: space-between; /* Distribución equitativa */
+    gap: 20px; /* Espacio entre botones */
+    background-color: transparent; /* Sobrescribimos el fondo del HTML original */
+    height: auto; /* Altura automática */
+    width: 100%; /* Ancho completo */
+			}
+			.fila4 {
+    display: flex; /* Usamos Flexbox */
+    justify-content: space-between; /* Distribución equitativa */
+    gap: 20px; /* Espacio entre botones */
+    background-color: transparent; /* Sobrescribimos el fondo del HTML original */
+    height: auto; /* Altura automática */
+    width: 100%; /* Ancho completo */
+			}
+			
+			/* Estilo para los botones (usando tu etiqueta <bottom>) */
+				bottom {
+					background-color: #95a5a6; /* Color de fondo */
+					color: #ffffff; /* Color del texto */
+					flex: 1; /* Hace que todos los botones ocupen el mismo ancho */
+					height: 50px; /* Altura de los botones */
+					border-radius: 8px; /* Bordes redondeados */
+					display: flex; /* Usamos Flexbox */
+					justify-content: center; /* Centramos horizontalmente */
+					align-items: center; /* Centramos verticalmente */
+    font-size: 20px; /* Tamaño de fuente */
+    font-weight: 600; 
+    cursor: pointer; /* Cursor */
+    user-select: none; /* Evita seleccionar el texto */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Transición */
+    box-shadow: 0 4px 0 #7f8c8d; /* Sombra */
+			}
+			
+			/* Efecto al pasar el mouse (Hover) */
+			bottom:hover {
+				background-color: #7f8c8d; /* Color de fondo al pasar el mouse */
+			}
+			
+			/* Para ocultar las flechas del input type="number" */
+			/* #entrada::-webkit-outer-spin-button,
+			#entrada::-webkit-inner-spin-button {
+							-webkit-appearance: none;
+							margin: 0;
+			} */
+/* Efecto al hacer clic (Active) */
+/* bottom:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #7f8c8d;
+} */
+
+/* --- COLORES ESPECIALES PARA LOS OPERADORES --- */
+/* Apunta al último botón de cada fila (+, -, *, =) */
+/* .fila1 bottom:last-child,
+.fila2 bottom:last-child,
+.fila3 bottom:last-child,
+.fila4 bottom:last-child {
+    background-color: #e67e22; /* Naranja vibrante 
+    box-shadow: 0 4px 0 #d35400;
+} */
+
+/* .fila1 bottom:last-child:hover,
+.fila2 bottom:last-child:hover,
+.fila3 bottom:last-child:hover,
+.fila4 bottom:last-child:hover {
+    background-color: #d35400;
+} */
+
+/* Efecto clic para operadores */
+/* .fila1 bottom:last-child:active,
+.fila2 bottom:last-child:active,
+.fila3 bottom:last-child:active,
+.fila4 bottom:last-child:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #d35400;
+} */ 
+	</style>
+</head>
+
+<body>
+	<main>
+		<section class="calculadora">
+			<div class="numeros" id="pantalla">
+				<input type="number" id="entrada">
+			</div>
+			<div class="botones" id="teclado">
+				<section class="fila1">
+					<bottom>1</bottom>
+					<bottom>2</bottom>
+					<bottom>3</bottom>
+					<bottom>+</bottom>
+				</section>
+				<section class="fila2">
+					<bottom>4</bottom>
+					<bottom>5</bottom>
+					<bottom>6</bottom>
+					<bottom>-</bottom>
+				</section>
+				<section class="fila3">
+					<bottom>7</bottom>
+					<bottom>8</bottom>
+					<bottom>9</bottom>
+					<bottom>*</bottom>
+				</section>
+				<section class="fila4">
+					<bottom>0</bottom>
+					<bottom>.</bottom>
+					<bottom>/</bottom>
+					<bottom>=</bottom>
+				</section>
+			</div>
+		</section>
+	</main>
+</body>
+
+</html>

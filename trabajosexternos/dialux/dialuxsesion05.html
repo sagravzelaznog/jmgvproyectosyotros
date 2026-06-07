@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 05: Aprendiendo DIALux - Archivos Fotométricos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 05: Luminarias y Fotometría</h1>
+            <h2>El ADN de la Luz: Archivos IES y LDT</h2>
+            <p class="objective"><strong>Objetivo:</strong> Comprender la naturaleza de las curvas fotométricas, importar archivos de fabricantes (IES/LDT) e insertar luminarias en el modelo 3D usando diferentes disposiciones.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. ¿Qué es un Archivo Fotométrico?</h3>
+            <p>A diferencia de un modelo 3D tradicional que solo tiene forma, un archivo fotométrico contiene una matriz de datos matemáticos que describe exactamente cómo una luminaria distribuye la luz en el espacio tridimensional.</p>
+            <ul class="features-list">
+                <li><strong>IES (.ies):</strong> Formato estándar norteamericano (Illuminating Engineering Society).</li>
+                <li><strong>LDT (.ldt):</strong> Formato estándar europeo (EULUMDAT). Ambos son perfectamente leídos por DIALux.</li>
+                <li><strong>La Curva Polar:</strong> Es la representación gráfica de estos archivos. Nos muestra si la luz es concentrada (spot), difusa (flood), simétrica o asimétrica.</li>
+            </ul>
+            <div class="visual-placeholder">
+                
+            </div>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Iluminando el Espacio</h3>
+            <p>Vamos a importar luz real de un fabricante y a distribuirla en la habitación que construimos en las sesiones anteriores.</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Importar Fotometría</h4>
+                    <p>Descarga un archivo .ies o .ldt de la página web de un fabricante de iluminación real. Simplemente arrastra (Drag & Drop) el archivo desde tu explorador de Windows directamente a la ventana 3D de DIALux evo.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Elegir la Disposición</h4>
+                    <p>Ve a la pestaña <strong>"Luz"</strong>. DIALux te ofrece varias formas de colocar las luminarias: <em>Disposición individual</em>, <em>Disposición en línea</em> (ideal para tiras LED o pasillos), <em>Disposición rectangular/rejilla</em> (para oficinas) o <em>Disposición circular</em>.</p>
+                    <div class="visual-placeholder">
+                        
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Ajustar Altura de Montaje</h4>
+                    <p>Selecciona las luminarias recién colocadas. En el panel izquierdo, verifica la <strong>Altura de montaje</strong>. DIALux suele detectar el techo automáticamente, pero si es una lámpara colgante o un aplique de pared, debes ajustar este valor (Z) manualmente.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Orientación (Apuntamiento)</h4>
+                    <p>Si estás usando un proyector direccional (spot), usa la herramienta <strong>"Alinear punto de mira"</strong> (el icono de la diana). Haz clic en la luminaria y luego haz clic en el objeto o pared que deseas iluminar. La lámpara rotará automáticamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto Fotométrico</h3>
+            <p>Demuestra que puedes pensar como un verdadero Lighting Designer.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 05 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

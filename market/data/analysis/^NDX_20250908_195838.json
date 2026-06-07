@@ -1,0 +1,37 @@
+{
+    "symbol": "^NDX",
+    "timestamp": "2025-09-08 19:58:40",
+    "interval": "1d",
+    "indicators": {
+        "rsi": 59.12,
+        "macd": 117.24,
+        "macd_signal": 125.38,
+        "macd_hist": -8.14,
+        "ema20": 23485.81,
+        "ema50": 23072.82,
+        "ema200": 21524.88,
+        "bb_upper": 23962.0,
+        "bb_middle": 23553.87,
+        "bb_lower": 23145.75,
+        "atr": 268.66,
+        "stoch_k": 89.12,
+        "stoch_d": 81.62,
+        "adx": 16.91,
+        "adx_pos": 31.41,
+        "adx_neg": 22.89,
+        "vwap": 23544.62,
+        "price": 23762.3,
+        "volume": 8435850000
+    },
+    "chart_paths": {},
+    "signals": {
+        "symbol": "^NDX",
+        "price": 23762.3,
+        "buy_signal": 0,
+        "sell_signal": 0,
+        "rsi": 59.12,
+        "macd": 117.24,
+        "macd_signal": 125.38,
+        "timestamp": "2025-09-08 00:00:00"
+    }
+}

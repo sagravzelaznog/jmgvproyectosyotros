@@ -1,0 +1,41 @@
+{
+    "symbol": "^GSPC",
+    "timestamp": "2025-09-08 19:37:59",
+    "interval": "1d",
+    "indicators": {
+        "rsi": 59.59,
+        "macd": 40.87,
+        "macd_signal": 43.77,
+        "macd_hist": -2.9,
+        "ema20": 6439.9,
+        "ema50": 6330.22,
+        "ema200": 6006.17,
+        "bb_upper": 6525.16,
+        "bb_middle": 6449.44,
+        "bb_lower": 6373.73,
+        "atr": 54.33,
+        "stoch_k": 80.14,
+        "stoch_d": 83.1,
+        "adx": 21.82,
+        "adx_pos": 32.07,
+        "adx_neg": 20.6,
+        "vwap": 6445.49,
+        "price": 6495.15,
+        "volume": 5211500000
+    },
+    "chart_paths": {
+        "main": "static/plots/^GSPC_20250908_193758.html",
+        "adx": "static/plots/^GSPC_adx_20250908_193758.html",
+        "stoch": "static/plots/^GSPC_stoch_20250908_193758.html"
+    },
+    "signals": {
+        "symbol": "^GSPC",
+        "price": 6495.15,
+        "buy_signal": 0,
+        "sell_signal": 0,
+        "rsi": 59.59,
+        "macd": 40.87,
+        "macd_signal": 43.77,
+        "timestamp": "2025-09-08 00:00:00"
+    }
+}

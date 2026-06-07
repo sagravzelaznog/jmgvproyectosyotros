@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 08: Aprendiendo DIALux - Documentación y Reportes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 08: Generación de Reportes</h1>
+            <h2>El Entregable Profesional (PDF)</h2>
+            <p class="objective"><strong>Objetivo:</strong> Configurar, personalizar y exportar la documentación técnica del cálculo lumínico en formato PDF para su presentación al cliente o instalador.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. El Valor de la Documentación</h3>
+            <p>El reporte de DIALux es el documento legal y técnico que avala tu trabajo. No se trata de imprimir todas las páginas que genera el software por defecto (lo cual puede resultar en un PDF de 100 páginas ilegible), sino de seleccionar estratégicamente la información pertinente:</p>
+            <ul class="features-list">
+                <li><strong>Resumen del Proyecto:</strong> La página más importante. Muestra la iluminancia media (Em), la uniformidad (Uo) y si se cumple la normativa.</li>
+                <li><strong>Lista de Luminarias:</strong> Crucial para el departamento de compras; detalla el modelo, la cantidad y el consumo eléctrico total.</li>
+                <li><strong>Planos de Situación e Isolíneas:</strong> La guía fundamental para el electricista que realizará la instalación en obra.</li>
+            </ul>
+            
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Armando el Dossier</h3>
+            <p>Sigue estos pasos para generar un reporte limpio, profesional y directo al grano:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Ir a Documentación</h4>
+                    <p>En la barra superior de DIALux evo, cambia del modo "Construcción" o "Luz" al modo <strong>"Documentación"</strong> (el ícono de la hoja de papel).</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Datos del Proyecto</h4>
+                    <p>En el panel izquierdo, llena los campos de "Datos del proyecto". Ingresa el nombre del cliente, el nombre del proyecto y, muy importante, tus datos como diseñador a cargo de la planificación (ej. Pedagogo y Diseñador: José Manuel).</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Selección de Páginas</h4>
+                    <p>Usa la herramienta <strong>"Edición"</strong> (ícono de lápiz en el panel izquierdo). Desmarca las casillas de las páginas innecesarias. Asegúrate de dejar activas: Portada, Resumen, Lista de Luminarias y Resultados del Plano Útil.</p>
+                    
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Exportar a PDF</h4>
+                    <p>Una vez que hayas previsualizado el documento en la pantalla central y estés satisfecho con el acomodo de las vistas 3D y los datos, haz clic en el botón <strong>"Imprimir / Guardar como PDF"</strong> para generar tu entregable final.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto Documental</h3>
+            <p>Evalúa tu capacidad para presentar la información técnica correctamente.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 08 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

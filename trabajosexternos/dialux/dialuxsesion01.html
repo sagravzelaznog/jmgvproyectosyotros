@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 01: Aprendiendo DIALux</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 01: Introducción a DIALux</h1>
+            <h2>Tu Primer Proyecto de Iluminación</h2>
+            <p class="objective"><strong>Objetivo:</strong> Conocer la interfaz de DIALux evo, construir un local básico y realizar tu primer cálculo lumínico.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. Fundamentos de DIALux evo</h3>
+            <p>DIALux es el estándar de la industria para el diseño y cálculo de iluminación profesional. Para dominarlo, debemos entender su flujo de trabajo principal, el cual se divide en cuatro fases lógicas:</p>
+            <ul class="features-list">
+                <li><strong>Construcción:</strong> Modelado del espacio físico (paredes, ventanas, muebles).</li>
+                <li><strong>Luz:</strong> Selección y posicionamiento de luminarias del catálogo.</li>
+                <li><strong>Cálculo:</strong> Procesamiento de la luz rebotada e incidente (iluminancia).</li>
+                <li><strong>Documentación:</strong> Generación de reportes y renders.</li>
+            </ul>
+            <div class="visual-placeholder">
+                
+            </div>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Habitación Simple</h3>
+            <p>Sigue estos pasos en tu software para crear tu primer escenario:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Nuevo Proyecto</h4>
+                    <p>Abre DIALux evo y en la pantalla de inicio selecciona <strong>"Planificación de espacio interior vacío"</strong>. Esto omite la creación de un edificio completo y va directo al local.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Dimensiones</h4>
+                    <p>Asigna las siguientes medidas en el panel izquierdo: Longitud <strong>5.00m</strong>, Anchura <strong>4.00m</strong>, Altura <strong>2.80m</strong>. Haz clic en "Aceptar".</p>
+                    <div class="visual-placeholder">
+                        
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Insertar Luminaria</h4>
+                    <p>Ve a la pestaña <strong>"Luz"</strong>. Selecciona una luminaria genérica del catálogo integrado. Usa la herramienta <strong>"Disposición individual"</strong> y colócala en el centro del techo.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: El Cálculo</h4>
+                    <p>Haz clic en el icono de la calculadora en la barra superior (<strong>Iniciar cálculo</strong>). Observa cómo el software renderiza la distribución de la luz en las superficies.</p>
+                    <div class="visual-placeholder">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Conocimiento</h3>
+            <p>Demuestra lo que has aprendido. Selecciona la respuesta correcta lo más rápido posible.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 01 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

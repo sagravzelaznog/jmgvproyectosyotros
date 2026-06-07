@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Mercado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js" integrity="sha512-5l2s3b5sPfCffYUKdgWBi0f6hXYSzaKwWMJUZPsua8j7RzHtCQjm3pP2t3CkyoIt7gXqyhLJdBpXhQ1Mxz03Yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            background-color: #121826;
+            color: #e0e0e0;
+        }
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+        }
+        .signal-buy {
+            color: #10b981;
+        }
+        .signal-sell {
+            color: #ef4444;
+        }
+        .signal-neutral {
+            color: #9ca3af;
+        }
+        .indicator-card {
+            text-align: center;
+            padding: 15px;
+        }
+        .indicator-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .indicator-label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        .chart-container {
+            height: 500px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #334155;
+        }
+        .nav-tabs .nav-link {
+            color: #9ca3af;
+            border: 1px solid transparent;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        .nav-tabs .nav-link.active {
+            color: #e0e0e0;
+            background-color: #1e293b;
+            border-color: #334155 #334155 #1e293b;
+        }
+        .nav-tabs .nav-link:hover {
+            border-color: #334155 #334155 #1e293b;
+        }
+        .tab-content {
+            padding: 20px 0;
+        }
+        .alert {
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+        }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-graph-up me-2"></i>Análisis de Mercado
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mercados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Análisis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Alertas -->
+        <div id="alerts" class="mb-4">
+            <!-- Las alertas se cargarán aquí dinámicamente -->
+        </div>
+
+        <!-- Resumen del Mercado -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="bi bi-speedometer2 me-2"></i>Resumen del Mercado</span>
+                <span id="last-update" class="text-muted small"></span>
+            </div>
+            <div class="card-body">
+                <div class="row" id="market-overview">
+                    <!-- Los datos del mercado se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-bar-chart-line me-2"></i>Gráficos
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="marketTabs" role="tablist">
+                    <!-- Las pestañas se generarán dinámicamente -->
+                </ul>
+                <div class="tab-content" id="marketTabContent">
+                    <!-- El contenido de los gráficos se cargará aquí dinámicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicadores Técnicos -->
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-graph-up me-2"></i>Indicadores Técnicos
+            </div>
+            <div class="card-body">
+                <div class="row" id="technical-indicators">
+                    <!-- Los indicadores técnicos se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cargar datos del mercado cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarketData();
+            // Actualizar los datos cada 5 minutos
+            setInterval(loadMarketData, 300000);
+        });
+
+        function loadMarketData() {
+            fetch('/api/analyze')
+                .then(response => response.json())
+                .then(data => {
+                    updateUI(data);
+                    updateAlerts(data.alerts);
+                    updateMarketOverview(data.signals);
+                    updateCharts(data.signals);
+                    updateIndicators(data.signals);
+                    document.getElementById('last-update').textContent = `Última actualización: ${new Date().toLocaleString()}`;
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
+                    document.getElementById('alerts').innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Error al cargar los datos del mercado. Por favor, intente de nuevo más tarde.
+                        </div>
+                    `;
+                });
+        }
+
+        function updateUI(data) {
+            // Actualizar la interfaz de usuario con los datos recibidos
+            console.log('Datos actualizados:', data);
+        }
+
+        function updateAlerts(alerts) {
+            const alertsContainer = document.getElementById('alerts');
+            if (!alerts || alerts.length === 0) {
+                alertsContainer.innerHTML = '';
+                return;
+            }
+
+            let alertsHTML = '';
+            alerts.forEach(alert => {
+                let alertClass = 'alert-info';
+                let icon = 'info-circle';
+                
+                if (alert.type === 'buy') {
+                    alertClass = 'alert-success';
+                    icon = 'arrow-up-circle';
+                } else if (alert.type === 'sell') {
+                    alertClass = 'alert-danger';
+                    icon = 'arrow-down-circle';
+                } else if (alert.type === 'warning') {
+                    alertClass = 'alert-warning';
+                    icon = 'exclamation-triangle';
+                }
+
+                alertsHTML += `
+                    <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                        <i class="bi bi-${icon} me-2"></i>
+                        <strong>${alert.title}</strong> - ${alert.message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                    </div>
+                `;
+            });
+
+            alertsContainer.innerHTML = alertsHTML;
+        }
+
+        function updateMarketOverview(signals) {
+            const overviewContainer = document.getElementById('market-overview');
+            if (!signals || signals.length === 0) {
+                overviewContainer.innerHTML = '<div class="col-12 text-center text-muted">No hay datos disponibles</div>';
+                return;
+            }
+
+            let overviewHTML = '';
+            signals.forEach(signal => {
+                const changeClass = signal.change >= 0 ? 'text-success' : 'text-danger';
+                const changeIcon = signal.change >= 0 ? 'arrow-up' : 'arrow-down';
+                
+                overviewHTML += `
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${signal.name}</h5>
+                                <div class="d-flex justify-content-center align-items-baseline mb-2">
+                                    <h3 class="card-text mb-0">${signal.price.toFixed(2)}</h3>
+                                    <span class="ms-2 ${changeClass}">
+                                        <i class="bi bi-${changeIcon}"></i>
+                                        ${Math.abs(signal.change)}%
+                                    </span>
+                                </div>
+                                <div class="text-muted small">
+                                    ${signal.signal_short}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            overviewContainer.innerHTML = overviewHTML;
+        }
+
+        function updateCharts(signals) {
+            const tabsContainer = document.querySelector('#marketTabs');
+            const tabsContentContainer = document.querySelector('#marketTabContent');
+            
+            // Limpiar pestañas y contenido existente
+            tabsContainer.innerHTML = '';
+            tabsContentContainer.innerHTML = '';
+            
+            signals.forEach((signal, index) => {
+                const isActive = index === 0;
+                
+                // Crear pestaña
+                const tab = document.createElement('li');
+                tab.className = 'nav-item';
+                tab.role = 'presentation';
+                tab.innerHTML = `
+                    <button class="nav-link ${isActive ? 'active' : ''}" 
+                            id="tab-${signal.name}" 
+                            data-bs-toggle="tab" 
+                            data-bs-target="#content-${signal.name}" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="content-${signal.name}" 
+                            aria-selected="${isActive}">
+                        ${signal.name}
+                    </button>
+                `;
+                tabsContainer.appendChild(tab);
+                
+                // Crear contenido de la pestaña
+                const tabContent = document.createElement('div');
+                tabContent.className = `tab-pane fade ${isActive ? 'show active' : ''}`;
+                tabContent.id = `content-${signal.name}`;
+                tabContent.role = 'tabpanel';
+                tabContent.setAttribute('aria-labelledby', `tab-${signal.name}`);
+                
+                // Agregar contenedor del gráfico
+                tabContent.innerHTML = `
+                    <div class="chart-container" id="chart-${signal.name}">
+                        <div style="width: 100%; height: 500px; position: relative;">
+                            <div class="spinner-border text-primary" role="status" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                tabsContentContainer.appendChild(tabContent);
+                
+                // Cargar el gráfico en un iframe
+                if (signal.charts && signal.charts.main) {
+                    const chartContainer = document.getElementById(`chart-${signal.name}`);
+                    chartContainer.innerHTML = `
+                        <div style="width: 100%; height: 500px; position: relative;">
+                            <iframe 
+                                src="/${signal.charts.main}" 
+                                style="width: 100%; height: 100%; border: none; opacity: 0; transition: opacity 0.3s;"
+                                onload="this.style.opacity = 1; this.parentNode.querySelector('.spinner-border').style.display = 'none';"
+                                onerror="this.parentNode.innerHTML = '<div class=\'alert alert-warning\'>Error al cargar el gráfico. <a href=\'/' + this.src + '\' target=\'_blank\'>Abrir en una pestaña nueva</a></div>'"
+                            ></iframe>
+                            <div class="spinner-border text-primary" role="status" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            // Inicializar pestañas de Bootstrap
+            const tabTriggerList = [].slice.call(document.querySelectorAll('button[data-bs-toggle="tab"]'));
+            tabTriggerList.forEach(tabTriggerEl => {
+                new bootstrap.Tab(tabTriggerEl);
+            });
+        }
+
+        function updateIndicators(signals) {
+            const indicatorsContainer = document.getElementById('technical-indicators');
+            if (!signals || signals.length === 0) {
+                indicatorsContainer.innerHTML = '<div class="col-12 text-center text-muted">No hay indicadores disponibles</div>';
+                return;
+            }
+
+            let indicatorsHTML = '';
+            
+            signals.forEach(signal => {
+                // Indicador RSI
+                let rsiClass = '';
+                let rsiIcon = '';
+                if (signal.rsi > 70) {
+                    rsiClass = 'text-danger';
+                    rsiIcon = 'arrow-down';
+                } else if (signal.rsi < 30) {
+                    rsiClass = 'text-success';
+                    rsiIcon = 'arrow-up';
+                } else {
+                    rsiClass = 'text-muted';
+                    rsiIcon = 'arrow-right';
+                }
+
+                // Indicador MACD
+                let macdClass = '';
+                let macdIcon = '';
+                if (signal.macd_hist > 0) {
+                    macdClass = 'text-success';
+                    macdIcon = 'arrow-up';
+                } else {
+                    macdClass = 'text-danger';
+                    macdIcon = 'arrow-down';
+                }
+
+                // Indicador Media Móvil
+                let maClass = '';
+                let maIcon = '';
+                if (signal.ma_signal === 'buy') {
+                    maClass = 'text-success';
+                    maIcon = 'arrow-up';
+                } else if (signal.ma_signal === 'sell') {
+                    maClass = 'text-danger';
+                    maIcon = 'arrow-down';
+                } else {
+                    maClass = 'text-muted';
+                    maIcon = 'arrow-right';
+                }
+
+                // Indicador BB
+                let bbClass = '';
+                let bbIcon = '';
+                if (signal.bb_signal === 'overbought') {
+                    bbClass = 'text-danger';
+                    bbIcon = 'arrow-down';
+                } else if (signal.bb_signal === 'oversold') {
+                    bbClass = 'text-success';
+                    bbIcon = 'arrow-up';
+                } else {
+                    bbClass = 'text-muted';
+                    bbIcon = 'arrow-right';
+                }
+
+                indicatorsHTML += `
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">${signal.name} - Indicadores</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <div class="indicator-card">
+                                            <div class="indicator-value ${rsiClass}">
+                                                ${signal.rsi ? signal.rsi.toFixed(2) : 'N/A'}
+                                                <i class="bi bi-${rsiIcon}"></i>
+                                            </div>
+                                            <div class="indicator-label">RSI (14)</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="indicator-card">
+                                            <div class="indicator-value ${macdClass}">
+                                                ${signal.macd_hist ? signal.macd_hist.toFixed(4) : 'N/A'}
+                                                <i class="bi bi-${macdIcon}"></i>
+                                            </div>
+                                            <div class="indicator-label">MACD Hist</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="indicator-card">
+                                            <div class="indicator-value ${maClass}">
+                                                ${signal.ma_signal ? signal.ma_signal.toUpperCase() : 'N/A'}
+                                                <i class="bi bi-${maIcon}"></i>
+                                            </div>
+                                            <div class="indicator-label">Media Móvil</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="indicator-card">
+                                            <div class="indicator-value ${bbClass}">
+                                                ${signal.bb_signal ? signal.bb_signal.toUpperCase() : 'N/A'}
+                                                <i class="bi bi-${bbIcon}"></i>
+                                            </div>
+                                            <div class="indicator-label">Bollinger Bands</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-sm btn-outline-primary" onclick="showDetailedAnalysis('${signal.name}')">
+                                    Ver Análisis Detallado
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            indicatorsContainer.innerHTML = indicatorsHTML;
+        }
+
+        function showDetailedAnalysis(symbol) {
+            // Aquí puedes implementar la lógica para mostrar un análisis más detallado
+            // Por ejemplo, abrir un modal o redirigir a otra página
+            alert(`Mostrando análisis detallado para ${symbol}`);
+            
+            // Ejemplo de cómo podrías implementar un modal:
+            /*
+            const modal = new bootstrap.Modal(document.getElementById('analysisModal'));
+            document.getElementById('modalTitle').textContent = `Análisis Detallado - ${symbol}`;
+            // Cargar datos adicionales y mostrarlos en el modal
+            modal.show();
+            */
+        }
+    </script>
+</body>
+</html>

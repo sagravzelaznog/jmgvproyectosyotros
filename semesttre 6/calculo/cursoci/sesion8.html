@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8: Práctica de Sumas de Riemann | Cálculo Integral</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∫</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>📚 Cálculo Integral</h3>
+                <p>Módulo 1: Fundamentos</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Introducción a la Suma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link">Sesión 2: Práctica de Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades de las Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica Avanzada</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link">Sesión 5: El Problema del Área</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link active">Sesión 8: Práctica de Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 9: Fórmulas de Sumas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 10: La Antiderivada</a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <p>Progreso del Módulo 1</p>
+                <div class="progress-bar">
+                    <div class="progress progress-80"></div>
+                </div>
+                <p class="progress-text">8/10 sesiones</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Sesión 8: Práctica de Sumas de Riemann</h1>
+                <p class="session-subtitle">Aplicación con la función f(x) = x² + 2</p>
+                <p class="session-description">Refuerza tu comprensión de las sumas de Riemann aplicando tanto rectángulos inscritos como circunscritos a una función cuadrática.</p>
+            </div>
+
+            <!-- Recordatorio -->
+            <div class="content-section">
+                <h2>📌 Recordatorio</h2>
+                <p>En las sesiones anteriores aprendimos a aproximar áreas usando:</p>
+                <ul class="reminder-list">
+                    <li><strong>Sumas inferiores:</strong> Usando el valor mínimo en cada subintervalo (rectángulos inscritos)</li>
+                    <li><strong>Sumas superiores:</strong> Usando el valor máximo en cada subintervalo (rectángulos circunscritos)</li>
+                </ul>
+                <p>Hoy aplicaremos ambos métodos a la función f(x) = x² + 2.</p>
+            </div>
+
+            <!-- Ejemplo Guiado -->
+            <div class="content-section">
+                <h2>🎯 Ejemplo Guiado</h2>
+                <p>Vamos a calcular el área bajo la curva de f(x) = x² + 2 en el intervalo [1, 3] usando 4 subintervalos.</p>
+                
+                <div class="step">
+                    <h3>Paso 1: Dividir el intervalo</h3>
+                    <p>Dividimos [1, 3] en 4 subintervalos iguales:</p>
+                    <div class="math-formula">
+                        <p>Δx = (3 - 1)/4 = 0.5</p>
+                        <p>Puntos de división: x₀=1.0, x₁=1.5, x₂=2.0, x₃=2.5, x₄=3.0</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3>Paso 2: Calcular la suma inferior (rectángulos inscritos)</h3>
+                    <p>Usamos el valor mínimo de f en cada subintervalo:</p>
+                    <div class="math-formula">
+                        <p>L₄ = f(1.0)⋅0.5 + f(1.5)⋅0.5 + f(2.0)⋅0.5 + f(2.5)⋅0.5</p>
+                        <p>L₄ = (1²+2)⋅0.5 + (1.5²+2)⋅0.5 + (2.0²+2)⋅0.5 + (2.5²+2)⋅0.5</p>
+                        <p>L₄ = 3⋅0.5 + 4.25⋅0.5 + 6⋅0.5 + 8.25⋅0.5</p>
+                        <p>L₄ = 1.5 + 2.125 + 3 + 4.125 = 10.75</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3>Paso 3: Calcular la suma superior (rectángulos circunscritos)</h3>
+                    <p>Usamos el valor máximo de f en cada subintervalo:</p>
+                    <div class="math-formula">
+                        <p>U₄ = f(1.5)⋅0.5 + f(2.0)⋅0.5 + f(2.5)⋅0.5 + f(3.0)⋅0.5</p>
+                        <p>U₄ = (1.5²+2)⋅0.5 + (2.0²+2)⋅0.5 + (2.5²+2)⋅0.5 + (3.0²+2)⋅0.5</p>
+                        <p>U₄ = 4.25⋅0.5 + 6⋅0.5 + 8.25⋅0.5 + 11⋅0.5</p>
+                        <p>U₄ = 2.125 + 3 + 4.125 + 5.5 = 14.75</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h3>Paso 4: Interpretación</h3>
+                    <p>El área real bajo la curva está entre 10.75 y 14.75 unidades cuadradas.</p>
+                    <p>Al aumentar el número de subintervalos (n), la diferencia entre Lₙ y Uₙ disminuirá, y ambas se acercarán al área exacta.</p>
+                </div>
+            </div>
+
+            <!-- Visualización Interactiva -->
+            <div class="content-section">
+                <h2>📊 Visualización Interactiva</h2>
+                <p>Experimenta con diferentes números de rectángulos para ver cómo mejoran las aproximaciones.</p>
+
+                <div class="visualization-container">
+                    <div class="visualization-controls">
+                        <div class="control-group">
+                            <label for="riemann-rects">Número de Rectángulos:</label>
+                            <input type="range" id="riemann-rects" min="2" max="20" value="4" step="1">
+                            <span id="riemann-rects-value">4</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="riemann-type">Tipo de Suma:</label>
+                            <select id="riemann-type" class="function-selector" aria-label="Seleccionar tipo de suma de Riemann">
+                                <option value="lower">Suma Inferior (Inscritos)</option>
+                                <option value="upper">Suma Superior (Circunscritos)</option>
+                                <option value="midpoint">Punto Medio</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="riemann-canvas" width="600" height="300"></canvas>
+                    </div>
+                    
+                    <div class="visualization-stats">
+                        <div class="stat">
+                            <span class="stat-label">Área Aproximada:</span>
+                            <span id="riemann-approx-area" class="stat-value">0.000</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Error:</span>
+                            <span id="riemann-error" class="stat-value">0.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="visualization-legend">
+                        <div class="legend-item">
+                            <span class="legend-color blue"></span>
+                            <span>Rectángulos de la Suma de Riemann</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color emerald"></span>
+                            <span>Función f(x) = x² + 2</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p>💡 <strong>Observa</strong> cómo al aumentar el número de rectángulos, la aproximación se acerca al área real bajo la curva.</p>
+                </div>
+            </div>
+
+            <!-- Ejercicios Prácticos -->
+            <div class="content-section">
+                <h2>🧩 Ejercicios Prácticos</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="exercise">
+                    <h3>Ejercicio 1: Cálculo Manual</h3>
+                    <p>Calcula manualmente la suma inferior (L₄) y superior (U₄) para f(x) = x² + 2 en el intervalo [0, 2] con 4 subintervalos.</p>
+                    <div class="exercise-solution">
+                        <button class="btn btn-solution" onclick="toggleSolution('solution1')">Mostrar Solución</button>
+                        <div id="solution1" class="solution">
+                            <p><strong>Paso 1:</strong> Δx = (2-0)/4 = 0.5</p>
+                            <p><strong>Paso 2 (L₄):</strong> f(0)⋅0.5 + f(0.5)⋅0.5 + f(1.0)⋅0.5 + f(1.5)⋅0.5 = 2⋅0.5 + 2.25⋅0.5 + 3⋅0.5 + 4.25⋅0.5 = 5.75</p>
+                            <p><strong>Paso 3 (U₄):</strong> f(0.5)⋅0.5 + f(1.0)⋅0.5 + f(1.5)⋅0.5 + f(2.0)⋅0.5 = 2.25⋅0.5 + 3⋅0.5 + 4.25⋅0.5 + 6⋅0.5 = 7.75</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="exercise">
+                    <h3>Ejercicio 2: Generalización</h3>
+                    <p>Para f(x) = x² + 2 en [a, b] con n subintervalos, encuentra una expresión general para:</p>
+                    <ol>
+                        <li>El ancho de cada subintervalo (Δx)</li>
+                        <li>Los puntos de división x₀, x₁, ..., xₙ</li>
+                        <li>La suma inferior Lₙ</li>
+                        <li>La suma superior Uₙ</li>
+                    </ol>
+                    <div class="exercise-solution">
+                        <button class="btn btn-solution" onclick="toggleSolution('solution2')">Mostrar Solución</button>
+                        <div id="solution2" class="solution">
+                            <p><strong>1. Ancho de subintervalo:</strong> Δx = (b - a)/n</p>
+                            <p><strong>2. Puntos de división:</strong> xᵢ = a + i⋅Δx para i = 0, 1, 2, ..., n</p>
+                            <p><strong>3. Suma inferior (Lₙ):</strong> Σᵢ₌₁ⁿ [f(xᵢ₋₁)]⋅Δx</p>
+                            <p><strong>4. Suma superior (Uₙ):</strong> Σᵢ₌₁ⁿ [f(xᵢ)]⋅Δx</p>
+                            <p>Donde f(x) = x² + 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="content-section">
+                <h2>🔍 Aplicaciones en la Vida Real</h2>
+                <p>Las sumas de Riemann tienen aplicaciones en diversas áreas:</p>
+                
+                <div class="application">
+                    <h3>Física</h3>
+                    <p>Cálculo del trabajo realizado por una fuerza variable, distancia recorrida con velocidad variable, etc.</p>
+                </div>
+                
+                <div class="application">
+                    <h3>Economía</h3>
+                    <p>Cálculo del ingreso total cuando la tasa de ingreso varía con el tiempo.</p>
+                </div>
+                
+                <div class="application">
+                    <h3>Ingeniería</h3>
+                    <p>Cálculo de volúmenes, centros de masa y trabajo en sistemas con propiedades variables.</p>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section summary">
+                <h2>📝 Resumen de la Sesión</h2>
+                <ul>
+                    <li>Practicamos el cálculo de sumas de Riemann para f(x) = x² + 2</li>
+                    <li>Vimos cómo las sumas inferiores y superiores se acercan al área real al aumentar n</li>
+                    <li>Exploramos aplicaciones prácticas de las sumas de Riemann</li>
+                </ul>
+                
+                <div class="next-steps">
+                    <h3>Próximos pasos:</h3>
+                    <p>En la siguiente sesión aprenderemos fórmulas generales para calcular sumatorias comunes, lo que nos permitirá calcular límites de sumas de Riemann de manera más eficiente.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Acerca de este curso</h4>
+                <p>Curso de Cálculo Integral - Módulo 1: Fundamentos</p>
+                <p>Diseñado para estudiantes de preparatoria</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="sesion7.html">← Sesión Anterior: Rectángulos Circunscritos</a></li>
+                    <li><a href="sesion9.html">Siguiente Sesión: Fórmulas de Sumas Básicas →</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Curso de Cálculo Integral. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Función para alternar la visibilidad de las soluciones
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Configuración de la visualización interactiva
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('riemann-canvas');
+            const ctx = canvas.getContext('2d');
+            const rectsInput = document.getElementById('riemann-rects');
+            const rectsValue = document.getElementById('riemann-rects-value');
+            const riemannType = document.getElementById('riemann-type');
+            const approxArea = document.getElementById('riemann-approx-area');
+            const errorSpan = document.getElementById('riemann-error');
+            
+            // Configuración del gráfico
+            const padding = 40;
+            const width = canvas.width;
+            const height = canvas.height;
+            const xMin = 0;
+            const xMax = 4;
+            const yMin = 0;
+            const yMax = 12;
+            
+            // Función para mapear coordenadas del mundo real a píxeles
+            function mapX(x) {
+                return padding + (x - xMin) * (width - 2 * padding) / (xMax - xMin);
+            }
+            
+            function mapY(y) {
+                return height - padding - (y - yMin) * (height - 2 * padding) / (yMax - yMin);
+            }
+            
+            // Función f(x) = x² + 2
+            function f(x) {
+                return x * x + 2;
+            }
+            
+            // Dibujar ejes
+            function drawAxes() {
+                ctx.beginPath();
+                // Eje X
+                ctx.moveTo(0, mapY(0));
+                ctx.lineTo(width, mapY(0));
+                // Eje Y
+                ctx.moveTo(mapX(0), 0);
+                ctx.lineTo(mapX(0), height);
+                ctx.strokeStyle = '#666';
+                ctx.stroke();
+                
+                // Etiquetas de ejes
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.fillText('x', width - 10, mapY(0) - 5);
+                ctx.fillText('y', mapX(0) + 5, 15);
+                
+                // Marcas en los ejes
+                for (let x = xMin; x <= xMax; x++) {
+                    const xPos = mapX(x);
+                    ctx.beginPath();
+                    ctx.moveTo(xPos, mapY(0) - 3);
+                    ctx.lineTo(xPos, mapY(0) + 3);
+                    ctx.stroke();
+                    if (x !== 0) {
+                        ctx.fillText(x, xPos - 3, mapY(0) + 15);
+                    }
+                }
+                
+                for (let y = yMin; y <= yMax; y += 2) {
+                    const yPos = mapY(y);
+                    ctx.beginPath();
+                    ctx.moveTo(mapX(0) - 3, yPos);
+                    ctx.lineTo(mapX(0) + 3, yPos);
+                    ctx.stroke();
+                    if (y !== 0) {
+                        ctx.fillText(y, mapX(0) - 25, yPos + 3);
+                    }
+                }
+            }
+            
+            // Dibujar la función
+            function drawFunction() {
+                ctx.beginPath();
+                let firstPoint = true;
+                for (let x = xMin; x <= xMax; x += 0.01) {
+                    const y = f(x);
+                    if (y >= yMin && y <= yMax) {
+                        if (firstPoint) {
+                            ctx.moveTo(mapX(x), mapY(y));
+                            firstPoint = false;
+                        } else {
+                            ctx.lineTo(mapX(x), mapY(y));
+                        }
+                    }
+                }
+                ctx.strokeStyle = 'var(--primary-emerald)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+            
+            // Dibujar rectángulos de Riemann
+            function drawRiemann() {
+                const n = parseInt(rectsInput.value);
+                const type = riemannType.value;
+                const a = 1;
+                const b = 3;
+                const dx = (b - a) / n;
+                let totalArea = 0;
+                
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+                
+                for (let i = 0; i < n; i++) {
+                    const x0 = a + i * dx;
+                    const x1 = x0 + dx;
+                    let height;
+                    
+                    if (type === 'lower') {
+                        // Mínimo en [x0, x1] para f(x) = x² + 2 (creciente en [1,3])
+                        height = f(x0);
+                    } else if (type === 'upper') {
+                        // Máximo en [x0, x1] para f(x) = x² + 2 (creciente en [1,3])
+                        height = f(x1);
+                    } else {
+                        // Punto medio
+                        const mid = (x0 + x1) / 2;
+                        height = f(mid);
+                    }
+                    
+                    const area = height * dx;
+                    totalArea += area;
+                    
+                    // Dibujar rectángulo
+                    ctx.fillRect(
+                        mapX(x0),
+                        mapY(0),
+                        mapX(x1) - mapX(x0),
+                        mapY(0) - mapY(height)
+                    );
+                }
+                
+                // Actualizar estadísticas
+                approxArea.textContent = totalArea.toFixed(4);
+                const exactArea = 28/3; // ∫(x²+2)dx de 1 a 3 = (x³/3 + 2x)|₁³ = 9 + 6 - 1/3 - 2 = 28/3
+                const error = Math.abs(totalArea - exactArea);
+                errorSpan.textContent = error.toFixed(4);
+            }
+            
+            // Función para actualizar la visualización
+            function updateVisualization() {
+                ctx.clearRect(0, 0, width, height);
+                drawAxes();
+                drawFunction();
+                drawRiemann();
+                rectsValue.textContent = rectsInput.value;
+            }
+            
+            // Event listeners
+            rectsInput.addEventListener('input', updateVisualization);
+            riemannType.addEventListener('change', updateVisualization);
+            
+            // Inicializar visualización
+            updateVisualization();
+        });
+    </script>
+</body>
+</html>

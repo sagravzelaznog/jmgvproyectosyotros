@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Mercado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js" integrity="sha512-5l2s3b5sPfCffYUKdgWBi0f6hXYSzaKwWMJUZPsua8j7RzHtCQjm3pP2t3CkyoIt7gXqyhLJdBpXhQ1Mxz03Yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            background-color: #121826;
+            color: #e0e0e0;
+        }
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            font-weight: 600;
+        }
+        .signal-buy {
+            color: #10b981;
+        }
+        .signal-sell {
+            color: #ef4444;
+        }
+        .signal-neutral {
+            color: #9ca3af;
+        }
+        .indicator-card {
+            text-align: center;
+            padding: 15px;
+        }
+        .indicator-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .indicator-label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .chart-container {
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        .alert-card {
+            border-left: 4px solid #f59e0b;
+        }
+        .alert-high {
+            border-left-color: #ef4444;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .navbar {
+            background-color: #0f172a !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .signal-meter {
+            height: 8px;
+            border-radius: 4px;
+            background: #2d3748;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .signal-meter-fill {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+        .signal-meter-buy {
+            background: linear-gradient(90deg, #10b981, #34d399);
+        }
+        .signal-meter-sell {
+            background: linear-gradient(90deg, #ef4444, #f87171);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-graph-up me-2"></i>Análisis de Mercado
+            </a>
+            <button class="btn btn-outline-light" id="refreshBtn">
+                <i class="bi bi-arrow-clockwise"></i> Actualizar
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Alerts Section -->
+        <div class="row mb-4" id="alertsContainer">
+            <div class="col-12">
+                <div class="card alert-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-bell-fill me-2"></i>Alertas</span>
+                        <span class="badge bg-warning text-dark" id="alertCount">0</span>
+                    </div>
+                    <div class="card-body" id="alertsList">
+                        <p class="mb-0 text-muted">No hay alertas activas en este momento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4 class="mb-3">Resumen del Mercado</h4>
+            </div>
+            <div class="col-md-4" id="marketOverview">
+                <!-- Market cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4 class="mb-3">Análisis Técnico</h4>
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="marketTabs" role="tablist">
+                            <!-- Tabs will be inserted here by JavaScript -->
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="marketTabContent">
+                            <!-- Tab content will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicators Section -->
+        <div class="row mb-4" id="indicatorsSection">
+            <div class="col-12">
+                <h4 class="mb-3">Indicadores Técnicos</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" id="indicatorsContainer">
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-center text-muted py-3 mt-5">
+        <div class="container">
+            <small>Última actualización: <span id="lastUpdate">-</span></small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial load
+            loadMarketData();
+            
+            // Set up refresh button
+            document.getElementById('refreshBtn').addEventListener('click', loadMarketData);
+            
+            // Auto-refresh every 5 minutes
+            setInterval(loadMarketData, 5 * 60 * 1000);
+        });
+        
+        function loadMarketData() {
+            // Show loading state
+            document.getElementById('refreshBtn').disabled = true;
+            document.getElementById('refreshBtn').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+            
+            // Fetch market data
+            fetch('/api/analyze')
+                .then(response => response.json())
+                .then(data => {
+                    updateUI(data);
+                    document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
+                })
+                .catch(error => {
+                    console.error('Error fetching market data:', error);
+                    alert('Error al cargar los datos del mercado. Por favor, intente de nuevo.');
+                })
+                .finally(() => {
+                    document.getElementById('refreshBtn').disabled = false;
+                    document.getElementById('refreshBtn').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar';
+                });
+        }
+        
+        function updateUI(data) {
+            updateAlerts(data.alerts);
+            updateMarketOverview(data.signals);
+            updateCharts(data.signals);
+            updateIndicators(data.signals);
+        }
+        
+        function updateAlerts(alerts) {
+            const alertsContainer = document.getElementById('alertsList');
+            const alertCount = document.getElementById('alertCount');
+            
+            if (alerts.length === 0) {
+                alertsContainer.innerHTML = '<p class="mb-0 text-muted">No hay alertas activas en este momento.</p>';
+                alertCount.textContent = '0';
+                return;
+            }
+            
+            alertCount.textContent = alerts.length;
+            alertsContainer.innerHTML = '';
+            
+            alerts.forEach(alert => {
+                const alertElement = document.createElement('div');
+                alertElement.className = `alert ${alert.type === 'BUY' ? 'alert-success' : 'alert-danger'} mb-2`;
+                alertElement.role = 'alert';
+                alertElement.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>${alert.symbol}</strong> - ${alert.type} (${alert.strength}%)
+                            <div class="signal-meter">
+                                <div class="signal-meter-fill ${alert.type === 'BUY' ? 'signal-meter-buy' : 'signal-meter-sell'}" 
+                                     style="width: ${alert.strength}%"></div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <small>Precio: $${alert.price.toFixed(2)}</small>
+                        </div>
+                    </div>
+                `;
+                alertsContainer.appendChild(alertElement);
+            });
+            
+            // Add animation to high-priority alerts
+            document.querySelectorAll('.alert').forEach(alert => {
+                const strength = alert.textContent.match(/\(([^)]+)%\)/);
+                if (strength && parseInt(strength[1]) >= 80) {
+                    alert.classList.add('alert-high');
+                }
+            });
+        }
+        
+        function updateMarketOverview(signals) {
+            const overviewContainer = document.getElementById('marketOverview');
+            overviewContainer.innerHTML = '';
+            
+            signals.forEach(signal => {
+                const isPositive = signal.buy_signal > signal.sell_signal;
+                const signalStrength = Math.max(signal.buy_signal, signal.sell_signal);
+                const signalType = isPositive ? 'COMPRA' : 'VENTA';
+                
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0">${signal.name}</h5>
+                            <span class="badge ${isPositive ? 'bg-success' : 'bg-danger'}">${signalType}</span>
+                        </div>
+                        <h3 class="mb-3">$${signal.price.toFixed(2)}</h3>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">Señal de ${isPositive ? 'compra' : 'venta'}</small>
+                                <div class="signal-meter">
+                                    <div class="signal-meter-fill ${isPositive ? 'signal-meter-buy' : 'signal-meter-sell'}" 
+                                         style="width: ${signalStrength}%"></div>
+                                </div>
+                            </div>
+                            <span class="badge bg-${isPositive ? 'success' : 'danger'}">${signalStrength}%</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to show detailed analysis
+                card.addEventListener('click', () => {
+                    showDetailedAnalysis(signal.name);
+                });
+                
+                card.style.cursor = 'pointer';
+                overviewContainer.appendChild(card);
+            });
+        }
+        
+        function updateCharts(signals) {
+            const tabsContainer = document.querySelector('#marketTabs');
+            const tabsContentContainer = document.querySelector('#marketTabContent');
+            
+            // Clear existing tabs and content
+            tabsContainer.innerHTML = '';
+            tabsContentContainer.innerHTML = '';
+            
+            signals.forEach((signal, index) => {
+                const isActive = index === 0;
+                
+                // Create tab
+                const tab = document.createElement('li');
+                tab.className = 'nav-item';
+                tab.role = 'presentation';
+                tab.innerHTML = `
+                    <button class="nav-link ${isActive ? 'active' : ''}" 
+                            id="tab-${signal.name}" 
+                            data-bs-toggle="tab" 
+                            data-bs-target="#content-${signal.name}" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="content-${signal.name}" 
+                            aria-selected="${isActive}">
+                        ${signal.name}
+                    </button>
+                `;
+                tabsContainer.appendChild(tab);
+                
+                // Create tab content
+                const tabContent = document.createElement('div');
+                tabContent.className = `tab-pane fade ${isActive ? 'show active' : ''}`;
+                tabContent.id = `content-${signal.name}`;
+                tabContent.role = 'tabpanel';
+                tabContent.setAttribute('aria-labelledby', `tab-${signal.name}`);
+                
+                // Add chart container
+                tabContent.innerHTML = `
+                    <div class="chart-container" id="chart-${signal.name}"></div>
+                `;
+                tabsContentContainer.appendChild(tabContent);
+                
+                // Load chart directly using Plotly
+                if (signal.charts && signal.charts.main) {
+                    fetch(`/${signal.charts.main}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Extract the div containing the plot
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const plotDiv = doc.querySelector('.plotly-graph-div');
+                            if (plotDiv) {
+                                const chartContainer = document.getElementById(`chart-${signal.name}`);
+                                chartContainer.innerHTML = '';
+                                chartContainer.appendChild(plotDiv);
+                                // Re-initialize the plot
+                                if (window.Plotly) {
+                                    window.Plotly.newPlot(chartContainer, JSON.parse(plotDiv.getAttribute('data-plotly')));
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading chart:', error);
+                            const chartContainer = document.getElementById(`chart-${signal.name}`);
+                            chartContainer.innerHTML = `
+                                <div class="alert alert-warning">
+                                    Error al cargar el gráfico. <a href="/${signal.charts.main}" target="_blank">Abrir en una pestaña nueva</a>
+                                </div>
+                            `;
+                        });
+                }
+            });
+            
+            // Initialize Bootstrap tabs
+            const tabTriggerList = [].slice.call(document.querySelectorAll('button[data-bs-toggle="tab"]'));
+            tabTriggerList.forEach(tabTriggerEl => {
+                new bootstrap.Tab(tabTriggerEl);
+            });
+        }
+        
+        function updateIndicators(signals) {
+            const indicatorsContainer = document.getElementById('indicatorsContainer');
+            indicatorsContainer.innerHTML = '';
+            
+            signals.forEach(signal => {
+                const indicators = signal.indicators || {};
+                
+                const indicatorsList = [
+                    { label: 'RSI', value: indicators.rsi, good: (v) => v < 30 || v > 70, format: v => v.toFixed(2) },
+                    { label: 'MACD', value: indicators.macd, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'Señal MACD', value: indicators.macd_signal, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'Hist. MACD', value: indicators.macd_hist, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'EMA 20', value: indicators.ema20, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'EMA 50', value: indicators.ema50, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'EMA 200', value: indicators.ema200, good: (v, s) => s.price > v, format: v => v ? v.toFixed(2) : 'N/A' },
+                    { label: 'BB Superior', value: indicators.bb_upper, good: (v, s) => s.price < v, format: v => v.toFixed(2) },
+                    { label: 'BB Medio', value: indicators.bb_middle, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'BB Inferior', value: indicators.bb_lower, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'ATR', value: indicators.atr, good: () => true, format: v => v.toFixed(4) },
+                    { label: 'Estoc. %K', value: indicators.stoch_k, good: (v) => v < 20 || v > 80, format: v => v.toFixed(2) },
+                    { label: 'Estoc. %D', value: indicators.stoch_d, good: (v) => v < 20 || v > 80, format: v => v.toFixed(2) },
+                    { label: 'ADX', value: indicators.adx, good: (v) => v > 25, format: v => v.toFixed(2) },
+                    { label: '+DI', value: indicators.adx_pos, good: (v, s) => v > (s.indicators?.adx_neg || 0), format: v => v.toFixed(2) },
+                    { label: '-DI', value: indicators.adx_neg, good: (v, s) => v < (s.indicators?.adx_pos || 0), format: v => v.toFixed(2) },
+                    { label: 'VWAP', value: indicators.vwap, good: (v, s) => s.price > v, format: v => v ? v.toFixed(2) : 'N/A' },
+                    { label: 'Volumen', value: indicators.volume, good: () => true, format: v => v.toLocaleString() }
+                ];
+                
+                const signalCard = document.createElement('div');
+                signalCard.className = 'col-12 mb-4';
+                signalCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>${signal.display_name || signal.name}</span>
+                            <span class="badge ${signal.buy_signal > signal.sell_signal ? 'bg-success' : 'bg-danger'}">
+                                ${signal.buy_signal > signal.sell_signal ? 'COMPRA' : 'VENTA'} ${Math.max(signal.buy_signal, signal.sell_signal)}%
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="indicators-${signal.name}"></div>
+                        </div>
+                    </div>
+                `;
+                
+                indicatorsContainer.appendChild(signalCard);
+                
+                const indicatorRow = document.getElementById(`indicators-${signal.name}`);
+                
+                indicatorsList.forEach(ind => {
+                    if (ind.value === undefined || ind.value === null) return;
+                    
+                    const isGood = ind.good(ind.value, signal);
+                    const indicatorElement = document.createElement('div');
+                    indicatorElement.className = 'col-6 col-md-4 col-lg-3 col-xl-2 mb-3';
+                    indicatorElement.innerHTML = `
+                        <div class="indicator-card ${isGood ? 'bg-dark' : ''} rounded p-2">
+                            <div class="indicator-value ${isGood ? 'text-success' : 'text-muted'}">
+                                ${ind.format ? ind.format(ind.value) : ind.value}
+                            </div>
+                            <div class="indicator-label">${ind.label}</div>
+                        </div>
+                    `;
+                    indicatorRow.appendChild(indicatorElement);
+                });
+            });
+        }
+        
+        function showDetailedAnalysis(symbol) {
+            // Show loading state
+            const refreshBtn = document.getElementById('refreshBtn');
+            const originalHtml = refreshBtn.innerHTML;
+            refreshBtn.disabled = true;
+            refreshBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+            
+            // Fetch detailed analysis for the symbol
+            fetch(`/api/analyze/${symbol}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the UI with detailed data
+                    updateCharts([data.signal]);
+                    updateIndicators([data.signal]);
+                    
+                    // Scroll to charts section
+                    document.querySelector('#marketTabs').scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Error fetching detailed analysis:', error);
+                    alert('Error al cargar el análisis detallado. Por favor, intente de nuevo.');
+                })
+                .finally(() => {
+                    refreshBtn.disabled = false;
+                    refreshBtn.innerHTML = originalHtml;
+                });
+        }
+    </script>
+</body>
+</html>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-center text-muted py-3 mt-5">
+        <div class="container">
+            <small>Última actualización: <span id="lastUpdate">-</span></small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial load
+            loadMarketData();
+            
+            // Set up refresh button
+            document.getElementById('refreshBtn').addEventListener('click', loadMarketData);
+            
+            // Auto-refresh every 5 minutes
+            setInterval(loadMarketData, 5 * 60 * 1000);
+        });
+        
+        function loadMarketData() {
+            // Show loading state
+            document.getElementById('refreshBtn').disabled = true;
+            document.getElementById('refreshBtn').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+            
+            // Fetch market data
+            fetch('/api/analyze')
+                .then(response => response.json())
+                .then(data => {
+                    updateUI(data);
+                    document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
+                })
+                .catch(error => {
+                    console.error('Error fetching market data:', error);
+                    alert('Error al cargar los datos del mercado. Por favor, intente de nuevo.');
+                })
+                .finally(() => {
+                    document.getElementById('refreshBtn').disabled = false;
+                    document.getElementById('refreshBtn').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar';
+                });
+        }
+        
+        function updateUI(data) {
+            updateAlerts(data.alerts);
+            updateMarketOverview(data.signals);
+            updateCharts(data.signals);
+            updateIndicators(data.signals);
+        }
+        
+        function updateAlerts(alerts) {
+            const alertsContainer = document.getElementById('alertsList');
+            const alertCount = document.getElementById('alertCount');
+            
+            if (alerts.length === 0) {
+                alertsContainer.innerHTML = '<p class="mb-0 text-muted">No hay alertas activas en este momento.</p>';
+                alertCount.textContent = '0';
+                return;
+            }
+            
+            alertCount.textContent = alerts.length;
+            alertsContainer.innerHTML = '';
+            
+            alerts.forEach(alert => {
+                const alertElement = document.createElement('div');
+                alertElement.className = `alert ${alert.type === 'BUY' ? 'alert-success' : 'alert-danger'} mb-2`;
+                alertElement.role = 'alert';
+                alertElement.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>${alert.symbol}</strong> - ${alert.type} (${alert.strength}%)
+                            <div class="signal-meter">
+                                <div class="signal-meter-fill ${alert.type === 'BUY' ? 'signal-meter-buy' : 'signal-meter-sell'}" 
+                                     style="width: ${alert.strength}%"></div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <small>Precio: $${alert.price.toFixed(2)}</small>
+                        </div>
+                    </div>
+                `;
+                alertsContainer.appendChild(alertElement);
+            });
+            
+            // Add animation to high-priority alerts
+            document.querySelectorAll('.alert').forEach(alert => {
+                const strength = alert.textContent.match(/\(([^)]+)%\)/);
+                if (strength && parseInt(strength[1]) >= 80) {
+                    alert.classList.add('alert-high');
+                }
+            });
+        }
+        
+        function updateMarketOverview(signals) {
+            const overviewContainer = document.getElementById('marketOverview');
+            overviewContainer.innerHTML = '';
+            
+            signals.forEach(signal => {
+                const isPositive = signal.buy_signal > signal.sell_signal;
+                const signalStrength = Math.max(signal.buy_signal, signal.sell_signal);
+                const signalType = isPositive ? 'COMPRA' : 'VENTA';
+                
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0">${signal.name}</h5>
+                            <span class="badge ${isPositive ? 'bg-success' : 'bg-danger'}">${signalType}</span>
+                        </div>
+                        <h3 class="mb-3">$${signal.price.toFixed(2)}</h3>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">Señal de ${isPositive ? 'compra' : 'venta'}</small>
+                                <div class="signal-meter">
+                                    <div class="signal-meter-fill ${isPositive ? 'signal-meter-buy' : 'signal-meter-sell'}" 
+                                         style="width: ${signalStrength}%"></div>
+                                </div>
+                            </div>
+                            <span class="badge bg-${isPositive ? 'success' : 'danger'}">${signalStrength}%</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to show detailed analysis
+                card.addEventListener('click', () => {
+                    showDetailedAnalysis(signal.name);
+                });
+                
+                card.style.cursor = 'pointer';
+                overviewContainer.appendChild(card);
+            });
+        }
+        
+        function updateCharts(signals) {
+            const tabsContainer = document.querySelector('#marketTabs');
+            const tabsContentContainer = document.querySelector('#marketTabContent');
+            
+            // Clear existing tabs and content
+            tabsContainer.innerHTML = '';
+            tabsContentContainer.innerHTML = '';
+            
+            signals.forEach((signal, index) => {
+                const isActive = index === 0;
+                
+                // Create tab
+                const tab = document.createElement('li');
+                tab.className = 'nav-item';
+                tab.role = 'presentation';
+                tab.innerHTML = `
+                    <button class="nav-link ${isActive ? 'active' : ''}" 
+                            id="tab-${signal.name}" 
+                            data-bs-toggle="tab" 
+                            data-bs-target="#content-${signal.name}" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="content-${signal.name}" 
+                            aria-selected="${isActive}">
+                        ${signal.name}
+                    </button>
+                `;
+                tabsContainer.appendChild(tab);
+                
+                // Create tab content
+                const tabContent = document.createElement('div');
+                tabContent.className = `tab-pane fade ${isActive ? 'show active' : ''}`;
+                tabContent.id = `content-${signal.name}`;
+                tabContent.role = 'tabpanel';
+                tabContent.setAttribute('aria-labelledby', `tab-${signal.name}`);
+                
+                // Add chart container
+                tabContent.innerHTML = `
+                    <div class="chart-container" id="chart-${signal.name}"></div>
+                `;
+                tabsContentContainer.appendChild(tabContent);
+                
+                // Load chart directly using Plotly
+                if (signal.charts && signal.charts.main) {
+                    fetch(`/${signal.charts.main}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Extract the div containing the plot
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+                            const plotDiv = doc.querySelector('.plotly-graph-div');
+                            if (plotDiv) {
+                                const chartContainer = document.getElementById(`chart-${signal.name}`);
+                                chartContainer.innerHTML = '';
+                                chartContainer.appendChild(plotDiv);
+                                // Re-initialize the plot
+                                if (window.Plotly) {
+                                    window.Plotly.newPlot(chartContainer, JSON.parse(plotDiv.getAttribute('data-plotly')));
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error loading chart:', error);
+                            const chartContainer = document.getElementById(`chart-${signal.name}`);
+                            chartContainer.innerHTML = `
+                                <div class="alert alert-warning">
+                                    Error al cargar el gráfico. <a href="/${signal.charts.main}" target="_blank">Abrir en una pestaña nueva</a>
+                                </div>
+                            `;
+                        });
+                }
+            });
+            
+            // Initialize Bootstrap tabs
+            const tabTriggerList = [].slice.call(document.querySelectorAll('button[data-bs-toggle="tab"]'));
+            tabTriggerList.forEach(tabTriggerEl => {
+                new bootstrap.Tab(tabTriggerEl);
+            });
+        }
+        
+        function updateIndicators(signals) {
+            const indicatorsContainer = document.getElementById('indicatorsContainer');
+            indicatorsContainer.innerHTML = '';
+            
+            signals.forEach(signal => {
+                const indicators = signal.indicators || {};
+                
+                const indicatorsList = [
+                    { label: 'RSI', value: indicators.rsi, good: (v) => v < 30 || v > 70, format: v => v.toFixed(2) },
+                    { label: 'MACD', value: indicators.macd, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'Señal MACD', value: indicators.macd_signal, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'Hist. MACD', value: indicators.macd_hist, good: (v) => v > 0, format: v => v.toFixed(4) },
+                    { label: 'EMA 20', value: indicators.ema20, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'EMA 50', value: indicators.ema50, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'EMA 200', value: indicators.ema200, good: (v, s) => s.price > v, format: v => v ? v.toFixed(2) : 'N/A' },
+                    { label: 'BB Superior', value: indicators.bb_upper, good: (v, s) => s.price < v, format: v => v.toFixed(2) },
+                    { label: 'BB Medio', value: indicators.bb_middle, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'BB Inferior', value: indicators.bb_lower, good: (v, s) => s.price > v, format: v => v.toFixed(2) },
+                    { label: 'ATR', value: indicators.atr, good: () => true, format: v => v.toFixed(4) },
+                    { label: 'Estoc. %K', value: indicators.stoch_k, good: (v) => v < 20 || v > 80, format: v => v.toFixed(2) },
+                    { label: 'Estoc. %D', value: indicators.stoch_d, good: (v) => v < 20 || v > 80, format: v => v.toFixed(2) },
+                    { label: 'ADX', value: indicators.adx, good: (v) => v > 25, format: v => v.toFixed(2) },
+                    { label: '+DI', value: indicators.adx_pos, good: (v, s) => v > (s.indicators?.adx_neg || 0), format: v => v.toFixed(2) },
+                    { label: '-DI', value: indicators.adx_neg, good: (v, s) => v < (s.indicators?.adx_pos || 0), format: v => v.toFixed(2) },
+                    { label: 'VWAP', value: indicators.vwap, good: (v, s) => s.price > v, format: v => v ? v.toFixed(2) : 'N/A' },
+                    { label: 'Volumen', value: indicators.volume, good: () => true, format: v => v.toLocaleString() }
+                ];
+                
+                const signalCard = document.createElement('div');
+                signalCard.className = 'col-12 mb-4';
+                signalCard.innerHTML = `
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>${signal.display_name || signal.name}</span>
+                            <span class="badge ${signal.buy_signal > signal.sell_signal ? 'bg-success' : 'bg-danger'}">
+                                ${signal.buy_signal > signal.sell_signal ? 'COMPRA' : 'VENTA'} ${Math.max(signal.buy_signal, signal.sell_signal)}%
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="indicators-${signal.name}"></div>
+                        </div>
+                    </div>
+                `;
+                
+                indicatorsContainer.appendChild(signalCard);
+                
+                const indicatorRow = document.getElementById(`indicators-${signal.name}`);
+                
+                indicatorsList.forEach(ind => {
+                    if (ind.value === undefined || ind.value === null) return;
+                    
+                    const isGood = ind.good(ind.value, signal);
+                    const indicatorElement = document.createElement('div');
+                    indicatorElement.className = 'col-6 col-md-4 col-lg-3 col-xl-2 mb-3';
+                    indicatorElement.innerHTML = `
+                        <div class="indicator-card ${isGood ? 'bg-dark' : ''} rounded p-2">
+                            <div class="indicator-value ${isGood ? 'text-success' : 'text-muted'}">
+                                ${ind.format ? ind.format(ind.value) : ind.value}
+                            </div>
+                            <div class="indicator-label">${ind.label}</div>
+                        </div>
+                    `;
+                    indicatorRow.appendChild(indicatorElement);
+                });
+            });
+        }
+        
+        function showDetailedAnalysis(symbol) {
+            // Show loading state
+            const refreshBtn = document.getElementById('refreshBtn');
+            const originalHtml = refreshBtn.innerHTML;
+            refreshBtn.disabled = true;
+            refreshBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...';
+            
+            // Fetch detailed analysis for the symbol
+            fetch(`/api/analyze/${symbol}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the UI with detailed data
+                    updateCharts([data.signal]);
+                    updateIndicators([data.signal]);
+                    
+                    // Scroll to charts section
+                    document.querySelector('#marketTabs').scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Error fetching detailed analysis:', error);
+                    alert('Error al cargar el análisis detallado. Por favor, intente de nuevo.');
+                })
+                .finally(() => {
+                    refreshBtn.disabled = false;
+                    refreshBtn.innerHTML = originalHtml;
+                });
+        }
+    </script>
+</body>
+</html>

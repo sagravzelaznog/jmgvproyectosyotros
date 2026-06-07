@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Check List - Proyecto Subterráneo CFE</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<button id="btnImprimir" class="no-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+	<div class="progress-container no-print">
+		<div class="progress-bar" id="progressBar"></div>
+	</div>
+
+	<div class="container">
+		<header>
+			<h1>Check List de Planos</h1>
+			<h2>Aprobación de Proyecto Subterráneo CFE</h2>
+		</header>
+
+		<section class="project-info">
+			<div class="input-group">
+				<label for="proyecto">Proyecto:</label>
+				<input type="text" id="proyecto" placeholder="Nombre del fraccionamiento o proyecto...">
+			</div>
+			<div class="info-row">
+				<div class="input-group">
+					<label for="fecha">Fecha de Revisión:</label>
+					<input type="date" id="fecha">
+				</div>
+				<div class="input-group">
+					<label for="reviso">Revisó:</label>
+					<input type="text" id="reviso" placeholder="Nombre del ingeniero o revisor...">
+				</div>
+			</div>
+		</section>
+
+		<main id="checklist">
+			<section class="checklist-section">
+				<h3>1. REQUISITOS GENERALES (MT, BT, Obra Civil y Alumbrado)</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Norte geográfico:</strong> Indicado en el primer o segundo
+						cuadrante del plano, orientado hacia donde convenga al proyecto.</label></li>
+					<li><label><input type="checkbox"> <strong>Lotificación:</strong> Delimitación clara y completa de los
+						lotes del fraccionamiento.</label></li>
+					<li><label><input type="checkbox"> <strong>Vialidades:</strong> Trazo de calles indicando sus
+						respectivos nombres.</label></li>
+					<li><label><input type="checkbox"> <strong>Áreas verdes y de donación:</strong> Perfectamente
+						identificadas en el plano.</label></li>
+					<li><label><input type="checkbox"> <strong>Simbología y nomenclatura:</strong> Conforme a lo establecido
+						en la especificación CFE.</label></li>
+					<li><label><input type="checkbox"> <strong>Cuadro de referencia (Solapa):</strong> Ubicado en la esquina
+						inferior derecha, conteniendo los datos del desarrollador, ubicación, escala, fecha y cuadro de
+						firmas de revisión/aprobación de CFE.</label></li>
+				</OL>
+			</section>
+
+			<section class="checklist-section">
+				<h3>2. PLANO GENERAL DE MEDIA TENSIÓN</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Recuadro de localización general:</strong> Macro y micro
+						localización del fraccionamiento.</label></li>
+					<li><label><input type="checkbox"> <strong>Trayectoria de circuitos:</strong> Trazos precisos de la red de
+						media tensión apegados a la configuración real de campo.</label></li>
+					<li><label><input type="checkbox"> <strong>Transiciones Aéreo-Subterráneas:</strong> Localización exacta,
+						indicando los circuitos y la subestación de distribución que las alimentan.</label></li>
+					<li><label><input type="checkbox"> <strong>Localización de equipos y dispositivos:</strong> Ubicación de
+						transformadores, seccionadores, etc.</label></li>
+					<li><label><input type="checkbox"> <strong>Identificación normativa:</strong> Claves de equipos, circuitos y
+						fases.</label></li>
+					<li><label><input type="checkbox"> <strong>Diagrama Unifilar o Trifilar:</strong> Indicando la interconexión
+						de todos los componentes eléctricos.</label></li>
+					<li><label><input type="checkbox"> <strong>Cuadro de dispositivos:</strong> Tabla detallando tipo, cantidad,
+						ubicación y características de los equipos y accesorios.</label></li>
+					<li><label><input type="checkbox"> <strong>Simbología:</strong> Leyenda completa de equipos y
+						cableado.</label></li>
+					<li><label><input type="checkbox"> <strong>Notas aclaratorias:</strong> Cualquier indicación técnica
+						relevante para la construcción.</label></li>
+			</section>
+
+			<section class="checklist-section">
+				<h3>3. PLANO GENERAL DE BAJA TENSIÓN</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Trayectoria de los circuitos:</strong> Rutas de baja
+						tensión.</label></li>
+					<li><label><input type="checkbox"> <strong>Localización de elementos:</strong> Ubicación de transformadores,
+						registros, concentraciones de medidores y muretes para acometidas.</label></li>
+					<li><label><input type="checkbox"> <strong>Identificación normativa:</strong> Nomenclatura para
+						transformadores, circuitos, registros y concentraciones.</label></li>
+					<ul>
+						<li><label><input type="checkbox"> <strong>Cuadro de cargas por cada transformador:</strong> Debe incluir forzosamente:</label></li>
+						<li><label><input type="checkbox"> Número de transformador.</label></li>
+						<li><label><input type="checkbox"> Capacidad del transformador y su porcentaje de utilización.</label></li>
+						<li><label><input type="checkbox"> Carga por tipo de lote o departamento.</label></li>
+						<li><label><input type="checkbox"> Cantidad de cada tipo de lote/departamento y su carga total.</label></li>
+						<li><label><input type="checkbox"> Carga y cantidad por tipo de luminaria de alumbrado.</label></li>
+						<li><label><input type="checkbox"> Carga total instalada.</label></li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="checklist-section">
+				<h3>4. PLANO DE DETALLES DE LA OBRA ELÉCTRICA</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Estructuras de transición:</strong> Detalles constructivos para
+						el paso de aéreo a subterráneo.</label></li>
+					<li><label><input type="checkbox"> <strong>Conexiones del equipo y dispositivos:</strong> Detalles de
+						empalmes y conectores múltiples.</label></li>
+					<li><label><input type="checkbox"> <strong>Sistemas de tierras:</strong> Diagramas y detalles constructivos
+						de conexiones a tierra.</label></li>
+					<li><label><input type="checkbox"> <strong>Concentraciones de medidores:</strong> Detalles de muretes y
+						equipos de medición.</label></li>
+					<li><label><input type="checkbox"> <strong>Dispositivos de identificación:</strong> Señalización de cables y
+						fases.</label></li>
+				</OL>
+			</section>
+
+			<section class="checklist-section">
+				<h3>5. PLANO DE ALUMBRADO PÚBLICO</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Trayectoria de los circuitos:</strong> Rutas exclusivas para
+						iluminación.</label></li>
+					<li><label><input type="checkbox"> <strong>Localización general:</strong> Transformadores, equipos de
+						medición/control, registros y luminarias.</label></li>
+					<li><label><input type="checkbox"> <strong>Cuadro de cargas de alumbrado:</strong> Indicando número, tipo de
+						luminaria, cantidad y carga total.</label></li>
+					<li><label><input type="checkbox"> <strong>Diagrama unifilar de alumbrado.</strong></label></li>
+				</OL>
+			</section>
+
+			<section class="checklist-section">
+				<h3>6. PLANO GENERAL DE LA OBRA CIVIL</h3>
+				<OL>
+					<li><label><input type="checkbox"> <strong>Trayectoria de bancos de ductos:</strong> Trazos a escala de la
+						canalización.</label></li>
+					<li><label><input type="checkbox"> <strong>Localización de elementos civiles:</strong> Bóvedas, pozos de
+						visita, registros, bases de transformadores, bases de seccionadores y muretes.</label></li>
+					<li><label><input type="checkbox"> <strong>Nomenclatura:</strong> Identificación de todos los componentes de
+					obra civil.</label></li>
+				<li><label><input type="checkbox"> <strong>Cortes transversales:</strong> Secciones de avenidas, calles y
+					banquetas.</label></li>
+				<li><label><input type="checkbox"> <strong>Cuadro resumen de componentes:</strong> Indicando número, tipo y
+					norma CFE aplicable para bóvedas, pozos, registros, bases y nomenclatura de bancos de
+					ductos.</label></li>
+				</OL>
+			</section>
+
+			<section class="checklist-section">
+				<h3>7. PLANO DE DETALLES DE LA OBRA CIVIL</h3>
+				<OL>
+				<li><label><input type="checkbox"> <strong>Detalles constructivos de bóvedas y pozos de visita</strong>
+					(indicando norma CFE).</label></li>
+				<li><label><input type="checkbox"> <strong>Detalles constructivos de registros de MT y BT.</strong></label></li>
+				<li><label><input type="checkbox"> <strong>Detalles de bases para equipos</strong> (transformadores y
+					seccionadores).</label></li>
+				<li><label><input type="checkbox"> <strong>Detalles constructivos de muretes.</strong></label></li>
+				</OL>
+			</section>
+		</main>
+
+		<footer>
+			<p>© 2026-JMGV-PTEL. Todos los derechos reservados.</p>
+			<p>Diseñado por José Manuel González Vargas, Pedagogo, Andragogo y Genio Matemático.</p>
+		</footer>
+	</div>
+	<script src="script.js"></script>
+</body>
+
+</html>

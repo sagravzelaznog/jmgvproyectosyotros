@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 04: Aprendiendo DIALux - Materiales y Reflexión</title>
+    <link rel="stylesheet" href="styles04.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 04: Materiales y Texturas</h1>
+            <h2>El Impacto del Coeficiente de Reflexión</h2>
+            <p class="objective"><strong>Objetivo:</strong> Asignar texturas y colores a las superficies del modelo 3D, comprendiendo cómo su grado de reflexión afecta el cálculo lumínico final.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. La Luz y la Materia</h3>
+            <p>En el diseño de iluminación profesional, las texturas no son solo estética; son matemáticas. Cuando un rayo de luz golpea una superficie, una parte se absorbe y otra rebota (luz indirecta). A esto le llamamos <strong>Grado de Reflexión (Rho - ρ)</strong>.</p>
+            <ul class="features-list">
+                <li><strong>Colores Claros:</strong> Un techo blanco puro puede reflejar hasta el 80% o 90% de la luz, ayudando a iluminar el espacio rebotando los rayos hacia abajo.</li>
+                <li><strong>Colores Oscuros:</strong> Un piso negro de asfalto absorbe la mayor parte de la luz (refleja solo un 10% o menos), requiriendo luminarias más potentes para alcanzar los niveles de luxes deseados.</li>
+                <li><strong>Especularidad:</strong> Además del color, DIALux calcula si un material es mate (difuso) o brillante (como un espejo o piso pulido), lo cual puede generar deslumbramiento.</li>
+            </ul>
+            <div class="visual-placeholder">
+                
+            </div>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Pintando con Propósito</h3>
+            <p>Vamos a aplicar materiales a los muros y pisos que levantaste en la sesión anterior:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Catálogo de Materiales</h4>
+                    <p>Ve a la pestaña <strong>"Materiales"</strong> en el panel izquierdo. Haz clic en <strong>"Seleccionar"</strong> y abre el catálogo de materiales de DIALux. Encontrarás categorías de interiores y exteriores.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Elegir y Arrastrar</h4>
+                    <p>Selecciona una textura de madera para el piso. Una vez seleccionada, haz clic sobre el material en el panel izquierdo, mantenlo presionado y arrástralo (Drag and Drop) hacia el piso de tu modelo 3D.</p>
+                    <div class="visual-placeholder">
+                        
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Editar el Grado de Reflexión</h4>
+                    <p>Con la herramienta de <strong>"Seleccionar material"</strong> (el icono del gotero), haz clic en el piso al que le aplicaste la madera. En el panel izquierdo, baja hasta las propiedades lumínicas y observa el % de reflexión.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Aplicar a Superficies Múltiples</h4>
+                    <p>Selecciona una pintura blanca mate para los muros. Utiliza la opción <strong>"Pintar material en todas las superficies del local"</strong> para ahorrar tiempo, luego puedes cambiar paredes individuales si es necesario.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Fotometría de Materiales</h3>
+            <p>Evalúa tu comprensión sobre cómo los materiales interactúan con la luz.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 04 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script04.js"></script>
+</body>
+</html>

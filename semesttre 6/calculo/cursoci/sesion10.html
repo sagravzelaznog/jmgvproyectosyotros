@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 10: La Antiderivada | Cálculo Integral</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∫</text></svg>">
+    
+    <style>
+        .antiderivative-card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .fundamental-theorem {
+            background: #f0fdf4;
+            border: 2px solid var(--primary-emerald);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .interactive-antiderivative {
+            background: #eff6ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .derivative-antiderivative {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .process-card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>📚 Cálculo Integral</h3>
+                <p>Módulo 1: Fundamentos</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Introducción a la Suma</a>
+                </li>
+                <!-- Previous sessions... -->
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link">Sesión 8: Práctica de Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion9.html" class="nav-link">Sesión 9: Fórmulas de Sumas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion10.html" class="nav-link active">Sesión 10: La Antiderivada</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Sesión 11: Fórmulas Inmediatas</a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <p>Progreso del Módulo 1</p>
+                <div class="progress-bar">
+                    <div class="progress progress-100"></div>
+                </div>
+                <p class="progress-text">10/10 sesiones</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Sesión 10: La Antiderivada</h1>
+                <p class="session-subtitle">El concepto de Integral Indefinida</p>
+                <p class="session-description">Descubre la relación entre la derivada y el área bajo la curva a través del concepto de antiderivada.</p>
+            </div>
+
+            <!-- Introducción -->
+            <div class="content-section">
+                <h2>📌 Introducción</h2>
+                <p>Después de trabajar con sumas de Riemann para calcular áreas, nos encontramos con un problema: ¡el proceso es tedioso! Hoy descubriremos una herramienta poderosa que simplificará enormemente estos cálculos: la <strong>antiderivada</strong>.</p>
+                
+                <div class="note">
+                    <p>💡 <strong>Pregunta clave:</strong> ¿Existe una forma más sencilla de calcular áreas bajo curvas sin tener que usar sumatorias con miles de términos?</p>
+                </div>
+            </div>
+
+            <!-- Concepto de Antiderivada -->
+            <div class="content-section">
+                <h2>🔍 ¿Qué es una Antiderivada?</h2>
+                
+                <div class="antiderivative-card">
+                    <h3>Definición</h3>
+                    <p>Una función \( F(x) \) es una <strong>antiderivada</strong> de \( f(x) \) en un intervalo \( I \) si:</p>
+                    <p class="math-formula">$$F'(x) = f(x) \quad \text{para todo } x \text{ en } I$$</p>
+                    
+                    <div class="example">
+                        <p><strong>Ejemplo 1:</strong> Si \( f(x) = 2x \), entonces \( F(x) = x^2 + C \) es una antiderivada de \( f(x) \), donde \( C \) es una constante.</p>
+                        <p><strong>¿Por qué?</strong> Porque \( \frac{d}{dx}(x^2 + C) = 2x \).</p>
+                    </div>
+                    
+                    <div class="note">
+                        <p>⚠️ <strong>¡Atención!</strong> La antiderivada no es única. Si \( F(x) \) es una antiderivada de \( f(x) \), entonces \( F(x) + C \) también lo es para cualquier constante \( C \).</p>
+                    </div>
+                </div>
+                
+                <div class="derivative-antiderivative">
+                    <div class="process-card">
+                        <h4>Derivación</h4>
+                        <p>Dada \( F(x) \), encontramos \( f(x) \) tal que:</p>
+                        <p class="math-formula">$$f(x) = F'(x)$$</p>
+                        <p><strong>Ejemplo:</strong><br>
+                        Si \( F(x) = x^3 \), entonces<br>
+                        \( f(x) = 3x^2 \)</p>
+                    </div>
+                    
+                    <div class="process-card">
+                        <h4>Antiderivación</h4>
+                        <p>Dada \( f(x) \), encontramos \( F(x) \) tal que:</p>
+                        <p class="math-formula">$$F'(x) = f(x)$$</p>
+                        <p><strong>Ejemplo:</strong><br>
+                        Si \( f(x) = 3x^2 \), entonces<br>
+                        \( F(x) = x^3 + C \)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- La Integral Indefinida -->
+            <div class="content-section">
+                <h2>∫ La Integral Indefinida</h2>
+                
+                <div class="antiderivative-card">
+                    <h3>Notación</h3>
+                    <p>La familia de todas las antiderivadas de \( f(x) \) se denota por:</p>
+                    <p class="math-formula">$$\int f(x) \, dx = F(x) + C$$</p>
+                    <p>Donde:</p>
+                    <ul>
+                        <li>\( \int \) es el símbolo de integral</li>
+                        <li>\( f(x) \) es el integrando</li>
+                        <li>\( dx \) indica la variable de integración</li>
+                        <li>\( F(x) \) es una antiderivada de \( f(x) \)</li>
+                        <li>\( C \) es la constante de integración</li>
+                    </ul>
+                </div>
+                
+                <div class="fundamental-theorem">
+                    <h3>Teorema Fundamental del Cálculo (Primera Parte)</h3>
+                    <p>Si \( f \) es continua en \([a, b]\) y \( F \) es una antiderivada de \( f \) en \([a, b]\), entonces:</p>
+                    <p class="math-formula">$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</p>
+                    <p>Este teorema conecta el concepto de área bajo la curva con la antiderivada, ¡y es uno de los más importantes del cálculo!</p>
+                </div>
+            </div>
+            
+            <!-- Propiedades de las Integrales Indefinidas -->
+            <div class="content-section">
+                <h2>📚 Propiedades de las Integrales Indefinidas</h2>
+                
+                <div class="antiderivative-card">
+                    <h3>1. Linealidad</h3>
+                    <p>$$\int [f(x) \pm g(x)] \, dx = \int f(x) \, dx \pm \int g(x) \, dx$$</p>
+                    <p>$$\int c \cdot f(x) \, dx = c \cdot \int f(x) \, dx \quad \text{(donde } c \text{ es constante)}$$</p>
+                </div>
+                
+                <div class="antiderivative-card">
+                    <h3>2. Integral de una constante</h3>
+                    <p>$$\int k \, dx = kx + C \quad \text{(donde } k \text{ es constante)}$$</p>
+                </div>
+                
+                <div class="antiderivative-card">
+                    <h3>3. Regla de la potencia</h3>
+                    <p>$$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C \quad \text{para } n \neq -1$$</p>
+                    <p><strong>Ejemplo:</strong> \(\int x^2 \, dx = \frac{x^3}{3} + C\)</p>
+                </div>
+            </div>
+            
+            <!-- Aplicación: Cálculo de Áreas -->
+            <div class="content-section">
+                <h2>📏 Aplicación: Cálculo de Áreas</h2>
+                
+                <p>Ahora podemos calcular el área bajo una curva \( f(x) \) desde \( a \) hasta \( b \) encontrando una antiderivada \( F(x) \) y evaluando \( F(b) - F(a) \).</p>
+                
+                <div class="example">
+                    <h3>Ejemplo 2: Área bajo \( f(x) = x^2 \) de 0 a 1</h3>
+                    <p>1. Encontramos una antiderivada: \( F(x) = \frac{x^3}{3} + C \)</p>
+                    <p>2. Calculamos \( F(1) - F(0) = \frac{1^3}{3} - \frac{0^3}{3} = \frac{1}{3} \)</p>
+                    <p>¡El área es \( \frac{1}{3} \) unidades cuadradas!</p>
+                </div>
+                
+                <div class="note">
+                    <p>💡 Compara esto con el cálculo que hicimos usando sumas de Riemann en sesiones anteriores. ¡Mucho más sencillo!</p>
+                </div>
+            </div>
+            
+            <!-- Herramienta Interactiva -->
+            <div class="content-section interactive-antiderivative">
+                <h2>🔄 Calculadora de Antiderivadas</h2>
+                <div class="control-group">
+                    <label for="function-input">Función f(x):</label>
+                    <input type="text" id="function-input" class="function-input" value="x^2" placeholder="Ej: x^2, sin(x), e^x">
+                </div>
+                
+                <button class="btn" onclick="calculateAntiderivative()">Calcular Antiderivada</button>
+                
+                <div class="result-box" style="margin-top: 1rem;">
+                    <h3>Resultado:</h3>
+                    <p id="antiderivative-result">F(x) = <span id="result">∫f(x)dx = ?</span> + C</p>
+                </div>
+                
+                <div class="note" style="margin-top: 1rem;">
+                    <p>💡 Intenta con: \( x^3 \), \( \cos(x) \), \( e^x \), \( \frac{1}{x} \)</p>
+                </div>
+            </div>
+            
+            <!-- Ejercicios Prácticos -->
+            <div class="content-section">
+                <h2>📝 Ejercicios Prácticos</h2>
+                
+                <div class="exercise">
+                    <h3>Ejercicio 1: Encuentra la antiderivada general</h3>
+                    <ol>
+                        <li>\( \int 3x^2 \, dx \)</li>
+                        <li>\( \int (2x + 5) \, dx \)</li>
+                        <li>\( \int (x^3 - 4x^2 + 2) \, dx \)</li>
+                    </ol>
+                    
+                    <div class="exercise-solution">
+                        <button class="btn btn-solution" onclick="toggleSolution('solution1')">Mostrar Soluciones</button>
+                        <div id="solution1" class="solution">
+                            <ol>
+                                <li>\( x^3 + C \)</li>
+                                <li>\( x^2 + 5x + C \)</li>
+                                <li>\( \frac{x^4}{4} - \frac{4x^3}{3} + 2x + C \)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Ejercicio 2: Aplicación del Teorema Fundamental</h3>
+                    <p>Calcula las siguientes integrales definidas encontrando primero una antiderivada:</p>
+                    <ol>
+                        <li>\( \int_{0}^{1} x^2 \, dx \)</li>
+                        <li>\( \int_{1}^{4} (2x + 3) \, dx \)</li>
+                    </ol>
+                    
+                    <div class="exercise-solution">
+                        <button class="btn btn-solution" onclick="toggleSolution('solution2')">Mostrar Soluciones</button>
+                        <div id="solution2" class="solution">
+                            <ol>
+                                <li>\( \left. \frac{x^3}{3} \right|_{0}^{1} = \frac{1}{3} - 0 = \frac{1}{3} \)</li>
+                                <li>\( \left. (x^2 + 3x) \right|_{1}^{4} = (16 + 12) - (1 + 3) = 24 \)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resumen -->
+            <div class="content-section summary">
+                <h2>📋 Resumen de la Sesión</h2>
+                <ul>
+                    <li>Una <strong>antiderivada</strong> de \( f(x) \) es una función \( F(x) \) tal que \( F'(x) = f(x) \).</li>
+                    <li>La <strong>integral indefinida</strong> \( \int f(x) \, dx \) representa la familia de todas las antiderivadas de \( f(x) \).</li>
+                    <li>El <strong>Teorema Fundamental del Cálculo</strong> conecta la derivada con la integral definida.</li>
+                    <li>Las propiedades de linealidad y la regla de la potencia simplifican el cálculo de antiderivadas.</li>
+                </ul>
+                
+                <div class="next-steps">
+                    <h3>Próximos pasos:</h3>
+                    <p>En la siguiente sesión exploraremos más fórmulas de integración inmediata y técnicas para encontrar antiderivadas de funciones más complejas.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Acerca de este curso</h4>
+                <p>Curso de Cálculo Integral - Módulo 1: Fundamentos</p>
+                <p>Diseñado para estudiantes de preparatoria</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="sesion9.html">← Sesión Anterior: Fórmulas de Sumas Básicas</a></li>
+                    <li><a href="sesion11.html">Siguiente Sesión: Fórmulas Inmediatas →</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Curso de Cálculo Integral. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Función para alternar la visibilidad de las soluciones
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
+            MathJax.typeset(); // Vuelve a renderizar las fórmulas
+        }
+        
+        // Función para calcular antiderivadas (versión simplificada)
+        function calculateAntiderivative() {
+            const input = document.getElementById('function-input').value.trim();
+            let result = 'No disponible';
+            
+            // Mapeo simple de funciones a sus antiderivadas
+            const antiderivatives = {
+                'x^2': '\\frac{x^3}{3}',
+                'x': '\\frac{x^2}{2}',
+                '1': 'x',
+                'x^n': '\\frac{x^{n+1}}{n+1} \\quad (n \\neq -1)',
+                'e^x': 'e^x',
+                'e^{kx}': '\\frac{e^{kx}}{k}',
+                '1/x': '\\ln|x|',
+                'sin(x)': '-\\cos(x)',
+                'cos(x)': '\\sin(x)',
+                'sec^2(x)': '\\tan(x)'
+            };
+            
+            result = antiderivatives[input] || 'No disponible (aún)';
+            
+            document.getElementById('result').innerHTML = `\\[ \\int ${input} \\, dx = ${result} \\] + C`;
+            MathJax.typeset(); // Vuelve a renderizar las fórmulas
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ocultar todas las soluciones al cargar
+            document.querySelectorAll('.solution').forEach(sol => {
+                sol.style.display = 'none';
+            });
+            
+            // Inicializar la primera visualización
+            calculateAntiderivative();
+        });
+    </script>
+</body>
+</html>

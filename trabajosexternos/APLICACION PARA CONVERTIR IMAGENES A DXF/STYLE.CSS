@@ -1,0 +1,152 @@
+:root {
+	/* Paleta de colores psicológica: Confianza, tecnología y calma */
+	--bg-color: #f4f7f6;
+	--text-main: #2d3748;
+	--text-muted: #718096;
+	--primary-color: #2b6cb0;
+	--primary-hover: #2c5282;
+	--success-color: #319795;
+	--success-hover: #285e61;
+	--card-bg: #ffffff;
+	--border-radius: 12px;
+	--shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-main);
+	display: flex;
+	justify-content: center;
+	padding: 2rem 1rem;
+	min-height: 100vh;
+}
+
+.app-container {
+	max-width: 900px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+header {
+	text-align: center;
+}
+
+header h1 {
+	font-size: 2.5rem;
+	color: var(--primary-color);
+	margin-bottom: 0.5rem;
+}
+
+header p {
+	color: var(--text-muted);
+	font-size: 1.1rem;
+}
+
+.step-card {
+	background: var(--card-bg);
+	padding: 2rem;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+}
+
+.step-card h2 {
+	font-size: 1.25rem;
+	margin-bottom: 1.5rem;
+	color: var(--primary-color);
+	border-bottom: 2px solid var(--bg-color);
+	padding-bottom: 0.5rem;
+}
+
+.upload-area {
+	border: 2px dashed var(--primary-color);
+	border-radius: var(--border-radius);
+	padding: 3rem 1rem;
+	text-align: center;
+	background-color: #ebf8ff;
+	transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+	background-color: #bee3f8;
+}
+
+.canvas-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.canvas-container {
+					grid-template-columns: 1fr 1fr;
+	}
+}
+
+canvas {
+	width: 100%;
+	max-width: 100%;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background-color: #edf2f7;
+}
+
+.controls {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+button {
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	color: white;
+}
+
+.btn-primary {
+	background-color: var(--primary-color);
+	margin-top: 1rem;
+}
+
+.btn-primary:hover {
+	background-color: var(--primary-hover);
+}
+
+.btn-success {
+	background-color: var(--success-color);
+	width: 100%;
+	padding: 1rem;
+	font-size: 1.2rem;
+}
+
+.btn-success:hover:not(:disabled) {
+	background-color: var(--success-hover);
+}
+
+.btn-success:disabled {
+	background-color: var(--text-muted);
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+footer {
+	text-align: center;
+	margin-top: 2rem;
+	color: var(--text-muted);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}

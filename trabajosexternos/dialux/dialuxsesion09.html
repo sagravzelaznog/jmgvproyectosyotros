@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 09: Aprendiendo DIALux - Exportación a AutoCAD (DWG)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 09: Exportación DWG/DXF</h1>
+            <h2>Devolviendo la Luz a AutoCAD</h2>
+            <p class="objective"><strong>Objetivo:</strong> Exportar la disposición geométrica de las luminarias y los resultados del cálculo desde DIALux evo de vuelta a un formato vectorial (DWG) para el proyecto eléctrico.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. El Ciclo Bidireccional del Diseño</h3>
+            <p>El diseño arquitectónico es colaborativo. Una vez que has validado que tu espacio cumple con los luxes necesarios mediante el cálculo fotométrico, debes comunicar esa posición exacta a los instaladores. Exportar un DWG desde DIALux nos brinda las siguientes ventajas:</p>
+            <ul class="features-list">
+                <li><strong>Precisión Absoluta:</strong> Evita el error humano de "redibujar" a ojo dónde iban las lámparas en el plano original.</li>
+                <li><strong>Bloques y Capas:</strong> DIALux exporta cada luminaria como un Bloque de AutoCAD estructurado en capas específicas (layers), facilitando su manipulación.</li>
+                <li><strong>Curvas Fotométricas en CAD:</strong> Puedes elegir exportar las isolíneas de luxes directamente como polilíneas en AutoCAD para justificar tu diseño ante revisores técnicos.</li>
+            </ul>
+            [Image of DIALux evo export to DWG settings panel]
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Exportando el Sembrado</h3>
+            <p>Sigue estos pasos para generar tu plano de "Sembrado de Luminarias":</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Cambiar al Modo Exportar</h4>
+                    <p>En la barra superior de DIALux evo, selecciona el último icono de la derecha: <strong>"Exportar"</strong>. Luego, en el panel izquierdo, elige la herramienta <strong>"Planos"</strong>.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Configurar la Capa de Información</h4>
+                    <p>En las opciones de exportación, asegúrate de marcar la casilla <strong>"Luminarias"</strong>. Opcionalmente, puedes marcar "Resultados del cálculo" si deseas que las isolíneas (curvas de luxes) aparezcan en el DWG.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Versión y Unidades</h4>
+                    <p>Selecciona la versión de AutoCAD compatible con tu equipo (ej. AutoCAD 2018). Es crítico verificar que la unidad de exportación (metros, milímetros) coincida con la que usaste al importar en la Sesión 02 para evitar cambios de escala.</p>
+                    [Image of DIALux exported luminaires opened in AutoCAD showing layers and blocks]
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Guardar e Integrar</h4>
+                    <p>Haz clic en <strong>"Guardar nuevo archivo"</strong>. Abre este nuevo archivo DWG en AutoCAD. Selecciona todo, cópialo (Ctrl+C) y pégalo en el mismo sitio (Paste to Original Coordinates) en tu proyecto eléctrico o arquitectónico maestro.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Integración CAD</h3>
+            <p>Demuestra tu conocimiento sobre el flujo de trabajo BIM/CAD respondiendo correctamente.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 09 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

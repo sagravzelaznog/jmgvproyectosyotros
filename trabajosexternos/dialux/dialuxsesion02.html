@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 02: Aprendiendo DIALux - Importación CAD</title>
+    <link rel="stylesheet" href="styles02.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 02: Importación de Planos CAD</h1>
+            <h2>Del Dibujo Vectorial al Entorno Lumínico</h2>
+            <p class="objective"><strong>Objetivo:</strong> Importar, escalar y posicionar correctamente un plano DWG/DXF en DIALux evo para usarlo como base arquitectónica.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. El Poder del Plano Base (DWG)</h3>
+            <p>En el flujo de trabajo profesional, rara vez construimos desde cero a ciegas. Utilizar un plano CAD como plantilla (blueprint) garantiza precisión milimétrica y respeta la intención arquitectónica original. DIALux evo nos permite:</p>
+            <ul class="features-list">
+                <li><strong>Reconocer Geometría:</strong> Calcar paredes, puertas y ventanas sobre líneas exactas.</li>
+                <li><strong>Gestión de Capas:</strong> Ocultar o mostrar capas del DWG (cotas, mobiliario, textos) para no saturar la vista.</li>
+                <li><strong>Alineación Perfecta:</strong> Establecer un punto de origen (0,0,0) coherente para futuros rediseños.</li>
+            </ul>
+            <div class="visual-placeholder">
+                
+            </div>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Inserción y Escala</h3>
+            <p>Sigue este protocolo riguroso para importar tu plano sin errores de escala (el error más común en principiantes):</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Nuevo Proyecto con Plano</h4>
+                    <p>En la pantalla de inicio de DIALux, selecciona <strong>"Importar plano o IFC"</strong>. Busca en tu equipo un archivo con extensión .dwg o .dxf y ábrelo.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Definir el Origen y Orientación</h4>
+                    <p>El asistente te pedirá un punto de origen. Haz clic en una esquina inferior izquierda representativa de tu plano. Esto alinea las coordenadas de CAD con las de DIALux. Determina también si necesitas rotar el plano (Norte).</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Unidades y Escala (Crucial)</h4>
+                    <p>Revisa la cota del plano original. Si una puerta mide "0.90" en el CAD, la unidad es <strong>Metros</strong>. Si mide "90", son Centímetros. Si mide "900", son Milímetros. Selecciona la unidad correcta en el menú desplegable para que la escala sea 1:1 en DIALux.</p>
+                    <div class="visual-placeholder">
+                        
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Limpieza de Capas</h4>
+                    <p>Ve al panel lateral izquierdo, busca la opción de "Planos" y desactiva las capas de sombreados (hatch), textos o cotas. Quédate solo con muros, vanos y mobiliario esencial para mejorar el rendimiento del software.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Conocimiento CAD</h3>
+            <p>El escaneo de planos requiere precisión. ¿Estás listo? Selecciona la respuesta correcta.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 02 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script02.js"></script>
+</body>
+</html>

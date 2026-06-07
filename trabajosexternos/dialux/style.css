@@ -1,0 +1,168 @@
+/* Variables de Color (Psicología del Aprendizaje) */
+:root {
+	--primary-color: #1abc9c; /* Turquesa: Concentración y claridad */
+	--secondary-color: #8e44ad; /* Violeta: Creatividad e intelecto */
+	--bg-color: #f4f7f6; /* Gris muy claro: Reduce fatiga visual */
+	--text-main: #2c3e50; /* Gris oscuro: Alta legibilidad */
+	--card-bg: #ffffff;
+	--kahoot-red: #e74c3c;
+	--kahoot-blue: #3498db;
+	--kahoot-yellow: #f1c40f;
+	--kahoot-green: #2ecc71;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-main);
+	line-height: 1.6;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* Header */
+header {
+	background: linear-gradient(135deg, var(--primary-color), #16a085);
+	color: white;
+	padding: 3rem 2rem;
+	text-align: center;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+header h2 { font-weight: 300; margin-bottom: 1rem; opacity: 0.9; }
+.objective { background: rgba(255,255,255,0.2); display: inline-block; padding: 0.8rem 1.5rem; border-radius: 50px; font-size: 1.1rem; }
+
+/* Main Layout */
+main {
+	flex: 1;
+	max-width: 1000px;
+	margin: 2rem auto;
+	padding: 0 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+/* Cards */
+.card {
+	background: var(--card-bg);
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+	border-top: 5px solid var(--primary-color);
+}
+
+.card h3 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+
+.features-list { margin: 1rem 0 1rem 2rem; }
+.features-list li { margin-bottom: 0.5rem; }
+
+/* Visual Placeholders */
+.visual-placeholder {
+	background-color: #ecf0f1;
+	border: 2px dashed #bdc3c7;
+	border-radius: 8px;
+	padding: 2rem;
+	text-align: center;
+	color: #7f8c8d;
+	margin: 1.5rem 0;
+	font-style: italic;
+}
+
+/* Steps Grid */
+.steps-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+.step {
+	background: #f8f9fa;
+	padding: 1.5rem;
+	border-radius: 8px;
+	border-left: 4px solid var(--secondary-color);
+}
+.step h4 { color: var(--secondary-color); margin-bottom: 0.5rem; }
+
+/* Quiz Styles (Kahoot Theme) */
+.quiz-card { border-top-color: var(--secondary-color); text-align: center; }
+.quiz-card h3 { color: var(--secondary-color); }
+
+#question-text { font-size: 1.5rem; margin: 1.5rem 0; }
+
+#answers-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.answer-btn {
+	color: white;
+	border: none;
+	padding: 1.5rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: transform 0.2s, box-shadow 0.2s;
+	box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+}
+
+.answer-btn:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(0,0,0,0.2); }
+.answer-btn:nth-child(1) { background-color: var(--kahoot-red); }
+.answer-btn:nth-child(2) { background-color: var(--kahoot-blue); }
+.answer-btn:nth-child(3) { background-color: var(--kahoot-yellow); color: #333; }
+.answer-btn:nth-child(4) { background-color: var(--kahoot-green); }
+
+/* Animations */
+.hidden { display: none !important; }
+.correct-anim { animation: pulse 0.5s ease; }
+.wrong-anim { animation: shake 0.5s ease; }
+
+@keyframes pulse {
+	0% { transform: scale(1); }
+	50% { transform: scale(1.05); background-color: var(--kahoot-green); }
+	100% { transform: scale(1); }
+}
+
+@keyframes shake {
+	0%, 100% { transform: translateX(0); }
+	25% { transform: translateX(-10px); background-color: var(--kahoot-red); }
+	50% { transform: translateX(10px); }
+	75% { transform: translateX(-10px); }
+}
+
+#feedback-message { font-size: 1.5rem; font-weight: bold; margin-top: 1rem; min-height: 35px; }
+.text-success { color: var(--kahoot-green); }
+.text-error { color: var(--kahoot-red); }
+
+#restart-btn {
+	background-color: var(--secondary-color); color: white; border: none; padding: 1rem 2rem; font-size: 1.2rem; border-radius: 50px; cursor: pointer; margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+	background-color: var(--text-main);
+	color: #ecf0f1;
+	text-align: center;
+	padding: 1.5rem;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	margin-top: auto;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+	#answers-grid { grid-template-columns: 1fr; }
+	header h1 { font-size: 2rem; }
+}

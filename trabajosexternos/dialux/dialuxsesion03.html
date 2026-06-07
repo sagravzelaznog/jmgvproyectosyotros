@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 03: Aprendiendo DIALux - Construcción 3D</title>
+    <link rel="stylesheet" href="styles03.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 03: Construcción 3D</h1>
+            <h2>Levantamiento de Muros y Vanos</h2>
+            <p class="objective"><strong>Objetivo:</strong> Transformar el plano 2D en una volumetría 3D trazando contornos, e insertar elementos arquitectónicos básicos como puertas y ventanas.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. De Líneas a Volúmenes</h3>
+            <p>DIALux evo necesita geometría sólida para calcular cómo rebota la luz. El dibujo CAD es solo una guía visual; ahora debemos "calcar" esa guía utilizando las herramientas de construcción del software. Los conceptos clave son:</p>
+            <ul class="features-list">
+                <li><strong>Polígonos Cerrados:</strong> Todo local debe ser un polígono continuo. Si el polígono no se cierra, DIALux no generará el piso ni el techo.</li>
+                <li><strong>Snap (Referencia a objetos):</strong> DIALux detecta automáticamente las esquinas y líneas de tu plano CAD importado, facilitando un trazado exacto.</li>
+                <li><strong>Vanos Inteligentes:</strong> Las puertas y ventanas perforan automáticamente los muros donde se colocan, permitiendo la entrada de luz natural si el proyecto lo requiere.</li>
+            </ul>
+            <div class="visual-placeholder">
+                [Image of DIALux evo drawing a room contour over a CAD plan]
+            </div>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Levantando tu Proyecto</h3>
+            <p>Asegúrate de tener la vista en planta (2D) activada y sigue estos pasos constructivos:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Dibujar Nuevo Local</h4>
+                    <p>Ve a la pestaña <strong>"Construcción"</strong> y selecciona la herramienta <strong>"Dibujar nuevo local"</strong> (o edificio, según corresponda). Tu cursor se transformará en un lápiz.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Trazar el Contorno</h4>
+                    <p>Haz clic en las esquinas interiores de la habitación basándote en el plano CAD subyacente. Sigue el perímetro en orden horario o antihorario. Al llegar a la última esquina, haz clic derecho y selecciona <strong>"Cerrar polígono"</strong>.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Insertar Vanos (Aberturas)</h4>
+                    <p>En el panel izquierdo, cambia a la herramienta <strong>"Vanos"</strong>. Selecciona una puerta del catálogo activo y arrástrala hacia el muro correspondiente en la vista 2D o 3D.</p>
+                    <div class="visual-placeholder">
+                        [Image of inserting windows and doors into 3D walls in DIALux evo]
+                    </div>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Ajustar Dimensiones</h4>
+                    <p>Selecciona la puerta o ventana que acabas de colocar. Usa la herramienta de escalar o el panel de propiedades para que su ancho y alto coincidan exactamente con la representación del plano CAD.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Construcción</h3>
+            <p>Demuestra tu dominio espacial respondiendo a este cuestionario.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 03 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script03.js"></script>
+</body>
+</html>

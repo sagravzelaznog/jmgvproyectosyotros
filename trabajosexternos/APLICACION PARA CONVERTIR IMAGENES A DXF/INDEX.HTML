@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Contornos: Imagen a DXF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Generador de Contornos DXF</h1>
+            <p>Transforma imágenes en vectores para corte láser y diseño CAD.</p>
+        </header>
+
+        <main>
+            <section class="step-card">
+                <h2>1. Cargar Imagen</h2>
+                <div class="upload-area" id="drop-zone">
+                    <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                    <input type="file" id="image-input" accept="image/png, image/jpeg, image/jpg" hidden>
+                    <button class="btn-primary" onclick="document.getElementById('image-input').click()">Seleccionar Archivo</button>
+                </div>
+            </section>
+
+            <section class="step-card visual-feedback">
+                <h2>2. Previsualización de Contornos</h2>
+                <div class="canvas-container">
+                    <canvas id="source-canvas" title="Imagen Original"></canvas>
+                    <canvas id="edge-canvas" title="Contornos Detectados"></canvas>
+                </div>
+                <div class="controls">
+                    <label for="threshold">Sensibilidad de Detección:</label>
+                    <input type="range" id="threshold" min="0" max="255" value="100">
+                </div>
+            </section>
+
+            <section class="step-card actions">
+                <h2>3. Exportar</h2>
+                <button id="download-btn" class="btn-success" disabled>Descargar Archivo DXF</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>Diseñado por el Pedagogo, Andragogo y Genio Matemático: <strong>José Manuel González Vargas</strong></p>
+            <p>© 2026 - JMGV-PTEL Programa de PENSAMIENTO MATEMÁTICO III. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

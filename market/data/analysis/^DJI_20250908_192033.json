@@ -1,0 +1,41 @@
+{
+    "symbol": "^DJI",
+    "timestamp": "2025-09-08 19:20:33",
+    "interval": "1d",
+    "indicators": {
+        "rsi": 59.34,
+        "macd": 307.47,
+        "macd_signal": 315.63,
+        "macd_hist": -8.17,
+        "ema20": 45165.34,
+        "ema50": 44531.18,
+        "ema200": 43148.56,
+        "bb_upper": 46000.51,
+        "bb_middle": 45147.73,
+        "bb_lower": 44294.96,
+        "atr": 397.13,
+        "stoch_k": 78.57,
+        "stoch_d": 78.66,
+        "adx": 24.07,
+        "adx_pos": 28.77,
+        "adx_neg": 15.93,
+        "vwap": 45121.86,
+        "price": 45514.95,
+        "volume": 472242829
+    },
+    "chart_paths": {
+        "main": "static/plots/^DJI_20250908_192033.html",
+        "adx": "static/plots/^DJI_adx_20250908_192033.html",
+        "stoch": "static/plots/^DJI_stoch_20250908_192033.html"
+    },
+    "signals": {
+        "symbol": "^DJI",
+        "price": 45514.95,
+        "buy_signal": 0,
+        "sell_signal": 0,
+        "rsi": 59.34,
+        "macd": 307.47,
+        "macd_signal": 315.63,
+        "timestamp": "2025-09-08 00:00:00"
+    }
+}

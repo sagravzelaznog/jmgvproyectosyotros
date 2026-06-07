@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1: Introducción a la Notación Sigma | Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar con navegación -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>🧮 Cálculo Integral</h1>
+                <p>64 Sesiones Completas</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                </li>
+
+                <!-- Módulo 1: Los Fundamentos -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        📚 Módulo 1: Fundamentos (1-21)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link active">Sesión 1: Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link">Sesión 2: Propiedades Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link">Sesión 5: Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link">Sesión 8: Práctica Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion9.html" class="nav-link">Sesión 9: Fórmulas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion10.html" class="nav-link">Sesión 10: Antiderivada</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion11.html" class="nav-link">Sesión 11: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion12.html" class="nav-link">Sesión 12: Fórmulas Inmediatas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion13.html" class="nav-link">Sesión 13: Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion14.html" class="nav-link">Sesión 14: Taller Integrales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion15.html" class="nav-link">Sesión 15: Cambio Variable</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion16.html" class="nav-link">Sesión 16: Práctica Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion17.html" class="nav-link">Sesión 17: Cambio Trig/Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion18.html" class="nav-link">Sesión 18: Taller Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion19.html" class="nav-link">Sesión 19: Expresiones Especiales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion20.html" class="nav-link">Sesión 20: Repaso Módulo 1</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion21.html" class="nav-link evaluacion">Sesión 21: Evaluación 1</a>
+                </li>
+
+                <!-- Módulo 2: Técnicas de Integración -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🔧 Módulo 2: Técnicas (22-42)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion22.html" class="nav-link">Sesión 22: Potencias Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion23.html" class="nav-link">Sesión 23: Caso Par</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion24.html" class="nav-link">Sesión 24: Tan y Cot</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion25.html" class="nav-link">Sesión 25: Sec y Csc</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion26.html" class="nav-link">Sesión 26: Tan^m Sec^n</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion27.html" class="nav-link">Sesión 27: Productos Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion28.html" class="nav-link">Sesión 28: Taller Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion29.html" class="nav-link">Sesión 29: Integración por Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion30.html" class="nav-link">Sesión 30: Partes Alg x Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion31.html" class="nav-link">Sesión 31: Partes Alg x Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion32.html" class="nav-link">Sesión 32: Partes Log/Inversas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion33.html" class="nav-link">Sesión 33: Taller Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion34.html" class="nav-link">Sesión 34: Sustitución Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion35.html" class="nav-link">Sesión 35: Caso u²+a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion36.html" class="nav-link">Sesión 36: Caso u²-a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion37.html" class="nav-link">Sesión 37: Fracciones Parciales I</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion38.html" class="nav-link">Sesión 38: Fracciones II</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion39.html" class="nav-link">Sesión 39: Fracciones III</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion40.html" class="nav-link">Sesión 40: Fracciones IV</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion41.html" class="nav-link">Sesión 41: Repaso Módulo 2</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion42.html" class="nav-link evaluacion">Sesión 42: Evaluación 2</a>
+                </li>
+
+                <!-- Módulo 3: Aplicaciones -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🚀 Módulo 3: Aplicaciones (43-64)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion43.html" class="nav-link">Sesión 43: Teorema Fundamental</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion44.html" class="nav-link">Sesión 44: Integrales Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion45.html" class="nav-link">Sesión 45: Práctica Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion46.html" class="nav-link">Sesión 46: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion47.html" class="nav-link">Sesión 47: Área bajo Curva X</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion48.html" class="nav-link">Sesión 48: Área bajo Curva Y</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion49.html" class="nav-link">Sesión 49: Área entre Curvas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion50.html" class="nav-link">Sesión 50: Área Horizontal</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion51.html" class="nav-link">Sesión 51: Taller Áreas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion52.html" class="nav-link">Sesión 52: Volúmenes - Discos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion53.html" class="nav-link">Sesión 53: Volúmenes - Arandelas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion54.html" class="nav-link">Sesión 54: Volúmenes - Capas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion55.html" class="nav-link">Sesión 55: Práctica Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion56.html" class="nav-link">Sesión 56: Taller Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion57.html" class="nav-link">Sesión 57: Longitud de Arco</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion58.html" class="nav-link">Sesión 58: Métodos Numéricos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion59.html" class="nav-link">Sesión 59: Ecuaciones Dif.</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion60.html" class="nav-link">Sesión 60: Variables Separables</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion61.html" class="nav-link">Sesión 61: ED Lineales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion62.html" class="nav-link">Sesión 62: Aplicaciones ED</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion63.html" class="nav-link">Sesión 63: Repaso Final</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion64.html" class="nav-link evaluacion">Sesión 64: Evaluación Final</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>📊 Sesión 1: Introducción a la Notación Sigma</h1>
+                <div class="session-subtitle">¿Qué es Σ? El lenguaje de las sumas</div>
+                <p class="session-description">
+                    En esta primera sesión, daremos el primer paso en nuestro viaje por el cálculo integral.
+                    Aprenderemos sobre la notación sigma (Σ), que es la forma matemática de expresar sumas de manera compacta y elegante.
+                    Este concepto es fundamental para entender las sumas de Riemann y, eventualmente, las integrales.
+                </p>
+            </div>
+
+            <!-- Introducción teórica -->
+            <div class="content-section">
+                <h2>🎯 ¿Qué es la Notación Sigma?</h2>
+
+                <p>La notación sigma (Σ) es una forma elegante y compacta de representar sumas largas. En lugar de escribir:</p>
+
+                <div class="math-expression">
+                    1 + 2 + 3 + 4 + 5 + ... + 100
+                </div>
+
+                <p>Podemos escribir de forma mucho más elegante:</p>
+
+                <div class="math-expression">
+                    \(\sum_{i=1}^{100} i\)
+                </div>
+
+                <p><strong>¿Cómo se lee?</strong> "La suma desde i=1 hasta i=100 de i"</p>
+
+                <div class="example-box">
+                    <h4>🔍 Partes de la Notación Sigma</h4>
+                    <p>En \(\sum_{i=1}^{100} i\), tenemos:</p>
+                    <ul>
+                        <li><strong>Σ (sigma mayúscula):</strong> Símbolo que indica "suma"</li>
+                        <li><strong>i=1:</strong> Valor inicial del índice (i comienza en 1)</li>
+                        <li><strong>100:</strong> Valor final del índice (i termina en 100)</li>
+                        <li><strong>i:</strong> Lo que se está sumando (en este caso, el índice mismo)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ejemplos paso a paso -->
+            <div class="content-section">
+                <h2>📝 Ejemplos Paso a Paso</h2>
+
+                <h3>Ejemplo 1: Suma de los primeros 5 números naturales</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Escribamos la suma:</strong> 1 + 2 + 3 + 4 + 5</p>
+                    <p><strong>En notación sigma:</strong> \(\sum_{i=1}^{5} i\)</p>
+
+                    <p><strong>Desglosemos el proceso:</strong></p>
+                    <ol>
+                        <li>El índice i comienza en 1</li>
+                        <li>Se suma i (que es 1)</li>
+                        <li>i aumenta a 2, se suma 2</li>
+                        <li>i aumenta a 3, se suma 3</li>
+                        <li>i aumenta a 4, se suma 4</li>
+                        <li>i aumenta a 5, se suma 5</li>
+                        <li>i sería 6, pero como 6 > 5, la suma termina</li>
+                    </ol>
+
+                    <p><strong>Resultado:</strong> 1 + 2 + 3 + 4 + 5 = 15</p>
+                </div>
+
+                <h3>Ejemplo 2: Suma de constantes</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Escribamos la suma:</strong> 3 + 3 + 3 + 3 + 3 (cinco veces)</p>
+                    <p><strong>En notación sigma:</strong> \(\sum_{i=1}^{5} 3\)</p>
+
+                    <p><strong>Desglosemos:</strong></p>
+                    <ol>
+                        <li>i=1: sumamos 3</li>
+                        <li>i=2: sumamos 3</li>
+                        <li>i=3: sumamos 3</li>
+                        <li>i=4: sumamos 3</li>
+                        <li>i=5: sumamos 3</li>
+                    </ol>
+
+                    <p><strong>Resultado:</strong> 3 + 3 + 3 + 3 + 3 = 15</p>
+                    <p><strong>Observación:</strong> Cuando sumamos una constante, el resultado es constante × número de términos</p>
+                </div>
+
+                <h3>Ejemplo 3: Suma de números pares</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Escribamos la suma:</strong> 2 + 4 + 6 + 8 + 10</p>
+                    <p><strong>En notación sigma:</strong> \(\sum_{i=1}^{5} 2i\)</p>
+
+                    <p><strong>Desglosemos:</strong></p>
+                    <ol>
+                        <li>i=1: 2×1 = 2</li>
+                        <li>i=2: 2×2 = 4</li>
+                        <li>i=3: 2×3 = 6</li>
+                        <li>i=4: 2×4 = 8</li>
+                        <li>i=5: 2×5 = 10</li>
+                    </ol>
+
+                    <p><strong>Resultado:</strong> 2 + 4 + 6 + 8 + 10 = 30</p>
+                    <p><strong>Patrón:</strong> Los números pares siguen la fórmula 2i</p>
+                </div>
+            </div>
+
+            <!-- Conceptos importantes -->
+            <div class="content-section">
+                <h2>💡 Conceptos Importantes</h2>
+
+                <h3>El Índice de Suma</h3>
+                <p>El índice (generalmente i, j, k, n) es una variable que:</p>
+                <ul>
+                    <li>Comienza en el valor inferior</li>
+                    <li>Aumenta de 1 en 1 hasta llegar al valor superior</li>
+                    <li>Se usa dentro de la expresión que se está sumando</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>📋 Reglas del Índice</h4>
+                    <ul>
+                        <li>✅ Puedes usar cualquier letra: i, j, k, n, m</li>
+                        <li>✅ El índice solo existe dentro de la suma</li>
+                        <li>✅ El valor del índice cambia en cada término</li>
+                        <li>❌ No uses el índice fuera de la suma con el mismo valor</li>
+                    </ul>
+                </div>
+
+                <h3>Valores Inicial y Final</h3>
+                <p>Los valores inicial y final determinan:</p>
+                <ul>
+                    <li><strong>Valor inicial:</strong> Dónde comienza la suma</li>
+                    <li><strong>Valor final:</strong> Dónde termina la suma</li>
+                    <li><strong>Diferencia:</strong> Número total de términos</li>
+                </ul>
+
+                <div class="math-expression">
+                    Número de términos = valor final - valor inicial + 1
+                </div>
+            </div>
+
+            <!-- Área interactiva -->
+            <div class="content-section interactive-area">
+                <h2>🧮 ¡Practica con Notación Sigma!</h2>
+
+                <div id="sigma-exercises">
+                    <div class="exercise-container">
+                        <h3>Ejercicio 1: Identifica la suma</h3>
+                        <p>¿Qué representa esta notación sigma?</p>
+                        <div class="math-expression">
+                            \(\sum_{k=1}^{10} k^2\)
+                        </div>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise1', 'a')">a) 1 + 2 + 3 + ... + 10</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise1', 'b')">b) 1² + 2² + 3² + ... + 10²</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise1', 'c')">c) 1 + 4 + 9 + ... + 100</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise1', 'd')">d) 1 × 2 × 3 × ... × 10</button>
+                        </div>
+
+                        <p id="feedback-exercise1" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 2: Convierte a notación sigma</h3>
+                        <p>Escribe en notación sigma: 5 + 5 + 5 + 5 (cuatro veces)</p>
+
+                        <input type="text" id="exercise2-input" class="exercise-input" placeholder="Escribe la notación sigma">
+
+                        <div>
+                            <button class="interactive-btn" onclick="checkSigmaAnswer()">Verificar</button>
+                            <button class="interactive-btn btn-secondary" onclick="showHint('exercise2')">Pista</button>
+                        </div>
+
+                        <p id="feedback-exercise2" class="feedback hidden"></p>
+                        <p id="hint-exercise2" class="feedback hint hidden"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section">
+                <h2>📋 Resumen de la Sesión</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">✅ Lo que aprendimos:</h3>
+                    <ul class="step-list">
+                        <li>La notación sigma (Σ) representa sumas de manera compacta</li>
+                        <li>La estructura básica es \(\sum_{inicial}^{final}\) expresión</li>
+                        <li>El índice cambia en cada término de la suma</li>
+                        <li>Es la base para entender sumas de Riemann e integrales</li>
+                        <li>Se usa para representar series matemáticas</li>
+                    </ul>
+                </div>
+
+                <div class="math-expression">
+                    💡 <strong>Conexión con el cálculo:</strong> Las sumas sigma son el primer paso hacia las sumas de Riemann, que a su vez nos llevan al concepto de integral.
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="content-section">
+                <div class="navigation-buttons">
+                    <p class="nav-subtitle">¿Listo para continuar?</p>
+                    <a href="sesion2.html" class="interactive-btn btn-nav">
+                        ➡️ Continuar a Sesión 2: Propiedades de Sigma
+                    </a>
+                </div>
+
+                <div class="navigation-buttons">
+                    <a href="index.html" class="interactive-btn btn-secondary">🏠 Volver al Inicio</a>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <h3>🧮 Cálculo Integral - Sesión 1</h3>
+                    <p>Introducción a la Notación Sigma</p>
+                    <p>¡Has completado el primer paso hacia el dominio del cálculo integral!</p>
+        
+                    <div class="footer-links">
+                        <a href="sesion2.html" class="footer-link">Continuar → Sesión 2</a>
+                        <a href="index.html" class="footer-link">🏠 Inicio</a>
+                        <a href="https://github.com" class="footer-link">📚 Recursos</a>
+                    </div>
+        
+                    <div class="footer-copyright">
+                        <p>&copy; JMGV-PTEL 2025. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="interactividad.js"></script>
+</body>
+</html>

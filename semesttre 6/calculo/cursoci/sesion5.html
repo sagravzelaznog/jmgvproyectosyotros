@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 5: Sumas de Riemann | Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar con navegación -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>🧮 Cálculo Integral</h1>
+                <p>64 Sesiones Completas</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                </li>
+
+                <!-- Módulo 1: Los Fundamentos -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        📚 Módulo 1: Fundamentos (1-21)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link">Sesión 2: Propiedades Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link active">Sesión 5: Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link">Sesión 8: Práctica Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion9.html" class="nav-link">Sesión 9: Fórmulas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion10.html" class="nav-link">Sesión 10: Antiderivada</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion11.html" class="nav-link">Sesión 11: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion12.html" class="nav-link">Sesión 12: Fórmulas Inmediatas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion13.html" class="nav-link">Sesión 13: Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion14.html" class="nav-link">Sesión 14: Taller Integrales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion15.html" class="nav-link">Sesión 15: Cambio Variable</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion16.html" class="nav-link">Sesión 16: Práctica Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion17.html" class="nav-link">Sesión 17: Cambio Trig/Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion18.html" class="nav-link">Sesión 18: Taller Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion19.html" class="nav-link">Sesión 19: Expresiones Especiales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion20.html" class="nav-link">Sesión 20: Repaso Módulo 1</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion21.html" class="nav-link evaluacion">Sesión 21: Evaluación 1</a>
+                </li>
+
+                <!-- Módulo 2: Técnicas de Integración -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🔧 Módulo 2: Técnicas (22-42)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion22.html" class="nav-link">Sesión 22: Potencias Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion23.html" class="nav-link">Sesión 23: Caso Par</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion24.html" class="nav-link">Sesión 24: Tan y Cot</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion25.html" class="nav-link">Sesión 25: Sec y Csc</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion26.html" class="nav-link">Sesión 26: Tan^m Sec^n</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion27.html" class="nav-link">Sesión 27: Productos Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion28.html" class="nav-link">Sesión 28: Taller Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion29.html" class="nav-link">Sesión 29: Integración por Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion30.html" class="nav-link">Sesión 30: Partes Alg x Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion31.html" class="nav-link">Sesión 31: Partes Alg x Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion32.html" class="nav-link">Sesión 32: Partes Log/Inversas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion33.html" class="nav-link">Sesión 33: Taller Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion34.html" class="nav-link">Sesión 34: Sustitución Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion35.html" class="nav-link">Sesión 35: Caso u²+a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion36.html" class="nav-link">Sesión 36: Caso u²-a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion37.html" class="nav-link">Sesión 37: Fracciones Parciales I</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion38.html" class="nav-link">Sesión 38: Fracciones II</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion39.html" class="nav-link">Sesión 39: Fracciones III</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion40.html" class="nav-link">Sesión 40: Fracciones IV</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion41.html" class="nav-link">Sesión 41: Repaso Módulo 2</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion42.html" class="nav-link evaluacion">Sesión 42: Evaluación 2</a>
+                </li>
+
+                <!-- Módulo 3: Aplicaciones -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🚀 Módulo 3: Aplicaciones (43-64)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion43.html" class="nav-link">Sesión 43: Teorema Fundamental</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion44.html" class="nav-link">Sesión 44: Integrales Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion45.html" class="nav-link">Sesión 45: Práctica Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion46.html" class="nav-link">Sesión 46: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion47.html" class="nav-link">Sesión 47: Área bajo Curva X</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion48.html" class="nav-link">Sesión 48: Área bajo Curva Y</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion49.html" class="nav-link">Sesión 49: Área entre Curvas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion50.html" class="nav-link">Sesión 50: Área Horizontal</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion51.html" class="nav-link">Sesión 51: Taller Áreas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion52.html" class="nav-link">Sesión 52: Volúmenes - Discos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion53.html" class="nav-link">Sesión 53: Volúmenes - Arandelas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion54.html" class="nav-link">Sesión 54: Volúmenes - Capas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion55.html" class="nav-link">Sesión 55: Práctica Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion56.html" class="nav-link">Sesión 56: Taller Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion57.html" class="nav-link">Sesión 57: Longitud de Arco</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion58.html" class="nav-link">Sesión 58: Métodos Numéricos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion59.html" class="nav-link">Sesión 59: Ecuaciones Dif.</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion60.html" class="nav-link">Sesión 60: Variables Separables</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion61.html" class="nav-link">Sesión 61: ED Lineales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion62.html" class="nav-link">Sesión 62: Aplicaciones ED</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion63.html" class="nav-link">Sesión 63: Repaso Final</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion64.html" class="nav-link evaluacion">Sesión 64: Evaluación Final</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>📐 Sesión 5: El Problema del Área - Sumas de Riemann</h1>
+                <div class="session-subtitle">De las sumas sigma al cálculo de áreas</div>
+                <p class="session-description">
+                    ¡Hemos llegado al momento crucial! Las sumas que hemos estudiado se convierten
+                    en sumas de Riemann para aproximar áreas bajo curvas. Este es el puente que
+                    nos lleva del álgebra al cálculo integral.
+                </p>
+            </div>
+
+            <!-- El problema fundamental -->
+            <div class="content-section">
+                <h2 class="module-title">🎯 El Problema del Área</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">¿Cómo calcular el área bajo una curva?</h3>
+
+                    <p>Desde la antigüedad, los matemáticos se preguntaron:</p>
+                    <ul class="step-list">
+                        <li><strong>¿Área de un triángulo?</strong> Fácil: base × altura / 2</li>
+                        <li><strong>¿Área de un círculo?</strong> Complicado: πr²</li>
+                        <li><strong>¿Área bajo una curva irregular?</strong> ¡Imposible con geometría simple!</li>
+                    </ul>
+
+                    <p><strong>Solución:</strong> Dividir la curva en rectángulos pequeños y sumar sus áreas.</p>
+                </div>
+
+                <div class="math-expression">
+                    <strong>El problema:</strong> Calcular ∫ f(x) dx de a a b
+                    <br>
+                    <strong>Nuestra aproximación:</strong> Σ f(xᵢ) Δx
+                </div>
+
+                <p><strong>¡Esta es exactamente la idea de las sumas de Riemann!</strong></p>
+            </div>
+
+            <!-- Sumas de Riemann básicas -->
+            <div class="content-section">
+                <h2 class="module-title">📊 Sumas de Riemann: La Idea Fundamental</h2>
+
+                <h3>Definición de suma de Riemann</h3>
+
+                <div class="step-by-step">
+                    <p>Para aproximar ∫<sub>a</sub><sup>b</sup> f(x) dx:</p>
+
+                    <ol class="step-list">
+                        <li><strong>Dividir el intervalo [a,b] en n subintervalos</strong></li>
+                        <li><strong>Elegir un punto xᵢ en cada subintervalo</strong></li>
+                        <li><strong>Multiplicar f(xᵢ) por el ancho Δx</strong></li>
+                        <li><strong>Sumar todas las áreas: Σ f(xᵢ) Δx</strong></li>
+                    </ol>
+                </div>
+
+                <div class="math-expression">
+                    Suma de Riemann = \(\sum_{i=1}^{n} f(x_i) \Delta x\)
+                    <br>
+                    donde Δx = (b - a)/n
+                </div>
+
+                <h3>Ejemplo: Área bajo f(x) = x² de 0 a 2</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Con n = 4 subintervalos:</strong></p>
+                    <ul class="step-list">
+                        <li>Δx = (2-0)/4 = 0.5</li>
+                        <li>Subintervalos: [0,0.5], [0.5,1], [1,1.5], [1.5,2]</li>
+                        <li>Elegimos punto medio: x₁=0.25, x₂=0.75, x₃=1.25, x₄=1.75</li>
+                    </ul>
+
+                    <div class="math-expression">
+                        Suma = f(0.25)×0.5 + f(0.75)×0.5 + f(1.25)×0.5 + f(1.75)×0.5
+                        <br>
+                        = (0.0625 + 0.5625 + 1.5625 + 3.0625) × 0.5
+                        <br>
+                        = 5.25 × 0.5 = 2.625
+                    </div>
+
+                    <p><strong>Área exacta:</strong> ∫₀² x² dx = [x³/3]₀² = 8/3 ≈ 2.667</p>
+                </div>
+            </div>
+
+            <!-- Tipos de sumas de Riemann -->
+            <div class="content-section">
+                <h2 class="module-title">🔀 Tipos de Sumas de Riemann</h2>
+
+                <h3>Suma inferior (rectángulos inscritos)</h3>
+
+                <div class="step-by-step">
+                    <p>Usa el <strong>punto más bajo</strong> de cada subintervalo:</p>
+                    <div class="math-expression">
+                        xᵢ = punto izquierdo del subintervalo
+                    </div>
+
+                    <p><strong>Ventaja:</strong> Siempre subestima el área</p>
+                    <p><strong>Desventaja:</strong> Menos precisa para funciones crecientes</p>
+                </div>
+
+                <h3>Suma superior (rectángulos circunscritos)</h3>
+
+                <div class="step-by-step">
+                    <p>Usa el <strong>punto más alto</strong> de cada subintervalo:</p>
+                    <div class="math-expression">
+                        xᵢ = punto derecho del subintervalo
+                    </div>
+
+                    <p><strong>Ventaja:</strong> Siempre sobreestima el área</p>
+                    <p><strong>Desventaja:</strong> Menos precisa para funciones decrecientes</p>
+                </div>
+
+                <h3>Suma media (rectángulos intermedios)</h3>
+
+                <div class="step-by-step">
+                    <p>Usa el <strong>punto medio</strong> de cada subintervalo:</p>
+                    <div class="math-expression">
+                        xᵢ = punto medio del subintervalo
+                    </div>
+
+                    <p><strong>Ventaja:</strong> Generalmente más precisa</p>
+                    <p><strong>Base:</strong> De las técnicas de integración numérica</p>
+                </div>
+            </div>
+
+            <!-- Conexión con sumas sigma -->
+            <div class="content-section">
+                <h2 class="module-title">🔗 Conexión con lo que ya sabemos</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">Las sumas de Riemann SON sumas sigma</h3>
+
+                    <p>Todo lo que hemos aprendido sobre sumas se aplica directamente:</p>
+                    <ul class="step-list">
+                        <li><strong>Propiedades de linealidad:</strong> Σ(c·f(xᵢ)) = c·Σ f(xᵢ)</li>
+                        <li><strong>Separación de términos:</strong> Σ(f(xᵢ) + g(xᵢ)) = Σ f(xᵢ) + Σ g(xᵢ)</li>
+                        <li><strong>Factor constante:</strong> Σ k = k·n (para áreas constantes)</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>🎯 Aplicación directa</h4>
+                    <p>Una suma de Riemann para f(x) = x + 1 de 0 a 2 con n=4:</p>
+                    <div class="math-expression">
+                        Σ ((xᵢ + 1) Δx) = Σ xᵢ Δx + Σ 1·Δx = (Σ xᵢ)Δx + n·Δx
+                    </div>
+                    <p><strong>¡Todas las propiedades que estudiamos se aplican aquí!</strong></p>
+                </div>
+            </div>
+
+            <!-- Visualización interactiva -->
+            <div class="content-section interactive-area">
+                <h2 class="module-title">📊 ¡Visualiza las Sumas de Riemann!</h2>
+
+                <div id="riemann-container">
+                    <div class="visualization-controls">
+                        <div class="control-group">
+                            <label>Función: x²</label>
+                            <span>Intervalo: [0, 2]</span>
+                        </div>
+                        <div class="control-group">
+                            <label>Número de rectángulos:</label>
+                            <input type="range" id="riemann-rects" min="4" max="20" value="8">
+                            <span id="riemann-display">8</span>
+                        </div>
+                        <div class="control-group">
+                            <label>Tipo de suma:</label>
+                            <select id="riemann-type">
+                                <option value="left">Izquierda</option>
+                                <option value="right">Derecha</option>
+                                <option value="midpoint">Medio</option>
+                            </select>
+                        </div>
+                        <button class="interactive-btn" onclick="updateRiemannVisualization()">Actualizar</button>
+                    </div>
+                    <div class="visualization-canvas">
+                        <canvas id="riemann-canvas" width="600" height="300"></canvas>
+                    </div>
+                    <div class="visualization-info">
+                        <div class="info-item">
+                            <strong>Aproximación:</strong> <span id="approx-area">0</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Área exacta:</strong> <span id="exact-area">2.667</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Error:</strong> <span id="error">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área interactiva -->
+            <div class="content-section interactive-area">
+                <h2 class="module-title">🧮 ¡Practica con Sumas de Riemann!</h2>
+
+                <div id="riemann-exercises">
+                    <div class="exercise-container">
+                        <h3>Ejercicio 1: Suma de Riemann simple</h3>
+                        <p>Calcula la suma de Riemann para f(x) = x de 0 a 1 con n=4 usando puntos medios.</p>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_1', 'a')">a) 0.5</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_1', 'b')">b) 0.375</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_1', 'c')">c) 0.25</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_1', 'd')">d) 0.125</button>
+                        </div>
+
+                        <p id="feedback-exercise5_1" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 2: Comparación de tipos</h3>
+                        <p>Para f(x) = x² de 0 a 1 con n=2, ¿cuál da mejor aproximación?</p>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_2', 'a')">a) Suma inferior</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_2', 'b')">b) Suma superior</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_2', 'c')">c) Suma media</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise5_2', 'd')">d) Todas iguales</button>
+                        </div>
+
+                        <p id="feedback-exercise5_2" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 3: Cálculo manual</h3>
+                        <p>Calcula la suma de Riemann para f(x) = x + 1 de 0 a 2 con n=4 usando puntos derechos.</p>
+
+                        <input type="text" id="exercise5_3-input" class="exercise-input" placeholder="Escribe el resultado">
+
+                        <div>
+                            <button class="interactive-btn" onclick="checkRiemannSum()">Verificar</button>
+                            <button class="interactive-btn btn-secondary" onclick="showHint('exercise5_3')">Pista</button>
+                        </div>
+
+                        <p id="feedback-exercise5_3" class="feedback hidden"></p>
+                        <p id="hint-exercise5_3" class="feedback hint hidden"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- El límite de las sumas -->
+            <div class="content-section">
+                <h2 class="module-title">🚀 El Límite: Nacimiento de la Integral</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">¿Y si n tiende a infinito?</h3>
+
+                    <p>Cuando el número de rectángulos tiende a infinito:</p>
+                    <div class="math-expression">
+                        \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i) \Delta x = \int_a^b f(x) dx
+                    </div>
+
+                    <p><strong>Esto es exactamente la definición de la integral definida!</strong></p>
+                </div>
+
+                <div class="example-box">
+                    <h4>💫 El momento eureka</h4>
+                    <p>Las sumas que hemos estudiado durante 4 sesiones se convierten en:</p>
+                    <div class="math-expression">
+                        <strong>Σ → ∫</strong><br>
+                        <strong>Sumas discretas → Integral continua</strong><br>
+                        <strong>Áreas de rectángulos → Área bajo la curva</strong>
+                    </div>
+                    <p><strong>¡Hemos construido el puente del álgebra al cálculo!</strong></p>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="content-section">
+                <h2 class="module-title">🔬 Aplicaciones de las Sumas de Riemann</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">¿Para qué sirven?</h3>
+
+                    <p>Las sumas de Riemann son la base de:</p>
+                    <ul class="step-list">
+                        <li><strong>Cálculo de áreas irregulares</strong> - Bajo cualquier curva</li>
+                        <li><strong>Integración numérica</strong> - Cuando no hay antiderivada</li>
+                        <li><strong>Probabilidad y estadística</strong> - Esperanza matemática</li>
+                        <li><strong>Física e ingeniería</strong> - Trabajo, energía, momentos</li>
+                        <li><strong>Economía y finanzas</strong> - Cálculo de utilidades</li>
+                    </ul>
+                </div>
+
+                <div class="math-expression">
+                    <strong>Ejemplo:</strong> Área bajo la curva de velocidad = distancia recorrida
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section">
+                <h2 class="module-title">📋 Resumen de la Sesión</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">✅ Lo que hemos descubierto:</h3>
+                    <ul class="step-list">
+                        <li><strong>El problema del área</strong> - Motiva las sumas de Riemann</li>
+                        <li><strong>Definición de suma de Riemann</strong> - Σ f(xᵢ) Δx</li>
+                        <li><strong>Tres tipos principales</strong> - Izquierda, derecha, media</li>
+                        <li><strong>Conexión con sumas sigma</strong> - Todas las propiedades aplican</li>
+                        <li><strong>Límite hacia integral</strong> - Base del cálculo integral</li>
+                        <li><strong>Aplicaciones prácticas</strong> - En múltiples disciplinas</li>
+                    </ul>
+                </div>
+
+                <div class="math-expression">
+                    🎯 <strong>El gran descubrimiento:</strong> Las sumas que estudiamos durante 4 sesiones son exactamente las que necesitamos para definir y calcular integrales.
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="content-section">
+                <div class="navigation-buttons">
+                    <p class="nav-subtitle">¿Entendiste el puente hacia las integrales?</p>
+                    <a href="sesion6.html" class="interactive-btn btn-nav">
+                        ➡️ Continuar a Sesión 6: Rectángulos Inscritos
+                    </a>
+                </div>
+
+                <div class="navigation-buttons">
+                    <a href="sesion4.html" class="interactive-btn btn-secondary">⬅️ Repasar Sesión 4</a>
+                    <a href="index.html" class="interactive-btn btn-secondary">🏠 Volver al Inicio</a>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <h3>🧮 Cálculo Integral - Sesión 5</h3>
+                    <p>Sumas de Riemann</p>
+                    <p>¡Has descubierto el puente hacia el cálculo integral!</p>
+        
+                    <div class="footer-links">
+                        <a href="sesion6.html" class="footer-link">Continuar → Sesión 6</a>
+                        <a href="sesion4.html" class="footer-link">⬅️ Sesión 4</a>
+                        <a href="index.html" class="footer-link">🏠 Inicio</a>
+                    </div>
+        
+                    <div class="footer-copyright">
+                        <p>&copy; JMGV-PTEL 2025. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="interactividad.js"></script>
+</body>
+</html>

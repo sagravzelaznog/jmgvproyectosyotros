@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 06: Aprendiendo DIALux - Cálculo y Resultados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 06: Cálculo Lumínico</h1>
+            <h2>Planos Útiles, Isolíneas y Falsos Colores</h2>
+            <p class="objective"><strong>Objetivo:</strong> Ejecutar el cálculo lumínico, visualizar los resultados mediante gráficas de falsos colores y analizar si el diseño cumple con los niveles de iluminancia requeridos.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. La Medición de la Luz</h3>
+            <p>Una vez que la geometría, los materiales y las luminarias están en su lugar, DIALux utiliza el método de radiosidad para simular cómo los fotones rebotan en el espacio. Para leer estos datos, utilizamos tres conceptos fundamentales:</p>
+            <ul class="features-list">
+                <li><strong>El Plano Útil (Working Plane):</strong> Es una superficie virtual (generalmente a 0.75m o 0.80m del suelo) que simula la altura de un escritorio. Aquí es donde nos importa medir la luz, no en el suelo. </li>
+                <li><strong>Falsos Colores:</strong> Un mapa térmico visual. Los colores cálidos (rojo, blanco) representan alta cantidad de luz (luxes), mientras que los fríos (azul, violeta) indican zonas oscuras.</li>
+                <li><strong>Isolíneas:</strong> Líneas topográficas que unen puntos con la misma cantidad de luxes, permitiéndonos ver qué tan "pareja" (uniforme) es la iluminación en el espacio. </li>
+            </ul>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Calculando el Espacio</h3>
+            <p>Es hora de encender las luces y medir los resultados:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Iniciar el Cálculo</h4>
+                    <p>En la barra superior, haz clic en el icono de la calculadora (<strong>"Iniciar cálculo"</strong>). Dependiendo de la complejidad de la geometría y la cantidad de luces, esto puede tardar desde unos segundos hasta varios minutos.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Activar Falsos Colores</h4>
+                    <p>Una vez terminado, ve al panel de <strong>"Opciones de visualización"</strong> (esquina superior derecha de la vista 3D) y activa el icono de <strong>"Falsos colores"</strong>. Tu modelo cambiará a un mapa térmico.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Leer el Resumen de Resultados</h4>
+                    <p>En el panel lateral derecho (o izquierdo, según tu configuración), busca la pestaña de "Resultados". Ubica la superficie llamada <strong>"Plano útil"</strong>. Observa dos valores críticos: <strong>Em</strong> (Iluminancia media) y <strong>Uo</strong> (Uniformidad).</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Ajustar la Escala</h4>
+                    <p>Si la escala de colores no te resulta clara, puedes ajustar los valores mínimos y máximos de los falsos colores en el panel de propiedades para que el rojo represente, por ejemplo, exactamente 500 luxes (el estándar para oficinas).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Análisis Lumínico</h3>
+            <p>Un diseño es tan bueno como tu capacidad para interpretarlo. Demuestra tu pericia.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 06 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

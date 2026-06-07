@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 07: Aprendiendo DIALux - Escenas y Luz Diurna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Sesión 07: Escenas y Luz Diurna</h1>
+            <h2>Control Dinámico y Análisis Solar</h2>
+            <p class="objective"><strong>Objetivo:</strong> Configurar la entrada de luz natural mediante la geolocalización del proyecto y crear diferentes escenas de control para la iluminación artificial.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="teoria" class="card">
+            <h3>1. El Dinamismo de la Luz</h3>
+            <p>La iluminación profesional debe ser adaptable. En DIALux, gestionamos este dinamismo mediante dos sistemas principales:</p>
+            <ul class="features-list">
+                <li><strong>Luz Diurna (Daylight):</strong> DIALux utiliza modelos de cielo de la CIE (Comisión Internacional de Iluminación). Para que sea preciso, el proyecto debe tener una ubicación geográfica exacta (latitud/longitud) y una orientación correcta del Norte.
+                
+                </li>
+                <li><strong>Escenas de Luz (Light Scenes):</strong> Son "fotografías" del estado de las luminarias. Puedes tener una escena llamada "Día" (luces cerca de la ventana apagadas, el resto al 50%) y una "Noche" (todas al 100%).</li>
+                <li><strong>Grupos de Control:</strong> Para crear escenas, primero agrupamos las luminarias (ej. "Luces de Pizarra", "Luces de Pasillo") para poder atenuarlas (dimming) de forma independiente.</li>
+            </ul>
+        </section>
+
+        <section id="ejercicio" class="card">
+            <h3>2. Ejercicio Práctico: Creando Ambientes</h3>
+            <p>Vamos a permitir que entre el sol y a programar nuestra primera escena de iluminación:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <h4>Paso 1: Configurar el Sol</h4>
+                    <p>Ve a la pestaña <strong>"Luz"</strong> y selecciona la herramienta <strong>"Luz diurna"</strong>. Define la ubicación de tu proyecto (ej. Torreón, Coahuila). Asegúrate de establecer la orientación del Norte para que la trayectoria solar sea realista.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 2: Generar una Escena de Luz</h4>
+                    <p>En el panel izquierdo, busca la herramienta <strong>"Escenas de luz"</strong>. Por defecto, DIALux crea una escena base. Haz clic en "Crear nueva escena de luz" y nómbrala "Presentación".</p>
+                    
+                </div>
+                <div class="step">
+                    <h4>Paso 3: Agrupar y Atenuar (Dimming)</h4>
+                    <p>Dentro de tu nueva escena, selecciona luminarias específicas en la vista 3D y asígnalas a un nuevo "Grupo de control". Cambia el porcentaje de ese grupo al 20% simulando que se apagan parcialmente para usar un proyector.</p>
+                </div>
+                <div class="step">
+                    <h4>Paso 4: Calcular con Luz Mixta</h4>
+                    <p>Si activas la opción de cielo claro y sol en tu escena, al presionar "Calcular", DIALux sumará los luxes de la luz natural entrando por las ventanas más el porcentaje de luz artificial que hayas dejado encendido.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="card quiz-card">
+            <h3>3. Reto de Control Lumínico</h3>
+            <p>Demuestra tu dominio sobre la gestión de la luz en el tiempo.</p>
+            
+            <div id="quiz-container">
+                <h4 id="question-text">Pregunta...</h4>
+                <div id="answers-grid">
+                    </div>
+                <div id="feedback-message" class="hidden"></div>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <h4 id="score-text"></h4>
+                <button id="restart-btn" onclick="initQuiz()">Reintentar Reto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>copyright &copy;JMGV-PTEL-2026. sesion 07 aprendiendo DIALux. Todos los derechos reservados</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

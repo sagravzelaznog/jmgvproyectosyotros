@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 04: El Rotor y el Buje | JMGV-PTEL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">WND-GEN-16S</div>
+        <div class="progress-container">
+            <span class="progress-text">Progreso de la Sesión</span>
+            <div class="progress-bar"><div class="progress-fill" id="scrollProgress"></div></div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">MÓDULO 1: FUNDAMENTOS</span>
+            <h1>El Rotor y el Buje (Hub)</h1>
+            <p class="subtitle">El arte del equilibrio perfecto: Cómo unir tus aspas sin generar vibraciones destructivas.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="teoria" class="card">
+            <h2>1. Teoría: Solidez y Equilibrio</h2>
+            
+            <div class="content-grid">
+                <div class="text-block">
+                    <h3>La Solidez del Rotor: ¿Cuántas aspas necesito?</h3>
+                    <p>La <strong>solidez</strong> es la relación entre el área total de las aspas y el área del círculo que barren al girar. </p>
+                    <ul>
+                        <li><strong>Alta Solidez (Muchas aspas):</strong> Tienen muchísima fuerza de arranque (torque), pero giran lento. Son ideales para bombear agua (molinos de granja).</li>
+                        <li><strong>Baja Solidez (3 aspas):</strong> Tienen bajo torque de arranque, pero alcanzan altísimas revoluciones (RPM). <em>¡Esto es exactamente lo que necesitamos para generar electricidad!</em></li>
+                    </ul>
+                    <p>El estándar de 3 aspas es el equilibrio perfecto entre eficiencia aerodinámica, estabilidad giroscópica y costo de materiales.</p>
+                </div>
+                
+                <div class="visual-block">
+                    <svg viewBox="0 0 400 200" class="educational-svg large-svg">
+                        <g transform="translate(100, 100)">
+                            <circle cx="0" cy="0" r="80" fill="#EDF6F9" stroke="#83C5BE" stroke-width="2" stroke-dasharray="4,4"/>
+                            <g class="spin-slow">
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(0)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(30)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(60)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(90)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(120)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(150)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(180)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(210)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(240)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(270)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(300)"/>
+                                <path d="M0,0 L10,-75 L-10,-75 Z" fill="#006D77" transform="rotate(330)"/>
+                                <circle cx="0" cy="0" r="15" fill="#2B2D42"/>
+                            </g>
+                            <text x="0" y="110" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="bold" fill="#2B2D42">Alta Solidez (Lento / Fuerza)</text>
+                        </g>
+                        
+                        <g transform="translate(300, 100)">
+                            <circle cx="0" cy="0" r="80" fill="#EDF6F9" stroke="#83C5BE" stroke-width="2" stroke-dasharray="4,4"/>
+                            <g class="spin-fast">
+                                <path d="M0,0 C5,-30 15,-60 5,-75 C-5,-60 -10,-30 0,0" fill="#E29578" transform="rotate(0)"/>
+                                <path d="M0,0 C5,-30 15,-60 5,-75 C-5,-60 -10,-30 0,0" fill="#E29578" transform="rotate(120)"/>
+                                <path d="M0,0 C5,-30 15,-60 5,-75 C-5,-60 -10,-30 0,0" fill="#E29578" transform="rotate(240)"/>
+                                <circle cx="0" cy="0" r="10" fill="#2B2D42"/>
+                            </g>
+                            <text x="0" y="110" text-anchor="middle" font-family="Montserrat" font-size="12" font-weight="bold" fill="#2B2D42">Baja Solidez (Rápido / Eléctrico)</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="highlight-box mt-2">
+                <h4>El Enemigo Invisible: La Vibración</h4>
+                <p><strong>Balanceo Estático:</strong> Implica que las 3 aspas pesen exactamente lo mismo. Si una pesa 5 gramos más, al girar a 500 RPM, la fuerza centrífuga convertirá esos 5 gramos en kilos de fuerza destructiva.</p>
+                <p><strong>Balanceo Dinámico:</strong> Implica que las aspas "pisen" sobre el mismo plano al girar (tracking). Si un aspa está más inclinada que otra, el viento la empujará diferente, causando un bamboleo.</p>
+            </div>
+        </section>
+
+        <section id="practica" class="card">
+            <h2>2. Práctica: Ensamble Geométrico del Rotor</h2>
+            <p>Usaremos un disco de madera o plástico grueso como nuestro <strong>Buje (Hub)</strong>. La clave del éxito aquí no es la fuerza, sino la precisión matemática de la división del círculo.</p>
+            
+            <div class="content-grid">
+                <div class="steps-container vertical-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Trazado a 120°:</strong> Un círculo tiene 360°. Para 3 aspas, dividimos 360/3 = 120°. Usa un transportador para marcar exactamente tres líneas desde el centro separadas por 120 grados.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Fijación:</strong> Coloca la raíz de cada aspa perfectamente alineada con tu trazo. Atornilla usando al menos dos tornillos por aspa para evitar que giren sobre su propio eje.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Prueba Estática:</strong> Monta el rotor terminado en un eje libre (un clavo largo o el motor apagado). Gíralo suavemente. Si siempre se detiene con la misma aspa apuntando hacia abajo, esa aspa está más pesada. Lija un poco su superficie hasta que el rotor se detenga en cualquier posición al azar.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-block">
+                    <svg viewBox="0 0 250 250" class="educational-svg">
+                        <circle cx="125" cy="125" r="100" fill="#EDF6F9" stroke="#006D77" stroke-width="4"/>
+                        <line x1="125" y1="125" x2="125" y2="25" stroke="#2B2D42" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="125" y1="125" x2="211.6" y2="175" stroke="#2B2D42" stroke-width="2" stroke-dasharray="4,4"/>
+                        <line x1="125" y1="125" x2="38.4" y2="175" stroke="#2B2D42" stroke-width="2" stroke-dasharray="4,4"/>
+                        
+                        <rect x="110" y="25" width="30" height="70" fill="#FFD166" rx="5" opacity="0.8"/>
+                        <circle cx="125" cy="80" r="3" fill="#2B2D42"/> <circle cx="125" cy="40" r="3" fill="#2B2D42"/>
+
+                        <g transform="rotate(120, 125, 125)">
+                            <rect x="110" y="25" width="30" height="70" fill="#FFD166" rx="5" opacity="0.8"/>
+                            <circle cx="125" cy="80" r="3" fill="#2B2D42"/> <circle cx="125" cy="40" r="3" fill="#2B2D42"/>
+                        </g>
+
+                        <g transform="rotate(240, 125, 125)">
+                            <rect x="110" y="25" width="30" height="70" fill="#FFD166" rx="5" opacity="0.8"/>
+                            <circle cx="125" cy="80" r="3" fill="#2B2D42"/> <circle cx="125" cy="40" r="3" fill="#2B2D42"/>
+                        </g>
+
+                        <path d="M 125 90 A 35 35 0 0 1 155.3 142.5" fill="none" stroke="#E29578" stroke-width="3"/>
+                        <text x="145" y="110" font-family="Montserrat" font-size="14" font-weight="bold" fill="#E29578">120°</text>
+
+                        <circle cx="125" cy="125" r="15" fill="#006D77"/>
+                    </svg>
+                    <p class="caption">Distribución geométrica perfecta del Hub.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="evaluacion" class="card quiz-section">
+            <h2>3. Evaluación de Conocimientos</h2>
+            <p>Comprueba que dominas la geometría y física del rotor antes del ensamble final.</p>
+            
+            <div id="quiz-container"></div>
+            
+            <button id="submit-btn" onclick="checkQuiz()">Calificar Sesión 4</button>
+            <div id="result-area" class="hidden"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; JMGVPTEL. masterclass sesion 4 aerogeneradores. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

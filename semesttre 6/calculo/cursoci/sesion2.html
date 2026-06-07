@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: Práctica de Notación Sigma y sus Propiedades | Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar con navegación -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>🧮 Cálculo Integral</h1>
+                <p>64 Sesiones Completas</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                </li>
+
+                <!-- Módulo 1: Los Fundamentos -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        📚 Módulo 1: Fundamentos (1-21)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion1.html" class="nav-link">Sesión 1: Notación Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion2.html" class="nav-link active">Sesión 2: Propiedades Sigma</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion3.html" class="nav-link">Sesión 3: Propiedades Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion4.html" class="nav-link">Sesión 4: Práctica Sumatorias</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion5.html" class="nav-link">Sesión 5: Sumas de Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion6.html" class="nav-link">Sesión 6: Rectángulos Inscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion7.html" class="nav-link">Sesión 7: Rectángulos Circunscritos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion8.html" class="nav-link">Sesión 8: Práctica Riemann</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion9.html" class="nav-link">Sesión 9: Fórmulas Básicas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion10.html" class="nav-link">Sesión 10: Antiderivada</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion11.html" class="nav-link">Sesión 11: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion12.html" class="nav-link">Sesión 12: Fórmulas Inmediatas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion13.html" class="nav-link">Sesión 13: Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion14.html" class="nav-link">Sesión 14: Taller Integrales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion15.html" class="nav-link">Sesión 15: Cambio Variable</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion16.html" class="nav-link">Sesión 16: Práctica Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion17.html" class="nav-link">Sesión 17: Cambio Trig/Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion18.html" class="nav-link">Sesión 18: Taller Cambio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion19.html" class="nav-link">Sesión 19: Expresiones Especiales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion20.html" class="nav-link">Sesión 20: Repaso Módulo 1</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion21.html" class="nav-link evaluacion">Sesión 21: Evaluación 1</a>
+                </li>
+
+                <!-- Módulo 2: Técnicas de Integración -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🔧 Módulo 2: Técnicas (22-42)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion22.html" class="nav-link">Sesión 22: Potencias Trigonométricas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion23.html" class="nav-link">Sesión 23: Caso Par</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion24.html" class="nav-link">Sesión 24: Tan y Cot</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion25.html" class="nav-link">Sesión 25: Sec y Csc</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion26.html" class="nav-link">Sesión 26: Tan^m Sec^n</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion27.html" class="nav-link">Sesión 27: Productos Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion28.html" class="nav-link">Sesión 28: Taller Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion29.html" class="nav-link">Sesión 29: Integración por Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion30.html" class="nav-link">Sesión 30: Partes Alg x Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion31.html" class="nav-link">Sesión 31: Partes Alg x Exp</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion32.html" class="nav-link">Sesión 32: Partes Log/Inversas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion33.html" class="nav-link">Sesión 33: Taller Partes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion34.html" class="nav-link">Sesión 34: Sustitución Trig</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion35.html" class="nav-link">Sesión 35: Caso u²+a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion36.html" class="nav-link">Sesión 36: Caso u²-a²</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion37.html" class="nav-link">Sesión 37: Fracciones Parciales I</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion38.html" class="nav-link">Sesión 38: Fracciones II</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion39.html" class="nav-link">Sesión 39: Fracciones III</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion40.html" class="nav-link">Sesión 40: Fracciones IV</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion41.html" class="nav-link">Sesión 41: Repaso Módulo 2</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion42.html" class="nav-link evaluacion">Sesión 42: Evaluación 2</a>
+                </li>
+
+                <!-- Módulo 3: Aplicaciones -->
+                <li class="nav-item">
+                    <div class="nav-link module-header">
+                        🚀 Módulo 3: Aplicaciones (43-64)
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion43.html" class="nav-link">Sesión 43: Teorema Fundamental</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion44.html" class="nav-link">Sesión 44: Integrales Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion45.html" class="nav-link">Sesión 45: Práctica Definidas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion46.html" class="nav-link">Sesión 46: Constante Integración</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion47.html" class="nav-link">Sesión 47: Área bajo Curva X</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion48.html" class="nav-link">Sesión 48: Área bajo Curva Y</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion49.html" class="nav-link">Sesión 49: Área entre Curvas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion50.html" class="nav-link">Sesión 50: Área Horizontal</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion51.html" class="nav-link">Sesión 51: Taller Áreas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion52.html" class="nav-link">Sesión 52: Volúmenes - Discos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion53.html" class="nav-link">Sesión 53: Volúmenes - Arandelas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion54.html" class="nav-link">Sesión 54: Volúmenes - Capas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion55.html" class="nav-link">Sesión 55: Práctica Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion56.html" class="nav-link">Sesión 56: Taller Volúmenes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion57.html" class="nav-link">Sesión 57: Longitud de Arco</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion58.html" class="nav-link">Sesión 58: Métodos Numéricos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion59.html" class="nav-link">Sesión 59: Ecuaciones Dif.</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion60.html" class="nav-link">Sesión 60: Variables Separables</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion61.html" class="nav-link">Sesión 61: ED Lineales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion62.html" class="nav-link">Sesión 62: Aplicaciones ED</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion63.html" class="nav-link">Sesión 63: Repaso Final</a>
+                </li>
+                <li class="nav-item">
+                    <a href="sesion64.html" class="nav-link evaluacion">Sesión 64: Evaluación Final</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>🧮 Sesión 2: Práctica de Notación Sigma y sus Propiedades</h1>
+                <div class="session-subtitle">Dominando las reglas que hacen que Σ sea poderoso</div>
+                <p class="session-description">
+                    Ahora que conocemos la notación sigma, vamos a explorar sus propiedades matemáticas.
+                    Estas reglas nos permiten manipular sumas de manera algebraica, simplificando cálculos
+                    complejos y abriendo la puerta a las sumas de Riemann y las integrales.
+                </p>
+            </div>
+
+            <!-- Recordatorio de la sesión anterior -->
+            <div class="content-section">
+                <h2 class="module-title">📚 Recordatorio: ¿Qué es Σ?</h2>
+
+                <div class="step-by-step">
+                    <p>En la <a href="sesion1.html" class="nav-link inline-link">Sesión 1</a> aprendimos que:</p>
+                    <ul class="step-list">
+                        <li><strong>Σ (Sigma mayúscula)</strong> significa "suma" en matemáticas</li>
+                        <li><strong>La estructura básica:</strong> \(\sum_{i=1}^{n} i\) = 1 + 2 + 3 + ... + n</li>
+                        <li><strong>El índice i</strong> cambia en cada término de la suma</li>
+                        <li><strong>Límites:</strong> desde el valor inicial hasta el valor final</li>
+                    </ul>
+                </div>
+
+                <div class="math-expression">
+                    \(\sum_{i=1}^{5} i = 1 + 2 + 3 + 4 + 5 = 15\)
+                </div>
+
+                <p><strong>¡Ahora vamos a descubrir cómo manipular estas sumas usando propiedades matemáticas!</strong></p>
+            </div>
+
+            <!-- Propiedades fundamentales -->
+            <div class="content-section">
+                <h2 class="module-title">🔑 Propiedades Fundamentales de Σ</h2>
+
+                <h3>Propiedad 1: Suma de una Constante</h3>
+
+                <div class="step-by-step">
+                    <p>Si sumamos la misma constante múltiples veces:</p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{n} c = c + c + c + \dots + c\) (n veces)
+                    </div>
+
+                    <p><strong>Resultado:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{n} c = n \times c\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{4} 3 = 3 + 3 + 3 + 3 = 12\)
+                        <br>
+                        \(4 \times 3 = 12\) ✅
+                    </div>
+                </div>
+
+                <h3>Propiedad 2: Factor Constante (Distributividad)</h3>
+
+                <div class="step-by-step">
+                    <p>Si tenemos un factor constante multiplicando la suma:</p>
+                    <div class="math-expression">
+                        \(c \times \sum_{i=1}^{n} a_i = \sum_{i=1}^{n} (c \times a_i)\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(2 \times \sum_{i=1}^{3} i = 2 \times (1 + 2 + 3) = 2 \times 6 = 12\)
+                        <br>
+                        \(\sum_{i=1}^{3} (2 \times i) = 2 + 4 + 6 = 12\) ✅
+                    </div>
+                </div>
+
+                <h3>Propiedad 3: Suma de Sumas (Aditividad)</h3>
+
+                <div class="step-by-step">
+                    <p>Podemos separar sumas y luego combinarlas:</p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{n} (a_i + b_i) = \sum_{i=1}^{n} a_i + \sum_{i=1}^{n} b_i\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{3} (i + 2i) = \sum_{i=1}^{3} i + \sum_{i=1}^{3} 2i\)
+                        <br>
+                        \((1+2+3) + (2+4+6) = 6 + 12 = 18\)
+                        <br>
+                        \(1+2+3 + 2+4+6 = 18\) ✅
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplos paso a paso -->
+            <div class="content-section">
+                <h2 class="module-title">📝 Ejemplos Paso a Paso</h2>
+
+                <h3>Ejemplo 1: Simplificando una suma compleja</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Problema:</strong> Simplificar \(\sum_{i=1}^{4} (3i + 2)\)</p>
+
+                    <p><strong>Solución paso a paso:</strong></p>
+                    <ol class="step-list">
+                        <li><strong>Aplicar la propiedad de aditividad:</strong><br>
+                            \(\sum_{i=1}^{4} (3i + 2) = \sum_{i=1}^{4} 3i + \sum_{i=1}^{4} 2\)</li>
+
+                        <li><strong>Aplicar la propiedad de factor constante:</strong><br>
+                            \(\sum_{i=1}^{4} 3i = 3 \times \sum_{i=1}^{4} i\)<br>
+                            \(\sum_{i=1}^{4} 2 = 4 \times 2\)</li>
+
+                        <li><strong>Calcular las sumas básicas:</strong><br>
+                            \(\sum_{i=1}^{4} i = 1 + 2 + 3 + 4 = 10\)<br>
+                            \(4 \times 2 = 8\)</li>
+
+                        <li><strong>Combinar resultados:</strong><br>
+                            \(3 \times 10 + 8 = 30 + 8 = 38\)</li>
+                    </ol>
+
+                    <p><strong>Verificación manual:</strong></p>
+                    <div class="math-expression">
+                        3(1)+2 + 3(2)+2 + 3(3)+2 + 3(4)+2 = 5 + 8 + 11 + 14 = 38 ✅
+                    </div>
+                </div>
+
+                <h3>Ejemplo 2: Propiedades combinadas</h3>
+
+                <div class="step-by-step">
+                    <p><strong>Problema:</strong> Calcular \(\sum_{i=1}^{5} (2i^2 + 3i + 1)\)</p>
+
+                    <p><strong>Solución:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{5} (2i^2 + 3i + 1) = 2\sum_{i=1}^{5} i^2 + 3\sum_{i=1}^{5} i + \sum_{i=1}^{5} 1\)
+                    </div>
+
+                    <p><strong>Cálculo de cada suma:</strong></p>
+                    <ul class="step-list">
+                        <li>\(\sum_{i=1}^{5} i^2 = 1^2 + 2^2 + 3^2 + 4^2 + 5^2 = 1 + 4 + 9 + 16 + 25 = 55\)</li>
+                        <li>\(\sum_{i=1}^{5} i = 1 + 2 + 3 + 4 + 5 = 15\)</li>
+                        <li>\(\sum_{i=1}^{5} 1 = 5 \times 1 = 5\)</li>
+                    </ul>
+
+                    <p><strong>Resultado final:</strong></p>
+                    <div class="math-expression">
+                        \(2(55) + 3(15) + 5 = 110 + 45 + 5 = 160\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Propiedades avanzadas -->
+            <div class="content-section">
+                <h2 class="module-title">🚀 Propiedades Avanzadas</h2>
+
+                <h3>Propiedad 4: Cambio de Índice</h3>
+
+                <div class="step-by-step">
+                    <p>Podemos cambiar el índice de la suma:</p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{n} a_i = \sum_{j=1}^{n} a_j = \sum_{k=1}^{n} a_k\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{3} i^2 = \sum_{k=1}^{3} k^2 = 1 + 4 + 9 = 14\)
+                    </div>
+                </div>
+
+                <h3>Propiedad 5: Suma desde 0</h3>
+
+                <div class="step-by-step">
+                    <p>Una suma que empieza desde 0:</p>
+                    <div class="math-expression">
+                        \(\sum_{i=0}^{n} a_i = a_0 + a_1 + a_2 + \dots + a_n\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=0}^{2} i = 0 + 1 + 2 = 3\)
+                    </div>
+                </div>
+
+                <h3>Propiedad 6: Suma en orden inverso</h3>
+
+                <div class="step-by-step">
+                    <p>El orden de la suma no afecta el resultado:</p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{n} a_i = \sum_{i=n}^{1} a_i\)
+                    </div>
+
+                    <p><strong>Ejemplo:</strong></p>
+                    <div class="math-expression">
+                        \(\sum_{i=1}^{3} i = 1 + 2 + 3 = 6\)
+                        <br>
+                        \(\sum_{i=3}^{1} i = 3 + 2 + 1 = 6\) ✅
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área interactiva -->
+            <div class="content-section interactive-area">
+                <h2 class="module-title">🧮 ¡Practica las Propiedades!</h2>
+
+                <div id="sigma-exercises">
+                    <div class="exercise-container">
+                        <h3>Ejercicio 1: Propiedad de constante</h3>
+                        <p>Simplifica usando las propiedades: \(\sum_{i=1}^{6} 4\)</p>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_1', 'a')">a) 24</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_1', 'b')">b) 10</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_1', 'c')">c) 6</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_1', 'd')">d) 4</button>
+                        </div>
+
+                        <p id="feedback-exercise2_1" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 2: Propiedad distributiva</h3>
+                        <p>Simplifica: \(3 \times \sum_{i=1}^{4} i\)</p>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_2', 'a')">a) 30</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_2', 'b')">b) 12</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_2', 'c')">c) 3</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_2', 'd')">d) 1</button>
+                        </div>
+
+                        <p id="feedback-exercise2_2" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 3: Propiedad aditiva</h3>
+                        <p>Separa esta suma: \(\sum_{i=1}^{3} (i + 2i)\)</p>
+
+                        <div class="exercise-options">
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_3', 'a')">a) \(\sum i + \sum 2i\)</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_3', 'b')">b) \(\sum 2i + \sum i\)</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_3', 'c')">c) \(2 \times \sum i\)</button>
+                            <button class="interactive-btn" onclick="checkAnswer('exercise2_3', 'd')">d) \(\sum i^2\)</button>
+                        </div>
+
+                        <p id="feedback-exercise2_3" class="feedback hidden"></p>
+                    </div>
+
+                    <div class="exercise-container">
+                        <h3>Ejercicio 4: Propiedad combinada</h3>
+                        <p>Calcula: \(\sum_{i=1}^{3} (2i + 3)\)</p>
+
+                        <input type="text" id="exercise2_4-input" class="exercise-input" placeholder="Escribe el resultado">
+
+                        <div>
+                            <button class="interactive-btn" onclick="checkSigmaCalculation()">Verificar</button>
+                            <button class="interactive-btn btn-secondary" onclick="showHint('exercise2_4')">Pista</button>
+                        </div>
+
+                        <p id="feedback-exercise2_4" class="feedback hidden"></p>
+                        <p id="hint-exercise2_4" class="feedback hint hidden"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aplicaciones -->
+            <div class="content-section">
+                <h2 class="module-title">🔗 Aplicaciones en el Cálculo</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">¿Por qué son importantes estas propiedades?</h3>
+
+                    <p>Las propiedades de la notación sigma son fundamentales porque:</p>
+                    <ul class="step-list">
+                        <li><strong>Simplifican cálculos complejos</strong> - Reducen sumas largas a operaciones simples</li>
+                        <li><strong>Permiten manipulación algebraica</strong> - Podemos tratar sumas como variables</li>
+                        <li><strong>Son la base de las sumas de Riemann</strong> - Que nos llevan a las integrales</li>
+                        <li><strong>Facilitan el trabajo con series</strong> - Importante en matemáticas avanzadas</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>🔮 Conexión con las Integrales</h4>
+                    <p>Estas mismas propiedades se aplican a las integrales:</p>
+                    <div class="math-expression">
+                        \(\int (f(x) + g(x)) dx = \int f(x) dx + \int g(x) dx\)
+                        <br>
+                        \(c \times \int f(x) dx = \int (c \times f(x)) dx\)
+                    </div>
+                    <p><strong>¡Lo que aprendemos con Σ se aplica directamente a ∫!</strong></p>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="content-section">
+                <h2 class="module-title">📋 Resumen de la Sesión</h2>
+
+                <div class="step-by-step">
+                    <h3 class="module-title">✅ Propiedades dominadas:</h3>
+                    <ul class="step-list">
+                        <li><strong>Constante:</strong> \(\sum_{i=1}^{n} c = n \times c\)</li>
+                        <li><strong>Factor constante:</strong> \(c \times \sum a_i = \sum (c \times a_i)\)</li>
+                        <li><strong>Aditividad:</strong> \(\sum (a_i + b_i) = \sum a_i + \sum b_i\)</li>
+                        <li><strong>Cambio de índice:</strong> \(\sum a_i = \sum a_j = \sum a_k\)</li>
+                        <li><strong>Suma desde 0:</strong> \(\sum_{i=0}^{n} a_i = a_0 + \sum_{i=1}^{n} a_i\)</li>
+                        <li><strong>Orden inverso:</strong> El orden no afecta el resultado</li>
+                    </ul>
+                </div>
+
+                <div class="math-expression">
+                    💡 <strong>Conexión con el cálculo:</strong> Estas propiedades son idénticas a las reglas de integración, demostrando la profunda conexión entre sumas y integrales.
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="content-section">
+                <div class="navigation-buttons">
+                    <p class="nav-subtitle">¿Dominaste las propiedades?</p>
+                    <a href="sesion3.html" class="interactive-btn btn-nav">
+                        ➡️ Continuar a Sesión 3: Propiedades Sumatorias
+                    </a>
+                </div>
+
+                <div class="navigation-buttons">
+                    <a href="sesion1.html" class="interactive-btn btn-secondary">⬅️ Repasar Sesión 1</a>
+                    <a href="index.html" class="interactive-btn btn-secondary">🏠 Volver al Inicio</a>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <h3>🧮 Cálculo Integral - Sesión 2</h3>
+                    <p>Propiedades de la Notación Sigma</p>
+                    <p>¡Has dominado las propiedades fundamentales de las sumas!</p>
+        
+                    <div class="footer-links">
+                        <a href="sesion3.html" class="footer-link">Continuar → Sesión 3</a>
+                        <a href="sesion1.html" class="footer-link">⬅️ Sesión 1</a>
+                        <a href="index.html" class="footer-link">🏠 Inicio</a>
+                    </div>
+        
+                    <div class="footer-copyright">
+                        <p>&copy; JMGV-PTEL 2025. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="interactividad.js"></script>
+</body>
+</html>

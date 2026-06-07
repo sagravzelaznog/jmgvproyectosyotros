@@ -16,6 +16,16 @@ export const questionDatabase = {
             timeLimit: 20
         },
         {
+            question: "¿En la dicotomía de Zenón, por qué nunca se llega al cero?",
+            options: [
+                "Porque siempre queda la mitad de la distancia anterior",
+                "Porque la velocidad es constante",
+                "Porque el espacio se acaba",
+                "Porque Aquiles es más lento"
+            ],
+            correctIndex: 0
+        },
+        {
             question: "En 'Aquiles y la Tortuga', ¿por qué Zenón argumenta que Aquiles nunca alcanzará a la tortuga?",
             options: [
                 "Porque la tortuga es más rápida",
@@ -60,6 +70,49 @@ export const questionDatabase = {
             answerIndex: 0,
             timeLimit: 30
         }
+    ],
+    "sesion2": [
+        {
+            question: "¿Qué curva intentaba medir Arquímedes con polígonos?",
+            options: ["El círculo", "El cuadrado", "El triángulo", "La recta"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué nombre recibe el método de aproximación de áreas de Arquímedes?",
+            options: ["Método de Exhausción", "Método de Dicotomía", "Método Algebraico", "Método Infinito"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué sucede al aumentar el número de lados de un polígono regular inscrito en un círculo?",
+            options: ["Su área se aproxima a la del círculo", "Su área se hace cero", "Se convierte en un cuadrado", "Su perímetro disminuye"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Cuál es el polígono con menor número de lados que usó Arquímedes como base?",
+            options: ["Triángulo", "Cuadrado", "Hexágono", "Octágono"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Además del círculo, ¿qué otra curva midió Arquímedes cortándola en triángulos?",
+            options: ["La parábola", "La hipérbola", "La elipse", "La espiral"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "El Método de Exhausción es considerado el precursor de...",
+            options: ["El Cálculo Integral", "El Álgebra Lineal", "La Trigonometría", "La Estadística"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Si el polígono tuviera infinitos lados, ¿qué figura formaría?",
+            options: ["Un círculo perfecto", "Un punto", "Una línea recta infinita", "Una estrella"],
+            answerIndex: 0,
+            timeLimit: 20
+        }
     ]
-    // Aquí se agregarán las de la sesión 2, 3...
 };

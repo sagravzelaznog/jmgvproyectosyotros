@@ -53,3 +53,79 @@ function resetRunner() {
     document.getElementById('runner-dot').style.left = '0%';
     document.getElementById('distance-log').innerHTML = 'Distancia restante: 100%';
 }
+
+// =========================================================
+// SCRIPT: SESIÓN 2 PENSAMIENTO VARIACIONAL
+// =========================================================
+
+function unlockTeacherTipsS2() {
+    const pwd = prompt("🔐 MODO MAESTRO (Pensamiento Variacional)\nIngrese el código de acceso: ");
+    if (pwd === "1983") {
+        const tips = document.querySelectorAll('#sesion2-variacional .teacher-tip');
+        let unlocked = false;
+        tips.forEach(tip => {
+            if (tip.classList.contains('hidden')) {
+                tip.classList.remove('hidden');
+                unlocked = true;
+            }
+        });
+        if (unlocked) alert("✅ ¡Modo Maestro Activado!");
+    } else if (pwd !== null) {
+        alert("❌ Código incorrecto. Acceso denegado.");
+    }
+}
+
+function drawPolygon(sides) {
+    const canvas = document.getElementById('polygon-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radius = 120;
+
+    // Limpiar canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Dibujar Círculo exterior
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.8)';
+    ctx.lineWidth = 3;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#3b82f6';
+    ctx.stroke();
+
+    // Dibujar Polígono inscrito
+    ctx.beginPath();
+    for (let i = 0; i <= sides; i++) {
+        const angle = i * (2 * Math.PI / sides) - (Math.PI / 2);
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    }
+    
+    ctx.fillStyle = 'rgba(168, 85, 247, 0.5)';
+    ctx.fill();
+    
+    ctx.strokeStyle = '#a855f7';
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = '#a855f7';
+    ctx.stroke();
+    
+    ctx.shadowBlur = 0;
+}
+
+// Necesario exportarlo al scope global para que el slider de HTML lo encuentre si usamos type="module" o defer
+window.updatePolygon = function(sides) {
+    document.getElementById('sides-value').innerText = sides;
+    drawPolygon(sides);
+}
+window.drawPolygon = drawPolygon;
+window.unlockTeacherTipsS2 = unlockTeacherTipsS2;

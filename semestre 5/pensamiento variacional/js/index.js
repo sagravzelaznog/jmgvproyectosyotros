@@ -15,11 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
         status: "active"
     });
 
-    // Generate the remaining 49 sessions
-    // Block 1: Sessions 1-16
+    sessions.push({
+        id: 2,
+        title: "Arquímedes y el Método de Exhausción",
+        description: "Aproximando curvas y áreas a través de figuras poligonales infinitas.",
+        block: 1,
+        link: "pages/PVS02.HTML",
+        status: "active"
+    });
+
+    // Generate the remaining sessions
+    // Block 1: Sessions 3-16
     // Block 2: Sessions 17-33
-    // Block 3: Sessions 34-50
-    for (let i = 2; i <= 50; i++) {
+    for (let i = 3; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .concept-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .concept-image:hover {
+            transform: scale(1.02);
+        }
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .slider-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .slider-container input {
+            width: 80%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de progreso de la sesión local -->
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion2-variacional">
+
+        <header class="info-header" ondblclick="unlockTeacherTipsS2()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 2</div>
+            <h1>Arquímedes y el Método de Exhausción</h1>
+            <p>Aproximando curvas y áreas a través de figuras poligonales infinitas.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Dibuja en el pizarrón un círculo con un triángulo dentro, luego un cuadrado, un hexágono, y pregunta: "¿Qué pasa si dibujamos un polígono de un millón de lados?"</div>
+        </header>
+
+        <div class="info-body">
+            <!-- Propósito Formativo -->
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender la aproximación al área de curvas mediante polígonos regulares, sentando las bases intuitivas del cálculo integral clásico a través del pensamiento de Arquímedes.</p>
+            </section>
+
+            <!-- 3 Ejemplos -->
+            <section class="info-card examples-card">
+                <h2>📝 3 Ejemplos Prácticos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Área del Círculo:</b> Aproximar el área de un círculo sumando las áreas de polígonos inscritos cada vez más grandes.
+                        <img src="../assets/images/arquimedes_exhauscion.png" alt="Exhausción del Círculo" class="concept-image">
+                    </li>
+                    <li>
+                        <b>Segmento Parabólico:</b> Cortar una curva y llenarla infinitamente de triángulos para calcular su área exacta.
+                        <img src="../assets/images/segmento_parabolico.png" alt="Segmento Parabólico" class="concept-image">
+                    </li>
+                    <li>
+                        <b>Sombras Circulares:</b> Analizar cómo la proyección de una luz genera formas cónicas o curvas a partir de círculos.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Estrategia y Simulador M-Learning -->
+            <section class="info-card strategy-card">
+                <h2>📱 Taller de Geometría Dinámica</h2>
+                <p>Experimenta el método de exhausción. Desliza la barra para aumentar el número de lados del polígono inscrito y observa cómo se aproxima al círculo perfecto.</p>
+
+                <!-- SIMULADOR VISUAL DE EXHAUSCIÓN -->
+                <div class="simulator-box">
+                    <h4>Simulador de Exhausción de Arquímedes</h4>
+                    
+                    <div class="canvas-container">
+                        <canvas id="polygon-canvas" width="300" height="300"></canvas>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <label for="sides-slider" style="font-weight: bold;">Número de lados: <span id="sides-value">3</span></label><br><br>
+                        <input type="range" id="sides-slider" min="3" max="50" value="3" oninput="updatePolygon(this.value)">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2 Actividades de Refuerzo -->
+            <section class="info-card activities-card">
+                <h2>⚙️ 2 Actividades de Refuerzo</h2>
+                <ol class="custom-list numbered">
+                    <li><b>Cálculo de Áreas:</b> Trabajar en papel calculando manualmente el área de un cuadrado y un octágono inscritos en un círculo de radio 1.</li>
+                    <li><b>Fracciones y Sombreado:</b> Dibujar diagramas circulares precisos e ir sombreando las fracciones que van llenando la curva.</li>
+                </ol>
+            </section>
+        </div>
+        
+        <!-- Gamificación: Quiz Interactivo -->
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <br><br>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        // Lógica de Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        // Inicializar Simulador al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof drawPolygon === 'function') {
+                drawPolygon(3);
+            }
+        });
+
+        // Iniciar Quiz Kahoot
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion2', async (score, percentage) => {
+                alert(`¡Quiz terminado! Guardando progreso... Puntaje: ${score}`);
+                
+                // Marcar en local (App global)
+                if(percentage >= 50) {
+                    AppController.markSessionCompleted('sesion2');
+                }
+                
+                // Guardar en Firebase
+                const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                localStorage.setItem('pv_student_id', tempStudentId);
+                
+                await saveProgressToFirebase(tempStudentId, 'sesion2', score, percentage >= 50);
+                alert('Progreso guardado exitosamente en Firebase y de forma local.');
+                window.location.href = '../index.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 /* =========================================================
     INFOGRAFÍA SESIÓN 1: PENSAMIENTO VARIACIONAL
     ========================================================= */
-#sesion1-variacional {
+.infographic-container {
     font-family: 'Segoe UI', system-ui, sans-serif;
     max-width: 900px;
     margin: 40px auto;
@@ -12,7 +12,7 @@
     color: #212529;
 }
 
-#sesion1-variacional .info-header {
+.infographic-container .info-header {
     background: linear-gradient(135deg, #10ac84 0%, #1dd1a1 100%);
     color: white;
     padding: 40px 30px;
@@ -40,7 +40,7 @@
     transform: translateY(-2px);
 }
 
-#sesion1-variacional .badge {
+.infographic-container .badge {
     display: inline-block;
     background: #222f3e;
     color: #1dd1a1;
@@ -53,20 +53,20 @@
     text-transform: uppercase;
 }
 
-#sesion1-variacional h1 {
+.infographic-container h1 {
     margin: 0 0 10px 0;
     font-size: 2.4em;
     font-weight: 800;
 }
 
-#sesion1-variacional .info-body {
+.infographic-container .info-body {
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
 }
 
-#sesion1-variacional .info-card {
+.infographic-container .info-card {
     background: white;
     padding: 25px;
     border-radius: 12px;
@@ -74,26 +74,26 @@
     border-top: 5px solid;
 }
 
-#sesion1-variacional .goal-card {
+.infographic-container .goal-card {
     grid-column: span 2;
     border-color: #ff9f43;
 }
 
-#sesion1-variacional .examples-card {
+.infographic-container .examples-card {
     border-color: #5f27cd;
 }
 
-#sesion1-variacional .activities-card {
+.infographic-container .activities-card {
     border-color: #ee5253;
 }
 
-#sesion1-variacional .strategy-card {
+.infographic-container .strategy-card {
     grid-column: span 2;
     border-color: #0abde3;
     text-align: center;
 }
 
-#sesion1-variacional h2 {
+.infographic-container h2 {
     margin-top: 0;
     font-size: 1.4em;
     display: flex;
@@ -215,7 +215,7 @@
 }
 
 /* Modo Maestro */
-#sesion1-variacional .teacher-tip {
+.infographic-container .teacher-tip {
     background: #fff3cd;
     color: #856404;
     padding: 15px;
@@ -227,11 +227,11 @@
     text-align: left;
 }
 
-#sesion1-variacional .teacher-tip.hidden {
+.infographic-container .teacher-tip.hidden {
     display: none;
 }
 
-#sesion1-variacional footer {
+.infographic-container footer {
     background: #222f3e;
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
@@ -242,7 +242,7 @@
 }
 
 @media (max-width: 768px) {
-    #sesion1-variacional .info-body {
+    .infographic-container .info-body {
         grid-template-columns: 1fr;
     }
 

@@ -121,11 +121,57 @@ function drawPolygon(sides) {
     
     ctx.shadowBlur = 0;
 }
+// =========================================================
+// SCRIPT: SESIÓN 3 PENSAMIENTO VARIACIONAL
+// =========================================================
 
-// Necesario exportarlo al scope global para que el slider de HTML lo encuentre si usamos type="module" o defer
-window.updatePolygon = function(sides) {
-    document.getElementById('sides-value').innerText = sides;
-    drawPolygon(sides);
+function unlockTeacherTipsS3() {
+    const pwd = prompt("🔐 MODO MAESTRO (Pensamiento Variacional)\nIngrese el código de acceso: ");
+    if (pwd === "1983") {
+        const tips = document.querySelectorAll('#sesion3-variacional .teacher-tip');
+        let unlocked = false;
+        tips.forEach(tip => {
+            if (tip.classList.contains('hidden')) {
+                tip.classList.remove('hidden');
+                unlocked = true;
+            }
+        });
+        if (unlocked) alert("✅ ¡Modo Maestro Activado!");
+    } else if (pwd !== null) {
+        alert("❌ Código incorrecto. Acceso denegado.");
+    }
 }
-window.drawPolygon = drawPolygon;
-window.unlockTeacherTipsS2 = unlockTeacherTipsS2;
+
+function calculateSpeed() {
+    const dist = parseFloat(document.getElementById('dist-slider').value);
+    const time = parseFloat(document.getElementById('time-slider').value);
+    
+    document.getElementById('dist-label').innerText = dist;
+    document.getElementById('time-label').innerText = time;
+    
+    // m = Δy / Δx
+    const speed = dist / time;
+    
+    // Update UI
+    const speedVal = document.getElementById('speed-val');
+    speedVal.innerText = speed.toFixed(1);
+    
+    // Cambiar color basado en la velocidad
+    const gauge = document.getElementById('gauge-display');
+    if (speed > 100) {
+        gauge.style.borderColor = '#ef4444'; // Red
+        gauge.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.5)';
+        speedVal.style.color = '#ef4444';
+    } else if (speed > 50) {
+        gauge.style.borderColor = '#eab308'; // Yellow
+        gauge.style.boxShadow = '0 0 20px rgba(234, 179, 8, 0.5)';
+        speedVal.style.color = '#eab308';
+    } else {
+        gauge.style.borderColor = '#38bdf8'; // Blue
+        gauge.style.boxShadow = '0 0 20px rgba(56, 189, 248, 0.5)';
+        speedVal.style.color = '#38bdf8';
+    }
+}
+
+window.unlockTeacherTipsS3 = unlockTeacherTipsS3;
+window.calculateSpeed = calculateSpeed;

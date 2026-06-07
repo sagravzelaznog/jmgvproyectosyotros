@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 3 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 150px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gráfica de Barras Neón */
+        .bar {
+            width: 20%;
+            background: linear-gradient(180deg, #ec4899 0%, transparent 100%);
+            border-top: 3px solid #ec4899;
+            box-shadow: 0 -5px 15px rgba(236, 72, 153, 0.4);
+            border-radius: 4px 4px 0 0;
+            transition: height 1s ease-out;
+        }
+
+        /* Gráfica de Velocidad (Carretera) */
+        .road {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .road::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #0ea5e9;
+            box-shadow: 0 0 10px #0ea5e9;
+            animation: moveRoad 2s linear infinite;
+        }
+        .car-emoji {
+            position: absolute;
+            bottom: 25px;
+            font-size: 2.5em;
+            left: 10%;
+            animation: bounceCar 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveRoad {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+        @keyframes bounceCar {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-3px); }
+        }
+
+        .math-box {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.2em;
+            text-align: center;
+            color: #1dd1a1;
+            margin: 10px 0;
+            border-left: 4px solid #1dd1a1;
+        }
+
+        /* Simulador Sliders */
+        .sim-control {
+            margin: 15px 0;
+        }
+        .sim-control input {
+            width: 100%;
+        }
+        .sim-gauge {
+            background: #0f172a;
+            color: #38bdf8;
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+            padding: 20px;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px auto;
+            border: 4px solid #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+        .sim-gauge small {
+            font-size: 0.3em;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion3-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS3()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 3</div>
+            <h1>Tasa de Variación Promedio I</h1>
+            <p>Entendiendo el cambio matemático en un intervalo de tiempo y espacio.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Invita a los alumnos al patio. Mide 10 metros, haz que un alumno camine y otro corra. Calculen la velocidad promedio in situ midiendo el tiempo con su celular.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Introducir el concepto fundamental del cálculo: entender y calcular la variación (cambio) de una magnitud en relación con un intervalo (generalmente el tiempo o la distancia).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #1dd1a1; border-top: 5px solid #1dd1a1;">
+                <h2 style="color: #1dd1a1;">📖 Teoría: La Razón de Cambio</h2>
+                <p><strong>Enunciado Teórico:</strong> La tasa de variación promedio mide cuánto cambia una variable (como la posición, la temperatura o el costo) en función de otra (como el tiempo o el número de artículos), dentro de un intervalo específico.</p>
+                <div class="math-box">
+                    m = Δy / Δx = [f(x₂) - f(x₁)] / [x₂ - x₁]
+                </div>
+                <p>En el mundo real, a esto le llamamos "Velocidad" (cambio de distancia sobre tiempo), "Crecimiento" (cambio de población sobre tiempo) o "Pendiente" en una gráfica matemática.</p>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos Prácticos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Velocidad Promedio (Carretera a Saltillo):</b>
+                        <div class="css-graphic">
+                            <div class="road"></div>
+                            <div class="car-emoji">🚙💨</div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Crecimiento Poblacional (Mensual):</b>
+                        <div class="css-graphic">
+                            <div class="bar" style="height: 20%"></div>
+                            <div class="bar" style="height: 40%"></div>
+                            <div class="bar" style="height: 70%"></div>
+                            <div class="bar" style="height: 90%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Consumo Eléctrico Promedio Semanal.</b>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card">
+                <h2>📱 Simulador de Variación (Velocímetro)</h2>
+                <p>Juega con las variables espaciales (Δy) y temporales (Δx) para calcular dinámicamente la Velocidad Promedio (Pendiente).</p>
+
+                <div class="simulator-box">
+                    <div class="sim-gauge" id="gauge-display">
+                        <span id="speed-val">0.0</span>
+                        <small>km/h (Δy/Δx)</small>
+                    </div>
+
+                    <div class="sim-control">
+                        <label>Distancia (Δy): <span id="dist-label">0</span> km</label>
+                        <input type="range" id="dist-slider" min="0" max="500" value="0" oninput="calculateSpeed()">
+                    </div>
+                    
+                    <div class="sim-control">
+                        <label>Tiempo (Δx): <span id="time-label">1</span> h</label>
+                        <input type="range" id="time-slider" min="1" max="10" value="1" oninput="calculateSpeed()">
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-card activities-card">
+                <h2>⚙️ Actividades de Refuerzo</h2>
+                <ol class="custom-list numbered">
+                    <li><b>Cálculo de pendientes algebraicas:</b> Resolver ejercicios clásicos usando la fórmula m = Δy/Δx.</li>
+                    <li><b>Llenado de tablas de datos:</b> Completar los valores de distancia según una velocidad constante.</li>
+                </ol>
+            </section>
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion3', async (score, percentage) => {
+                alert(`¡Quiz terminado! Guardando progreso... Puntaje: ${score}`);
+                if(percentage >= 50) AppController.markSessionCompleted('sesion3');
+                
+                const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                localStorage.setItem('pv_student_id', tempStudentId);
+                
+                await saveProgressToFirebase(tempStudentId, 'sesion3', score, percentage >= 50);
+                window.location.href = '../index.html';
+            });
+        });
+    </script>
+</body>
+</html>

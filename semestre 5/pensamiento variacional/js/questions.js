@@ -114,5 +114,49 @@ export const questionDatabase = {
             answerIndex: 0,
             timeLimit: 20
         }
+    ],
+    "sesion3": [
+        {
+            question: "¿Qué mide la 'Tasa de Variación Promedio' en un viaje en coche?",
+            options: ["La Velocidad Promedio", "La Gasolina consumida", "El Peso del coche", "El color de la carretera"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "En matemáticas, ¿cómo se le llama a la inclinación de una recta que representa esta variación?",
+            options: ["Pendiente (m)", "Intercepto (b)", "Área (A)", "Hipotenusa (h)"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Si recorres 100 km en 2 horas, ¿cuál fue tu velocidad promedio?",
+            options: ["50 km/h", "200 km/h", "100 km/h", "25 km/h"],
+            answerIndex: 0,
+            timeLimit: 30
+        },
+        {
+            question: "¿Cuál es la fórmula algebraica de la pendiente m?",
+            options: ["Δy / Δx", "Δx * Δy", "Δx - Δy", "x + y"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué significa el símbolo 'Δ' (Delta) en matemáticas?",
+            options: ["Cambio o Diferencia", "Suma total", "Infinito", "Una variable desconocida"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Si la población de un país crece 500,000 habitantes en 5 años, ¿cuál es la tasa de variación anual?",
+            options: ["100,000 habitantes por año", "50,000 habitantes por año", "1 millón de habitantes por año", "500,000 habitantes por año"],
+            answerIndex: 0,
+            timeLimit: 30
+        },
+        {
+            question: "En una gráfica de distancia vs tiempo, una línea muy empinada (casi vertical) indica...",
+            options: ["Alta velocidad", "Baja velocidad", "Que el objeto está detenido", "Que retrocede en el tiempo"],
+            answerIndex: 0,
+            timeLimit: 20
+        }
     ]
 };

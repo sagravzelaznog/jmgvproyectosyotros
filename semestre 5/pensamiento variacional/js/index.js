@@ -24,10 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
         status: "active"
     });
 
+    sessions.push({
+        id: 3,
+        title: "Tasa de Variación Promedio I",
+        description: "Entendiendo el cambio matemático en un intervalo de tiempo y espacio.",
+        block: 1,
+        link: "pages/PVS03.HTML",
+        status: "active"
+    });
+
     // Generate the remaining sessions
-    // Block 1: Sessions 3-16
-    // Block 2: Sessions 17-33
-    for (let i = 3; i <= 50; i++) {
+    for (let i = 4; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

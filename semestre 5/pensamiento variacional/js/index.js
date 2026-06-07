@@ -33,8 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
         status: "active"
     });
 
+    sessions.push({
+        id: 4,
+        title: "Tasa de Variación en la Ciudad",
+        description: "Modelando fenómenos con datos reales de servicios e infraestructura.",
+        block: 1,
+        link: "pages/PVS04.HTML",
+        status: "active"
+    });
+
     // Generate the remaining sessions
-    for (let i = 4; i <= 50; i++) {
+    for (let i = 5; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

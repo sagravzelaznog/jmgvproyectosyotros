@@ -158,5 +158,49 @@ export const questionDatabase = {
             answerIndex: 0,
             timeLimit: 20
         }
+    ],
+    "sesion4": [
+        {
+            question: "¿Qué ocurre con la 'Tasa de Demanda' eléctrica de la ciudad durante el calor extremo?",
+            options: ["Aumenta exponencialmente", "Disminuye", "Se mantiene constante", "Llega a cero"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "En una gráfica de demanda eléctrica, si la pendiente es positiva muy alta, significa que...",
+            options: ["El consumo está subiendo rápidamente", "Hay un apagón", "El consumo es estable", "Es de madrugada"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Por qué el agua pierde presión a medida que viaja por la tubería urbana?",
+            options: ["Por la fricción y fugas que generan una tasa negativa", "Por gravedad inversa", "Por exceso de cloro", "Porque el agua se evapora"],
+            answerIndex: 0,
+            timeLimit: 30
+        },
+        {
+            question: "Si analizas un recibo de luz que pasa de 100 kWh a 400 kWh en verano, la Tasa de Variación es...",
+            options: ["Positiva", "Negativa", "Cero", "Infinita"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué nos permite predecir el modelado de la variación de voltaje?",
+            options: ["Cuándo se va a dañar un transformador", "Cuándo va a llover", "El costo del cable de cobre", "La velocidad del viento"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Matemáticamente, la infraestructura urbana se comporta de manera...",
+            options: ["Dinámica y variante", "Estática", "Infinita", "Cíclica exacta"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué magnitud sufre variación durante el uso simultáneo de aires acondicionados?",
+            options: ["La Carga (Amperes) del transformador", "La velocidad de la luz", "El diámetro del transformador", "El color de los postes"],
+            answerIndex: 0,
+            timeLimit: 30
+        }
     ]
 };

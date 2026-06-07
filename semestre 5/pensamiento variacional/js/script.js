@@ -175,3 +175,63 @@ function calculateSpeed() {
 
 window.unlockTeacherTipsS3 = unlockTeacherTipsS3;
 window.calculateSpeed = calculateSpeed;
+
+// =========================================================
+// SCRIPT: SESIÓN 4 PENSAMIENTO VARIACIONAL
+// =========================================================
+
+function unlockTeacherTipsS4() {
+    const pwd = prompt("🔐 MODO MAESTRO (Pensamiento Variacional)\nIngrese el código de acceso: ");
+    if (pwd === "1983") {
+        const tips = document.querySelectorAll('#sesion4-variacional .teacher-tip');
+        let unlocked = false;
+        tips.forEach(tip => {
+            if (tip.classList.contains('hidden')) {
+                tip.classList.remove('hidden');
+                unlocked = true;
+            }
+        });
+        if (unlocked) alert("✅ ¡Modo Maestro Activado!");
+    } else if (pwd !== null) {
+        alert("❌ Código incorrecto. Acceso denegado.");
+    }
+}
+
+function calculateLoad() {
+    const tempSlider = document.getElementById('temp-slider');
+    if(!tempSlider) return;
+    
+    const temp = parseFloat(tempSlider.value);
+    document.getElementById('temp-label').innerText = temp;
+    
+    // Cálculo exponencial simple (simulando demanda de A/C)
+    // Base a 20°C = 40% de carga. 
+    // Por cada grado extra, sube 2% al principio, y luego más rápido.
+    const excessTemp = temp - 20;
+    const load = Math.min(100, Math.floor(40 + (excessTemp * 1.5) + (Math.pow(excessTemp, 1.3))));
+    
+    document.getElementById('load-val').innerText = load;
+    
+    const gauge = document.getElementById('load-gauge');
+    const alertBox = document.getElementById('overload-alert');
+    
+    if (load >= 95) {
+        gauge.style.borderColor = '#ef4444'; // Red
+        gauge.style.color = '#ef4444';
+        gauge.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.7)';
+        alertBox.style.display = 'block';
+    } else if (load >= 75) {
+        gauge.style.borderColor = '#f59e0b'; // Amber
+        gauge.style.color = '#f59e0b';
+        gauge.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.5)';
+        alertBox.style.display = 'none';
+    } else {
+        gauge.style.borderColor = '#10b981'; // Green
+        gauge.style.color = '#10b981';
+        gauge.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.3)';
+        alertBox.style.display = 'none';
+    }
+}
+
+window.unlockTeacherTipsS4 = unlockTeacherTipsS4;
+window.calculateLoad = calculateLoad;

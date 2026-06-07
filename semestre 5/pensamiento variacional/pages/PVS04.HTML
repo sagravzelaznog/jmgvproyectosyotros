@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 4 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Variación de Voltaje */
+        .sine-wave {
+            width: 80%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        .sine-wave::before {
+            content: '〰️';
+            position: absolute;
+            font-size: 2em;
+            color: #06b6d4;
+            text-shadow: 0 0 10px #06b6d4;
+            top: -20px;
+            left: 0;
+            animation: moveWave 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveWave {
+            0% { left: 0%; transform: scaleY(0.5); color: #06b6d4; }
+            100% { left: 90%; transform: scaleY(1.5); color: #ef4444; }
+        }
+
+        /* Consumo de Agua */
+        .water-tank {
+            width: 60px;
+            height: 80px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .water-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #3b82f6;
+            box-shadow: 0 0 15px #3b82f6;
+            animation: fillWater 3s infinite;
+        }
+
+        @keyframes fillWater {
+            0% { height: 10%; }
+            50% { height: 90%; }
+            100% { height: 10%; }
+        }
+
+        /* Caída de Presión */
+        .pipe {
+            width: 80%;
+            height: 30px;
+            background: #334155;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .pressure-flow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, transparent);
+            animation: dropPressure 4s infinite;
+        }
+
+        @keyframes dropPressure {
+            0% { width: 100%; opacity: 1; }
+            100% { width: 10%; opacity: 0.2; }
+        }
+
+        /* Simulador Demanda vs Temp */
+        .sim-control {
+            margin: 15px 0;
+        }
+        .sim-control input {
+            width: 100%;
+        }
+        .sim-gauge {
+            background: #0f172a;
+            color: #10b981;
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px auto;
+            border: 4px solid #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s;
+        }
+        .sim-gauge small {
+            font-size: 0.3em;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .alert-box {
+            display: none;
+            background: #ef4444;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            animation: flashAlert 0.5s infinite alternate;
+            margin-top: 10px;
+        }
+        @keyframes flashAlert {
+            0% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion4-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS4()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 4</div>
+            <h1>Tasa de Variación en la Ciudad</h1>
+            <p>Modelando fenómenos con datos reales de servicios e infraestructura.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Pide a los alumnos que traigan sus recibos de luz y agua. Comparen el consumo entre los meses de invierno y verano, y trácenlo en un plano cartesiano para encontrar la pendiente de consumo.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar el concepto matemático de la Tasa de Variación (pendiente) a problemas de la vida cotidiana, específicamente modelando cómo fluctúan los servicios de una ciudad y la infraestructura civil.</p>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos Prácticos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Variación del Voltaje:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Las redes de media tensión experimentan caídas y picos de voltaje a lo largo del día. Esta tasa de variación permite a los ingenieros dimensionar los transformadores.</p>
+                        <div class="css-graphic">
+                            <div class="sine-wave"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Consumo de Agua (Verano):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El consumo urbano se dispara exponencialmente en meses cálidos, vaciando las reservas y modificando la tasa de extracción.</p>
+                        <div class="css-graphic">
+                            <div class="water-tank">
+                                <div class="water-fill"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Caída de Presión en Tuberías:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Conforme el agua viaja por la ciudad, la fricción genera una tasa de pérdida de presión constante.</p>
+                        <div class="css-graphic">
+                            <div class="pipe">
+                                <div class="pressure-flow"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">📱 Simulador: Clima vs Demanda</h2>
+                <p>Análisis de datos históricos locales. Modifica la Temperatura ambiental y observa cómo se altera la Demanda (Carga Eléctrica) en el transformador de la colonia.</p>
+
+                <div class="simulator-box">
+                    <div class="sim-gauge" id="load-gauge">
+                        <span id="load-val">40</span>%
+                        <small>CARGA DEL TRANSFORMADOR</small>
+                    </div>
+                    <div class="alert-box" id="overload-alert">⚠️ PELIGRO: SOBRECARGA INMINENTE</div>
+
+                    <div class="sim-control">
+                        <label>Temperatura de la Ciudad: <span id="temp-label">25</span> °C</label>
+                        <input type="range" id="temp-slider" min="20" max="45" value="25" oninput="calculateLoad()">
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-card activities-card">
+                <h2>⚙️ Actividades de Refuerzo</h2>
+                <ol class="custom-list numbered">
+                    <li><b>Gráficas de Variación de Voltaje:</b> Graficar los picos de voltaje domésticos (110v a 130v) por hora del día.</li>
+                    <li><b>Interpretación de Recibos:</b> Analizar el histórico de kWh de un recibo real y calcular la tasa de crecimiento del consumo.</li>
+                </ol>
+            </section>
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar simulador
+            if(window.calculateLoad) window.calculateLoad();
+
+            new KahootQuiz('quiz-mount-point', 'sesion4', async (score, percentage) => {
+                alert(`¡Quiz terminado! Guardando progreso... Puntaje: ${score}`);
+                if(percentage >= 50) AppController.markSessionCompleted('sesion4');
+                
+                const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                localStorage.setItem('pv_student_id', tempStudentId);
+                
+                await saveProgressToFirebase(tempStudentId, 'sesion4', score, percentage >= 50);
+                window.location.href = '../index.html';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: El Teorema Fundamental del Cálculo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --error-red: #ef4444;
+            --master-gold: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--cyan-neon), var(--emerald-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Interacción para el Modo Maestro */
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--cyan-neon);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .highlight {
+            color: var(--emerald-neon);
+            font-weight: 600;
+        }
+
+        /* TARJETAS DE CONTENIDO */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* LABORATORIO INTERACTIVO (CANVAS) */
+        .lab-container {
+            text-align: center;
+        }
+
+        .canvas-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            align-items: center;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 400px;
+            accent-color: var(--emerald-neon);
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* GAMIFICACIÓN: QUIZ KAHOOT STYLE */
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-question h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+
+        .quiz-btn.correct {
+            background: var(--emerald-neon) !important;
+            color: #000;
+            border-color: var(--emerald-neon);
+        }
+
+        .quiz-btn.incorrect {
+            background: var(--error-red) !important;
+            color: #fff;
+            border-color: var(--error-red);
+        }
+
+        /* MODO MAESTRO */
+        .master-mode {
+            display: none; /* Oculto por defecto */
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--master-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+
+        .master-mode.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .master-title {
+            color: var(--master-gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="main-title">Cálculo Integral: Sesión 2</h1>
+            <p>El Puente Mágico: El Teorema Fundamental y Antiderivadas Básicas</p>
+        </header>
+
+        <section class="card">
+            <h2>1. El Mayor Descubrimiento de la Historia</h2>
+            <p>Imagina que tienes dos operaciones matemáticas que parecen no tener nada en común: una calcula <span class="highlight">velocidades</span> (derivadas) y otra calcula <span class="highlight">áreas acumuladas</span> (integrales). Newton y Leibniz descubrieron que, en realidad, son <strong>dos caras de la misma moneda</strong>.</p>
+            <p>Integrar es, simplemente, "des-derivar". Si derivas la posición de un coche, obtienes su velocidad. Si integras su velocidad, vuelves a obtener su posición. Esto es el <strong>Teorema Fundamental del Cálculo</strong>.</p>
+            <p>Al integrar una función como $f(x) = x^n$, aplicamos la regla invertida de la derivada: <br><span class="highlight" style="font-size: 1.3rem;">∫ xⁿ dx = (xⁿ⁺¹ / n+1) + C</span></p>
+            
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Analogía sugerida:</strong> Habla de "hacer" y "deshacer". Derivar es como desarmar un reloj para ver sus engranajes; integrar es volver a armarlo. <br><strong>El Misterio de la +C:</strong> Explícales que al derivar una constante (ej. un número fijo), se vuelve 0. Al "des-derivar" o integrar, no sabemos qué número fijo había originalmente, así que ponemos una "C" (Constante de Integración) como comodín.</p>
+            </div>
+        </section>
+
+        <section class="card lab-container">
+            <h2>2. Simulador: El Teorema en Acción</h2>
+            <p>Mueve el control de "tiempo". Observa cómo el <span style="color:var(--cyan-neon); font-weight:bold;">Área Acumulada</span> en la gráfica de Velocidad (Derivada) coincide exactamente con la <span style="color:var(--magenta-neon); font-weight:bold;">Altura</span> en la gráfica de Posición (Antiderivada).</p>
+            
+            <div class="controls">
+                <label for="time-slider">Límite de Integración (x): <span id="time-val" class="highlight">2.0</span></label>
+                <input type="range" id="time-slider" min="0" max="5" step="0.1" value="2.0">
+            </div>
+
+            <div class="canvas-wrapper">
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Velocidad f(x) = 2x (Calculamos el Área)</h3>
+                    <canvas id="derivCanvas" width="600" height="200"></canvas>
+                </div>
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Posición F(x) = x² (Calculamos la Altura)</h3>
+                    <canvas id="antiCanvas" width="600" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="border-left: 4px solid var(--cyan-neon);">
+                    Área = Integral de 2x:<br><span id="area-val" style="color:var(--cyan-neon);">4.00</span> u²
+                </div>
+                <div class="stat-box" style="border-left: 4px solid var(--magenta-neon);">
+                    Altura = F(x) = x²:<br><span id="height-val" style="color:var(--magenta-neon);">4.00</span> u
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Guía del Laboratorio:</strong> Mueve el slider al valor x=3. El área del triángulo arriba es (Base*Altura)/2 = (3*6)/2 = 9. Observa abajo: el punto en la parábola x² está exactamente en altura 9. Esto demuestra visualmente que el área bajo la derivada nos da el valor de la función original.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>3. Quiz: Las Antiderivadas</h2>
+            
+            <div class="quiz-question">
+                <h3>1. ¿Cuál es el núcleo del Teorema Fundamental del Cálculo?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">La integración y la derivación son operaciones inversas</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">El área de un círculo es πr²</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Que las áreas no se pueden calcular con precisión</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Que las constantes siempre valen cero</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>2. Aplicando la fórmula de integrales inmediatas, ¿Cuál es el resultado de ∫ x³ dx?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">3x² + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">x³ + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">(x⁴ / 4) + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">4x⁴ + C</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>3. ¿Por qué siempre debemos escribir el "+ C" en una integral indefinida?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Por estética matemática</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Porque representa una constante que se hizo cero al derivar</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Porque C significa "Cálculo"</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Es un error escribir + C</button>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Respuestas:</strong> 1) Operaciones inversas. 2) x⁴/4 + C. 3) Constante que se hizo cero. Si un alumno escoge "3x² + C" en la pregunta 2, recuérdale que eso es la derivada, no la integral. ¡Su cerebro hizo la operación inversa por instinto!</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. SESIÓN 02. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DEL SIMULADOR DEL TEOREMA FUNDAMENTAL ---
+        const derivCanvas = document.getElementById('derivCanvas');
+        const dCtx = derivCanvas.getContext('2d');
+        const antiCanvas = document.getElementById('antiCanvas');
+        const aCtx = antiCanvas.getContext('2d');
+        
+        const slider = document.getElementById('time-slider');
+        const timeValDisplay = document.getElementById('time-val');
+        const areaValDisplay = document.getElementById('area-val');
+        const heightValDisplay = document.getElementById('height-val');
+
+        // Escalas matemáticas
+        const xMax = 5;
+        const dyMax = 10; // Para f(x) = 2x, si x=5 -> y=10
+        const ayMax = 25; // Para F(x) = x^2, si x=5 -> y=25
+
+        // Funciones de mapeo a píxeles
+        const dToPixelX = (x) => (x / xMax) * derivCanvas.width;
+        const dToPixelY = (y) => derivCanvas.height - ((y / dyMax) * derivCanvas.height);
+        
+        const aToPixelX = (x) => (x / xMax) * antiCanvas.width;
+        const aToPixelY = (y) => antiCanvas.height - ((y / ayMax) * antiCanvas.height);
+
+        // Funciones Matemáticas
+        const f = (x) => 2 * x;           // Derivada
+        const F = (x) => Math.pow(x, 2);  // Antiderivada
+
+        function drawDerivGraph(currentX) {
+            dCtx.clearRect(0, 0, derivCanvas.width, derivCanvas.height);
+
+            // Sombrear el Área bajo la curva
+            dCtx.beginPath();
+            dCtx.fillStyle = 'rgba(6, 182, 212, 0.3)'; // Cian transparente
+            dCtx.moveTo(dToPixelX(0), dToPixelY(0));
+            dCtx.lineTo(dToPixelX(currentX), dToPixelY(f(currentX)));
+            dCtx.lineTo(dToPixelX(currentX), dToPixelY(0));
+            dCtx.fill();
+
+            // Dibujar la recta de f(x) = 2x
+            dCtx.beginPath();
+            dCtx.strokeStyle = '#06b6d4'; // Cian neón
+            dCtx.lineWidth = 3;
+            dCtx.moveTo(dToPixelX(0), dToPixelY(0));
+            dCtx.lineTo(dToPixelX(xMax), dToPixelY(f(xMax)));
+            dCtx.stroke();
+        }
+
+        function drawAntiGraph(currentX) {
+            aCtx.clearRect(0, 0, antiCanvas.width, antiCanvas.height);
+
+            // Dibujar la curva completa de la parábola
+            aCtx.beginPath();
+            aCtx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            aCtx.lineWidth = 2;
+            for (let i = 0; i <= xMax; i += 0.1) {
+                const px = aToPixelX(i);
+                const py = aToPixelY(F(i));
+                if (i === 0) aCtx.moveTo(px, py);
+                else aCtx.lineTo(px, py);
+            }
+            aCtx.stroke();
+
+            // Dibujar la curva "Revelada" hasta currentX
+            aCtx.beginPath();
+            aCtx.strokeStyle = '#d946ef'; // Magenta neón
+            aCtx.lineWidth = 4;
+            for (let i = 0; i <= currentX; i += 0.05) {
+                const px = aToPixelX(i);
+                const py = aToPixelY(F(i));
+                if (i === 0) aCtx.moveTo(px, py);
+                else aCtx.lineTo(px, py);
+            }
+            aCtx.stroke();
+
+            // Dibujar un punto que marca la altura actual
+            const pointX = aToPixelX(currentX);
+            const pointY = aToPixelY(F(currentX));
+            
+            // Línea indicadora de altura
+            aCtx.beginPath();
+            aCtx.setLineDash([5, 5]);
+            aCtx.strokeStyle = '#d946ef';
+            aCtx.moveTo(pointX, aToPixelY(0));
+            aCtx.lineTo(pointX, pointY);
+            aCtx.lineTo(aToPixelX(0), pointY);
+            aCtx.stroke();
+            aCtx.setLineDash([]); // Reset
+
+            // Círculo
+            aCtx.beginPath();
+            aCtx.fillStyle = '#fff';
+            aCtx.arc(pointX, pointY, 6, 0, Math.PI * 2);
+            aCtx.fill();
+        }
+
+        function renderLab() {
+            const currentX = parseFloat(slider.value);
+            timeValDisplay.innerText = currentX.toFixed(1);
+            
+            // El área de un triángulo es (b * h) / 2 = (x * 2x) / 2 = x^2
+            const area = F(currentX); 
+            const height = F(currentX);
+
+            areaValDisplay.innerText = area.toFixed(2);
+            heightValDisplay.innerText = height.toFixed(2);
+
+            drawDerivGraph(currentX);
+            drawAntiGraph(currentX);
+        }
+
+        // Event listener del slider
+        slider.addEventListener('input', renderLab);
+        // Render inicial
+        renderLab();
+
+
+        // --- 2. LÓGICA DEL QUIZ (Estilo Kahoot) ---
+        function checkAnswer(btn, isCorrect) {
+            // Desactiva todos los botones de esa pregunta para evitar múltiples clics
+            const siblings = btn.parentElement.querySelectorAll('.quiz-btn');
+            siblings.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+                b.style.opacity = '0.6';
+            });
+
+            // Restaura la opacidad del botón clickeado y aplica color
+            btn.style.opacity = '1';
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // --- 3. LÓGICA DEL MODO MAESTRO (Protección) ---
+        const mainTitle = document.getElementById('main-title');
+        const masterElements = document.querySelectorAll('.master-mode');
+
+        mainTitle.addEventListener('dblclick', () => {
+            const password = prompt('🔐 INGRESO AL MODO MAESTRO.\nPor favor, introduce el código de acceso:');
+            
+            if (password === '1983') {
+                masterElements.forEach(el => el.classList.add('active'));
+                alert('✅ Acceso concedido. Notas didácticas activadas.');
+            } else if (password !== null) {
+                alert('❌ Código incorrecto. Acceso denegado.');
+            }
+        });
+    </script>
+</body>
+</html>

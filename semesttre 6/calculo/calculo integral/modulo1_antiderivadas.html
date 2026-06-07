@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Antiderivadas e Integrales Indefinidas - Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Header con navegación -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <h1>Cálculo Integral</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="modulo1_antiderivadas.html" class="nav-link active">Módulo 1</a>
+                <a href="modulo2_integral_definida.html" class="nav-link">Módulo 2</a>
+                <a href="modulo3_tecnicas_integracion.html" class="nav-link">Módulo 3</a>
+                <a href="modulo4_aplicaciones.html" class="nav-link">Módulo 4</a>
+                <a href="modulo5_ecuaciones_diferenciales.html" class="nav-link">Módulo 5</a>
+            </nav>
+            <div class="user-info">
+                <span id="user-name">Usuario</span>
+                <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="../index.html">Inicio</a>
+                <span class="separator">></span>
+                <span>Módulo 1: Antiderivadas e Integrales Indefinidas</span>
+            </nav>
+
+            <!-- Título del módulo -->
+            <section class="module-header">
+                <h1 class="module-title">
+                    <i class="fas fa-function"></i>
+                    Módulo 1: Antiderivadas e Integrales Indefinidas
+                </h1>
+                <div class="module-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duración: 2 semanas (8 horas)</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-target"></i>
+                        <span>Objetivo: Comprender antiderivadas como operación inversa de la derivada</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progreso del módulo -->
+            <section class="progress-section">
+                <h3>Progreso del Módulo</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="module-progress"></div>
+                </div>
+                <div class="progress-stats">
+                    <span id="progress-text">0% completado</span>
+                    <span id="time-spent">Tiempo: 0 min</span>
+                </div>
+            </section>
+
+            <!-- Navegación del módulo -->
+            <nav class="module-nav">
+                <button class="nav-btn active" data-section="concepto">1.1 Concepto de Antiderivada</button>
+                <button class="nav-btn" data-section="inmediatas">1.2 Integrales Inmediatas</button>
+                <button class="nav-btn" data-section="tecnicas">1.3 Técnicas Básicas</button>
+                <button class="nav-btn" data-section="ejercicios">Ejercicios</button>
+                <button class="nav-btn" data-section="quiz">Quiz</button>
+            </nav>
+
+            <!-- Sección 1.1: Concepto de Antiderivada -->
+            <section id="concepto" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-lightbulb"></i> 1.1 Concepto de Antiderivada</h2>
+                    <div class="section-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 2 horas</span>
+                        <span class="difficulty"><i class="fas fa-star"></i> Básico</span>
+                    </div>
+                </div>
+
+                <!-- Introducción -->
+                <div class="intro-box">
+                    <h3><i class="fas fa-play-circle"></i> Introducción</h3>
+                    <p>En Cálculo Diferencial aprendiste que la derivada de una función representa la razón de cambio instantánea. Ahora vamos a explorar la operación inversa: <strong>la antiderivada</strong>.</p>
+                    <p>Imagina que tienes la velocidad de un objeto en cada momento. ¿Cómo podrías encontrar su posición? ¡Exacto! Necesitas "deshacer" la derivación.</p>
+                </div>
+
+                <!-- Definición -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-book"></i> Definición de Antiderivada</h3>
+                    <div class="definition">
+                        <p><strong>Definición:</strong> Una función $F(x)$ es una <em>antiderivada</em> de $f(x)$ en un intervalo $I$ si</p>
+                        <div class="math-display">
+                            $$F'(x) = f(x) \text{ para todo } x \text{ en } I$$
+                        </div>
+                        <p>En otras palabras, la derivada de $F(x)$ es $f(x)$.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 1 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 1: Antiderivada Básica</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Encuentra una antiderivada de $f(x) = 3x^2$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Recordar las reglas de derivación</h4>
+                            <p>Sabemos que $\frac{d}{dx}[x^3] = 3x^2$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Identificar la antiderivada</h4>
+                            <p>Si $\frac{d}{dx}[x^3] = 3x^2$, entonces $F(x) = x^3$ es una antiderivada de $f(x) = 3x^2$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Verificar</h4>
+                            <p>Verificamos: $\frac{d}{dx}[x^3] = 3x^2$ ✓</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> Una antiderivada de $f(x) = 3x^2$ es $F(x) = x^3$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- La constante de integración -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-plus"></i> La Constante de Integración</h3>
+                    <div class="important-note">
+                        <h4><i class="fas fa-exclamation-triangle"></i> ¡Importante!</h4>
+                        <p>Las antiderivadas no son únicas. Si $F(x)$ es una antiderivada de $f(x)$, entonces $F(x) + C$ también lo es, donde $C$ es cualquier constante.</p>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>¿Por qué?</h4>
+                        <p>Porque $\frac{d}{dx}[F(x) + C] = F'(x) + 0 = F'(x) = f(x)$</p>
+                        <p>La derivada de cualquier constante es cero, por lo que agregar una constante no cambia la derivada.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 2 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 2: Familia de Antiderivadas</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Encuentra todas las antiderivadas de $f(x) = 2x$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Encontrar una antiderivada</h4>
+                            <p>Sabemos que $\frac{d}{dx}[x^2] = 2x$, entonces $F(x) = x^2$ es una antiderivada.</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Agregar la constante</h4>
+                            <p>Todas las antiderivadas tienen la forma: $F(x) = x^2 + C$ donde $C$ es cualquier constante.</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Visualizar la familia</h4>
+                            <div class="visualization">
+                                <p>La familia de antiderivadas $F(x) = x^2 + C$ representa una familia de parábolas:</p>
+                                <ul>
+                                    <li>$C = 0$: $F(x) = x^2$ (pasa por el origen)</li>
+                                    <li>$C = 2$: $F(x) = x^2 + 2$ (desplazada 2 unidades hacia arriba)</li>
+                                    <li>$C = -1$: $F(x) = x^2 - 1$ (desplazada 1 unidad hacia abajo)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> Todas las antiderivadas de $f(x) = 2x$ son $F(x) = x^2 + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notación de la integral indefinida -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-symbol"></i> Notación de la Integral Indefinida</h3>
+                    <div class="notation-box">
+                        <p>Para representar todas las antiderivadas de $f(x)$, usamos la notación:</p>
+                        <div class="math-display">
+                            $$\int f(x) \, dx = F(x) + C$$
+                        </div>
+                        <p>Donde:</p>
+                        <ul>
+                            <li>$\int$ es el símbolo de integral</li>
+                            <li>$f(x)$ es el integrando</li>
+                            <li>$dx$ indica la variable de integración</li>
+                            <li>$F(x)$ es una antiderivada de $f(x)$</li>
+                            <li>$C$ es la constante de integración</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 3 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 3: Usando la Notación de Integral</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int 4x^3 \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Identificar el integrando</h4>
+                            <p>El integrando es $f(x) = 4x^3$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Encontrar una antiderivada</h4>
+                            <p>Sabemos que $\frac{d}{dx}[x^4] = 4x^3$, entonces $F(x) = x^4$ es una antiderivada.</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Escribir la respuesta</h4>
+                            <div class="math-display">
+                                $$\int 4x^3 \, dx = x^4 + C$$
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 4: Verificar</h4>
+                            <p>Verificamos: $\frac{d}{dx}[x^4 + C] = 4x^3 + 0 = 4x^3$ ✓</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int 4x^3 \, dx = x^4 + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad interactiva -->
+                <div class="interactive-box">
+                    <h3><i class="fas fa-gamepad"></i> Actividad Interactiva: Encuentra la Antiderivada</h3>
+                    <div class="activity-content">
+                        <p>Practica encontrando antiderivadas con esta actividad interactiva:</p>
+                        <div class="quiz-container">
+                            <div class="question">
+                                <p>¿Cuál es una antiderivada de $f(x) = 5x^4$?</p>
+                                <div class="options">
+                                    <button class="option-btn" data-answer="correct">$x^5 + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$5x^5 + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$x^4 + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$20x^3 + C$</button>
+                                </div>
+                                <div class="feedback" id="feedback1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen -->
+                <div class="summary-box">
+                    <h3><i class="fas fa-clipboard-list"></i> Resumen de Conceptos Clave</h3>
+                    <div class="summary-content">
+                        <ul>
+                            <li><strong>Antiderivada:</strong> Una función cuya derivada es la función dada</li>
+                            <li><strong>Constante de integración:</strong> Las antiderivadas no son únicas; difieren por una constante</li>
+                            <li><strong>Notación:</strong> $\int f(x) \, dx = F(x) + C$ representa todas las antiderivadas</li>
+                            <li><strong>Verificación:</strong> Siempre verifica tu respuesta derivando</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 1.2: Integrales Inmediatas -->
+            <section id="inmediatas" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bolt"></i> 1.2 Integrales Inmediatas</h2>
+                    <div class="section-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 3 horas</span>
+                        <span class="difficulty"><i class="fas fa-star"></i> Básico</span>
+                    </div>
+                </div>
+
+                <!-- Introducción -->
+                <div class="intro-box">
+                    <h3><i class="fas fa-play-circle"></i> Introducción</h3>
+                    <p>Las <strong>integrales inmediatas</strong> son aquellas que podemos resolver directamente aplicando las reglas básicas de integración. Son el equivalente inverso de las reglas de derivación que ya conoces.</p>
+                </div>
+
+                <!-- Tabla de integrales básicas -->
+                <div class="table-box">
+                    <h3><i class="fas fa-table"></i> Tabla de Integrales Inmediatas</h3>
+                    <div class="table-container">
+                        <table class="integral-table">
+                            <thead>
+                                <tr>
+                                    <th>Función</th>
+                                    <th>Integral</th>
+                                    <th>Condición</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$x^n$</td>
+                                    <td>$\frac{x^{n+1}}{n+1} + C$</td>
+                                    <td>$n \neq -1$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\frac{1}{x}$</td>
+                                    <td>$\ln|x| + C$</td>
+                                    <td>$x \neq 0$</td>
+                                </tr>
+                                <tr>
+                                    <td>$e^x$</td>
+                                    <td>$e^x + C$</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>$a^x$</td>
+                                    <td>$\frac{a^x}{\ln a} + C$</td>
+                                    <td>$a > 0, a \neq 1$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\sin x$</td>
+                                    <td>$-\cos x + C$</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>$\cos x$</td>
+                                    <td>$\sin x + C$</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>$\sec^2 x$</td>
+                                    <td>$\tan x + C$</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>$\csc^2 x$</td>
+                                    <td>$-\cot x + C$</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Regla de la potencia -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-exponent"></i> Regla de la Potencia para Integrales</h3>
+                    <div class="rule-box">
+                        <div class="math-display">
+                            $$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C \quad \text{si } n \neq -1$$
+                        </div>
+                        <p>Esta es la regla más importante y la usaremos constantemente.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 4 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 4: Regla de la Potencia</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int x^5 \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Identificar n</h4>
+                            <p>En $x^5$, tenemos $n = 5$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Aplicar la regla</h4>
+                            <p>$\int x^5 \, dx = \frac{x^{5+1}}{5+1} + C = \frac{x^6}{6} + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Verificar</h4>
+                            <p>$\frac{d}{dx}\left[\frac{x^6}{6} + C\right] = \frac{6x^5}{6} = x^5$ ✓</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int x^5 \, dx = \frac{x^6}{6} + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 5 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 5: Potencias Fraccionarias</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int \sqrt{x} \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Reescribir como potencia</h4>
+                            <p>$\sqrt{x} = x^{1/2}$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Aplicar la regla</h4>
+                            <p>$\int x^{1/2} \, dx = \frac{x^{1/2+1}}{1/2+1} + C = \frac{x^{3/2}}{3/2} + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Simplificar</h4>
+                            <p>$\frac{x^{3/2}}{3/2} = \frac{2x^{3/2}}{3}$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 4: Reescribir en forma radical</h4>
+                            <p>$x^{3/2} = x \cdot x^{1/2} = x\sqrt{x}$</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int \sqrt{x} \, dx = \frac{2x\sqrt{x}}{3} + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integrales trigonométricas -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-wave"></i> Integrales Trigonométricas Básicas</h3>
+                    <div class="trig-box">
+                        <div class="math-display">
+                            $$\int \sin x \, dx = -\cos x + C$$
+                            $$\int \cos x \, dx = \sin x + C$$
+                            $$\int \sec^2 x \, dx = \tan x + C$$
+                            $$\int \csc^2 x \, dx = -\cot x + C$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 6 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 6: Integrales Trigonométricas</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int (3\sin x + 2\cos x) \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Separar las integrales</h4>
+                            <p>$\int (3\sin x + 2\cos x) \, dx = 3\int \sin x \, dx + 2\int \cos x \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Aplicar las fórmulas</h4>
+                            <p>$3(-\cos x) + 2(\sin x) + C = -3\cos x + 2\sin x + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Verificar</h4>
+                            <p>$\frac{d}{dx}[-3\cos x + 2\sin x + C] = 3\sin x + 2\cos x$ ✓</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int (3\sin x + 2\cos x) \, dx = -3\cos x + 2\sin x + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedades de linealidad -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-equals"></i> Propiedades de Linealidad</h3>
+                    <div class="properties-box">
+                        <div class="math-display">
+                            $$\int [f(x) + g(x)] \, dx = \int f(x) \, dx + \int g(x) \, dx$$
+                            $$\int k \cdot f(x) \, dx = k \int f(x) \, dx$$
+                        </div>
+                        <p>Estas propiedades nos permiten separar integrales complejas en integrales más simples.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 7 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 7: Aplicando Propiedades de Linealidad</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int (4x^3 - 2x^2 + 5x - 1) \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Separar término por término</h4>
+                            <p>$\int (4x^3 - 2x^2 + 5x - 1) \, dx = 4\int x^3 \, dx - 2\int x^2 \, dx + 5\int x \, dx - \int 1 \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Aplicar la regla de la potencia</h4>
+                            <p>$4 \cdot \frac{x^4}{4} - 2 \cdot \frac{x^3}{3} + 5 \cdot \frac{x^2}{2} - x + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Simplificar</h4>
+                            <p>$x^4 - \frac{2x^3}{3} + \frac{5x^2}{2} - x + C$</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int (4x^3 - 2x^2 + 5x - 1) \, dx = x^4 - \frac{2x^3}{3} + \frac{5x^2}{2} - x + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad interactiva -->
+                <div class="interactive-box">
+                    <h3><i class="fas fa-gamepad"></i> Practica con Integrales Inmediatas</h3>
+                    <div class="activity-content">
+                        <div class="quiz-container">
+                            <div class="question">
+                                <p>Evalúa $\int (2x^4 - 3x^2 + 1) \, dx$</p>
+                                <div class="options">
+                                    <button class="option-btn" data-answer="correct">$\frac{2x^5}{5} - x^3 + x + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$\frac{2x^5}{5} - \frac{3x^3}{3} + x + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$8x^3 - 6x + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$2x^4 - 3x^2 + x + C$</button>
+                                </div>
+                                <div class="feedback" id="feedback2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="./ejercicio3/ejercicios_calculo_nuevo.html">Ejercicio 3</a>
+            </section>
+
+            <!-- Sección 1.3: Técnicas Básicas -->
+            <section id="tecnicas" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tools"></i> 1.3 Técnicas Básicas de Integración</h2>
+                    <div class="section-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 3 horas</span>
+                        <span class="difficulty"><i class="fas fa-star"></i> Intermedio</span>
+                    </div>
+                </div>
+
+                <!-- Introducción -->
+                <div class="intro-box">
+                    <h3><i class="fas fa-play-circle"></i> Introducción</h3>
+                    <p>No todas las integrales son inmediatas. A veces necesitamos <strong>reescribir</strong> la función antes de poder integrarla usando las reglas básicas.</p>
+                </div>
+
+                <!-- Reescritura de funciones -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-edit"></i> Reescritura de Funciones</h3>
+                    <div class="technique-box">
+                        <h4>Técnicas de Reescritura:</h4>
+                        <ul>
+                            <li><strong>Expansión:</strong> Multiplicar expresiones</li>
+                            <li><strong>División:</strong> Dividir numerador entre denominador</li>
+                            <li><strong>Factorización:</strong> Factorizar expresiones comunes</li>
+                            <li><strong>Identidades:</strong> Usar identidades algebraicas o trigonométricas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 8 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 8: Expansión</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int (x + 2)^2 \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Expandir el binomio</h4>
+                            <p>$(x + 2)^2 = x^2 + 4x + 4$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Integrar término por término</h4>
+                            <p>$\int (x^2 + 4x + 4) \, dx = \int x^2 \, dx + 4\int x \, dx + 4\int 1 \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Aplicar reglas básicas</h4>
+                            <p>$= \frac{x^3}{3} + 4 \cdot \frac{x^2}{2} + 4x + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 4: Simplificar</h4>
+                            <p>$= \frac{x^3}{3} + 2x^2 + 4x + C$</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int (x + 2)^2 \, dx = \frac{x^3}{3} + 2x^2 + 4x + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 9 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 9: División de Polinomios</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int \frac{x^3 + 2x^2 - 1}{x} \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Dividir término por término</h4>
+                            <p>$\frac{x^3 + 2x^2 - 1}{x} = \frac{x^3}{x} + \frac{2x^2}{x} - \frac{1}{x} = x^2 + 2x - \frac{1}{x}$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Integrar término por término</h4>
+                            <p>$\int (x^2 + 2x - \frac{1}{x}) \, dx = \int x^2 \, dx + 2\int x \, dx - \int \frac{1}{x} \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Aplicar reglas</h4>
+                            <p>$= \frac{x^3}{3} + 2 \cdot \frac{x^2}{2} - \ln|x| + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 4: Simplificar</h4>
+                            <p>$= \frac{x^3}{3} + x^2 - \ln|x| + C$</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int \frac{x^3 + 2x^2 - 1}{x} \, dx = \frac{x^3}{3} + x^2 - \ln|x| + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 10 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 10: Usando Identidades Trigonométricas</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Evalúa $\int \sin^2 x \, dx$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Usar identidad trigonométrica</h4>
+                            <p>$\sin^2 x = \frac{1 - \cos(2x)}{2}$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Sustituir en la integral</h4>
+                            <p>$\int \sin^2 x \, dx = \int \frac{1 - \cos(2x)}{2} \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Separar términos</h4>
+                            <p>$= \frac{1}{2}\int 1 \, dx - \frac{1}{2}\int \cos(2x) \, dx$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 4: Integrar</h4>
+                            <p>$= \frac{1}{2}x - \frac{1}{2} \cdot \frac{\sin(2x)}{2} + C$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 5: Simplificar</h4>
+                            <p>$= \frac{x}{2} - \frac{\sin(2x)}{4} + C$</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Respuesta:</strong> $\int \sin^2 x \, dx = \frac{x}{2} - \frac{\sin(2x)}{4} + C$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verificación por derivación -->
+                <div class="concept-box">
+                    <h3><i class="fas fa-check-circle"></i> Verificación por Derivación</h3>
+                    <div class="verification-box">
+                        <h4>¡Siempre verifica tu respuesta!</h4>
+                        <p>Para verificar que $\int f(x) \, dx = F(x) + C$ es correcta:</p>
+                        <div class="math-display">
+                            $$\frac{d}{dx}[F(x) + C] = f(x)$$
+                        </div>
+                        <p>Si obtienes $f(x)$ al derivar $F(x) + C$, entonces tu integral es correcta.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 11 -->
+                <div class="example-box">
+                    <h3><i class="fas fa-example"></i> Ejemplo 11: Verificación Completa</h3>
+                    <div class="example-content">
+                        <p><strong>Problema:</strong> Verifica que $\int (3x^2 - 2x + 1) \, dx = x^3 - x^2 + x + C$</p>
+                        
+                        <div class="step">
+                            <h4>Paso 1: Derivar la respuesta</h4>
+                            <p>$\frac{d}{dx}[x^3 - x^2 + x + C] = 3x^2 - 2x + 1$</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 2: Comparar con el integrando</h4>
+                            <p>El integrando original era $3x^2 - 2x + 1$ ✓</p>
+                        </div>
+
+                        <div class="step">
+                            <h4>Paso 3: Conclusión</h4>
+                            <p>Como la derivada coincide con el integrando, la integral es correcta.</p>
+                        </div>
+
+                        <div class="result-box">
+                            <p><strong>Verificación:</strong> ✓ Correcta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad interactiva -->
+                <div class="interactive-box">
+                    <h3><i class="fas fa-gamepad"></i> Practica Técnicas Básicas</h3>
+                    <div class="activity-content">
+                        <div class="quiz-container">
+                            <div class="question">
+                                <p>Evalúa $\int \frac{x^2 - 4}{x} \, dx$</p>
+                                <div class="options">
+                                    <button class="option-btn" data-answer="correct">$\frac{x^2}{2} - 4\ln|x| + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$x - \frac{4}{x} + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$\frac{x^3}{3} - 4x + C$</button>
+                                    <button class="option-btn" data-answer="wrong">$2x - \frac{4}{x^2} + C$</button>
+                                </div>
+                                <div class="feedback" id="feedback3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Ejercicios -->
+            <section id="ejercicios" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-dumbbell"></i> Ejercicios del Módulo 1</h2>
+                    <div class="section-meta">
+                        <span class="difficulty"><i class="fas fa-star"></i> Variado</span>
+                    </div>
+                </div>
+
+                <!-- Ejercicios por sección -->
+                <div class="exercises-container">
+                    <!-- Ejercicios 1.1 -->
+                    <div class="exercise-section">
+                        <h3><i class="fas fa-lightbulb"></i> Ejercicios 1.1: Concepto de Antiderivada</h3>
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <h4>Ejercicio 1</h4>
+                                <p>Encuentra una antiderivada de $f(x) = 6x^2$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $F(x) = 2x^3 + C$</p>
+                                        <p><strong>Verificación:</strong> $\frac{d}{dx}[2x^3 + C] = 6x^2$ ✓</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 2</h4>
+                                <p>Encuentra todas las antiderivadas de $f(x) = 4x - 3$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $F(x) = 2x^2 - 3x + C$</p>
+                                        <p><strong>Verificación:</strong> $\frac{d}{dx}[2x^2 - 3x + C] = 4x - 3$ ✓</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 3</h4>
+                                <p>Verifica que $F(x) = x^4 - 2x^2 + 5$ es una antiderivada de $f(x) = 4x^3 - 4x$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\frac{d}{dx}[x^4 - 2x^2 + 5] = 4x^3 - 4x$ ✓</p>
+                                        <p>Por lo tanto, $F(x)$ es una antiderivada de $f(x)$.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejercicios 1.2 -->
+                    <div class="exercise-section">
+                        <h3><i class="fas fa-bolt"></i> Ejercicios 1.2: Integrales Inmediatas</h3>
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <h4>Ejercicio 4</h4>
+                                <p>Evalúa $\int 5x^3 \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\int 5x^3 \, dx = 5 \cdot \frac{x^4}{4} + C = \frac{5x^4}{4} + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 5</h4>
+                                <p>Evalúa $\int (x^2 + 3x - 2) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\int (x^2 + 3x - 2) \, dx = \frac{x^3}{3} + \frac{3x^2}{2} - 2x + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 6</h4>
+                                <p>Evalúa $\int (\sin x + \cos x) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\int (\sin x + \cos x) \, dx = -\cos x + \sin x + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 7</h4>
+                                <p>Evalúa $\int \frac{1}{x^2} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\int x^{-2} \, dx = \frac{x^{-1}}{-1} + C = -\frac{1}{x} + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejercicios 1.3 -->
+                    <div class="exercise-section">
+                        <h3><i class="fas fa-tools"></i> Ejercicios 1.3: Técnicas Básicas</h3>
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <h4>Ejercicio 8</h4>
+                                <p>Evalúa $\int (x + 1)^3 \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $(x + 1)^3 = x^3 + 3x^2 + 3x + 1$</p>
+                                        <p>$\int (x^3 + 3x^2 + 3x + 1) \, dx = \frac{x^4}{4} + x^3 + \frac{3x^2}{2} + x + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 9</h4>
+                                <p>Evalúa $\int \frac{x^3 - 2x + 1}{x} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\frac{x^3 - 2x + 1}{x} = x^2 - 2 + \frac{1}{x}$</p>
+                                        <p>$\int (x^2 - 2 + \frac{1}{x}) \, dx = \frac{x^3}{3} - 2x + \ln|x| + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card">
+                                <h4>Ejercicio 10</h4>
+                                <p>Evalúa $\int \cos^2 x \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <p><strong>Solución:</strong> $\cos^2 x = \frac{1 + \cos(2x)}{2}$</p>
+                                        <p>$\int \frac{1 + \cos(2x)}{2} \, dx = \frac{x}{2} + \frac{\sin(2x)}{4} + C$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generador de ejercicios -->
+                <div class="exercise-generator">
+                    <h3><i class="fas fa-random"></i> Generador de Ejercicios</h3>
+                    <div class="generator-controls">
+                        <button id="generate-exercise" class="btn-primary">Generar Nuevo Ejercicio</button>
+                        <select id="difficulty-select" aria-label="Seleccionar nivel de dificultad">
+                            <option value="basic">Básico</option>
+                            <option value="intermediate">Intermedio</option>
+                            <option value="advanced">Avanzado</option>
+                        </select>
+                    </div>
+                    <div id="generated-exercise" class="generated-exercise-box"></div>
+                </div>
+            </section>
+
+            <!-- Sección de Quiz -->
+            <section id="quiz" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Quiz del Módulo 1</h2>
+                    <div class="section-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 20 minutos</span>
+                        <span class="difficulty"><i class="fas fa-star"></i> Evaluación</span>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h3>Quiz: Antiderivadas e Integrales Indefinidas</h3>
+                        <div class="quiz-timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="timer">20:00</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="quiz-progress" ></div>
+                        </div>
+                        <span id="quiz-progress-text">Pregunta 1 de 10</span>
+                    </div>
+
+                    <div class="quiz-content">
+                        <div class="question-container">
+                            <div class="question-number">Pregunta <span id="current-question">1</span></div>
+                            <div class="question-text" id="question-text">
+                                ¿Cuál es una antiderivada de $f(x) = 4x^3$?
+                            </div>
+                            <div class="question-options" id="question-options">
+                                <button class="option-btn" data-answer="A">$x^4 + C$</button>
+                                <button class="option-btn" data-answer="B">$4x^4 + C$</button>
+                                <button class="option-btn" data-answer="C">$\frac{x^4}{4} + C$</button>
+                                <button class="option-btn" data-answer="D">$12x^2 + C$</button>
+                            </div>
+                        </div>
+
+                        <div class="quiz-navigation">
+                            <button id="prev-question" class="nav-btn" disabled>Anterior</button>
+                            <button id="next-question" class="nav-btn">Siguiente</button>
+                            <button id="submit-quiz" class="btn-primary" >Enviar Quiz</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-results" id="quiz-results" >
+                        <h3>Resultados del Quiz</h3>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="final-score">0</span>
+                                <span class="score-label">/10</span>
+                            </div>
+                            <div class="score-details">
+                                <p id="score-percentage">0%</p>
+                                <p id="score-message">¡Sigue practicando!</p>
+                            </div>
+                        </div>
+                        <div class="quiz-summary" id="quiz-summary"></div>
+                        <button id="retake-quiz" class="btn-secondary">Repetir Quiz</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Cálculo Integral</h4>
+                    <p>Desarrollando competencias matemáticas avanzadas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="modulo2_integral_definida.html">Módulo 2</a></li>
+                        <li><a href="modulo3_tecnicas_integracion.html">Módulo 3</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Formulario de Integrales</a></li>
+                        <li><a href="#">Calculadora Online</a></li>
+                        <li><a href="#">Videos Tutoriales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JMGV-PTEL - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../firebase-config.js"></script>
+    <script src="../auth-manager.js"></script>
+    <script src="../module-navigation.js"></script>
+    <script src="modulo1-script.js"></script>
+</body>
+</html>

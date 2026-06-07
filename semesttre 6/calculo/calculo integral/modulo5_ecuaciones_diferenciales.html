@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Ecuaciones Diferenciales - Cálculo Integral</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <!-- Navigation Script -->
+    <script src="navigation.js"></script>
+    <style>
+        .module-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .module-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .module-title {
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        
+        .module-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: #4CAF50;
+            height: 100%;
+            width: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .content-section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-icon {
+            font-size: 1.5em;
+        }
+        
+        .learning-objective {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+        
+        .example-title {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        
+        .step-number {
+            background: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .demo-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .formula-highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .formula-title {
+            color: #f39c12;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .exercise-box {
+            background: #e8f5e8;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .exercise-title {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .solution-toggle {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .solution-toggle:hover {
+            background: #0056b3;
+        }
+        
+        .solution {
+            display: none;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tips-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 2px solid #ff9a9e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .tips-title {
+            color: #d63031;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .visualization-container {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .visualization-title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .module-container {
+                padding: 10px;
+            }
+            
+            .module-title {
+                font-size: 2em;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="module-container">
+        <!-- Header del Módulo -->
+        <div class="module-header">
+            <h1 class="module-title">Módulo 5: Ecuaciones Diferenciales</h1>
+            <p class="module-subtitle">Aplicaciones del Cálculo Integral en Modelación Matemática</p>
+            <div class="progress-bar">
+                <div class="progress-fill" ></div>
+            </div>
+            <p>Duración: 3 semanas | 12 horas</p>
+        </div>
+
+        <!-- Objetivo del Módulo -->
+        <div class="learning-objective">
+            <i class="fas fa-target"></i>
+            <strong>Objetivo Específico:</strong> Comprender los conceptos básicos de ecuaciones diferenciales y aplicar métodos de solución para ecuaciones de primer orden, modelando fenómenos naturales y sociales.
+        </div>
+
+        <!-- Sección 5.1: Introducción a Ecuaciones Diferenciales -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-play-circle section-icon"></i>
+                5.1 Introducción a Ecuaciones Diferenciales
+            </h2>
+
+            <div class="formula-highlight">
+                <div class="formula-title">¿Qué es una Ecuación Diferencial?</div>
+                <p>Una <strong>ecuación diferencial</strong> es una ecuación que relaciona una función desconocida con sus derivadas. Su forma general es:</p>
+                <p >$$F(x, y, y', y'', \ldots, y^{(n)}) = 0$$</p>
+                <p>Donde $y$ es la función desconocida, $y'$ es su primera derivada, $y''$ su segunda derivada, y así sucesivamente.</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Ejemplo 1: Identificando Ecuaciones Diferenciales
+                </div>
+                <p>Clasifica las siguientes ecuaciones:</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>$y' = 2x + 3$</strong>
+                    <p><strong>Respuesta:</strong> Ecuación diferencial ordinaria de primer orden, lineal</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>$y'' + 3y' + 2y = 0$</strong>
+                    <p><strong>Respuesta:</strong> Ecuación diferencial ordinaria de segundo orden, lineal, homogénea</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>$y' = y^2 + x^2$</strong>
+                    <p><strong>Respuesta:</strong> Ecuación diferencial ordinaria de primer orden, no lineal</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>$y'' + \sin(y) = 0$</strong>
+                    <p><strong>Respuesta:</strong> Ecuación diferencial ordinaria de segundo orden, no lineal</p>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <div class="tips-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Clasificación de Ecuaciones Diferenciales
+                </div>
+                <ul>
+                    <li><strong>Por orden:</strong> Determina la derivada de mayor orden que aparece</li>
+                    <li><strong>Por linealidad:</strong> Lineal si $y$ y sus derivadas aparecen elevadas a la primera potencia</li>
+                    <li><strong>Por tipo:</strong> Ordinaria (una variable independiente) vs. Parcial (varias variables independientes)</li>
+                    <li><strong>Por homogeneidad:</strong> Homogénea si no hay término independiente, no homogénea si lo hay</li>
+                </ul>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">
+                    <i class="fas fa-calculator"></i>
+                    Verificación de Soluciones
+                </div>
+                <p>Para verificar si una función es solución de una ecuación diferencial, sustituimos la función y sus derivadas en la ecuación.</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Ejemplo:</strong> Verificar si $y = e^{2x}$ es solución de $y' = 2y$
+                    <p><strong>Solución:</strong></p>
+                    <p>$y = e^{2x} \Rightarrow y' = 2e^{2x}$</p>
+                    <p>Sustituyendo: $2e^{2x} = 2(e^{2x}) = 2e^{2x}$ ✓</p>
+                    <p><strong>Conclusión:</strong> $y = e^{2x}$ es solución de la ecuación diferencial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5.2: Ecuaciones de Variables Separables -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-puzzle-piece section-icon"></i>
+                5.2 Ecuaciones Diferenciales de Variables Separables
+            </h2>
+
+            <div class="formula-highlight">
+                <div class="formula-title">Forma General de Variables Separables</div>
+                <p>Una ecuación diferencial de variables separables tiene la forma:</p>
+                <p >$$\frac{dy}{dx} = g(x) \cdot h(y)$$</p>
+                <p>Donde podemos separar las variables y resolver por integración.</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-cogs"></i>
+                    Ejemplo 2: Resolución Paso a Paso - Variables Separables
+                </div>
+                <p><strong>Resolver:</strong> $\frac{dy}{dx} = x^2y$</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Separar variables:</strong>
+                    <p>$$\frac{dy}{dx} = x^2y$$</p>
+                    <p>$$\frac{dy}{y} = x^2 dx$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Integrar ambos lados:</strong>
+                    <p>$$\int \frac{dy}{y} = \int x^2 dx$$</p>
+                    <p>$$\ln|y| = \frac{x^3}{3} + C$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Despejar y:</strong>
+                    <p>$$|y| = e^{\frac{x^3}{3} + C} = e^C \cdot e^{\frac{x^3}{3}}$$</p>
+                    <p>$$y = \pm e^C \cdot e^{\frac{x^3}{3}}$$</p>
+                    <p>Como $e^C$ es una constante positiva, llamamos $A = \pm e^C$:</p>
+                    <p>$$\boxed{y = A e^{\frac{x^3}{3}}}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Verificación:</strong>
+                    <p>$y = A e^{\frac{x^3}{3}} \Rightarrow y' = A e^{\frac{x^3}{3}} \cdot x^2 = x^2y$ ✓</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-chart-line"></i>
+                    Ejemplo 3: Problema de Valor Inicial
+                </div>
+                <p><strong>Resolver:</strong> $\frac{dy}{dx} = \frac{y^2}{x^2}$ con condición inicial $y(1) = 2$</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Separar variables:</strong>
+                    <p>$$\frac{dy}{dx} = \frac{y^2}{x^2}$$</p>
+                    <p>$$\frac{dy}{y^2} = \frac{dx}{x^2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Integrar:</strong>
+                    <p>$$\int \frac{dy}{y^2} = \int \frac{dx}{x^2}$$</p>
+                    <p>$$-\frac{1}{y} = -\frac{1}{x} + C$$</p>
+                    <p>$$\frac{1}{y} = \frac{1}{x} - C$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Aplicar condición inicial:</strong>
+                    <p>$y(1) = 2 \Rightarrow \frac{1}{2} = \frac{1}{1} - C$</p>
+                    <p>$$\frac{1}{2} = 1 - C \Rightarrow C = \frac{1}{2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Solución particular:</strong>
+                    <p>$$\frac{1}{y} = \frac{1}{x} - \frac{1}{2} = \frac{2-x}{2x}$$</p>
+                    <p>$$\boxed{y = \frac{2x}{2-x}}$$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5.3: Ecuaciones Homogéneas -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale section-icon"></i>
+                5.3 Ecuaciones Diferenciales Homogéneas
+            </h2>
+
+            <div class="formula-highlight">
+                <div class="formula-title">Ecuaciones Homogéneas</div>
+                <p>Una ecuación diferencial homogénea tiene la forma:</p>
+                <p>$$\frac{dy}{dx} = f\left(\frac{y}{x}\right)$$</p>
+                <p>Se resuelve mediante la sustitución $v = \frac{y}{x}$ o $y = vx$.</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-exchange-alt"></i>
+                    Ejemplo 4: Ecuación Homogénea
+                </div>
+                <p><strong>Resolver:</strong> $(x^2 + y^2)dx - 2xy \, dy = 0$</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Verificar que es homogénea:</strong>
+                    <p>$$\frac{dy}{dx} = \frac{x^2 + y^2}{2xy} = \frac{x^2\left(1 + \frac{y^2}{x^2}\right)}{2xy} = \frac{x\left(1 + \frac{y^2}{x^2}\right)}{2y}$$</p>
+                    <p>$$= \frac{1 + \left(\frac{y}{x}\right)^2}{2\left(\frac{y}{x}\right)} = f\left(\frac{y}{x}\right)$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Sustitución:</strong>
+                    <p>$y = vx \Rightarrow dy = v \, dx + x \, dv$</p>
+                    <p>Sustituyendo: $(x^2 + v^2x^2)dx - 2x(vx)(v \, dx + x \, dv) = 0$</p>
+                    <p>$$x^2(1 + v^2)dx - 2x^2v(v \, dx + x \, dv) = 0$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Simplificar:</strong>
+                    <p>$$(1 + v^2)dx - 2v(v \, dx + x \, dv) = 0$$</p>
+                    <p>$$(1 + v^2 - 2v^2)dx - 2vx \, dv = 0$$</p>
+                    <p>$$(1 - v^2)dx - 2vx \, dv = 0$$</p>
+                    <p>$$\frac{dx}{x} = \frac{2v}{1-v^2} \, dv$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Integrar:</strong>
+                    <p>$$\int \frac{dx}{x} = \int \frac{2v}{1-v^2} \, dv$$</p>
+                    <p>$$\ln|x| = -\ln|1-v^2| + C$$</p>
+                    <p>$$\ln|x| + \ln|1-v^2| = C$$</p>
+                    <p>$$\ln|x(1-v^2)| = C$$</p>
+                    <p>$$x(1-v^2) = \pm e^C = A$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <strong>Solución final:</strong>
+                    <p>$$x\left(1 - \frac{y^2}{x^2}\right) = A$$</p>
+                    <p>$$x - \frac{y^2}{x} = A$$</p>
+                    <p>$$\boxed{x^2 - y^2 = Ax}$$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5.4: Ecuaciones Exactas -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-check-circle section-icon"></i>
+                5.4 Ecuaciones Diferenciales Exactas
+            </h2>
+
+            <div class="formula-highlight">
+                <div class="formula-title">Condición de Exactitud</div>
+                <p>La ecuación $M(x,y)dx + N(x,y)dy = 0$ es exacta si:</p>
+                <p >$$\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$$</p>
+                <p>En este caso, existe una función $F(x,y)$ tal que $dF = M \, dx + N \, dy$.</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-magic"></i>
+                    Ejemplo 5: Ecuación Exacta
+                </div>
+                <p><strong>Resolver:</strong> $(2xy + 3)dx + (x^2 - 1)dy = 0$</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Verificar exactitud:</strong>
+                    <p>$M(x,y) = 2xy + 3$ y $N(x,y) = x^2 - 1$</p>
+                    <p>$$\frac{\partial M}{\partial y} = 2x$$</p>
+                    <p>$$\frac{\partial N}{\partial x} = 2x$$</p>
+                    <p>Como $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$, la ecuación es exacta. ✓</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Encontrar F(x,y):</strong>
+                    <p>$$\frac{\partial F}{\partial x} = M = 2xy + 3$$</p>
+                    <p>$$F = \int (2xy + 3)dx = x^2y + 3x + g(y)$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Determinar g(y):</strong>
+                    <p>$$\frac{\partial F}{\partial y} = x^2 + g'(y) = N = x^2 - 1$$</p>
+                    <p>$$g'(y) = -1 \Rightarrow g(y) = -y + C$$</p>
+                    <p>$$F(x,y) = x^2y + 3x - y + C$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Solución general:</strong>
+                    <p>$F(x,y) = C$ (constante)</p>
+                    <p>$$\boxed{x^2y + 3x - y = C}$$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5.5: Ecuaciones Lineales de Primer Orden -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line section-icon"></i>
+                5.5 Ecuaciones Lineales de Primer Orden
+            </h2>
+
+            <div class="formula-highlight">
+                <div class="formula-title">Forma Estándar de Ecuación Lineal</div>
+                <p>La forma estándar es:</p>
+                <p >$$\frac{dy}{dx} + P(x)y = Q(x)$$</p>
+                <p>Su solución se encuentra usando el <strong>factor integrante</strong>:</p>
+                <p >$$\mu(x) = e^{\int P(x)dx}$$</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-tools"></i>
+                    Ejemplo 6: Ecuación Lineal con Factor Integrante
+                </div>
+                <p><strong>Resolver:</strong> $\frac{dy}{dx} + 2xy = x$</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar P(x) y Q(x):</strong>
+                    <p>$P(x) = 2x$ y $Q(x) = x$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Calcular factor integrante:</strong>
+                    <p>$$\mu(x) = e^{\int P(x)dx} = e^{\int 2x \, dx} = e^{x^2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Aplicar factor integrante:</strong>
+                    <p>$$e^{x^2}\frac{dy}{dx} + 2xe^{x^2}y = xe^{x^2}$$</p>
+                    <p>$$\frac{d}{dx}(ye^{x^2}) = xe^{x^2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Integrar:</strong>
+                    <p>$$ye^{x^2} = \int xe^{x^2} dx$$</p>
+                    <p>Para $\int xe^{x^2} dx$, usamos sustitución $u = x^2$:</p>
+                    <p>$$du = 2x \, dx \Rightarrow \frac{du}{2} = x \, dx$$</p>
+                    <p>$$\int xe^{x^2} dx = \int e^u \frac{du}{2} = \frac{e^u}{2} = \frac{e^{x^2}}{2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <strong>Solución general:</strong>
+                    <p>$$ye^{x^2} = \frac{e^{x^2}}{2} + C$$</p>
+                    <p>$$\boxed{y = \frac{1}{2} + Ce^{-x^2}}$$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5.6: Aplicaciones -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-globe-americas section-icon"></i>
+                5.6 Aplicaciones de Ecuaciones Diferenciales
+            </h2>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-chart-area"></i>
+                    Ejemplo 7: Crecimiento Exponencial
+                </div>
+                <p><strong>Problema:</strong> Una población de bacterias crece a una tasa proporcional a su tamaño actual. Si inicialmente hay 1000 bacterias y después de 2 horas hay 2000, ¿cuántas habrá después de 6 horas?</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Modelo matemático:</strong>
+                    <p>$$\frac{dP}{dt} = kP$$</p>
+                    <p>donde $P(t)$ es la población en el tiempo $t$ y $k$ es la constante de crecimiento.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Resolver la ecuación:</strong>
+                    <p>$$\frac{dP}{P} = k \, dt$$</p>
+                    <p>$$\int \frac{dP}{P} = \int k \, dt$$</p>
+                    <p>$$\ln|P| = kt + C$$</p>
+                    <p>$$P = e^{kt + C} = e^C \cdot e^{kt} = A e^{kt}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Aplicar condiciones iniciales:</strong>
+                    <p>$P(0) = 1000 \Rightarrow A = 1000$</p>
+                    <p>$P(2) = 2000 \Rightarrow 2000 = 1000 e^{2k}$</p>
+                    <p>$$e^{2k} = 2 \Rightarrow k = \frac{\ln 2}{2}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Respuesta:</strong>
+                    <p>$$P(t) = 1000 e^{\frac{t \ln 2}{2}} = 1000 \cdot 2^{t/2}$$</p>
+                    <p>Para $t = 6$:</p>
+                    <p>$$P(6) = 1000 \cdot 2^{6/2} = 1000 \cdot 2^3 = 1000 \cdot 8 = 8000$$</p>
+                    <p><strong>Después de 6 horas habrá 8000 bacterias.</strong></p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">
+                    <i class="fas fa-thermometer-half"></i>
+                    Ejemplo 8: Ley de Enfriamiento de Newton
+                </div>
+                <p><strong>Problema:</strong> Un objeto a 100°C se coloca en un ambiente a 20°C. La temperatura del objeto disminuye a 80°C en 10 minutos. ¿Cuánto tiempo tardará en llegar a 30°C?</p>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Modelo matemático:</strong>
+                    <p>$$\frac{dT}{dt} = -k(T - T_a)$$</p>
+                    <p>donde $T$ es la temperatura del objeto, $T_a = 20°C$ es la temperatura ambiente, y $k > 0$.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Resolver:</strong>
+                    <p>$$\frac{dT}{dt} = -k(T - 20)$$</p>
+                    <p>Sustitución: $u = T - 20 \Rightarrow \frac{du}{dt} = \frac{dT}{dt}$</p>
+                    <p>$$\frac{du}{dt} = -ku$$</p>
+                    <p>$$u = A e^{-kt}$$</p>
+                    <p>$$T - 20 = A e^{-kt}$$</p>
+                    <p>$$T = 20 + A e^{-kt}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Aplicar condiciones:</strong>
+                    <p>$T(0) = 100 \Rightarrow 100 = 20 + A \Rightarrow A = 80$</p>
+                    <p>$T(10) = 80 \Rightarrow 80 = 20 + 80e^{-10k}$</p>
+                    <p>$$60 = 80e^{-10k} \Rightarrow e^{-10k} = \frac{3}{4}$$</p>
+                    <p>$$k = -\frac{\ln(3/4)}{10}$$</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Encontrar tiempo para 30°C:</strong>
+                    <p>$$T(t) = 20 + 80e^{-kt}$$</p>
+                    <p>$$30 = 20 + 80e^{-kt}$$</p>
+                    <p>$$10 = 80e^{-kt} \Rightarrow e^{-kt} = \frac{1}{8}$$</p>
+                    <p>$$-kt = \ln(1/8) = -\ln 8$$</p>
+                    <p>$$t = \frac{\ln 8}{k} = \frac{10 \ln 8}{\ln(4/3)} \approx 67.3 \text{ minutos}$$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios Prácticos -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-dumbbell section-icon"></i>
+                Ejercicios Prácticos
+            </h2>
+
+            <div class="exercise-box">
+                <div class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    Ejercicio 1: Variables Separables
+                </div>
+                <p>Resolver: $\frac{dy}{dx} = \frac{y \sin x}{\cos y}$</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol1')">Ver Solución</button>
+                <div class="solution" id="sol1">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <strong>Separar variables:</strong>
+                        <p>$$\frac{\cos y}{y} dy = \sin x dx$$</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Integrar:</strong>
+                        <p>$$\int \frac{\cos y}{y} dy = \int \sin x dx$$</p>
+                        <p>Esta integral no tiene solución elemental. El problema requiere técnicas más avanzadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">
+                    <i class="fas fa-pencil-alt"></i>
+                    Ejercicio 2: Ecuación Lineal
+                </div>
+                <p>Resolver: $\frac{dy}{dx} + y = e^{-x}$ con $y(0) = 1$</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol2')">Ver Solución</button>
+                <div class="solution" id="sol2">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <strong>Factor integrante:</strong>
+                        <p>$P(x) = 1 \Rightarrow \mu(x) = e^x$</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Resolver:</strong>
+                        <p>$$e^x \frac{dy}{dx} + e^x y = 1$$</p>
+                        <p>$$\frac{d}{dx}(ye^x) = 1$$</p>
+                        <p>$$ye^x = x + C$$</p>
+                        <p>$$y = (x + C)e^{-x}$$</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <strong>Aplicar condición inicial:</strong>
+                        <p>$y(0) = 1 \Rightarrow 1 = C \Rightarrow C = 1$</p>
+                        <p>$$\boxed{y = (x + 1)e^{-x}}$$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons">
+            <a href="modulo4_aplicaciones.html" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+                Módulo 4: Aplicaciones
+            </a>
+            <a href="ejercicios_modulo5.html" class="nav-button">
+                Ejercicios Módulo 5
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'none' || solution.style.display === '') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+
+        // Animación de entrada para las secciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

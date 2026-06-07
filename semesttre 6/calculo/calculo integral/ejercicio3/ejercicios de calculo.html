@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Cálculo Integral | JMGV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --primary-light: #64B5F6;
+            --primary-dark: #1976D2;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --warning-color: #FFC107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .student-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .student-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+        
+        .score-display {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .exercise-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .exercise-id {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.95em;
+            box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+        }
+        
+        .exercise-method {
+            font-size: 0.75em;
+            color: white;
+            background: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .exercise-expression {
+            font-size: 1.3em;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px dashed #e0e0e0;
+        }
+        
+        .exercise-input-container {
+            margin: 15px 0;
+        }
+        
+        .exercise-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .exercise-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+        
+        .exercise-status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            text-align: center;
+            min-height: 24px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .correct {
+            color: var(--success-color);
+            font-weight: 500;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .incorrect {
+            color: var(--error-color);
+            font-weight: 500;
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+        
+        .pending {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .method-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: white;
+            font-size: 0.9em;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .method-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .score-display {
+                justify-content: center;
+            }
+            
+            .exercise-expression {
+                font-size: 1.1em;
+                padding: 10px;
+            }
+        }
+        
+        /* Math styling */
+        .katex {
+            font-size: 1.1em !important;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9em;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            .exercise-card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ejercicios de Cálculo Integral</h1>
+            <p class="subtitle">Resuelve las siguientes integrales indefinidas. No olvides incluir la constante de integración (+C) en tus respuestas.</p>
+        </header>
+        
+        <div class="controls">
+            <input type="text" id="studentName" class="student-input" placeholder="Nombre del estudiante">
+            <div class="score-display">
+                <span>Puntuación:</span>
+                <span id="scoreDisplay">0/84</span>
+            </div>
+            <button onclick="generatePDF()" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                    <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                </svg>
+                Exportar PDF
+            </button>
+        </div>
+        
+        <div class="exercise-grid" id="exerciseList">
+            <!-- Los ejercicios se generarán aquí dinámicamente -->
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="scrollToTop()" class="btn btn-outline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                </svg>
+                Volver arriba
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 Matemáticas Avanzadas | Prof. JMGV</p>
+        </div>
+    </div>
+
+    <script>
+        // Datos de los ejercicios
+        const data = [
+            { id: 1, q: "x^{6}dx", a: "x^7/7+c", c: "Potencia" }, 
+            { id: 2, q: "5x^{4}dx", a: "x^5+c", c: "Potencia" }, 
+            { id: 3, q: "bx^{3}dx", a: "(bx^4)/4+c", c: "Potencia" }, 
+            { id: 4, q: "\\sqrt{3}x^{2}dx", a: "(\\sqrt{3}x^3)/3+c", c: "Potencia" }, 
+            { id: 5, q: "a~dx", a: "ax+c", c: "Constante" },
+            { id: 6, q: "\\frac{3~dx}{4}", a: "3x/4+c", c: "Constante" },
+            { id: 7, q: "\\frac{dx}{3}", a: "x/3+c", c: "Constante" },
+            { id: 8, q: "\\sqrt[3]{x}dx", a: "(3x^{4/3})/4+c", c: "Radical" },
+            { id: 9, q: "5\\sqrt[4]{x}dx", a: "4x^{5/4}+c", c: "Radical" },
+            { id: 10, q: "\\frac{dx}{x^{3}}", a: "-1/(2x^2)+c", c: "Potencia Negativa" },
+            { id: 11, q: "\\frac{5~dx}{x^{4}}", a: "-5/(3x^3)+c", c: "Potencia Negativa" },
+            { id: 12, q: "\\frac{dx}{\\sqrt[4]{x}}", a: "(4x^{3/4})/3+c", c: "Radical" },
+            { id: 13, q: "\\frac{4~dx}{x}", a: "4ln|x|+c", c: "Logarítmica" },
+            { id: 14, q: "\\frac{6~dx}{\\sqrt[3]{x}}", a: "9x^{2/3}+c", c: "Radical" },
+            { id: 15, q: "\\sqrt[5]{x^{3}}dx", a: "(5x^{8/5})/8+c", c: "Radical" },
+            { id: 16, q: "\\frac{a~dx}{\\sqrt[3]{x^{2}}}", a: "3ax^{1/3}+c", c: "Radical" },
+            { id: 17, q: "\\frac{5~dx}{2x}", a: "(5/2)ln|x|+c", c: "Logarítmica" },
+            { id: 18, q: "\\sqrt{bx}dx", a: "(2\\sqrt{b}x^{3/2})/3+c", c: "Radical" },
+            { id: 19, q: "(\\frac{5}{\\sqrt[3]{x}}-4\\sqrt[3]{x})dx", a: "(15x^{2/3})/2 - 3x^{4/3}+c", c: "Radicales" },
+            { id: 20, q: "(\\frac{3}{x^{5}}-\\frac{2}{x^{2}}-\\frac{6}{x})dx", a: "-3/(4x^4) + 2/x - 6ln|x|+c", c: "Polinómica" },
+            { id: 21, q: "\\sqrt[3]{at}dt", a: "(3(at)^{4/3})/(4a)+c", c: "Radical" },
+            { id: 22, q: "\\sqrt{6t}dt", a: "(2(6t)^{3/2})/18+c", c: "Radical" },
+            { id: 23, q: "(8x^{5}-5x^{4}-4x^{3}-6x^{2}-2x-3)dx", a: "(4x^6)/3-x^5-x^4-2x^3-x^2-3x+c", c: "Polinómica" },
+            { id: 24, q: "(ax^{3}-bx^{2}-cx+d)dx", a: "(ax^4)/4-(bx^3)/3-(cx^2)/2+dx+c", c: "Polinómica" },
+            { id: 25, q: "(\\frac{x^{2}}{\\sqrt{a^2+b^2}}-\\frac{3x}{\\sqrt{a}}-5\\sqrt{b})dx", a: "(x^3)/(3\\sqrt{a^2+b^2})-(3x^2)/(2\\sqrt{a})-5x\\sqrt{b}+c", c: "Polinómica" },
+            { id: 26, q: "(\\frac{x^{4}-6x^{3}-7x}{x})dx", a: "x^4/4-2x^3-7x+c", c: "Simplificación" },
+            { id: 27, q: "(\\frac{3}{\\sqrt[5]{x^{2}}}-\\frac{2}{\\sqrt[5]{x}})dx", a: "5x^{3/5} - (5x^{4/5})/2+c", c: "Radicales" },
+            { id: 28, q: "(\\frac{4}{\\sqrt[3]{x}}-\\frac{5}{\\sqrt[4]{x}})dx", a: "6x^{2/3} - (20x^{3/4})/3+c", c: "Radicales" },
+            { id: 29, q: "(y^{5/2}-5y^{4/3}-2y^{1/4}-\\sqrt{y})dy", a: "(2y^{7/2})/7-(15y^{7/3})/7-(8y^{5/4})/5-(2y^{3/2})/3+c", c: "Potencia" },
+            { id: 30, q: "(\\frac{y^{2/2}-y^{5/3}-y^{1/4}}{y^{2}})dy", a: "ln|y| + 3y^{-2/3} + (4y^{-3/4})/3+c", c: "Simplificación" },
+            { id: 31, q: "\\sqrt[3]{t}(5t^{2}-3t+2)dt", a: "(15t^{10/3})/10 - (9t^{7/3})/7 + (3t^{4/3})/2+c", c: "Algebraica" },
+            { id: 32, q: "\\sqrt[3]{7t}dt", a: "(3(7t)^{4/3})/28+c", c: "Radical" },
+            { id: 33, q: "(3x+4)^{6}dx", a: "((3x+4)^7)/21+c", c: "Sustitución" },
+            { id: 34, q: "(ax^{2}-b)^{5}x~dx", a: "((ax^2-b)^6)/(12a)+c", c: "Sustitución" },
+            { id: 35, q: "t^{2}(t^{3}-4)^{2}dt", a: "((t^3-4)^3)/9+c", c: "Sustitución" },
+            { id: 36, q: "(a-by)^{4}dy", a: "-((a-by)^5)/(5b)+c", c: "Sustitución" },
+            { id: 37, q: "(t^{2}-6)^{2}dt", a: "t^5/5-4t^3+36t+c", c: "Polinómica" },
+            { id: 38, q: "x(x+4)^{2}dx", a: "x^4/4+8x^3/3+8x^2+c", c: "Polinómica" },
+            { id: 39, q: "x^{2}(x+1)^{3}dx", a: "x^6/6+3x^5/5+3x^4/4+x^3/3+c", c: "Polinómica" },
+            { id: 40, q: "\\sqrt{m+ny}dy", a: "(2(m+ny)^{3/2})/(3n)+c", c: "Sustitución" },
+            { id: 41, q: "\\sqrt{5x-3}dx", a: "(2(5x-3)^{3/2})/15+c", c: "Sustitución" },
+            { id: 42, q: "\\frac{t~dt}{\\sqrt{at^{2}+b}}", a: "(\\sqrt{at^2+b})/a+c", c: "Sustitución" },
+            { id: 43, q: "\\frac{dx}{\\sqrt[3]{9x-1}}", a: "(9x-1)^{2/3}/6+c", c: "Sustitución" },
+            { id: 44, q: "(\\sqrt{x}-4)^{2}dx", a: "x^2/2-16x^{3/2}/3+16x+c", c: "Algebraica" },
+            { id: 45, q: "\\frac{x~dx}{(3x^{2}-4)^{4}}", a: "-1/(18(3x^2-4)^3)+c", c: "Sustitución" },
+            { id: 46, q: "\\frac{5~dx}{(3x-4)^{2}}", a: "-5/(3(3x-4))+c", c: "Sustitución" },
+            { id: 47, q: "\\frac{8x~dx}{(2x^{2}+5)^{4}}", a: "-2/(3(2x^2+5)^3)+c", c: "Sustitución" },
+            { id: 48, q: "\\frac{(\\sqrt{x}-b)^{2}}{\\sqrt{x}}dx", a: "(2(\\sqrt{x}-b)^3)/3+c", c: "Sustitución" },
+            { id: 49, q: "\\frac{dt}{at+b}", a: "(1/a)ln|at+b|+c", c: "Logarítmica" },
+            { id: 50, q: "\\frac{x~dx}{3x^{2}-4}", a: "(1/6)ln|3x^2-4|+c", c: "Logarítmica" },
+            { id: 51, q: "\\frac{dx}{x+3}", a: "ln|x+3|+c", c: "Logarítmica" },
+            { id: 52, q: "\\frac{4x~dx}{2x^{2}-6}", a: "ln|2x^2-6|+c", c: "Logarítmica" },
+            { id: 53, q: "\\frac{(2x-3)dx}{(x^2-3x+6)^2}", a: "-1/(x^2-3x+6)+c", c: "Sustitución" },
+            { id: 54, q: "(x^{2}-2)\\sqrt{x^{3}-6x+3}dx", a: "(2(x^3-6x+3)^{3/2})/9+c", c: "Sustitución" },
+            { id: 55, q: "\\frac{y^{n-1}dy}{(ay^{n}+b)^{m}}", a: "((ay^n+b)^{1-m})/(an(1-m))", c: "Sustitución" },
+            { id: 56, q: "e^{3x}(1-e^{3x})^{2}dx", a: "-((1-e^{3x})^3)/9+c", c: "Exponencial" },
+            { id: 57, q: "\\frac{(4-ln|x+3|)^{3}dx}{x+3}", a: "-((4-ln|x+3|)^4)/4+c", c: "Logarítmica" },
+            { id: 58, q: "cos~4x(1-sen~4x)^{3}dx", a: "-((1-sen~4x)^4)/16+c", c: "Trigonométrica" },
+            { id: 59, q: "csc^{2}x\\sqrt{3+cot~x}dx", a: "-(2(3+cot~x)^{3/2})/3+c", c: "Trigonométrica" },
+            { id: 60, q: "\\frac{sec~2x~tan~2x}{\\sqrt{1-sec~2x}}dx", a: "-2\\sqrt{1-sec~2x}+c", c: "Trigonométrica" },
+            { id: 61, q: "\\frac{cos~ax}{1-sen~ax}dx", a: "-(1/a)ln|1-sen~ax|+c", c: "Trigonométrica" },
+            { id: 62, q: "\\frac{e^{\\sqrt{x}}\\sqrt{e^{\\sqrt{x}}-1}}{\\sqrt{x}}dx", a: "(4(e^{\\sqrt{x}}-1)^{3/2})/3+c", c: "Exponencial" },
+            { id: 63, q: "cot~x(2+ln|sen~x|)dx", a: "(2+ln|sen~x|)^2/2+c", c: "Logarítmica" },
+            { id: 64, q: "\\frac{sen~2x~dx}{(1-cos^{2}x)^{3}}", a: "-1/(2sen^4~x)+c", c: "Trigonométrica" },
+            { id: 65, q: "sen^{2}bx~cos~bx~dx", a: "(sen^3~bx)/(3b)+c", c: "Trigonométrica" },
+            { id: 66, q: "cot~mx~csc^{2}mx~dx", a: "-(cot^2~mx)/(2m)+c", c: "Trigonométrica" },
+            { id: 67, q: "cos^{2}4x~sen~4x~dx", a: "-(cos^3~4x)/12+c", c: "Trigonométrica" },
+            { id: 68, q: "\\frac{cos~5x}{\\sqrt{sen~5x+4}}dx", a: "(2\\sqrt{sen~5x+4})/5+c", c: "Trigonométrica" },
+            { id: 69, q: "\\frac{4x+2}{x+2}dx", a: "4x - 6ln|x+2|+c", c: "División" },
+            { id: 70, q: "\\frac{(3x^{2}+2)dx}{x-1}", a: "3x^2/2 + 3x + 5ln|x-1|+c", c: "División" },
+            { id: 71, q: "\\frac{dy}{y~ln^{2}y}", a: "-1/ln|y|+c", c: "Logarítmica" },
+            { id: 72, q: "\\frac{dx}{2x~ln~3x}", a: "(1/2)ln|ln|3x||+c", c: "Logarítmica" },
+            { id: 73, q: "x^{n}\\sqrt{ax^{n+1}+b}dx", a: "(2(ax^{n+1}+b)^{3/2})/(3a(n+1))+c", c: "Sustitución" },
+            { id: 74, q: "\\frac{1}{x^{3}}\\sqrt{1-\\frac{1}{x^{2}}}dx", a: "((1-x^{-2})^{3/2})/3+c", c: "Sustitución" },
+            { id: 75, q: "csc^{2}3x~cos~3x~dx", a: "-1/(3sen~3x)+c", c: "Trigonométrica" },
+            { id: 76, q: "(\\frac{2}{(x+1)^{3}}-\\frac{3}{(x+1)^{2}}+\\frac{4}{x+1})dx", a: "-1/(x+1)^2 + 3/(x+1) + 4ln|x+1|+c", c: "Fracciones" },
+            { id: 77, q: "(\\frac{3}{x+2}-\\frac{4}{x+5})dx", a: "3ln|x+2| - 4ln|x+5|+c", c: "Logarítmica" },
+            { id: 78, q: "(\\frac{3}{2x-1}+\\frac{5}{3x-4})dx", a: "(3/2)ln|2x-1| + (5/3)ln|3x-4|+c", c: "Logarítmica" },
+            { id: 79, q: "\\frac{sen~x}{\\sqrt[3]{cos^{2}x}}dx", a: "-3cos^{1/3}x+c", c: "Trigonométrica" },
+            { id: 80, q: "sen^{3}x~sen~2x~dx", a: "(2sen^5~x)/5+c", c: "Trigonométrica" },
+            { id: 81, q: "\\frac{dw}{sen^{2}w\\sqrt{1-cot~w}}", a: "2\\sqrt{1-cot~w}+c", c: "Trigonométrica" },
+            { id: 82, q: "\\frac{3~sen~y~cos~y}{\\sqrt{1-2~sen^{2}y}}dy", a: "-(3/2)\\sqrt{1-2sen^2~y}+c", c: "Trigonométrica" },
+            { id: 83, q: "\\sqrt{1+cos~\\alpha}d\\alpha", a: "2\\sqrt{2}sen(\\alpha/2)+c", c: "Trigonométrica" },
+            { id: 84, q: "\\frac{sen^{\\frac{3}{4}}x}{cos^{\\frac{11}{4}}x}dx", a: "(4tan^{7/4}x)/7+c", c: "Trigonométrica" }
+        ];
+
+        // Asegurar que tengamos 84 ejercicios
+        for (let i = 1; i <= 84; i++) {
+            if (!data.find(e => e.id === i)) {
+                data.push({ 
+                    id: i, 
+                    q: `\\text{Ejercicio } ${i}`, 
+                    a: "...", 
+                    c: "Por determinar" 
+                });
+            }
+        }
+        data.sort((a,b) => a.id - b.id);
+
+        // Generar las tarjetas de ejercicios
+        const exerciseList = document.getElementById('exerciseList');
+        
+        data.forEach(ex => {
+            const card = document.createElement('div');
+            card.className = 'exercise-card';
+            card.innerHTML = `
+                <div class="exercise-header">
+                    <div class="exercise-id">${ex.id}</div>
+                    <div class="exercise-method">${ex.c || 'Cálculo'}</div>
+                </div>
+                <div class="exercise-expression">$$\\int ${ex.q}$$</div>
+                <select class="method-select" onchange="updateMethod(${ex.id}, this)">
+                    <option value="">Selecciona un método...</option>
+                    <option value="Potencia">Potencia</option>
+                    <option value="Sustitución">Sustitución</option>
+                    <option value="Partes">Por Partes</option>
+                    <option value="Trigonométrica">Trigonométrica</option>
+                    <option value="Logarítmica">Logarítmica</option>
+                    <option value="Exponencial">Exponencial</option>
+                    <option value="Fracciones parciales">Fracciones parciales</option>
+                </select>
+                <div class="exercise-input-container">
+                    <input type="text" 
+                        oninput="validate(${ex.id}, this)" 
+                        class="exercise-input" 
+                        placeholder="Escribe tu respuesta (sin +C)" 
+                        data-exercise-id="${ex.id}">
+                </div>
+                <div class="exercise-status" id="status-${ex.id}">
+                    <span class="pending">Pendiente</span>
+                </div>
+            `;
+            exerciseList.appendChild(card);
+            
+            // Guardar referencia al input para validación
+            ex.inputElement = card.querySelector('input');
+            ex.statusElement = card.querySelector(`#status-${ex.id}`);
+        });
+
+        // Función para actualizar el método de resolución
+        function updateMethod(id, select) {
+            const ex = data.find(e => e.id === id);
+            if (ex) {
+                ex.method = select.value;
+                // Opcional: Guardar en localStorage
+                saveProgress();
+            }
+        }
+        
+        // Función para validar la respuesta
+        function validate(id, input) {
+            const ex = data.find(e => e.id === id);
+            if (!ex) return;
+            
+            const userVal = input.value.replace(/\\s/g, '').toLowerCase();
+            const correctVal = ex.a.replace(/\\s/g, '').toLowerCase();
+            const statusElement = document.getElementById(`status-${id}`);
+            
+            // Guardar la respuesta del usuario
+            ex.userAnswer = userVal;
+            
+            if (userVal === '') {
+                statusElement.innerHTML = '<span class="pending">Pendiente</span>';
+                input.classList.remove('correct', 'incorrect');
+                ex.correct = undefined;
+                updateScore();
+                return;
+            }
+            
+            // Verificar si la respuesta es correcta (ignorando espacios y mayúsculas)
+            if (userVal === correctVal) {
+                statusElement.innerHTML = '<span class="correct">✓ Respuesta correcta</span>';
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                ex.correct = true;
+            } else {
+                statusElement.innerHTML = '<span class="incorrect">✗ Intenta de nuevo</span>';
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+                ex.correct = false;
+            }
+            
+            // Actualizar el marcador
+            updateScore();
+            
+            // Guardar el progreso
+            saveProgress();
+        }
+        
+        // Actualizar el marcador
+        function updateScore() {
+            const correct = data.filter(ex => ex.correct === true).length;
+            const total = data.length;
+            const percentage = Math.round((correct / total) * 100);
+            
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `${correct}/${total} (${percentage}%)`;
+            
+            // Actualizar colores según el puntaje
+            const scoreContainer = scoreDisplay.parentElement;
+            scoreContainer.style.background = getScoreColor(percentage);
+        }
+        
+        // Obtener color según el puntaje
+        function getScoreColor(percentage) {
+            if (percentage >= 80) return '#4CAF50'; // Verde
+            if (percentage >= 50) return '#FFC107'; // Amarillo
+            if (percentage > 0) return '#FF9800';   // Naranja
+            return '#F44336';                       // Rojo
+        }
+        
+        // Guardar el progreso en localStorage
+        function saveProgress() {
+            const progress = {
+                studentName: document.getElementById('studentName').value,
+                exercises: data.map(ex => ({
+                    id: ex.id,
+                    userAnswer: ex.userAnswer,
+                    method: ex.method,
+                    correct: ex.correct
+                }))
+            };
+            localStorage.setItem('calculusExercisesProgress', JSON.stringify(progress));
+        }
+        
+        // Cargar el progreso guardado
+        function loadProgress() {
+            const saved = localStorage.getItem('calculusExercisesProgress');
+            if (!saved) return;
+            
+            try {
+                const progress = JSON.parse(saved);
+                
+                // Restaurar nombre del estudiante
+                if (progress.studentName) {
+                    document.getElementById('studentName').value = progress.studentName;
+                }
+                
+                // Restaurar respuestas y métodos
+                progress.exercises.forEach(savedEx => {
+                    const ex = data.find(e => e.id === savedEx.id);
+                    if (ex) {
+                        ex.userAnswer = savedEx.userAnswer;
+                        ex.method = savedEx.method;
+                        ex.correct = savedEx.correct;
+                        
+                        // Actualizar la interfaz
+                        const input = document.querySelector(`input[data-exercise-id="${ex.id}"]`);
+                        if (input && savedEx.userAnswer) {
+                            input.value = savedEx.userAnswer;
+                            input.dispatchEvent(new Event('input'));
+                        }
+                        
+                        // Actualizar método seleccionado
+                        const select = document.querySelector(`select[onchange*="${ex.id}"]`);
+                        if (select && savedEx.method) {
+                            select.value = savedEx.method;
+                        }
+                    }
+                });
+                
+                // Actualizar puntuación
+                updateScore();
+            } catch (e) {
+                console.error('Error al cargar el progreso:', e);
+            }
+        }
+        
+        // Función para generar el PDF
+        function generatePDF() {
+            const studentName = document.getElementById('studentName').value || 'Estudiante';
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Título
+            doc.setFontSize(20);
+            doc.setTextColor(33, 33, 33);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Resultados de Cálculo Integral', 14, 22);
+            
+            // Información del estudiante
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(66, 66, 66);
+            doc.text(`Estudiante: ${studentName}`, 14, 30);
+            doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}`, 14, 36);
+            
+            // Contador de aciertos
+            const correctCount = data.filter(ex => ex.correct).length;
+            const score = (correctCount / data.length * 100).toFixed(1);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(33, 150, 243);
+            doc.text(`Puntuación: ${correctCount}/${data.length} (${score}%)`, 14, 44);
+            
+            // Tabla de resultados
+            const headers = ['ID', 'Expresión', 'Método', 'Tu Respuesta', 'Resultado'];
+            const rows = data.map(ex => ({
+                id: ex.id,
+                expression: `$\\\\int ${ex.q}~dx$`,
+                method: ex.method || 'No especificado',
+                answer: ex.userAnswer || 'No respondido',
+                correct: ex.correct ? '✓' : ex.userAnswer ? '✗' : ''
+            }));
+            
+            // Ordenar por ID
+            rows.sort((a, b) => a.id - b.id);
+            
+            // Convertir a matriz para autoTable
+            const tableData = rows.map(row => [
+                row.id,
+                row.expression,
+                row.method,
+                row.answer,
+                row.correct
+            ]);
+            
+            doc.autoTable({
+                head: [headers],
+                body: tableData,
+                startY: 55,
+                margin: { left: 14, right: 14 },
+                styles: { 
+                    fontSize: 8,
+                    cellPadding: 2,
+                    lineColor: [221, 221, 221],
+                    lineWidth: 0.2
+                },
+                headStyles: {
+                    fillColor: [33, 150, 243],
+                    textColor: 255,
+                    fontStyle: 'bold',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    0: { cellWidth: 10, halign: 'center' },
+                    1: { cellWidth: 60, cellHeight: 15 },
+                    2: { cellWidth: 30 },
+                    3: { cellWidth: 50 },
+                    4: { cellWidth: 15, halign: 'center' }
+                },
+                didParseCell: function(data) {
+                    // Resaltar celdas de resultado
+                    if (data.column.index === 4) {
+                        if (data.cell.raw === '✓') {
+                            data.cell.styles.fillColor = [200, 230, 201]; // Verde claro
+                            data.cell.styles.textColor = [56, 142, 60]; // Verde oscuro
+                        } else if (data.cell.raw === '✗') {
+                            data.cell.styles.fillColor = [255, 205, 210]; // Rojo claro
+                            data.cell.styles.textColor = [211, 47, 47]; // Rojo oscuro
+                        }
+                    }
+                },
+                willDrawCell: function(data) {
+                    // Dibujar borde inferior para todas las filas
+                    if (data.row.index > 0) {
+                        doc.setDrawColor(224, 224, 224);
+                        doc.line(
+                            data.cell.x,
+                            data.cell.y + data.cell.height,
+                            data.cell.x + data.cell.width,
+                            data.cell.y + data.cell.height
+                        );
+                    }
+                }
+            });
+            
+            // Pie de página
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(10);
+                doc.setTextColor(150);
+                doc.text(
+                    `Página ${i} de ${pageCount}`,
+                    doc.internal.pageSize.width - 20,
+                    doc.internal.pageSize.height - 10,
+                    { align: 'right' }
+                );
+            }
+            
+            // Guardar el PDF
+            doc.save(`Resultados_${studentName.replace(/\\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`);
+        }
+        
+        // Función para hacer scroll al inicio de la página
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Inicializar KaTeX para renderizar las expresiones matemáticas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Renderizar ecuaciones con KaTeX
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError: false
+            });
+            
+            // Cargar progreso guardado
+            loadProgress();
+            
+            // Guardar el nombre del estudiante cuando cambia
+            document.getElementById('studentName').addEventListener('input', function() {
+                saveProgress();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Módulo 5: Ecuaciones Diferenciales - Cálculo Integral</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="module-container">
+        <!-- Header -->
+        <div class="module-header">
+            <h1 class="exercises-title">Ejercicios Módulo 5</h1>
+            <p class="exercises-subtitle">Ecuaciones Diferenciales - Práctica Integral</p>
+            <p>Resuelve estos ejercicios paso a paso para dominar las ecuaciones diferenciales</p>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="progress-title">Tu Progreso en el Módulo 5</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="checklist">
+                <div class="check-item" data-exercise="1">Ejercicio 1</div>
+                <div class="check-item" data-exercise="2">Ejercicio 2</div>
+                <div class="check-item" data-exercise="3">Ejercicio 3</div>
+                <div class="check-item" data-exercise="4">Ejercicio 4</div>
+                <div class="check-item" data-exercise="5">Ejercicio 5</div>
+                <div class="check-item" data-exercise="6">Ejercicio 6</div>
+                <div class="check-item" data-exercise="7">Ejercicio 7</div>
+                <div class="check-item" data-exercise="8">Ejercicio 8</div>
+            </div>
+        </div>
+
+        <!-- Sección: Variables Separables -->
+        <div class="difficulty-section">
+            <h2 class="difficulty-title">
+                <i class="fas fa-puzzle-piece difficulty-icon"></i>
+                Variables Separables
+            </h2>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">1</div>
+                    <div class="exercise-title">Separación Básica</div>
+                    <div class="difficulty-badge difficulty-easy">Fácil</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $\frac{dy}{dx} = \frac{x^2}{y}$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Separa las variables y luego integra ambos lados. Recuerda la constante de integración.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol1')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol1">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Separar variables:</strong>
+                            <p>$$\frac{dy}{dx} = \frac{x^2}{y}$$</p>
+                            <p>$$y \, dy = x^2 \, dx$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Integrar ambos lados:</strong>
+                            <p>$$\int y \, dy = \int x^2 \, dx$$</p>
+                            <p>$$\frac{y^2}{2} = \frac{x^3}{3} + C$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Despejar y:</strong>
+                            <p>$$y^2 = \frac{2x^3}{3} + 2C$$</p>
+                            <p>$$\boxed{y = \pm\sqrt{\frac{2x^3}{3} + C}}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">2</div>
+                    <div class="exercise-title">Con Condición Inicial</div>
+                    <div class="difficulty-badge difficulty-medium">Medio</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $\frac{dy}{dx} = \frac{y^2}{x}$ con $y(1) = 2$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Separa las variables, integra, y luego usa la condición inicial para encontrar la constante.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol2')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol2">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Separar variables:</strong>
+                            <p>$$\frac{dy}{dx} = \frac{y^2}{x}$$</p>
+                            <p>$$\frac{dy}{y^2} = \frac{dx}{x}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Integrar:</strong>
+                            <p>$$\int \frac{dy}{y^2} = \int \frac{dx}{x}$$</p>
+                            <p>$$-\frac{1}{y} = \ln|x| + C$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Aplicar condición inicial:</strong>
+                            <p>$y(1) = 2 \Rightarrow -\frac{1}{2} = \ln|1| + C = 0 + C$</p>
+                            <p>$$C = -\frac{1}{2}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Solución particular:</strong>
+                            <p>$$-\frac{1}{y} = \ln|x| - \frac{1}{2}$$</p>
+                            <p>$$\frac{1}{y} = \frac{1}{2} - \ln|x|$$</p>
+                            <p>$$\boxed{y = \frac{1}{\frac{1}{2} - \ln|x|}}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Ecuaciones Homogéneas -->
+        <div class="difficulty-section">
+            <h2 class="difficulty-title">
+                <i class="fas fa-balance-scale difficulty-icon"></i>
+                Ecuaciones Homogéneas
+            </h2>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">3</div>
+                    <div class="exercise-title">Homogénea Básica</div>
+                    <div class="difficulty-badge difficulty-medium">Medio</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $\frac{dy}{dx} = \frac{x^2 + y^2}{2xy}$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Verifica que es homogénea y usa la sustitución $y = vx$ donde $v$ es una función de $x$.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol3')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol3">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Verificar homogeneidad:</strong>
+                            <p>$$\frac{dy}{dx} = \frac{x^2 + y^2}{2xy} = \frac{x^2(1 + \frac{y^2}{x^2})}{2xy} = \frac{1 + \left(\frac{y}{x}\right)^2}{2\left(\frac{y}{x}\right)}$$</p>
+                            <p>Es homogénea ya que depende solo de $\frac{y}{x}$.</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Sustitución:</strong>
+                            <p>$y = vx \Rightarrow \frac{dy}{dx} = v + x\frac{dv}{dx}$</p>
+                            <p>$$v + x\frac{dv}{dx} = \frac{1 + v^2}{2v}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Separar variables:</strong>
+                            <p>$$x\frac{dv}{dx} = \frac{1 + v^2}{2v} - v = \frac{1 + v^2 - 2v^2}{2v} = \frac{1 - v^2}{2v}$$</p>
+                            <p>$$\frac{2v}{1-v^2} dv = \frac{dx}{x}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Integrar:</strong>
+                            <p>$$\int \frac{2v}{1-v^2} dv = \int \frac{dx}{x}$$</p>
+                            <p>$$-\ln|1-v^2| = \ln|x| + C$$</p>
+                            <p>$$\ln|x(1-v^2)| = C$$</p>
+                            <p>$$x(1-v^2) = A$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">5</span>
+                            <strong>Solución final:</strong>
+                            <p>$$x\left(1 - \frac{y^2}{x^2}\right) = A$$</p>
+                            <p>$$\boxed{x^2 - y^2 = Ax}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Ecuaciones Exactas -->
+        <div class="difficulty-section">
+            <h2 class="difficulty-title">
+                <i class="fas fa-check-circle difficulty-icon"></i>
+                Ecuaciones Exactas
+            </h2>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">4</div>
+                    <div class="exercise-title">Exacta Básica</div>
+                    <div class="difficulty-badge difficulty-medium">Medio</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $(2xy + 1)dx + (x^2 - 2y)dy = 0$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Primero verifica que la ecuación sea exacta usando la condición $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol4')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol4">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Verificar exactitud:</strong>
+                            <p>$M(x,y) = 2xy + 1$ y $N(x,y) = x^2 - 2y$</p>
+                            <p>$$\frac{\partial M}{\partial y} = 2x$$</p>
+                            <p>$$\frac{\partial N}{\partial x} = 2x$$</p>
+                            <p>Como $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$, la ecuación es exacta. ✓</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Encontrar F(x,y):</strong>
+                            <p>$$\frac{\partial F}{\partial x} = M = 2xy + 1$$</p>
+                            <p>$$F = \int (2xy + 1)dx = x^2y + x + g(y)$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Determinar g(y):</strong>
+                            <p>$$\frac{\partial F}{\partial y} = x^2 + g'(y) = N = x^2 - 2y$$</p>
+                            <p>$$g'(y) = -2y \Rightarrow g(y) = -y^2 + C$$</p>
+                            <p>$$F(x,y) = x^2y + x - y^2 + C$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Solución general:</strong>
+                            <p>$$\boxed{x^2y + x - y^2 = C}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Ecuaciones Lineales -->
+        <div class="difficulty-section">
+            <h2 class="difficulty-title">
+                <i class="fas fa-chart-line difficulty-icon"></i>
+                Ecuaciones Lineales de Primer Orden
+            </h2>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">5</div>
+                    <div class="exercise-title">Factor Integrante</div>
+                    <div class="difficulty-badge difficulty-medium">Medio</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $\frac{dy}{dx} + 3y = e^{2x}$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Usa el factor integrante $\mu(x) = e^{\int P(x)dx}$ donde $P(x) = 3$.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol5')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol5">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Identificar P(x) y Q(x):</strong>
+                            <p>$P(x) = 3$ y $Q(x) = e^{2x}$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Calcular factor integrante:</strong>
+                            <p>$$\mu(x) = e^{\int P(x)dx} = e^{\int 3 dx} = e^{3x}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Aplicar factor integrante:</strong>
+                            <p>$$e^{3x}\frac{dy}{dx} + 3e^{3x}y = e^{3x}e^{2x} = e^{5x}$$</p>
+                            <p>$$\frac{d}{dx}(ye^{3x}) = e^{5x}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Integrar:</strong>
+                            <p>$$ye^{3x} = \int e^{5x} dx = \frac{e^{5x}}{5} + C$$</p>
+                            <p>$$\boxed{y = \frac{e^{2x}}{5} + Ce^{-3x}}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">6</div>
+                    <div class="exercise-title">Con Condición Inicial</div>
+                    <div class="difficulty-badge difficulty-hard">Difícil</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Resolver:</strong> $xy' + 2y = x^2$ con $y(1) = 1$</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Primero convierte a la forma estándar dividiendo por $x$, luego usa el factor integrante.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol6')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol6">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Forma estándar:</strong>
+                            <p>$$xy' + 2y = x^2$$</p>
+                            <p>$$y' + \frac{2}{x}y = x$$</p>
+                            <p>$P(x) = \frac{2}{x}$ y $Q(x) = x$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Factor integrante:</strong>
+                            <p>$$\mu(x) = e^{\int \frac{2}{x} dx} = e^{2\ln|x|} = x^2$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Aplicar factor integrante:</strong>
+                            <p>$$x^2y' + 2xy = x^3$$</p>
+                            <p>$$\frac{d}{dx}(yx^2) = x^3$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Integrar:</strong>
+                            <p>$$yx^2 = \int x^3 dx = \frac{x^4}{4} + C$$</p>
+                            <p>$$y = \frac{x^2}{4} + \frac{C}{x^2}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">5</span>
+                            <strong>Aplicar condición inicial:</strong>
+                            <p>$y(1) = 1 \Rightarrow 1 = \frac{1}{4} + C \Rightarrow C = \frac{3}{4}$</p>
+                            <p>$$\boxed{y = \frac{x^2}{4} + \frac{3}{4x^2}}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Aplicaciones -->
+        <div class="difficulty-section">
+            <h2 class="difficulty-title">
+                <i class="fas fa-globe-americas difficulty-icon"></i>
+                Aplicaciones
+            </h2>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">7</div>
+                    <div class="exercise-title">Crecimiento Poblacional</div>
+                    <div class="difficulty-badge difficulty-medium">Medio</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Problema:</strong> Una población de conejos crece a una tasa proporcional a su tamaño. Si inicialmente hay 50 conejos y después de 1 año hay 100, ¿cuántos habrá después de 3 años?</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Usa el modelo $\frac{dP}{dt} = kP$ donde $P(t)$ es la población en el tiempo $t$.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol7')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol7">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Modelo matemático:</strong>
+                            <p>$$\frac{dP}{dt} = kP$$</p>
+                            <p>donde $P(t)$ es la población en el tiempo $t$ (en años).</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Resolver la ecuación:</strong>
+                            <p>$$\frac{dP}{P} = k \, dt$$</p>
+                            <p>$$\ln|P| = kt + C$$</p>
+                            <p>$$P = A e^{kt}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Aplicar condiciones:</strong>
+                            <p>$P(0) = 50 \Rightarrow A = 50$</p>
+                            <p>$P(1) = 100 \Rightarrow 100 = 50 e^{k}$</p>
+                            <p>$$e^{k} = 2 \Rightarrow k = \ln 2$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Respuesta:</strong>
+                            <p>$$P(t) = 50 e^{t \ln 2} = 50 \cdot 2^t$$</p>
+                            <p>Para $t = 3$: $P(3) = 50 \cdot 2^3 = 50 \cdot 8 = 400$</p>
+                            <p><strong>Después de 3 años habrá 400 conejos.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-header">
+                    <div class="exercise-number">8</div>
+                    <div class="exercise-title">Ley de Enfriamiento</div>
+                    <div class="difficulty-badge difficulty-hard">Difícil</div>
+                </div>
+                <div class="exercise-content">
+                    <p><strong>Problema:</strong> Una taza de café a 95°C se coloca en una habitación a 20°C. Después de 10 minutos, la temperatura es 70°C. ¿Cuánto tiempo tardará en llegar a 40°C?</p>
+                    <div class="hint-box">
+                        <div class="hint-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pista
+                        </div>
+                        <p>Usa la ley de enfriamiento de Newton: $\frac{dT}{dt} = -k(T - T_a)$ donde $T_a$ es la temperatura ambiente.</p>
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('sol8')">
+                        <i class="fas fa-eye"></i>
+                        Ver Solución
+                    </button>
+                    <div class="solution" id="sol8">
+                        <div class="solution-step">
+                            <span class="step-number">1</span>
+                            <strong>Modelo matemático:</strong>
+                            <p>$$\frac{dT}{dt} = -k(T - 20)$$</p>
+                            <p>donde $T$ es la temperatura del café y $T_a = 20°C$.</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">2</span>
+                            <strong>Resolver:</strong>
+                            <p>Sustitución: $u = T - 20 \Rightarrow \frac{du}{dt} = \frac{dT}{dt}$</p>
+                            <p>$$\frac{du}{dt} = -ku$$</p>
+                            <p>$$u = A e^{-kt}$$</p>
+                            <p>$$T = 20 + A e^{-kt}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">3</span>
+                            <strong>Aplicar condiciones:</strong>
+                            <p>$T(0) = 95 \Rightarrow 95 = 20 + A \Rightarrow A = 75$</p>
+                            <p>$T(10) = 70 \Rightarrow 70 = 20 + 75e^{-10k}$</p>
+                            <p>$$50 = 75e^{-10k} \Rightarrow e^{-10k} = \frac{2}{3}$$</p>
+                            <p>$$k = -\frac{\ln(2/3)}{10}$$</p>
+                        </div>
+                        <div class="solution-step">
+                            <span class="step-number">4</span>
+                            <strong>Encontrar tiempo para 40°C:</strong>
+                            <p>$$40 = 20 + 75e^{-kt}$$</p>
+                            <p>$$20 = 75e^{-kt} \Rightarrow e^{-kt} = \frac{4}{15}$$</p>
+                            <p>$$-kt = \ln\left(\frac{4}{15}\right)$$</p>
+                            <p>$$t = \frac{\ln(15/4)}{k} = \frac{10 \ln(15/4)}{\ln(3/2)} \approx 37.7 \text{ minutos}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons">
+            <a href="modulo5_ecuaciones_diferenciales.html" class="nav-button">
+                <i class="fas fa-arrow-left"></i>
+                Volver al Módulo 5
+            </a>
+            <a href="index.html" class="nav-button">
+                Ir al Inicio
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            const button = solution.previousElementSibling;
+            
+            if (solution.style.display === 'none' || solution.style.display === '') {
+                solution.style.display = 'block';
+                button.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar Solución';
+                button.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
+                
+                // Marcar ejercicio como completado
+                const exerciseNumber = id.replace('sol', '');
+                const checkItem = document.querySelector(`[data-exercise="${exerciseNumber}"]`);
+                if (checkItem && !checkItem.classList.contains('completed')) {
+                    checkItem.classList.add('completed');
+                    updateProgress();
+                }
+            } else {
+                solution.style.display = 'none';
+                button.innerHTML = '<i class="fas fa-eye"></i> Ver Solución';
+                button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        }
+
+        function updateProgress() {
+            const completed = document.querySelectorAll('.check-item.completed').length;
+            const total = document.querySelectorAll('.check-item').length;
+            const percentage = (completed / total) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Animación de entrada para las tarjetas de ejercicio
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.exercise-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Agregar funcionalidad de clic a los elementos de checklist
+            document.querySelectorAll('.check-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('completed');
+                    updateProgress();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

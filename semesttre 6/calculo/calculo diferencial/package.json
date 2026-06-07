@@ -1,0 +1,40 @@
+{
+  "name": "sistema-control-acceso-calculo-diferencial",
+  "version": "1.0.0",
+  "description": "Sistema de control de acceso para el curso de Cálculo Diferencial con Firebase",
+  "main": "index.html",
+  "scripts": {
+    "start": "python server.py",
+    "serve": "npx serve .",
+    "dev": "python server.py",
+    "build": "echo 'No build process needed for static files'",
+    "test": "echo 'No tests configured'",
+    "deploy": "firebase deploy",
+    "lint": "echo 'No linting configured'",
+    "clean": "echo 'Cleaning temporary files'"
+  },
+  "keywords": [
+    "calculo",
+    "diferencial",
+    "firebase",
+    "authentication",
+    "educacion",
+    "matematicas"
+  ],
+  "author": "Sistema Educativo",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^10.7.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "local"
+  },
+  "bugs": {
+    "url": "local"
+  },
+  "homepage": "index.html"
+}

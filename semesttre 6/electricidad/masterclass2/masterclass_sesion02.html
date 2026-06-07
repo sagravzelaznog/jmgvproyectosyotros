@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 02: Física del Vuelo | JMGV-PTEL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">WND-GEN-16S</div>
+        <div class="progress-container">
+            <span class="progress-text">Progreso de la Sesión</span>
+            <div class="progress-bar"><div class="progress-fill" id="scrollProgress"></div></div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">MÓDULO 1: FUNDAMENTOS</span>
+            <h1>Física del Vuelo (Aerodinámica Básica)</h1>
+            <p class="subtitle">Descubre por qué las aspas modernas no son empujadas por el viento, sino que "vuelan" a través de él.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="teoria" class="card">
+            <h2>1. Teoría: Los Secretos del Viento</h2>
+            
+            <div class="content-block">
+                <h3>El Principio de Bernoulli</h3>
+                <p>Daniel Bernoulli, un matemático brillante, descubrió algo contraintuitivo: <strong>cuando un fluido (como el aire) se mueve más rápido, su presión disminuye.</strong></p>
+                <p>Si diseñamos un aspa (perfil alar) con una curva en la parte superior y más plana en la inferior, el aire que viaja por arriba tiene que recorrer más distancia en el mismo tiempo, por lo que acelera. Esto crea una zona de <strong>baja presión</strong> arriba, y la alta presión de abajo empuja el aspa hacia arriba. A esta fuerza "mágica" le llamamos <strong>Sustentación (Lift)</strong>.</p>
+                
+                <div class="visual-center" style="text-align: center;">
+                    <img src="The_Bernoulli_Principle_Sep2021_v1.jpg" alt="The_Bernoulli_Principle_Sep2021_v1.jpg" width="50%">
+                </div>
+            </div>
+
+            <div class="content-grid mt-2">
+                <div class="text-block">
+                    <h3>Sustentación vs. Arrastre</h3>
+                    <p>En el diseño de aerogeneradores, lidiamos con dos fuerzas principales:</p>
+                    <ul>
+                        <li><strong>Arrastre (Drag):</strong> Es la resistencia. El viento choca contra una superficie y la empuja. Es fuerza bruta, pero lenta e ineficiente.</li>
+                        <li><strong>Sustentación (Lift):</strong> Es la fuerza de Bernoulli. Permite que las aspas giren mucho más rápido que la velocidad del viento mismo. Es elegancia pura.</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>Tipos de Rotores</h4>
+                    <p><strong>SAVONIUS:</strong> Usa <em>Arrastre</em>. Parece un barril partido a la mitad. Gira lento, tiene mucha fuerza (torque), pero baja eficiencia.</p>
+                    <p><strong>HÉLICE / DARRIEUS:</strong> Usa <em>Sustentación</em>. Son las turbinas modernas de 3 aspas. Giran rapidísimo y son altamente eficientes.</p>
+                </div>
+            </div>
+
+            <div class="svg-demonstration mt-2">
+                <svg viewBox="0 0 400 200" class="educational-svg large-svg">
+                    <g transform="translate(100, 100)">
+                        <text x="0" y="-80" text-anchor="middle" font-family="Montserrat" font-weight="bold" fill="#006D77">SAVONIUS (Arrastre)</text>
+                        <line x1="0" y1="-60" x2="0" y2="80" stroke="#333" stroke-width="4"/>
+                        <path d="M0,-40 A30,30 0 0,0 0,40" fill="none" stroke="#E29578" stroke-width="15" class="spin-slow"/>
+                        <path d="M0,-20 A30,30 0 0,1 0,60" fill="none" stroke="#FFD166" stroke-width="15" class="spin-slow"/>
+                        <text x="0" y="95" text-anchor="middle" font-family="Roboto" font-size="12" fill="#666">Alta fuerza, baja velocidad</text>
+                    </g>
+                    
+                    <g transform="translate(300, 100)">
+                        <text x="0" y="-80" text-anchor="middle" font-family="Montserrat" font-weight="bold" fill="#006D77">HÉLICE (Sustentación)</text>
+                        <circle cx="0" cy="10" r="10" fill="#333"/>
+                        <g class="spin-fast">
+                            <path d="M-5,10 Q-10,-40 0,-60 Q10,-40 5,10 Z" fill="#E29578"/>
+                            <path d="M-5,10 Q-50,20 -55,45 Q-30,40 5,10 Z" fill="#E29578"/>
+                            <path d="M5,10 Q50,20 55,45 Q30,40 -5,10 Z" fill="#E29578"/>
+                        </g>
+                        <text x="0" y="95" text-anchor="middle" font-family="Roboto" font-size="12" fill="#666">Alta velocidad, alta eficiencia</text>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <section id="practica" class="card">
+            <h2>2. Práctica: Simulación de Perfiles Alares</h2>
+            <p>Demostraremos físicamente que la curvatura genera sustentación al soplar aire, desafiando la intuición común.</p>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p><strong>El Material:</strong> Corta una tira de papel de unos 5 cm de ancho y 20 cm de largo.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p><strong>La Postura:</strong> Sostén la tira de papel justo debajo de tu labio inferior. Verás que el papel cuelga hacia abajo por la gravedad.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p><strong>La Magia de Bernoulli:</strong> Sopla fuerte <em>por encima</em> del papel (no por debajo). Observa cómo el papel se levanta desafiando la gravedad.</p>
+                </div>
+            </div>
+
+            <div class="svg-demonstration">
+                <svg viewBox="0 0 300 150" class="educational-svg">
+                    <path d="M50,40 Q80,40 80,70 Q80,80 60,90" fill="none" stroke="#2B2D42" stroke-width="4"/>
+                    <path d="M90,65 Q150,55 250,50" fill="none" stroke="#83C5BE" stroke-width="3" stroke-dasharray="5,5" class="wind-anim"/>
+                    <path d="M90,75 Q150,65 250,60" fill="none" stroke="#83C5BE" stroke-width="3" stroke-dasharray="5,5" class="wind-anim"/>
+                    <path d="M80,80 Q150,140 200,140" fill="none" stroke="#FFD166" stroke-width="6" id="paper-strip">
+                        <animate attributeName="d" values="M80,80 Q150,140 200,140; M80,80 Q150,70 230,65; M80,80 Q150,140 200,140" dur="3s" repeatCount="indefinite" />
+                    </path>
+                    <text x="180" y="40" font-family="Roboto" font-weight="bold" fill="#006D77" font-size="14">Baja Presión = Sustentación</text>
+                </svg>
+            </div>
+        </section>
+
+        <section id="evaluacion" class="card quiz-section">
+            <h2>3. Evaluación de Conocimientos</h2>
+            <p>Consolida tu aprendizaje arquitectónico de los fluidos.</p>
+            
+            <div id="quiz-container"></div>
+            
+            <button id="submit-btn" onclick="checkQuiz()">Calificar Sesión 2</button>
+            <div id="result-area" class="hidden"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; JMGVPTEL. sesion 2 aerogeneradores. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

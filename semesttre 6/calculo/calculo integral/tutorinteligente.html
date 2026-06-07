@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Inteligente de Cálculo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
+        .glass-panel { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+        .correct { border-color: #10b981 !important; background: rgba(16, 185, 129, 0.05); color: #10b981; }
+        .incorrect { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.05); color: #ef4444; }
+        
+        /* Animación para el modal */
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-animate { animation: fadeIn 0.2s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans min-h-screen relative">
+
+    <nav class="sticky top-0 z-40 bg-slate-900/90 border-b border-slate-800 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white tracking-tight">
+                MATH<span class="text-cyan-400">GENIUS</span> <span class="text-xs text-slate-500 font-normal ml-2">SISTEMA TUTORIAL</span>
+            </h1>
+            <div class="text-right">
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Aciertos</p>
+                <p id="scoreDisplay" class="text-2xl font-mono text-cyan-400 leading-none">0/84</p>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-950">
+                        <tr>
+                            <th class="p-5 text-cyan-500 text-xs font-black uppercase tracking-wider">ID</th>
+                            <th class="p-5 text-cyan-500 text-xs font-black uppercase tracking-wider min-w-[150px]">Integral</th>
+                            <th class="p-5 text-cyan-500 text-xs font-black uppercase tracking-wider">Categoría</th>
+                            <th class="p-5 text-cyan-500 text-xs font-black uppercase tracking-wider min-w-[250px]">Tu Respuesta</th>
+                            <th class="p-5 text-cyan-500 text-xs font-black uppercase tracking-wider text-center">Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody id="exerciseList">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="solutionModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-slate-900 border border-cyan-500/30 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar modal-animate relative">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-cyan-500/20">Solución Paso a Paso</span>
+                    <span id="modalId" class="text-slate-500 font-mono text-sm">#</span>
+                </div>
+
+                <div class="mb-8 text-center">
+                    <p class="text-slate-400 text-sm mb-2">Resolviendo la integral:</p>
+                    <div id="modalProblem" class="text-2xl md:text-3xl font-bold text-white py-2"></div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-800/50 p-4 rounded-xl border-l-4 border-purple-500">
+                        <h3 class="text-purple-400 text-xs font-bold uppercase mb-2">Fórmula / Estrategia</h3>
+                        <div id="modalFormula" class="text-lg"></div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-slate-300 text-sm font-bold uppercase mb-3 border-b border-slate-700 pb-2">Procedimiento Detallado</h3>
+                        <ul id="modalSteps" class="space-y-3 text-slate-400 text-sm list-disc pl-5">
+                            </ul>
+                    </div>
+                    
+                    <div class="mt-6 bg-slate-950 p-4 rounded-xl border border-emerald-500/30 text-center">
+                        <p class="text-emerald-500 text-xs font-bold uppercase mb-1">Resultado Final</p>
+                        <div id="modalResult" class="text-xl font-bold text-emerald-400"></div>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-lg text-xs text-blue-300">
+                        <span class="font-bold">💡 Nota Pedagógica:</span> <span id="modalExplanation"></span>
+                    </div>
+                </div>
+
+                <button onclick="closeModal()" class="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl font-bold transition-all border border-slate-700">
+                    Entendido, voy a intentarlo de nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS UNIFICADA (Ejercicios + Soluciones) ---
+        // Aquí combinamos la petición 'q', 'a', 'c' con 'steps', 'formula', etc.
+        const exercisesDB = [
+            { 
+                id: 1, 
+                q: "x^{6}dx", 
+                a: "x^7/7+c", 
+                c: "Potencia",
+                formula: "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C",
+                steps: ["Identificar n=6", "Sumar 1 al exponente: 6+1=7", "Dividir entre 7"],
+                explanation: "Regla básica de la potencia.",
+                result: "\\frac{x^7}{7} + C"
+            },
+            { 
+                id: 2, 
+                q: "5x^{4}dx", 
+                a: "x^5+c", 
+                c: "Potencia",
+                formula: "c \\int x^n dx",
+                steps: ["Sacar el 5 constante", "Integrar x^4 a x^5/5", "Simplificar 5/5 = 1"],
+                explanation: "La constante multiplicativa se simplifica con el denominador.",
+                result: "x^5 + C"
+            },
+            {
+                id: 49,
+                q: "\\frac{dt}{at+b}",
+                a: "1/a ln|at+b|+c",
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u} = \\ln|u|",
+                steps: ["u = at+b", "du = a dt", "Compensar con 1/a"],
+                explanation: "Integral que resulta en Logaritmo Natural por tener derivada en el numerador.",
+                result: "\\frac{1}{a}\\ln|at+b| + C"
+            },
+            // ... Puedes agregar aquí el resto de los 84 ejercicios siguiendo este formato
+        ];
+
+        // Rellenamos datos de prueba para que la tabla no se vea vacía en el ejemplo
+        // (En producción, aquí irían los 84 objetos reales)
+        if(exercisesDB.length < 5) {
+             exercisesDB.push({
+                id: 84,
+                q: "\\frac{\\sin^{3/4}x}{\\cos^{11/4}x}dx",
+                a: "4/7tan^{7/4}x+c",
+                c: "Trigonométrica",
+                formula: "\\int \\tan^n x \\sec^2 x dx",
+                steps: ["Separar cos(x)", "Formar tangente y secante", "Sustitución u=tan(x)"],
+                explanation: "Manipulación avanzada de exponentes.",
+                result: "\\frac{4}{7}\\tan^{7/4}x + C"
+             });
+        }
+
+        // --- RENDERIZADO DE LA TABLA ---
+        const tableBody = document.getElementById('exerciseList');
+        
+        exercisesDB.forEach(ex => {
+            const row = document.createElement('tr');
+            row.className = "border-b border-slate-800 hover:bg-slate-800/50 transition-colors group";
+            row.innerHTML = `
+                <td class="p-5 font-mono text-slate-500 text-sm opacity-50 group-hover:opacity-100 transition-opacity">${ex.id}</td>
+                <td class="p-5 text-xl font-serif">$$ \\int ${ex.q} $$</td>
+                <td class="p-5"><span class="bg-slate-800 border border-slate-700 px-2 py-1 rounded text-[10px] uppercase font-bold text-slate-400">${ex.c}</span></td>
+                <td class="p-5">
+                    <input type="text" 
+                           id="input-${ex.id}"
+                           placeholder="Respuesta..." 
+                           onchange="validate(${ex.id})"
+                           class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 font-mono text-sm outline-none focus:border-cyan-500 transition-all placeholder:text-slate-800 text-slate-300">
+                </td>
+                <td class="p-5 text-center min-w-[140px]" id="feedback-${ex.id}">
+                    <span class="text-slate-700 text-xs italic">Pendiente</span>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // --- LÓGICA DE VALIDACIÓN ---
+        function validate(id) {
+            const exercise = exercisesDB.find(e => e.id === id);
+            const inputEl = document.getElementById(`input-${id}`);
+            const feedbackEl = document.getElementById(`feedback-${id}`);
+            
+            // Normalización: quitamos espacios, pasamos a minúsculas
+            // Quitamos "+c" de ambos lados para comparar solo la función, o lo exigimos.
+            // En este caso, normalizamos para comparar texto simple.
+            let userVal = inputEl.value.toLowerCase().replace(/\s/g, '');
+            let correctVal = exercise.a.toLowerCase().replace(/\s/g, '');
+
+            // Truco: Permitimos al usuario escribir o no el "+c" para la validación
+            // Si la base de datos tiene "+c", lo quitamos para comparar la "carnita" de la función
+            const cleanUser = userVal.replace(/\+c$/, '');
+            const cleanCorrect = correctVal.replace(/\+c$/, '');
+
+            if (userVal === "") {
+                inputEl.classList.remove('correct', 'incorrect');
+                feedbackEl.innerHTML = '<span class="text-slate-700 text-xs italic">Pendiente</span>';
+                return;
+            }
+
+            if (cleanUser === cleanCorrect) {
+                // CORRECTO
+                inputEl.classList.add('correct');
+                inputEl.classList.remove('incorrect');
+                feedbackEl.innerHTML = `
+                    <div class="flex items-center justify-center gap-2 text-emerald-500 font-bold animate-pulse">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>¡Excelente!</span>
+                    </div>`;
+            } else {
+                // INCORRECTO -> INVITACIÓN A VER SOLUCIÓN
+                inputEl.classList.add('incorrect');
+                inputEl.classList.remove('correct');
+                feedbackEl.innerHTML = `
+                    <button onclick="openSolution(${id})" class="flex items-center justify-center gap-2 w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 py-1.5 px-3 rounded-lg transition-all text-xs font-bold group">
+                        <span>Incorrecto</span>
+                        <span class="group-hover:translate-x-1 transition-transform">💡 Ver Solución</span>
+                    </button>
+                `;
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            const score = document.querySelectorAll('.correct').length;
+            document.getElementById('scoreDisplay').innerText = `${score}/${exercisesDB.length}`;
+        }
+
+        // --- LÓGICA DEL MODAL (Tutoría) ---
+        function openSolution(id) {
+            const ex = exercisesDB.find(e => e.id === id);
+            
+            // Inyectar datos en el modal
+            document.getElementById('modalId').innerText = `#${ex.id}`;
+            document.getElementById('modalProblem').innerHTML = `$$ \\int ${ex.q} $$`;
+            document.getElementById('modalFormula').innerHTML = `$$ ${ex.formula} $$`;
+            document.getElementById('modalResult').innerHTML = `$$ ${ex.result} $$`;
+            document.getElementById('modalExplanation').innerText = ex.explanation;
+
+            // Inyectar pasos como lista
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            ex.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsList.appendChild(li);
+            });
+
+            // Mostrar modal
+            const modal = document.getElementById('solutionModal');
+            modal.classList.remove('hidden');
+
+            // Renderizar matemáticas de nuevo dentro del modal
+            renderMathInElement(modal, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('solutionModal').classList.add('hidden');
+        }
+
+        // Render inicial de KaTeX al cargar
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body);
+        });
+    </script>
+</body>
+</html>

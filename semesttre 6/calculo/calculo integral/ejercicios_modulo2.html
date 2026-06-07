@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Módulo 2 | Cálculo Integral</title>
+    
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modulo2-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>📐 Cálculo Integral</h1>
+                    <span class="subtitle">Ejercicios Módulo 2: Sumas de Riemann y la Integral Definida</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link">🏠 Inicio</a>
+                    <a href="modulo2_integral_definida.html" class="nav-link">📚 Módulo 2</a>
+                    <a href="#" class="nav-link active">💪 Ejercicios</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Introducción -->
+            <section class="module-intro">
+                <div class="intro-card">
+                    <h2>💪 Ejercicios Prácticos del Módulo 2</h2>
+                    <p>Practica los conceptos de sumas de Riemann, integral definida y el Teorema Fundamental del Cálculo con estos ejercicios progresivos.</p>
+                    
+                    <div class="difficulty-levels">
+                        <h3>📊 Niveles de Dificultad</h3>
+                        <div class="level-grid">
+                            <div class="level-card beginner">
+                                <h4>🟢 Básico</h4>
+                                <p>Conceptos fundamentales y cálculos directos</p>
+                            </div>
+                            <div class="level-card intermediate">
+                                <h4>🟡 Intermedio</h4>
+                                <p>Aplicación de propiedades y técnicas</p>
+                            </div>
+                            <div class="level-card advanced">
+                                <h4>🔴 Avanzado</h4>
+                                <p>Problemas complejos y aplicaciones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ejercicios de Sumas de Riemann -->
+            <section class="exercise-section">
+                <h2>📊 Sumas de Riemann</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="exercise-card beginner">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 1</h3>
+                        <span class="difficulty-badge beginner">Básico</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Calcula la suma de Riemann por la izquierda para la función $f(x) = x^2$ en el intervalo $[0, 3]$ usando $n = 6$ subintervalos.</p>
+                        
+                        <div class="exercise-solution" id="sol1" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular $\Delta x$:</strong></p>
+                                        <p>$$\Delta x = \frac{b - a}{n} = \frac{3 - 0}{6} = \frac{3}{6} = 0.5$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Determinar los puntos de la partición:</strong></p>
+                                        <p>$$x_0 = 0, \quad x_1 = 0.5, \quad x_2 = 1.0, \quad x_3 = 1.5, \quad x_4 = 2.0, \quad x_5 = 2.5, \quad x_6 = 3.0$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular la suma por la izquierda:</strong></p>
+                                        <p>$$R_{\text{izq}} = \sum_{i=1}^{6} f(x_{i-1}) \cdot \Delta x$$</p>
+                                        <p>$$= f(0) \cdot 0.5 + f(0.5) \cdot 0.5 + f(1.0) \cdot 0.5 + f(1.5) \cdot 0.5 + f(2.0) \cdot 0.5 + f(2.5) \cdot 0.5$$</p>
+                                        <p>$$= 0^2 \cdot 0.5 + 0.5^2 \cdot 0.5 + 1.0^2 \cdot 0.5 + 1.5^2 \cdot 0.5 + 2.0^2 \cdot 0.5 + 2.5^2 \cdot 0.5$$</p>
+                                        <p>$$= 0 + 0.125 + 0.5 + 1.125 + 2.0 + 3.125 = 6.875$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol1')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="exercise-card intermediate">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 2</h3>
+                        <span class="difficulty-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Calcula la suma de Riemann por el punto medio para la función $f(x) = \sin(x)$ en el intervalo $[0, \pi]$ usando $n = 4$ subintervalos.</p>
+                        
+                        <div class="exercise-solution" id="sol2" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular $\Delta x$:</strong></p>
+                                        <p>$$\Delta x = \frac{\pi - 0}{4} = \frac{\pi}{4}$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Determinar los puntos medios:</strong></p>
+                                        <p>$$x_1^* = \frac{\pi}{8}, \quad x_2^* = \frac{3\pi}{8}, \quad x_3^* = \frac{5\pi}{8}, \quad x_4^* = \frac{7\pi}{8}$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular la suma por el punto medio:</strong></p>
+                                        <p>$$R_{\text{medio}} = \frac{\pi}{4} \left[\sin\left(\frac{\pi}{8}\right) + \sin\left(\frac{3\pi}{8}\right) + \sin\left(\frac{5\pi}{8}\right) + \sin\left(\frac{7\pi}{8}\right)\right]$$</p>
+                                        <p>$$= \frac{\pi}{4} [0.383 + 0.924 + 0.924 + 0.383] = \frac{\pi}{4} \cdot 2.614 \approx 2.052$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol2')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="exercise-card advanced">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 3</h3>
+                        <span class="difficulty-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Compara las sumas de Riemann por la izquierda, derecha y punto medio para $f(x) = e^x$ en $[0, 2]$ con $n = 8$ subintervalos. ¿Cuál es la más precisa?</p>
+                        
+                        <div class="exercise-solution" id="sol3" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular $\Delta x$:</strong></p>
+                                        <p>$$\Delta x = \frac{2 - 0}{8} = \frac{2}{8} = 0.25$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Suma por la izquierda:</strong></p>
+                                        <p>$$R_{\text{izq}} = 0.25 \sum_{i=0}^{7} e^{0.25i} \approx 0.25 \cdot 12.32 = 3.08$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Suma por la derecha:</strong></p>
+                                        <p>$$R_{\text{der}} = 0.25 \sum_{i=1}^{8} e^{0.25i} \approx 0.25 \cdot 20.09 = 5.02$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Suma por el punto medio:</strong></p>
+                                        <p>$$R_{\text{medio}} = 0.25 \sum_{i=1}^{8} e^{0.25(i-0.5)} \approx 0.25 \cdot 15.76 = 3.94$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <p><strong>Valor exacto:</strong></p>
+                                        <p>$$\int_0^2 e^x \, dx = e^2 - e^0 = e^2 - 1 \approx 6.39$$</p>
+                                        <p><strong>Conclusión:</strong> La suma por el punto medio es la más precisa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol3')">Ver Solución</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ejercicios de Integral Definida -->
+            <section class="exercise-section">
+                <h2>📐 Integral Definida</h2>
+                
+                <!-- Ejercicio 4 -->
+                <div class="exercise-card beginner">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 4</h3>
+                        <span class="difficulty-badge beginner">Básico</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Evalúa la integral definida $\int_1^4 (3x^2 + 2x - 1) \, dx$ usando las propiedades de linealidad.</p>
+                        
+                        <div class="exercise-solution" id="sol4" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar propiedades de linealidad:</strong></p>
+                                        <p>$$\int_1^4 (3x^2 + 2x - 1) \, dx = 3\int_1^4 x^2 \, dx + 2\int_1^4 x \, dx - \int_1^4 1 \, dx$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Calcular cada integral:</strong></p>
+                                        <p>$$3\int_1^4 x^2 \, dx = 3\left[\frac{x^3}{3}\right]_1^4 = 3\left(\frac{64}{3} - \frac{1}{3}\right) = 3 \cdot 21 = 63$$</p>
+                                        <p>$$2\int_1^4 x \, dx = 2\left[\frac{x^2}{2}\right]_1^4 = 2\left(\frac{16}{2} - \frac{1}{2}\right) = 2 \cdot 7.5 = 15$$</p>
+                                        <p>$$-\int_1^4 1 \, dx = -[x]_1^4 = -(4 - 1) = -3$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Sumar resultados:</strong></p>
+                                        <p>$$\int_1^4 (3x^2 + 2x - 1) \, dx = 63 + 15 - 3 = 75$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol4')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 5 -->
+                <div class="exercise-card intermediate">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 5</h3>
+                        <span class="difficulty-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Demuestra que $\int_{-a}^a f(x) \, dx = 0$ si $f(x)$ es una función impar.</p>
+                        
+                        <div class="exercise-solution" id="sol5" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Usar la propiedad de aditividad:</strong></p>
+                                        <p>$$\int_{-a}^a f(x) \, dx = \int_{-a}^0 f(x) \, dx + \int_0^a f(x) \, dx$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Hacer sustitución en la primera integral:</strong></p>
+                                        <p>Sea $u = -x$, entonces $du = -dx$ y cuando $x = -a$, $u = a$; cuando $x = 0$, $u = 0$</p>
+                                        <p>$$\int_{-a}^0 f(x) \, dx = \int_a^0 f(-u)(-du) = -\int_0^a f(-u) \, du$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar la propiedad de función impar:</strong></p>
+                                        <p>Como $f(x)$ es impar, $f(-u) = -f(u)$</p>
+                                        <p>$$-\int_0^a f(-u) \, du = -\int_0^a (-f(u)) \, du = \int_0^a f(u) \, du$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Combinar resultados:</strong></p>
+                                        <p>$$\int_{-a}^a f(x) \, dx = \int_0^a f(u) \, du + \int_0^a f(x) \, dx = 2\int_0^a f(x) \, dx$$</p>
+                                        <p>Pero como $f(x)$ es impar y $f(0) = 0$, entonces $\int_0^a f(x) \, dx = -\int_{-a}^0 f(x) \, dx$</p>
+                                        <p>Por lo tanto: $\int_{-a}^a f(x) \, dx = 0$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol5')">Ver Solución</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ejercicios del Teorema Fundamental del Cálculo -->
+            <section class="exercise-section">
+                <h2>🔑 Teorema Fundamental del Cálculo</h2>
+                
+                <!-- Ejercicio 6 -->
+                <div class="exercise-card beginner">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 6</h3>
+                        <span class="difficulty-badge beginner">Básico</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Usa el Teorema Fundamental del Cálculo para evaluar $\int_0^{\pi/2} \cos(x) \, dx$.</p>
+                        
+                        <div class="exercise-solution" id="sol6" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Encontrar una antiderivada:</strong></p>
+                                        <p>Una antiderivada de $\cos(x)$ es $F(x) = \sin(x)$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar el TFC:</strong></p>
+                                        <p>$$\int_0^{\pi/2} \cos(x) \, dx = F\left(\frac{\pi}{2}\right) - F(0)$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Evaluar:</strong></p>
+                                        <p>$$= \sin\left(\frac{\pi}{2}\right) - \sin(0) = 1 - 0 = 1$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol6')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 7 -->
+                <div class="exercise-card intermediate">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 7</h3>
+                        <span class="difficulty-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Si $F(x) = \int_1^x \frac{1}{t} \, dt$ para $x > 0$, encuentra $F'(x)$ usando la primera parte del TFC.</p>
+                        
+                        <div class="exercise-solution" id="sol7" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar la primera parte del TFC:</strong></p>
+                                        <p>Si $F(x) = \int_a^x f(t) \, dt$, entonces $F'(x) = f(x)$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Identificar la función:</strong></p>
+                                        <p>En este caso, $f(t) = \frac{1}{t}$ y $a = 1$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar el teorema:</strong></p>
+                                        <p>$$F'(x) = f(x) = \frac{1}{x}$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Verificación:</strong></p>
+                                        <p>Esto significa que $F(x) = \ln(x)$ (logaritmo natural), ya que $\frac{d}{dx}[\ln(x)] = \frac{1}{x}$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol7')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 8 -->
+                <div class="exercise-card advanced">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 8</h3>
+                        <span class="difficulty-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Calcula $\frac{d}{dx}\left[\int_0^{x^2} \sin(t) \, dt\right]$ usando la primera parte del TFC y la regla de la cadena.</p>
+                        
+                        <div class="exercise-solution" id="sol8" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Definir función auxiliar:</strong></p>
+                                        <p>Sea $G(u) = \int_0^u \sin(t) \, dt$</p>
+                                        <p>Entonces $\int_0^{x^2} \sin(t) \, dt = G(x^2)$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar primera parte del TFC:</strong></p>
+                                        <p>$$G'(u) = \sin(u)$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar regla de la cadena:</strong></p>
+                                        <p>$$\frac{d}{dx}[G(x^2)] = G'(x^2) \cdot \frac{d}{dx}[x^2] = \sin(x^2) \cdot 2x$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Resultado final:</strong></p>
+                                        <p>$$\frac{d}{dx}\left[\int_0^{x^2} \sin(t) \, dt\right] = 2x\sin(x^2)$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol8')">Ver Solución</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ejercicios de Aplicaciones -->
+            <section class="exercise-section">
+                <h2>🎯 Aplicaciones</h2>
+                
+                <!-- Ejercicio 9 -->
+                <div class="exercise-card intermediate">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 9</h3>
+                        <span class="difficulty-badge intermediate">Intermedio</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Calcula el área bajo la curva $y = x^3 - 4x$ desde $x = -2$ hasta $x = 2$.</p>
+                        
+                        <div class="exercise-solution" id="sol9" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Identificar la función:</strong></p>
+                                        <p>$f(x) = x^3 - 4x$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>Encontrar antiderivada:</strong></p>
+                                        <p>$F(x) = \frac{x^4}{4} - 2x^2$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar TFC:</strong></p>
+                                        <p>$$\int_{-2}^2 (x^3 - 4x) \, dx = F(2) - F(-2)$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Evaluar:</strong></p>
+                                        <p>$F(2) = \frac{16}{4} - 2(4) = 4 - 8 = -4$</p>
+                                        <p>$F(-2) = \frac{16}{4} - 2(4) = 4 - 8 = -4$</p>
+                                        <p>$$\int_{-2}^2 (x^3 - 4x) \, dx = -4 - (-4) = 0$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <p><strong>Interpretación:</strong></p>
+                                        <p>El resultado es 0 porque la función es impar y el intervalo es simétrico. Las áreas positivas y negativas se cancelan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol9')">Ver Solución</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 10 -->
+                <div class="exercise-card advanced">
+                    <div class="exercise-header">
+                        <h3>Ejercicio 10</h3>
+                        <span class="difficulty-badge advanced">Avanzado</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p>Una partícula se mueve a lo largo de una línea recta con velocidad $v(t) = 3t^2 - 6t + 2$ m/s. Calcula el desplazamiento total de la partícula desde $t = 0$ hasta $t = 3$ segundos.</p>
+                        
+                        <div class="exercise-solution" id="sol10" style="display: none;">
+                            <h4>Solución:</h4>
+                            <div class="solution-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <p><strong>Identificar la función velocidad:</strong></p>
+                                        <p>$v(t) = 3t^2 - 6t + 2$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <p><strong>El desplazamiento es la integral de la velocidad:</strong></p>
+                                        <p>$$\text{Desplazamiento} = \int_0^3 v(t) \, dt = \int_0^3 (3t^2 - 6t + 2) \, dt$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <p><strong>Encontrar antiderivada:</strong></p>
+                                        <p>$s(t) = t^3 - 3t^2 + 2t$ (donde $s(t)$ es la posición)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <p><strong>Aplicar TFC:</strong></p>
+                                        <p>$$\int_0^3 (3t^2 - 6t + 2) \, dt = s(3) - s(0)$$</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-content">
+                                        <p><strong>Evaluar:</strong></p>
+                                        <p>$s(3) = 27 - 27 + 6 = 6$</p>
+                                        <p>$s(0) = 0 - 0 + 0 = 0$</p>
+                                        <p>$$\text{Desplazamiento} = 6 - 0 = 6 \text{ metros}$$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('sol10')">Ver Solución</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resumen y evaluación -->
+            <section class="module-summary">
+                <div class="summary-card">
+                    <h2>📋 Resumen de Ejercicios</h2>
+                    <div class="summary-content">
+                        <div class="summary-section">
+                            <h3>🎯 Conceptos Practicados</h3>
+                            <ul>
+                                <li>✅ Cálculo de sumas de Riemann (izquierda, derecha, punto medio)</li>
+                                <li>✅ Aplicación de propiedades de la integral definida</li>
+                                <li>✅ Uso del Teorema Fundamental del Cálculo</li>
+                                <li>✅ Evaluación de integrales definidas</li>
+                                <li>✅ Aplicaciones en geometría y física</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="summary-section">
+                            <h3>📊 Estadísticas</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number">10</span>
+                                    <span class="stat-label">Ejercicios Totales</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">Nivel Básico</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-label">Nivel Intermedio</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">Nivel Avanzado</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-section">
+                            <h3>📈 Próximos Pasos</h3>
+                            <p>Ahora que has dominado las sumas de Riemann y la integral definida, estás listo para aprender técnicas avanzadas de integración en el Módulo 3.</p>
+                            <a href="modulo3_tecnicas_integracion.html" class="next-module-btn">Continuar al Módulo 3 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Cálculo Integral</h4>
+                    <p>Ejercicios prácticos para el aprendizaje</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="modulo2_integral_definida.html">Módulo 2</a></li>
+                        <li><a href="#">Soluciones</a></li>
+                        <li><a href="#">Videos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>profesor@institucion.edu</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JMGV-PTEL. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Función para alternar soluciones
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            const button = solution.nextElementSibling;
+            
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+                button.textContent = 'Ocultar Solución';
+            } else {
+                solution.style.display = 'none';
+                button.textContent = 'Ver Solución';
+            }
+        }
+    </script>
+</body>
+</html>

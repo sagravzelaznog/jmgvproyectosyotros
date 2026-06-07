@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Aplicaciones de la Integral - Portal Principal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .portal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .portal-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .portal-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .portal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .portal-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .portal-card p {
+            color: var(--light-text);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .portal-card .icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .portal-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .portal-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .portal-btn.primary {
+            background: var(--success-color);
+        }
+
+        .portal-btn.primary:hover {
+            background: #219a52;
+        }
+
+        .portal-btn.secondary {
+            background: var(--warning-color);
+        }
+
+        .portal-btn.secondary:hover {
+            background: #e67e22;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .quick-access {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .quick-access h3 {
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .quick-link {
+            background: white;
+            color: var(--dark-text);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer-info {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .footer-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .footer-info p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .portal-container {
+                padding: 15px;
+            }
+            
+            .portal-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portal-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .quick-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <div class="portal-header">
+            <h1><i class="fas fa-calculator"></i> Módulo 4: Aplicaciones de la Integral</h1>
+            <p>Portal de Aprendizaje Interactivo - Cálculo Integral</p>
+        </div>
+
+        <div class="portal-grid">
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Módulo Completo</h3>
+                <p>Accede al contenido completo del Módulo 4 con todas las secciones: cálculo de áreas, volúmenes, aplicaciones en física y otras aplicaciones del cálculo integral.</p>
+                <button class="portal-btn primary" onclick="window.open('modulo4_aplicaciones.html', '_blank')">
+                    <i class="fas fa-external-link-alt"></i>
+                    Abrir Módulo
+                </button>
+            </div>
+
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3>Ejercicios Interactivos</h3>
+                <p>Practica con ejercicios paso a paso, calculadoras interactivas y problemas resueltos que te ayudarán a dominar las aplicaciones del cálculo integral.</p>
+                <button class="portal-btn" onclick="window.open('ejercicios_modulo4.html', '_blank')">
+                    <i class="fas fa-play"></i>
+                    Ir a Ejercicios
+                </button>
+            </div>
+
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Demo Interactivo</h3>
+                <p>Explora las características principales del módulo con una demostración interactiva que muestra todas las funcionalidades disponibles.</p>
+                <button class="portal-btn secondary" onclick="window.open('demo_modulo4.html', '_blank')">
+                    <i class="fas fa-eye"></i>
+                    Ver Demo
+                </button>
+            </div>
+
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Documentación</h3>
+                <p>Consulta la documentación completa del módulo, incluyendo guías de uso, características técnicas y instrucciones de personalización.</p>
+                <button class="portal-btn" onclick="window.open('README_MODULO4.md', '_blank')">
+                    <i class="fas fa-book"></i>
+                    Leer Docs
+                </button>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>
+                <i class="fas fa-chart-bar"></i> Estadísticas del Módulo
+            </h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <div class="stat-label">Secciones Principales</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <div class="stat-label">Ejercicios Interactivos</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <div class="stat-label">Ejemplos Paso a Paso</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <div class="stat-label">Calculadoras Especializadas</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Diseño Responsivo</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Posibilidades de Aprendizaje</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-access">
+            <h3><i class="fas fa-bolt"></i> Acceso Rápido</h3>
+            <p>Enlaces directos a las funcionalidades más utilizadas:</p>
+            
+            <div class="quick-links">
+                <a href="modulo4_aplicaciones.html#areas" class="quick-link">
+                    <i class="fas fa-square"></i> Cálculo de Áreas
+                </a>
+                
+                <a href="modulo4_aplicaciones.html#volumes" class="quick-link">
+                    <i class="fas fa-cube"></i> Cálculo de Volúmenes
+                </a>
+                
+                <a href="modulo4_aplicaciones.html#physics" class="quick-link">
+                    <i class="fas fa-atom"></i> Aplicaciones en Física
+                </a>
+                
+                <a href="ejercicios_modulo4.html" class="quick-link">
+                    <i class="fas fa-dumbbell"></i> Ejercicios
+                </a>
+                
+                <a href="demo_modulo4.html" class="quick-link">
+                    <i class="fas fa-play"></i> Demo
+                </a>
+            </div>
+        </div>
+
+        <div class="portal-grid">
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Para Estudiantes</h3>
+                <p>Aprende cálculo integral de manera interactiva con ejemplos prácticos, ejercicios progresivos y retroalimentación inmediata.</p>
+                <ul>
+                    <li>Ejemplos paso a paso</li>
+                    <li>Calculadoras interactivas</li>
+                    <li>Progreso personalizado</li>
+                    <li>Modo de práctica</li>
+                </ul>
+            </div>
+
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-chalkboard"></i>
+                </div>
+                <h3>Para Profesores</h3>
+                <p>Herramientas pedagógicas avanzadas para enseñar cálculo integral con materiales listos para usar en clase.</p>
+                <ul>
+                    <li>Materiales listos para clase</li>
+                    <li>Seguimiento de progreso</li>
+                    <li>Ejercicios personalizables</li>
+                    <li>Recursos multimedia</li>
+                </ul>
+            </div>
+
+            <div class="portal-card">
+                <div class="icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Para Desarrolladores</h3>
+                <p>Código bien documentado y arquitectura modular para personalizar y adaptar el módulo a diferentes necesidades.</p>
+                <ul>
+                    <li>Código abierto y documentado</li>
+                    <li>Arquitectura modular</li>
+                    <li>Fácil personalización</li>
+                    <li>APIs bien definidas</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <h3><i class="fas fa-heart"></i> Desarrollado con Pasión</h3>
+            <p>
+                Este módulo representa el compromiso con la excelencia en la educación matemática 
+                y la innovación tecnológica en el aprendizaje del cálculo integral.
+            </p>
+            
+            <div>
+                <strong>© 2025 JMGV-PTEL - Todos los derechos reservados</strong><br>
+                <em>Elaborado por: José Manuel González Vargas</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animación de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.portal-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+
+            // Animación de números
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalNumber = stat.textContent;
+                if (!isNaN(finalNumber)) {
+                    let currentNumber = 0;
+                    const increment = parseInt(finalNumber) / 50;
+                    const timer = setInterval(() => {
+                        currentNumber += increment;
+                        if (currentNumber >= parseInt(finalNumber)) {
+                            stat.textContent = finalNumber;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(currentNumber);
+                        }
+                    }, 30);
+                }
+            });
+        });
+
+        // Efecto de hover mejorado
+        document.querySelectorAll('.portal-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensamiento Variacional - AppWeb</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="dashboard">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <span class="course-badge">Semestre 5</span>
+                <h1>Pensamiento Variacional</h1>
+                <p>Explora el cambio, el movimiento y el infinito. Planeación Didáctica de 50 Sesiones.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">Sesiones</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="global-progress-text">0%</span>
+                    <span class="stat-label">Avance Global</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="b1">Bloque 1</button>
+            <button class="filter-btn" data-filter="b2">Bloque 2</button>
+            <button class="filter-btn" data-filter="b3">Bloque 3</button>
+        </div>
+
+        <section class="sessions-grid" id="sessions-container">
+            <!-- Las tarjetas se generarán dinámicamente con JavaScript -->
+        </section>
+        
+        <footer>
+            <p>copyright &copy; JMGV-PTEL-2026. curso pensamiento variacional. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+
+    <script src="js/env.js"></script>
+    <script src="js/index.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/firebase-setup.js"></script>
+</body>
+</html>

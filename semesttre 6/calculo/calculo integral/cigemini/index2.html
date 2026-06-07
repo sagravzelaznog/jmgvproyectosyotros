@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minicurso Interactivo de Cálculo Integral Básico</title>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0e1117;
+      --card: #141820;
+      --surface: #1e2430;
+      --text: #e9f0f8;
+      --muted: #aab4c6;
+      --accent: #00e5ff;      /* cian neon */
+      --accent2: #ff3bba;      /* magenta neon */
+      --green: #2ee6a6;
+      --shadow: 0 6px 18px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
+      background: linear-gradient(135deg, #0a0f14 0%, #0b0f14 60%, #0a0f14 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header.hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(20,24,40,.98), rgba(20,24,40,.7));
+      border: 1px solid rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: saturate(1.2) blur(2px);
+    }
+
+    header .title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+
+    header .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #001018;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      font-weight: 700;
+    }
+
+    /* Sections */
+    section.section {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(20,24,40,.96), rgba(20,24,40,.88));
+      border: 1px solid rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+    }
+
+    section.section h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #eaf6ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    section.section p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Concepto: tarjetas de ideas o listas */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 14px;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.08);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #d9f0ff;
+      font-weight: 700;
+    }
+
+    .card ul {
+      margin: 0; padding-left: 18px;
+      color: #cbd7e7;
+    }
+
+    /* Laboratorio: Canvas y controles */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .lab-grid { grid-template-columns: 1fr; }
+    }
+
+    #riemannCanvas {
+      width: 100%;
+      height: 420px;
+      display: block;
+      border-radius: 10px;
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .panel {
+      background: rgba(0,0,0,.25);
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      min-height: 100px;
+    }
+
+    .control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      margin-top: 8px;
+    }
+
+    .control label {
+      font-size: 13px;
+      color: #e6f3ff;
+      min-width: 120px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 6px;
+      background: #2e2f3a;
+      outline: none;
+      transition: background .3s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: 2px solid #0b0b0b;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+      transition: transform .2s ease;
+    }
+
+    input[type="range"]:hover::-webkit-slider-thumb {
+      transform: scale(1.05);
+    }
+
+    .stat {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .stat:last-child { border-bottom: none; }
+
+    .stat .label { color: #cbd6e9; font-size: 13px; }
+    .stat .value { font-weight: 700; color: #eafffb; }
+
+    .badge-soft {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(0,229,255,.15);
+      border: 1px solid rgba(0,229,255,.4);
+      color: #bdf7ff;
+    }
+
+    /* Reto: formulario y feedback */
+    .reto-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .reto-wrap { grid-template-columns: 1fr; }
+    }
+
+    #retoProblem {
+      line-height: 1.6;
+      color: #dceaff;
+      background: rgba(255,255,255,.03);
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    #retoInput {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.06);
+      color: #eaffff;
+      font-size: 16px;
+    }
+
+    #checkBtn {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      color: #001018;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 6px 14px rgba(0,0,0,.35);
+    }
+    #checkBtn:hover { transform: translateY(-1px); }
+
+    #feedback {
+      min-height: 50px;
+      display: flex; align-items: center; justify-content: flex-start;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: all .3s ease;
+    }
+
+    .success { background: rgba(46,230,166,.15); color: #d9fff0; }
+    .error   { background: rgba(255,99,132,.15); color: #ffdbe1; }
+
+    /* Confetti (simple) */
+    #confettiContainer {
+      position: relative;
+      width: 100%; height: 0; overflow: visible;
+      pointer-events: none;
+    }
+    .confetti {
+      position: absolute;
+      width: 8px; height: 14px;
+      opacity: 0.95;
+      animation: fall 2.4s linear forwards;
+      will-change: transform;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(420px) rotate(540deg); opacity: 0; }
+    }
+
+    /* Tiny utilities */
+    .center { text-align: center; }
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Cabecera / Contexto -->
+    <header class="hero" aria-label="Encabezado del curso">
+      <div class="title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-label="Icono de cálculo" role="img">
+          <path d="M5 18h14M9 6h6M3 12h18" stroke="white" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <div>
+          <h1>Minicurso Interactivo: Cálculo Integral Básico</h1>
+          <div class="badge-soft" aria-label="Nivel">Para adolescentes 15-18 años</div>
+        </div>
+      </div>
+      <div class="mini" aria-label="Indicadores rápidos" style="color:#cbd6e9;">
+        <span class="badge-soft" style="margin-right:6px;">Idea clave: área bajo la curva</span>
+      </div>
+    </header>
+
+    <!-- Concepto: Teoría digerible -->
+    <section id="concepto" class="section" aria-labelledby="concepto-titulo">
+      <h2 id="concepto-titulo">El Concepto: ¿Qué es una integral?</h2>
+      <div class="concept-grid" aria-label="Resumen conceptual">
+        <div class="card" aria-label="Analogía de acumulación">
+          <h3>Analogía 1: Distancia a partir de velocidad</h3>
+          <ul>
+            <li>La velocidad es cuánto cambia la posición por unidad de tiempo.</li>
+            <li>Si sumas cambios pequeños (pequeños intervalos), obtienes la cantidad total: la distancia recorrida.</li>
+            <li>La integral es esa suma de cambios continuos, o el área bajo una curva.</li>
+          </ul>
+        </div>
+        <div class="card" aria-label="Qué es una integral">
+          <h3>Analogía 2: Área y acumulación</h3>
+          <ul>
+            <li>Imagina medir un terreno irregular. Si lo divides en rectángulos pequeños, su área se aproxima a la real al aumentar la cantidad de rectángulos.</li>
+            <li>Con más rectángulos, la cota de error disminuye, y la suma se acerca a la integral exacta.</li>
+          </ul>
+        </div>
+        <div class="card" aria-label="Frase clave">
+          <h3>Idea central</h3>
+          <ul>
+            <li>La integral es una acumulación continua de cambios y, en muchos casos, representa un área.</li>
+            <li>No se trata solo de memorizar fórmulas, sino de entender el razonamiento: cuánto y dónde se acumulan esos cambios.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Laboratorio: Suma de Riemann (Canvas) -->
+    <section id="laboratorio" class="section" aria-labelledby="laboratorio-titulo">
+      <h2 id="laboratorio-titulo">Laboratorio: Suma de Riemann en Acción</h2>
+
+      <div class="lab-grid" aria-label="Sección interactiva de la Suma de Riemann">
+        <!-- Canvas interactivo -->
+        <div class="panel" style="display:flex; flex-direction:column;">
+          <canvas id="riemannCanvas" width="800" height="420" aria-label="Canvas de la Suma de Riemann"></canvas>
+          <div class="control" aria-label="Control deslizante de número de rectángulos">
+            <label for="nRectangles" id="nRectLabel">Nrectángulos: <strong id="nValue">20</strong></label>
+            <input type="range" id="nRectangles" min="1" max="100" value="20" />
+          </div>
+        </div>
+
+        <!-- Panel de información y resultados -->
+        <div class="panel" aria-label="Resumen de cálculos">
+          <div class="stat">
+            <span class="label">Área exacta (fina):</span>
+            <span class="value" id="areaExacto">32/3 ≈ 10.6667</span>
+          </div>
+          <div class="stat">
+            <span class="label">Área aproximada (N rectángulos):</span>
+            <span class="value" id="areaAproximada">0</span>
+          </div>
+          <div class="stat">
+            <span class="label">Error absoluto:</span>
+            <span class="value" id="errorAbsoluto">0</span>
+          </div>
+          <div class="stat" style="align-items:center;">
+            <span class="label" style="min-width:0;">Función escogida: f(x) = -0.25 x^2 + 4</span>
+            <span class="badge-soft" aria-live="polite" style="margin-left:auto;">Domain: x ∈ [0, 4]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reto: evaluación gamificada -->
+    <section id="reto" class="section" aria-labelledby="reto-titulo">
+      <h2 id="reto-titulo">Reto: ¿Cuánta agua acumula un tanque?</h2>
+
+      <div class="reto-wrap" aria-label="Reto de acumulación de agua">
+        <!-- Enunciado -->
+        <div id="retoProblem" aria-label="Problema de tanque">
+          En un tanque de agua, la tasa de llenado depende del tiempo t (minutos) como f(t) = 1 + 0.5 t litros/minuto.
+          ¿Cuánta agua habrá en el tanque después de 8 minutos? (Responde en litros)
+          <br><br>
+          Pista: la integral de f(t) desde 0 a 8 es ∫(1 + 0.5t) dt = t + 0.25 t^2 entre 0 y 8.
+        </div>
+
+        <!-- Entradas y retroalimentación -->
+        <div class="panel" aria-label="Entrada de respuesta">
+          <label for="retoAnswer" style="display:block; font-size:14px; margin-bottom:6px;">Respuesta (litros):</label>
+          <input type="number" id="retoAnswer" placeholder="Introduce tu respuesta" step="any" style="width:100%; padding:12px; border-radius:6px; border:1px solid #555; background:#0b1020; color:#fff;">
+          <button id="checkBtn" type="button" style="margin-top:12px; width:150px;">Comprobar</button>
+
+          <div id="feedback" class="center" style="margin-top:12px;">
+            <span id="feedbackText" style="font-weight:600;"></span>
+          </div>
+
+          <!-- Contenedor de confeti (se mostrará en éxito) -->
+          <div id="confettiContainer" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Script (JavaScript Vanilla) -->
+  <script>
+    // Minicurso: Implementación de la Suma de Riemann y Reto
+    // Sección Laboratorio: Suma de Riemann para f(x) = -0.25 x^2 + 4, en [0,4]
+    // N: número de rectángulos. Área aproximada = sum_i f(x_i) * dx
+    // Área exacta analítica: ∫_0^4 (-0.25 x^2 + 4) dx = [-x^3/12 + 4x]_0^4 = 32/3 ≈ 10.6667
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Elementos del DOM
+      const canvas = document.getElementById('riemannCanvas');
+      const ctx = canvas.getContext('2d');
+      const nRectanglesInput = document.getElementById('nRectangles');
+      const nValueLabel = document.getElementById('nValue');
+      const areaExactoLabel = document.getElementById('areaExacto');
+      const areaAproximadaLabel = document.getElementById('areaAproximada');
+      const errorAbsolutoLabel = document.getElementById('errorAbsoluto');
+
+      // Reto
+      const retoAnswerInput = document.getElementById('retoAnswer');
+      const checkBtn = document.getElementById('checkBtn');
+      const feedbackBox = document.getElementById('feedback');
+      const feedbackText = document.getElementById('feedbackText');
+      const confettiContainer = document.getElementById('confettiContainer');
+
+      // Parámetros de la curva y dominio
+      const a = 0;
+      const b = 4;
+      // f(x) = -0.25 x^2 + 4
+      function f(x) { return -0.25 * x * x + 4; }
+
+      // Integrales: F(x) = ∫ f(x) dx = -x^3/12 + 4x
+      function primitiveF(x) { return - (x * x * x) / 12 + 4 * x; }
+
+      function integralExact(aVal, bVal) {
+        // Evaluar F(b) - F(a)
+        return primitiveF(bVal) - primitiveF(aVal);
+      }
+
+      // Configuración de la visualización
+      // Margen y escalas para dibujar de forma clara
+      const margins = { left: 62, right: 18, top: 18, bottom: 50 };
+      let plotW, plotH;
+      let scaleX, scaleY;
+      let DPR = Math.max(1, window.devicePixelRatio || 1);
+
+      function resizeCanvas() {
+        // Resize a canvas responsivo manteniendo resolución adecuada
+        const containerW = canvas.clientWidth || 800;
+        const containerH = 420;
+
+        canvas.width = Math.floor(containerW * DPR);
+        canvas.height = Math.floor(containerH * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0); // dibujar con coordenadas CSS
+
+        plotW = containerW - margins.left - margins.right;
+        plotH = containerH - margins.top - margins.bottom;
+
+        // Scales: adaptadas a [a,b] y [0, ymax]
+        const ymax = 4.5; // un poco de holgura por arriba
+        scaleX = plotW / (b - a);
+        scaleY = plotH / ymax;
+
+        // Dibujar de nuevo
+        drawAll();
+      }
+
+      // Dibujar eje, curva y rectángulos
+      function toCanvasX(x) { return margins.left + (x - a) * scaleX; }
+      function toCanvasY(y) { return (canvas.height / DPR) - margins.bottom - y * scaleY; }
+
+      // Dibujar todo: ejes, curva y rectángulos
+      function drawAll(N = 20) {
+        // Limpia
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Fondo
+        ctx.fillStyle = '#0b1220';
+        ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
+        // Ejes
+        drawAxes();
+
+        // Curva f(x)
+        drawCurve();
+
+        // Rectángulos de Riemann (usando extremos izquierdos)
+        drawRectangles(N);
+
+        // Área exacta y actual ya calculadas fuera de este helper
+      }
+
+      function drawAxes() {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(170,190,255,.8)';
+        ctx.lineWidth = 2;
+
+        // Eje x (y=0)
+        const x0 = toCanvasX(a);
+        const y0 = toCanvasY(0);
+        // Dibujar eje x desde x=a a b en el plano base
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(a), toCanvasY(0));
+        ctx.lineTo(toCanvasX(b), toCanvasY(0));
+        ctx.stroke();
+
+        // Eje y (x=0)
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(0), toCanvasY(0));
+        ctx.lineTo(toCanvasX(0), toCanvasY(4.5));
+        ctx.stroke();
+
+        // Ticks y labels opcionales (rápido)
+        ctx.fillStyle = '#c6d6ff';
+        ctx.font = '12px Inter';
+        ctx.fillText('0', toCanvasX(0) - 8, toCanvasY(0) + 15);
+        ctx.fillText('4', toCanvasX(0) - 20, toCanvasY(4) + 6);
+
+        ctx.restore();
+      }
+
+      function drawCurve() {
+        ctx.save();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#74d3ff';
+        ctx.beginPath();
+        const steps = 500;
+        const dx = (b - a) / steps;
+        for (let i = 0; i <= steps; i++) {
+          const x = a + i * dx;
+          const y = f(x);
+          const px = toCanvasX(x);
+          const py = toCanvasY(y);
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawRectangles(N) {
+        const dx = (b - a) / N;
+        const widthPx = dx * scaleX;
+        ctx.save();
+        // Semi-transparente cyan para rectángulos
+        ctx.fillStyle = 'rgba(0, 255, 255, 0.45)';
+        for (let i = 0; i < N; i++) {
+          const xLeft = a + i * dx;
+          const height = f(xLeft);
+          const rectX = toCanvasX(xLeft);
+          const rectY = toCanvasY(height);
+          const rectH = height * scaleY;
+          ctx.fillRect(rectX, rectY, widthPx, rectH);
+        }
+        ctx.restore();
+      }
+
+      // Actualizar área exacta y aproximada en la UI
+      function updateAreasUI(N) {
+        // Área exacta de la curva f(x) en [a,b]
+        const areaExact = integralExact(a, b);
+        areaExactoLabel.textContent = areaExact.toFixed(6);
+
+        // Área aproximada con N rectángulos (left endpoints)
+        const dx = (b - a) / N;
+        let areaApprox = 0;
+        for (let i = 0; i < N; i++) {
+          const xLeft = a + i * dx;
+          areaApprox += f(xLeft) * dx;
+        }
+        areaAproximadaLabel.textContent = areaApprox.toFixed(6);
+
+        const error = Math.abs(areaExact - areaApprox);
+        errorAbsolutoLabel.textContent = error.toFixed(6);
+      }
+
+      // Inicialización
+      function initLab() {
+        // Inicializamos con N = 20
+        updateAreasUI(20);
+        drawAll(20);
+        resizeCanvas();
+      }
+
+      // Eventos
+      nRectanglesInput.addEventListener('input', () => {
+        const N = Math.max(1, Math.min(100, parseInt(nRectanglesInput.value, 10) || 1));
+        nValueLabel.textContent = N;
+        updateAreasUI(N);
+        drawAll(N);
+      });
+
+      // Resize responsive
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      initLab();
+    });
+
+    // Reto: verificación de respuesta y confeti
+    (function enableReto() {
+      // Respuesta correcta para el reto: ∫_0^8 (1 + 0.5 t) dt = [t + 0.25 t^2]_0^8 = 8 + 0.25*64 = 8 + 16 = 24
+      const correctAnswer = 24;
+      const tolerance = 0.01;
+
+      const retoAnswerInput = document.getElementById('retoAnswer');
+      const checkBtn = document.getElementById('checkBtn');
+      const feedbackBox = document.getElementById('feedback');
+      const feedbackText = document.getElementById('feedbackText');
+      const confettiContainer = document.getElementById('confettiContainer');
+
+      function showFeedback(isSuccess, message) {
+        feedbackBox.classList.remove('success', 'error');
+        if (isSuccess) feedbackBox.classList.add('success');
+        else feedbackBox.classList.add('error');
+        feedbackText.textContent = message;
+        feedbackBox.style.minHeight = '48px';
+      }
+
+      function clearConfetti() {
+        confettiContainer.innerHTML = '';
+      }
+
+      function launchConfetti() {
+        clearConfetti();
+        // Crear pequeñas piezas de confeti que caen
+        const colors = ['#FF6B6B', '#FFD93D', '#6BFFB8', '#7DF9FF', '#9B6BFF', '#FF6AFF'];
+        const count = 40;
+        const width = confettiContainer.clientWidth || window.innerWidth;
+        for (let i = 0; i < count; i++) {
+          const div = document.createElement('div');
+          div.className = 'confetti';
+          const size = Math.random() * 6 + 6;
+          div.style.width = size + 'px';
+          div.style.height = (size * 1.3) + 'px';
+          div.style.left = Math.random() * (width - 20) + 'px';
+          div.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          // Aleatorizar duración y rotación
+          div.style.animationDuration = (Math.random() * 1.5 + 1.6) + 's';
+          div.style.opacity = '1';
+          confettiContainer.appendChild(div);
+          // Remover después de la animación
+          div.addEventListener('animationend', () => div.remove());
+        }
+      }
+
+      checkBtn.addEventListener('click', () => {
+        const userValue = parseFloat(retoAnswerInput.value);
+        if (isNaN(userValue)) {
+          showFeedback(false, 'Por favor, introduce un número.');
+          return;
+        }
+
+        const diff = Math.abs(userValue - correctAnswer);
+        if (diff <= tolerance) {
+          showFeedback(true, '¡Correcto! La cantidad de agua es 24 litros.');
+          launchConfetti();
+        } else {
+          showFeedback(false, `Incorrecto. Intenta de nuevo. Pista: integra f(t) = 1 + 0.5 t desde 0 a 8.`);
+          // Opción: recomputar una guía visual
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

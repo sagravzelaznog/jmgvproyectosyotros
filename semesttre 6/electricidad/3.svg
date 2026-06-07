@@ -1,0 +1,13 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect x="190" y="150" width="20" height="150" fill="#E29578" /> <rect x="190" y="130" width="20" height="20" fill="#ccc" /> <path d="M190 130 Q 200 110 210 130" fill="#E63946" /> <line x1="100" y1="100" x2="300" y2="100" stroke="#006D77" stroke-width="5" />
+  <line x1="200" y1="0" x2="200" y2="200" stroke="#006D77" stroke-width="5" />
+
+  <path d="M100 100 L60 80 L60 120 Z" fill="#FFD166" stroke="#000"/> 
+  <path d="M300 100 L340 120 L340 80 Z" fill="#FFD166" stroke="#000"/>
+  <path d="M200 0 L180 -40 L220 -40 Z" fill="#FFD166" stroke="#000"/>
+  <path d="M200 200 L220 240 L180 240 Z" fill="#FFD166" stroke="#000"/>
+
+  <circle cx="200" cy="100" r="5" fill="#333" />
+  
+  <text x="20" y="280" font-family="Montserrat" font-size="12">Asegurar orientación cíclica de los vasos</text>
+</svg>

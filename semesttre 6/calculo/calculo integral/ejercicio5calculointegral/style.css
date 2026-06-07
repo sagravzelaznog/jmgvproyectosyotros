@@ -1,0 +1,225 @@
+/* --- VARIABLES GENIO DE COLOR --- */
+:root {
+	--bg-page: #F8FAFC;
+	--bg-card: #FFFFFF;
+	--text-main: #1A202C;
+	--text-muted: #718096;
+	--primary-math: #2C5282; /* Azul Oxford */
+	--accent-dv: #E53E3E;    /* Rojo Diferencial */
+	--accent-v: #2F855A;     /* Verde Variable */
+	--quiz-purple: #6B46C1;  /* Kahoot Purple */
+	--teacher-bg: #FFFAF0;  /* Beige sutil */
+	--teacher-text: #B7791F; /* Oro mate */
+	--border-color: #E2E8F0;
+}
+
+/* --- ESTILOS BASE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: var(--bg-page);
+	color: var(--text-main);
+	line-height: 1.6;
+	padding-bottom: 50px;
+}
+
+.container {
+	width: 90%;
+	max-width: 1000px;
+	margin: 20px auto;
+}
+
+h1, h2, h3 { color: var(--primary-math); margin-bottom: 15px; }
+
+/* --- HEADER & BRANDING --- */
+header {
+	text-align: center;
+	padding: 30px 0;
+	border-bottom: 3px solid var(--primary-math);
+	margin-bottom: 20px;
+}
+
+.branding {
+	font-size: 0.8rem;
+	color: var(--text-muted);
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.subtitle { color: var(--text-muted); }
+
+/* --- CARDS --- */
+.card {
+	background-color: var(--bg-card);
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+	margin-bottom: 25px;
+	border: 1px solid var(--border-color);
+}
+
+/* --- MATH BOXES --- */
+.formula-box h2 { text-align: center; }
+.math-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 15px;
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+/* Color Genius para Fórmulas */
+.mjx-mrow, .mjx-n, .mjx-mi { color: var(--primary-math); }
+.mjx-mi[mathvariant="italic"] { color: var(--accent-v) !important; } /* Variable v */
+.mjx-mi[mathvariant="italic"] + .mjx-mi[mathvariant="italic"] { color: var(--accent-dv) !important; } /* dv */
+
+/* --- SOLUCIONES (Responsivo) --- */
+.solution-item {
+	border-bottom: 1px solid var(--border-color);
+	padding: 20px 0;
+}
+.solution-item:last-child { border-bottom: none; }
+.exercise-text { font-size: 1.3rem; margin-bottom: 15px; font-weight: bold; }
+
+.steps-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 0.95rem;
+}
+
+.step {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.step-number {
+	background-color: var(--primary-math);
+	color: white;
+	font-size: 0.8rem;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 3px;
+	flex-shrink: 0;
+}
+
+/* --- IMPRESIÓN PDF --- */
+.only-print { display: none; }
+
+.btn-print {
+	background-color: var(--text-muted);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: 0.3s;
+}
+.btn-print:hover { background-color: var(--text-main); }
+
+@media print {
+	.no-print, .branding, header, .print-container, .quiz-box { display: none !important; }
+	.container { width: 100%; max-width: 100%; margin: 0; padding: 0; box-shadow: none; border: none;}
+	.solution-item { page-break-inside: avoid; border: none;}
+	.only-print { display: block; }
+	body { background-color: white; color: black; font-size: 10pt; }
+	.step-number { border: 1px solid black; color: black; background: none;}
+}
+
+/* --- RESPONSIVE CELLPHONES --- */
+@media (max-width: 600px) {
+	.container { width: 95%; padding: 10px; }
+	h1 { font-size: 1.5rem; }
+	.math-grid { grid-template-columns: 1fr; font-size: 1rem; }
+	.solution-item { padding: 15px 5px; }
+	.exercise-text { font-size: 1.1rem; }
+}
+
+/* --- FOOTER --- */
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--text-main);
+	color: var(--text-muted);
+	text-align: center;
+	padding: 10px;
+	font-size: 0.75rem;
+	z-index: 100;
+}
+
+/* --- QUIZ & MAESTRO (js) --- */
+.quiz-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 2px solid var(--quiz-purple);
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+}
+.quiz-header h2 { color: var(--quiz-purple); }
+
+.btn-teacher {
+	background: none;
+	border: 2px solid var(--text-muted);
+	color: var(--text-muted);
+	padding: 5px 10px;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 0.8rem;
+	transition: 0.3s;
+}
+.btn-teacher.unlocked {
+	background-color: var(--teacher-text);
+	color: white;
+	border-color: var(--teacher-text);
+}
+
+.teacher-note {
+	display: none;
+	background-color: var(--teacher-bg);
+	color: var(--teacher-text);
+	padding: 15px;
+	border-radius: 8px;
+	margin-top: 15px;
+	border: 1px dashed var(--teacher-text);
+}
+.teacher-note.visible { display: block; }
+
+.quiz-question { margin-bottom: 20px; }
+.options-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+.btn-option {
+	background-color: #EDF2F7;
+	border: 2px solid var(--border-color);
+	padding: 15px;
+	border-radius: 8px;
+	cursor: pointer;
+	text-align: left;
+	font-weight: bold;
+	transition: 0.2s;
+}
+.btn-option:hover { background-color: #E2E8F0; }
+.btn-option.selected { border-color: var(--quiz-purple); background-color: #FAF5FF;}
+.btn-submit {
+	margin-top: 15px;
+	background-color: var(--quiz-purple);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
+	display: none; /* Aparece cuando se selecciona opcion */
+}

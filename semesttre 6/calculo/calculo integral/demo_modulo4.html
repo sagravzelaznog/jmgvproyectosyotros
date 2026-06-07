@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Módulo 4: Aplicaciones de la Integral</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="demo-header">
+            <h1 class="card-title"><i class="fas fa-rocket"></i> Demo del Módulo 4</h1>
+            <p class="card-subtitle">Aplicaciones de la Integral - Experiencia de Aprendizaje Interactiva</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="card-title"><i class="fas fa-star"></i> Características Destacadas</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-calculator"></i> Calculadoras Interactivas</h3>
+                    <p>Calculadoras en tiempo real para áreas, volúmenes, trabajo mecánico y longitud de arco con resultados instantáneos y precisos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Ejemplos Paso a Paso</h3>
+                    <p>Soluciones detalladas con explicaciones matemáticas completas, desde el planteamiento hasta la interpretación del resultado.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-eye"></i> Visualizaciones Matemáticas</h3>
+                    <p>Representaciones gráficas interactivas que facilitan la comprensión de conceptos abstractos del cálculo integral.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-mobile-alt"></i> Diseño Responsivo</h3>
+                    <p>Experiencia optimizada para todos los dispositivos: computadoras, tablets y smartphones con navegación intuitiva.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-gamepad"></i> Gamificación</h3>
+                    <p>Sistema de progreso, ejercicios interactivos y retroalimentación inmediata que motiva el aprendizaje continuo.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="card-title"><i class="fas fa-universal-access"></i> Accesibilidad</h3>
+                    <p>Diseño accesible con soporte para lectores de pantalla, modo oscuro y navegación por teclado.</p>
+                </div>
+            </div>
+        <div class="demo-section">
+            <h2 class="card-title"><i class="fas fa-chart-bar"></i> Estadísticas del Módulo</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Ejercicios Interactivos</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Ejemplos Paso a Paso</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Calculadoras Especializadas</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Secciones Principales</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Responsive Design</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Posibilidades de Aprendizaje</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="card-title"><i class="fas fa-play-circle"></i> Demostración en Vivo</h2>
+
+            <div class="highlight-box">
+                <h4 class="card-title"><i class="fas fa-lightbulb"></i> ¿Qué puedes hacer en el Módulo 4?</h4>
+                <ul>
+                    <li><strong>Calcular áreas:</strong> Bajo curvas y entre curvas con visualizaciones interactivas</li>
+                    <li><strong>Determinar volúmenes:</strong> Usando métodos de discos, arandelas y cascarones</li>
+                    <li><strong>Resolver problemas físicos:</strong> Trabajo mecánico, centros de masa y fuerzas hidrostáticas</li>
+                    <li><strong>Explorar aplicaciones:</strong> Longitud de arco, superficie de revolución y economía</li>
+                    <li><strong>Practicar con ejercicios:</strong> Progresión de dificultad con soluciones detalladas</li>
+                </ul>
+            </div>
+
+            <div class="demo-buttons">
+                <button class="demo-btn primary" onclick="window.open('modulo4_aplicaciones.html', '_blank')">
+                    <i class="fas fa-external-link-alt"></i>
+                    Abrir Módulo Completo
+                </button>
+
+                <button class="demo-btn" onclick="window.open('ejercicios_modulo4.html', '_blank')">
+                    <i class="fas fa-dumbbell"></i>
+                    Ir a Ejercicios
+                </button>
+
+                <button class="demo-btn" onclick="showQuickDemo()">
+                    <i class="fas fa-play"></i>
+                    Demo Rápido
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-cogs"></i> Tecnologías Utilizadas</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fab fa-html5"></i> HTML5</h3>
+                    <p>Estructura semántica moderna con elementos accesibles y optimizados para SEO.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fab fa-css3-alt"></i> CSS3</h3>
+                    <p>Diseño responsivo con gradientes, animaciones y efectos visuales avanzados.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fab fa-js-square"></i> JavaScript ES6+</h3>
+                    <p>Funcionalidad interactiva moderna con clases, módulos y APIs del navegador.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-square-root-alt"></i> MathJax</h3>
+                    <p>Renderización profesional de fórmulas matemáticas con soporte completo para LaTeX.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-users"></i> Para Diferentes Usuarios</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Estudiantes</h3>
+                    <p>Aprendizaje interactivo con ejemplos prácticos, ejercicios progresivos y retroalimentación inmediata.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-chalkboard"></i> Profesores</h3>
+                    <p>Herramientas pedagógicas avanzadas, seguimiento de progreso y materiales listos para usar en clase.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3><i class="fas fa-laptop-code"></i> Desarrolladores</h3>
+                    <p>Código bien documentado, arquitectura modular y fácil personalización para adaptar a diferentes necesidades.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-road"></i> Próximas Características</h2>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-rocket"></i> Versión 2.0 en Desarrollo</h4>
+                <ul>
+                    <li><strong>Integración con GeoGebra:</strong> Visualizaciones matemáticas interactivas</li>
+                    <li><strong>Realidad Aumentada:</strong> Visualización 3D de sólidos de revolución</li>
+                    <li><strong>Inteligencia Artificial:</strong> Tutor personalizado que adapta el contenido</li>
+                    <li><strong>Modo Offline:</strong> Funcionalidad completa sin conexión a internet</li>
+                    <li><strong>Progressive Web App:</strong> Instalación como aplicación nativa</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2><i class="fas fa-download"></i> Cómo Empezar</h2>
+            
+            <div class="demo-buttons">
+                <button class="demo-btn primary" onclick="window.open('README_MODULO4.md', '_blank')">
+                    <i class="fas fa-book"></i>
+                    Leer Documentación
+                </button>
+                
+                <button class="demo-btn" onclick="downloadModule()">
+                    <i class="fas fa-download"></i>
+                    Descargar Módulo
+                </button>
+                
+                <button class="demo-btn" onclick="contactSupport()">
+                    <i class="fas fa-envelope"></i>
+                    Contactar Soporte
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="card-title"><i class="fas fa-heart"></i> Desarrollado con Pasión</h2>
+
+            <p class="text-center demo-description">
+                Este módulo representa el compromiso con la excelencia en la educación matemática
+                y la innovación tecnológica en el aprendizaje del cálculo integral.
+            </p>
+
+            <div class="text-center demo-footer">
+                <strong>© 2025 JMGV-PTEL - Todos los derechos reservados</strong><br>
+                <em>Elaborado por: José Manuel González Vargas</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showQuickDemo() {
+            alert('¡Demo rápido! En el módulo completo podrás:\n\n' +
+                  '• Calcular áreas bajo curvas interactivamente\n' +
+                  '• Visualizar volúmenes de sólidos de revolución\n' +
+                  '• Resolver problemas de física paso a paso\n' +
+                  '• Practicar con ejercicios progresivos\n' +
+                  '• Usar calculadoras especializadas\n\n' +
+                  '¡Abre el módulo completo para experimentar todas las funcionalidades!');
+        }
+
+        function downloadModule() {
+            alert('Para descargar el módulo completo:\n\n' +
+                  '1. Haz clic derecho en el archivo modulo4_aplicaciones.html\n' +
+                  '2. Selecciona "Guardar como..."\n' +
+                  '3. Descarga todos los archivos del módulo\n' +
+                  '4. ¡Disfruta aprendiendo cálculo integral!');
+        }
+
+        function contactSupport() {
+            alert('Información de contacto:\n\n' +
+                  '📧 Email: jmgv@ptel.edu\n' +
+                  '🌐 Web: https://jmgv-ptel.edu\n' +
+                  '📱 Tel: +52 (XXX) XXX-XXXX\n\n' +
+                  '¡Estamos aquí para ayudarte con cualquier pregunta!');
+        }
+
+        // Animación de entrada mejorada
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card, .stat-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Animación de botones
+            const buttons = document.querySelectorAll('.demo-btn');
+            buttons.forEach((btn, index) => {
+                btn.style.opacity = '0';
+                btn.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    btn.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    btn.style.opacity = '1';
+                    btn.style.transform = 'translateY(0)';
+                }, 800 + (index * 150));
+            });
+        });
+
+        // Efectos de hover mejorados
+        document.querySelectorAll('.demo-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

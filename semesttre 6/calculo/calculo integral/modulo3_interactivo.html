@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Técnicas de Integración - Cálculo Integral</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <!-- Navigation Script -->
+    <script src="navigation.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .nav-tab:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            text-align: center;
+        }
+
+        .subsection {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .subsection h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .example-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .example-title {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            margin: -20px -20px 15px -20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+        }
+
+        .step {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .step-number {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .formula {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #2196f3;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-basic {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .calculator-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .calculator-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .calculator-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .calculator-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-box {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .tips-box h4 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Módulo 3: Técnicas de Integración</h1>
+            <p>Domina las técnicas avanzadas de integración con ejemplos paso a paso</p>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('sustitucion')">🔄 Sustitución</div>
+            <div class="nav-tab" onclick="showSection('trigonometricas')">📐 Trigonométricas</div>
+            <div class="nav-tab" onclick="showSection('partes')">🔧 Por Partes</div>
+            <div class="nav-tab" onclick="showSection('especiales')">⭐ Especiales</div>
+            <div class="nav-tab" onclick="showSection('calculadora')">🧮 Calculadora</div>
+        </div>
+
+        <!-- Sección de Integración por Sustitución -->
+        <div id="sustitucion" class="content-section active">
+            <h2 class="section-title">🔄 Integración por Sustitución</h2>
+            
+            <div class="subsection">
+                <h3>📖 Concepto Fundamental</h3>
+                <p>La integración por sustitución es el equivalente de la regla de la cadena para la integración. Si tenemos:</p>
+                <div class="formula">
+                    $$\int f(g(x)) \cdot g'(x) \, dx$$
+                </div>
+                <p>Hacemos la sustitución $u = g(x)$, entonces $du = g'(x) \, dx$, y la integral se convierte en:</p>
+                <div class="formula">
+                    $$\int f(u) \, du$$
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>🎯 Patrones de Reconocimiento</h3>
+                <div class="tips-box">
+                    <h4>💡 Tipos de Patrones:</h4>
+                    <ul>
+                        <li><strong>Patrón 1:</strong> Derivada interna presente</li>
+                        <li><strong>Patrón 2:</strong> Función compuesta simple</li>
+                        <li><strong>Patrón 3:</strong> Potencias de funciones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">Ejemplo 1: Sustitución Básica</div>
+                <p><strong>Problema:</strong> $\int (2x + 3)^4 \cdot 2 \, dx$</p>
+                
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar la función interna
+                    <br>Función interna: $g(x) = 2x + 3$, Derivada: $g'(x) = 2$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Hacer la sustitución
+                    <br>Sea $u = 2x + 3$, entonces $du = 2 \, dx$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Reescribir la integral
+                    <br>$\int (2x + 3)^4 \cdot 2 \, dx = \int u^4 \, du$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Integrar
+                    <br>$\int u^4 \, du = \frac{u^5}{5} + C$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 5:</span> Sustituir de vuelta
+                    <br>$\frac{u^5}{5} + C = \frac{(2x + 3)^5}{5} + C$
+                </div>
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 1</h4>
+                    <p>$\int (3x + 2)^5 \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 2</h4>
+                    <p>$\int \cos(2x) \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-intermediate">Intermedio</div>
+                    <h4>Ejercicio 3</h4>
+                    <p>$\int x^2(x^3 + 1)^4 \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-advanced">Avanzado</div>
+                    <h4>Ejercicio 4</h4>
+                    <p>$\int \frac{x^3}{\sqrt{x^4 + 9}} \, dx$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Funciones Trigonométricas -->
+        <div id="trigonometricas" class="content-section">
+            <h2 class="section-title">📐 Integración de Funciones Trigonométricas</h2>
+            
+            <div class="subsection">
+                <h3>📖 Identidades Esenciales</h3>
+                <div class="formula">
+                    <strong>Pitagóricas:</strong><br>
+                    $\sin^2(x) + \cos^2(x) = 1$<br>
+                    $\tan^2(x) + 1 = \sec^2(x)$<br>
+                    $\cot^2(x) + 1 = \csc^2(x)$
+                </div>
+                <div class="formula">
+                    <strong>De Potencia:</strong><br>
+                    $\sin^2(x) = \frac{1 - \cos(2x)}{2}$<br>
+                    $\cos^2(x) = \frac{1 + \cos(2x)}{2}$
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">Ejemplo: Potencias Impares</div>
+                <p><strong>Problema:</strong> $\int \sin^3(x) \, dx$</p>
+                
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Separar una potencia impar
+                    <br>$\sin^3(x) = \sin^2(x) \cdot \sin(x)$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Usar identidad pitagórica
+                    <br>$\sin^2(x) = 1 - \cos^2(x)$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Sustituir y hacer cambio de variable
+                    <br>$\int (1 - \cos^2(x)) \sin(x) \, dx$ con $u = \cos(x)$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Resultado final
+                    <br>$-\cos(x) + \frac{\cos^3(x)}{3} + C$
+                </div>
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 1</h4>
+                    <p>$\int \sin^2(x) \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 2</h4>
+                    <p>$\int \cos^2(x) \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-intermediate">Intermedio</div>
+                    <h4>Ejercicio 3</h4>
+                    <p>$\int \sin^3(x) \cos^2(x) \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-advanced">Avanzado</div>
+                    <h4>Ejercicio 4</h4>
+                    <p>$\int \sin^4(x) \, dx$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Integración por Partes -->
+        <div id="partes" class="content-section">
+            <h2 class="section-title">🔧 Integración por Partes</h2>
+            
+            <div class="subsection">
+                <h3>📖 Fórmula Fundamental</h3>
+                <div class="formula">
+                    $$\int u \, dv = uv - \int v \, du$$
+                </div>
+                <p>Esta fórmula se deriva de la regla del producto para derivadas.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>🎯 Método ILATE</h3>
+                <div class="tips-box">
+                    <h4>💡 Cómo elegir u y dv:</h4>
+                    <ul>
+                        <li><strong>I</strong> = Inversas (arcsin, arccos, arctan)</li>
+                        <li><strong>L</strong> = Logarítmicas (ln, log)</li>
+                        <li><strong>A</strong> = Algebraicas (polinomios)</li>
+                        <li><strong>T</strong> = Trigonométricas (sin, cos, tan)</li>
+                        <li><strong>E</strong> = Exponenciales (e^x, a^x)</li>
+                    </ul>
+                    <p><strong>Regla:</strong> La función que aparece primero en ILATE debe ser u.</p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">Ejemplo: Producto de Polinomio y Exponencial</div>
+                <p><strong>Problema:</strong> $\int x e^x \, dx$</p>
+                
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar u y dv usando ILATE
+                    <br>Algebraica: $x$ (A), Exponencial: $e^x$ (E) → $u = x$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Definir u y dv
+                    <br>$u = x$ → $du = dx$<br>
+                    $dv = e^x \, dx$ → $v = e^x$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Aplicar la fórmula
+                    <br>$\int x e^x \, dx = x \cdot e^x - \int e^x \, dx$
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Resultado final
+                    <br>$x e^x - e^x + C = e^x(x - 1) + C$
+                </div>
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 1</h4>
+                    <p>$\int x e^x \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 2</h4>
+                    <p>$\int x \sin(x) \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-intermediate">Intermedio</div>
+                    <h4>Ejercicio 3</h4>
+                    <p>$\int x^2 e^x \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-advanced">Avanzado</div>
+                    <h4>Ejercicio 4</h4>
+                    <p>$\int e^x \sin(x) \, dx$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Métodos Especiales -->
+        <div id="especiales" class="content-section">
+            <h2 class="section-title">⭐ Métodos Especiales de Integración</h2>
+            
+            <div class="subsection">
+                <h3>🔢 Fracciones Parciales</h3>
+                <p>Descomponer funciones racionales complejas en fracciones más simples.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Ejemplo: Factores Lineales</div>
+                    <p><strong>Problema:</strong> $\int \frac{x + 1}{(x - 1)(x + 2)} \, dx$</p>
+                    
+                    <div class="step">
+                        <span class="step-number">Paso 1:</span> Descomponer en fracciones parciales
+                        <br>$\frac{x + 1}{(x - 1)(x + 2)} = \frac{A}{x - 1} + \frac{B}{x + 2}$
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">Paso 2:</span> Resolver para A y B
+                        <br>$A = \frac{2}{3}$, $B = \frac{1}{3}$
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">Paso 3:</span> Resultado final
+                        <br>$\frac{2}{3} \ln|x - 1| + \frac{1}{3} \ln|x + 2| + C$
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>🔺 Sustituciones Trigonométricas</h3>
+                <div class="tips-box">
+                    <h4>💡 Casos de Sustitución:</h4>
+                    <ul>
+                        <li>$\sqrt{a^2 - x^2}$ → $x = a\sin(\theta)$</li>
+                        <li>$\sqrt{a^2 + x^2}$ → $x = a\tan(\theta)$</li>
+                        <li>$\sqrt{x^2 - a^2}$ → $x = a\sec(\theta)$</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-basic">Básico</div>
+                    <h4>Ejercicio 1</h4>
+                    <p>$\int \frac{1}{(x - 1)(x + 1)} \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-intermediate">Intermedio</div>
+                    <h4>Ejercicio 2</h4>
+                    <p>$\int \frac{1}{\sqrt{16 - x^2}} \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-intermediate">Intermedio</div>
+                    <h4>Ejercicio 3</h4>
+                    <p>$\int \frac{1}{\sqrt{x^2 + 9}} \, dx$</p>
+                </div>
+                <div class="exercise-card">
+                    <div class="difficulty-badge difficulty-advanced">Avanzado</div>
+                    <h4>Ejercicio 4</h4>
+                    <p>$\int \frac{x^2}{\sqrt{4 - x^2}} \, dx$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Calculadora -->
+        <div id="calculadora" class="content-section">
+            <h2 class="section-title">🧮 Calculadora de Integrales</h2>
+            
+            <div class="calculator-section">
+                <h3>Calculadora Interactiva</h3>
+                <p>Ingresa una función para calcular su integral (usa sintaxis matemática estándar)</p>
+                
+                <input type="text" id="integralInput" class="calculator-input" placeholder="Ejemplo: x^2 + 3*x + 1">
+                
+                <div>
+                    <button class="calculator-button" onclick="calculateIntegral()">Calcular Integral</button>
+                    <button class="calculator-button" onclick="clearCalculator()">Limpiar</button>
+                </div>
+                
+                <div id="resultBox" class="result-box">
+                    <h4>Resultado:</h4>
+                    <div id="integralResult"></div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>💡 Ejemplos de Sintaxis:</h4>
+                <ul>
+                    <li><strong>Polinomios:</strong> x^2 + 3*x + 1</li>
+                    <li><strong>Trigonométricas:</strong> sin(x), cos(x), tan(x)</li>
+                    <li><strong>Exponenciales:</strong> exp(x), e^x</li>
+                    <li><strong>Logarítmicas:</strong> log(x), ln(x)</li>
+                    <li><strong>Raíces:</strong> sqrt(x), x^(1/2)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Barra de Progreso -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p style="text-align: center; color: #6c757d;">Progreso del Módulo: <span id="progressText">0%</span></p>
+
+        <div class="footer">
+            <p>🎓 Módulo 3: Técnicas de Integración - Cálculo Integral</p>
+            <p>Desarrollado con ❤️ para el aprendizaje efectivo de matemáticas</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'sustitucion';
+        let progress = 0;
+
+        function showSection(sectionName) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remover clase active de todas las pestañas
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Activar la pestaña correspondiente
+            event.target.classList.add('active');
+            
+            currentSection = sectionName;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const sections = ['sustitucion', 'trigonometricas', 'partes', 'especiales', 'calculadora'];
+            const currentIndex = sections.indexOf(currentSection);
+            progress = ((currentIndex + 1) / sections.length) * 100;
+            
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+        }
+
+        function calculateIntegral() {
+            const input = document.getElementById('integralInput').value;
+            const resultBox = document.getElementById('resultBox');
+            const resultDiv = document.getElementById('integralResult');
+            
+            if (!input.trim()) {
+                alert('Por favor ingresa una función para integrar');
+                return;
+            }
+            
+            // Simulación de cálculo (en una implementación real usarías una librería como math.js)
+            try {
+                // Aquí iría la lógica real de cálculo de integrales
+                const result = simulateIntegralCalculation(input);
+                resultDiv.innerHTML = `
+                    <div class="formula">
+                        <strong>Integral de:</strong> ${input}<br>
+                        <strong>Resultado:</strong> ${result}
+                    </div>
+                `;
+                resultBox.style.display = 'block';
+            } catch (error) {
+                resultDiv.innerHTML = '<p style="color: red;">Error en el cálculo. Verifica la sintaxis.</p>';
+                resultBox.style.display = 'block';
+            }
+        }
+
+        function simulateIntegralCalculation(func) {
+            // Simulación básica para demostración
+            const patterns = {
+                'x^2': 'x^3/3 + C',
+                'x': 'x^2/2 + C',
+                'sin(x)': '-cos(x) + C',
+                'cos(x)': 'sin(x) + C',
+                'exp(x)': 'exp(x) + C',
+                '1/x': 'ln|x| + C'
+            };
+            
+            for (const [pattern, result] of Object.entries(patterns)) {
+                if (func.includes(pattern)) {
+                    return result;
+                }
+            }
+            
+            return 'Integral no reconocida. Intenta con funciones más simples.';
+        }
+
+        function clearCalculator() {
+            document.getElementById('integralInput').value = '';
+            document.getElementById('resultBox').style.display = 'none';
+        }
+
+        // Inicializar MathJax cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // Actualizar MathJax cuando cambie de sección
+        function showSection(sectionName) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remover clase active de todas las pestañas
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Activar la pestaña correspondiente
+            event.target.classList.add('active');
+            
+            currentSection = sectionName;
+            updateProgress();
+            
+            // Actualizar MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+    </script>
+</body>
+</html>

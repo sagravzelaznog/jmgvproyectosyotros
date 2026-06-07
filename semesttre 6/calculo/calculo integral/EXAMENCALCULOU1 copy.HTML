@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen: Cálculo Integral</title>
+    <style>
+        /* Variables de color estilo gamificación, orientadas a abstracción matemática */
+        :root {
+            --primary-bg: #f4f6f9;
+            --header-bg: #4a148c; /* Púrpura profundo: análisis lógico y concentración */
+            --text-main: #333333;
+            --text-light: #ffffff;
+            --q-bg: #ffffff;
+            --opt-a: #e21b3c; /* Rojo */
+            --opt-b: #1368ce; /* Azul */
+            --opt-c: #d89e00; /* Amarillo */
+            --opt-d: #26890c; /* Verde */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--text-light);
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Campos de identificación interactivos web */
+        .student-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-group {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-group label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .info-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--text-light);
+            color: var(--text-light);
+            font-size: 1.1rem;
+            padding: 5px;
+            outline: none;
+        }
+
+        .question-card {
+            background-color: var(--q-bg);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--header-bg);
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .option-label:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+
+        .opt-0 { background-color: var(--opt-a); }
+        .opt-1 { background-color: var(--opt-b); }
+        .opt-2 { background-color: var(--opt-c); }
+        .opt-3 { background-color: var(--opt-d); }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background-color: var(--header-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover { background-color: #310c5e; }
+
+        #result-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* =========================================================
+           CONFIGURACIÓN ULTRA-COMPRIMIDA PARA IMPRESIÓN (MAX 2 HOJAS)
+           ========================================================= */
+        @media print {
+            @page { 
+                size: letter; 
+                margin: 1cm; /* Margen drásticamente reducido */
+            }
+            body { 
+                background-color: white; 
+                color: black; 
+                font-size: 10pt; /* Tamaño óptimo para legibilidad y compresión */
+                line-height: 1.1; 
+            }
+            .container { width: 100%; max-width: none; padding: 0; }
+            
+            /* Encabezado limpio y minimalista */
+            header { 
+                background-color: white !important; 
+                color: black !important; 
+                box-shadow: none; 
+                border-bottom: none; 
+                border-radius: 0; 
+                padding: 0; 
+                margin-bottom: 10px; 
+                text-align: left;
+            }
+            h1 { font-size: 14pt; margin-bottom: 10px; border-bottom: 2px solid black; padding-bottom: 5px; }
+            
+            /* Campos de identificación sin bordes innecesarios */
+            .student-info { background: none; padding: 0; gap: 10px; margin-bottom: 10px; flex-wrap: nowrap;}
+            .info-group label { color: black; font-size: 10pt; font-weight: normal;}
+            .info-group input { border: none; border-bottom: 1px solid black; color: black; font-size: 10pt; padding: 0; }
+            
+            /* Eliminación de bordes y sombras en las preguntas */
+            .question-card { 
+                box-shadow: none; 
+                border: none; /* Borde eliminado */
+                border-bottom: 1px dashed #ccc; /* Solo un separador sutil */
+                border-left: none; 
+                padding: 5px 0; /* Padding vertical mínimo */
+                margin-bottom: 5px; 
+                page-break-inside: avoid; 
+                break-inside: avoid; 
+            }
+            
+            .question-text { font-size: 10pt; margin-bottom: 4px; font-weight: bold; }
+            
+            /* Opciones compactas sin colores de fondo */
+            .options-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+            .option-label { 
+                background-color: transparent !important; 
+                color: black !important; 
+                border: none; /* Borde eliminado */
+                padding: 2px 0; 
+                font-size: 10pt;
+                font-weight: normal;
+            }
+            .option-label input[type="radio"] {
+                transform: scale(0.9); /* Ligeramente más pequeño */
+                margin-right: 5px;
+            }
+
+            /* Ocultar elementos web */
+            .submit-btn, #result-container { display: none !important; }
+            
+            .footer-text { 
+                position: fixed; 
+                bottom: 0; 
+                width: 100%; 
+                border-top: 1px solid #ccc; 
+                padding-top: 3px; 
+                font-size: 8pt;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .student-info { flex-direction: column; }
+            .info-group { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Evaluación: Cálculo Integral</h1>
+        <div class="student-info">
+            <div class="info-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="off">
+            </div>
+            <div class="info-group">
+                <label for="semestre">Semestre:</label>
+                <input type="text" id="semestre" name="semestre" autocomplete="off">
+            </div>
+            <div class="info-group">
+                <label for="fecha">Fecha:</label>
+                <input type="text" id="fecha" name="fecha" autocomplete="off">
+            </div>
+        </div>
+    </header>
+
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+        <button type="button" class="submit-btn" onclick="calificarExamen()">Calificar Examen</button>
+        <div id="result-container"></div>
+    </form>
+    
+    <div class="footer-text">
+        &copy; 2026 JMGV-PTEL Programa de CALCULO INTEGRAL. Todos los derechos reservados.
+    </div>
+</div>
+
+<script>
+    // Banco de preguntas basado en los ejercicios del documento proporcionado
+    const quizData = [
+        { 
+            question: "1. ¿Cuál es el resultado de evaluar la integral inmediata &int; x<sup>6</sup> dx? ", 
+            options: ["x<sup>7</sup>/7 + C", "6x<sup>5</sup> + C", "x<sup>7</sup> + C", "x<sup>6</sup>/6 + C"], 
+            correct: 0 
+        },
+        { 
+            question: "2. Calcula la siguiente integral de un monomio con constante: &int; bx<sup>3</sup> dx ", 
+            options: ["bx<sup>4</sup>/4 + C", "b<sup>2</sup>x<sup>4</sup>/4 + C", "3bx<sup>2</sup> + C", "bx<sup>3</sup>/3 + C"], 
+            correct: 0 
+        },
+        { 
+            question: "3. Resuelve la siguiente integral aplicando la regla de exponentes negativos: &int; (5/x<sup>4</sup>) dx", 
+            options: ["5/(-3x<sup>3</sup>) + C", "5/x<sup>5</sup> + C", "-20x<sup>-5</sup> + C", "-5/(4x<sup>3</sup>) + C"], 
+            correct: 0 
+        },
+        { 
+            question: "4. Calcula el resultado de &int; (4/x) dx recordando las fórmulas de integración logarítmica: ", 
+            options: ["4 ln|x| + C", "4/x<sup>2</sup> + C", "4x + C", "ln|4x| + C"], 
+            correct: 0 
+        },
+        { 
+            question: "5. Evalúa la integral convirtiendo la raíz a exponente fraccionario: &int; <sup>5</sup>&radic;(x<sup>3</sup>) dx", 
+            options: ["(5x <sup>5</sup>&radic;(x<sup>3</sup>)) / 8 + C", "(3x<sup>2/5</sup>) / 5 + C", "(5x<sup>8/5</sup>) / 3 + C", "(8x<sup>5/3</sup>) / 5 + C"], 
+            correct: 0 
+        },
+        { 
+            question: "6. Resuelve la integral del polinomio fraccionario: &int; (3/x<sup>5</sup> - 2/x<sup>2</sup> - 6/x) dx", 
+            options: ["-3/(4x<sup>4</sup>) + 2/x - 6 ln|x| + C", "3/(6x<sup>6</sup>) - 2/(3x<sup>3</sup>) - 6x + C", "-3/(4x<sup>4</sup>) - 2/x - 6x + C", "12/x<sup>4</sup> + 4/x - 6 ln|x| + C"], 
+            correct: 0 
+        },
+        { 
+            question: "7. Integra el siguiente polinomio  &int; (8x<sup>5</sup> - 5x<sup>4</sup> - 4x<sup>3</sup> - 6x<sup>2</sup> - 2x - 3) dx ", 
+            options: ["4x<sup>6</sup>/3 - x<sup>5</sup> - x<sup>4</sup> - 2x<sup>3</sup> - x<sup>2</sup> - 3x + C", "8x<sup>6</sup>/6 - 5x<sup>5</sup> - 4x<sup>4</sup> - 6x<sup>3</sup> - 2x<sup>2</sup> - 3x + C", "40x<sup>4</sup> - 20x<sup>3</sup> - 12x<sup>2</sup> - 12x - 2 + C", "4x<sup>6</sup>/3 - x<sup>5</sup>/5 - x<sup>4</sup>/4 - x<sup>3</sup>/3 - x<sup>2</sup>/2 - 3x + C"], 
+            correct: 0 
+        },
+        { 
+            question: "8. Calcula la integral del polinomio con literales: &int; (ax<sup>3</sup> - bx<sup>2</sup> - cx + e) dx", 
+            options: ["ax<sup>4</sup>/4 - bx<sup>3</sup>/3 - cx<sup>2</sup>/2 + ex + C", "3ax<sup>2</sup> - 2bx - c + C", "a<sup>2</sup>x<sup>4</sup>/4 - b<sup>2</sup>x<sup>3</sup>/3 - c<sup>2</sup>x<sup>2</sup>/2 + ex + C", "ax<sup>3</sup>/4 - bx<sup>2</sup>/3 - cx/2 + e + C"], 
+            correct: 0 
+        },
+        { 
+            question: "9. Utilizando el método de cambio de variable (sustitución), resuelve: &int; (3x + 4)<sup>6</sup> dx", 
+            options: ["(3x + 4)<sup>7</sup> / 21 + C", "(3x + 4)<sup>7</sup> / 7 + C", "18(3x + 4)<sup>5</sup> + C", "(3x + 4)<sup>7</sup> / 3 + C"], 
+            correct: 0 
+        },
+        { 
+            question: "10. Aplica el cambio de variable para evaluar la siguiente integral: &int; (ax<sup>2</sup> - b)<sup>5</sup> x dx", 
+            options: ["((ax<sup>2</sup> - b)<sup>6</sup> / 12a) + C", "(ax<sup>2</sup> - b)<sup>6</sup> / 6 + C", "a(ax<sup>2</sup> - b)<sup>6</sup> / 3 + C", "10ax(ax<sup>2</sup> - b)<sup>4</sup> + C"], 
+            correct: 0 
+        }
+    ];
+
+    // Aleatoriedad para barajar las opciones y evitar la trampa visual
+    quizData.forEach((q) => {
+        let optionsWithIndex = q.options.map((opt, index) => {
+            return { text: opt, isCorrect: (index === q.correct) };
+        });
+
+        for (let i = optionsWithIndex.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionsWithIndex[i], optionsWithIndex[j]] = [optionsWithIndex[j], optionsWithIndex[i]];
+        }
+
+        q.options = optionsWithIndex.map(opt => opt.text);
+        q.correct = optionsWithIndex.findIndex(opt => opt.isCorrect);
+    });
+
+    const container = document.getElementById('questions-container');
+
+    quizData.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        
+        let optionsHTML = '';
+        q.options.forEach((opt, i) => {
+            optionsHTML += `
+                <label class="option-label opt-${i}">
+                    <input type="radio" name="q${index}" value="${i}">
+                    <span>${opt}</span>
+                </label>
+            `;
+        });
+
+        card.innerHTML = `
+            <div class="question-text">${q.question}</div>
+            <div class="options-grid">
+                ${optionsHTML}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+
+    function calificarExamen() {
+        let score = 0;
+        let allAnswered = true;
+
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            if (selected) {
+                if (parseInt(selected.value) === q.correct) {
+                    score++;
+                }
+            } else {
+                allAnswered = false;
+            }
+        });
+
+        const resultDiv = document.getElementById('result-container');
+        resultDiv.style.display = 'block';
+
+        if (!allAnswered) {
+            resultDiv.style.backgroundColor = '#fff3cd';
+            resultDiv.style.color = '#856404';
+            resultDiv.innerHTML = 'Faltan respuestas. Revisa cuidadosamente cada reactivo.';
+            return;
+        }
+
+        const percentage = Math.round((score / quizData.length) * 100);
+        resultDiv.style.backgroundColor = score >= 6 ? '#d4edda' : '#f8d7da';
+        resultDiv.style.color = score >= 6 ? '#155724' : '#721c24';
+        resultDiv.innerHTML = `Tu calificación es: ${score} de 10 (${percentage}%)`;
+    }
+</script>
+
+</body>
+</html>

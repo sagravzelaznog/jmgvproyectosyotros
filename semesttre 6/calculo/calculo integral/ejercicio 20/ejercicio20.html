@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathGenius Pro | Masterclass Integrales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <style>
+        /* Estilos personalizados "Genius Dark" */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;700;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #0a0e17; color: #e2e8f0; }
+        .math-font { font-family: 'Fira Code', monospace; }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
+        
+        /* FEEDBACK STATES */
+        .correct { border: 2px solid #10b981 !important; background: rgba(16, 185, 129, 0.05); color: #10b981; }
+        .incorrect { border: 2px solid #ef4444 !important; background: rgba(239, 68, 68, 0.05); color: #ef4444; }
+        
+        /* TEACHER MODE */
+        .teacher-note { background-color: #2c1a0a; border: 1px solid #f97316; }
+
+        /* ANIMACIONES */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="sticky top-0 z-50 bg-[#0f172a]/90 border-b border-slate-800 backdrop-blur-sm shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="bg-cyan-500 p-2.5 rounded-xl shadow-lg shadow-cyan-500/20">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black text-white tracking-tighter uppercase leading-none">MATH<span class="text-cyan-400 italic">GENIUS</span> PRO</h1>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-none mt-1">Masterclass: Aplicaciones de Integrales</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button id="teacherModeBtn" class="border-2 border-orange-500 text-orange-400 font-bold text-xs px-5 py-2.5 rounded-xl hover:bg-orange-500 hover:text-white transition-all active:scale-95">MODO MAESTRO</button>
+                <div class="bg-slate-950 px-5 py-2 rounded-2xl border border-slate-800 text-center shadow-inner">
+                    <span class="text-[10px] text-slate-600 block font-bold tracking-widest">PRECISIÓN</span>
+                    <span id="scoreDisplay" class="text-cyan-400 font-black text-2xl font-mono leading-none">0/84</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6 md:p-10 space-y-12">
+        
+        <section id="definicion" class="animate-fade-in">
+            <div class="flex items-center gap-4 mb-6">
+                <h2 class="text-3xl font-black text-white tracking-tighter">1. Definición y Concepto Clave</h2>
+                <div class="h-px flex-grow bg-slate-800"></div>
+            </div>
+            <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-4">
+                <p class="text-slate-300">En términos andragógicos (enseñanza para adultos), la derivada representa una tasa de cambio instantánea. Por el contrario, la integral representa la <strong>acumulación total</strong> de ese cambio a lo largo de un intervalo.</p>
+                <p class="text-slate-300">Geométricamente, la integral definida calcula el <strong>área neta</strong> acumulada bajo la curva de una función.</p>
+                <div class="formula bg-slate-950 p-6 rounded-xl border border-slate-800 text-center tracking-wide shadow-inner">
+                    <span class="math-tex">$$ Accumulation = \int_{a}^{b} f(x) \, dx $$</span>
+                </div>
+                
+                <div class="teacher-note hidden mt-6 p-6 rounded-xl space-y-3" id="nota-def">
+                    <div class="flex items-center gap-3">
+                        <span class="text-orange-400 text-xs font-black uppercase tracking-widest border border-orange-500/30 px-3 py-1 rounded-full">Nota Pedagógica</span>
+                    </div>
+                    <p class="text-orange-200 text-sm">Use la analogía del velocímetro y el odómetro. La derivada es la velocidad instantánea ($km/h$). La integral es la distancia total acumulada ($km$) mostrada en el odómetro. Es una conexión intuitiva y efectiva para alumnos de bachillerato.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="formulario">
+            <div class="flex items-center gap-4 mb-6">
+                <h2 class="text-3xl font-black text-white tracking-tighter">2. Ejercicio de Aplicación (De la Imagen)</h2>
+                <div class="h-px flex-grow bg-slate-800"></div>
+            </div>
+            
+            <p class="text-slate-400 mb-6 italic">A continuación, ingrese las soluciones de los problemas de la imagen adjunta. Si se equivoca, el sistema Genius Pro le guiará paso a paso.</p>
+
+            <div class="bg-slate-900 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse whitespace-nowrap">
+                        <thead class="bg-slate-950 border-b-2 border-slate-800">
+                            <tr>
+                                <th class="p-6 text-cyan-500 text-[10px] font-black uppercase tracking-widest min-w-[60px]">ID</th>
+                                <th class="p-6 text-cyan-500 text-[10px] font-black uppercase tracking-widest min-w-[250px]">Integral / Problema</th>
+                                <th class="p-6 text-cyan-500 text-[10px] font-black uppercase tracking-widest min-w-[200px]">Tu Respuesta</th>
+                                <th class="p-6 text-cyan-500 text-[10px] font-black uppercase tracking-widest min-w-[150px]">Feedback</th>
+                                <th class="p-6 text-cyan-500 text-[10px] font-black uppercase tracking-widest text-center">Tutor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exerciseList">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 py-10 border-t border-slate-800 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-6 text-center text-slate-600 text-[11px] font-bold uppercase tracking-widest leading-loose">
+            Copyright &copy; jmgv-ptel-2026. Masterclass aplicaciones del cálculo integral. todos los derechos reservados.
+        </div>
+    </footer>
+
+    <div id="solutionModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fade-in">
+        <div class="bg-slate-950 rounded-3xl border-2 border-cyan-500/30 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+            
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-500 hover:text-white hover:rotate-90 transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+
+            <div class="p-10 space-y-8 math-tex">
+                <div class="flex items-center gap-3">
+                    <span class="bg-cyan-500/10 text-cyan-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-cyan-500/20">Tutor CONCEPTUAL Genius Pro</span>
+                    <span id="modalId" class="text-slate-600 font-mono text-xs">#1</span>
+                </div>
+
+                <div class="text-center pb-6 border-b border-slate-800">
+                    <p class="text-slate-500 text-sm mb-3">Resolviendo para la antiderivada (Ecuación de la curva):</p>
+                    <div id="modalProblem" class="text-3xl font-bold text-white tracking-tight"></div>
+                </div>
+
+                <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+                    <p class="text-slate-400 text-sm italic mb-1">Estrategia/Fórmula clave a usar:</p>
+                    <div id="modalFormula" class="text-lg text-cyan-300"></div>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-300 text-xs font-bold uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Procedimiento detallado</h4>
+                    <ul id="modalSteps" class="space-y-3 text-slate-400 text-sm list-disc pl-5 marker:text-cyan-500">
+                        </ul>
+                </div>
+                
+                <div class="teacher-note p-5 rounded-xl text-orange-200 text-sm" id="modalExplanation">
+                    </div>
+
+                <div class="mt-8 bg-slate-900 p-6 rounded-2xl border-l-4 border-emerald-500 shadow-inner text-center space-y-2">
+                    <p class="text-emerald-500 text-[10px] font-black uppercase tracking-widest">Antiderivada Particular (Solución final)</p>
+                    <div id="modalResult" class="text-2xl font-black text-emerald-400 tracking-tight"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS MAESTRA (Ejercicios + Soluciones Pedagógicas) ---
+        // Se han poblado los problemas conceptuales más complejos de la imagen adjunta.
+        const geniusDatabase = [
+            { 
+                id: 1, 
+                q: "f'(x) = x+3, \\quad P(2,4)", 
+                a: "x^2/2+3x-4", // Respuesta esperada normalizada (sin espacios, sin +c)
+                c: "Antiderivada Básica",
+                formula: "\\int (x + 3) \\, dx = \\frac{x^2}{2} + 3x + C",
+                steps: [
+                    "Identificar que la derivada representa la pendiente.",
+                    "Integrar la función $x+3$ para hallar la familia de curvas.",
+                    "Sustituir el punto dado $(2,4)$ en la ecuación general.",
+                    "Resolver para la constante $C$.",
+                    "Escribir la ecuación final."
+                ],
+                explanation: "Este problema demuestra el poder del cálculo integral para revertir la derivación. A partir de una descripción de 'cómo cambia la pendiente' ($x+3$), podemos reconstruir la forma original de la curva.",
+                result: "f(x) = \\frac{x^2}{2} + 3x - 4"
+            },
+            {
+                id: 12,
+                q: "v = 11, \\quad t=8, \\quad s=73",
+                a: "11t-15",
+                c: "Física (Constante)",
+                formula: "s(t) = \\int v(t) \\, dt = \\int 11 \\, dt",
+                steps: [
+                    "Identificar la velocidad constante $v=11$.",
+                    "Integrar para hallar la función de desplazamiento general: $s(t) = 11t + C$.",
+                    "Usar la condición $s(8) = 73$ para hallar $C$.",
+                    "Resolver: $73 = 11(8) + C \implies C = -15$."
+                ],
+                explanation: "Un ejemplo perfecto de andragogía: conecta la fórmula de física $d=v \cdot t$ con la generalización del cálculo. Muestre que el cálculo es la herramienta madre, no una 'fórmula física' aislada.",
+                result: "s(t) = 11t - 15"
+            },
+            {
+                id: 16,
+                q: "Caída Libre: \\quad t=6, \\quad suelo",
+                a: "176.4",
+                c: "Física (Caída Libre)",
+                formula: "s(t) = \\int (\\int -9.8 \\, dt) \\, dt = -4.9t^2 + h_0",
+                steps: [
+                    "Modelo: $a(t) = -9.8$, $v(0) = 0$.",
+                    "Integrar aceleración -> $v(t) = -9.8t$.",
+                    "Integrar velocidad -> $s(t) = -4.9t^2 + C$.",
+                    "Aquí $C$ es la altura inicial $h_0$.",
+                    "En $t=6$, llega al suelo ($s=0$): $0 = -4.9(6^2) + h_0 \implies h_0 = 176.4$."
+                ],
+                explanation: "Problema andragógico de alto nivel. Muestre cómo partiendo solo de la aceleración constante de la gravedad ($g$), el cálculo nos permite 'integrar' dos veces para hallar la posición exacta de un objeto en caída libre.",
+                result: "Altura = 176.4 \\text{ metros}"
+            },
+            {
+                id: 84,
+                q: "\\int \\frac{\\sin^{3/4}x}{\\cos^{11/4}x}dx",
+                a: "4/7tan^{7/4}x",
+                c: "Trigonométrica Avanzada",
+                formula: "\\int u^n du \\text{ donde } u=\\tan(x)",
+                steps: [
+                    "Manipulación algebraica: $\\cos^{11/4}x = \\cos^{3/4}x \\cdot \\cos^2 x$.",
+                    "Reescribir: $\\frac{\\sin^{3/4}x}{\\cos^{3/4}x} \\cdot \\frac{1}{\\cos^2 x} = \\tan^{3/4}x \\cdot \\sec^2 x$.",
+                    "Sustitución $u=\\tan x, du=\\sec^2 x dx$.",
+                    "Integrar $u^{3/4} \implies \\frac{4}{7}u^{7/4}$."
+                ],
+                explanation: "Este es el 'Jefe Final' del formulario. Requiere una agudeza visual algebraica avanzada para convertir una fracción trigonométrica compleja en una forma simple de $\\int u^n du$. Un reto excelente para alumnos que dominan lo básico.",
+                result: "\\frac{4}{7}\\tan^{7/4}x + C"
+            }
+        ];
+
+        // --- LÓGICA MODO MAESTRO ---
+        const teacherNotes = [' nota-def', ' nota-pr12']; // IDs de notas adicionales si se añaden.
+        let isTeacherModeDesbloqueado = false;
+
+        document.getElementById('teacherModeBtn').addEventListener('click', () => {
+            if (!isTeacherModeDesbloqueado) {
+                const codigo = prompt("Genio Pedagogo, introduzca el código de acceso (1983):");
+                if (codigo === "1983") {
+                    isTeacherModeDesbloqueado = true;
+                    document.getElementById('nota-def').classList.remove('hidden');
+                    document.getElementById('modalExplanation').classList.remove('hidden'); // Desbloquea explicación en modal
+                    alert("Acceso Genius concedido. Notas andragógicas desbloqueadas.");
+                    document.getElementById('teacherModeBtn').innerText = "MODO MAESTRO: ON";
+                } else {
+                    alert("Código incorrecto. Solo un Genio Pedagogo tiene acceso.");
+                }
+            } else {
+                isTeacherModeDesbloqueado = false;
+                document.getElementById('nota-def').classList.add('hidden');
+                document.getElementById('teacherModeBtn').innerText = "MODO MAESTRO";
+            }
+        });
+
+
+        // --- RENDERIZADO DEL FORMULARIO INTERACTIVO ---
+        const tbody = document.getElementById('exerciseList');
+        
+        geniusDatabase.forEach(ex => {
+            const row = document.createElement('tr');
+            row.className = "border-b border-slate-800 hover:bg-slate-800/30 transition-colors group";
+            
+            row.innerHTML = `
+                <td class="p-6 text-slate-600 font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity">${ex.id}</td>
+                <td class="p-6 text-2xl font-serif">$$ ${ex.q} $$</td>
+                <td class="p-6"><span class="bg-slate-800 px-3 py-1.5 rounded-full text-[10px] uppercase font-black text-cyan-400 border border-slate-700">${ex.c}</span></td>
+                <td class="p-6">
+                    <input type="text" placeholder="Escribe tu solución (Sin +C)..." 
+                        onchange="validate(${ex.id}, this)"
+                        class="bg-slate-950 border border-slate-700 p-3 rounded-xl w-full text-sm font-mono focus:ring-1 focus:ring-cyan-500 outline-none transition-all placeholder:text-slate-800">
+                </td>
+                <td class="p-6 text-center" id="status-${ex.id}">
+                    <span class="text-slate-700 italic text-xs">Esperando...</span>
+                </td>
+                <td class="p-6 text-center">
+                    <button id="tutorBtn-${ex.id}" onclick="openSolution(${ex.id})" 
+                        class="text-slate-600 hover:text-cyan-400 disabled:opacity-30 disabled:pointer-events-none transition-colors" disabled>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // --- LÓGICA DE VALIDACIÓN Genius Pro ---
+        function validate(id, input) {
+            const exercise = geniusDatabase.find(d => d.id === id);
+            // Normalización Genius: quitamos espacios y pasamos a minúsculas
+            const userVal = input.value.replace(/\s/g, '').toLowerCase();
+            const correctVal = exercise.a.toLowerCase();
+            const statusCell = document.getElementById(`status-${id}`);
+            const tutorBtn = document.getElementById(`tutorBtn-${id}`);
+
+            if (userVal === "") {
+                input.className = "bg-slate-950 border border-slate-700 p-3 rounded-xl w-full text-sm font-mono outline-none";
+                statusCell.innerHTML = '<span class="text-slate-700">Esperando...</span>';
+                tutorBtn.disabled = true;
+                return;
+            }
+
+            if (userVal === correctVal) {
+                input.className = "correct p-3 rounded-xl w-full text-sm font-mono outline-none";
+                statusCell.innerHTML = '<b class="text-emerald-500 text-xs">CORRECTO ✓</b>';
+                tutorBtn.disabled = true; // No necesita tutor si está bien
+            } else {
+                input.className = "incorrect p-3 rounded-xl w-full text-sm font-mono outline-none";
+                statusCell.innerHTML = '<b class="text-red-500 text-xs">INCORRECTO ✗</b>';
+                tutorBtn.disabled = false; // Habilita tutor si falla
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            const corrects = document.querySelectorAll('.text-emerald-500').length;
+            document.getElementById('scoreDisplay').innerText = `${corrects}/84`;
+        }
+
+        // --- LÓGICA DEL MODAL TUTOR CONCEPTUAL ---
+        function openSolution(id) {
+            const ex = geniusDatabase.find(d => d.id === id);
+            if(!ex) return;
+
+            // Inyectar datos en el modal
+            document.getElementById('modalId').innerText = `#${ex.id}`;
+            document.getElementById('modalProblem').innerHTML = `$$ ${ex.q} $$`;
+            document.getElementById('modalFormula').innerHTML = `$$ ${ex.formula} $$`;
+            document.getElementById('modalResult').innerHTML = `$$ ${ex.result} $$`;
+            document.getElementById('modalExplanation').innerText = ex.explanation;
+
+            // Ocultar explicación pedagógica si no está desbloqueado el modo maestro
+            if (!isTeacherModeDesbloqueado) {
+                document.getElementById('modalExplanation').classList.add('hidden');
+            }
+
+            // Cargar pasos
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = ''; // Limpiar anteriores
+            ex.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsList.appendChild(li);
+            });
+
+            // Mostrar modal
+            const modal = document.getElementById('solutionModal');
+            modal.classList.remove('hidden');
+
+            // Renderizar mates dentro del modal
+            renderMathInElement(modal, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('solutionModal').classList.add('hidden');
+        }
+
+        // Render inicial de KaTeX al cargar
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body);
+        });
+    </script>
+</body>
+</html>

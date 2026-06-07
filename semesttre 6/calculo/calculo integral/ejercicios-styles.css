@@ -1,0 +1,372 @@
+/* Estilos adicionales para ejercicios del Módulo 2 */
+
+/* Variables CSS para ejercicios con paleta azul-esmeralda */
+:root {
+    /* Paleta Principal Azul-Esmeralda Profesional */
+    --primary-color: #1e3a8a;           /* Azul marino profundo */
+    --secondary-color: #0ea5e9;         /* Azul cielo vibrante */
+    --accent-color: #059669;            /* Esmeralda vibrante */
+    --success-color: #10b981;           /* Verde esmeralda */
+    --warning-color: #f59e0b;            /* Ámbar dorado */
+    --error-color: #dc2626;             /* Rojo profesional */
+    
+    /* Colores de fondo y superficie */
+    --light-bg: #f0f9ff;                /* Azul muy claro */
+    --surface-color: #ffffff;           /* Blanco puro */
+    --surface-secondary: #f8fafc;      /* Gris muy claro */
+    
+    /* Colores de texto con alto contraste */
+    --dark-text: #0f172a;              /* Azul marino muy oscuro */
+    --text-primary: #1e293b;           /* Azul gris oscuro */
+    --text-secondary: #475569;         /* Azul gris medio */
+    --light-text: #64748b;             /* Azul gris claro */
+    --text-on-dark: #f8fafc;           /* Blanco azulado */
+    
+    /* Gradientes profesionales */
+    --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+    --gradient-secondary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    
+    /* Sombras mejoradas */
+    --shadow-sm: 0 1px 2px 0 rgba(30, 58, 138, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(30, 58, 138, 0.15);
+    --shadow-colored: 0 10px 25px -5px rgba(14, 165, 233, 0.25);
+    
+    /* Bordes y líneas */
+    --border-color: #e2e8f0;
+    --border-accent: #0ea5e9;
+    --border-success: #10b981;
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+}
+
+/* Ejercicios */
+.exercise-section {
+    margin-bottom: 3rem;
+}
+
+.exercise-section h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 1rem;
+}
+
+.exercise-card {
+    background: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.exercise-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exercise-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.difficulty-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.difficulty-badge.beginner {
+    background: var(--gradient-success);
+    color: var(--text-on-dark);
+    border: 1px solid var(--success-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.difficulty-badge.intermediate {
+    background: var(--gradient-warning);
+    color: var(--text-on-dark);
+    border: 1px solid var(--warning-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.difficulty-badge.advanced {
+    background: var(--gradient-secondary);
+    color: var(--text-on-dark);
+    border: 1px solid var(--accent-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.exercise-content {
+    padding: 1.5rem;
+}
+
+.exercise-content p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.exercise-solution {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--success-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.exercise-solution h4 {
+    color: var(--success-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.solution-steps {
+    margin-bottom: 1rem;
+}
+
+.solution-steps .step {
+    display: flex;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.solution-steps .step-number {
+    background: var(--success-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.solution-steps .step-content {
+    flex: 1;
+}
+
+.solution-steps .step-content p {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.solution-steps .step-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.solution-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    display: block;
+    margin: 0 auto;
+}
+
+.solution-toggle:hover {
+    background: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* Niveles de dificultad */
+.difficulty-levels {
+    margin-top: 2rem;
+}
+
+.difficulty-levels h3 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.level-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.level-card.beginner {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-color: var(--success-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.level-card.intermediate {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-color: var(--warning-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.level-card.advanced {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border-color: var(--error-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.level-card h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.level-card.beginner h4 {
+    color: #065f46;
+    font-weight: 600;
+}
+
+.level-card.intermediate h4 {
+    color: #92400e;
+    font-weight: 600;
+}
+
+.level-card.advanced h4 {
+    color: #991b1b;
+    font-weight: 600;
+}
+
+.level-card p {
+    font-size: 0.875rem;
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* Estadísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Responsive design para ejercicios */
+@media (max-width: 768px) {
+    .exercise-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .exercise-content {
+        padding: 1rem;
+    }
+    
+    .exercise-content p {
+        font-size: 1rem;
+    }
+    
+    .solution-steps .step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .solution-steps .step-number {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .level-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .exercise-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .exercise-header h3 {
+        font-size: 1.125rem;
+    }
+    
+    .difficulty-badge {
+        font-size: 0.625rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .exercise-solution {
+        padding: 1rem;
+    }
+    
+    .solution-steps .step-content p {
+        font-size: 0.875rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

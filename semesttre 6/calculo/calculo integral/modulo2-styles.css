@@ -1,0 +1,1168 @@
+/* Estilos específicos para el Módulo 2: Sumas de Riemann y la Integral Definida */
+
+/* Variables CSS para el tema del módulo con paleta azul-esmeralda */
+:root {
+    /* Paleta Principal Azul-Esmeralda Profesional */
+    --primary-color: #1e3a8a;           /* Azul marino profundo */
+    --secondary-color: #0ea5e9;         /* Azul cielo vibrante */
+    --accent-color: #059669;            /* Esmeralda vibrante */
+    --success-color: #10b981;           /* Verde esmeralda */
+    --warning-color: #f59e0b;            /* Ámbar dorado */
+    --error-color: #dc2626;             /* Rojo profesional */
+    
+    /* Colores de fondo y superficie */
+    --background-color: #f0f9ff;        /* Azul muy claro */
+    --surface-color: #ffffff;           /* Blanco puro */
+    --surface-secondary: #f8fafc;      /* Gris muy claro */
+    
+    /* Colores de texto con alto contraste */
+    --text-primary: #0f172a;           /* Azul marino muy oscuro */
+    --text-secondary: #475569;         /* Azul gris medio */
+    --text-on-dark: #f8fafc;           /* Blanco azulado */
+    
+    /* Gradientes profesionales */
+    --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 100%);
+    --gradient-secondary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    
+    /* Sombras mejoradas */
+    --shadow-sm: 0 1px 2px 0 rgba(30, 58, 138, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(30, 58, 138, 0.15);
+    --shadow-colored: 0 10px 25px -5px rgba(14, 165, 233, 0.25);
+    
+    /* Bordes y líneas */
+    --border-color: #e2e8f0;
+    --border-accent: #0ea5e9;
+    --border-success: #10b981;
+    
+    /* Transiciones y bordes */
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* Estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.main-header {
+    background: var(--gradient-primary);
+    color: var(--text-on-dark);
+    padding: 1rem 0;
+    box-shadow: var(--shadow-colored);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--text-on-dark);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Barra de progreso */
+.progress-bar {
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 0;
+}
+
+.progress-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-text {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.progress-percentage {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.progress-track {
+    flex: 1;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* Contenido principal */
+.main-content {
+    padding: 2rem 0;
+}
+
+/* Introducción del módulo */
+.module-intro {
+    margin-bottom: 3rem;
+}
+
+.intro-card {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--primary-color);
+}
+
+.intro-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.learning-outcomes {
+    margin-top: 1.5rem;
+}
+
+.learning-outcomes h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.learning-outcomes ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.learning-outcomes li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.learning-outcomes li:last-child {
+    border-bottom: none;
+}
+
+/* Navegación del módulo */
+.module-nav {
+    margin-bottom: 2rem;
+}
+
+.nav-tabs {
+    display: flex;
+    background: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    padding: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+}
+
+.nav-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 200px;
+}
+
+.nav-tab:hover {
+    background-color: var(--background-color);
+}
+
+.nav-tab.active {
+    background: var(--gradient-primary);
+    color: var(--text-on-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Secciones de contenido */
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+/* Cajas de motivación */
+.motivation-box {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.motivation-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.problem-visualization {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.problem-visualization canvas {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+}
+
+/* Grid de conceptos */
+.concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.concept-card {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--primary-color);
+}
+
+.concept-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+/* Cajas de fórmulas */
+.formula-box {
+    background: var(--surface-secondary);
+    border: 2px solid var(--border-accent);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.125rem;
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.formula-box.large {
+    font-size: 1.25rem;
+    padding: 1.5rem;
+}
+
+/* Tipos de sumas de Riemann */
+.riemann-types {
+    margin-bottom: 2rem;
+}
+
+.riemann-types h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.type-card {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.type-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.type-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.visualization {
+    margin: 1rem 0;
+}
+
+.visualization canvas {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+}
+
+/* Ejemplo paso a paso */
+.step-by-step-example {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.step-by-step-example h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.example-problem {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid var(--warning-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.example-problem h4 {
+    color: #92400e;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.solution-steps {
+    margin-bottom: 1.5rem;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h5 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.example-conclusion {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border: 2px solid var(--success-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.example-conclusion h4 {
+    color: #065f46;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.result-item:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.result-item.highlight {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-color: var(--warning-color);
+    box-shadow: var(--shadow-md);
+}
+
+.result-label {
+    font-weight: 500;
+}
+
+.result-value {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Visualización interactiva */
+.interactive-visualization {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.interactive-visualization h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.visualization-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.control-group input,
+.control-group select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+}
+
+.visualization-container {
+    margin-bottom: 1.5rem;
+}
+
+.calculation-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.result-display {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--surface-secondary);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.result-display:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.result-label {
+    font-weight: 500;
+}
+
+.result-value {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Definición de integral definida */
+.definition-box {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.definition-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.definition-content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+/* Notación de Leibniz */
+.notation-section {
+    margin-bottom: 2rem;
+}
+
+.notation-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.notation-explanation {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.notation-symbol {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.integral-symbol {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.symbol-explanation h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.notation-components {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.component {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.component-symbol {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.component-name {
+    font-weight: 500;
+}
+
+/* Propiedades de la integral */
+.properties-section {
+    margin-bottom: 2rem;
+}
+
+.properties-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.property-card {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+}
+
+.property-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+/* Teorema Fundamental del Cálculo */
+.tfc-introduction {
+    margin-bottom: 2rem;
+}
+
+.tfc-introduction h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.bridge-visualization {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.bridge-section {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.bridge-section.highlight {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid var(--warning-color);
+}
+
+.bridge-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+/* Teoremas */
+.theorem-box {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.theorem-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.tfc-example {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+}
+
+.tfc-example h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.verification {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+.verification h5 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* Notación de evaluación */
+.evaluation-notation {
+    margin-bottom: 2rem;
+}
+
+.evaluation-notation h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.notation-example {
+    background: var(--surface-color);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+.notation-example h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Aplicaciones del TFC */
+.tfc-applications {
+    margin-bottom: 2rem;
+}
+
+.tfc-applications h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.application-card {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--success-color);
+}
+
+.application-card h4 {
+    color: var(--success-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+/* Ejercicios */
+.exercise-section {
+    margin-bottom: 2rem;
+}
+
+.exercise-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.exercise-card {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--accent-color);
+}
+
+.exercise-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.exercise-solution {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    border-left: 3px solid var(--success-color);
+}
+
+.exercise-solution h5 {
+    color: var(--success-color);
+    margin-bottom: 0.5rem;
+}
+
+.solution-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.solution-toggle:hover {
+    background: var(--secondary-color);
+}
+
+/* Calculadora interactiva */
+.interactive-calculator {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.interactive-calculator h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.calculator-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.calculator-input label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.calculator-input input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.calculator-input button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.calculator-input button:hover {
+    background: var(--secondary-color);
+}
+
+.calculator-output {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Resumen del módulo */
+.module-summary {
+    margin-top: 3rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.summary-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.summary-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.summary-section h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.summary-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.summary-section li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.summary-section li:last-child {
+    border-bottom: none;
+}
+
+.formula-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formula-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.formula-label {
+    font-weight: 500;
+}
+
+.formula {
+    font-family: 'Fira Code', monospace;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.next-module-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: 1rem;
+}
+
+.next-module-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.main-footer {
+    background: var(--gradient-primary);
+    color: var(--text-on-dark);
+    padding: 2rem 0 1rem;
+    margin-top: 3rem;
+    box-shadow: var(--shadow-colored);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-section li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--text-on-dark);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    color: var(--secondary-color);
+    transform: translateX(2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(248, 250, 252, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-tabs {
+        flex-direction: column;
+    }
+    
+    .nav-tab {
+        min-width: auto;
+    }
+    
+    .concept-grid,
+    .types-grid,
+    .properties-grid,
+    .applications-grid,
+    .exercise-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bridge-visualization {
+        flex-direction: column;
+    }
+    
+    .calculator-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .formula-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .intro-card,
+    .step-by-step-example,
+    .interactive-visualization,
+    .summary-card {
+        padding: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .formula-box {
+        font-size: 0.875rem;
+        padding: 0.75rem;
+    }
+    
+    .formula-box.large {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}

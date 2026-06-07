@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8: Viaje en el Tiempo (C-14)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --radioactive-green: #84cc16;
+            --bone-white: #e2e8f0;
+            --error-red: #ef4444;
+            --master-gold: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--radioactive-green), var(--cyan-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Interacción para el Modo Maestro */
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--radioactive-green);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgba(132, 204, 22, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .highlight {
+            color: var(--cyan-neon);
+            font-weight: 600;
+        }
+
+        .formula-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--radioactive-green);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.4rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* TARJETAS DE CONTENIDO */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* LABORATORIO INTERACTIVO */
+        .lab-container {
+            text-align: center;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid rgba(132, 204, 22, 0.3);
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem 0;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 500px;
+            accent-color: var(--radioactive-green);
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--radioactive-green);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* GAMIFICACIÓN: QUIZ KAHOOT STYLE */
+        .quiz-question { margin-bottom: 2rem; }
+        .quiz-question h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quiz-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.02); }
+        .quiz-btn.correct { background: var(--emerald-neon) !important; color: #000; border-color: var(--emerald-neon); }
+        .quiz-btn.incorrect { background: var(--error-red) !important; color: #fff; border-color: var(--error-red); }
+
+        /* MODO MAESTRO */
+        .master-mode {
+            display: none;
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--master-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+        .master-mode.active { display: block; animation: fadeIn 0.5s; }
+        .master-title { color: var(--master-gold); font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 2rem; background: rgba(0,0,0,0.5); font-size: 0.9rem; color: var(--text-muted); margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="main-title">Cálculo Integral: Sesión 8</h1>
+            <p>Viaje en el Tiempo: Ecuaciones Diferenciales y Carbono 14</p>
+        </header>
+
+        <section class="card">
+            <h2>1. Hackeando el Reloj de la Naturaleza</h2>
+            <p>Imagina que la batería de tu celular no se descarga a una velocidad constante, sino que pierde energía <em>dependiendo de cuánta carga le quede</em>. Si está al 100%, se drena rápido; si le queda 10%, se drena muy lento. A esto le llamamos <strong>Decaimiento Radiactivo</strong>.</p>
+            <p>El científico <strong>Willard Libby</strong> ganó el Premio Nobel al descubrir que los seres vivos absorben Carbono-14 mientras viven. Al morir, ese C-14 empieza a desaparecer exactamente con esa lógica: la tasa de cambio es proporcional a la cantidad presente (dC/dt = -kC).</p>
+            <p>Para resolver esta <strong>Ecuación Diferencial</strong>, usamos las técnicas de integración que aprendimos en el curso (¡Separación de variables y la función Inmortal de Euler!). Al integrar, obtenemos la fórmula del viaje en el tiempo:</p>
+
+            <div class="formula-box">
+                <span style="color: var(--text-muted); font-size: 1rem;">Ecuación Diferencial (El Problema):</span>
+                <span style="color: var(--cyan-neon);">dC / dt = -kC</span>
+                <hr style="border: 1px solid rgba(255,255,255,0.1); margin: 0.5rem 0;">
+                <span style="color: var(--text-muted); font-size: 1rem;">Función Integrada (La Solución):</span>
+                <span style="color: var(--radioactive-green);">C(t) = C₀ e^(-kt)</span>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Cierre Épico:</strong> Este es el clímax de tu curso. Hazles ver que las matemáticas no son solo números muertos; son una máquina del tiempo. Al despejar 't' de esa ecuación integrada, los arqueólogos pueden saber exactamente el año en que murió un faraón egipcio o un dinosaurio. El Cálculo reescribe la historia de la humanidad.</p>
+            </div>
+        </section>
+
+        <section class="card lab-container">
+            <h2>2. Laboratorio Arqueológico: Datación por C-14</h2>
+            <p>El Carbono-14 tiene una "vida media" de aprox. 5,730 años (tarda ese tiempo en reducirse a la mitad). Ajusta el slider para avanzar en el tiempo y observa cómo la muestra del fósil pierde su radiación en una curva exponencial perfecta.</p>
+            
+            <div class="controls">
+                <label for="time-slider" style="font-weight: 600;">Tiempo transcurrido (Años): <span id="time-val" style="color:var(--radioactive-green);">0</span></label>
+                <input type="range" id="time-slider" min="0" max="30000" step="100" value="0">
+            </div>
+
+            <canvas id="decayCanvas" width="800" height="300"></canvas>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="border-left-color: var(--bone-white);">
+                    Material Original (C₀):<br><span style="color:var(--bone-white);">100 %</span>
+                </div>
+                <div class="stat-box" style="border-left-color: var(--cyan-neon);">
+                    Material Restante C(t):<br><span id="c-val" style="color:var(--cyan-neon); font-size: 1.5rem;">100.00 %</span>
+                </div>
+                <div class="stat-box" style="border-left-color: var(--radioactive-green);">
+                    Estado del Fósil:<br><span id="fossil-status" style="color:var(--radioactive-green);">Fresco / Reciente</span>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Guía del Laboratorio:</strong> Pide a un estudiante que mueva el slider exactamente a 5,700 años (aprox. la vida media). El porcentaje restante debe estar cerca del 50%. Muévelo a 11,400 años (dos vidas medias) y estará cerca del 25%. Esta demostración destruye el mito de que el decaimiento es lineal (restar) y solidifica el concepto de decaimiento exponencial (dividir/multiplicar).</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>3. Quiz Final: Maestros del Tiempo</h2>
+            
+            <div class="quiz-question">
+                <h3>1. ¿Qué nos indica físicamente la ecuación diferencial dC/dt = -kC ?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Que el carbono aumenta con el tiempo</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Que la tasa a la que se pierde material depende de cuánto material queda</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Que el fósil nunca perderá todo su carbono</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Que el tiempo retrocede de manera constante</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>2. Al integrar la ecuación diferencial del decaimiento, ¿qué función matemática (inmortal) obtenemos como modelo?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Una parábola cuadrática (x²)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Una onda trigonométrica (seno)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Una línea recta (mx+b)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Una función exponencial (e⁻ᵏᵗ)</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>3. ¿A qué científico se le otorgó el Premio Nobel por usar este principio matemático para datar fósiles y artefactos históricos?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Isaac Newton</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Willard Libby</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Albert Einstein</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Leonhard Euler</button>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Respuestas del Quiz Final:</strong> 1) La pérdida depende de lo que queda. 2) Función exponencial. 3) Willard Libby.<br><strong>¡Felicidades, Maestro!</strong> Has concluido exitosamente un programa de Cálculo Integral transformador, interactivo y profundamente conectado con la realidad de tus alumnos de Bachillerato.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. SESIÓN 08. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DEL SIMULADOR DE DECAIMIENTO (Carbono 14) ---
+        const canvas = document.getElementById('decayCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const slider = document.getElementById('time-slider');
+        const timeValDisplay = document.getElementById('time-val');
+        const cValDisplay = document.getElementById('c-val');
+        const statusDisplay = document.getElementById('fossil-status');
+
+        // Constantes del Carbono 14
+        const HALF_LIFE = 5730; // Vida media en años
+        // k = ln(2) / vida_media
+        const K = Math.log(2) / HALF_LIFE; 
+        const C0 = 100; // Porcentaje inicial (100%)
+
+        // Escalas del Canvas
+        const xMax = 30000; // Máximo de años a graficar
+        const yMax = 110;   // Margen superior para el %
+
+        // Funciones de mapeo a píxeles
+        const toPixX = (x) => (x / xMax) * canvas.width;
+        const toPixY = (y) => canvas.height - ((y / yMax) * canvas.height) - 10; // -10 de padding inferior
+
+        // Función matemática del decaimiento
+        const C_t = (t) => C0 * Math.exp(-K * t);
+
+        function drawSimulator(currentT) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Dibujar Cuadrícula y Ejes
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            // Líneas horizontales de referencia (25%, 50%, 75%, 100%)
+            [25, 50, 75, 100].forEach(val => {
+                ctx.beginPath();
+                ctx.moveTo(0, toPixY(val));
+                ctx.lineTo(canvas.width, toPixY(val));
+                ctx.stroke();
+                // Etiquetas
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                ctx.font = '10px Poppins';
+                ctx.fillText(val + '%', 5, toPixY(val) - 5);
+            });
+
+            // 2. Dibujar la curva completa en "Fondo" (fantasma)
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 2;
+            for (let t = 0; t <= xMax; t += 100) {
+                let px = toPixX(t);
+                let py = toPixY(C_t(t));
+                if (t === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // 3. Dibujar la Curva Viva (Radiactiva) hasta currentT
+            ctx.beginPath();
+            ctx.strokeStyle = '#84cc16'; // Verde Radiactivo
+            ctx.lineWidth = 4;
+            
+            // Sombrear el área bajo la curva (representando radiación emanando)
+            ctx.fillStyle = 'rgba(132, 204, 22, 0.2)';
+            ctx.moveTo(toPixX(0), toPixY(0));
+            ctx.lineTo(toPixX(0), toPixY(C_t(0)));
+
+            for (let t = 0; t <= currentT; t += 50) {
+                let px = toPixX(t);
+                let py = toPixY(C_t(t));
+                ctx.lineTo(px, py);
+            }
+            ctx.lineTo(toPixX(currentT), toPixY(0));
+            ctx.fill();
+
+            // Redibujar la línea encima
+            ctx.beginPath();
+            for (let t = 0; t <= currentT; t += 50) {
+                let px = toPixX(t);
+                let py = toPixY(C_t(t));
+                if (t === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // 4. Punto Indicador
+            let pX = toPixX(currentT);
+            let pY = toPixY(C_t(currentT));
+
+            // Línea de intersección
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = 'rgba(6, 182, 212, 0.8)'; // Cian
+            ctx.moveTo(pX, toPixY(0));
+            ctx.lineTo(pX, pY);
+            ctx.lineTo(0, pY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Círculo brillante
+            ctx.beginPath();
+            ctx.fillStyle = '#06b6d4';
+            ctx.arc(pX, pY, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#06b6d4';
+            ctx.stroke();
+            ctx.shadowBlur = 0; // Reset
+        }
+
+        function updateStatus(c_remains) {
+            if(c_remains > 80) return "Fósil Reciente";
+            if(c_remains > 40) return "Antigüedad Media (Ej. Civilización Egipcia)";
+            if(c_remains > 10) return "Prehistoria Tardía";
+            return "Antigüedad Extrema (Límite del C-14)";
+        }
+
+        function renderLab() {
+            const currentT = parseInt(slider.value, 10);
+            timeValDisplay.innerText = currentT.toLocaleString(); // Poner comas a los miles
+            
+            const c_remains = C_t(currentT);
+            cValDisplay.innerText = c_remains.toFixed(2) + ' %';
+            
+            statusDisplay.innerText = updateStatus(c_remains);
+
+            // Cambiar color de estado si queda muy poco
+            if(c_remains < 10) statusDisplay.style.color = 'var(--error-red)';
+            else statusDisplay.style.color = 'var(--radioactive-green)';
+
+            drawSimulator(currentT);
+        }
+
+        // Listeners
+        slider.addEventListener('input', renderLab);
+        renderLab(); // Llamada inicial
+
+
+        // --- 2. LÓGICA DEL QUIZ (Estilo Kahoot) ---
+        function checkAnswer(btn, isCorrect) {
+            const siblings = btn.parentElement.querySelectorAll('.quiz-btn');
+            siblings.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+                b.style.opacity = '0.6';
+            });
+
+            btn.style.opacity = '1';
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // --- 3. LÓGICA DEL MODO MAESTRO (Protección) ---
+        const mainTitle = document.getElementById('main-title');
+        const masterElements = document.querySelectorAll('.master-mode');
+
+        mainTitle.addEventListener('dblclick', () => {
+            const password = prompt('🔐 INGRESO AL MODO MAESTRO.\nPor favor, introduce el código de acceso:');
+            
+            if (password === '1983') {
+                masterElements.forEach(el => el.classList.add('active'));
+                alert('✅ Acceso concedido. Notas didácticas activadas.\n¡Felicidades por concluir el curso de Cálculo Integral!');
+            } else if (password !== null) {
+                alert('❌ Código incorrecto. Acceso denegado.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen: Integración Avanzada</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+ 
+    <style>
+        /* ================= ESTILOS INTERACTIVOS ================= */
+        :root {
+            --kahoot-purple: #46178f;
+            --red: #e21b3c;
+            --blue: #1368ce;
+            --yellow: #d89e00;
+            --green: #26890c;
+            --bg: #f2f2f2;
+            --gray: #e6e6e6;
+            --dark-gray: #333;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: var(--dark-gray); }
+        
+        #app { max-width: 1000px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; }
+        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; flex: 1; }
+        .screen.active { display: flex; }
+
+        .login-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 500px; }
+        input { width: 100%; padding: 15px; margin: 15px 0; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
+        .btn-main { background: var(--kahoot-purple); color: white; border: none; padding: 15px 20px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; margin-bottom: 10px; transition: 0.2s; }
+        .btn-main:hover { filter: brightness(1.1); }
+        .btn-secondary { background: var(--blue); color: white; border: none; padding: 15px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; }
+
+        .header { display: flex; justify-content: space-between; width: 100%; padding: 15px 20px; background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; font-weight: bold; font-size: 18px; box-sizing: border-box; }
+
+        .main-expression { background: white; width: 100%; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px; color: var(--kahoot-purple); box-sizing: border-box; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;}
+
+        .exam-container { display: flex; width: 100%; justify-content: center; align-items: flex-start; }
+        
+        .questions-area { width: 100%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr; gap: 10px; }
+        
+        .question-row { display: flex; align-items: center; justify-content: space-between; background: var(--gray); padding: 10px 15px; border-radius: 8px; font-size: 16px; }
+        .math-q { font-weight: bold; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;}
+        
+        .dropzone { min-width: 120px; height: 38px; background: white; border: 2px dashed #999; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; transition: 0.2s; padding: 0 10px; margin: 0 5px; cursor: pointer; }
+        .dropzone:hover:not(.filled) { background: #d0e7ff; border-color: var(--blue); }
+        .dropzone.filled { border: 2px solid var(--kahoot-purple); background: #f9f6ff; cursor: default; }
+        .dropzone.correct { border-color: var(--green); background: #e8f5e9; }
+        .dropzone.incorrect { border-color: var(--red); background: #ffebee; }
+
+        /* ================= ESTILOS DEL MODAL (BANCO DE RESPUESTAS) ================= */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 650px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gray); padding-bottom: 15px; margin-bottom: 15px; }
+        .modal-header h3 { margin: 0; color: var(--kahoot-purple); }
+        .btn-close { background: var(--red); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.2s;}
+        .btn-close:hover { background: #b0122b; transform: scale(1.1); }
+        
+        .modal-body { overflow-y: auto; flex: 1; padding-right: 5px; }
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        
+        .option-btn { background: var(--kahoot-purple); color: white; padding: 12px 8px; border-radius: 8px; cursor: pointer; text-align: center; font-size: 15px; font-weight: bold; box-shadow: 0 4px 0px rgba(0,0,0,0.2); user-select: none; border: none; transition: transform 0.1s, box-shadow 0.1s; display: flex; align-items: center; justify-content: center; min-height: 50px;}
+        .option-btn:active { transform: translateY(4px); box-shadow: 0 0px 0px rgba(0,0,0,0.2); }
+        .option-btn:hover { filter: brightness(1.1); }
+
+        #cheat-warning { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(226, 27, 60, 0.95); color: white; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 3000; text-align: center; padding: 20px; box-sizing: border-box; }
+        #cheat-warning h1 { font-size: 40px; margin-bottom: 10px; }
+
+        /* ================= ESTILOS DE IMPRESIÓN ================= */
+        #print-area { display: none; }
+        
+        @media print {
+            body { background: white; color: black; font-size: 9pt; margin: 0; }
+            #app, #cheat-warning, .modal-overlay { display: none !important; }
+            #print-area { display: block !important; padding: 0; margin: 0; }
+            
+            .print-header { border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px; text-align: center; }
+            .print-header h1 { margin: 0 0 5px 0; font-size: 14pt; }
+            .print-info { display: flex; justify-content: space-between; font-size: 10pt; font-weight: bold; }
+            
+            .print-main-exp { text-align: center; font-size: 11pt; margin-bottom: 15px; font-weight: bold; display: flex; justify-content: space-around;}
+
+            .print-questions-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
+            .print-q { border-bottom: 1px dashed #ccc; padding-bottom: 4px; display: flex; align-items: center; break-inside: avoid; flex-wrap: wrap; }
+            
+            body.print-blank .ans-box { width: 60px; height: 18px; border: 1px solid black; display: inline-block; margin: 0 5px; }
+            body.print-blank .ans-graded { display: none; }
+            
+            body.print-graded .ans-box { display: none; }
+            body.print-graded .ans-graded { font-weight: bold; font-size: 9pt; margin: 0 5px; }
+            .ans-graded.correct { color: green; }
+            .ans-graded.wrong { color: red; text-decoration: line-through; }
+            .ans-graded.correction { color: green; font-size: 8pt; }
+            
+            @page { margin: 1cm; }
+        }
+
+        @media (max-width: 768px) {
+            .print-questions-grid { grid-template-columns: 1fr; }
+            .options-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cheat-warning">
+        <h1>⚠️ ALERTA DE BLOQUEO ⚠️</h1>
+        <p>Has salido de la pantalla del examen.</p>
+        <p>Si no regresas en menos de 5 segundos, tu examen será anulado.</p>
+    </div>
+
+    <div id="app">
+        <div id="screen-login" class="screen active">
+            <div class="login-box">
+                <h2 style="color: var(--kahoot-purple); margin-top:0;">Evaluación: Integrales Avanzadas</h2>
+                <p>Haz clic en los espacios vacíos para seleccionar la respuesta correcta. Cada acierto suma 1 punto.<br><b style="color:red;">Atención:</b> Salir de la ventana por más de 5 segundos anulará tu examen.</p>
+                <input type="text" id="student-name" placeholder="Escribe tu Nombre Completo" autocomplete="off">
+                <button class="btn-main" onclick="startExam()">COMENZAR EXAMEN INTERACTIVO</button>
+                <button class="btn-secondary" onclick="printBlank()">🖨️ Imprimir Formato en Blanco</button>
+            </div>
+        </div>
+
+        <div id="screen-quiz" class="screen">
+            <div class="header">
+                <span id="display-name">Alumno: </span>
+                <span id="display-progress">Aciertos: 0 / 20</span>
+            </div>
+            
+            <div class="main-expression">
+                <span><strong>I. Por Partes:</strong> \(\int x e^{2x} dx\)</span>
+                <span><strong>II. Fracciones:</strong> \(\int \frac{-(3y^{2}-12y+3)}{(2-y)^{2}(y+1)} dy\)</span>
+            </div>
+
+            <div class="exam-container">
+                <div class="questions-area" id="questions-container">
+                    </div>
+            </div>
+        </div>
+
+        <div id="screen-results" class="screen">
+            <div class="login-box">
+                <h2>Evaluación Finalizada</h2>
+                <h1 id="final-score" style="color: var(--blue); font-size: 48px; margin: 10px 0;">0 / 20</h1>
+                <p id="time-summary"></p>
+                <button class="btn-main" style="background: var(--green);" onclick="printGraded()">🖨️ Generar PDF Calificado</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="options-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Selecciona un término</h3>
+                <button class="btn-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="options-grid" id="modal-options-container">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="print-area"></div>
+
+    <script>
+        // ================= BASE DE DATOS DEL EJERCICIO (20 Reactivos) =================
+        const db = [
+            // Sección 1: Integración por Partes
+            { id: 1, pre: "\\text{1. Fórmula Maestra: } \\int u dv =", post: "", ans: "u \\cdot v - \\int v du" },
+            { id: 2, pre: "\\text{2. Jerarquía de selección: }", post: "", ans: "\\text{ILATE}" },
+            { id: 3, pre: "\\text{3. En } \\int x e^{2x} dx, \\text{ asignamos } u =", post: "", ans: "x" },
+            { id: 4, pre: "\\text{4. Y asignamos } dv =", post: "", ans: "e^{2x} dx" },
+            { id: 5, pre: "\\text{5. Al derivar, obtenemos } du =", post: "", ans: "dx" },
+            { id: 6, pre: "\\text{6. Al integrar, obtenemos } v =", post: "", ans: "\\frac{1}{2}e^{2x}" },
+            { id: 7, pre: "\\text{7. Solución Final I: }", post: "", ans: "\\frac{1}{2}x e^{2x} - \\frac{1}{4}e^{2x} + C" },
+            // Sección 2: Fracciones Parciales
+            { id: 8, pre: "\\text{8. Fracción A: } \\frac{A}{?} \\rightarrow", post: "", ans: "2-y" },
+            { id: 9, pre: "\\text{9. Fracción B (Repetido): } \\frac{B}{?} \\rightarrow", post: "", ans: "(2-y)^2" },
+            { id: 10, pre: "\\text{10. Fracción C: } \\frac{C}{?} \\rightarrow", post: "", ans: "y+1" },            
+            { id: 11, pre: "\\text{11. Filtro } y^2: -3 =", post: "", ans: "-A+C" },
+            { id: 12, pre: "\\text{12. Filtro } y: 12 =", post: "", ans: "A+B-4C" },
+            { id: 13, pre: "\\text{13. Filtro Constante: } -3 =", post: "", ans: "2A+B+4C" },
+            { id: 14, pre: "\\text{14. Calculando coeficientes, } A =", post: "", ans: "1" },
+            { id: 15, pre: "\\text{15. Valor de } B =", post: "", ans: "3" },
+            { id: 16, pre: "\\text{16. Valor de } C =", post: "", ans: "-2" },
+            { id: 17, pre: "\\text{17. } \\int \\frac{1}{2-y} dy =", post: "", ans: "-\\ln(2-y)" },
+            { id: 18, pre: "\\text{18. } \\int \\frac{3}{(2-y)^2} dy =", post: "", ans: "\\frac{3}{2-y}" },
+            { id: 19, pre: "\\text{19. } \\int \\frac{-2}{y+1} dy =", post: "", ans: "-\\ln((y+1)^2)" },
+            { id: 20, pre: "\\text{20. Con } x=-\\ln 4, y=1, \\text{ la constante } c =", post: "", ans: "-3" }
+        ];
+
+        // ================= VARIABLES GLOBALES =================
+        let studentName = "";
+        let score = 0;
+        let placedItems = 0;
+        let startTime, endTime;
+        let examActive = false;
+        let userAnswers = {}; 
+        
+        let lastHiddenTime = 0;
+        let isCheater = false;
+
+        let activeBox = null;
+        let activeQuestionId = null;
+
+        // ================= LÓGICA ANTITRAMPAS =================
+        document.addEventListener("visibilitychange", () => {
+            if (!examActive || isCheater) return;
+            const warningEl = document.getElementById('cheat-warning');
+
+            if (document.hidden) {
+                lastHiddenTime = Date.now();
+                warningEl.style.display = 'flex';
+            } else {
+                let awayTime = Date.now() - lastHiddenTime;
+                if (awayTime > 5000) {
+                    lockExam();
+                } else {
+                    warningEl.style.display = 'none';
+                }
+            }
+        });
+
+        function lockExam() {
+            isCheater = true;
+            examActive = false;
+            document.getElementById('cheat-warning').innerHTML = `
+                <h1>❌ EXAMEN ANULADO ❌</h1>
+                <p>Saliste de la ventana por más de 5 segundos.</p>
+                <button class="btn-main" style="margin-top:20px; width:250px;" onclick="finishExam(true)">Ver Reporte</button>
+            `;
+        }
+
+        // ================= LÓGICA DEL EXAMEN =================
+        function startExam() {
+            studentName = document.getElementById("student-name").value.trim().toUpperCase();
+            if (studentName === "") { alert("Por favor, ingresa tu nombre."); return; }
+
+            const localKey = "integral_avanzada_" + studentName.replace(/\s/g, '');
+            if (localStorage.getItem(localKey)) {
+                alert("Ya presentaste este examen. No se permiten reintentos.");
+                return;
+            }
+
+            localStorage.setItem(localKey, "started");
+            examActive = true;
+            startTime = new Date();
+            
+            document.getElementById("display-name").innerText = "Alumno: " + studentName;
+            document.getElementById("screen-login").classList.remove("active");
+            document.getElementById("screen-quiz").classList.add("active");
+
+            buildInterface();
+        }
+
+        function buildInterface() {
+            const qContainer = document.getElementById("questions-container");
+            const mContainer = document.getElementById("modal-options-container");
+            qContainer.innerHTML = "";
+            mContainer.innerHTML = "";
+
+            // 1. Construir las preguntas
+            db.forEach(item => {
+                const row = document.createElement("div");
+                row.className = "question-row";
+                
+                const qText = document.createElement("div");
+                qText.className = "math-q";
+                
+                const spanPre = document.createElement("span");
+                spanPre.innerHTML = `\\(${item.pre}\\)`;
+                
+                const dropzone = document.createElement("div");
+                dropzone.className = "dropzone";
+                dropzone.id = `box-${item.id}`;
+                dropzone.setAttribute("data-correct", item.ans);
+                
+                // Evento para abrir el modal
+                dropzone.onclick = () => openModal(dropzone, item.id);
+                
+                const spanPost = document.createElement("span");
+                spanPost.innerHTML = `\\(${item.post}\\)`;
+                
+                qText.appendChild(spanPre);
+                qText.appendChild(dropzone);
+                if(item.post !== "") qText.appendChild(spanPost);
+
+                row.appendChild(qText);
+                qContainer.appendChild(row);
+            });
+
+            // 2. Construir los botones del modal desordenados
+            let shuffledAnswers = [...db].sort(() => 0.5 - Math.random());
+
+            shuffledAnswers.forEach((item, index) => {
+                const optBtn = document.createElement("button");
+                optBtn.className = "option-btn";
+                optBtn.id = `opt-${item.id}-${index}`;
+                
+                // Usamos una función anónima para evitar problemas de escape con caracteres especiales
+                optBtn.onclick = function() {
+                    selectOption(item.ans, this.id);
+                };
+                
+                optBtn.innerHTML = `\\(${item.ans}\\)`;
+                mContainer.appendChild(optBtn);
+            });
+
+            // Renderizar matemáticas
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+
+        // ================= LÓGICA DEL MODAL =================
+        function openModal(boxElement, qId) {
+            // Si el cuadro ya tiene respuesta, no hacer nada
+            if (boxElement.classList.contains("filled")) return; 
+            
+            activeBox = boxElement;
+            activeQuestionId = qId;
+            document.getElementById("options-modal").classList.add("active");
+        }
+
+        function closeModal() {
+            document.getElementById("options-modal").classList.remove("active");
+            activeBox = null;
+            activeQuestionId = null;
+        }
+
+        function selectOption(answerText, btnId) {
+            if (!activeBox) return;
+
+            let correctText = activeBox.getAttribute("data-correct");
+            let btnElement = document.getElementById(btnId);
+
+            // Ocultar el botón para que no se use de nuevo
+            btnElement.style.display = "none";
+
+            // Actualizar la caja
+            activeBox.classList.add("filled");
+            activeBox.onclick = null; // Quitar el evento de clic para bloquearlo
+            activeBox.innerHTML = `\\(${answerText}\\)`;
+            
+            // Actualizar las matemáticas solo en esa caja para mejor rendimiento
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, activeBox]);
+
+            // Guardar respuesta del usuario
+            userAnswers[activeQuestionId] = { givenText: answerText };
+
+            // Evaluar
+            if (answerText === correctText) {
+                activeBox.classList.add("correct");
+                score++;
+            } else {
+                activeBox.classList.add("incorrect");
+            }
+
+            placedItems++;
+            document.getElementById("display-progress").innerText = `Aciertos: ${score} / 20`;
+
+            closeModal();
+
+            // Revisar si ya se terminó
+            if (placedItems === 20) {
+                setTimeout(() => finishExam(false), 1000);
+            }
+        }
+
+        function formatTime(date) { 
+            if(!date) return "--:--:--";
+            return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}); 
+        }
+
+        function finishExam(dueToCheat) {
+            examActive = false;
+            endTime = new Date();
+            
+            const localKey = "integral_avanzada_" + studentName.replace(/\s/g, '');
+            localStorage.setItem(localKey, `score:${score}_cheat:${dueToCheat}`);
+
+            document.getElementById("cheat-warning").style.display = "none";
+            document.getElementById("screen-quiz").classList.remove("active");
+            document.getElementById("screen-results").classList.add("active");
+
+            document.getElementById("final-score").innerText = dueToCheat ? "ANULADO" : `${score} / 20`;
+            document.getElementById("time-summary").innerHTML = `
+                <strong>Inicio:</strong> ${formatTime(startTime)} <br>
+                <strong>Término:</strong> ${formatTime(endTime)}
+            `;
+        }
+
+        // ================= LÓGICA DE IMPRESIÓN =================
+        function printBlank() {
+            let tempName = document.getElementById("student-name").value.trim().toUpperCase() || "_________________________";
+            document.body.className = 'print-blank';
+            buildPrintHTML(tempName, false, true);
+            window.print();
+        }
+
+        function printGraded() {
+            document.body.className = 'print-graded';
+            buildPrintHTML(studentName, isCheater, false);
+            window.print();
+        }
+
+        function buildPrintHTML(name, dueToCheat, isBlank) {
+            const printArea = document.getElementById("print-area");
+            
+            let html = `
+                <div class="print-header">
+                    <h1>Examen: Integrales Avanzadas</h1>
+                    <div class="print-info">
+                        <span>Alumno: ${name}</span>
+                        <span>Aciertos: ${isBlank ? '___ / 20' : (dueToCheat ? '0 (TRAMPA)' : score + ' / 20')}</span>
+                    </div>
+                    <div class="print-info" style="font-weight:normal; margin-top:5px;">
+                        <span>Inicio: ${isBlank ? '__:__:__' : formatTime(startTime)}</span>
+                        <span>Término: ${isBlank ? '__:__:__' : formatTime(endTime)}</span>
+                    </div>
+                </div>
+                <div class="print-main-exp">
+                    <span>\\(\\int x e^{2x} dx\\)</span>
+                    <span>\\(\\int \\frac{-(3y^{2}-12y+3)}{(2-y)^{2}(y+1)} dy\\)</span>
+                </div>
+                <div class="print-questions-grid">
+            `;
+
+            db.forEach((q) => {
+                html += `<div class="print-q">`;
+                html += `<span>\\(${q.pre}\\)</span>`;
+                
+                html += `<div class="ans-box"></div>`;
+
+                if (!isBlank) {
+                    const uAns = userAnswers[q.id];
+                    if (!uAns && !dueToCheat) {
+                        html += `<span class="ans-graded wrong">Vacío</span>`;
+                        html += `<span class="ans-graded correction">\\(${q.ans}\\)</span>`;
+                    } else if (dueToCheat) {
+                        html += `<span class="ans-graded wrong">ANULADO</span>`;
+                    } else if (uAns.givenText === q.ans) {
+                        html += `<span class="ans-graded correct">\\(${q.ans}\\)</span>`;
+                    } else {
+                        html += `<span class="ans-graded wrong">\\(${uAns.givenText}\\)</span>`;
+                        html += `<span class="ans-graded correction">\\(${q.ans}\\)</span>`;
+                    }
+                }
+                
+                html += `<span>\\(${q.post}\\)</span>`;
+                html += `</div>`;
+            });
+
+            html += `</div>`;
+            printArea.innerHTML = html;
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, printArea]);
+        }
+    </script>
+</body>
+</html>

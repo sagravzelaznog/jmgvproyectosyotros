@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Cálculo Integral - Paso a Paso</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+     <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --bg-color: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .instruction {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .student-info {
+            margin-bottom: 30px;
+        }
+
+        .student-info input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .problem-statement {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .math-line {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        /* Estilos para los inputs de los términos */
+        input.term-blank {
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 5px;
+            border: 2px solid #b0bec5;
+            border-radius: 4px;
+            background-color: #fff;
+            transition: all 0.3s;
+            font-family: monospace;
+        }
+
+        input.term-blank:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Tamaños específicos según lo que se pide */
+        .w-small { width: 40px; }
+        .w-med { width: 60px; }
+        .w-large { width: 80px; }
+
+        /* Estados de validación */
+        input.correct {
+            border-color: var(--success-color);
+            background-color: #eafaf1;
+            color: var(--success-color);
+            pointer-events: none;
+        }
+
+        input.incorrect {
+            border-color: var(--danger-color);
+            background-color: #fceceb;
+            color: var(--danger-color);
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .score-board {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9f9;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: 2px dashed #bdc3c7;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 600px) {
+            .math-line { font-size: 1em; }
+            input.term-blank { font-size: 0.9em; padding: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Evaluación: Cálculo Integral</h1>
+        
+        <div class="instruction">
+            <strong>Instrucciones:</strong> Calcula el área de la región delimitada por las curvas \( f(x) = 2x \) y \( g(x) = x^2 - 4x \). Rellena las cajas en blanco con los términos, coeficientes o exponentes correctos. Cada recuadro equivale a 1 acierto (Total: 20 aciertos).
+        </div>
+
+        <div class="student-info">
+            <input type="text" id="studentName" placeholder="Escribe tu Nombre Completo" autocomplete="off">
+        </div>
+
+        <div class="problem-statement">
+            Área entre \( y = 2x \) y \( y = x^2 - 4x \)
+        </div>
+
+        <div id="exam-form">
+            <div class="step">
+                <p>1. Igualamos las funciones para encontrar los puntos de intersección (límites de integración):</p>
+                <div class="math-line">
+                    \( x^2 - 4x = \) <input type="text" class="term-blank w-med" data-ans="2x"> 
+                </div>
+            </div>
+
+            <div class="step">
+                <p>2. Igualamos a cero y simplificamos los términos semejantes:</p>
+                <div class="math-line">
+                    \( x^2 - \) <input type="text" class="term-blank w-med" data-ans="6x"> \( = 0 \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>3. Factorizamos por factor común para hallar las raíces:</p>
+                <div class="math-line">
+                    <input type="text" class="term-blank w-small" data-ans="x"> \( (x - \) <input type="text" class="term-blank w-small" data-ans="6"> \( ) = 0 \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>4. Definimos los límites de integración (de menor a mayor):</p>
+                <div class="math-line">
+                    \( a = \) <input type="text" class="term-blank w-small" data-ans="0"> \( , \quad b = \) <input type="text" class="term-blank w-small" data-ans="6">
+                </div>
+            </div>
+
+            <div class="step">
+                <p>5. Planteamos la integral definida restando la función de abajo a la de arriba:</p>
+                <div class="math-line">
+                    \( \int_{0}^{6} \Big[ \) <input type="text" class="term-blank w-med" data-ans="2x"> \( - ( x^2 - \) <input type="text" class="term-blank w-med" data-ans="4x"> \( ) \Big] dx \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>6. Simplificamos el integrando antes de integrar:</p>
+                <div class="math-line">
+                    \( \int_{0}^{6} \Big[ \) <input type="text" class="term-blank w-med" data-ans="6x"> \( - x^2 \Big] dx \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>7. Aplicamos las reglas básicas de integración \( \int x^n dx \):</p>
+                <div class="math-line">
+                    \( \Bigg[ \frac{ \) 
+                    <input type="text" class="term-blank w-small" data-ans="6"> \( x \^ \) <input type="text" class="term-blank w-small" data-ans="2"> 
+                    \( }{ \)
+                    <input type="text" class="term-blank w-small" data-ans="2">
+                    \( } - \frac{ x \^ \)
+                    <input type="text" class="term-blank w-small" data-ans="3">
+                    \( }{ \)
+                    <input type="text" class="term-blank w-small" data-ans="3">
+                    \( } \Bigg]_0^6 \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>8. Simplificamos las fracciones resultantes:</p>
+                <div class="math-line">
+                    \( \Bigg[ \) <input type="text" class="term-blank w-small" data-ans="3"> \( x^2 - \frac{x^3}{3} \Bigg]_0^6 \)
+                </div>
+            </div>
+
+            <div class="step">
+                <p>9. Evaluamos usando el Teorema Fundamental del Cálculo (límite superior):</p>
+                <div class="math-line">
+                    \( = 3( \) <input type="text" class="term-blank w-small" data-ans="6"> \( )^2 - \frac{ (6)^3 }{3} \)
+                </div>
+                <div class="math-line">
+                    \( = 3( \) <input type="text" class="term-blank w-med" data-ans="36"> \( ) - \frac{216}{3} \)
+                </div>
+                <div class="math-line">
+                    \( = \) <input type="text" class="term-blank w-med" data-ans="108"> \( - \) <input type="text" class="term-blank w-med" data-ans="72">
+                </div>
+            </div>
+
+            <div class="step">
+                <p>10. Obtenemos el resultado final (el límite inferior evaluado da cero):</p>
+                <div class="math-line">
+                    \( Área = \) <input type="text" class="term-blank w-large" data-ans="36"> \( u^2 \)
+                </div>
+            </div>
+
+            <div class="controls">
+                <button onclick="calificarExamen()">✅ VERIFICAR RESPUESTAS</button>
+            </div>
+
+            <div id="scoreBoard" class="score-board"></div>
+        </div>
+    </div>
+
+    <script>
+        function calificarExamen() {
+            const nombre = document.getElementById("studentName").value.trim();
+            if (nombre === "") {
+                alert("Por favor, escribe tu nombre antes de calificar.");
+                return;
+            }
+
+            const inputs = document.querySelectorAll('.term-blank');
+            let aciertos = 0;
+
+            inputs.forEach(input => {
+                // Se limpian espacios y se pasa a minúsculas para evitar errores de dedo
+                const respuestaCorrecta = input.getAttribute('data-ans').replace(/\s+/g, '').toLowerCase();
+                const respuestaUsuario = input.value.replace(/\s+/g, '').toLowerCase();
+
+                if (respuestaUsuario === respuestaCorrecta) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    aciertos++;
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                }
+            });
+
+            const scoreBoard = document.getElementById("scoreBoard");
+            scoreBoard.style.display = "block";
+            
+            // Colores dependiendo de la calificación
+            if (aciertos === 20) {
+                scoreBoard.style.color = "var(--success-color)";
+                scoreBoard.style.borderColor = "var(--success-color)";
+                scoreBoard.innerHTML = `¡Excelente, ${nombre}! <br> Calificación: ${aciertos} / 20`;
+            } else if (aciertos >= 12) {
+                scoreBoard.style.color = "var(--accent-color)";
+                scoreBoard.style.borderColor = "var(--accent-color)";
+                scoreBoard.innerHTML = `Buen trabajo, ${nombre}. Revisa los recuadros en rojo. <br> Calificación: ${aciertos} / 20`;
+            } else {
+                scoreBoard.style.color = "var(--danger-color)";
+                scoreBoard.style.borderColor = "var(--danger-color)";
+                scoreBoard.innerHTML = `Hay áreas de oportunidad, ${nombre}. Corrige los errores. <br> Calificación: ${aciertos} / 20`;
+            }
+
+            // Opcional: Desplazarse hacia la puntuación
+            scoreBoard.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

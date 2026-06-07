@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Integral - Portal Principal</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header con navegación -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-calculator logo-icon"></i>
+                <div class="logo-text">
+                    <h1>Cálculo Integral</h1>
+                    <span class="subtitle">Portal Educativo</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#inicio" class="nav-link">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+                <a href="#modulos" class="nav-link">
+                    <i class="fas fa-book"></i> Módulos
+                </a>
+                <a href="#progreso" class="nav-link">
+                    <i class="fas fa-chart-line"></i> Progreso
+                </a>
+                <a href="login.html" class="nav-link">
+                    <i class="fas fa-user"></i> Perfil
+                </a>
+            </nav>
+            <div class="user-info">
+                <span class="user-name" id="user-name">Usuario</span>
+                <button class="btn btn-error btn-sm" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container main-content">
+        <!-- Sección de bienvenida -->
+        <section class="section" id="inicio">
+            <div class="card card-elevated animate-fade-in">
+                <div class="card-header">
+                    <h1 class="card-title text-center">
+                        <i class="fas fa-graduation-cap"></i>
+                        Bienvenido al Portal de Cálculo Integral
+                    </h1>
+                    <p class="card-subtitle text-center">
+                        Domina el cálculo integral con nuestros módulos interactivos y ejercicios paso a paso
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de progreso -->
+        <section class="section" id="progreso">
+            <div class="card card-elevated">
+                <div class="card-header">
+                    <h2 class="card-title text-center">
+                        <i class="fas fa-chart-line"></i>
+                        Tu Progreso de Aprendizaje
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-5 progress-grid">
+                        <div class="card progress-item">
+                            <h4 class="text-center">Módulo 1</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress1"></div>
+                            </div>
+                            <span class="progress-text">
+                                <span class="progress-percentage" id="percent1">0%</span>
+                            </span>
+                        </div>
+                        <div class="card progress-item">
+                            <h4 class="text-center">Módulo 2</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress2"></div>
+                            </div>
+                            <span class="progress-text">
+                                <span class="progress-percentage" id="percent2">0%</span>
+                            </span>
+                        </div>
+                        <div class="card progress-item">
+                            <h4 class="text-center">Módulo 3</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress3"></div>
+                            </div>
+                            <span class="progress-text">
+                                <span class="progress-percentage" id="percent3">0%</span>
+                            </span>
+                        </div>
+                        <div class="card progress-item">
+                            <h4 class="text-center">Módulo 4</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress4"></div>
+                            </div>
+                            <span class="progress-text">
+                                <span class="progress-percentage" id="percent4">0%</span>
+                            </span>
+                        </div>
+                        <div class="card progress-item">
+                            <h4 class="text-center">Módulo 5</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress5"></div>
+                            </div>
+                            <span class="progress-text">
+                                <span class="progress-percentage" id="percent5">0%</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid de módulos -->
+        <section class="section" id="modulos">
+            <div class="card card-elevated">
+                <div class="card-header">
+                    <h2 class="card-title text-center">
+                        <i class="fas fa-book"></i>
+                        Módulos de Aprendizaje
+                    </h2>
+                    <p class="card-subtitle text-center">
+                        Explora cada módulo con contenido interactivo y ejercicios prácticos
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-3 modules-grid">
+                        <!-- Módulo 1: Antiderivadas -->
+                        <div class="card card-interactive module-card">
+                            <div class="card-header">
+                                <i class="fas fa-function module-icon"></i>
+                                <h3 class="card-title">Módulo 1: Antiderivadas e Integrales Indefinidas</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Aprende los conceptos fundamentales del cálculo integral, incluyendo antiderivadas, integrales indefinidas y sus propiedades básicas.
+                                </p>
+                                <ul class="module-features">
+                                    <li>Conceptos de antiderivadas</li>
+                                    <li>Integrales indefinidas</li>
+                                    <li>Propiedades básicas</li>
+                                    <li>Reglas de integración</li>
+                                </ul>
+                                <div class="flex flex-column gap-2">
+                                    <a href="modulo1_antiderivadas.html" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Estudiar Módulo
+                                    </a>
+                                    <a href="ejercicios_modulo1.html" class="btn btn-success">
+                                        <i class="fas fa-dumbbell"></i> Ejercicios
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 2: Integral Definida -->
+                        <div class="card card-interactive module-card">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area module-icon"></i>
+                                <h3 class="card-title">Módulo 2: Sumas de Riemann y la Integral Definida</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Explora las sumas de Riemann, el concepto de integral definida y el teorema fundamental del cálculo.
+                                </p>
+                                <ul class="module-features">
+                                    <li>Sumas de Riemann</li>
+                                    <li>Integral definida</li>
+                                    <li>Teorema fundamental del cálculo</li>
+                                    <li>Aplicaciones geométricas</li>
+                                </ul>
+                                <div class="flex flex-column gap-2">
+                                    <a href="modulo2_integral_definida.html" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Estudiar Módulo
+                                    </a>
+                                    <a href="ejercicios_modulo2.html" class="btn btn-success">
+                                        <i class="fas fa-dumbbell"></i> Ejercicios
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 3: Técnicas de Integración -->
+                        <div class="card card-interactive module-card">
+                            <div class="card-header">
+                                <i class="fas fa-tools module-icon"></i>
+                                <h3 class="card-title">Módulo 3: Técnicas de Integración</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Domina las diferentes técnicas de integración: sustitución, integración por partes, fracciones parciales y más.
+                                </p>
+                                <ul class="module-features">
+                                    <li>Integración por sustitución</li>
+                                    <li>Integración por partes</li>
+                                    <li>Fracciones parciales <a href="examenaplicaru3.html">Examen Aplicado U3</a></li>
+                                    <li>Integrales trigonométricas <a href="ejercicio5calculointegral/eje5calculointegral.html"></a></li>
+                                </ul>
+                                <div class="flex flex-column gap-2">
+                                    <a href="modulo3_interactivo.html" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Estudiar Módulo
+                                    </a>
+                                    <a href="EJERCICIOS_MODULO3.md" class="btn btn-success">
+                                        <i class="fas fa-dumbbell"></i> Ejercicios
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 4: Aplicaciones -->
+                        <div class="card card-interactive module-card">
+                            <div class="card-header">
+                                <i class="fas fa-rocket module-icon"></i>
+                                <h3 class="card-title">Módulo 4: Aplicaciones de la Integral</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Descubre las aplicaciones prácticas del cálculo integral en cálculo de áreas, volúmenes y problemas de física.
+                                </p>
+                                <ul class="module-features">
+                                    <li>Cálculo de áreas</li>
+                                    <li>Cálculo de volúmenes</li>
+                                    <li>Aplicaciones en física</li>
+                                    <li>Problemas prácticos</li>
+                                </ul>
+                                <div class="flex flex-column gap-2">
+                                    <a href="index_modulo4.html" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Portal del Módulo
+                                    </a>
+                                    <a href="modulo4_aplicaciones.html" class="btn btn-success">
+                                        <i class="fas fa-book"></i> Contenido Completo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 5: Ecuaciones Diferenciales -->
+                        <div class="card card-interactive module-card">
+                            <div class="card-header">
+                                <i class="fas fa-infinity module-icon"></i>
+                                <h3 class="card-title">Módulo 5: Ecuaciones Diferenciales</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Introduce las ecuaciones diferenciales y su resolución, conectando el cálculo integral con aplicaciones avanzadas.
+                                </p>
+                                <ul class="module-features">
+                                    <li>Ecuaciones diferenciales básicas</li>
+                                    <li>Métodos de resolución</li>
+                                    <li>Aplicaciones prácticas</li>
+                                    <li>Modelado matemático</li>
+                                </ul>
+                                <div class="flex flex-column gap-2">
+                                    <a href="modulo5_ecuaciones_diferenciales.html" class="btn btn-primary">
+                                        <i class="fas fa-play"></i> Estudiar Módulo
+                                    </a>
+                                    <a href="ejercicios_modulo5.html" class="btn btn-success">
+                                        <i class="fas fa-dumbbell"></i> Ejercicios
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acceso rápido -->
+        <section class="section">
+            <div class="card card-elevated">
+                <div class="card-header">
+                    <h3 class="card-title text-center">
+                        <i class="fas fa-bolt"></i>
+                        Acceso Rápido
+                    </h3>
+                    <p class="card-subtitle text-center">
+                        Enlaces directos a recursos y herramientas útiles
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-4 quick-links">
+                        <a href="login.html" class="btn btn-outline">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                        <a href="README.md" class="btn btn-outline">
+                            <i class="fas fa-book"></i> Documentación
+                        </a>
+                        <a href="REFERENCIA_RAPIDA.md" class="btn btn-outline">
+                            <i class="fas fa-lightning-bolt"></i> Referencia Rápida
+                        </a>
+                        <a href="planeacionCI.MD" class="btn btn-outline">
+                            <i class="fas fa-calendar"></i> Planificación
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="card card-elevated">
+            <div class="card-body text-center">
+                <h3 class="card-title">
+                    <i class="fas fa-heart"></i>
+                    Desarrollado con Pasión
+                </h3>
+                <p class="card-text">
+                    Este portal representa el compromiso con la excelencia en la educación matemática
+                    y la innovación tecnológica en el aprendizaje del cálculo integral.
+                </p>
+                <div class="mt-4">
+                    <strong>© 2025 JMGV-PTEL - Todos los derechos reservados</strong><br>
+                    <em>Elaborado por: José Manuel González Vargas</em>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { 
+            observarEstadoAuth 
+        } from './auth-manager.js';
+
+        // Observar estado de autenticación
+        observarEstadoAuth((estado) => {
+            if (estado.autenticado) {
+                mostrarInfoUsuario(estado.usuario, estado.datos);
+            } else {
+                // Redirigir al login si no está autenticado
+                window.location.href = 'login.html';
+            }
+        });
+
+        function mostrarInfoUsuario(usuario, datos) {
+            document.getElementById('user-name').textContent = datos?.displayName || usuario.email;
+
+            // Mostrar progreso si está disponible
+            if (datos && datos.progress) {
+                actualizarProgreso();
+            }
+        }
+
+        // Función para actualizar progreso
+        function actualizarProgreso() {
+            if (datos && datos.progress) {
+                for (let i = 1; i <= 5; i++) {
+                    const progreso = datos.progress[`modulo${i}`] || 0;
+                    const progressBar = document.getElementById(`progress${i}`);
+                    const percentText = document.getElementById(`percent${i}`);
+
+                    if (progressBar) {
+                        progressBar.style.width = `${progreso}%`;
+                        progressBar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    }
+
+                    if (percentText) {
+                        percentText.textContent = `${progreso}%`;
+                        percentText.style.color = progreso > 50 ? 'var(--success-color)' : 'var(--primary-color)';
+                    }
+                }
+            }
+        }
+
+        // Manejar logout
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            const { cerrarSesion } = await import('./auth-manager.js');
+            const resultado = await cerrarSesion();
+            if (resultado.success) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Animaciones de entrada mejoradas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de acceso rápido
+            const quickLinks = document.querySelectorAll('.quick-links .btn');
+            quickLinks.forEach((link, index) => {
+                link.style.opacity = '0';
+                link.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    link.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    link.style.opacity = '1';
+                    link.style.transform = 'translateY(0)';
+                }, 1200 + (index * 100));
+            });
+        });
+
+        // Efectos de hover mejorados
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = 'var(--shadow-xl)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Efectos para elementos de progreso
+        document.querySelectorAll('.progress-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-6px) scale(1.05)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Navegación suave mejorada
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

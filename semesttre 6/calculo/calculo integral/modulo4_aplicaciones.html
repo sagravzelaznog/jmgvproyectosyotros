@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Aplicaciones de la Integral - Cálculo Integral</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="module-header">
+        <div class="container">
+            <h1 class="card-title"><i class="fas fa-calculator"></i> Módulo 4: Aplicaciones de la Integral</h1>
+            <p class="card-subtitle">Explorando el poder del cálculo integral en problemas reales</p>
+            <div class="module-progress-bar">
+                <div class="module-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-nav">
+            <div class="module-nav-tabs">
+                <button class="module-nav-tab active" onclick="showSection('overview')">
+                    <i class="fas fa-eye"></i> Visión General
+                </button>
+                <button class="module-nav-tab" onclick="showSection('areas')">
+                    <i class="fas fa-square"></i> Cálculo de Áreas
+                </button>
+                <button class="module-nav-tab" onclick="showSection('volumes')">
+                    <i class="fas fa-cube"></i> Cálculo de Volúmenes
+                </button>
+                <button class="module-nav-tab" onclick="showSection('physics')">
+                    <i class="fas fa-atom"></i> Aplicaciones en Física
+                </button>
+                <button class="module-nav-tab" onclick="showSection('other')">
+                    <i class="fas fa-chart-line"></i> Otras Aplicaciones
+                </button>
+                <button class="module-nav-tab" onclick="showSection('exercises')">
+                    <i class="fas fa-dumbbell"></i> Ejercicios
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección de Visión General -->
+        <div id="overview" class="module-content-section active">
+            <div class="module-section-header">
+                <i class="fas fa-eye"></i>
+                <h2>Visión General del Módulo 4</h2>
+            </div>
+
+            <div class="module-concept-box">
+                <h3 class="card-title"><i class="fas fa-lightbulb"></i> ¿Por qué son importantes las aplicaciones?</h3>
+                <p>El cálculo integral no es solo una herramienta matemática abstracta. Es la base para resolver problemas reales en:</p>
+                <ul>
+                    <li><strong>Ingeniería:</strong> Diseño de estructuras, análisis de señales</li>
+                    <li><strong>Física:</strong> Cálculo de trabajo, centros de masa</li>
+                    <li><strong>Economía:</strong> Análisis de superávit, optimización</li>
+                    <li><strong>Medicina:</strong> Modelado de procesos biológicos</li>
+                    <li><strong>Arquitectura:</strong> Cálculo de volúmenes y áreas</li>
+                </ul>
+            </div>
+
+            <h3 class="card-title"><i class="fas fa-road"></i> Ruta de Aprendizaje</h3>
+            <div class="module-exercise-grid">
+                <div class="module-exercise-card">
+                    <h4 class="card-title"><i class="fas fa-square"></i> 4.1 Cálculo de Áreas</h4>
+                    <p>Aprenderemos a calcular áreas bajo curvas y entre curvas, fundamentales para muchos problemas prácticos.</p>
+                    <span class="module-difficulty-badge module-difficulty-basic">Básico</span>
+                </div>
+                <div class="module-exercise-card">
+                    <h4 class="card-title"><i class="fas fa-cube"></i> 4.2 Cálculo de Volúmenes</h4>
+                    <p>Exploraremos los métodos de discos, arandelas y cascarones para calcular volúmenes de sólidos de revolución.</p>
+                    <span class="module-difficulty-badge module-difficulty-intermediate">Intermedio</span>
+                </div>
+                <div class="module-exercise-card">
+                    <h4 class="card-title"><i class="fas fa-atom"></i> 4.3 Aplicaciones en Física</h4>
+                    <p>Veremos cómo la integral se aplica al trabajo mecánico, centros de masa y fuerzas hidrostáticas.</p>
+                    <span class="module-difficulty-badge module-difficulty-intermediate">Intermedio</span>
+                </div>
+                <div class="module-exercise-card">
+                    <h4 class="card-title"><i class="fas fa-chart-line"></i> 4.4 Otras Aplicaciones</h4>
+                    <p>Exploraremos longitud de arco, superficie de revolución y aplicaciones en economía.</p>
+                    <span class="module-difficulty-badge module-difficulty-advanced">Avanzado</span>
+                </div>
+            </div>
+
+            <div class="module-interactive-demo">
+                <h3 class="card-title"><i class="fas fa-play-circle"></i> Demostración Interactiva</h3>
+                <p>Haz clic para ver cómo las integrales transforman problemas complejos en soluciones elegantes:</p>
+                <button class="module-demo-button" onclick="showDemo()">
+                    <i class="fas fa-magic"></i> Ver Demostración
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección 4.1: Cálculo de Áreas -->
+        <div id="areas" class="module-content-section">
+            <div class="module-section-header">
+                <i class="fas fa-square"></i>
+                <h2>4.1 Cálculo de Áreas</h2>
+            </div>
+
+            <div class="module-concept-box">
+                <h3 class="card-title"><i class="fas fa-lightbulb"></i> Concepto Fundamental</h3>
+                <p>El área bajo una curva $y = f(x)$ desde $x = a$ hasta $x = b$ está dada por:</p>
+                <div class="module-formula-box">
+                    $$A = \int_a^b f(x) \, dx$$
+                </div>
+                <p>Esta es la aplicación más directa del Teorema Fundamental del Cálculo.</p>
+            </div>
+
+            <h3 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Área Bajo una Curva</h3>
+            <div class="module-example-box">
+                <h4 class="card-title"><i class="fas fa-calculator"></i> Ejemplo 1: Área bajo $y = x^2$ desde $x = 0$ hasta $x = 2$</h4>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">1</span>
+                    <strong>Identificar la función y los límites:</strong>
+                    <p>Función: $f(x) = x^2$<br>
+                    Límites: $a = 0$, $b = 2$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">2</span>
+                    <strong>Plantear la integral:</strong>
+                    <p>$$A = \int_0^2 x^2 \, dx$$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">3</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$\int x^2 \, dx = \frac{x^3}{3} + C$$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">4</span>
+                    <strong>Aplicar el Teorema Fundamental del Cálculo:</strong>
+                    <p>$$A = \left[\frac{x^3}{3}\right]_0^2 = \frac{2^3}{3} - \frac{0^3}{3} = \frac{8}{3}$$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">5</span>
+                    <strong>Interpretar el resultado:</strong>
+                    <p>El área bajo la curva $y = x^2$ desde $x = 0$ hasta $x = 2$ es $\frac{8}{3}$ unidades cuadradas.</p>
+                </div>
+            </div>
+
+            <h3 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Área Entre Dos Curvas</h3>
+            <div class="module-concept-box">
+                <h3 class="card-title"><i class="fas fa-lightbulb"></i> Fórmula para Área Entre Curvas</h3>
+                <p>Si $f(x) \geq g(x)$ en el intervalo $[a, b]$, entonces el área entre las curvas es:</p>
+                <div class="module-formula-box">
+                    $$A = \int_a^b [f(x) - g(x)] \, dx$$
+                </div>
+            </div>
+
+            <div class="module-example-box">
+                <h4 class="card-title"><i class="fas fa-calculator"></i> Ejemplo 2: Área entre $y = x^2$ y $y = x$</h4>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">1</span>
+                    <strong>Encontrar los puntos de intersección:</strong>
+                    <p>$x^2 = x \Rightarrow x^2 - x = 0 \Rightarrow x(x-1) = 0$<br>
+                    Por lo tanto: $x = 0$ y $x = 1$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">2</span>
+                    <strong>Determinar cuál función está arriba:</strong>
+                    <p>En el intervalo $[0, 1]$: $x \geq x^2$<br>
+                    Por lo tanto: $f(x) = x$ y $g(x) = x^2$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">3</span>
+                    <strong>Plantear la integral:</strong>
+                    <p>$$A = \int_0^1 [x - x^2] \, dx$$</p>
+                </div>
+
+                <div class="module-step-by-step">
+                    <span class="module-step-number">4</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$A = \int_0^1 x \, dx - \int_0^1 x^2 \, dx = \left[\frac{x^2}{2}\right]_0^1 - \left[\frac{x^3}{3}\right]_0^1$$</p>
+                    <p>$$A = \frac{1}{2} - \frac{1}{3} = \frac{3-2}{6} = \frac{1}{6}$$</p>
+                </div>
+            </div>
+
+            <div class="module-interactive-demo">
+                <h3 class="card-title"><i class="fas fa-play-circle"></i> Simulador de Áreas</h3>
+                <p>Explora cómo cambia el área al modificar las funciones y límites:</p>
+                <button class="module-demo-button" onclick="openAreaSimulator()">
+                    <i class="fas fa-chart-area"></i> Abrir Simulador
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección 4.2: Cálculo de Volúmenes -->
+        <div id="volumes" class="module-content-section">
+            <div class="section-header">
+                <i class="fas fa-cube"></i>
+                <h2>4.2 Cálculo de Volúmenes</h2>
+            </div>
+
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Concepto de Sólidos de Revolución</h3>
+                <p>Un sólido de revolución se genera al rotar una región plana alrededor de un eje. Los métodos principales son:</p>
+                <ul>
+                    <li><strong>Método de Discos:</strong> Para regiones que tocan el eje de rotación</li>
+                    <li><strong>Método de Arandelas:</strong> Para regiones que no tocan el eje</li>
+                    <li><strong>Método de Cascarones:</strong> Alternativa más eficiente en algunos casos</li>
+                </ul>
+            </div>
+
+            <h3><i class="fas fa-compact-disc"></i> Método de Discos</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula del Método de Discos</h3>
+                <p>Para rotación alrededor del eje x:</p>
+                <div class="formula-box">
+                    $$V = \pi \int_a^b [f(x)]^2 \, dx$$
+                </div>
+                <p>Para rotación alrededor del eje y:</p>
+                <div class="formula-box">
+                    $$V = \pi \int_c^d [g(y)]^2 \, dy$$
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 3: Volumen al rotar $y = \sqrt{x}$ alrededor del eje x</h4>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar la función y límites:</strong>
+                    <p>Función: $f(x) = \sqrt{x}$<br>
+                    Límites: de $x = 0$ a $x = 4$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Plantear la integral usando el método de discos:</strong>
+                    <p>$$V = \pi \int_0^4 [\sqrt{x}]^2 \, dx = \pi \int_0^4 x \, dx$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">3</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$V = \pi \left[\frac{x^2}{2}\right]_0^4 = \pi \left(\frac{16}{2} - 0\right) = 8\pi$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">4</span>
+                    <strong>Interpretar el resultado:</strong>
+                    <p>El volumen del sólido de revolución es $8\pi$ unidades cúbicas.</p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-ring"></i> Método de Arandelas</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula del Método de Arandelas</h3>
+                <p>Cuando la región no toca el eje de rotación:</p>
+                <div class="formula-box">
+                    $$V = \pi \int_a^b \left([f(x)]^2 - [g(x)]^2\right) \, dx$$
+                </div>
+                <p>Donde $f(x)$ es el radio exterior y $g(x)$ es el radio interior.</p>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 4: Volumen entre $y = x^2$ y $y = x$ rotando alrededor de $y = -1$</h4>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar las funciones y límites:</strong>
+                    <p>Funciones: $f(x) = x^2$ (superior), $g(x) = x$ (inferior)<br>
+                    Eje de rotación: $y = -1$<br>
+                    Límites: $x = 0$ a $x = 1$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Calcular los radios desde el eje de rotación:</strong>
+                    <p>Radio exterior: $R(x) = x^2 - (-1) = x^2 + 1$<br>
+                    Radio interior: $r(x) = x - (-1) = x + 1$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">3</span>
+                    <strong>Plantear la integral:</strong>
+                    <p>$$V = \pi \int_0^1 \left[(x^2 + 1)^2 - (x + 1)^2\right] \, dx$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">4</span>
+                    <strong>Expandir y simplificar:</strong>
+                    <p>$(x^2 + 1)^2 - (x + 1)^2 = (x^4 + 2x^2 + 1) - (x^2 + 2x + 1) = x^4 + x^2 - 2x$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">5</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$V = \pi \int_0^1 (x^4 + x^2 - 2x) \, dx = \pi \left[\frac{x^5}{5} + \frac{x^3}{3} - x^2\right]_0^1$$</p>
+                    <p>$$V = \pi \left(\frac{1}{5} + \frac{1}{3} - 1\right) = \pi \left(\frac{3 + 5 - 15}{15}\right) = \frac{-7\pi}{15}$$</p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-cylinder"></i> Método de Cascarones Cilíndricos</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula del Método de Cascarones</h3>
+                <p>Para rotación alrededor del eje y:</p>
+                <div class="formula-box">
+                    $$V = 2\pi \int_a^b x \cdot f(x) \, dx$$
+                </div>
+                <p>Donde $x$ es el radio del cascarón y $f(x)$ es la altura.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3><i class="fas fa-play-circle"></i> Visualizador 3D de Volúmenes</h3>
+                <p>Explora cómo se generan los sólidos de revolución:</p>
+                <button class="demo-button" onclick="openVolumeViewer()">
+                    <i class="fas fa-cube"></i> Abrir Visualizador 3D
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección 4.3: Aplicaciones en Física -->
+        <div id="physics" class="content-section">
+            <div class="section-header">
+                <i class="fas fa-atom"></i>
+                <h2>4.3 Aplicaciones en Física</h2>
+            </div>
+
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Trabajo Mecánico</h3>
+                <p>El trabajo realizado por una fuerza variable $F(x)$ al mover un objeto desde $x = a$ hasta $x = b$ es:</p>
+                <div class="formula-box">
+                    $$W = \int_a^b F(x) \, dx$$
+                </div>
+            </div>
+
+            <h3><i class="fas fa-spring"></i> Trabajo en Resortes (Ley de Hooke)</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Ley de Hooke</h3>
+                <p>La fuerza necesaria para estirar o comprimir un resorte una distancia $x$ desde su posición de equilibrio es:</p>
+                <div class="formula-box">
+                    $$F(x) = kx$$
+                </div>
+                <p>Donde $k$ es la constante del resorte.</p>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 5: Trabajo para estirar un resorte</h4>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar los datos:</strong>
+                    <p>Constante del resorte: $k = 50$ N/m<br>
+                    Estiramiento deseado: de $0$ a $0.3$ metros</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Plantear la integral del trabajo:</strong>
+                    <p>$$W = \int_0^{0.3} 50x \, dx$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">3</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$W = 50 \left[\frac{x^2}{2}\right]_0^{0.3} = 50 \left(\frac{0.09}{2} - 0\right) = 50 \cdot 0.045 = 2.25 \text{ J}$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">4</span>
+                    <strong>Interpretar el resultado:</strong>
+                    <p>Se requiere $2.25$ julios de trabajo para estirar el resorte $30$ cm.</p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-weight"></i> Centro de Masa</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmulas del Centro de Masa</h3>
+                <p>Para una región plana con densidad constante:</p>
+                <div class="formula-box">
+                    $$\bar{x} = \frac{1}{A} \int_a^b x \cdot f(x) \, dx$$
+                    $$\bar{y} = \frac{1}{A} \int_a^b \frac{1}{2} [f(x)]^2 \, dx$$
+                </div>
+                <p>Donde $A$ es el área de la región.</p>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 6: Centro de masa de la región bajo $y = 4 - x^2$</h4>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Identificar la función y límites:</strong>
+                    <p>Función: $f(x) = 4 - x^2$<br>
+                    Límites: de $x = -2$ a $x = 2$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Calcular el área:</strong>
+                    <p>$$A = \int_{-2}^2 (4 - x^2) \, dx = \left[4x - \frac{x^3}{3}\right]_{-2}^2 = 8 - \frac{8}{3} - (-8 + \frac{8}{3}) = \frac{32}{3}$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">3</span>
+                    <strong>Calcular $\bar{x}$:</strong>
+                    <p>Por simetría, $\bar{x} = 0$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">4</span>
+                    <strong>Calcular $\bar{y}$:</strong>
+                    <p>$$\bar{y} = \frac{1}{A} \int_{-2}^2 \frac{1}{2} (4 - x^2)^2 \, dx$$</p>
+                    <p>$$\bar{y} = \frac{3}{32} \cdot \frac{1}{2} \int_{-2}^2 (16 - 8x^2 + x^4) \, dx = \frac{3}{64} \left[16x - \frac{8x^3}{3} + \frac{x^5}{5}\right]_{-2}^2$$</p>
+                    <p>$$\bar{y} = \frac{3}{64} \cdot 2 \left(32 - \frac{64}{3} + \frac{32}{5}\right) = \frac{3}{32} \left(\frac{480 - 320 + 96}{15}\right) = \frac{3}{32} \cdot \frac{256}{15} = \frac{8}{5}$$</p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tint"></i> Fuerza Hidrostática</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Presión Hidrostática</h3>
+                <p>La presión a una profundidad $h$ en un fluido de densidad $\rho$ es:</p>
+                <div class="formula-box">
+                    $$P = \rho g h$$
+                </div>
+                <p>Donde $g$ es la aceleración de la gravedad.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3><i class="fas fa-play-circle"></i> Simulador de Aplicaciones Físicas</h3>
+                <p>Explora diferentes aplicaciones físicas del cálculo integral:</p>
+                <button class="demo-button" onclick="openPhysicsSimulator()">
+                    <i class="fas fa-atom"></i> Abrir Simulador Físico
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección 4.4: Otras Aplicaciones -->
+        <div id="other" class="content-section">
+            <div class="section-header">
+                <i class="fas fa-chart-line"></i>
+                <h2>4.4 Otras Aplicaciones</h2>
+            </div>
+
+            <h3><i class="fas fa-route"></i> Longitud de Arco</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula de Longitud de Arco</h3>
+                <p>La longitud de arco de la curva $y = f(x)$ desde $x = a$ hasta $x = b$ es:</p>
+                <div class="formula-box">
+                    $$L = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx$$
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 7: Longitud de arco de $y = x^{3/2}$ desde $x = 0$ hasta $x = 4$</h4>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Calcular la derivada:</strong>
+                    <p>$$f'(x) = \frac{3}{2}x^{1/2}$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Plantear la integral:</strong>
+                    <p>$$L = \int_0^4 \sqrt{1 + \left(\frac{3}{2}x^{1/2}\right)^2} \, dx = \int_0^4 \sqrt{1 + \frac{9}{4}x} \, dx$$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">3</span>
+                    <strong>Hacer sustitución:</strong>
+                    <p>$u = 1 + \frac{9}{4}x \Rightarrow du = \frac{9}{4}dx \Rightarrow dx = \frac{4}{9}du$</p>
+                    <p>Límites: $x = 0 \Rightarrow u = 1$, $x = 4 \Rightarrow u = 10$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">4</span>
+                    <strong>Resolver la integral:</strong>
+                    <p>$$L = \frac{4}{9} \int_1^{10} u^{1/2} \, du = \frac{4}{9} \left[\frac{2}{3}u^{3/2}\right]_1^{10} = \frac{8}{27}(10^{3/2} - 1)$$</p>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-chart-area"></i> Área de Superficie de Revolución</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula de Superficie de Revolución</h3>
+                <p>El área de la superficie generada al rotar $y = f(x)$ alrededor del eje x es:</p>
+                <div class="formula-box">
+                    $$S = 2\pi \int_a^b f(x) \sqrt{1 + [f'(x)]^2} \, dx$$
+                </div>
+            </div>
+
+            <h3><i class="fas fa-balance-scale"></i> Valor Promedio de una Función</h3>
+            <div class="concept-box">
+                <h3><i class="fas fa-lightbulb"></i> Fórmula del Valor Promedio</h3>
+                <p>El valor promedio de $f(x)$ en el intervalo $[a, b]$ es:</p>
+                <div class="formula-box">
+                    $$f_{\text{promedio}} = \frac{1}{b-a} \int_a^b f(x) \, dx$$
+                </div>
+            </div>
+
+            <h3><i class="fas fa-chart-pie"></i> Aplicaciones en Economía</h3>
+            <div class="example-box">
+                <h4><i class="fas fa-example"></i> Ejemplo 8: Superávit del Consumidor</h4>
+                <p>Si la función de demanda es $p = 100 - 0.1q$ y el precio de equilibrio es $p_0 = 60$, el superávit del consumidor es:</p>
+                
+                <div class="step-by-step">
+                    <span class="step-number">1</span>
+                    <strong>Encontrar la cantidad de equilibrio:</strong>
+                    <p>$60 = 100 - 0.1q \Rightarrow q = 400$</p>
+                </div>
+
+                <div class="step-by-step">
+                    <span class="step-number">2</span>
+                    <strong>Calcular el superávit del consumidor:</strong>
+                    <p>$$SC = \int_0^{400} (100 - 0.1q) \, dq - 60 \cdot 400$$</p>
+                    <p>$$SC = \left[100q - 0.05q^2\right]_0^{400} - 24000 = 40000 - 8000 - 24000 = 8000$$</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3><i class="fas fa-play-circle"></i> Calculadora de Aplicaciones</h3>
+                <p>Calcula automáticamente diferentes aplicaciones del cálculo integral:</p>
+                <button class="demo-button" onclick="openApplicationsCalculator()">
+                    <i class="fas fa-calculator"></i> Abrir Calculadora
+                </button>
+            </div>
+        </div>
+
+        <!-- Sección de Ejercicios -->
+        <div id="exercises" class="content-section">
+            <div class="section-header">
+                <i class="fas fa-dumbbell"></i>
+                <h2>Ejercicios del Módulo 4</h2>
+            </div>
+
+            <div class="exercise-grid">
+                <div class="exercise-card">
+                    <h4><i class="fas fa-square"></i> Ejercicios de Áreas</h4>
+                    <span class="difficulty-badge difficulty-basic">Básico</span>
+                    <p>1. Calcula el área bajo $y = x^3$ desde $x = 0$ hasta $x = 2$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('area1')">Ver Solución</button>
+                    <div id="area1" class="solution-content">
+                        <p><strong>Solución:</strong> $A = \int_0^2 x^3 \, dx = \left[\frac{x^4}{4}\right]_0^2 = 4$ unidades cuadradas</p>
+                    </div>
+                    
+                    <p>2. Encuentra el área entre $y = x^2$ y $y = 2x$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('area2')">Ver Solución</button>
+                    <div id="area2" class="solution-content">
+                        <p><strong>Solución:</strong> Puntos de intersección: $x = 0, 2$. Área = $\int_0^2 (2x - x^2) \, dx = \frac{4}{3}$</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <h4><i class="fas fa-cube"></i> Ejercicios de Volúmenes</h4>
+                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
+                    <p>3. Calcula el volumen al rotar $y = \sqrt{x}$ alrededor del eje x desde $x = 0$ hasta $x = 1$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('vol1')">Ver Solución</button>
+                    <div id="vol1" class="solution-content">
+                        <p><strong>Solución:</strong> $V = \pi \int_0^1 x \, dx = \pi \left[\frac{x^2}{2}\right]_0^1 = \frac{\pi}{2}$</p>
+                    </div>
+                    
+                    <p>4. Encuentra el volumen entre $y = x^2$ y $y = x$ rotando alrededor de $y = 0$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('vol2')">Ver Solución</button>
+                    <div id="vol2" class="solution-content">
+                        <p><strong>Solución:</strong> $V = \pi \int_0^1 (x^2 - x^4) \, dx = \pi \left[\frac{x^3}{3} - \frac{x^5}{5}\right]_0^1 = \frac{2\pi}{15}$</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <h4><i class="fas fa-atom"></i> Ejercicios de Física</h4>
+                    <span class="difficulty-badge difficulty-intermediate">Intermedio</span>
+                    <p>5. Un resorte con $k = 100$ N/m se estira de $0$ a $0.5$ m. Calcula el trabajo realizado.</p>
+                    <button class="solution-toggle" onclick="toggleSolution('phy1')">Ver Solución</button>
+                    <div id="phy1" class="solution-content">
+                        <p><strong>Solución:</strong> $W = \int_0^{0.5} 100x \, dx = 100 \left[\frac{x^2}{2}\right]_0^{0.5} = 12.5$ J</p>
+                    </div>
+                    
+                    <p>6. Encuentra el centro de masa de la región bajo $y = 1 - x^2$ desde $x = -1$ hasta $x = 1$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('phy2')">Ver Solución</button>
+                    <div id="phy2" class="solution-content">
+                        <p><strong>Solución:</strong> $\bar{x} = 0$ (por simetría), $\bar{y} = \frac{2}{5}$</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <h4><i class="fas fa-chart-line"></i> Ejercicios Avanzados</h4>
+                    <span class="difficulty-badge difficulty-advanced">Avanzado</span>
+                    <p>7. Calcula la longitud de arco de $y = \ln(\cos x)$ desde $x = 0$ hasta $x = \pi/4$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('adv1')">Ver Solución</button>
+                    <div id="adv1" class="solution-content">
+                        <p><strong>Solución:</strong> $L = \ln(1 + \sqrt{2})$</p>
+                    </div>
+                    
+                    <p>8. Encuentra el área de superficie al rotar $y = x^3$ alrededor del eje x desde $x = 0$ hasta $x = 1$</p>
+                    <button class="solution-toggle" onclick="toggleSolution('adv2')">Ver Solución</button>
+                    <div id="adv2" class="solution-content">
+                        <p><strong>Solución:</strong> $S = \frac{\pi}{27}(10^{3/2} - 1)$</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3><i class="fas fa-play-circle"></i> Generador de Ejercicios</h3>
+                <p>Practica con ejercicios generados aleatoriamente:</p>
+                <button class="demo-button" onclick="generateRandomExercise()">
+                    <i class="fas fa-random"></i> Generar Ejercicio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-menu">
+        <button onclick="scrollToTop()" title="Ir arriba">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <button onclick="toggleFullscreen()" title="Pantalla completa">
+            <i class="fas fa-expand"></i>
+        </button>
+        <button onclick="toggleDarkMode()" title="Modo oscuro">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button onclick="printPage()" title="Imprimir">
+            <i class="fas fa-print"></i>
+        </button>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2025 JMGV-PTEL - Módulo 4: Aplicaciones de la Integral</p>
+            <p>Desarrollado con pasión para el aprendizaje de las matemáticas</p>
+        </div>
+    </div>
+
+    <script>
+        // Navegación entre secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar navegación
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Toggle de soluciones
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+            } else {
+                solution.style.display = 'block';
+            }
+        }
+
+        // Funciones de demostración
+        function showDemo() {
+            alert('¡Demostración interactiva! Aquí podrías integrar una visualización de GeoGebra o Desmos.');
+        }
+
+        function openAreaSimulator() {
+            alert('¡Simulador de áreas! Integración con GeoGebra o Desmos para visualizar áreas entre curvas.');
+        }
+
+        function openVolumeViewer() {
+            alert('¡Visualizador 3D! Aquí podrías mostrar sólidos de revolución en 3D.');
+        }
+
+        function openPhysicsSimulator() {
+            alert('¡Simulador físico! Demostraciones interactivas de trabajo, resortes y centros de masa.');
+        }
+
+        function openApplicationsCalculator() {
+            alert('¡Calculadora de aplicaciones! Herramienta para calcular automáticamente áreas, volúmenes, etc.');
+        }
+
+        function generateRandomExercise() {
+            const exercises = [
+                'Calcula el área bajo y = x² desde x = 0 hasta x = 3',
+                'Encuentra el volumen al rotar y = √x alrededor del eje x desde x = 0 hasta x = 4',
+                'Calcula el trabajo para estirar un resorte con k = 80 N/m de 0 a 0.2 m',
+                'Encuentra la longitud de arco de y = x³/2 desde x = 0 hasta x = 2'
+            ];
+            const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+            alert(`Ejercicio aleatorio: ${randomExercise}`);
+        }
+
+        // Funciones del menú flotante
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function printPage() {
+            window.print();
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+            
+            // Animación de entrada
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        // Progreso de aprendizaje
+        function updateProgress() {
+            const sections = ['overview', 'areas', 'volumes', 'physics', 'other', 'exercises'];
+            const currentSection = document.querySelector('.content-section.active');
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+
+            document.querySelector('.module-progress-fill').style.width = progress + '%';
+        }
+
+        function showDemo() {
+            alert('\u{1F4F7} Demostración del Módulo 4\n\n' +
+                  'En este módulo has aprendido a:\n\n' +
+                  '• \u{2705} Calcular áreas bajo curvas y entre curvas\n' +
+                  '• \u{2705} Determinar volúmenes usando métodos de discos y arandelas\n' +
+                  '• \u{2705} Aplicar integrales en problemas de física\n' +
+                  '• \u{2705} Explorar aplicaciones en economía y otras disciplinas\n\n' +
+                  '¡Las integrales son herramientas poderosas para resolver problemas reales!');
+        }
+
+        function openAreaSimulator() {
+            alert('\u{1F4F7} Simulador de Áreas\n\n' +
+                  'En el simulador completo podrás:\n\n' +
+                  '• Modificar función f(x) y g(x)\n' +
+                  '• Ajustar los límites de integración\n' +
+                  '• Ver la visualización en tiempo real\n' +
+                  '• Calcular áreas automáticamente\n\n' +
+                  '¡Explora cómo cambian las áreas!');
+        }
+
+        function openVolumeViewer() {
+            alert('\u{1F4F7} Visualizador 3D de Volúmenes\n\n' +
+                  'El visualizador completo permite:\n\n' +
+                  '• Ver sólidos de revolución en 3D\n' +
+                  '• Comparar métodos de discos vs arandelas\n' +
+                  '• Animar la rotación de las regiones\n' +
+                  '• Calcular volúmenes en tiempo real\n\n' +
+                  '¡Visualiza el poder de las integrales!');
+        }
+
+        function openPhysicsSimulator() {
+            alert('\u{1F4F7} Simulador de Física\n\n' +
+                  'En el simulador completo explorarás:\n\n' +
+                  '• Trabajo mecánico en resortes\n' +
+                  '• Cálculo de centros de masa\n' +
+                  '• Fuerzas hidrostáticas en tanques\n' +
+                  '• Aplicaciones en movimiento\n\n' +
+                  '¡La física cobra vida con las integrales!');
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de entrada para las tarjetas
+            const cards = document.querySelectorAll('.module-exercise-card, .module-step-by-step');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Animación para botones
+            const buttons = document.querySelectorAll('.module-demo-button');
+            buttons.forEach((btn, index) => {
+                btn.style.opacity = '0';
+                btn.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    btn.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    btn.style.opacity = '1';
+                    btn.style.transform = 'translateY(0)';
+                }, 800 + (index * 150));
+            });
+
+            // Inicializar MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 4: Ondas y Oscilaciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --purple-neon: #8b5cf6;
+            --error-red: #ef4444;
+            --master-gold: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--cyan-neon), var(--purple-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Interacción para el Modo Maestro */
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--purple-neon);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .highlight {
+            color: var(--cyan-neon);
+            font-weight: 600;
+        }
+        
+        .formula-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--purple-neon);
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.4rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: var(--emerald-neon);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* TARJETAS DE CONTENIDO */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* LABORATORIO INTERACTIVO (CANVAS) */
+        .lab-container {
+            text-align: center;
+        }
+
+        .canvas-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            align-items: center;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 400px;
+            accent-color: var(--purple-neon);
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--purple-neon);
+        }
+
+        /* GAMIFICACIÓN: QUIZ KAHOOT STYLE */
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-question h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+
+        .quiz-btn.correct {
+            background: var(--emerald-neon) !important;
+            color: #000;
+            border-color: var(--emerald-neon);
+        }
+
+        .quiz-btn.incorrect {
+            background: var(--error-red) !important;
+            color: #fff;
+            border-color: var(--error-red);
+        }
+
+        /* MODO MAESTRO */
+        .master-mode {
+            display: none; /* Oculto por defecto */
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--master-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+
+        .master-mode.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .master-title {
+            color: var(--master-gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="main-title">Cálculo Integral: Sesión 4</h1>
+            <p>Ondas y Oscilaciones: Matemáticas que Vibran</p>
+        </header>
+
+        <section class="card">
+            <h2>1. Diseccionando el Sonido</h2>
+            <p>Cuando escuchas tu canción favorita en Spotify, no estás oyendo un solo sonido, sino miles de ondas superpuestas. El matemático <strong>Jean-Baptiste Joseph Fourier</strong> descubrió que cualquier sonido, por complejo que sea, puede descomponerse en ondas puras de <span class="highlight">Seno y Coseno</span>.</p>
+            <p>Al integrar estas ondas (calcular su área acumulada), podemos analizar frecuencias, comprimir audio (MP3) o crear algoritmos de cancelación de ruido para tus audífonos inalámbricos.</p>
+            
+            <p>Dado que la derivada de <em>sin(x)</em> es <em>cos(x)</em>, y la derivada de <em>cos(x)</em> es <em>-sin(x)</em>, sus integrales forman un ciclo perfecto (no olvides el signo menos al integrar el seno):</p>
+            
+            <div class="formula-box">
+                <div>∫ cos(x) dx = sin(x) + C</div>
+                <div>∫ sin(x) dx = -cos(x) + C</div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Analogía sugerida:</strong> Habla de la cancelación de ruido activo (ANC) en los AirPods o audífonos. El micrófono capta una onda (Seno). El audífono genera la onda inversa matemática (-Seno). Al sumar ∫(Seno - Seno), el área es cero. ¡Silencio total logrado a través del cálculo!</p>
+            </div>
+        </section>
+
+        <section class="card lab-container">
+            <h2>2. Simulador: Tejiendo la Onda</h2>
+            <p>Desliza el control de tiempo (eje X, en radianes). Arriba, verás la función <span style="color:var(--cyan-neon);">f(x) = cos(x)</span> acumulando "área". ¡Observa cómo esa área acumulada (neta) dibuja exactamente la función <span style="color:var(--purple-neon);">F(x) = sin(x)</span> en la gráfica de abajo!</p>
+            
+            <div class="controls">
+                <label for="rad-slider">Límite de Integración (x en radianes): <span id="rad-val" class="highlight">0.00</span></label>
+                <input type="range" id="rad-slider" min="0" max="6.28318" step="0.05" value="0">
+            </div>
+
+            <div class="canvas-wrapper">
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Derivada: f(x) = cos(x) [Área Acumulada]</h3>
+                    <canvas id="cosCanvas" width="600" height="200"></canvas>
+                </div>
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Integral: F(x) = sin(x) [Altura Resultante]</h3>
+                    <canvas id="sinCanvas" width="600" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="border-left-color: var(--cyan-neon);">
+                    Área Neta Acumulada:<br><span id="area-val" style="color:var(--cyan-neon);">0.000</span>
+                </div>
+                <div class="stat-box">
+                    Posición (Altura) del Seno:<br><span id="height-val" style="color:var(--purple-neon);">0.000</span>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Guía del Laboratorio:</strong> Pide a un alumno que lleve el slider a <strong>3.14 (π)</strong>. Verán que el área sombreada arriba es exactamente igual en la parte positiva (arriba del eje) y la parte negativa (abajo). Área neta = 0. En la gráfica de abajo, el Seno vuelve a valer 0. ¡Maravilloso!</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>3. Quiz: Frecuencias Matemáticas</h2>
+            
+            <div class="quiz-question">
+                <h3>1. ¿Cuál es el resultado correcto de ∫ cos(x) dx ?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">-sin(x) + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">sin(x) + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">-cos(x) + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">tan(x) + C</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>2. Según el simulador, cuando la curva de cos(x) cruza hacia los números negativos y sombrea área "hacia abajo", ¿qué pasa con la gráfica de sin(x)?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Se mantiene plana</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Sube más rápido</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Comienza a descender (pierde altura)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Se vuelve invisible</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>3. ¿A qué genio matemático le debemos el descubrimiento de que las ondas complejas están formadas por senos y cosenos?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Isaac Newton</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Bernhard Riemann</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Augustin Cauchy</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Jean-Baptiste Joseph Fourier</button>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Respuestas:</strong> 1) sin(x) + C. 2) Comienza a descender (el área negativa "resta" valor a la integral). 3) Fourier.<br>Nota: Si un alumno elige "-sin(x)" en la pregunta 1, recuérdale que su cerebro está haciendo la *derivada*. ¡Es el error más común!</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. SESIÓN 04. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DEL SIMULADOR DE ONDAS ---
+        const cosCanvas = document.getElementById('cosCanvas');
+        const cCtx = cosCanvas.getContext('2d');
+        const sinCanvas = document.getElementById('sinCanvas');
+        const sCtx = sinCanvas.getContext('2d');
+        
+        const slider = document.getElementById('rad-slider');
+        const radValDisplay = document.getElementById('rad-val');
+        const areaValDisplay = document.getElementById('area-val');
+        const heightValDisplay = document.getElementById('height-val');
+
+        // Escalas matemáticas (X va de 0 a 2*PI, Y va de -1.5 a 1.5)
+        const xMax = Math.PI * 2;
+        const yMax = 1.5;
+
+        // Mapeo de coordenadas (Centrando el eje Y en medio del Canvas)
+        const toPixelX = (canvas, x) => (x / xMax) * canvas.width;
+        const toPixelY = (canvas, y) => (canvas.height / 2) - ((y / yMax) * (canvas.height / 2));
+
+        function drawAxes(ctx, canvas) {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            // Eje X
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            // Marcas en PI/2, PI, 3PI/2, 2PI
+            for(let i = 1; i <= 4; i++) {
+                let px = toPixelX(canvas, (Math.PI / 2) * i);
+                ctx.moveTo(px, canvas.height / 2 - 5);
+                ctx.lineTo(px, canvas.height / 2 + 5);
+            }
+            ctx.stroke();
+        }
+
+        function drawCosArea(currentX) {
+            cCtx.clearRect(0, 0, cosCanvas.width, cosCanvas.height);
+            drawAxes(cCtx, cosCanvas);
+
+            // Sombrear el Área Acumulada
+            cCtx.beginPath();
+            cCtx.moveTo(toPixelX(cosCanvas, 0), toPixelY(cosCanvas, 0)); // Origen en eje X
+            
+            for (let t = 0; t <= currentX; t += 0.02) {
+                cCtx.lineTo(toPixelX(cosCanvas, t), toPixelY(cosCanvas, Math.cos(t)));
+            }
+            cCtx.lineTo(toPixelX(cosCanvas, currentX), toPixelY(cosCanvas, 0)); // Baja/sube al eje X
+            cCtx.closePath();
+            
+            // Color de relleno (Cian transparente)
+            cCtx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+            cCtx.fill();
+
+            // Dibujar la curva completa de cos(x) en fondo
+            cCtx.beginPath();
+            cCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+            cCtx.lineWidth = 2;
+            for (let t = 0; t <= xMax; t += 0.05) {
+                let px = toPixelX(cosCanvas, t);
+                let py = toPixelY(cosCanvas, Math.cos(t));
+                if (t === 0) cCtx.moveTo(px, py);
+                else cCtx.lineTo(px, py);
+            }
+            cCtx.stroke();
+
+            // Dibujar la curva activa de cos(x)
+            cCtx.beginPath();
+            cCtx.strokeStyle = '#06b6d4'; // Cian
+            cCtx.lineWidth = 3;
+            for (let t = 0; t <= currentX; t += 0.05) {
+                let px = toPixelX(cosCanvas, t);
+                let py = toPixelY(cosCanvas, Math.cos(t));
+                if (t === 0) cCtx.moveTo(px, py);
+                else cCtx.lineTo(px, py);
+            }
+            cCtx.stroke();
+        }
+
+        function drawSinCurve(currentX) {
+            sCtx.clearRect(0, 0, sinCanvas.width, sinCanvas.height);
+            drawAxes(sCtx, sinCanvas);
+
+            // Curva fantasma de sin(x)
+            sCtx.beginPath();
+            sCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+            sCtx.lineWidth = 2;
+            for (let t = 0; t <= xMax; t += 0.05) {
+                let px = toPixelX(sinCanvas, t);
+                let py = toPixelY(sinCanvas, Math.sin(t));
+                if (t === 0) sCtx.moveTo(px, py);
+                else sCtx.lineTo(px, py);
+            }
+            sCtx.stroke();
+
+            // Curva "Dibujada" de sin(x) basada en el área
+            sCtx.beginPath();
+            sCtx.strokeStyle = '#8b5cf6'; // Morado
+            sCtx.lineWidth = 4;
+            for (let t = 0; t <= currentX; t += 0.05) {
+                let px = toPixelX(sinCanvas, t);
+                let py = toPixelY(sinCanvas, Math.sin(t));
+                if (t === 0) sCtx.moveTo(px, py);
+                else sCtx.lineTo(px, py);
+            }
+            sCtx.stroke();
+
+            // Punto indicador
+            let px = toPixelX(sinCanvas, currentX);
+            let py = toPixelY(sinCanvas, Math.sin(currentX));
+            
+            // Línea punteada a la altura
+            sCtx.beginPath();
+            sCtx.setLineDash([5, 5]);
+            sCtx.strokeStyle = 'rgba(139, 92, 246, 0.6)';
+            sCtx.moveTo(px, toPixelY(sinCanvas, 0));
+            sCtx.lineTo(px, py);
+            sCtx.stroke();
+            sCtx.setLineDash([]);
+
+            sCtx.beginPath();
+            sCtx.fillStyle = '#fff';
+            sCtx.arc(px, py, 6, 0, Math.PI * 2);
+            sCtx.fill();
+        }
+
+        function renderLab() {
+            const currentX = parseFloat(slider.value);
+            
+            // Formatear display de radianes a términos de PI para mayor claridad matemática opcional, 
+            // pero lo dejaremos numérico.
+            radValDisplay.innerText = currentX.toFixed(2);
+            
+            // Matemáticamente, la integral de cos(x) evaluada de 0 a X es sin(X)
+            const result = Math.sin(currentX); 
+
+            // Manejar -0.000 visual
+            let displayVal = result.toFixed(3);
+            if(displayVal === "-0.000") displayVal = "0.000";
+
+            areaValDisplay.innerText = displayVal;
+            heightValDisplay.innerText = displayVal;
+
+            drawCosArea(currentX);
+            drawSinCurve(currentX);
+        }
+
+        // Listeners
+        slider.addEventListener('input', renderLab);
+        renderLab();
+
+
+        // --- 2. LÓGICA DEL QUIZ (Estilo Kahoot) ---
+        function checkAnswer(btn, isCorrect) {
+            const siblings = btn.parentElement.querySelectorAll('.quiz-btn');
+            siblings.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+                b.style.opacity = '0.6';
+            });
+
+            btn.style.opacity = '1';
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // --- 3. LÓGICA DEL MODO MAESTRO (Protección) ---
+        const mainTitle = document.getElementById('main-title');
+        const masterElements = document.querySelectorAll('.master-mode');
+
+        mainTitle.addEventListener('dblclick', () => {
+            const password = prompt('🔐 INGRESO AL MODO MAESTRO.\nPor favor, introduce el código de acceso:');
+            
+            if (password === '1983') {
+                masterElements.forEach(el => el.classList.add('active'));
+                alert('✅ Acceso concedido. Notas didácticas activadas.');
+            } else if (password !== null) {
+                alert('❌ Código incorrecto. Acceso denegado.');
+            }
+        });
+    </script>
+</body>
+</html>

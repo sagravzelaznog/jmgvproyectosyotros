@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 3: El Mundo de Euler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --warning-orange: #f97316;
+            --error-red: #ef4444;
+            --master-gold: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--magenta-neon), var(--warning-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Interacción para el Modo Maestro */
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--warning-orange);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgba(249, 115, 22, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .highlight {
+            color: var(--magenta-neon);
+            font-weight: 600;
+        }
+        
+        .formula-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--magenta-neon);
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.4rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: var(--cyan-neon);
+        }
+
+        /* TARJETAS DE CONTENIDO */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* LABORATORIO INTERACTIVO (CANVAS) */
+        .lab-container {
+            text-align: center;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem 0;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 400px;
+            accent-color: var(--warning-orange);
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--warning-orange);
+        }
+
+        /* GAMIFICACIÓN: QUIZ KAHOOT STYLE */
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-question h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+
+        .quiz-btn.correct {
+            background: var(--emerald-neon) !important;
+            color: #000;
+            border-color: var(--emerald-neon);
+        }
+
+        .quiz-btn.incorrect {
+            background: var(--error-red) !important;
+            color: #fff;
+            border-color: var(--error-red);
+        }
+
+        /* MODO MAESTRO */
+        .master-mode {
+            display: none; /* Oculto por defecto */
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--master-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+
+        .master-mode.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .master-title {
+            color: var(--master-gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="main-title">Cálculo Integral: Sesión 3</h1>
+            <p>El Mundo de Euler: Funciones Inmortales y el Logaritmo Natural</p>
+        </header>
+
+        <section class="card">
+            <h2>1. El Crecimiento Viral y la Función "Inmune"</h2>
+            <p>Piensa en un video de TikTok que se hace viral. No crece sumando +10 vistas cada minuto; crece multiplicándose. Este tipo de crecimiento "orgánico" está regido por el número de Euler (<span class="highlight">e ≈ 2.718...</span>).</p>
+            <p>La función exponencial <strong>f(x) = eˣ</strong> es la única en todo el universo matemático cuya derivada es exactamente ella misma. Por lo tanto, si la integras ("des-derivas"), ¡el resultado sigue siendo el mismo!</p>
+            
+            <div class="formula-box">
+                ∫ eˣ dx = eˣ + C
+            </div>
+
+            <p>Por otro lado, cuando intentamos integrar <strong>x⁻¹</strong> (o 1/x) usando la regla normal de sumarle 1 al exponente, nos queda x⁰/0... <strong>¡Una división entre cero que destruiría el universo matemático!</strong> Leonhard Euler demostró que el área real bajo esta curva es, ni más ni menos, que el <span class="highlight">Logaritmo Natural (ln)</span>.</p>
+
+            <div class="formula-box">
+                ∫ (1/x) dx = ln |x| + C
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Truco Didáctico:</strong> Pregunta a los alumnos qué pasa si aplican la fórmula de xⁿ al caso n = -1. Deja que hagan el cálculo y choquen con la división entre cero. Ese momento de "error" abrirá su curiosidad para presentarles el Logaritmo Natural como el "héroe" que salva la integral.</p>
+            </div>
+        </section>
+
+        <section class="card lab-container">
+            <h2>2. Simulador: El Nacimiento del Logaritmo</h2>
+            <p>En este laboratorio graficamos <strong>f(t) = 1/t</strong>. Desliza el control para calcular el área bajo la curva desde t = 1 hasta el valor de x. ¡Observa cómo el área calculada genera la gráfica del logaritmo natural!</p>
+            
+            <div class="controls">
+                <label for="x-slider">Límite superior (x): <span id="x-val" class="highlight">2.72</span></label>
+                <input type="range" id="x-slider" min="1" max="10" step="0.01" value="2.72">
+            </div>
+
+            <canvas id="logCanvas" width="800" height="300"></canvas>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    Área = ∫ (1/t) dt <br><span id="area-val" style="color:var(--magenta-neon);">1.00</span> u²
+                </div>
+                <div class="stat-box">
+                    Valor de ln(x)<br><span id="ln-val" style="color:var(--cyan-neon);">1.00</span>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Guía del Laboratorio:</strong> Pide a los alumnos que deslicen el valor de x exactamente a "2.72" (el número e). Verán que el área debajo de 1/x es exactamente 1. ¡Esto significa que ln(e) = 1! La visualización integra geometría y álgebra en un solo golpe cognitivo.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>3. Quiz: ¿Dominas el mundo de Euler?</h2>
+            
+            <div class="quiz-question">
+                <h3>1. ¿Cuál es el resultado de integrar ∫ eˣ dx ?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">x · eˣ⁻¹ + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">eˣ + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">(eˣ⁺¹ / x+1) + C</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">ln|x| + C</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>2. ¿Por qué NO podemos usar la regla de la potencia ∫ xⁿ dx = (xⁿ⁺¹)/(n+1) para integrar 1/x ?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Porque la x no tiene exponente visible</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Porque el resultado sería infinito negativo</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Porque el denominador sería cero, lo cual está indefinido</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Sí se puede usar, el resultado es x</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>3. Geométricamente, ¿qué representa ln(5)?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">El área bajo la curva f(t) = 1/t desde t=1 hasta t=5</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">La pendiente de la curva eˣ en el punto x=5</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">El volumen de un cono de radio 5</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">El límite cuando x tiende a 5</button>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Respuestas:</strong> 1) eˣ + C. 2) Porque el denominador sería cero. 3) El área bajo f(t) = 1/t desde t=1 a t=5. <br>Si fallan la 1, recuérdales el concepto de la función "inmortal" o "inmune". Para la 3, haz referencia directa a lo que acaban de hacer en el simulador.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. SESIÓN 03. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DEL SIMULADOR DEL LOGARITMO ---
+        const canvas = document.getElementById('logCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const slider = document.getElementById('x-slider');
+        const xValDisplay = document.getElementById('x-val');
+        const areaValDisplay = document.getElementById('area-val');
+        const lnValDisplay = document.getElementById('ln-val');
+
+        // Escalas matemáticas (X va de 0 a 10, Y va de 0 a 3)
+        const xMax = 10;
+        const yMax = 3;
+
+        // Funciones de mapeo a píxeles
+        const toPixelX = (x) => (x / xMax) * canvas.width;
+        const toPixelY = (y) => canvas.height - ((y / yMax) * canvas.height);
+
+        // Función f(t) = 1/t
+        const f = (t) => 1 / t;
+
+        function drawSimulator(currentX) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Dibujar Cuadrícula y Ejes
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for(let i=0; i<=xMax; i++){
+                ctx.beginPath(); ctx.moveTo(toPixelX(i), 0); ctx.lineTo(toPixelX(i), canvas.height); ctx.stroke();
+            }
+            
+            // 2. Sombrear el Área bajo la curva de t=1 a t=currentX
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(217, 70, 239, 0.4)'; // Magenta transparente
+            ctx.moveTo(toPixelX(1), toPixelY(0)); // Inicia en x=1, y=0
+            
+            for (let t = 1; t <= currentX; t += 0.05) {
+                ctx.lineTo(toPixelX(t), toPixelY(f(t)));
+            }
+            ctx.lineTo(toPixelX(currentX), toPixelY(0)); // Cierra hacia el eje X
+            ctx.fill();
+
+            // 3. Dibujar la curva f(t) = 1/t (evitando el 0 para que no diverja al infinito visualmente)
+            ctx.beginPath();
+            ctx.strokeStyle = '#f97316'; // Orange neon
+            ctx.lineWidth = 3;
+            for (let t = 0.1; t <= xMax; t += 0.1) {
+                const px = toPixelX(t);
+                const py = toPixelY(f(t));
+                if (t === 0.1) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            
+            // 4. Marcar la línea base de inicio en x=1
+            ctx.beginPath();
+            ctx.strokeStyle = '#06b6d4'; // Cyan
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(toPixelX(1), toPixelY(0));
+            ctx.lineTo(toPixelX(1), toPixelY(1)); // f(1) = 1
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function renderLab() {
+            const currentX = parseFloat(slider.value);
+            xValDisplay.innerText = currentX.toFixed(2);
+            
+            // Área matemática = ln(x)
+            const area = Math.log(currentX); 
+
+            areaValDisplay.innerText = area.toFixed(4);
+            lnValDisplay.innerText = area.toFixed(4);
+
+            drawSimulator(currentX);
+        }
+
+        // Event listener del slider
+        slider.addEventListener('input', renderLab);
+        // Render inicial (en e = 2.718...)
+        renderLab();
+
+
+        // --- 2. LÓGICA DEL QUIZ (Estilo Kahoot) ---
+        function checkAnswer(btn, isCorrect) {
+            const siblings = btn.parentElement.querySelectorAll('.quiz-btn');
+            siblings.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+                b.style.opacity = '0.6';
+            });
+
+            btn.style.opacity = '1';
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // --- 3. LÓGICA DEL MODO MAESTRO (Protección) ---
+        const mainTitle = document.getElementById('main-title');
+        const masterElements = document.querySelectorAll('.master-mode');
+
+        mainTitle.addEventListener('dblclick', () => {
+            const password = prompt('🔐 INGRESO AL MODO MAESTRO.\nPor favor, introduce el código de acceso:');
+            
+            if (password === '1983') {
+                masterElements.forEach(el => el.classList.add('active'));
+                alert('✅ Acceso concedido. Notas didácticas activadas.');
+            } else if (password !== null) {
+                alert('❌ Código incorrecto. Acceso denegado.');
+            }
+        });
+    </script>
+</body>
+</html>

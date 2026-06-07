@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 03: Diseño de Álabes | JMGV-PTEL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">WND-GEN-16S</div>
+        <div class="progress-container">
+            <span class="progress-text">Progreso de la Sesión</span>
+            <div class="progress-bar"><div class="progress-fill" id="scrollProgress"></div></div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">MÓDULO 1: FUNDAMENTOS</span>
+            <h1>Diseño de Álabes (Aspas)</h1>
+            <p class="subtitle">Transformando la teoría aerodinámica en una pieza física de alta eficiencia.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="teoria" class="card">
+            <h2>1. Teoría: La Anatomía del Aspa</h2>
+            
+            <div class="content-grid">
+                <div class="text-block">
+                    <h3>Ángulo de Ataque y Perfil NACA</h3>
+                    <p>El <strong>Ángulo de Ataque</strong> es la inclinación del aspa respecto a la dirección del viento. Si es muy plano, no hay sustentación; si es muy inclinado, el aspa "entra en pérdida" (stall) y genera puro arrastre destructivo.</p>
+                    <p>Para maximizar la eficiencia, los ingenieros utilizan los <strong>Perfiles NACA</strong> (desarrollados por la agencia predecesora de la NASA). Tienen forma de gota de agua: un <em>Borde de Ataque</em> grueso y redondeado (por donde entra el viento) y un <em>Borde de Fuga</em> afilado (por donde sale).</p>
+                </div>
+                
+                <div class="visual-block">
+                    <svg viewBox="0 0 300 200" class="educational-svg">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#83C5BE" />
+                            </marker>
+                        </defs>
+                        <path d="M 20 120 L 100 120" stroke="#83C5BE" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+                        <path d="M 20 140 L 100 140" stroke="#83C5BE" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
+                        <text x="20" y="110" font-family="Roboto" font-size="12" fill="#006D77">Viento</text>
+                        
+                        <g transform="translate(150, 130) rotate(-15)">
+                            <line x1="-50" y1="0" x2="80" y2="0" stroke="#E29578" stroke-width="1.5" stroke-dasharray="4,4"/>
+                            <path d="M -50 0 C -50 -30, 20 -20, 80 0 C 20 5, -50 15, -50 0 Z" fill="#FFD166" stroke="#E29578" stroke-width="2"/>
+                            <circle cx="-50" cy="0" r="3" fill="#006D77"/>
+                            <text x="-65" y="20" font-family="Roboto" font-size="10" fill="#333">Ataque</text>
+                            <text x="75" y="20" font-family="Roboto" font-size="10" fill="#333">Fuga</text>
+                        </g>
+
+                        <path d="M 100 130 A 50 50 0 0 0 140 115" fill="none" stroke="#2B2D42" stroke-width="2"/>
+                        <text x="145" y="105" font-family="Montserrat" font-size="14" font-weight="bold" fill="#2B2D42">Ángulo α</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="highlight-box mt-2">
+                <h4>La Torsión (Twist): ¿Por qué el aspa está retorcida?</h4>
+                <p>Piensa en esto: la punta del aspa recorre un círculo mucho más grande que la base (raíz) en el mismo tiempo. Por lo tanto, <strong>la punta viaja mucho más rápido</strong>. Si toda el aspa tuviera el mismo ángulo, la punta entraría en pérdida. Por eso, las aspas tienen un ángulo mayor en la base y se van aplanando (menor ángulo) hacia la punta.</p>
+            </div>
+        </section>
+
+        <section id="practica" class="card">
+            <h2>2. Práctica: Tallado de Aspa en PVC</h2>
+            <p>Usaremos un tubo de PVC sanitario de 4 o 6 pulgadas. La genialidad de este material casero es que, al cortar un segmento transversal, <strong>la curvatura natural del tubo imita perfectamente un perfil aerodinámico asimétrico</strong>.</p>
+            
+            <div class="content-grid">
+                <div class="steps-container vertical-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>El Trazo:</strong> Un tubo se puede dividir en 4 o 6 aspas. Dibuja un trapecio alargado a lo largo del tubo. La base ancha irá al rotor (raíz) y la parte estrecha será la punta.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>El Corte:</strong> Usa una sierra caladora o segueta para cortar con cuidado la forma trazada. Mantén la seguridad primero.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Lijado Aerodinámico (Crucial):</strong> Usa lija para redondear el borde grueso (Borde de Ataque) y afilar como cuchillo el borde posterior (Borde de Fuga). ¡Esto reduce el ruido y aumenta la eficiencia dramáticamente!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-block">
+                    <svg viewBox="0 0 200 300" class="educational-svg">
+                        <rect x="50" y="20" width="100" height="240" rx="10" fill="#EDF6F9" stroke="#006D77" stroke-width="3"/>
+                        <path d="M 50 40 Q 100 50 150 40" fill="none" stroke="#006D77" stroke-width="1" stroke-dasharray="2,2"/>
+                        <path d="M 50 260 Q 100 270 150 260" fill="none" stroke="#006D77" stroke-width="1" stroke-dasharray="2,2"/>
+                        
+                        <path d="M 60 40 L 120 40 L 90 260 L 70 260 Z" fill="rgba(255, 209, 102, 0.5)" stroke="#E29578" stroke-width="3" stroke-dasharray="5,5"/>
+                        
+                        <text x="130" y="50" font-family="Roboto" font-size="12" fill="#E29578" font-weight="bold">Raíz (Ancha)</text>
+                        <text x="100" y="270" font-family="Roboto" font-size="12" fill="#E29578" font-weight="bold">Punta (Estrecha)</text>
+                    </svg>
+                    <p class="caption">Plantilla de corte en tubo PVC.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="evaluacion" class="card quiz-section">
+            <h2>3. Evaluación de Conocimientos</h2>
+            <p>Verifiquemos que los conceptos estructurales estén sólidos antes de encender las herramientas.</p>
+            
+            <div id="quiz-container"></div>
+            
+            <button id="submit-btn" onclick="checkQuiz()">Calificar Sesión 3</button>
+            <div id="result-area" class="hidden"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; JMGVPTEL. masterclass sesion 3 aerogeneradores. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

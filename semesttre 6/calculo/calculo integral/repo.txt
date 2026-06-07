@@ -1,0 +1,10 @@
+https://github.com/sagravzelaznog/calculoIntegral.git
+echo "examen calculo Integral" >> README.md
+git init
+git branch -M main
+git remote add origin https://github.com/sagravzelaznog/calculoIntegral.git
+git add .
+git commit -m "first commit"
+git push -u origin main
+https://jmgv-ptel-2025-calculointegral.netlify.app
+https://jmgv-ptel-2025-calculointegral.netlify.app/examenaplicaru3

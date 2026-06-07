@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Cálculo: Sumas de Riemann</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* --- ESTILOS ADICIONALES PARA LA TABLA Y FORMULARIO --- */
+        /* Estos estilos heredan las variables de tu style.css */
+
+        /* Contenedor responsivo (La clave para móviles) */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto; /* Habilita el scroll horizontal */
+            -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0,0,0,0.1);
+            background: white;
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Tabla estilizada */
+        .riemann-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px; /* Fuerza el ancho para activar scroll en móviles */
+        }
+
+        .riemann-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .riemann-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .riemann-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .riemann-table tr:hover {
+            background-color: var(--background-light);
+        }
+
+        /* Inputs y Selects personalizados */
+        .form-control {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid #dfe6e9;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: var(--transition);
+            background-color: #fcfcfc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        }
+
+        /* Estilos de validación */
+        .is-valid {
+            border-color: var(--success-color) !important;
+            background-color: #f0fff4 !important;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .is-invalid {
+            border-color: var(--danger-color) !important;
+            background-color: #fff5f5 !important;
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        /* Ajustes de MathJax dentro de la tabla */
+        mjx-container {
+            font-size: 1.1em !important;
+            color: var(--text-dark);
+        }
+
+        .score-display {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+				<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="text-center mb-4">
+            <h1>Práctica de Sumas de Riemann</h1>
+            <p class="instruction">Completa la tabla calculando el ancho del intervalo y el área aproximada.</p>
+        </header>
+
+        <div class="rule-box mb-4">
+            <h4><i class="fas fa-book"></i> Fórmulas Clave</h4>
+            <p>Recuerda que para aproximar el área bajo la curva $$f(x)$$ en 	$$[a, b]$$ con $$n$$ rectángulos:</p>
+            <ul style="margin-left: 20px;">
+                <li>Ancho del intervalo: <span class="math">\(\Delta x = \frac{b-a}{n}\)</span></li>
+                <li>Área Total: <span class="math">\(A \approx \sum_{i=1}^{n} f(x_i) \cdot \Delta x\)</span></li>
+            </ul>
+        </div>
+
+        <div class="quiz-container">
+            <form id="riemannForm">
+                <div class="table-responsive">
+                    <table class="riemann-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="35%">Función e Intervalo</th>
+                                <th width="15%">Método</th>
+                                <th width="15%">\(\Delta x\)</th>
+                                <th width="30%">Área Aproximada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exercise-body">
+                            </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="btn pulse" onclick="checkAnswers()">Calificar Ejercicios</button>
+            </form>
+        </div>
+
+        <div id="result-box" class="result-container">
+            <div class="score-display" id="score"></div>
+            <p id="feedback-msg"></p>
+            <button class="btn" style="background-color: var(--secondary-color); margin-top: 10px;" onclick="resetQuiz()">Intentar de Nuevo</button>
+        </div>
+    </div>
+
+    <script>
+        // Datos de los ejercicios (Algebra y Cálculo)
+        const exercises = [
+            {
+                id: 1,
+                latex: "f(x) = x, \\; [0, 4], \\; n=4",
+                method: "Derecha",
+                delta: 1,
+                area: 10 // Puntos: 1,2,3,4 -> Alturas: 1,2,3,4 -> Suma: 10 * 1
+            },
+            {
+                id: 2,
+                latex: "f(x) = 2x, \\; [0, 2], \\; n=2",
+                method: "Izquierda",
+                delta: 1,
+                area: 2 // Puntos: 0,1 -> Alturas: 0,2 -> Suma: 2 * 1
+            },
+            {
+                id: 3,
+                latex: "f(x) = x^2, \\; [0, 2], \\; n=2",
+                method: "Derecha",
+                delta: 1,
+                area: 5 // Puntos: 1,2 -> Alturas: 1,4 -> Suma: 5 * 1
+            },
+            {
+                id: 4,
+                latex: "f(x) = 3, \\; [1, 5], \\; n=2",
+                method: "Punto Medio",
+                delta: 2,
+                area: 12 // Rectángulo constante. Base total 4 * Altura 3 = 12
+            },
+            {
+                id: 5,
+                latex: "f(x) = x+1, \\; [0, 3], \\; n=3",
+                method: "Izquierda",
+                delta: 1,
+                area: 6 // Puntos: 0,1,2 -> Alturas: 1,2,3 -> Suma: 6 * 1
+            },
+            {
+                id: 6,
+                latex: "f(x) = x^2+1, \\; [0, 2], \\; n=2",
+                method: "Derecha",
+                delta: 1,
+                area: 7 // Puntos: 1,2 -> Alturas: 2,5 -> Suma: 7 * 1
+            },
+            {
+                id: 7,
+                latex: "f(x) = 2x+1, \\; [1, 3], \\; n=2",
+                method: "Izquierda",
+                delta: 1,
+                area: 8 // Puntos: 1,2 -> Alturas: 3,5 -> Suma: 8 * 1
+            },
+            {
+                id: 8,
+                latex: "f(x) = 5, \\; [2, 6], \\; n=2",
+                method: "Derecha",
+                delta: 2,
+                area: 20 // Constante
+            },
+            {
+                id: 9,
+                latex: "f(x) = x, \\; [0, 6], \\; n=3",
+                method: "Punto Medio",
+                delta: 2,
+                area: 18 // Intervalos [0,2],[2,4],[4,6] -> Medios: 1,3,5 -> Alturas: 1,3,5 -> Suma(9)*2
+            },
+            {
+                id: 10,
+                latex: "f(x) = x^3, \\; [0, 2], \\; n=2",
+                method: "Derecha",
+                delta: 1,
+                area: 9 // Puntos: 1,2 -> Alturas: 1,8 -> Suma: 9 * 1
+            }
+        ];
+
+        // Función para renderizar la tabla
+        function renderTable() {
+            const tbody = document.getElementById('exercise-body');
+            tbody.innerHTML = '';
+
+            exercises.forEach((ex, index) => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td><strong>${index + 1}</strong></td>
+                    <td>$$${ex.latex}$$</td>
+                    <td>
+                        <select class="form-control" id="method-${index}" disabled style="background: #e9ecef; cursor: default;">
+                            <option selected>${ex.method}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="delta-${index}" placeholder="?" step="0.1">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="area-${index}" placeholder="Resultado final" step="0.1">
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            // Refrescar MathJax para renderizar las fórmulas nuevas
+            MathJax.typeset();
+        }
+
+        // Función de Calificación
+        function checkAnswers() {
+            let score = 0;
+            const total = exercises.length * 2; // 2 puntos por ejercicio (delta y area)
+
+            exercises.forEach((ex, index) => {
+                const deltaInput = document.getElementById(`delta-${index}`);
+                const areaInput = document.getElementById(`area-${index}`);
+                
+                // Validar Delta
+                if (parseFloat(deltaInput.value) === ex.delta) {
+                    deltaInput.classList.remove('is-invalid');
+                    deltaInput.classList.add('is-valid');
+                    score++;
+                } else {
+                    deltaInput.classList.remove('is-valid');
+                    deltaInput.classList.add('is-invalid');
+                }
+
+                // Validar Area
+                if (parseFloat(areaInput.value) === ex.area) {
+                    areaInput.classList.remove('is-invalid');
+                    areaInput.classList.add('is-valid');
+                    score++;
+                } else {
+                    areaInput.classList.remove('is-valid');
+                    areaInput.classList.add('is-invalid');
+                }
+            });
+
+            // Mostrar resultados
+            const resultBox = document.getElementById('result-box');
+            const scoreText = document.getElementById('score');
+            const msg = document.getElementById('feedback-msg');
+            
+            resultBox.style.display = 'block';
+            resultBox.className = 'result-container'; // Reset class
+
+            const percentage = (score / total) * 100;
+            scoreText.textContent = `${score} / ${total} Puntos`;
+
+            if (percentage === 100) {
+                resultBox.classList.add('result-success');
+                msg.textContent = "¡Excelente! Dominas perfectamente las Sumas de Riemann.";
+            } else if (percentage >= 60) {
+                resultBox.classList.add('result-warning');
+                msg.textContent = "Buen trabajo, pero revisa los campos en rojo.";
+            } else {
+                resultBox.classList.add('result-danger');
+                msg.textContent = "Sigue practicando. Revisa las fórmulas al inicio.";
+            }
+            
+            // Scroll al resultado
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            document.getElementById('riemannForm').reset();
+            document.querySelectorAll('.form-control').forEach(el => {
+                el.classList.remove('is-valid', 'is-invalid');
+            });
+            document.getElementById('result-box').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
+</body>
+</html>

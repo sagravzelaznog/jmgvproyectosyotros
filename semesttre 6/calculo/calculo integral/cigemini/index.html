@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Integral: Portal Central</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --purple-neon: #8b5cf6;
+            --yellow-neon: #facc15;
+            --coral-neon: #f43f5e;
+            --blue-neon: #3b82f6;
+            --radioactive-green: #84cc16;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(217, 70, 239, 0.05), transparent 25%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--cyan-neon), var(--magenta-neon), var(--yellow-neon));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* GRID DE MISIONES */
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* TARJETAS DE SESIÓN */
+        .mission-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        /* Animación escalonada para que aparezcan una por una */
+        .mission-card:nth-child(1) { animation-delay: 0.1s; border-bottom: 4px solid var(--magenta-neon); }
+        .mission-card:nth-child(2) { animation-delay: 0.2s; border-bottom: 4px solid var(--emerald-neon); }
+        .mission-card:nth-child(3) { animation-delay: 0.3s; border-bottom: 4px solid var(--warning-orange); }
+        .mission-card:nth-child(4) { animation-delay: 0.4s; border-bottom: 4px solid var(--purple-neon); }
+        .mission-card:nth-child(5) { animation-delay: 0.5s; border-bottom: 4px solid var(--yellow-neon); }
+        .mission-card:nth-child(6) { animation-delay: 0.6s; border-bottom: 4px solid var(--blue-neon); }
+        .mission-card:nth-child(7) { animation-delay: 0.7s; border-bottom: 4px solid var(--coral-neon); }
+        .mission-card:nth-child(8) { animation-delay: 0.8s; border-bottom: 4px solid var(--radioactive-green); }
+
+        .mission-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .mission-card:nth-child(1):hover { box-shadow: 0 15px 30px rgba(217, 70, 239, 0.2); }
+        .mission-card:nth-child(2):hover { box-shadow: 0 15px 30px rgba(16, 185, 129, 0.2); }
+        .mission-card:nth-child(3):hover { box-shadow: 0 15px 30px rgba(249, 115, 22, 0.2); }
+        .mission-card:nth-child(4):hover { box-shadow: 0 15px 30px rgba(139, 92, 246, 0.2); }
+        .mission-card:nth-child(5):hover { box-shadow: 0 15px 30px rgba(250, 204, 21, 0.2); }
+        .mission-card:nth-child(6):hover { box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2); }
+        .mission-card:nth-child(7):hover { box-shadow: 0 15px 30px rgba(244, 63, 94, 0.2); }
+        .mission-card:nth-child(8):hover { box-shadow: 0 15px 30px rgba(132, 204, 22, 0.2); }
+
+        .session-number {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .mission-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .mission-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .mission-icon {
+            font-size: 2.5rem;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            opacity: 0.2;
+            transition: opacity 0.3s;
+        }
+
+        .mission-card:hover .mission-icon {
+            opacity: 1;
+        }
+
+        .play-btn {
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .mission-card:hover .play-btn {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Cálculo Integral</h1>
+            <p class="subtitle">Laboratorios Interactivos. Elige tu misión matemática y descubre los secretos del universo a través del cálculo.</p>
+        </header>
+
+        <main class="missions-grid">
+            
+            <a href="calints01.html" class="mission-card">
+                <div class="mission-icon">📏</div>
+                <div class="session-number" style="color: var(--magenta-neon);">Misión 01</div>
+                <div class="mission-title">El Origen Geométrico</div>
+                <div class="mission-desc">Descubre el concepto de acumulación de áreas y el poder infinito de las Sumas de Riemann.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints02.html" class="mission-card">
+                <div class="mission-icon">🌉</div>
+                <div class="session-number" style="color: var(--emerald-neon);">Misión 02</div>
+                <div class="mission-title">El Puente Mágico</div>
+                <div class="mission-desc">El Teorema Fundamental del Cálculo. Une el mundo de la derivada con la integral.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints03.html" class="mission-card">
+                <div class="mission-icon">🦠</div>
+                <div class="session-number" style="color: var(--warning-orange);">Misión 03</div>
+                <div class="mission-title">El Mundo de Euler</div>
+                <div class="mission-desc">Explora la función "inmortal" (Exponenciales) y cómo salvar el universo de la división entre cero (Logaritmos).</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints04.html" class="mission-card">
+                <div class="mission-icon">🌊</div>
+                <div class="session-number" style="color: var(--purple-neon);">Misión 04</div>
+                <div class="mission-title">Ondas y Oscilaciones</div>
+                <div class="mission-title" style="font-size: 1rem; color: var(--text-muted); margin-top:-10px;">Integrales Trigonométricas</div>
+                <div class="mission-desc">Hackea el sonido con el legado de Fourier usando Senos y Cosenos.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints05.html" class="mission-card">
+                <div class="mission-icon">🎭</div>
+                <div class="session-number" style="color: var(--yellow-neon);">Misión 05</div>
+                <div class="mission-title">El Arte de Simplificar</div>
+                <div class="mission-title" style="font-size: 1rem; color: var(--text-muted); margin-top:-10px;">Cambio de Variable</div>
+                <div class="mission-desc">Utiliza la letal técnica del disfraz "u" para colapsar y resolver monstruos algebraicos.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints06.html" class="mission-card">
+                <div class="mission-icon">🧩</div>
+                <div class="session-number" style="color: var(--blue-neon);">Misión 06</div>
+                <div class="mission-title">Rompecabezas Lógico</div>
+                <div class="mission-title" style="font-size: 1rem; color: var(--text-muted); margin-top:-10px;">Integración por Partes</div>
+                <div class="mission-desc">Domina la técnica ALATE y ensambla las piezas de la mnemotecnia matemática definitiva.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints07.html" class="mission-card">
+                <div class="mission-icon">🏺</div>
+                <div class="session-number" style="color: var(--coral-neon);">Misión 07</div>
+                <div class="mission-title">Sólidos en 3D</div>
+                <div class="mission-title" style="font-size: 1rem; color: var(--text-muted); margin-top:-10px;">Aplicaciones de la Integral</div>
+                <div class="mission-desc">Gira el área plana a la velocidad de la luz y materialízala en modelos tridimensionales (Legado de Cauchy).</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+            <a href="calints08.html" class="mission-card">
+                <div class="mission-icon">⏳</div>
+                <div class="session-number" style="color: var(--radioactive-green);">Misión 08</div>
+                <div class="mission-title">Viaje en el Tiempo</div>
+                <div class="mission-title" style="font-size: 1rem; color: var(--text-muted); margin-top:-10px;">Ecuaciones Diferenciales</div>
+                <div class="mission-desc">La batalla final. Usa el Carbono-14 para retroceder los relojes de la naturaleza y datar fósiles milenarios.</div>
+                <div class="play-btn">Iniciar Simulador &rarr;</div>
+            </a>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+</body>
+</html>

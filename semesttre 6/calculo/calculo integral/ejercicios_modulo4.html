@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Interactivos - Módulo 4: Aplicaciones de la Integral</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="module-container">
+        <div class="module-header">
+            <h1><i class="fas fa-dumbbell"></i> Ejercicios Interactivos</h1>
+            <p>Módulo 4: Aplicaciones de la Integral - Práctica Guiada</p>
+        </div>
+
+        <div class="progress-indicator">
+            <h3>Progreso del Ejercicio</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p>Ejercicio <span id="currentExercise">1</span> de <span id="totalExercises">8</span></p>
+        </div>
+
+        <!-- Ejercicio 1: Área bajo una curva -->
+        <div class="module-exercise-container" id="exercise1">
+            <div class="exercise-header">
+                <div class="exercise-title">
+                    <i class="fas fa-square"></i>
+                    <span>Ejercicio 1: Área Bajo una Curva</span>
+                </div>
+                <span class="difficulty-indicator difficulty-basic">Básico</span>
+            </div>
+
+            <div class="problem-statement">
+                <h4><i class="fas fa-question-circle"></i> Problema</h4>
+                <p>Calcula el área bajo la curva $y = x^2 + 2x$ desde $x = 0$ hasta $x = 3$.</p>
+            </div>
+
+            <div class="hint-box">
+                <h5><i class="fas fa-lightbulb"></i> Pista</h5>
+                <p>Recuerda que el área bajo una curva $y = f(x)$ desde $x = a$ hasta $x = b$ se calcula como: $A = \int_a^b f(x) \, dx$</p>
+            </div>
+
+            <div class="solution-steps">
+                <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Identificar la función y los límites</div>
+                        <p>Función: $f(x) = x^2 + 2x$<br>
+                        Límites de integración: $a = 0$, $b = 3$</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Plantear la integral</div>
+                        <div class="formula-highlight">$A = \int_0^3 (x^2 + 2x) \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolver la integral indefinida</div>
+                        <p>$$\int (x^2 + 2x) \, dx = \int x^2 \, dx + \int 2x \, dx = \frac{x^3}{3} + x^2 + C$$</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Aplicar el Teorema Fundamental del Cálculo</div>
+                        <div class="formula-highlight">$A = \left[\frac{x^3}{3} + x^2\right]_0^3$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Evaluar la integral</div>
+                        <p>$A = \left(\frac{3^3}{3} + 3^2\right) - \left(\frac{0^3}{3} + 0^2\right)$</p>
+                        <p>$A = (9 + 9) - (0 + 0) = 18$</p>
+                        <div class="formula-highlight">El área es $18$ unidades cuadradas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-calculator">
+                <h4><i class="fas fa-calculator"></i> Calculadora Interactiva</h4>
+                <p>Prueba con diferentes valores para la función $y = ax^2 + bx + c$:</p>
+                
+                <div class="calculator-input">
+                    <div class="input-group">
+                        <label for="a1">a (coeficiente de x²):</label>
+                        <input type="number" id="a1" value="1" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="b1">b (coeficiente de x):</label>
+                        <input type="number" id="b1" value="2" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="c1">c (término constante):</label>
+                        <input type="number" id="c1" value="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="lower1">Límite inferior:</label>
+                        <input type="number" id="lower1" value="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="upper1">Límite superior:</label>
+                        <input type="number" id="upper1" value="3" step="0.1">
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateArea()">
+                    <i class="fas fa-calculator"></i> Calcular Área
+                </button>
+                
+                <div class="result-display" id="result1">
+                    <i class="fas fa-check-circle"></i> Resultado: <span id="areaResult"></span>
+                </div>
+            </div>
+
+            <div class="visualization">
+                <h4><i class="fas fa-chart-area"></i> Visualización</h4>
+                <div class="graph-placeholder">
+                    <i class="fas fa-chart-area"></i> Gráfica de la función y área calculada
+                </div>
+                <p>La gráfica muestra la curva $y = x^2 + 2x$ y el área sombreada desde $x = 0$ hasta $x = 3$.</p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 2: Área entre dos curvas -->
+        <div class="module-exercise-container" id="exercise2">
+            <div class="exercise-header">
+                <div class="exercise-title">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Ejercicio 2: Área Entre Dos Curvas</span>
+                </div>
+                <span class="difficulty-indicator difficulty-intermediate">Intermedio</span>
+            </div>
+
+            <div class="problem-statement">
+                <h4><i class="fas fa-question-circle"></i> Problema</h4>
+                <p>Encuentra el área de la región limitada por las curvas $y = x^2$ y $y = 2x - x^2$.</p>
+            </div>
+
+            <div class="solution-steps">
+                <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Encontrar los puntos de intersección</div>
+                        <p>Igualamos las funciones: $x^2 = 2x - x^2$</p>
+                        <p>$2x^2 - 2x = 0 \Rightarrow 2x(x - 1) = 0$</p>
+                        <p>Por lo tanto: $x = 0$ y $x = 1$</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Determinar cuál función está arriba</div>
+                        <p>En el intervalo $[0, 1]$: $2x - x^2 \geq x^2$</p>
+                        <p>Por lo tanto: $f(x) = 2x - x^2$ (superior) y $g(x) = x^2$ (inferior)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Plantear la integral</div>
+                        <div class="formula-highlight">$A = \int_0^1 [(2x - x^2) - x^2] \, dx = \int_0^1 (2x - 2x^2) \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolver la integral</div>
+                        <p>$A = \int_0^1 (2x - 2x^2) \, dx = \left[x^2 - \frac{2x^3}{3}\right]_0^1$</p>
+                        <p>$A = \left(1 - \frac{2}{3}\right) - (0 - 0) = \frac{1}{3}$</p>
+                        <div class="formula-highlight">El área es $\frac{1}{3}$ unidades cuadradas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-calculator">
+                <h4><i class="fas fa-calculator"></i> Calculadora Interactiva</h4>
+                <p>Calcula el área entre dos funciones cuadráticas:</p>
+                
+                <div class="calculator-input">
+                    <div class="input-group">
+                        <label for="function1">f(x) = ax² + bx + c</label>
+                        <input type="text" id="function1" value="x²" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="function2">g(x) = mx² + nx + p</label>
+                        <input type="text" id="function2" value="2x - x²" readonly>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateAreaBetween()">
+                    <i class="fas fa-calculator"></i> Calcular Área Entre Curvas
+                </button>
+                
+                <div class="result-display" id="result2">
+                    <i class="fas fa-check-circle"></i> Resultado: <span id="areaBetweenResult"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3: Volumen por método de discos -->
+        <div class="module-exercise-container" id="exercise3">
+            <div class="exercise-header">
+                <div class="exercise-title">
+                    <i class="fas fa-compact-disc"></i>
+                    <span>Ejercicio 3: Volumen por Método de Discos</span>
+                </div>
+                <span class="difficulty-indicator difficulty-intermediate">Intermedio</span>
+            </div>
+
+            <div class="problem-statement">
+                <h4><i class="fas fa-question-circle"></i> Problema</h4>
+                <p>Calcula el volumen del sólido generado al rotar la región bajo la curva $y = \sqrt{x}$ alrededor del eje x desde $x = 0$ hasta $x = 4$.</p>
+            </div>
+
+            <div class="solution-steps">
+                <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Identificar la función y límites</div>
+                        <p>Función: $f(x) = \sqrt{x}$<br>
+                        Límites: $a = 0$, $b = 4$<br>
+                        Eje de rotación: eje x</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Aplicar la fórmula del método de discos</div>
+                        <div class="formula-highlight">$V = \pi \int_a^b [f(x)]^2 \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Plantear la integral</div>
+                        <div class="formula-highlight">$V = \pi \int_0^4 [\sqrt{x}]^2 \, dx = \pi \int_0^4 x \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolver la integral</div>
+                        <p>$V = \pi \left[\frac{x^2}{2}\right]_0^4 = \pi \left(\frac{16}{2} - 0\right) = 8\pi$</p>
+                        <div class="formula-highlight">El volumen es $8\pi$ unidades cúbicas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visualization">
+                <h4><i class="fas fa-cube"></i> Visualización 3D</h4>
+                <div class="graph-placeholder">
+                    <i class="fas fa-cube"></i> Sólido de revolución generado
+                </div>
+                <p>El sólido se genera al rotar la curva $y = \sqrt{x}$ alrededor del eje x, creando una forma similar a un cono truncado.</p>
+            </div>
+        </div>
+
+        <!-- Ejercicio 4: Volumen por método de arandelas -->
+        <div class="module-exercise-container" id="exercise4">
+            <div class="exercise-header">
+                <div class="exercise-title">
+                    <i class="fas fa-ring"></i>
+                    <span>Ejercicio 4: Volumen por Método de Arandelas</span>
+                </div>
+                <span class="difficulty-indicator difficulty-intermediate">Intermedio</span>
+            </div>
+
+            <div class="problem-statement">
+                <h4><i class="fas fa-question-circle"></i> Problema</h4>
+                <p>Calcula el volumen del sólido generado al rotar la región entre $y = x^2$ y $y = 2x$ alrededor del eje x.</p>
+            </div>
+
+            <div class="solution-steps">
+                <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Encontrar los puntos de intersección</div>
+                        <p>$x^2 = 2x \Rightarrow x^2 - 2x = 0 \Rightarrow x(x - 2) = 0$</p>
+                        <p>Por lo tanto: $x = 0$ y $x = 2$</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Determinar los radios</div>
+                        <p>Radio exterior: $R(x) = 2x$ (función superior)<br>
+                        Radio interior: $r(x) = x^2$ (función inferior)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Aplicar la fórmula de arandelas</div>
+                        <div class="formula-highlight">$V = \pi \int_0^2 [(2x)^2 - (x^2)^2] \, dx = \pi \int_0^2 (4x^2 - x^4) \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolver la integral</div>
+                        <p>$V = \pi \left[\frac{4x^3}{3} - \frac{x^5}{5}\right]_0^2$</p>
+                        <p>$V = \pi \left(\frac{32}{3} - \frac{32}{5}\right) = \pi \left(\frac{160 - 96}{15}\right) = \frac{64\pi}{15}$</p>
+                        <div class="formula-highlight">El volumen es $\frac{64\pi}{15}$ unidades cúbicas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 5: Trabajo en resortes -->
+        <div class="module-exercise-container" id="exercise5">
+            <div class="exercise-header">
+                <div class="exercise-title">
+                    <i class="fas fa-spring"></i>
+                    <span>Ejercicio 5: Trabajo en Resortes</span>
+                </div>
+                <span class="difficulty-indicator difficulty-intermediate">Intermedio</span>
+            </div>
+
+            <div class="problem-statement">
+                <h4><i class="fas fa-question-circle"></i> Problema</h4>
+                <p>Un resorte tiene una constante $k = 150$ N/m. Calcula el trabajo necesario para estirarlo desde su posición natural hasta 0.4 metros.</p>
+            </div>
+
+            <div class="solution-steps">
+                <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Identificar los datos</div>
+                        <p>Constante del resorte: $k = 150$ N/m<br>
+                        Estiramiento: de $x = 0$ a $x = 0.4$ m</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Aplicar la Ley de Hooke</div>
+                        <p>Fuerza necesaria: $F(x) = kx = 150x$</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Calcular el trabajo</div>
+                        <div class="formula-highlight">$W = \int_0^{0.4} 150x \, dx$</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Resolver la integral</div>
+                        <p>$W = 150 \left[\frac{x^2}{2}\right]_0^{0.4} = 150 \left(\frac{0.16}{2} - 0\right) = 12$ J</p>
+                        <div class="formula-highlight">El trabajo realizado es $12$ julios</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-calculator">
+                <h4><i class="fas fa-calculator"></i> Calculadora de Trabajo en Resortes</h4>
+                <p>Calcula el trabajo para diferentes constantes de resorte y estiramientos:</p>
+                
+                <div class="calculator-input">
+                    <div class="input-group">
+                        <label for="springK">Constante k (N/m):</label>
+                        <input type="number" id="springK" value="150" step="1">
+                    </div>
+                    <div class="input-group">
+                        <label for="stretch">Estiramiento (m):</label>
+                        <input type="number" id="stretch" value="0.4" step="0.1">
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateSpringWork()">
+                    <i class="fas fa-calculator"></i> Calcular Trabajo
+                </button>
+                
+                <div class="result-display" id="result5">
+                    <i class="fas fa-check-circle"></i> Resultado: <span id="springWorkResult"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons">
+            <button class="nav-btn" onclick="previousExercise()" id="prevBtn" disabled>
+                <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button class="nav-btn" onclick="nextExercise()" id="nextBtn">
+                Siguiente <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="navigation-buttons">
+            <button class="nav-btn" onclick="goToModule()">
+                <i class="fas fa-book"></i> Volver al Módulo 4
+            </button>
+            <button class="nav-btn" onclick="window.open('https://www.geogebra.org/calculator')">
+                <i class="fas fa-external-link-alt"></i> Abrir GeoGebra
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentExercise = 1;
+        const totalExercises = 5;
+
+        function updateExerciseDisplay() {
+            // Ocultar todos los ejercicios
+            for (let i = 1; i <= totalExercises; i++) {
+                document.getElementById(`exercise${i}`).style.display = 'none';
+            }
+            
+            // Mostrar el ejercicio actual
+            document.getElementById(`exercise${currentExercise}`).style.display = 'block';
+            
+            // Actualizar indicadores
+            document.getElementById('currentExercise').textContent = currentExercise;
+            document.getElementById('totalExercises').textContent = totalExercises;
+            
+            // Actualizar barra de progreso
+            const progress = (currentExercise / totalExercises) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            
+            // Actualizar botones de navegación
+            document.getElementById('prevBtn').disabled = currentExercise === 1;
+            document.getElementById('nextBtn').disabled = currentExercise === totalExercises;
+            
+            if (currentExercise === totalExercises) {
+                document.getElementById('nextBtn').innerHTML = '<i class="fas fa-check"></i> Completar';
+            } else {
+                document.getElementById('nextBtn').innerHTML = 'Siguiente <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        function nextExercise() {
+            if (currentExercise < totalExercises) {
+                currentExercise++;
+                updateExerciseDisplay();
+            } else {
+                alert('¡Felicidades! Has completado todos los ejercicios del Módulo 4.');
+            }
+        }
+
+        function previousExercise() {
+            if (currentExercise > 1) {
+                currentExercise--;
+                updateExerciseDisplay();
+            }
+        }
+
+        function goToModule() {
+            window.location.href = 'modulo4_aplicaciones.html';
+        }
+
+        // Funciones de calculadora
+        function calculateArea() {
+            const a = parseFloat(document.getElementById('a1').value);
+            const b = parseFloat(document.getElementById('b1').value);
+            const c = parseFloat(document.getElementById('c1').value);
+            const lower = parseFloat(document.getElementById('lower1').value);
+            const upper = parseFloat(document.getElementById('upper1').value);
+            
+            // Calcular la integral de ax² + bx + c
+            const area = (a * (upper**3 - lower**3) / 3) + 
+                        (b * (upper**2 - lower**2) / 2) + 
+                        (c * (upper - lower));
+            
+            document.getElementById('areaResult').textContent = `${area.toFixed(2)} unidades cuadradas`;
+            document.getElementById('result1').style.display = 'block';
+        }
+
+        function calculateAreaBetween() {
+            // Para este ejemplo específico
+            const area = 1/3;
+            document.getElementById('areaBetweenResult').textContent = `${area.toFixed(4)} unidades cuadradas`;
+            document.getElementById('result2').style.display = 'block';
+        }
+
+        function calculateSpringWork() {
+            const k = parseFloat(document.getElementById('springK').value);
+            const stretch = parseFloat(document.getElementById('stretch').value);
+            
+            const work = (k * stretch**2) / 2;
+            
+            document.getElementById('springWorkResult').textContent = `${work.toFixed(2)} julios`;
+            document.getElementById('result5').style.display = 'block';
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateExerciseDisplay();
+            
+            // Configurar MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // Atajos de teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentExercise > 1) {
+                previousExercise();
+            } else if (e.key === 'ArrowRight' && currentExercise < totalExercises) {
+                nextExercise();
+            }
+        });
+    </script>
+</body>
+</html>

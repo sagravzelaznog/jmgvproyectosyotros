@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Cálculo Integral | Tutor Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .math {
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            color: var(--darker);
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .instruction {
+            color: var(--gray);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-id {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+
+        .exercise-category {
+            background-color: #e0e7ff;
+            color: var(--primary-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .exercise-question {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            color: var(--darker);
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-top: 1rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--darker);
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9375rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 1px 3px 0 rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border-left: 4px solid var(--success);
+        }
+
+        .feedback.incorrect {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border-left: 4px solid var(--error);
+        }
+        
+        .math-toolbar {
+            background-color: #1e293b;
+            border-radius: 0.375rem 0.375rem 0 0;
+            padding: 0.25rem;
+            border: 1px solid #334155;
+            border-bottom: none;
+        }
+        
+        .math-toolbar button {
+            min-width: 1.5rem;
+            height: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0.125rem;
+            padding: 0 0.25rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s;
+        }
+        
+        .math-toolbar button:hover {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .score-display {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 40;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--darker);
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .solution-step {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .solution-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--darker);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-content {
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .formula-box {
+            background-color: #f8fafc;
+            border-left: 3px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-family: 'Source Code Pro', monospace;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .exercise-card {
+                padding: 1.25rem;
+            }
+
+            .exercise-question {
+                font-size: 1.125rem;
+            }
+
+            .score-display {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Student Information Form -->
+    <div class="container mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Datos del Estudiante</h2>
+            <form id="studentForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="mb-4">
+                    <label for="studentName" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                    <input type="text" id="studentName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="studentId" class="block text-sm font-medium text-gray-700 mb-1">Matrícula</label>
+                    <input type="text" id="studentId" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="group" class="block text-sm font-medium text-gray-700 mb-1">Grupo</label>
+                    <input type="text" id="group" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4 flex items-end">
+                    <button type="button" onclick="startExercise()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">Comenzar</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="exerciseContainer" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Ejercicios de Cálculo Integral</h1>
+                    <p class="text-gray-600 mt-1">Alumno: <span id="displayStudentName" class="font-medium"></span> | Grupo: <span id="displayGroup"></span> | Matrícula: <span id="displayStudentId"></span></p>
+                </div>
+                <button onclick="generatePDF()" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Guardar PDF
+                </button>
+                <a href="./modulo1_antiderivadas.html">Regresar</a>
+            </div>
+            <p class="instruction mb-8 text-gray-600">Resuelve las siguientes integrales y verifica tus respuestas. ¡Practica todo lo que necesites!</p>
+
+        <div id="exerciseList" class="space-y-6">
+            <!-- Los ejercicios se generarán aquí dinámicamente -->
+        </div>
+        </div>
+    </div>
+
+    <div class="score-display">
+        <div class="text-right">
+            <div class="score-label">Puntuación</div>
+            <div id="scoreDisplay" class="score-value">0/84</div>
+        </div>
+    </div>
+
+    <div id="solutionModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-slate-900 border border-cyan-500/30 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar modal-animate relative">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-cyan-500/20">Solución Paso a Paso</span>
+                    <span id="modalId" class="text-slate-500 font-mono text-sm">#</span>
+                </div>
+
+                <div class="mb-8 text-center">
+                    <p class="text-slate-400 text-sm mb-2">Resolviendo la integral:</p>
+                    <div id="modalProblem" class="text-2xl md:text-3xl font-bold text-white py-2"></div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-800/50 p-4 rounded-xl border-l-4 border-purple-500">
+                        <h3 class="text-purple-400 text-xs font-bold uppercase mb-2">Fórmula / Estrategia</h3>
+                        <div id="modalFormula" class="text-lg" style="color: #ccc;"></div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-slate-300 text-sm font-bold uppercase mb-3 border-b border-slate-700 pb-2">Procedimiento Detallado</h3>
+                        <ul id="modalSteps" class="space-y-3 text-slate-400 text-sm list-disc pl-5">
+                            </ul>
+                    </div>
+                    
+                    <div class="mt-6 bg-slate-950 p-4 rounded-xl border border-emerald-500/30 text-center">
+                        <p class="text-emerald-500 text-xs font-bold uppercase mb-1">Resultado Final</p>
+                        <div id="modalResult" class="text-xl font-bold text-emerald-400"></div>
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-blue-900/20 rounded-lg text-xs text-blue-300">
+                        <span class="font-bold">💡 Nota Pedagógica:</span> <span id="modalExplanation"></span>
+                    </div>
+                </div>
+
+                <button onclick="closeModal()" class="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl font-bold transition-all border border-slate-700">
+                    Entendido, voy a intentarlo de nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Solución -->
+    <div id="solutionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Solución Paso a Paso</h2>
+                <button class="close-modal" onclick="closeModal()" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-6 text-center">
+                    <p class="text-gray-600 mb-2">Resolviendo la integral:</p>
+                    <div id="modalProblem" class="text-2xl font-bold text-gray-900"></div>
+                </div>
+
+                <div class="solution-step">
+                    <h3 class="step-title">
+                        <span class="text-slate-300">Fórmula / Estrategia</span>
+                    </h3>
+                    <div id="modalFormula" class="formula-box text-slate-400"></div>
+                </div>
+
+                <div class="solution-step">
+                    <h3 class="step-title">
+                        <span class="text-slate-300">Procedimiento Detallado</span>
+                    </h3>
+                    <ul id="modalSteps" class="space-y-3 list-disc pl-5 text-gray-700"></ul>
+                </div>
+
+                <div class="solution-step bg-green-50 p-4 rounded-lg mt-6">
+                    <h3 class="step-title text-green-600">
+                        Resultado Final
+                    </h3>
+                    <div id="modalResult" class="text-xl font-mono font-bold text-green-700 mt-2"></div>
+                </div>
+
+                <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-medium text-blue-800 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h2a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        Nota Pedagógica
+                    </h4>
+                    <p id="modalExplanation" class="mt-2 text-blue-700"></p>
+                </div>
+
+                <div class="mt-6">
+                    <button onclick="closeModal()" class="btn btn-primary w-full">
+                        Cerrar Solución
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+// Initialize jsPDF
+const { jsPDF } = window.jspdf;
+        // --- BASE DE DATOS UNIFICADA (Ejercicios + Soluciones) ---
+        // Aquí combinamos la petición 'q', 'a', 'c' con 'steps', 'formula', etc.
+        const exercisesDB = [
+        { 
+        id: 1, 
+        q: "x^{6}dx", 
+        a: "x^7/7", 
+        c: "Potencia",
+        formula: "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C",
+        steps: [
+            "Identificar n = 6.",
+            "Aplicar n + 1: 6 + 1 = 7.",
+            "Dividir entre el nuevo exponente."
+        ],
+        explanation: "Se aplica la regla básica de potencias para integrales indefinidas.",
+        result: "\\frac{x^7}{7} + C"
+    },
+    
+    // Ejercicio 2
+    { 
+        id: 2, 
+        q: "5x^{4}dx", 
+        a: "x^5", 
+        c: "Potencia",
+        formula: "c \\int x^n dx = c \\frac{x^{n+1}}{n+1} + C",
+        steps: [
+            "Extraer la constante 5.",
+            "Integrar x^4 obteniendo x^5/5.",
+            "Simplificar 5/5."
+        ],
+        explanation: "Se extrae la constante y se aplica la regla de potencias.",
+        result: "x^5 + C"
+    },
+    
+    // Ejercicio 3
+    { 
+        id: 3, 
+        q: "bx^{3}dx", 
+        a: "(bx^4)/4", 
+        c: "Potencia",
+        formula: "\\int k \\cdot x^n dx = k \\cdot \\frac{x^{n+1}}{n+1} + C",
+        steps: [
+            "Identificar k = b y n = 3.",
+            "Aplicar n + 1: 3 + 1 = 4.",
+            "Dividir entre el nuevo exponente."
+        ],
+        explanation: "Se aplica la regla de potencias con coeficiente constante.",
+        result: "\\frac{bx^4}{4} + C"
+    },
+    
+    // Ejercicio 4
+    { 
+        id: 4, 
+        q: "\\sqrt{3}x^{2}dx", 
+        a: "(\\sqrt{3}x^3)/3", 
+        c: "Potencia",
+        formula: "\\sqrt{3} \\int x^2 dx",
+        steps: [
+            "La constante es \\sqrt{3}.",
+            "La integral de x^2 es x^3/3.",
+            "Combinar términos."
+        ],
+        explanation: "Cualquier número real, incluso raíces, funciona como constante multiplicativa.",
+        result: "\\frac{\\sqrt{3}x^3}{3} + C"
+    },
+    
+    // Ejercicio 5
+    { 
+        id: 5, 
+        q: "a~dx", 
+        a: "ax", 
+        c: "Constante",
+        formula: "\\int k~dx = kx + C",
+        steps: [
+            "Identificar que 'a' no depende de x.",
+            "La integral de una constante es la constante por la variable."
+        ],
+        explanation: "Es el proceso inverso a la derivada de una función lineal (f(x)=ax).",
+        result: "ax + C"
+    },
+    
+    // Ejercicio 6
+    { 
+        id: 6, 
+        q: "\\frac{3~dx}{4}", 
+        a: "3x/4", 
+        c: "Constante",
+        formula: "\\int k\\,dx = kx + C",
+        steps: [
+            "Identificar la constante k = 3/4.",
+            "Aplicar la regla de la constante.",
+            "Añadir la variable de integración x."
+        ],
+        explanation: "Cualquier fracción constante sigue la regla básica de integración de constantes.",
+        result: "\\frac{3x}{4} + C"
+    },
+    
+    // Ejercicio 7
+    { 
+        id: 7, 
+        q: "\\frac{dx}{3}", 
+        a: "x/3", 
+        c: "Constante",
+        formula: "\\int \\frac{1}{k}\\,dx = \\frac{1}{k}x + C",
+        steps: [
+            "Reescribir como (1/3) * integral de dx.",
+            "Integrar para obtener x/3."
+        ],
+        explanation: "El denominador constante se mantiene bajo la variable x.",
+        result: "\\frac{x}{3} + C"
+    },
+    
+    // Ejercicio 8
+    { 
+        id: 8, 
+        q: "\\sqrt[3]{x}dx", 
+        a: "(3x^{4/3})/4", 
+        c: "Radical",
+        formula: "\\int x^{1/3} dx = \\frac{x^{1/3+1}}{1/3+1}",
+        steps: [
+            "Convertir raíz cúbica a exponente fraccionario (1/3).",
+            "Sumar 1 al exponente: 1/3 + 3/3 = 4/3.",
+            "Multiplicar por el inverso del nuevo exponente (3/4)."
+        ],
+        explanation: "Para integrar radicales, siempre conviértelos primero a potencias fraccionarias.",
+        result: "\\frac{3x^{4/3}}{4} + C"
+    },
+    
+    // Ejercicio 9
+    { 
+        id: 9, 
+        q: "5\\sqrt[4]{x}dx", 
+        a: "4x^{5/4}", 
+        c: "Radical",
+        formula: "5 \\int x^{1/4} dx",
+        steps: [
+            "Extraer el 5 y convertir la raíz cuarta a x^(1/4).",
+            "Nuevo exponente: 1/4 + 1 = 5/4.",
+            "Dividir: 5 / (5/4) = 4."
+        ],
+        explanation: "El coeficiente 5 se simplifica perfectamente con el nuevo denominador 5/4.",
+        result: "4x^{5/4} + C"
+    },
+    
+    // Ejercicio 10
+    { 
+        id: 10, 
+        q: "\\frac{dx}{x^{3}}", 
+        a: "-1/(2x^2)", 
+        c: "Potencia Negativa",
+        formula: "\\int x^{-3} dx = \\frac{x^{-3+1}}{-3+1}",
+        steps: [
+            "Subir x^3 como x^-3.",
+            "Sumar 1 al exponente: -3 + 1 = -2.",
+            "Dividir por -2 y reacomodar como fracción positiva."
+        ],
+        explanation: "Las potencias en el denominador se manejan como exponentes negativos antes de aplicar la regla de la potencia.",
+        result: "-\\frac{1}{2x^2} + C"
+    },
+    
+    // Ejercicio 11
+    { 
+        id: 11, 
+        q: "\\frac{5~dx}{x^{4}}", 
+        a: "-5/(3x^3)", 
+        c: "Potencia Negativa",
+        formula: "5 \\int x^{-4} dx",
+        steps: [
+            "Subir x^4 como x^-4.",
+            "Sumar 1 al exponente: -4 + 1 = -3.",
+            "Dividir 5 entre -3 y bajar x^3 al denominador."
+        ],
+        explanation: "Cuando la variable está en el denominador con una potencia, se usa un exponente negativo para aplicar la regla de la potencia.",
+        result: "-\\frac{5}{3x^3} + C"
+    },
+    
+    // Ejercicio 12
+    { 
+        id: 12, 
+        q: "\\frac{dx}{\\sqrt[4]{x}}", 
+        a: "(4x^{3/4})/3", 
+        c: "Radical",
+        formula: "\\int x^{-1/4} dx",
+        steps: [
+            "Transformar raíz cuarta en el denominador a x^-1/4.",
+            "Nuevo exponente: -1/4 + 4/4 = 3/4.",
+            "Multiplicar por el recíproco 4/3."
+        ],
+        explanation: "Este ejercicio combina el manejo de radicales y potencias negativas.",
+        result: "\\frac{4x^{3/4}}{3} + C"
+    },
+    
+    // Ejercicio 13
+    { 
+        id: 13, 
+        q: "\\frac{4~dx}{x}", 
+        a: "4ln|x|", 
+        c: "Logarítmica",
+        formula: "4 \\int \\frac{1}{x} dx",
+        steps: [
+            "Extraer la constante 4.",
+            "Identificar la integral inmediata del logaritmo natural."
+        ],
+        explanation: "Importante: La regla de la potencia no aplica cuando el exponente es -1.",
+        result: "4\\ln|x| + C"
+    },
+    
+    // Ejercicio 14
+    { 
+        id: 14, 
+        q: "\\frac{6~dx}{\\sqrt[3]{x}}", 
+        a: "9x^{2/3}", 
+        c: "Radical",
+        formula: "6 \\int x^{-1/3} dx",
+        steps: [
+            "Convertir raíz cúbica en el denominador a x^-1/3.",
+            "Sumar 1 al exponente: -1/3 + 1 = 2/3.",
+            "Simplificar: 6 / (2/3) = 9."
+        ],
+        explanation: "La constante se multiplica por el inverso de la nueva fracción del exponente.",
+        result: "9x^{2/3} + C"
+    },
+    
+    // Ejercicio 15
+    { 
+        id: 15, 
+        q: "\\sqrt[5]{x^{3}}dx", 
+        a: "(5x^{8/5})/8", 
+        c: "Radical",
+        formula: "\\int x^{3/5} dx",
+        steps: [
+            "Convertir raíz quinta de x^3 a x^(3/5).",
+            "Nuevo exponente: 3/5 + 1 = 8/5.",
+            "Multiplicar por el recíproco 5/8."
+        ],
+        explanation: "Se aplica la regla de la potencia directamente tras la conversión del radical.",
+        result: "\\frac{5x^{8/5}}{8} + C"
+    },
+    
+    // Ejercicio 16
+    { 
+        id: 16, 
+        q: "\\frac{a~dx}{\\sqrt[3]{x^{2}}}", 
+        a: "3ax^{1/3}", 
+        c: "Radical",
+        formula: "a \\int x^{-2/3} dx",
+        steps: [
+            "Extraer constante 'a' y subir x como potencia negativa -2/3.",
+            "Sumar 1 al exponente: -2/3 + 1 = 1/3.",
+            "Dividir 'a' entre 1/3 (multiplicar por 3)."
+        ],
+        explanation: "Se manejan constantes literales y potencias fraccionarias negativas simultáneamente.",
+        result: "3a\\sqrt[3]{x} + C"
+    },
+    
+    // Ejercicio 17
+    { 
+        id: 17, 
+        q: "\\frac{5~dx}{2x}", 
+        a: "(5/2)ln|x|", 
+        c: "Logarítmica",
+        formula: "\\frac{5}{2} \\int \\frac{1}{x} dx",
+        steps: [
+            "Separar la constante 5/2 de la variable.",
+            "Aplicar la regla directa del logaritmo natural para 1/x."
+        ],
+        explanation: "Las constantes en el denominador también deben extraerse antes de integrar.",
+        result: "\\frac{5}{2}\\ln|x| + C"
+    },
+    
+    // Ejercicio 18
+    { 
+        id: 18, 
+        q: "\\sqrt{bx}dx", 
+        a: "(2\\sqrt{b}x^{3/2})/3", 
+        c: "Radical",
+        formula: "\\sqrt{b} \\int x^{1/2} dx",
+        steps: [
+            "Propiedad de radicales: sqrt(bx) = sqrt(b) * sqrt(x).",
+            "Nuevo exponente: 1/2 + 1 = 3/2.",
+            "Multiplicar la constante por el recíproco 2/3."
+        ],
+        explanation: "Es vital separar la constante numérica o literal de la variable bajo el radical.",
+        result: "\\frac{2\\sqrt{b}x^{3/2}}{3} + C"
+    },
+    
+    // Ejercicio 19
+    { 
+        id: 19, 
+        q: "(\\frac{5}{\\sqrt[3]{x}}-4\\sqrt[3]{x})dx", 
+        a: "(15x^{2/3})/2 - 3x^{4/3}", 
+        c: "Radicales",
+        formula: "\\int 5x^{-1/3} dx - \\int 4x^{1/3} dx",
+        steps: [
+            "Dividir en dos integrales independientes.",
+            "Término 1: 5 * (x^(2/3) / (2/3)) = 15/2 x^(2/3).",
+            "Término 2: 4 * (x^(4/3) / (4/3)) = 3 x^(4/3)."
+        ],
+        explanation: "Este ejercicio practica la integración de sumas con exponentes fraccionarios.",
+        result: "\\frac{15}{2}x^{2/3} - 3x^{4/3} + C"
+    },
+    
+    // Ejercicio 20
+    { 
+        id: 20, 
+        q: "(\\frac{3}{x^{5}}-\\frac{2}{x^{2}}-\\frac{6}{x})dx", 
+        a: "-3/(4x^4) + 2/x - 6ln|x|", 
+        c: "Polinómica",
+        formula: "\\sum \\int x^n dx",
+        steps: [
+            "Término 1: 3x^-5 -> 3x^-4 / -4.",
+            "Término 2: -2x^-2 -> -2x^-1 / -1.",
+            "Término 3: -6/x -> -6 ln|x|."
+        ],
+        explanation: "Se combinan potencias negativas con la regla del logaritmo en un solo polinomio.",
+        result: "-\\frac{3}{4x^4} + \\frac{2}{x} - 6\\ln|x| + C"
+    },
+            // Ejercicio 21
+            { 
+                id: 21, 
+                q: "\\sqrt[3]{at}dt", 
+                a: "(3(at)^{4/3})/(4a)", 
+                c: "Radical",
+                formula: "\\int (at)^{1/3} dt",
+                steps: [
+                    "Convertir raíz cúbica a exponente 1/3.",
+                    "Integrar: (at)^(4/3) dividido por (4/3) y por la constante 'a'.",
+                    "Simplificar la fracción resultante."
+                ],
+                explanation: "Se introduce la variable 't'. Las constantes literales (a) se manejan igual que las numéricas.",
+                result: "\\frac{3(at)^{4/3}}{4a} + C"
+            },
+            
+            // Ejercicio 22
+            { 
+                id: 22, 
+                q: "\\sqrt{6t}dt", 
+                a: "(2(6t)^{3/2})/18", 
+                c: "Radical",
+                formula: "\\int (6t)^{1/2} dt",
+                steps: [
+                    "Transformar la raíz cuadrada a potencia 1/2.",
+                    "Aplicar regla de la potencia: (6t)^(3/2) / (3/2 * 6).",
+                    "Simplificar el denominador: 1.5 * 6 = 9."
+                ],
+                explanation: "Ejercicio de refuerzo para integración de funciones lineales bajo un radical.",
+                result: "\\frac{(6t)^{3/2}}{9} + C"
+            },
+            
+            // Ejercicio 23
+            { 
+                id: 23, 
+                q: "(8x^{5}-5x^{4}-4x^{3}-6x^{2}-2x-3)dx", 
+                a: "(4x^6)/3-x^5-x^4-2x^3-x^2-3x", 
+                c: "Polinómica",
+                formula: "\\int \\sum a_i x^i dx",
+                steps: [
+                    "Integrar 8x^5 -> 8x^6/6 = 4x^6/3.",
+                    "Integrar -5x^4 -> -5x^5/5 = -x^5.",
+                    "Integrar cada término sucesivo bajando el grado.",
+                    "La constante -3 se convierte en -3x."
+                ],
+                explanation: "Práctica de polinomios extensos. Se debe cuidar la simplificación de cada fracción.",
+                result: "\\frac{4x^6}{3}-x^5-x^4-2x^3-x^2-3x + C"
+            },
+            
+            // Ejercicio 24
+            { 
+                id: 24, 
+                q: "(ax^{3}-bx^{2}-cx+d)dx", 
+                a: "(ax^4)/4-(bx^3)/3-(cx^2)/2+dx", 
+                c: "Polinómica",
+                formula: "\\int (ax^3 - bx^2 - cx + d) dx",
+                steps: [
+                    "Identificar que a, b, c, d son constantes.",
+                    "Aplicar n+1 a cada potencia de x.",
+                    "Dividir cada término por su nuevo exponente."
+                ],
+                explanation: "Base fundamental para el cálculo integral con coeficientes indeterminados.",
+                result: "\\frac{ax^4}{4}-\\frac{bx^3}{3}-\\frac{cx^2}{2}+dx + C"
+            },
+            
+            // Ejercicio 25
+            { 
+                id: 25, 
+                q: "(\\frac{x^{2}}{\\sqrt{a^2+b^2}}-\\frac{3x}{\\sqrt{a}}-5\\sqrt{b})dx", 
+                a: "(x^3)/(3\\sqrt{a^2+b^2})-(3x^2)/(2\\sqrt{a})-5x\\sqrt{b}", 
+                c: "Polinómica",
+                formula: "\\int (k_1 x^2 - k_2 x - k_3) dx",
+                steps: [
+                    "Tratar los denominadores con raíces como constantes fijas.",
+                    "Integrar x^2 para obtener x^3/3.",
+                    "Integrar 3x para obtener 3x^2/2.",
+                    "Integrar la constante 5*sqrt(b) agregando la variable x."
+                ],
+                explanation: "Uso de constantes complejas para evaluar la capacidad de identificar la variable real.",
+                result: "\\frac{x^3}{3\\sqrt{a^2+b^2}}-\\frac{3x^2}{2\\sqrt{a}}-5x\\sqrt{b} + C"
+            },
+            
+            // Ejercicio 26
+            { 
+                id: 26, 
+                q: "(\\frac{x^{4}-6x^{3}-7x}{x})dx", 
+                a: "x^4/4-2x^3-7x", 
+                c: "Simplificación",
+                formula: "\\int \\frac{x^4-6x^3-7x}{x} dx = \\int (x^3-6x^2-7) dx",
+                steps: [
+                    "Dividir cada término del numerador por x.",
+                    "Integrar x^3 -> x^4/4.",
+                    "Integrar -6x^2 -> -2x^3.",
+                    "Integrar -7 -> -7x."
+                ],
+                explanation: "La simplificación por división de monomios es el paso más eficiente antes de integrar.",
+                result: "\\frac{x^4}{4} - 2x^3 - 7x + C"
+            },
+            
+            // Ejercicio 27
+            { 
+                id: 27, 
+                q: "(\\frac{3}{\\sqrt[5]{x^{2}}}-\\frac{2}{\\sqrt[5]{x}})dx", 
+                a: "5x^{3/5} - (5x^{4/5})/2", 
+                c: "Radicales",
+                formula: "\\int (3x^{-2/5} - 2x^{-1/5}) dx",
+                steps: [
+                    "Convertir radicales en el denominador a potencias negativas.",
+                    "Sumar 1 a -2/5 para obtener 3/5; multiplicar 3 por el recíproco 5/3 para obtener 5.",
+                    "Sumar 1 a -1/5 para obtener 4/5; multiplicar 2 por el recíproco 5/4 para obtener 5/2."
+                ],
+                explanation: "Se manejan exponentes fraccionarios negativos para aplicar la regla de la potencia.",
+                result: "5x^{3/5} - \\frac{5x^{4/5}}{2} + C"
+            },
+            
+            // Ejercicio 28
+            { 
+                id: 28, 
+                q: "(\\frac{4}{\\sqrt[3]{x}}-\\frac{5}{\\sqrt[4]{x}})dx", 
+                a: "6x^{2/3} - (20x^{3/4})/3", 
+                c: "Radicales",
+                formula: "\\int (4x^{-1/3} - 5x^{-1/4}) dx",
+                steps: [
+                    "Reescribir los términos como potencias negativas.",
+                    "Término 1: 4 * (x^(2/3) / (2/3)) = 6x^(2/3).",
+                    "Término 2: 5 * (x^(3/4) / (3/4)) = 20/3 x^(3/4)."
+                ],
+                explanation: "Este ejercicio refuerza la aritmética de fracciones en los coeficientes y exponentes.",
+                result: "6x^{2/3} - \\frac{20x^{3/4}}{3} + C"
+            },
+            
+            // Ejercicio 29
+            { 
+                id: 29, 
+                q: "(y^{5/2}-5y^{4/3}-2y^{1/4}-\\sqrt{y})dy", 
+                a: "(2y^{7/2})/7-(15y^{7/3})/7-(8y^{5/4})/5-(2y^{3/2})/3", 
+                c: "Potencia",
+                formula: "\\int \\sum y^n dy",
+                steps: [
+                    "Integrar y^(5/2) -> 2y^(7/2)/7.",
+                    "Integrar -5y^(4/3) -> -5 * (3/7)y^(7/3) = -15y^(7/3)/7.",
+                    "Integrar -2y^(1/4) -> -2 * (4/5)y^(5/4) = -8y^(5/4)/5.",
+                    "Integrar -y^(1/2) -> -2y^(3/2)/3."
+                ],
+                explanation: "Se aplica la regla de la potencia término a término para una variable distinta (y).",
+                result: "\\frac{2y^{7/2}}{7} - \\frac{15y^{7/3}}{7} - \\frac{8y^{5/4}}{5} - \\frac{2y^{3/2}}{3} + C"
+            },
+            
+            // Ejercicio 30
+            { 
+                id: 30, 
+                q: "(\\frac{y^{2/2}-y^{5/3}-y^{1/4}}{y^{2}})dy", 
+                a: "ln|y| + 3y^{-2/3} + (4y^{-3/4})/3", 
+                c: "Simplificación",
+                formula: "\\int (y^{-1} - y^{-1/3} - y^{-7/4}) dy",
+                steps: [
+                    "Simplificar la fracción restando exponentes de y.",
+                    "La integral de y^-1 es el logaritmo natural ln|y|.",
+                    "Aplicar regla de la potencia a los términos restantes."
+                ],
+                explanation: "Fundamental reconocer que x^-1 (o y^-1) no sigue la regla de la potencia habitual.",
+                result: "\\ln|y| + 3y^{-2/3} + \\frac{4y^{-3/4}}{3} + C"
+            },
+            
+            // Ejercicio 31
+            { 
+                id: 31, 
+                q: "\\sqrt[3]{t}(5t^{2}-3t+2)dt", 
+                a: "(15t^{10/3})/10 - (9t^{7/3})/7 + (3t^{4/3})/2", 
+                c: "Algebraica",
+                formula: "\\int (5t^{7/3} - 3t^{4/3} + 2t^{1/3}) dt",
+                steps: [
+                    "Distribuir t^(1/3) multiplicando a cada término.",
+                    "Integrar t^(7/3) -> t^(10/3) / (10/3).",
+                    "Integrar t^(4/3) -> t^(7/3) / (7/3).",
+                    "Integrar t^(1/3) -> t^(4/3) / (4/3)."
+                ],
+                explanation: "Fundamental: Siempre realiza las multiplicaciones indicadas antes de intentar integrar.",
+                result: "\\frac{15t^{10/3}}{10} - \\frac{9t^{7/3}}{7} + \\frac{3t^{4/3}}{2} + C"
+            },
+            
+            // Ejercicio 32
+            { 
+                id: 32, 
+                q: "\\sqrt[3]{7t}dt", 
+                a: "(3(7t)^{4/3})/28", 
+                c: "Radical",
+                formula: "\\int (7t)^{1/3} dt",
+                steps: [
+                    "Cambio de variable: u = 7t, du = 7 dt.",
+                    "Despejar dt: dt = du/7.",
+                    "Sustituir: (1/7) integral de u^(1/3).",
+                    "Resultado en u: (1/7) * (3/4) * u^(4/3)."
+                ],
+                explanation: "Introducción a la sustitución simple cuando el argumento del radical no es solo x.",
+                result: "\\frac{3(7t)^{4/3}}{28} + C"
+            },
+            
+            // Ejercicio 33
+            { 
+                id: 33, 
+                q: "(3x+4)^{6}dx", 
+                a: "((3x+4)^7)/21", 
+                c: "Sustitución",
+                formula: "\\int u^6 \\frac{du}{3}",
+                steps: [
+                    "Identificar u = 3x+4.",
+                    "Derivar: du = 3 dx -> dx = du/3.",
+                    "Sacar 1/3 de la integral.",
+                    "Integrar u^6 -> u^7/7."
+                ],
+                explanation: "Regla de la Cadena inversa: Se compensa la derivada interna multiplicando por su recíproco.",
+                result: "\\frac{(3x+4)^7}{21} + C"
+            },
+            
+            // Ejercicio 34
+            { 
+                id: 34, 
+                q: "(ax^{2}-b)^{5}x~dx", 
+                a: "((ax^2-b)^6)/(12a)", 
+                c: "Sustitución",
+                formula: "\\int u^5 \\frac{du}{2a}",
+                steps: [
+                    "Identificar u = ax^2 - b.",
+                    "Derivar: du = 2ax dx.",
+                    "Notar que 'x dx' está presente; falta la constante '2a'.",
+                    "Compensar con 1/(2a) fuera de la integral."
+                ],
+                explanation: "Ejercicio clásico de sustitución donde la variable de la derivada ya está presente en la integral.",
+                result: "\\frac{(ax^2 - b)^6}{12a} + C"
+            },
+            
+            // Ejercicio 35
+            { 
+                id: 35, 
+                q: "t^{2}(t^{3}-4)^{2}dt", 
+                a: "((t^3-4)^3)/9", 
+                c: "Sustitución",
+                formula: "\\int u^2 \\frac{du}{3}",
+                steps: [
+                    "Identificar u = t^3 - 4 (lo que está dentro de la potencia).",
+                    "Derivar: du = 3t^2 dt.",
+                    "Tenemos t^2 dt, falta el 3.",
+                    "Multiplicar por 1/3 e integrar u^2 -> u^3/3."
+                ],
+                explanation: "Reconocer patrones: t^2 es la derivada (salvo constante) de t^3.",
+                result: "\\frac{(t^3 - 4)^3}{9} + C"
+            },
+            
+            // Ejercicio 36
+            { 
+                id: 36, 
+                q: "(a-by)^{4}dy", 
+                a: "-((a-by)^5)/(5b)", 
+                c: "Sustitución",
+                formula: "\\int u^4 \\frac{du}{-b}",
+                steps: [
+                    "Identificar u = a - by.",
+                    "Derivar: du = -b dy -> dy = du/-b.",
+                    "Extraer -1/b e integrar u^4 -> u^5/5."
+                ],
+                explanation: "Cuidado con el signo negativo que surge de la derivada de -by.",
+                result: "-\\frac{(a-by)^5}{5b} + C"
+            },
+            
+            // Ejercicio 37
+            { 
+                id: 37, 
+                q: "(t^{2}-6)^{2}dt", 
+                a: "t^5/5-4t^3+36t", 
+                c: "Polinómica",
+                formula: "\\int (t^4 - 12t^2 + 36) dt",
+                steps: [
+                    "¡ALERTA! No usar sustitución (falta 't' afuera).",
+                    "Expandir el binomio al cuadrado.",
+                    "Integrar polinomio resultante: t^5/5 - 12t^3/3 + 36t."
+                ],
+                explanation: "Si la derivada de lo de adentro no está afuera, debes desarrollar el álgebra primero.",
+                result: "\\frac{t^5}{5} - 4t^3 + 36t + C"
+            },
+            
+            // Ejercicio 38
+            { 
+                id: 38, 
+                q: "x(x+4)^{2}dx", 
+                a: "x^4/4+8x^3/3+8x^2", 
+                c: "Polinómica",
+                formula: "\\int (x^3 + 8x^2 + 16x) dx",
+                steps: [
+                    "Desarrollar (x+4)^2 -> x^2 + 8x + 16.",
+                    "Distribuir la 'x' externa.",
+                    "Integrar término a término."
+                ],
+                explanation: "Combinación de álgebra básica con reglas de potencia.",
+                result: "\\frac{x^4}{4} + \\frac{8x^3}{3} + 8x^2 + C"
+            },
+            
+            // Ejercicio 39
+            { 
+                id: 39, 
+                q: "x^{2}(x+1)^{3}dx", 
+                a: "x^6/6+3x^5/5+3x^4/4+x^3/3", 
+                c: "Polinómica",
+                formula: "\\int (x^5 + 3x^4 + 3x^3 + x^2) dx",
+                steps: [
+                    "Desarrollar cubo: (x+1)^3 = x^3 + 3x^2 + 3x + 1.",
+                    "Multiplicar por x^2.",
+                    "Integrar las potencias resultantes (5, 4, 3, 2)."
+                ],
+                explanation: "Requiere paciencia algebraica antes de aplicar cálculo.",
+                result: "\\frac{x^6}{6} + \\frac{3x^5}{5} + \\frac{3x^4}{4} + \\frac{x^3}{3} + C"
+            },
+            
+            // Ejercicio 40
+            { 
+                id: 40, 
+                q: "\\sqrt{m+ny}dy", 
+                a: "(2(m+ny)^{3/2})/(3n)", 
+                c: "Sustitución",
+                formula: "\\int u^{1/2} \\frac{du}{n}",
+                steps: [
+                    "Sustitución u = m + ny.",
+                    "Compensar la derivada 'n' con 1/n afuera.",
+                    "Integrar u^(1/2) -> 2/3 u^(3/2)."
+                ],
+                explanation: "Similar a los ejercicios de radicales anteriores, pero con dos constantes (m y n).",
+                result: "\\frac{2(m+ny)^{3/2}}{3n} + C"
+            },
+            // Ejercicio 41
+            { 
+                id: 41, 
+                q: "\\frac{dx}{ax+b}", 
+                a: "(1/a)ln|ax+b|", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{1}{u} \\frac{du}{a}",
+                steps: [
+                    "Sustitución u = ax + b.",
+                    "Derivar: du = a dx -> dx = du/a.",
+                    "La integral se convierte en (1/a)∫(1/u)du.",
+                    "Integrar para obtener (1/a)ln|u|."
+                ],
+                explanation: "Caso clásico de integral logarítmica con sustitución simple.",
+                result: "\\frac{1}{a}\\ln|ax + b| + C"
+            },
+            
+            // Ejercicio 42
+            { 
+                id: 42, 
+                q: "x\\sqrt{x^2 + 1}~dx", 
+                a: "(x^2 + 1)^{3/2}/3", 
+                c: "Sustitución",
+                formula: "\\int u^{1/2} \\frac{du}{2}",
+                steps: [
+                    "Sustitución u = x² + 1.",
+                    "Derivar: du = 2x dx -> x dx = du/2.",
+                    "La integral se convierte en (1/2)∫√u du.",
+                    "Integrar para obtener (1/2)(2/3)u^(3/2)."
+                ],
+                explanation: "La presencia de 'x' afuera del radical sugiere sustitución con u = lo de adentro.",
+                result: "\\frac{(x^2 + 1)^{3/2}}{3} + C"
+            },
+            
+            // Ejercicio 43
+            { 
+                id: 43, 
+                q: "\\frac{x~dx}{\\sqrt{1-x^4}}", 
+                a: "(1/2)arcsen(x^2)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{2\\sqrt{1-u^2}}",
+                steps: [
+                    "Sustitución u = x².",
+                    "Derivar: du = 2x dx -> x dx = du/2.",
+                    "La integral se convierte en (1/2)∫du/√(1-u²).",
+                    "Reconocer la integral de arcsen(u)."
+                ],
+                explanation: "Aunque parece complejo, el x en el numerador es la pista para la sustitución.",
+                result: "\\frac{1}{2}\\arcsin(x^2) + C"
+            },
+            
+            // Ejercicio 44
+            { 
+                id: 44, 
+                q: "e^{3x+2}dx", 
+                a: "e^{3x+2}/3", 
+                c: "Exponencial",
+                formula: "\\int e^u \\frac{du}{3}",
+                steps: [
+                    "Sustitución u = 3x + 2.",
+                    "Derivar: du = 3 dx -> dx = du/3.",
+                    "La integral se convierte en (1/3)∫e^u du.",
+                    "Integrar para obtener (1/3)e^u."
+                ],
+                explanation: "La integral de e^u es e^u, solo hay que compensar la derivada interna.",
+                result: "\\frac{e^{3x+2}}{3} + C"
+            },
+            
+            // Ejercicio 45
+            { 
+                id: 45, 
+                q: "\\frac{e^{1/x}}{x^2}dx", 
+                a: "-e^{1/x}", 
+                c: "Exponencial",
+                formula: "-\\int e^u du",
+                steps: [
+                    "Sustitución u = 1/x = x⁻¹.",
+                    "Derivar: du = -1/x² dx -> -du = dx/x².",
+                    "La integral se convierte en -∫e^u du.",
+                    "Integrar para obtener -e^u."
+                ],
+                explanation: "El término 1/x² en el denominador es clave para la sustitución.",
+                result: "-e^{1/x} + C"
+            },
+            
+            // Ejercicio 46
+            { 
+                id: 46, 
+                q: "\\frac{dx}{x\\ln x}", 
+                a: "ln|ln x|", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Sustitución u = ln x.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫(1/u) du.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "La derivada de ln x está presente en el denominador, lo que sugiere sustitución logarítmica.",
+                result: "\\ln|\\ln x| + C"
+            },
+            
+            // Ejercicio 47
+            { 
+                id: 47, 
+                q: "\\tan x~dx", 
+                a: "-ln|cos x|", 
+                c: "Trigonométrica",
+                formula: "-\\int \\frac{du}{u}",
+                steps: [
+                    "Expresar tan x como sen x / cos x.",
+                    "Sustitución u = cos x.",
+                    "Derivar: du = -sen x dx -> -du = sen x dx.",
+                    "La integral se convierte en -∫(1/u) du."
+                ],
+                explanation: "La integral de la tangente es un clásico que se resuelve expresándola en términos de seno y coseno.",
+                result: "-\\ln|\\cos x| + C = \\ln|\\sec x| + C"
+            },
+            
+            // Ejercicio 48
+            { 
+                id: 48, 
+                q: "\\cot x~dx", 
+                a: "ln|sen x|", 
+                c: "Trigonométrica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Expresar cot x como cos x / sen x.",
+                    "Sustitución u = sen x.",
+                    "Derivar: du = cos x dx.",
+                    "La integral se convierte en ∫(1/u) du."
+                ],
+                explanation: "Similar a la tangente, pero con coseno en el numerador y seno en el denominador.",
+                result: "\\ln|\\sin x| + C"
+            },
+            
+            // Ejercicio 49
+            { 
+                id: 49, 
+                q: "\\frac{dt}{at+b}", 
+                a: "(1/a)ln|at+b|", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{1}{u} \\frac{du}{a}",
+                steps: [
+                    "Sustitución u = at + b.",
+                    "Derivar: du = a dt -> dt = du/a.",
+                    "La integral se convierte en (1/a)∫(1/u) du.",
+                    "Integrar para obtener (1/a)ln|u|."
+                ],
+                explanation: "Caso general de integral logarítmica con sustitución simple.",
+                result: "\\frac{1}{a}\\ln|at + b| + C"
+            },
+            
+            // Ejercicio 50
+            { 
+                id: 50, 
+                q: "\\frac{x~dx}{\\sqrt{9-x^4}}", 
+                a: "(1/2)arcsen(x^2/3)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{2\\sqrt{a^2-u^2}}",
+                steps: [
+                    "Sustitución u = x², a = 3.",
+                    "Derivar: du = 2x dx -> x dx = du/2.",
+                    "La integral se convierte en (1/2)∫du/√(9-u²).",
+                    "Reconocer la forma del arcoseno: (1/2)arcsen(u/3)."
+                ],
+                explanation: "Similar al ejercicio 43, pero con una constante en el denominador.",
+                result: "\\frac{1}{2}\\arcsin\\left(\\frac{x^2}{3}\\right) + C"
+            },
+            
+            // Ejercicio 51
+            { 
+                id: 51, 
+                q: "\\frac{e^x~dx}{e^x + 1}", 
+                a: "ln(e^x + 1)", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Sustitución u = eˣ + 1.",
+                    "Derivar: du = eˣ dx.",
+                    "La integral se convierte en ∫(1/u) du.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "La derivada del denominador está en el numerador, lo que sugiere una integral logarítmica.",
+                result: "\\ln(e^x + 1) + C"
+            },
+            
+            // Ejercicio 52
+            { 
+                id: 52, 
+                q: "x\\sqrt[3]{1 - x^2}~dx", 
+                a: "-3(1-x^2)^{4/3}/8", 
+                c: "Sustitución",
+                formula: "-\\frac{3}{8} \\int u^{1/3} du",
+                steps: [
+                    "Sustitución u = 1 - x².",
+                    "Derivar: du = -2x dx -> -du/2 = x dx.",
+                    "La integral se convierte en (-1/2)∫u^(1/3) du.",
+                    "Integrar para obtener (-1/2)(3/4)u^(4/3)."
+                ],
+                explanation: "Similar al ejercicio 42, pero con una raíz cúbica y coeficientes diferentes.",
+                result: "-\\frac{3(1-x^2)^{4/3}}{8} + C"
+            },
+            
+            // Ejercicio 53
+            { 
+                id: 53, 
+                q: "\\frac{dx}{x\\sqrt{4-(\\ln x)^2}}", 
+                a: "arcsen((ln x)/2)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{a^2-u^2}}",
+                steps: [
+                    "Sustitución u = ln x, a = 2.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫du/√(4-u²).",
+                    "Reconocer la forma del arcoseno: arcsen(u/2)."
+                ],
+                explanation: "Combinación de sustitución logarítmica con integral trigonométrica inversa.",
+                result: "\\arcsin\\left(\\frac{\\ln x}{2}\\right) + C"
+            },
+            
+            // Ejercicio 54
+            { 
+                id: 54, 
+                q: "\\frac{e^{2x}~dx}{\\sqrt{1-e^{4x}}}", 
+                a: "(1/2)arcsen(e^{2x})", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{2\\sqrt{1-u^2}}",
+                steps: [
+                    "Sustitución u = e^(2x).",
+                    "Derivar: du = 2e^(2x) dx -> du/2 = e^(2x) dx.",
+                    "La integral se convierte en (1/2)∫du/√(1-u²).",
+                    "Reconocer la forma del arcoseno: (1/2)arcsen(u)."
+                ],
+                explanation: "La presencia de e^(2x) en el numerador sugiere la sustitución para la raíz cuadrada.",
+                result: "\\frac{1}{2}\\arcsin(e^{2x}) + C"
+            },
+            
+            // Ejercicio 55
+            { 
+                id: 55, 
+                q: "\\frac{dx}{x(\\ln x + 1)}", 
+                a: "ln|ln x + 1|", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Sustitución u = ln x + 1.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫(1/u) du.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "Similar al ejercicio 46, pero con un término adicional en el denominador.",
+                result: "\\ln|\\ln x + 1| + C"
+            },
+            
+            // Ejercicio 56
+            { 
+                id: 56, 
+                q: "\\frac{\\cos x~dx}{\\sqrt{\\sin x + 1}}", 
+                a: "2\\sqrt{\\sin x + 1}", 
+                c: "Sustitución",
+                formula: "\\int u^{-1/2} du",
+                steps: [
+                    "Sustitución u = sen x + 1.",
+                    "Derivar: du = cos x dx.",
+                    "La integral se convierte en ∫u^(-1/2) du.",
+                    "Integrar para obtener 2u^(1/2)."
+                ],
+                explanation: "La presencia de cos x en el numerador sugiere que es la derivada de sen x.",
+                result: "2\\sqrt{\\sin x + 1} + C"
+            },
+            
+            // Ejercicio 57
+            { 
+                id: 57, 
+                q: "\\frac{e^x - e^{-x}}{e^x + e^{-x}}~dx", 
+                a: "ln(e^x + e^{-x})", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Observar que el numerador es la derivada del denominador.",
+                    "Sustitución u = eˣ + e⁻ˣ.",
+                    "Derivar: du = (eˣ - e⁻ˣ) dx.",
+                    "La integral se convierte en ∫(1/u) du."
+                ],
+                explanation: "Caso clásico donde el numerador es la derivada del denominador.",
+                result: "\\ln(e^x + e^{-x}) + C"
+            },
+            
+            // Ejercicio 58
+            { 
+                id: 58, 
+                q: "\\frac{\\sec^2 x~dx}{\\sqrt{1-\\tan^2 x}}", 
+                a: "arcsen(\\tan x)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{1-u^2}}",
+                steps: [
+                    "Sustitución u = tan x.",
+                    "Derivar: du = sec²x dx.",
+                    "La integral se convierte en ∫du/√(1-u²).",
+                    "Reconocer la forma del arcoseno: arcsen(u)."
+                ],
+                explanation: "La secante al cuadrado en el numerador es la derivada de la tangente.",
+                result: "\\arcsin(\\tan x) + C"
+            },
+            
+            // Ejercicio 59
+            { 
+                id: 59, 
+                q: "\\frac{dx}{x\\ln x \\ln(\\ln x)}", 
+                a: "ln|ln(ln x)|", 
+                c: "Logarítmica Compuesta",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Sustitución u = ln(ln x).",
+                    "Derivar: du = (1/ln x)(1/x) dx = dx/(x ln x).",
+                    "La integral se convierte en ∫(1/u) du.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "Ejemplo de sustitución múltiple con logaritmos anidados.",
+                result: "\\ln|\\ln(\\ln x)| + C"
+            },
+            
+            // Ejercicio 60
+            { 
+                id: 60, 
+                q: "\\frac{\\cos x~dx}{1 + \\sin^2 x}", 
+                a: "arctan(\\sin x)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{1 + u^2}",
+                steps: [
+                    "Sustitución u = sen x.",
+                    "Derivar: du = cos x dx.",
+                    "La integral se convierte en ∫du/(1+u²).",
+                    "Reconocer la forma del arcotangente: arctan(u)."
+                ],
+                explanation: "La presencia de cos x en el numerador sugiere sustitución con u = sen x.",
+                result: "\\arctan(\\sin x) + C"
+            },
+            
+            // Ejercicio 61
+            { 
+                id: 61, 
+                q: "\\frac{\\cos x~dx}{\\sqrt{1 + \\sin^2 x}}", 
+                a: "arcsinh(sin x)", 
+                c: "Hiperbólica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{1 + u^2}}",
+                steps: [
+                    "Sustitución u = sen x.",
+                    "Derivar: du = cos x dx.",
+                    "La integral se convierte en ∫du/√(1+u²).",
+                    "Reconocer la forma del arcoseno hiperbólico: arcsinh(u)."
+                ],
+                explanation: "La presencia de cos x en el numerador sugiere sustitución con u = sen x.",
+                result: "\\text{arcsinh}(\\sin x) + C"
+            },
+            
+            // Ejercicio 62
+            { 
+                id: 62, 
+                q: "\\frac{e^x~dx}{\\sqrt{1 - e^{2x}}}", 
+                a: "arcsin(e^x)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{1 - u^2}}",
+                steps: [
+                    "Sustitución u = eˣ.",
+                    "Derivar: du = eˣ dx.",
+                    "La integral se convierte en ∫du/√(1-u²).",
+                    "Reconocer la forma del arcoseno: arcsin(u)."
+                ],
+                explanation: "La presencia de eˣ en el numerador sugiere sustitución con u = eˣ.",
+                result: "\\arcsin(e^x) + C"
+            },
+            
+            // Ejercicio 63
+            { 
+                id: 63, 
+                q: "\\frac{dx}{x\\ln x (\\ln(\\ln x))^2}", 
+                a: "-1/ln(ln x)", 
+                c: "Logarítmica Compuesta",
+                formula: "-\\int u^{-2} du",
+                steps: [
+                    "Sustitución u = ln(ln x).",
+                    "Derivar: du = (1/ln x)(1/x) dx = dx/(x ln x).",
+                    "La integral se convierte en -∫u⁻² du.",
+                    "Integrar para obtener u⁻¹."
+                ],
+                explanation: "Ejemplo de sustitución múltiple con logaritmos anidados y exponente negativo.",
+                result: "-\\frac{1}{\\ln(\\ln x)} + C"
+            },
+            
+            // Ejercicio 64
+            { 
+                id: 64, 
+                q: "\\frac{\\sec^2 x~dx}{\\sqrt{1 - \\tan^2 x}}", 
+                a: "arcsin(tan x)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{1 - u^2}}",
+                steps: [
+                    "Sustitución u = tan x.",
+                    "Derivar: du = sec²x dx.",
+                    "La integral se convierte en ∫du/√(1-u²).",
+                    "Reconocer la forma del arcoseno: arcsin(u)."
+                ],
+                explanation: "La secante al cuadrado en el numerador es la derivada de la tangente.",
+                result: "\\arcsin(\\tan x) + C"
+            },
+            
+            // Ejercicio 65
+            { 
+                id: 65, 
+                q: "\\frac{\\sinh x~dx}{\\cosh^2 x}", 
+                a: "-1/cosh x", 
+                c: "Hiperbólica",
+                formula: "-\\int u^{-2} du",
+                steps: [
+                    "Sustitución u = cosh x.",
+                    "Derivar: du = sinh x dx.",
+                    "La integral se convierte en ∫u⁻² du.",
+                    "Integrar para obtener -u⁻¹."
+                ],
+                explanation: "La presencia de sinh x en el numerador sugiere sustitución con u = cosh x.",
+                result: "-\\frac{1}{\\cosh x} + C = -\\text{sech}\\,x + C"
+            },
+            
+            // Ejercicio 66
+            { 
+                id: 66, 
+                q: "\\frac{dx}{x\\sqrt{(\\ln x)^2 - 1}}", 
+                a: "arcsec(ln x)", 
+                c: "Trigonométrica Inversa",
+                formula: "\\int \\frac{du}{u\\sqrt{u^2 - 1}}",
+                steps: [
+                    "Sustitución u = ln x.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫du/(u√(u²-1)).",
+                    "Reconocer la forma de la arcosecante: arcsec|u|."
+                ],
+                explanation: "La presencia de 1/x en el numerador sugiere sustitución con u = ln x.",
+                result: "\\text{arcsec}|\\ln x| + C"
+            },
+            
+            // Ejercicio 67
+            { 
+                id: 67, 
+                q: "\\frac{e^{2x}~dx}{\\sqrt{1 - e^{4x}}}", 
+                a: "(1/2)arcsin(e^{2x})", 
+                c: "Trigonométrica Inversa",
+                formula: "\\frac{1}{2} \\int \\frac{du}{\\sqrt{1 - u^2}}",
+                steps: [
+                    "Sustitución u = e²ˣ.",
+                    "Derivar: du = 2e²ˣ dx -> e²ˣ dx = du/2.",
+                    "La integral se convierte en (1/2)∫du/√(1-u²).",
+                    "Reconocer la forma del arcoseno: (1/2)arcsin(u)."
+                ],
+                explanation: "La presencia de e²ˣ en el numerador sugiere sustitución con u = e²ˣ.",
+                result: "\\frac{1}{2}\\arcsin(e^{2x}) + C"
+            },
+            
+            // Ejercicio 68
+            { 
+                id: 68, 
+                q: "\\frac{\\tan^{-1} x~dx}{1 + x^2}", 
+                a: "(tan^{-1} x)^2 / 2", 
+                c: "Inversa Trigonométrica",
+                formula: "\\int u~du",
+                steps: [
+                    "Sustitución u = arctan x.",
+                    "Derivar: du = dx/(1+x²).",
+                    "La integral se convierte en ∫u du.",
+                    "Integrar para obtener u²/2."
+                ],
+                explanation: "La presencia de 1/(1+x²) en el integrando sugiere sustitución con u = arctan x.",
+                result: "\\frac{(\\arctan x)^2}{2} + C"
+            },
+            
+            // Ejercicio 69
+            { 
+                id: 69, 
+                q: "\\frac{\\ln(\\cos x)}{\\cos^2 x} \\tan x~dx", 
+                a: "-ln(cos x)^2 / 2", 
+                c: "Logarítmica",
+                formula: "-\\int u~du",
+                steps: [
+                    "Simplificar: tan x = sen x / cos x.",
+                    "La integral se convierte en ∫(ln(cos x)/cos²x)(sen x/cos x) dx = ∫ln(cos x)(sen x/cos³x) dx.",
+                    "Sustitución u = ln(cos x).",
+                    "Derivar: du = (-sen x/cos x) dx = -tan x dx.",
+                    "La integral se convierte en -∫u du.",
+                    "Integrar para obtener -u²/2."
+                ],
+                explanation: "La presencia de tan x = sen x / cos x sugiere simplificación antes de la sustitución.",
+                result: "-\\frac{[\\ln(\\cos x)]^2}{2} + C"
+            },
+            
+            // Ejercicio 70
+            { 
+                id: 70, 
+                q: "\\frac{dx}{x\\ln x \\ln(\\ln x) \\ln(\\ln(\\ln x)))}", 
+                a: "ln|ln(ln(ln x))|", 
+                c: "Logarítmica Múltiple",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Sustitución u = ln(ln(ln x))).",
+                    "Derivar: du = (1/ln(ln x))(1/ln x)(1/x) dx = dx/(x ln x ln(ln x)).",
+                    "La integral se convierte en ∫(1/u) du.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "Ejemplo de sustitución múltiple con tres niveles de logaritmos anidados.",
+                result: "\\ln|\\ln(\\ln(\\ln x)))| + C"
+            },
+            
+            // Ejercicio 71
+            { 
+                id: 71, 
+                q: "\\frac{\\sec x \\tan x~dx}{\\sqrt{1 + \\sec^2 x}}", 
+                a: "arcsinh(sec x)", 
+                c: "Hiperbólica Inversa",
+                formula: "\\int \\frac{du}{\\sqrt{1 + u^2}}",
+                steps: [
+                    "Sustitución u = sec x.",
+                    "Derivar: du = sec x tan x dx.",
+                    "La integral se convierte en ∫du/√(1+u²).",
+                    "Reconocer la forma del seno hiperbólico inverso: arcsinh(u)."
+                ],
+                explanation: "La presencia de sec x tan x en el numerador sugiere sustitución con u = sec x.",
+                result: "\\text{arcsinh}(\\sec x) + C"
+            },
+            
+            // Ejercicio 72
+            { 
+                id: 72, 
+                q: "\\frac{e^{\\tan^{-1} x}~dx}{1 + x^2}", 
+                a: "e^{tan^{-1} x}", 
+                c: "Exponencial Compuesta",
+                formula: "\\int e^u du",
+                steps: [
+                    "Sustitución u = arctan x.",
+                    "Derivar: du = dx/(1+x²).",
+                    "La integral se convierte en ∫eᵘ du.",
+                    "Integrar para obtener eᵘ."
+                ],
+                explanation: "La presencia de 1/(1+x²) en el denominador sugiere sustitución con u = arctan x.",
+                result: "e^{\\arctan x} + C"
+            },
+            
+            // Ejercicio 73
+            { 
+                id: 73, 
+                q: "\\frac{\\sin(2x)~dx}{1 + \\cos^4 x}", 
+                a: "-tan^{-1}(cos^2 x)", 
+                c: "Trigonométrica Inversa",
+                formula: "-\\int \\frac{du}{1 + u^2}",
+                steps: [
+                    "Usar identidad: sin(2x) = 2 sin x cos x.",
+                    "La integral se convierte en ∫(2 sin x cos x dx)/(1 + cos⁴x).",
+                    "Sustitución u = cos²x.",
+                    "Derivar: du = -2 cos x sin x dx.",
+                    "La integral se convierte en -∫du/(1+u²).",
+                    "Reconocer la forma de la arcotangente: -arctan(u)."
+                ],
+                explanation: "La presencia de sin(2x) = 2 sin x cos x sugiere sustitución con u = cos²x.",
+                result: "-\\arctan(\\cos^2 x) + C"
+            },
+            
+            // Ejercicio 74
+            { 
+                id: 74, 
+                q: "\\frac{\\ln(\\sin x)}{\\sin^2 x} \\cot x~dx", 
+                a: "-ln(sin x)^2 / 2", 
+                c: "Logarítmica",
+                formula: "-\\int u~du",
+                steps: [
+                    "Simplificar: cot x = cos x / sin x.",
+                    "La integral se convierte en ∫(ln(sin x)/sin²x)(cos x/sin x) dx = ∫ln(sin x)(cos x/sin³x) dx.",
+                    "Sustitución u = ln(sin x).",
+                    "Derivar: du = (cos x/sin x) dx = cot x dx.",
+                    "La integral se convierte en -∫u du.",
+                    "Integrar para obtener -u²/2."
+                ],
+                explanation: "La presencia de cot x = cos x / sin x sugiere simplificación antes de la sustitución.",
+                result: "-\\frac{[\\ln(\\sin x)]^2}{2} + C"
+            },
+            
+            // Ejercicio 75
+            { 
+                id: 75, 
+                q: "\\frac{\\sin(\\ln x)}{x}dx", 
+                a: "-cos(ln x)", 
+                c: "Trigonométrica Compuesta",
+                formula: "\\int \\sin u~du",
+                steps: [
+                    "Sustitución u = ln x.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫sin u du.",
+                    "Integrar para obtener -cos u."
+                ],
+                explanation: "La presencia de 1/x en el integrando sugiere sustitución con u = ln x.",
+                result: "-\\cos(\\ln x) + C"
+            },
+            
+            // Ejercicio 76
+            { 
+                id: 76, 
+                q: "\\frac{e^{\\sqrt{x}}}{\\sqrt{x}}dx", 
+                a: "2e^{\\sqrt{x}}", 
+                c: "Exponencial Compuesta",
+                formula: "2\\int e^u du",
+                steps: [
+                    "Sustitución u = √x = x^(1/2).",
+                    "Derivar: du = (1/2)x^(-1/2) dx = dx/(2√x).",
+                    "La integral se convierte en 2∫eᵘ du.",
+                    "Integrar para obtener 2eᵘ."
+                ],
+                explanation: "La presencia de 1/√x en el integrando sugiere sustitución con u = √x.",
+                result: "2e^{\\sqrt{x}} + C"
+            },
+            
+            // Ejercicio 77
+            { 
+                id: 77, 
+                q: "\\frac{\\cos(\\sqrt{x})}{\\sqrt{x}}dx", 
+                a: "2 sin(\\sqrt{x})", 
+                c: "Trigonométrica Compuesta",
+                formula: "2\\int \\cos u~du",
+                steps: [
+                    "Sustitución u = √x = x^(1/2).",
+                    "Derivar: du = (1/2)x^(-1/2) dx = dx/(2√x).",
+                    "La integral se convierte en 2∫cos u du.",
+                    "Integrar para obtener 2 sin u."
+                ],
+                explanation: "La presencia de 1/√x en el integrando sugiere sustitución con u = √x.",
+                result: "2\\sin(\\sqrt{x}) + C"
+            },
+            
+            // Ejercicio 78
+            { 
+                id: 78, 
+                q: "\\frac{dx}{x(\\ln x + 1)^3}", 
+                a: "-1/(2(ln x + 1)^2)", 
+                c: "Sustitución Potencia",
+                formula: "\\int u^{-3} du",
+                steps: [
+                    "Sustitución u = ln x + 1.",
+                    "Derivar: du = (1/x) dx.",
+                    "La integral se convierte en ∫u⁻³ du.",
+                    "Integrar para obtener u⁻²/(-2)."
+                ],
+                explanation: "La presencia de 1/x en el integrando sugiere sustitución con u = ln x.",
+                result: "-\\frac{1}{2(\\ln x + 1)^2} + C"
+            },
+            
+            // Ejercicio 79
+            { 
+                id: 79, 
+                q: "\\frac{\\sin(2x)}{1 + \\sin^2 x}dx", 
+                a: "ln(1 + sin^2 x)", 
+                c: "Logarítmica",
+                formula: "\\int \\frac{du}{u}",
+                steps: [
+                    "Usar identidad: sin(2x) = 2 sin x cos x.",
+                    "Sustitución u = 1 + sin²x.",
+                    "Derivar: du = 2 sin x cos x dx = sin(2x) dx.",
+                    "La integral se convierte en ∫du/u.",
+                    "Integrar para obtener ln|u|."
+                ],
+                explanation: "La presencia de sin(2x) = 2 sin x cos x sugiere sustitución con u = 1 + sin²x.",
+                result: "\\ln(1 + \\sin^2 x) + C"
+            },
+            
+            // Ejercicio 80
+            { 
+                id: 80, 
+                q: "\\frac{\\cos(\\ln x^2)}{x}dx", 
+                a: "(sin(ln x^2))/2", 
+                c: "Trigonométrica Compuesta",
+                formula: "\\frac{1}{2} \\int \\cos u~du",
+                steps: [
+                    "Simplificar: ln x² = 2 ln x.",
+                    "La integral se convierte en ∫cos(2 ln x)(1/x) dx.",
+                    "Sustitución u = 2 ln x.",
+                    "Derivar: du = (2/x) dx -> (1/x) dx = du/2.",
+                    "La integral se convierte en (1/2)∫cos u du.",
+                    "Integrar para obtener (1/2) sin u."
+                ],
+                explanation: "La presencia de 1/x en el integrando sugiere sustitución con u = ln x (o una función de ln x).",
+                result: "\\frac{\\sin(2 \\ln x)}{2} + C = \\frac{\\sin(\\ln x^2)}{2} + C"
+            },
+            
+            // Ejercicio 81
+            { 
+                id: 81, 
+                q: "\\frac{e^{2x} - e^{-2x}}{e^{2x} + e^{-2x}}dx", 
+                a: "(1/2)ln(e^{2x} + e^{-2x})", 
+                c: "Logarítmica",
+                formula: "\\frac{1}{2} \\int \\frac{du}{u}",
+                steps: [
+                    "Multiplicar numerador y denominador por e²ˣ.",
+                    "La integral se convierte en ∫(e⁴ˣ - 1)/(e⁴ˣ + 1) dx.",
+                    "Sustitución u = e⁴ˣ + 1.",
+                    "Derivar: du = 4e⁴ˣ dx -> (e⁴ˣ - 1) dx = (u - 2) du/(4u).",
+                    "La integral se simplifica a (1/4)∫(1 - 2/u) du.",
+                    "Integrar para obtener (1/4)(u - 2 ln|u|)."
+                ],
+                explanation: "Multiplicar por e²ˣ/e²ˣ para simplificar la expresión.",
+                result: "\\frac{1}{2}\\ln(e^{2x} + e^{-2x}) + C"
+            },
+            
+            // Ejercicio 82
+            { 
+                id: 82, 
+                q: "\\frac{dx}{x\\ln x (\\ln(\\ln x))^{3/2}}", 
+                a: "-2/\\sqrt{ln(ln x)}", 
+                c: "Potencia Fraccionaria",
+                formula: "-\\int u^{-3/2} du",
+                steps: [
+                    "Sustitución u = ln(ln x)).",
+                    "Derivar: du = (1/ln x)(1/x) dx = dx/(x ln x).",
+                    "La integral se convierte en ∫u^(-3/2) du.",
+                    "Integrar para obtener u^(-1/2)/(-1/2) = -2/√u."
+                ],
+                explanation: "La presencia de 1/(x ln x) en el integrando sugiere sustitución con u = ln(ln x)).",
+                result: "-\\frac{2}{\\sqrt{\\ln(\\ln x)}} + C"
+            },
+            
+            // Ejercicio 83
+            { 
+                id: 83, 
+                q: "\\frac{\\sin(\\ln x) + \\cos(\\ln x)}{x}dx", 
+                a: "sin(ln x)", 
+                c: "Trigonométrica Compuesta",
+                formula: "\\int (\\sin u + \\cos u) du",
+                steps: [
+                    "Separar en dos integrales: ∫(sin(ln x)/x) dx + ∫(cos(ln x)/x) dx.",
+                    "Para la primera integral: u = ln x, du = dx/x -> ∫sin u du = -cos u.",
+                    "Para la segunda integral: v = ln x, dv = dx/x -> ∫cos v dv = sin v.",
+                    "Sumar los resultados: -cos(ln x) + sin(ln x) + C.",
+                    "Notar que -cos(ln x) + sin(ln x) = sin(ln x) - cos(ln x)."
+                ],
+                explanation: "La presencia de 1/x en el integrando sugiere sustitución con u = ln x para ambas integrales.",
+                result: "\\sin(\\ln x) - \\cos(\\ln x) + C"
+            },
+            {
+                id: 84,
+                q: "\\frac{\\sin^{3/4}x}{\\cos^{11/4}x}dx",
+                a: "4/7tan^{7/4}x+c",
+                c: "Trigonométrica",
+                formula: "\\int \\tan^n x \\sec^2 x dx",
+                steps: ["Separar cos(x)", "Formar tangente y secante", "Sustitución u=tan(x)"],
+                explanation: "Manipulación avanzada de exponentes.",
+                result: "\\frac{4}{7}\\tan^{7/4}x + C"
+            }
+        ];
+
+   
+        // --- RENDERIZADO DE LA TABLA ---
+        const tableBody = document.getElementById('exerciseList');
+        
+        exercisesDB.forEach(ex => {
+            const row = document.createElement('tr');
+            row.className = "border-b border-slate-800 hover:bg-slate-800/50 transition-colors group";
+            row.innerHTML = `
+                <td class="p-5 font-mono text-slate-500 text-sm opacity-50 group-hover:opacity-100 transition-opacity">${ex.id}</td>
+                <td class="p-5 text-xl font-serif">$$ \\int ${ex.q} $$</td>
+                <td class="p-5"><span class="bg-slate-800 border border-slate-700 px-2 py-1 rounded text-[10px] uppercase font-bold text-slate-400">${ex.c}</span></td>
+                <td class="p-5">
+                    <div class="mb-1 flex flex-wrap gap-1">
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '^')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">^</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '{}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">{}</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '[]')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">[]</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '()')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">()</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\frac{}{}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">\frac{}{}</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\sqrt{}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">√</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\int')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">∫</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\sum')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">∑</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\lim')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">lim</button>
+                        <button type="button" onclick="insertAtCursor('input-${ex.id}', '\\infty')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 hover:text-white transition-colors">∞</button>
+                    </div>
+                    <input type="text" 
+                           id="input-${ex.id}"
+                           placeholder="Respuesta..." 
+                           onchange="validate(${ex.id})"
+                           class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 font-mono text-sm outline-none focus:border-cyan-500 transition-all placeholder:text-slate-800 text-slate-300">
+                </td>
+                <td class="p-5 text-center min-w-[140px]" id="feedback-${ex.id}">
+                    <span class="text-slate-700 text-xs italic">Pendiente</span>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // --- LÓGICA DE VALIDACIÓN ---
+        function validate(id) {
+            const exercise = exercisesDB.find(e => e.id === id);
+            const inputEl = document.getElementById(`input-${id}`);
+            const feedbackEl = document.getElementById(`feedback-${id}`);
+            
+            // Normalización: quitamos espacios, pasamos a minúsculas
+            // Quitamos "+c" de ambos lados para comparar solo la función, o lo exigimos.
+            // En este caso, normalizamos para comparar texto simple.
+            let userVal = inputEl.value.toLowerCase().replace(/\s/g, '');
+            let correctVal = exercise.a.toLowerCase().replace(/\s/g, '');
+
+            // Truco: Permitimos al usuario escribir o no el "+c" para la validación
+            // Si la base de datos tiene "+c", lo quitamos para comparar la "carnita" de la función
+            const cleanUser = userVal.replace(/\+c$/, '');
+            const cleanCorrect = correctVal.replace(/\+c$/, '');
+
+            if (userVal === "") {
+                inputEl.classList.remove('correct', 'incorrect');
+                feedbackEl.innerHTML = '<span class="text-slate-700 text-xs italic">Pendiente</span>';
+                return;
+            }
+
+            if (cleanUser === cleanCorrect) {
+                // CORRECTO
+                inputEl.classList.add('correct');
+                inputEl.classList.remove('incorrect');
+                feedbackEl.innerHTML = `
+                    <div class="flex items-center justify-center gap-2 text-emerald-500 font-bold animate-pulse">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>¡Excelente!</span>
+                    </div>`;
+            } else {
+                // INCORRECTO -> INVITACIÓN A VER SOLUCIÓN
+                inputEl.classList.add('incorrect');
+                inputEl.classList.remove('correct');
+                feedbackEl.innerHTML = `
+                    <button onclick="openSolution(${id})" class="flex items-center justify-center gap-2 w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 py-1.5 px-3 rounded-lg transition-all text-xs font-bold group">
+                        <span>Incorrecto</span>
+                        <span class="group-hover:translate-x-1 transition-transform">💡 Ver Solución</span>
+                    </button>
+                `;
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            const score = document.querySelectorAll('.correct').length;
+            document.getElementById('scoreDisplay').innerText = `${score}/${exercisesDB.length}`;
+        }
+
+        // --- LÓGICA DEL MODAL (Tutoría) ---
+        function openSolution(id) {
+            const ex = exercisesDB.find(e => e.id === id);
+            
+            // Inyectar datos en el modal
+            document.getElementById('modalId').innerText = `#${ex.id}`;
+            document.getElementById('modalProblem').innerHTML = `$$ \\int ${ex.q} $$`;
+            document.getElementById('modalFormula').innerHTML = `$$ ${ex.formula} $$`;
+            document.getElementById('modalResult').innerHTML = `$$ ${ex.result} $$`;
+            document.getElementById('modalExplanation').innerText = ex.explanation;
+
+            // Inyectar pasos como lista
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            ex.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsList.appendChild(li);
+            });
+
+            // Mostrar modal
+            const modal = document.getElementById('solutionModal');
+            modal.classList.remove('hidden');
+
+            // Renderizar matemáticas de nuevo dentro del modal
+            renderMathInElement(modal, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('solutionModal').classList.add('hidden');
+        }
+
+        // Student information handling
+        function startExercise() {
+            const name = document.getElementById('studentName').value;
+            const id = document.getElementById('studentId').value;
+            const group = document.getElementById('group').value;
+            
+            if (!name || !id || !group) {
+                alert('Por favor completa todos los campos.');
+                return;
+            }
+            
+            document.getElementById('displayStudentName').textContent = name;
+            document.getElementById('displayStudentId').textContent = id;
+            document.getElementById('displayGroup').textContent = group;
+            
+            document.getElementById('studentForm').parentElement.classList.add('hidden');
+            document.getElementById('exerciseContainer').classList.remove('hidden');
+            
+            // Save to localStorage
+            localStorage.setItem('studentInfo', JSON.stringify({ name, id, group }));
+        }
+        
+        // Generate PDF with student information and results
+        async function generatePDF() {
+            const studentInfo = JSON.parse(localStorage.getItem('studentInfo') || '{}');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set default font
+            doc.setFont('helvetica');
+            
+            // Add title
+            doc.setFontSize(20);
+            doc.setTextColor(40, 62, 80);
+            doc.text('Ejercicios de Cálculo Integral', 105, 20, { align: 'center' });
+            
+            // Add student info section
+            doc.setFontSize(12);
+            doc.setTextColor(40, 62, 80);
+            doc.setFont(undefined, 'bold');
+            doc.text('Datos del Estudiante:', 20, 35);
+            doc.setFont(undefined, 'normal');
+            doc.text(`• Nombre: ${studentInfo.name || 'No especificado'}`, 25, 45);
+            doc.text(`• Matrícula: ${studentInfo.id || 'No especificada'}`, 25, 55);
+            doc.text(`• Grupo: ${studentInfo.group || 'No especificado'}`, 25, 65);
+            doc.text(`• Fecha: ${new Date().toLocaleDateString('es-MX', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })}`, 25, 75);
+            doc.text(`• Puntaje: ${studentInfo.score || 'No especificado'}`, 25, 85);
+            
+            // Add a line separator
+            doc.setDrawColor(200, 200, 200);
+            doc.line(20, 85, 190, 85);
+            
+            // Prepare exercises data for the table
+            const exercisesData = exercisesDB.map(ex => {
+                // Format the integral
+                const integral = `$$\\int ${ex.q}\\,dx$`;
+                
+                // Format the solution steps
+                let solution = '';
+                if (ex.formula) {
+                    solution += `Fórmula: $${ex.formula}$\\n`;
+                }
+                if (ex.steps && ex.steps.length > 0) {
+                    solution += ex.steps.map((step, i) => `${i + 1}. ${step}`).join('\\n');
+                }
+                
+                // Format the final result
+                const result = `$${ex.a} + C$`;
+                
+                return {
+                    id: ex.id,
+                    integral: integral,
+                    category: ex.c,
+                    solution: solution,
+                    result: result
+                };
+            });
+            
+            // Create a table for exercises
+            doc.autoTable({
+                startY: 95,
+                head: [
+                    [
+                        { content: 'Ejercicio', styles: { fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [63, 81, 181] } },
+                        { content: 'Integral', styles: { fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [63, 81, 181] } },
+                        { content: 'Categoría', styles: { fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [63, 81, 181] } },
+                        { content: 'Solución', styles: { fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [63, 81, 181] } },
+                        { content: 'Resultado', styles: { fontStyle: 'bold', textColor: [255, 255, 255], fillColor: [63, 81, 181] } }
+                    ]
+                ],
+                body: exercisesData.map(ex => [
+                    { content: ex.id.toString(), styles: { fontStyle: 'bold' } },
+                    { content: ex.integral, styles: { font: 'times' } },
+                    ex.category,
+                    { content: ex.solution, styles: { font: 'times' } },
+                    { content: ex.result, styles: { font: 'times', fontStyle: 'bold' } }
+                ]),
+                theme: 'grid',
+                headStyles: {
+                    fillColor: [63, 81, 181],
+                    textColor: 255,
+                    fontStyle: 'bold',
+                    halign: 'center'
+                },
+                columnStyles: {
+                    0: { cellWidth: 20, halign: 'center' },
+                    1: { cellWidth: 40, font: 'times' },
+                    2: { cellWidth: 30 },
+                    3: { cellWidth: 50, font: 'times' },
+                    4: { cellWidth: 30, font: 'times', fontStyle: 'bold' }
+                },
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3,
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1
+                },
+                didDrawPage: function(data) {
+                    // Add page numbers
+                    const pageCount = doc.internal.getNumberOfPages();
+                    const currentPage = data.pageNumber;
+                    
+                    doc.setFontSize(10);
+                    doc.setTextColor(150, 150, 150);
+                    doc.text(
+                        `Página ${currentPage} de ${pageCount}`,
+                        doc.internal.pageSize.getWidth() - 30,
+                        doc.internal.pageSize.getHeight() - 10
+                    );
+                    
+                    // Add student info header on each page
+                    doc.setFontSize(10);
+                    doc.setTextColor(100, 100, 100);
+                    doc.text(`Alumno: ${studentInfo.name || 'No especificado'}`, 20, 15);
+                    doc.text(`Fecha: ${new Date().toLocaleDateString('es-MX')}`, doc.internal.pageSize.getWidth() - 30, 15, { align: 'right' });
+                }
+            });
+            
+            // Save the PDF with student name
+            doc.save(`Ejercicios_Calculo_${studentInfo.name ? studentInfo.name.replace(/\s+/g, '_') : 'estudiante'}.pdf`);
+        }
+        
+        // Function to escape LaTeX special characters
+        function escapeLatex(text) {
+            if (!text) return '';
+            return text
+                .replace(/\\/g, '\\\\')  // Escape backslashes first
+                .replace(/_/g, '\\_')
+                .replace(/#/g, '\\#')
+                .replace(/\$/g, '\\$')
+                .replace(/%/g, '\\%')
+                .replace(/&/g, '\\&')
+                .replace(/\{/g, '\\{')
+                .replace(/\}/g, '\\}')
+                .replace(/\^/g, '\\^')
+                .replace(/~/g, '\\~');
+        }
+
+        // Function to insert text at cursor position
+        function insertAtCursor(inputId, text) {
+            const input = document.getElementById(inputId);
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const value = input.value;
+            
+            // Check if there's a placeholder like {} or {?} in the text
+            const placeholderIndex = text.indexOf('{}');
+            if (placeholderIndex !== -1) {
+                // Insert the text with cursor between the braces
+                input.value = value.substring(0, start) + text.replace('{}', '') + value.substring(end);
+                // Place cursor between the braces
+                input.setSelectionRange(start + placeholderIndex, start + placeholderIndex);
+            } else if (text === '\\frac{}{}') {
+                // Special handling for fractions
+                input.value = value.substring(0, start) + '\\frac{' + value.substring(start, end) + '}{}' + value.substring(end);
+                // Place cursor in the denominator
+                input.setSelectionRange(start + 7 + (end - start), start + 7 + (end - start));
+            } else {
+                // Regular text insertion
+                input.value = value.substring(0, start) + text + value.substring(end);
+                // Place cursor after the inserted text
+                input.setSelectionRange(start + text.length, start + text.length);
+            }
+            
+            // Trigger the change event to validate
+            input.dispatchEvent(new Event('input'));
+            input.focus();
+        }
+
+        // Load student info if exists
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body);
+            
+            // Add event listener for PDF button
+            const pdfButton = document.querySelector('button[onclick*="generatePDF"]');
+            if (pdfButton) {
+                pdfButton.addEventListener('click', generatePDF);
+            }
+            
+            const studentInfo = JSON.parse(localStorage.getItem('studentInfo') || '{}');
+            if (studentInfo.name && studentInfo.id && studentInfo.group) {
+                document.getElementById('studentName').value = studentInfo.name;
+                document.getElementById('studentId').value = studentInfo.id;
+                document.getElementById('group').value = studentInfo.group;
+                startExercise();
+            }
+        });
+    </script>
+</body>
+</html>

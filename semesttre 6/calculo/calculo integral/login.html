@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cálculo Integral</title>
+    <link rel="stylesheet" href="styles-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="card-title">
+                    <i class="fas fa-calculator"></i> Cálculo Integral
+                </h1>
+                <p class="card-subtitle">Plataforma de Aprendizaje Matemático</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="login-tabs">
+                <button class="tab active" onclick="cambiarTab('login')">Iniciar Sesión</button>
+                <button class="tab" onclick="cambiarTab('registro')">Registrarse</button>
+            </div>
+
+            <!-- Formularios -->
+            <div class="login-form-container">
+                <!-- Mensaje de respuesta -->
+                <div id="mensaje" class="login-message"></div>
+
+                <!-- Formulario de Login -->
+                <form id="loginForm" class="form">
+                    <div class="form-group">
+                        <label for="loginEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword" class="form-label">Contraseña</label>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                </form>
+
+                <!-- Formulario de Registro -->
+                <form id="registroForm" class="form hidden">
+                    <div class="form-group">
+                        <label for="registroNombre" class="form-label">Nombre Completo</label>
+                        <input type="text" id="registroNombre" class="form-input" placeholder="Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registroEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" id="registroEmail" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registroPassword" class="form-label">Contraseña</label>
+                        <input type="password" id="registroPassword" class="form-input" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Crear Cuenta</button>
+                </form>
+
+                <!-- Panel de Usuario Autenticado -->
+                <div id="userPanel" class="user-panel">
+                    <h3 class="card-title">
+                        <i class="fas fa-user"></i> Bienvenido(a)
+                    </h3>
+                    <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                    <p><strong>Nombre:</strong> <span id="userName"></span></p>
+
+                    <h4 class="progress-title">
+                        <i class="fas fa-chart-line"></i> Progreso del Curso
+                    </h4>
+
+                    <div class="user-progress-item">
+                        <p>Módulo 1: Antiderivadas <span id="progress1">0%</span></p>
+                        <div class="user-progress-bar">
+                            <div class="user-progress-fill" id="bar1"></div>
+                        </div>
+                    </div>
+
+                    <div class="user-progress-item">
+                        <p>Módulo 2: Integral Definida <span id="progress2">0%</span></p>
+                        <div class="user-progress-bar">
+                            <div class="user-progress-fill" id="bar2"></div>
+                        </div>
+                    </div>
+
+                    <div class="user-progress-item">
+                        <p>Módulo 3: Técnicas de Integración <span id="progress3">0%</span></p>
+                        <div class="user-progress-bar">
+                            <div class="user-progress-fill" id="bar3"></div>
+                        </div>
+                    </div>
+
+                    <div class="user-progress-item">
+                        <p>Módulo 4: Aplicaciones <span id="progress4">0%</span></p>
+                        <div class="user-progress-bar">
+                            <div class="user-progress-fill" id="bar4"></div>
+                        </div>
+                    </div>
+
+                    <div class="user-progress-item">
+                        <p>Módulo 5: Ecuaciones Diferenciales <span id="progress5">0%</span></p>
+                        <div class="user-progress-bar">
+                            <div class="user-progress-fill" id="bar5"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-column gap-2">
+                        <a href="index.html" class="btn btn-success btn-lg">
+                            <i class="fas fa-home"></i> Ir al Portal Principal
+                        </a>
+                        <button class="btn btn-error btn-lg" onclick="handleLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importar auth-manager -->
+    <script type="module">
+        import { 
+            registrarUsuario, 
+            iniciarSesion, 
+            cerrarSesion, 
+            observarEstadoAuth 
+        } from './auth-manager.js';
+
+        // Hacer funciones globales
+        window.registrarUsuario = registrarUsuario;
+        window.iniciarSesion = iniciarSesion;
+        window.cerrarSesion = cerrarSesion;
+
+        // Observar estado de autenticación
+        observarEstadoAuth((estado) => {
+            if (estado.autenticado) {
+                mostrarPanelUsuario(estado.usuario, estado.datos);
+            } else {
+                ocultarPanelUsuario();
+            }
+        });
+
+        function mostrarPanelUsuario(usuario, datos) {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registroForm').classList.add('hidden');
+            document.getElementById('userPanel').classList.add('show');
+
+            document.getElementById('userEmail').textContent = usuario.email;
+            document.getElementById('userName').textContent = datos?.displayName || 'Usuario';
+
+            // Mostrar progreso con animación
+            if (datos && datos.progress) {
+                setTimeout(() => {
+                    for (let i = 1; i <= 5; i++) {
+                        const progreso = datos.progress[`modulo${i}`] || 0;
+                        const progressText = document.getElementById(`progress${i}`);
+                        const progressBar = document.getElementById(`bar${i}`);
+
+                        if (progressText) {
+                            progressText.textContent = `${progreso}%`;
+                        }
+
+                        if (progressBar) {
+                            progressBar.style.width = `${progreso}%`;
+                            progressBar.style.transition = 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                        }
+                    }
+                }, 300);
+            }
+        }
+
+        function ocultarPanelUsuario() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('userPanel').classList.remove('show');
+        }
+
+        // Manejar login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            mostrarMensaje('Iniciando sesión...', 'success');
+            
+            const resultado = await iniciarSesion(email, password);
+            
+            if (resultado.success) {
+                mostrarMensaje('✅ ' + resultado.message, 'success');
+                document.getElementById('loginForm').reset();
+                // Redirigir al portal principal después del login exitoso
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                mostrarMensaje('❌ ' + resultado.message, 'error');
+            }
+        });
+
+        // Manejar registro
+        document.getElementById('registroForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('registroNombre').value;
+            const email = document.getElementById('registroEmail').value;
+            const password = document.getElementById('registroPassword').value;
+
+            mostrarMensaje('Creando cuenta...', 'success');
+            
+            const resultado = await registrarUsuario(email, password, nombre);
+            
+            if (resultado.success) {
+                mostrarMensaje('✅ ' + resultado.message, 'success');
+                document.getElementById('registroForm').reset();
+                // Redirigir al portal principal después del registro exitoso
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                mostrarMensaje('❌ ' + resultado.message, 'error');
+            }
+        });
+
+        function mostrarMensaje(texto, tipo) {
+            const mensaje = document.getElementById('mensaje');
+            mensaje.textContent = texto;
+            mensaje.className = `message ${tipo} show`;
+            
+            if (tipo === 'success') {
+                setTimeout(() => {
+                    mensaje.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Hacer función global
+        window.mostrarMensaje = mostrarMensaje;
+    </script>
+
+    <script>
+        function cambiarTab(tab) {
+            // Actualizar tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Mostrar/ocultar formularios
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registroForm').classList.add('hidden');
+            } else {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('registroForm').classList.remove('hidden');
+            }
+
+            // Limpiar mensaje
+            document.getElementById('mensaje').classList.remove('show');
+        }
+
+        async function handleLogout() {
+            const resultado = await window.cerrarSesion();
+            if (resultado.success) {
+                window.mostrarMensaje('✅ Sesión cerrada', 'success');
+            }
+        }
+    </script>
+</body>
+</html>
+

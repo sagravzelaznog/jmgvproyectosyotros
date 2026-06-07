@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeación Didáctica: Cálculo Integral 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+		window.MathJax = {
+			tex: {
+				// Aquí le decimos que reconozca el signo de peso simple como fórmula en línea
+				inlineMath: [['$', '$'], ['\\(', '\\)']]
+			}
+		};
+	</script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-area">
+            <h1>PLANEACIÓN ESTRATÉGICA 2026</h1>
+            <h2>Cálculo Integral - 6º Semestre</h2>
+        </div>
+        <div class="teacher-info">
+            <p class="name">José Manuel González Vargas</p>
+            <!-- <p class="titles">Pedagogo | Andragogo | Genio Matemático</p> -->
+        </div>
+        <button onclick="printPlanner()" class="btn-print">🖨️ Generar PDF</button>
+    </header>
+
+    <main class="container">
+        <section class="course-intro">
+            <h3>Visión General del Curso</h3>
+            <p>Esta planeación de <strong>40 sesiones</strong> cubre rigurosamente los 4 Bloques del programa DGB. Se enfoca en la transición del pensamiento infinitesimal (Diferencial) a la acumulación (Integral), culminando con aplicaciones en sólidos de revolución y modelos de crecimiento.</p>
+        </section>
+
+        <div class="planner-wrapper">
+            <table class="planner-table">
+                <thead>
+                    <tr>
+                        <th width="5%">Ses.</th>
+                        <th width="20%">Bloque / Tema</th>
+                        <th width="50%">Secuencia Didáctica (Inicio - Desarrollo - Cierre)</th>
+                        <th width="25%">Recursos y Evaluación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="block-header"><td colspan="4">Bloque I: La Diferencial y Estimación de Errores</td></tr>
+                    
+                    <tr>
+                        <td>1</td>
+                        <td><strong>B1:</strong> Encuadre y Concepto de Diferencial</td>
+                        <td><strong>I:</strong> Evaluación diagnóstica (Derivadas). <strong>D:</strong> Definición formal de Diferencial (dy = f'(x)dx). <strong>C:</strong> Interpretación geométrica en GeoGebra.</td>
+                        <td>GeoGebra. Diágnostico.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>B1:</strong> Cálculo de Diferenciales</td>
+                        <td><strong>I:</strong> Reglas de derivación rápida. <strong>D:</strong> Ejercicios de diferenciales algebraicas y trigonométricas. <strong>C:</strong> Diferencia entre $\Delta y$ y $dy$.</td>
+                        <td>Formulario de derivadas.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>B1:</strong> Aproximaciones Lineales</td>
+                        <td><strong>I:</strong> ¿Cómo calcular $\sqrt{26}$ sin calculadora? <strong>D:</strong> Uso de la diferencial para aproximar raíces y potencias. <strong>C:</strong> Ejercicios mentales.</td>
+                        <td>Calculadora científica.</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>B1:</strong> Estimación de Errores I</td>
+                        <td><strong>I:</strong> El error en la medición física. <strong>D:</strong> Propagación del error usando diferenciales (Error absoluto). <strong>C:</strong> Caso práctico: Área de un cuadrado.</td>
+                        <td>Reglas graduadas.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>B1:</strong> Estimación de Errores II</td>
+                        <td><strong>I:</strong> Error relativo y porcentual. <strong>D:</strong> Problemas de contexto (Volumen de una esfera, tolerancia en piezas mecánicas). <strong>C:</strong> Análisis de impacto del error.</td>
+                        <td>Problemario contextual.</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>B1:</strong> Cierre Bloque I</td>
+                        <td><strong>I:</strong> Repaso rápido. <strong>D:</strong> Resolución colaborativa de problemas de aplicación de diferenciales. <strong>C:</strong> Quiz de validación.</td>
+                        <td>Lista de cotejo.</td>
+                    </tr>
+
+                    <tr class="block-header"><td colspan="4">Bloque II: Integral Indefinida y Métodos de Integración</td></tr>
+
+                    <tr>
+                        <td>7</td>
+                        <td><strong>B2:</strong> La Antiderivada</td>
+                        <td><strong>I:</strong> Operaciones inversas. <strong>D:</strong> Definición de Función Primitiva $F(x) + C$. Familia de curvas. <strong>C:</strong> Ejercicios simples de reversibilidad.</td>
+                        <td>Gráficas de familias.</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><strong>B2:</strong> Fórmulas Básicas (Potencia)</td>
+                        <td><strong>I:</strong> Regla de la potencia inversa. <strong>D:</strong> Integración de $x^n$, polinomios y radicales. Propiedades de linealidad. <strong>C:</strong> Taller de 20 integrales rápidas.</td>
+                        <td>Tabla de integrales.</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>B2:</strong> Funciones Trascendentes</td>
+                        <td><strong>I:</strong> Derivadas de seno y exponencial. <strong>D:</strong> Integrales inmediatas de funciones trigonométricas y exponenciales ($e^x$, $1/x$). <strong>C:</strong> Memorama de fórmulas.</td>
+                        <td>Fichas nemotécnicas.</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>B2:</strong> Cambio de Variable I</td>
+                        <td><strong>I:</strong> La Regla de la Cadena inversa. <strong>D:</strong> Identificación de $u$ y $du$. Método de Sustitución en funciones algebraicas. <strong>C:</strong> Ejercicios guiados.</td>
+                        <td>Pizarrón.</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>B2:</strong> Cambio de Variable II</td>
+                        <td><strong>I:</strong> Completando la diferencial. <strong>D:</strong> Sustitución en funciones trigonométricas y radicales complejos. <strong>C:</strong> Reto matemático.</td>
+                        <td>Ejercicios avanzados.</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>B2:</strong> Integración por Partes I</td>
+                        <td><strong>I:</strong> Producto de funciones. Fórmula "Una Vaca Vestida De Uniforme". <strong>D:</strong> Deducción y aplicación (Algebraica x Exponencial). <strong>C:</strong> Práctica.</td>
+                        <td>Video explicativo.</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>B2:</strong> Integración por Partes II</td>
+                        <td><strong>I:</strong> ¿Qué elegir como $u$ (ILATE)? <strong>D:</strong> Casos logarítmicos y trigonométricos inversos. <strong>C:</strong> Integrales cíclicas (breve).</td>
+                        <td>Estrategia ILATE.</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><strong>B2:</strong> Taller de Métodos Básicos</td>
+                        <td><strong>I:</strong> Mix de integrales. <strong>D:</strong> Trabajo en binas: Discernir entre Sustitución y Por Partes. <strong>C:</strong> Coevaluación.</td>
+                        <td>Problemario mixto.</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><strong>B2:</strong> Potencias Trigonométricas I</td>
+                        <td><strong>I:</strong> Identidades Pitagóricas. <strong>D:</strong> Casos de Senos y Cosenos (Pares e Impares). <strong>C:</strong> Resolución.</td>
+                        <td>Formulario trigonométrico.</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><strong>B2:</strong> Potencias Trigonométricas II</td>
+                        <td><strong>I:</strong> Secantes y Tangentes. <strong>D:</strong> Uso de identidades para reducción de potencias. <strong>C:</strong> Ejercicios selectos.</td>
+                        <td>Pizarrón.</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td><strong>B2:</strong> Sustitución Trigonométrica I</td>
+                        <td><strong>I:</strong> Teorema de Pitágoras en integrales. <strong>D:</strong> Caso $\sqrt{a^2 - x^2}$ (Seno). Construcción del triángulo. <strong>C:</strong> Ejemplo paso a paso.</td>
+                        <td>Esquema triangular.</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td><strong>B2:</strong> Sustitución Trigonométrica II</td>
+                        <td><strong>I:</strong> Casos Tangente y Secante. <strong>D:</strong> Integrales con $\sqrt{a^2 + x^2}$ y $\sqrt{x^2 - a^2}$. <strong>C:</strong> Ejercicios de aplicación.</td>
+                        <td>Tabla de sustituciones.</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td><strong>B2:</strong> Fracciones Parciales I</td>
+                        <td><strong>I:</strong> Suma de fracciones algebraicas. <strong>D:</strong> Factores lineales distintos (Caso 1). Sistemas de ecuaciones para hallar A, B. <strong>C:</strong> Práctica.</td>
+                        <td>Algebra básica.</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td><strong>B2:</strong> Fracciones Parciales II</td>
+                        <td><strong>I:</strong> Factores repetidos y cuadráticos. <strong>D:</strong> Planteamiento de Casos 2 y 3. <strong>C:</strong> Resolución de integral racional completa.</td>
+                        <td>Calculadora de matrices.</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td><strong>B2:</strong> Estrategias de Integración</td>
+                        <td><strong>I:</strong> Mapa mental de métodos. <strong>D:</strong> Tabla de decisión: ¿Qué método uso? Análisis de estructura de la función. <strong>C:</strong> Competencia de velocidad.</td>
+                        <td>Diagrama de flujo.</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td><strong>B2:</strong> Evaluación Parcial Bloque II</td>
+                        <td>Evaluación escrita sobre métodos de integración (Indefinidas). Revisión de procedimientos.</td>
+                        <td>Examen impreso.</td>
+                    </tr>
+
+                    <tr class="block-header"><td colspan="4">Bloque III: Integral Definida y Áreas</td></tr>
+
+                    <tr>
+                        <td>23</td>
+                        <td><strong>B3:</strong> Notación Sigma y Área</td>
+                        <td><strong>I:</strong> Problema del área bajo la curva irregular. <strong>D:</strong> Notación sumatoria ($\Sigma$). Aproximación por rectángulos. <strong>C:</strong> Ejercicio visual.</td>
+                        <td>Gráficos de rectángulos.</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td><strong>B3:</strong> Sumas de Riemann</td>
+                        <td><strong>I:</strong> Sumas izquierdas, derechas y punto medio. <strong>D:</strong> Cálculo de áreas aproximadas. El límite cuando $n \to \infty$. <strong>C:</strong> Simulación en software.</td>
+                        <td>Applet GeoGebra.</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td><strong>B3:</strong> La Integral Definida</td>
+                        <td><strong>I:</strong> Definición formal $\int_a^b$. <strong>D:</strong> Propiedades de la integral definida (Linealidad, aditividad, límites). <strong>C:</strong> Ejemplos conceptuales.</td>
+                        <td>Pizarrón inteligente.</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td><strong>B3:</strong> Teorema Fundamental (TFC) I</td>
+                        <td><strong>I:</strong> Relación Derivada-Integral. <strong>D:</strong> Primera parte del TFC (Derivada de una integral). <strong>C:</strong> Ejercicios teóricos.</td>
+                        <td>Videos demostrativos.</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td><strong>B3:</strong> Teorema Fundamental (TFC) II</td>
+                        <td><strong>I:</strong> Regla de Barrow. <strong>D:</strong> Evaluación de integrales definidas $F(b) - F(a)$. <strong>C:</strong> Cálculo exacto de áreas simples.</td>
+                        <td>Problemario.</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td><strong>B3:</strong> Cambio de Variable Definida</td>
+                        <td><strong>I:</strong> ¿Qué pasa con los límites? <strong>D:</strong> Ajuste de límites de integración al cambiar variable vs Regresar a variable original. <strong>C:</strong> Comparación.</td>
+                        <td>Pizarrón.</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td><strong>B3:</strong> Área Bajo la Curva</td>
+                        <td><strong>I:</strong> Áreas negativas vs Áreas geométricas. <strong>D:</strong> Valor absoluto de la función. Interpretación física. <strong>C:</strong> Cálculo de áreas netas y totales.</td>
+                        <td>Gráficas coloreadas.</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td><strong>B3:</strong> Área Entre Curvas I</td>
+                        <td><strong>I:</strong> Región entre dos funciones. <strong>D:</strong> Techo menos Piso (Integración respecto a X). Puntos de intersección. <strong>C:</strong> Planteamiento de integral.</td>
+                        <td>GeoGebra.</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td><strong>B3:</strong> Área Entre Curvas II</td>
+                        <td><strong>I:</strong> Funciones complejas en X. <strong>D:</strong> Derecha menos Izquierda (Integración respecto a Y). <strong>C:</strong> Resolución de problemas mixtos.</td>
+                        <td>Hojas milimétricas.</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td><strong>B3:</strong> Proyecto de Áreas</td>
+                        <td><strong>I:</strong> Medición de un área real (hoja de árbol, terreno). <strong>D:</strong> Modelado con funciones y cálculo de integral definida. <strong>C:</strong> Presentación preliminar.</td>
+                        <td>Software graficador.</td>
+                    </tr>
+
+                    <tr class="block-header"><td colspan="4">Bloque IV: Aplicaciones de la Integral</td></tr>
+
+                    <tr>
+                        <td>33</td>
+                        <td><strong>B4:</strong> Sólidos de Revolución (Discos)</td>
+                        <td><strong>I:</strong> Rotación de figuras 2D. <strong>D:</strong> Método de Discos: $V = \pi \int [f(x)]^2 dx$. Deducción de fórmula. <strong>C:</strong> Volumen de cono/esfera.</td>
+                        <td>Objetos 3D / Maquetas.</td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td><strong>B4:</strong> Sólidos de Revolución (Arandelas)</td>
+                        <td><strong>I:</strong> Sólidos huecos. <strong>D:</strong> Método de Arandelas (Radio mayor - Radio menor). Ejes de giro desplazados. <strong>C:</strong> Ejercicios visuales.</td>
+                        <td>Animaciones 3D.</td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td><strong>B4:</strong> Longitud de Arco (Opcional)</td>
+                        <td><strong>I:</strong> ¿Cuánto mide una curva? <strong>D:</strong> Fórmula de longitud de arco. Aplicación en cables o trayectorias. <strong>C:</strong> Cálculo simple.</td>
+                        <td>Cuerda y regla.</td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td><strong>B4:</strong> Aplicaciones Físicas</td>
+                        <td><strong>I:</strong> Trabajo mecánico. <strong>D:</strong> Problemas de resortes (Ley de Hooke) y bombeo de líquidos. <strong>C:</strong> Resolución de problemas físicos.</td>
+                        <td>Simuladores Física.</td>
+                    </tr>
+                    <tr>
+                        <td>37</td>
+                        <td><strong>B4:</strong> Aplicaciones Económicas</td>
+                        <td><strong>I:</strong> Excedente del consumidor. <strong>D:</strong> Curvas de oferta y demanda. Cálculo de superávit mediante integrales. <strong>C:</strong> Caso de estudio.</td>
+                        <td>Gráficas económicas.</td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td><strong>B4:</strong> Modelos de Crecimiento</td>
+                        <td><strong>I:</strong> Ecuaciones diferenciales separables básicas. <strong>D:</strong> Ley de enfriamiento de Newton o Crecimiento poblacional exponencial. <strong>C:</strong> Predicción.</td>
+                        <td>Calculadora.</td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td><strong>B4:</strong> Integración del Curso</td>
+                        <td><strong>I:</strong> Repaso general tipo "Escape Room". <strong>D:</strong> Resolución de retos que integran los 4 bloques. <strong>C:</strong> Retroalimentación final.</td>
+                        <td>Juego didáctico.</td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td><strong>Final:</strong> Evaluación y Cierre</td>
+                        <td><strong>I:</strong> Entrega de portafolios. <strong>D:</strong> Examen Final / Presentación de Proyectos Transversales. <strong>C:</strong> Reflexión y despedida.</td>
+                        <td>Rúbrica global.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="legal-footer">
+        <p>copyright &copy;JMGV-PTEL-2026. planeación calculo integral 6 sem. Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

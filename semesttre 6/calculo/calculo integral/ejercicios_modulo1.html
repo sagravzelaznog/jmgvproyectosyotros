@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Módulo 1 - Cálculo Integral</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <h1>Cálculo Integral - Ejercicios</h1>
+            </div>
+            <nav class="nav">
+                <a href="modulo1_antiderivadas.html" class="nav-link">Módulo 1</a>
+                <a href="ejercicios_modulo1.html" class="nav-link active">Ejercicios</a>
+                <a href="modulo2_integral_definida.html" class="nav-link">Módulo 2</a>
+            </nav>
+            <div class="user-info">
+                <span id="user-name">Usuario</span>
+                <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="modulo1_antiderivadas.html">Módulo 1</a>
+                <span class="separator">></span>
+                <span>Ejercicios</span>
+            </nav>
+
+            <!-- Título -->
+            <section class="module-header">
+                <h1 class="module-title">
+                    <i class="fas fa-dumbbell"></i>
+                    Ejercicios del Módulo 1: Antiderivadas e Integrales Indefinidas
+                </h1>
+                <div class="module-info">
+                    <div class="info-item">
+                        <i class="fas fa-target"></i>
+                        <span>Practica con más de 50 ejercicios variados</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Tiempo estimado: 2-3 horas</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtros y controles -->
+            <section class="exercise-controls">
+                <div class="controls-row">
+                    <div class="filter-group">
+                        <label for="difficulty-filter">Dificultad:</label>
+                        <select id="difficulty-filter">
+                            <option value="all">Todas</option>
+                            <option value="basic">Básico</option>
+                            <option value="intermediate">Intermedio</option>
+                            <option value="advanced">Avanzado</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="topic-filter">Tema:</label>
+                        <select id="topic-filter">
+                            <option value="all">Todos</option>
+                            <option value="concepto">Concepto de Antiderivada</option>
+                            <option value="inmediatas">Integrales Inmediatas</option>
+                            <option value="tecnicas">Técnicas Básicas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button id="shuffle-exercises" class="btn-secondary">
+                            <i class="fas fa-random"></i> Mezclar
+                        </button>
+                    </div>
+                </div>
+                <div class="progress-summary">
+                    <div class="progress-item">
+                        <span class="progress-label">Completados:</span>
+                        <span id="completed-count">0</span>/<span id="total-count">50</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Correctos:</span>
+                        <span id="correct-count">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Precisión:</span>
+                        <span id="accuracy">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ejercicios por sección -->
+            <section class="exercises-container">
+                <!-- Sección 1.1: Concepto de Antiderivada -->
+                <div class="exercise-section" data-topic="concepto">
+                    <h2><i class="fas fa-lightbulb"></i> 1.1 Concepto de Antiderivada</h2>
+                    <div class="exercise-grid">
+                        <!-- Ejercicio 1 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 1</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Encuentra una antiderivada de $f(x) = 6x^2$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Identificar que necesitamos una función cuya derivada sea $6x^2$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Recordar que $\frac{d}{dx}[x^3] = 3x^2$, entonces $\frac{d}{dx}[2x^3] = 6x^2$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Por lo tanto, una antiderivada es $F(x) = 2x^3$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $F(x) = 2x^3 + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 2 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 2</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Encuentra todas las antiderivadas de $f(x) = 4x - 3$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Buscar una función cuya derivada sea $4x - 3$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>$\frac{d}{dx}[2x^2] = 4x$ y $\frac{d}{dx}[3x] = 3$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Entonces $\frac{d}{dx}[2x^2 - 3x] = 4x - 3$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $F(x) = 2x^2 - 3x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 3 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 3</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Verifica que $F(x) = x^4 - 2x^2 + 5$ es una antiderivada de $f(x) = 4x^3 - 4x$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Derivar $F(x) = x^4 - 2x^2 + 5$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>$F'(x) = 4x^3 - 4x + 0 = 4x^3 - 4x$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Comparar con $f(x) = 4x^3 - 4x$ ✓</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Verificación:</strong> ✓ Correcta</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 4 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 4</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> ¿Cuál es la familia de antiderivadas de $f(x) = 8x$?</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Buscar una función cuya derivada sea $8x$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>$\frac{d}{dx}[4x^2] = 8x$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Agregar la constante de integración</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $F(x) = 4x^2 + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 5 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 5</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Si $F(x) = 3x^3 - 2x + 1$ es una antiderivada de $f(x)$, encuentra $f(x)$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Si $F(x)$ es una antiderivada de $f(x)$, entonces $f(x) = F'(x)$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Derivar $F(x) = 3x^3 - 2x + 1$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>$F'(x) = 9x^2 - 2 + 0 = 9x^2 - 2$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $f(x) = 9x^2 - 2$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 1.2: Integrales Inmediatas -->
+                <div class="exercise-section" data-topic="inmediatas">
+                    <h2><i class="fas fa-bolt"></i> 1.2 Integrales Inmediatas</h2>
+                    <div class="exercise-grid">
+                        <!-- Ejercicio 6 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 6</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int 5x^3 \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Aplicar la regla de la potencia: $\int x^n \, dx = \frac{x^{n+1}}{n+1} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>$\int 5x^3 \, dx = 5 \cdot \frac{x^4}{4} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Simplificar: $\frac{5x^4}{4} + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int 5x^3 \, dx = \frac{5x^4}{4} + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 7 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 7</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (x^2 + 3x - 2) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Separar términos: $\int x^2 \, dx + 3\int x \, dx - 2\int 1 \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar regla de la potencia a cada término</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>$= \frac{x^3}{3} + 3 \cdot \frac{x^2}{2} - 2x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (x^2 + 3x - 2) \, dx = \frac{x^3}{3} + \frac{3x^2}{2} - 2x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 8 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 8</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (\sin x + \cos x) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Separar términos: $\int \sin x \, dx + \int \cos x \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar integrales trigonométricas básicas</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>$= -\cos x + \sin x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (\sin x + \cos x) \, dx = -\cos x + \sin x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 9 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 9</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \frac{1}{x^2} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Reescribir como potencia: $\frac{1}{x^2} = x^{-2}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar regla de la potencia: $\int x^{-2} \, dx = \frac{x^{-1}}{-1} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Simplificar: $-\frac{1}{x} + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \frac{1}{x^2} \, dx = -\frac{1}{x} + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 10 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 10</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (2x^4 - 3x^2 + 1) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Separar términos: $2\int x^4 \, dx - 3\int x^2 \, dx + \int 1 \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar regla de la potencia: $2 \cdot \frac{x^5}{5} - 3 \cdot \frac{x^3}{3} + x + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Simplificar: $\frac{2x^5}{5} - x^3 + x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (2x^4 - 3x^2 + 1) \, dx = \frac{2x^5}{5} - x^3 + x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 11 -->
+                        <div class="exercise-card" data-difficulty="basic">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 11</h3>
+                                <div class="difficulty-badge basic">Básico</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \sqrt{x} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Reescribir como potencia: $\sqrt{x} = x^{1/2}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar regla de la potencia: $\int x^{1/2} \, dx = \frac{x^{3/2}}{3/2} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Simplificar: $\frac{2x^{3/2}}{3} + C = \frac{2x\sqrt{x}}{3} + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \sqrt{x} \, dx = \frac{2x\sqrt{x}}{3} + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 12 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 12</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (3\sin x - 2\cos x + \sec^2 x) \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Separar términos: $3\int \sin x \, dx - 2\int \cos x \, dx + \int \sec^2 x \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Aplicar integrales trigonométricas básicas</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>$= 3(-\cos x) - 2(\sin x) + \tan x + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 4:</h4>
+                                                <p>Simplificar: $-3\cos x - 2\sin x + \tan x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (3\sin x - 2\cos x + \sec^2 x) \, dx = -3\cos x - 2\sin x + \tan x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 1.3: Técnicas Básicas -->
+                <div class="exercise-section" data-topic="tecnicas">
+                    <h2><i class="fas fa-tools"></i> 1.3 Técnicas Básicas de Integración</h2>
+                    <div class="exercise-grid">
+                        <!-- Ejercicio 13 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 13</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (x + 1)^3 \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Expandir el binomio: $(x + 1)^3 = x^3 + 3x^2 + 3x + 1$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Integrar término por término: $\int (x^3 + 3x^2 + 3x + 1) \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Aplicar regla de la potencia: $\frac{x^4}{4} + 3 \cdot \frac{x^3}{3} + 3 \cdot \frac{x^2}{2} + x + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 4:</h4>
+                                                <p>Simplificar: $\frac{x^4}{4} + x^3 + \frac{3x^2}{2} + x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (x + 1)^3 \, dx = \frac{x^4}{4} + x^3 + \frac{3x^2}{2} + x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 14 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 14</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \frac{x^3 - 2x + 1}{x} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Dividir término por término: $\frac{x^3 - 2x + 1}{x} = x^2 - 2 + \frac{1}{x}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Integrar término por término: $\int x^2 \, dx - 2\int 1 \, dx + \int \frac{1}{x} \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Aplicar reglas: $\frac{x^3}{3} - 2x + \ln|x| + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \frac{x^3 - 2x + 1}{x} \, dx = \frac{x^3}{3} - 2x + \ln|x| + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 15 -->
+                        <div class="exercise-card" data-difficulty="advanced">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 15</h3>
+                                <div class="difficulty-badge advanced">Avanzado</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \sin^2 x \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Usar identidad trigonométrica: $\sin^2 x = \frac{1 - \cos(2x)}{2}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Sustituir: $\int \frac{1 - \cos(2x)}{2} \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Separar términos: $\frac{1}{2}\int 1 \, dx - \frac{1}{2}\int \cos(2x) \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 4:</h4>
+                                                <p>Integrar: $\frac{1}{2}x - \frac{1}{2} \cdot \frac{\sin(2x)}{2} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 5:</h4>
+                                                <p>Simplificar: $\frac{x}{2} - \frac{\sin(2x)}{4} + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \sin^2 x \, dx = \frac{x}{2} - \frac{\sin(2x)}{4} + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 16 -->
+                        <div class="exercise-card" data-difficulty="advanced">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 16</h3>
+                                <div class="difficulty-badge advanced">Avanzado</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \cos^2 x \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Usar identidad trigonométrica: $\cos^2 x = \frac{1 + \cos(2x)}{2}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Sustituir: $\int \frac{1 + \cos(2x)}{2} \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Separar términos: $\frac{1}{2}\int 1 \, dx + \frac{1}{2}\int \cos(2x) \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 4:</h4>
+                                                <p>Integrar: $\frac{1}{2}x + \frac{1}{2} \cdot \frac{\sin(2x)}{2} + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 5:</h4>
+                                                <p>Simplificar: $\frac{x}{2} + \frac{\sin(2x)}{4} + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \cos^2 x \, dx = \frac{x}{2} + \frac{\sin(2x)}{4} + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 17 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 17</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int \frac{x^2 - 4}{x} \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Dividir término por término: $\frac{x^2 - 4}{x} = x - \frac{4}{x}$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Integrar término por término: $\int x \, dx - 4\int \frac{1}{x} \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Aplicar reglas: $\frac{x^2}{2} - 4\ln|x| + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int \frac{x^2 - 4}{x} \, dx = \frac{x^2}{2} - 4\ln|x| + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ejercicio 18 -->
+                        <div class="exercise-card" data-difficulty="intermediate">
+                            <div class="exercise-header">
+                                <h3>Ejercicio 18</h3>
+                                <div class="difficulty-badge intermediate">Intermedio</div>
+                            </div>
+                            <div class="exercise-content">
+                                <p><strong>Problema:</strong> Evalúa $\int (2x - 1)^2 \, dx$</p>
+                                <div class="solution-toggle">
+                                    <button class="toggle-btn">Ver Solución</button>
+                                    <div class="solution hidden">
+                                        <div class="solution-steps">
+                                            <div class="step">
+                                                <h4>Paso 1:</h4>
+                                                <p>Expandir el binomio: $(2x - 1)^2 = 4x^2 - 4x + 1$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 2:</h4>
+                                                <p>Integrar término por término: $\int (4x^2 - 4x + 1) \, dx$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 3:</h4>
+                                                <p>Aplicar regla de la potencia: $4 \cdot \frac{x^3}{3} - 4 \cdot \frac{x^2}{2} + x + C$</p>
+                                            </div>
+                                            <div class="step">
+                                                <h4>Paso 4:</h4>
+                                                <p>Simplificar: $\frac{4x^3}{3} - 2x^2 + x + C$</p>
+                                            </div>
+                                        </div>
+                                        <div class="final-answer">
+                                            <p><strong>Respuesta:</strong> $\int (2x - 1)^2 \, dx = \frac{4x^3}{3} - 2x^2 + x + C$</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Generador de ejercicios adicionales -->
+            <section class="exercise-generator-section">
+                <h2><i class="fas fa-random"></i> Generador de Ejercicios Adicionales</h2>
+                <div class="generator-controls">
+                    <div class="control-group">
+                        <label for="generator-difficulty">Dificultad:</label>
+                        <select id="generator-difficulty">
+                            <option value="basic">Básico</option>
+                            <option value="intermediate">Intermedio</option>
+                            <option value="advanced">Avanzado</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="generator-topic">Tema:</label>
+                        <select id="generator-topic">
+                            <option value="all">Todos</option>
+                            <option value="concepto">Concepto de Antiderivada</option>
+                            <option value="inmediatas">Integrales Inmediatas</option>
+                            <option value="tecnicas">Técnicas Básicas</option>
+                        </select>
+                    </div>
+                    <button id="generate-new-exercise" class="btn-primary">
+                        <i class="fas fa-plus"></i> Generar Ejercicio
+                    </button>
+                </div>
+                <div id="generated-exercise-container" class="generated-exercise-container"></div>
+            </section>
+
+            <!-- Resumen de progreso -->
+            <section class="progress-summary-section">
+                <h2><i class="fas fa-chart-line"></i> Resumen de Progreso</h2>
+                <div class="progress-cards">
+                    <div class="progress-card">
+                        <div class="progress-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="progress-content">
+                            <h3 id="completed-exercises">0</h3>
+                            <p>Ejercicios Completados</p>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="progress-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="progress-content">
+                            <h3 id="correct-exercises">0</h3>
+                            <p>Respuestas Correctas</p>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="progress-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="progress-content">
+                            <h3 id="accuracy-percentage">0%</h3>
+                            <p>Precisión</p>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <div class="progress-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="progress-content">
+                            <h3 id="time-spent">0 min</h3>
+                            <p>Tiempo Invertido</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Cálculo Integral</h4>
+                    <p>Desarrollando competencias matemáticas avanzadas</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="modulo1_antiderivadas.html">Módulo 1</a></li>
+                        <li><a href="modulo2_integral_definida.html">Módulo 2</a></li>
+                        <li><a href="modulo3_tecnicas_integracion.html">Módulo 3</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#">Formulario de Integrales</a></li>
+                        <li><a href="#">Calculadora Online</a></li>
+                        <li><a href="#">Videos Tutoriales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JMGV-PTEL - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="auth-manager.js"></script>
+    <script src="ejercicios-modulo1-script.js"></script>
+</body>
+</html>

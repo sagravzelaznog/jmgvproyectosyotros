@@ -1,0 +1,162 @@
+name: Verificación del Curso de Cálculo Diferencial
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+      
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+        
+    - name: Verificar dependencias
+      run: |
+        python check_dependencies.py
+        
+    - name: Verificar estructura de archivos
+      run: |
+        echo "Verificando archivos principales..."
+        test -f index.html
+        test -f firebase-config.js
+        test -f auth-manager.js
+        test -f server.py
+        test -f check_dependencies.py
+        test -f package.json
+        test -f README.md
+        test -f LICENSE
+        test -f CONTRIBUTING.md
+        test -f CHANGELOG.md
+        test -f SECURITY.md
+        test -f CONTRIBUTORS.md
+        echo "✅ Todos los archivos principales están presentes"
+        
+    - name: Verificar módulos
+      run: |
+        echo "Verificando módulos del curso..."
+        test -f modulo1_relaciones_funciones.html
+        test -f modulo2_limites.html
+        test -f modulo3_continuidad.html
+        test -f modulo4_la_derivada.html
+        test -f modulo5_aplicaciones_derivada.html
+        echo "✅ Todos los módulos están presentes"
+        
+    - name: Verificar archivos de GitHub
+      run: |
+        echo "Verificando archivos de GitHub..."
+        test -d .github
+        test -f .github/ISSUE_TEMPLATE/bug_report.md
+        test -f .github/ISSUE_TEMPLATE/feature_request.md
+        test -f .github/ISSUE_TEMPLATE/content_improvement.md
+        test -f .github/pull_request_template.md
+        echo "✅ Todos los archivos de GitHub están presentes"
+        
+    - name: Verificar configuración
+      run: |
+        echo "Verificando archivos de configuración..."
+        test -f .gitignore
+        test -f .gitattributes
+        test -f config.env
+        echo "✅ Todos los archivos de configuración están presentes"
+        
+    - name: Verificar derechos de autor
+      run: |
+        echo "Verificando derechos de autor en archivos HTML..."
+        grep -r "JMGV-PTEL-2025" *.html || (echo "❌ Derechos de autor no encontrados en archivos HTML" && exit 1)
+        echo "✅ Derechos de autor verificados"
+        
+    - name: Verificar sintaxis HTML
+      run: |
+        echo "Verificando sintaxis HTML básica..."
+        for file in *.html; do
+          echo "Verificando $file..."
+          grep -q "<!DOCTYPE html>" "$file" || (echo "❌ DOCTYPE no encontrado en $file" && exit 1)
+          grep -q "<html" "$file" || (echo "❌ Etiqueta html no encontrada en $file" && exit 1)
+          grep -q "</html>" "$file" || (echo "❌ Etiqueta de cierre html no encontrada en $file" && exit 1)
+        done
+        echo "✅ Sintaxis HTML básica verificada"
+        
+    - name: Verificar sintaxis JavaScript
+      run: |
+        echo "Verificando sintaxis JavaScript básica..."
+        for file in *.js; do
+          echo "Verificando $file..."
+          node -c "$file" || (echo "❌ Error de sintaxis en $file" && exit 1)
+        done
+        echo "✅ Sintaxis JavaScript verificada"
+        
+    - name: Verificar sintaxis Python
+      run: |
+        echo "Verificando sintaxis Python..."
+        python -m py_compile server.py
+        python -m py_compile check_dependencies.py
+        echo "✅ Sintaxis Python verificada"
+        
+    - name: Verificar sintaxis JSON
+      run: |
+        echo "Verificando sintaxis JSON..."
+        python -m json.tool package.json > /dev/null
+        echo "✅ Sintaxis JSON verificada"
+        
+    - name: Verificar archivos de documentación
+      run: |
+        echo "Verificando archivos de documentación..."
+        for file in *.md; do
+          echo "Verificando $file..."
+          test -s "$file" || (echo "❌ Archivo $file está vacío" && exit 1)
+        done
+        echo "✅ Archivos de documentación verificados"
+        
+    - name: Generar reporte de verificación
+      run: |
+        echo "📊 REPORTE DE VERIFICACIÓN" > verification_report.txt
+        echo "=========================" >> verification_report.txt
+        echo "" >> verification_report.txt
+        echo "✅ Archivos principales: $(ls -1 *.html *.js *.py *.json *.md | wc -l)" >> verification_report.txt
+        echo "✅ Módulos del curso: $(ls -1 modulo*.html | wc -l)" >> verification_report.txt
+        echo "✅ Archivos de GitHub: $(ls -1 .github/**/*.md | wc -l)" >> verification_report.txt
+        echo "✅ Archivos de configuración: $(ls -1 .git* config.* | wc -l)" >> verification_report.txt
+        echo "" >> verification_report.txt
+        echo "📅 Fecha de verificación: $(date)" >> verification_report.txt
+        echo "🔗 Commit: $GITHUB_SHA" >> verification_report.txt
+        echo "" >> verification_report.txt
+        echo "© JMGV-PTEL-2025. TODOS LOS DERECHOS RESERVADOS." >> verification_report.txt
+        
+    - name: Subir reporte de verificación
+      uses: actions/upload-artifact@v3
+      with:
+        name: verification-report
+        path: verification_report.txt
+        
+    - name: Comentar en PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✅ **Verificación completada exitosamente**\n\nTodos los archivos del curso han sido verificados y están listos para producción.\n\n📊 **Resumen:**\n- ✅ Archivos principales verificados\n- ✅ Módulos del curso verificados\n- ✅ Archivos de GitHub verificados\n- ✅ Configuración verificada\n- ✅ Derechos de autor verificados\n- ✅ Sintaxis verificada\n\n🎉 **¡El curso está listo para ser usado!**\n\n© JMGV-PTEL-2025. TODOS LOS DERECHOS RESERVADOS.'
+          })
+
+
+
+
+
+
+

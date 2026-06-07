@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 7: Matemáticas que se Tocan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           ESTÉTICA "CALCULUS COSMOS" (DARK MODE NEÓN)
+           ========================================= */
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --cyan-neon: #06b6d4;
+            --magenta-neon: #d946ef;
+            --emerald-neon: #10b981;
+            --coral-neon: #f43f5e;
+            --error-red: #ef4444;
+            --master-gold: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--coral-neon), var(--cyan-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Interacción para el Modo Maestro */
+            user-select: none;
+        }
+
+        h2 {
+            color: var(--coral-neon);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid rgba(244, 63, 94, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        .highlight {
+            color: var(--cyan-neon);
+            font-weight: 600;
+        }
+
+        .formula-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--coral-neon);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        /* TARJETAS DE CONTENIDO */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* LABORATORIO INTERACTIVO (CANVAS) */
+        .lab-container {
+            text-align: center;
+        }
+
+        .canvas-wrapper {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 500px;
+            accent-color: var(--coral-neon);
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--coral-neon);
+        }
+
+        /* GAMIFICACIÓN: QUIZ KAHOOT STYLE */
+        .quiz-question { margin-bottom: 2rem; }
+        .quiz-question h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .quiz-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quiz-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.02); }
+        .quiz-btn.correct { background: var(--emerald-neon) !important; color: #000; border-color: var(--emerald-neon); }
+        .quiz-btn.incorrect { background: var(--error-red) !important; color: #fff; border-color: var(--error-red); }
+
+        /* MODO MAESTRO */
+        .master-mode {
+            display: none;
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid var(--master-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+        .master-mode.active { display: block; animation: fadeIn 0.5s; }
+        .master-title { color: var(--master-gold); font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 2rem; background: rgba(0,0,0,0.5); font-size: 0.9rem; color: var(--text-muted); margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="main-title">Cálculo Integral: Sesión 7</h1>
+            <p>Matemáticas que se Tocan: Áreas y Sólidos de Revolución</p>
+        </header>
+
+        <section class="card">
+            <h2>1. De 2D a 3D: La Impresora de Cauchy</h2>
+            <p>Hasta ahora hemos calculado áreas planas. Pero, ¿qué pasa si tomamos ese "recorte" de área y lo hacemos girar a la velocidad de la luz sobre el eje X? ¡Se forma un objeto tridimensional sólido!</p>
+            <p>El gran matemático <strong>Augustin-Louis Cauchy</strong> ayudó a formalizar cómo tratar estos problemas. Imagina una impresora 3D o un torno de cerámica. El cálculo integral crea volúmenes "imprimiendo" o apilando discos infinitamente delgados uno tras otro.</p>
+            
+            <p>Si el área de un círculo es $A = \pi \cdot r^2$, y nuestro "radio" está dado por la altura de la función $f(x)$, la fórmula mágica para crear materia tridimensional es:</p>
+
+            <div class="formula-box">
+                V = π ∫ [ f(x) ]² dx
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Analogía sugerida (El Torno y la Impresora 3D):</strong> Diles a tus alumnos que la integral es el software de una impresora 3D. La función $f(x)$ es el perfil del objeto. Al elevarla al cuadrado y multiplicarla por Pi ($\pi$), le estamos dando la orden a la matemática de "hacer girar" ese perfil para crear una copa, un pistón de motor o una llanta de auto. Todo objeto simétrico manufacturado se diseña con integrales.</p>
+            </div>
+        </section>
+
+        <section class="card lab-container">
+            <h2>2. Simulador: El Generador de Discos</h2>
+            <p>Vamos a generar un sólido haciendo girar la función <span class="highlight">f(x) = √x</span>. A la izquierda verás los rectángulos 2D (Área). A la derecha, verás cómo al rotarlos se convierten en "Discos" 3D (Volumen).</p>
+            
+            <div class="controls">
+                <label for="disk-slider" style="font-weight: 600;">Número de Discos / Capas (n): <span id="disk-val" style="color:var(--coral-neon);">5</span></label>
+                <input type="range" id="disk-slider" min="1" max="50" value="5">
+            </div>
+
+            <div class="canvas-wrapper">
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Vista 2D: Área Bajo la Curva</h3>
+                    <canvas id="canvas2D" width="400" height="300"></canvas>
+                </div>
+                <div>
+                    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem;">Vista 3D: Sólido de Revolución</h3>
+                    <canvas id="canvas3D" width="400" height="300"></canvas>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="border-left-color: var(--cyan-neon);">
+                    Volumen Aproximado:<br><span id="vol-aprox" style="color:var(--cyan-neon);">0.00</span> u³
+                </div>
+                <div class="stat-box">
+                    Volumen Exacto (n→∞):<br><span id="vol-exact" style="color:var(--emerald-neon);">25.13</span> u³
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Guía del Laboratorio:</strong> Pídeles que pongan el slider en n=1. Se ve un simple cilindro gigante (pésima aproximación). Luego deslízalo lentamente hasta n=50. Verán cómo la acumulación de cilindros finísimos modela perfectamente un "tazón" o "paraboloide". ¡Acaban de visualizar el paso de una Sumatoria de Riemann a una Integral Definida en 3D!</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>3. Quiz: Ingenieros del Volumen</h2>
+            
+            <div class="quiz-question">
+                <h3>1. En la fórmula del volumen V = π ∫ [f(x)]² dx, ¿qué representa la expresión "π [f(x)]²"?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">El perímetro de la figura</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">El área de un disco circular (π·r²)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">La aceleración constante</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Un error de escritura de Cauchy</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>2. Cuando incrementas el número de discos al máximo en el simulador, ¿qué sucede matemáticamente?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">El ancho del disco (dx) tiende a cero y se obtiene el volumen exacto</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">El volumen se vuelve infinito</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">La gráfica regresa a ser 2D</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">La integral falla por división entre cero</button>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <h3>3. ¿Para qué profesión actual es VITAL el entendimiento de las integrales de volumen (Sólidos de Revolución)?</h3>
+                <div class="options-grid">
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Sociología de datos</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Filosofía pura</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">Ingeniería mecánica y Diseño Industrial (Modelado CAD/3D)</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">Programación web básica</button>
+                </div>
+            </div>
+
+            <div class="master-mode">
+                <div class="master-title">🧠 Notas del Master (Teacher Mode)</div>
+                <p><strong>Respuestas del Quiz:</strong> 1) El área de un disco. 2) El ancho (dx) tiende a cero. 3) Ingeniería / Diseño 3D.<br>Enfatiza fuertemente la respuesta 3. Conectar el Cálculo con el Diseño CAD, AutoCAD, SolidWorks o diseño de motores de F1 les da a los adolescentes un "Por qué" inmediato para aprender esto.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        &copy; JMGV-PTEL-2026. CURSO CÁLCULO INTEGRAL. SESIÓN 07. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DEL SIMULADOR 2D Y 3D ---
+        const slider = document.getElementById('disk-slider');
+        const diskValDisplay = document.getElementById('disk-val');
+        const volAproxDisplay = document.getElementById('vol-aprox');
+        
+        const c2D = document.getElementById('canvas2D');
+        const ctx2 = c2D.getContext('2d');
+        const c3D = document.getElementById('canvas3D');
+        const ctx3 = c3D.getContext('2d');
+
+        // Escalas Matemáticas (f(x) = 2*sqrt(x) de 0 a 4)
+        const xMax = 4;
+        const yMax = 4; // max y = 2*sqrt(4) = 4
+
+        // Función matemática a graficar: y = 2*sqrt(x)
+        const f = (x) => 2 * Math.sqrt(x);
+
+        // Mapeo a Píxeles
+        const toPixX = (canvas, x) => (x / xMax) * canvas.width * 0.9; // 0.9 para margen
+        const toPixY = (canvas, y) => canvas.height - ((y / yMax) * canvas.height * 0.8) - 20; // Y invertido, margen inferior
+
+        // Dibujar Ejes
+        function drawAxes(ctx, canvas, is3D = false) {
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            
+            // Eje X
+            const originY = toPixY(canvas, 0);
+            ctx.moveTo(0, originY);
+            ctx.lineTo(canvas.width, originY);
+            
+            // Si es 3D, dibujamos una línea tenue arriba también (simetría)
+            if(is3D) {
+                const topY = toPixY(canvas, yMax*2) + 20; 
+                ctx.setLineDash([5, 5]);
+                ctx.moveTo(0, topY);
+                // No dibujamos eje superior, pero marcamos el centro
+                ctx.setLineDash([]);
+            }
+            
+            ctx.stroke();
+        }
+
+        // Renderizado del Canvas 2D (Rectángulos de Riemann)
+        function render2D(n) {
+            ctx2.clearRect(0, 0, c2D.width, c2D.height);
+            drawAxes(ctx2, c2D);
+
+            const dx = xMax / n;
+
+            // Dibujar rectángulos
+            ctx2.fillStyle = 'rgba(6, 182, 212, 0.4)'; // Cian
+            ctx2.strokeStyle = '#06b6d4';
+            ctx2.lineWidth = 1;
+
+            for(let i=0; i<n; i++) {
+                let x_i = i * dx;
+                let x_next = (i+1) * dx;
+                
+                // Usamos suma por la derecha (f(x_next)) para que encaje visualmente mejor con la curva ascendente
+                let fx = f(x_next); 
+                
+                let px = toPixX(c2D, x_i);
+                let pWidth = toPixX(c2D, dx);
+                let py = toPixY(c2D, fx);
+                let pHeight = toPixY(c2D, 0) - py;
+
+                ctx2.fillRect(px, py, pWidth, pHeight);
+                ctx2.strokeRect(px, py, pWidth, pHeight);
+            }
+
+            // Dibujar la curva f(x)
+            ctx2.beginPath();
+            ctx2.strokeStyle = '#f8fafc';
+            ctx2.lineWidth = 3;
+            for(let x=0; x<=xMax; x+=0.1) {
+                let px = toPixX(c2D, x);
+                let py = toPixY(c2D, f(x));
+                if(x===0) ctx2.moveTo(px, py);
+                else ctx2.lineTo(px, py);
+            }
+            ctx2.stroke();
+        }
+
+        // Renderizado del Canvas 3D (Discos/Cilindros Pseudo 3D)
+        function render3D(n) {
+            ctx3.clearRect(0, 0, c3D.width, c3D.height);
+            // El eje X será el centro de rotación en la vista 3D (Y lo subimos)
+            
+            // Función interna para mapear coordenadas 3D (con el eje X en el medio)
+            const originY_3D = c3D.height / 2;
+            const toPixY_3D = (y) => originY_3D - ((y / yMax) * (c3D.height / 2.5));
+
+            drawAxes(ctx3, c3D); // Dibuja eje X central
+
+            const dx = xMax / n;
+            let volAprox = 0;
+
+            // Orden de dibujo: De izquierda (fondo) a derecha (frente) crea el efecto 3D
+            for(let i=0; i<n; i++) {
+                let x_i = i * dx;
+                let x_next = (i+1) * dx;
+                let fx = f(x_next); // Altura / Radio del disco
+                
+                // Volumen del cilindro = pi * r^2 * h
+                volAprox += Math.PI * Math.pow(fx, 2) * dx;
+
+                // Coordenadas en canvas
+                let px_start = toPixX(c3D, x_i);
+                let px_end = toPixX(c3D, x_next);
+                let width = px_end - px_start;
+                
+                // Radios de la elipse
+                let radiusY = originY_3D - toPixY_3D(fx); // Alto de la elipse (radio real f(x))
+                let radiusX = radiusY * 0.25; // Profundidad simulada (perspectiva)
+
+                // 1. Dibujar el cuerpo del cilindro (rectángulo conectando dos elipses)
+                ctx3.fillStyle = 'rgba(244, 63, 94, 0.4)'; // Coral transparente
+                ctx3.fillRect(px_start, originY_3D - radiusY, width, radiusY * 2);
+                
+                // Bordes superior e inferior del cilindro
+                ctx3.beginPath();
+                ctx3.strokeStyle = '#f43f5e';
+                ctx3.lineWidth = 1;
+                ctx3.moveTo(px_start, originY_3D - radiusY);
+                ctx3.lineTo(px_end, originY_3D - radiusY);
+                ctx3.moveTo(px_start, originY_3D + radiusY);
+                ctx3.lineTo(px_end, originY_3D + radiusY);
+                ctx3.stroke();
+
+                // 2. Dibujar la elipse frontal (tapa del disco)
+                ctx3.beginPath();
+                ctx3.ellipse(px_end, originY_3D, radiusX, radiusY, 0, 0, 2 * Math.PI);
+                ctx3.fillStyle = 'rgba(244, 63, 94, 0.6)';
+                ctx3.fill();
+                ctx3.stroke();
+            }
+
+            // Actualizar Estadísticas
+            volAproxDisplay.innerText = volAprox.toFixed(2);
+        }
+
+        // Orquestador
+        function updateVisuals() {
+            const n = parseInt(slider.value, 10);
+            diskValDisplay.innerText = n;
+            render2D(n);
+            render3D(n);
+        }
+
+        // Listeners
+        slider.addEventListener('input', updateVisuals);
+        updateVisuals(); // Llamada inicial
+
+
+        // --- 2. LÓGICA DEL QUIZ (Estilo Kahoot) ---
+        function checkAnswer(btn, isCorrect) {
+            const siblings = btn.parentElement.querySelectorAll('.quiz-btn');
+            siblings.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+                b.style.opacity = '0.6';
+            });
+
+            btn.style.opacity = '1';
+            if (isCorrect) {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        }
+
+        // --- 3. LÓGICA DEL MODO MAESTRO (Protección) ---
+        const mainTitle = document.getElementById('main-title');
+        const masterElements = document.querySelectorAll('.master-mode');
+
+        mainTitle.addEventListener('dblclick', () => {
+            const password = prompt('🔐 INGRESO AL MODO MAESTRO.\nPor favor, introduce el código de acceso:');
+            
+            if (password === '1983') {
+                masterElements.forEach(el => el.classList.add('active'));
+                alert('✅ Acceso concedido. Notas didácticas activadas.');
+            } else if (password !== null) {
+                alert('❌ Código incorrecto. Acceso denegado.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<svg width="600" height="200" xmlns="http://www.w3.org/2000/svg" style="background-color:#EDF6F9; border-radius:10px;">
+  <path d="M50 80 L200 60 L400 40 L550 20  M50 120 L200 140 L400 160 L550 180" fill="none" stroke="#ccc" stroke-width="1" stroke-dasharray="4"/>
+  
+  <g transform="translate(20,0)">
+     <path d="M20 90 L100 90" stroke="#006D77" stroke-width="3" marker-end="url(#arrowWind)"/>
+     <path d="M20 110 L100 110" stroke="#006D77" stroke-width="3" marker-end="url(#arrowWind)"/>
+     <text x="20" y="80" font-family="Roboto" font-size="12" fill="#006D77">Viento Rápido</text>
+  </g>
+
+  <rect x="250" y="60" width="10" height="80" fill="#FFD166" rx="2" />
+  <line x1="255" y1="60" x2="255" y2="140" stroke="#E29578" stroke-width="2"/>
+  <circle cx="255" cy="100" r="5" fill="#E29578"/>
+  <text x="230" y="50" font-family="Montserrat" font-weight="bold" font-size="12" fill="#E29578">TURBINA</text>
+
+  <g transform="translate(350,0)">
+     <path d="M20 90 L80 90" stroke="#006D77" stroke-width="1.5" marker-end="url(#arrowWind)"/> <path d="M20 110 L80 110" stroke="#006D77" stroke-width="1.5" marker-end="url(#arrowWind)"/>
+     <text x="20" y="80" font-family="Roboto" font-size="12" fill="#006D77">Viento Lento</text>
+  </g>
+  
+  <text x="200" y="180" font-family="Montserrat" font-size="10" fill="#666">LIMITE DE BETZ: Máx 59.3% de extracción</text>
+</svg>

@@ -147,8 +147,7 @@
                     await saveProgressToFirebase(tempStudentId, 'sesion1', score, true);
                     window.location.href = '../index.html';
                 } else {
-                    alert(`Obtuviste un ${percentage}%. Se requiere 100% para completar la sesión. ¡Inténtalo de nuevo!`);
-                    window.location.reload();
+                    window.location.href = '../index.html';
                 }
             });
         });

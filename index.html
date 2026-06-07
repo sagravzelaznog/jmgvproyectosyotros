@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMGV - Hub de Proyectos y Cursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent: #3b82f6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.2) 0%, rgba(15, 23, 42, 1) 100%);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0 0 10px 0;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: var(--text-sub);
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            padding: 20px 0 60px;
+        }
+
+        .category-title {
+            font-size: 1.5em;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin: 40px 0 20px;
+            color: #e2e8f0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+            color: var(--text-main);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-sub);
+            font-size: 0.95em;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Directorio de Proyectos</h1>
+        <p class="subtitle">Repositorio central de aplicaciones web, cursos y planeaciones didácticas.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Semestre 5 -->
+        <h2 class="category-title">Semestre 5</h2>
+        <div class="grid">
+            <a href="semestre 5/pensamiento variacional/index.html" class="card">
+                <span class="card-tag">AppWeb (PWA)</span>
+                <h3>Pensamiento Variacional</h3>
+                <p>Curso gamificado con Firebase, quizzes interactivos y diseño móvil.</p>
+            </a>
+        </div>
+
+        <!-- Semestre 6 -->
+        <h2 class="category-title">Semestre 6</h2>
+        <div class="grid">
+            <a href="semesttre 6/calculo/index.html" class="card">
+                <span class="card-tag">Curso</span>
+                <h3>Cálculo</h3>
+                <p>Portal principal del curso de cálculo diferencial e integral.</p>
+            </a>
+            <a href="semesttre 6/calculo/cursoci/index.html" class="card">
+                <span class="card-tag">Módulo</span>
+                <h3>Curso CI (Interactividad)</h3>
+                <p>Sesiones de cálculo con interactividad web.</p>
+            </a>
+            <a href="semesttre 6/electricidad/index.html" class="card">
+                <span class="card-tag">Especialidad</span>
+                <h3>Electricidad</h3>
+                <p>Módulo de electricidad para Semestre 6.</p>
+            </a>
+            <a href="semesttre 6/calculadora.html" class="card">
+                <span class="card-tag">Herramienta</span>
+                <h3>Calculadora Web</h3>
+                <p>Herramienta interactiva para resolución de problemas.</p>
+            </a>
+            <a href="semesttre 6/masterclass04/masterclass_sesion04.html" class="card">
+                <span class="card-tag">Masterclass</span>
+                <h3>Sesión 04</h3>
+                <p>Presentación de Masterclass especial.</p>
+            </a>
+        </div>
+
+        <!-- Trabajos Externos & Otros -->
+        <h2 class="category-title">Trabajos Externos y Otros Proyectos</h2>
+        <div class="grid">
+            <a href="trabajosexternos/APLICACION PARA CONVERTIR IMAGENES A DXF/INDEX.HTML" class="card">
+                <span class="card-tag">App de Utilidad</span>
+                <h3>Conversor de Imágenes a DXF</h3>
+                <p>Aplicación web para convertir imágenes al formato vectorial DXF.</p>
+            </a>
+            <a href="trabajosexternos/CHECK LIS PLANOS/CHECLISTPLANOS.HTML" class="card">
+                <span class="card-tag">Herramienta</span>
+                <h3>Checklist de Planos</h3>
+                <p>Sistema de revisión y validación de planos.</p>
+            </a>
+            <a href="trabajosexternos/dialux/dialuxsesion01.html" class="card">
+                <span class="card-tag">Curso</span>
+                <h3>Curso DIALux</h3>
+                <p>Sesiones de aprendizaje para software de iluminación DIALux.</p>
+            </a>
+            <a href="market/templates/index.html" class="card">
+                <span class="card-tag">Proyecto</span>
+                <h3>Market / Trading</h3>
+                <p>Análisis y gráficas de mercado financiero.</p>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

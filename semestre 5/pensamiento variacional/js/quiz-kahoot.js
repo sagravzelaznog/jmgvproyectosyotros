@@ -134,9 +134,16 @@ export class KahootQuiz {
                 <p>Tu puntuación es:</p>
                 <div style="font-size: 4em; font-weight: 900; color: white;">${this.score} / ${this.questions.length}</div>
                 <div style="margin: 20px 0; font-size: 1.2em; color: ${percentage === 100 ? '#10b981' : '#ef4444'};">Aciertos: ${percentage}%</div>
-                <button class="btn-next-level" id="finish-btn">${percentage === 100 ? 'Guardar y Finalizar' : 'Reintentar Quiz'}</button>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                    <button class="btn-next-level" id="retry-btn" style="background: #f59e0b;">Repetir Quiz 🔄</button>
+                    <button class="btn-next-level" id="finish-btn" style="background: #3b82f6;">${percentage === 100 ? 'Guardar y Continuar ✅' : 'Salir sin guardar ❌'}</button>
+                </div>
             </div>
         `;
+
+        document.getElementById('retry-btn').addEventListener('click', () => {
+            window.location.reload();
+        });
 
         document.getElementById('finish-btn').addEventListener('click', () => {
             if (this.onCompleteCallback) {

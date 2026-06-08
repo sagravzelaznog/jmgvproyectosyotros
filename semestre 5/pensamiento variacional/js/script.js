@@ -314,16 +314,19 @@ function updateExpoCurve() {
     document.getElementById('base-val').innerText = base.toFixed(1);
     
     let points = [];
-    for(let x=0; x<=10; x++) {
-        let maxVal = Math.pow(4, 10);
+    let maxVal = 100; // Fixed ceiling to visually compare steepness
+    
+    for(let x=0; x<=10; x+=0.2) {
         let y = Math.pow(base, x);
-        let percentX = x * 10;
+        let percentX = (x / 10) * 100;
         let percentY = 100 - ((y / maxVal) * 100);
-        if(base < 2) percentY = 100 - ((y / Math.pow(2, 10)) * 100);
-        if(percentY < 0) percentY = 0;
-        points.push(${percentX}% %);
+        
+        if(percentY < 0) percentY = 0; // Clip to ceiling
+        
+        points.push(`${percentX.toFixed(1)}% ${percentY.toFixed(1)}%`);
     }
-    const polygon = polygon(0 100%, 0 100%, , 100% 0, 100% 100%);
+    
+    const polygon = `polygon(0% 100%, ${points.join(', ')}, 100% 100%)`;
     document.getElementById('expo-curve').style.clipPath = polygon;
 }
 

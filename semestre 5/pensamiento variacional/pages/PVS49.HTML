@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 49 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Ciudad Isometrica */
+        .iso-city { display: flex; gap: 10px; align-items: flex-end; }
+        .bldg { width: 30px; background: #3b82f6; position: relative; }
+        .b1 { height: 40px; } .b2 { height: 80px; } .b3 { height: 60px; } .b4 { height: 100px; }
+        .bldg::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.2) 50%, transparent 50%); }
+
+        /* Simulador: Dashboard Variacional */
+        .city-sim { background: #0f172a; border: 4px solid #10b981; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .dash-card { background: #1e293b; border: 2px solid #64748b; border-radius: 10px; padding: 15px; }
+        .d-title { color: #94a3b8; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+        .d-value { font-family: monospace; font-size: 2em; color: white; margin: 10px 0; }
+        .d-opt { font-size: 0.8em; padding: 5px 10px; border-radius: 20px; display: inline-block; }
+        .opt-good { background: rgba(16,185,129,0.2); color: #10b981; border: 1px solid #10b981; }
+        .opt-bad { background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444; }
+        .city-controls { margin-top: 20px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion49-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 49</div>
+            <h1>Proyecto: La Ciudad Variacional</h1>
+            <p>Aplicando todo el cálculo aprendido para optimizar una metrópolis moderna.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Integrar los conceptos de límites, derivadas e integrales en un macro-proyecto interdisciplinario, demostrando cómo el cálculo toma decisiones críticas en el mundo real.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: El Ingeniero Variacional</h2>
+                <div class="math-box" style="border-color:#10b981; color:#a7f3d0; text-align:left;">
+                    No estudiaste cálculo solo para aprobar un examen. Lo estudiaste para <strong>resolver problemas</strong>.<br><br>
+                    - Usarás <strong>Límites</strong> para proyectar la población máxima que puede soportar la ciudad.<br>
+                    - Usarás <strong>Derivadas</strong> para minimizar el costo del material de tuberías y encontrar el pico de tráfico en horas pico.<br>
+                    - Usarás <strong>Integrales</strong> para calcular la energía total consumida en un mes y el volumen de reservas de agua dulce.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Áreas de Impacto</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Urbanismo Sostenible:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Calcular áreas exactas de parques irregulares entre carreteras (Área entre curvas).</p>
+                        <div class="css-graphic"><div class="iso-city"><div class="bldg b1"></div><div class="bldg b4"></div><div class="bldg b2"></div><div class="bldg b3"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Economía y Finanzas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Determinar la tasa de inflación y el ingreso marginal para ajustar los impuestos sin afectar el crecimiento económico.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">🏙️ Dashboard: Gestión de Ciudad</h2>
+                <p>Eres el alcalde. Ajusta el "Presupuesto de Infraestructura" ($x$). El sistema usa derivadas para optimizar costos e integrales para calcular beneficios a largo plazo.</p>
+
+                <div class="city-sim">
+                    <div class="city-controls">
+                        <label style="color:white;">Presupuesto de Infraestructura (Millones $): <span id="budget-val" style="color:#facc15;">50</span></label><br>
+                        <input type="range" id="budget-slider" min="10" max="100" value="50" style="width: 80%; margin-top:10px;">
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dash-card">
+                            <div class="d-title">Costo Marginal (Derivada)</div>
+                            <div class="d-value" id="val-cost">$<span id="cost-num">0</span>M / año</div>
+                            <div class="d-opt" id="opt-cost">Óptimo</div>
+                        </div>
+                        <div class="dash-card">
+                            <div class="d-title">Beneficio Social (Integral)</div>
+                            <div class="d-value" id="val-ben">+<span id="ben-num">0</span>%</div>
+                            <div class="d-opt" id="opt-ben">Eficiente</div>
+                        </div>
+                    </div>
+                    
+                    <div id="city-msg" style="margin-top:15px; font-weight:bold; color:white; font-size:1.1em;"></div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS48.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS50.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('budget-slider');
+        const bVal = document.getElementById('budget-val');
+        const costNum = document.getElementById('cost-num');
+        const benNum = document.getElementById('ben-num');
+        const optCost = document.getElementById('opt-cost');
+        const optBen = document.getElementById('opt-ben');
+        const msg = document.getElementById('city-msg');
+
+        // Let's pretend Cost curve is a parabola that minimizes at x=60
+        // C(x) = (x-60)^2 + 10  => Marginal cost C'(x) = 2(x-60)
+        // Benefit integral is Area = x * ln(x) roughly. Let's just map it.
+        
+        function updateCity() {
+            const x = parseInt(slider.value);
+            bVal.innerText = x;
+
+            const marginalCost = 2 * (x - 60);
+            costNum.innerText = Math.abs(marginalCost);
+            
+            const benefit = Math.floor(Math.sqrt(x) * 10);
+            benNum.innerText = benefit;
+
+            if(Math.abs(marginalCost) < 10) {
+                optCost.className = "d-opt opt-good";
+                optCost.innerText = "Mínimo Alcanzado (C'≈0)";
+            } else {
+                optCost.className = "d-opt opt-bad";
+                optCost.innerText = marginalCost > 0 ? "Gasto Excesivo" : "Subinversión";
+            }
+
+            if(benefit > 65) {
+                optBen.className = "d-opt opt-good";
+                optBen.innerText = "Alto Rendimiento";
+            } else {
+                optBen.className = "d-opt opt-bad";
+                optBen.innerText = "Impacto Pobre";
+            }
+
+            if(x >= 55 && x <= 65) {
+                msg.innerText = "¡Alcalde, ha encontrado el Punto Óptimo Matemático!";
+                msg.style.color = "#10b981";
+            } else {
+                msg.innerText = "Ajuste el presupuesto usando derivadas para minimizar el costo marginal.";
+                msg.style.color = "#94a3b8";
+            }
+        }
+
+        slider.addEventListener('input', updateCity);
+        updateCity();
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion49', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion49');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion49', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

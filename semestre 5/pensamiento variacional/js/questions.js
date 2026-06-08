@@ -549,7 +549,40 @@ export const questionDatabase = {
         { question: "La Integración por Partes sirve para resolver integrales que provienen de...", options: ["La regla del producto de derivadas", "La regla de la cadena", "Sumas y restas simples", "Raíces cuadradas"], answerIndex: 0, timeLimit: 20 },
         { question: "La famosa frase para recordar la fórmula es: 'Un Día Vi...'", options: ["Una Vaca - Vestida De Uniforme ( ∫ u dv = uv - ∫ v du )", "Un Venado - Volando", "Una Ventana - Verde", "Un Viejo - Viajero"], answerIndex: 0, timeLimit: 20 },
         { question: "¿Para qué sirve el acrónimo ILATE (Inversa, Logarítmica, Algebraica, Trigonométrica, Exponencial)?", options: ["Para saber a qué término llamar 'u' (prioridad de izquierda a derecha)", "Para dibujar", "Para nombrar planetas", "Es el nombre del inventor"], answerIndex: 0, timeLimit: 20 },
-        { question: "En ∫ x*e^x dx, según ILATE, ¿quién debe ser 'u'?", options: ["x (porque es Algebraica y va antes que Exponencial)", "e^x", "dx", "e"], answerIndex: 0, timeLimit: 20 },
-        { question: "Al usar Integración por Partes, nuestro objetivo es que la segunda integral (∫ v du)...", options: ["Sea más fácil de resolver que la integral original", "Sea idéntica", "Sea imposible", "Desaparezca automáticamente"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion46": [
+        { question: "Un Sólido de Revolución se forma al...", options: ["Girar un área plana alrededor de un eje (como un torno)", "Sumar muchos cuadrados", "Doblar un papel en 3D", "Derivar un círculo"], answerIndex: 0, timeLimit: 20 },
+        { question: "El método de los discos para calcular volúmenes utiliza la fórmula del área de un...", options: ["Círculo (π·r²)", "Cuadrado", "Triángulo", "Esfera"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al girar la función f(x) = x (una línea recta) alrededor del eje X, se forma...", options: ["Un cono", "Un cilindro", "Una esfera", "Una caja"], answerIndex: 0, timeLimit: 20 },
+        { question: "En la integral del volumen V = ∫ π[f(x)]² dx, ¿qué representa f(x)?", options: ["El radio de cada disco giratorio", "El área total", "La altura del sólido", "El grosor del disco"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las botellas, copas y floreros se diseñan usando...", options: ["Sólidos de revolución", "Solo reglas rectas", "Cálculo diferencial básico", "Sumas y restas"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion47": [
+        { question: "¿Qué es el Centro de Masa (o centro de gravedad) de una figura 2D?", options: ["El punto de equilibrio perfecto donde la figura no se inclina", "El punto más alto de la figura", "El borde más pesado", "El área total dividida entre dos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para calcular el centro de masa usando integrales, necesitamos encontrar los...", options: ["Momentos respecto a los ejes X y Y", "Volúmenes de revolución", "Puntos de inflexión", "Cálculos de fuerza magnética"], answerIndex: 0, timeLimit: 20 },
+        { question: "El Trabajo en física se define como Fuerza multiplicada por Distancia. ¿Qué pasa si la fuerza es variable?", options: ["Usamos una integral W = ∫ F(x) dx", "No se puede calcular", "Sumamos y dividimos", "Multiplicamos por cero"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al bombear agua fuera de un tanque cónico, la integral es necesaria porque...", options: ["El agua en el fondo debe levantarse una mayor distancia que el agua de arriba", "El tanque se mueve", "El agua no pesa", "La gravedad desaparece"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las aplicaciones del cálculo integral abarcan desde la geometría hasta...", options: ["Ingeniería estructural, física clásica y diseño automotriz", "Pintura al óleo", "Historia antigua", "Música clásica pura"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion48": [
+        { question: "Una Ecuación Diferencial es aquella que relaciona...", options: ["Una función desconocida con sus propias derivadas", "Solo números enteros", "Fracciones equivalentes", "Ejes X y Y sin funciones"], answerIndex: 0, timeLimit: 20 },
+        { question: "El modelo más simple y(t) = y_0 * e^(kt) describe...", options: ["Crecimiento o decaimiento exponencial (poblaciones, radiación)", "Líneas rectas", "Parábolas", "Ondas de sonido"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un modelo de enfriamiento de Newton, la temperatura de tu café...", options: ["Baja rápidamente al principio y se estabiliza con la temperatura ambiente", "Baja a ritmo constante hasta congelarse", "Sube de la nada", "Oscila arriba y abajo"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para 'resolver' una ecuación diferencial, no buscamos un número, buscamos...", options: ["La función matemática que cumple con la ecuación", "El área bajo la curva", "Un punto en la gráfica", "La constante C"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las EDOs (Ecuaciones Diferenciales Ordinarias) son el lenguaje de...", options: ["Las ciencias exactas para predecir el futuro de sistemas dinámicos", "La poesía", "La suma algebraica", "La estadística estática"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion49": [
+        { question: "En un proyecto integrador como 'La Ciudad Variacional', el cálculo sirve para...", options: ["Optimizar recursos reales: material, rutas, energía y costos", "Hacer que la ciudad se vea más grande", "Contar casas", "Elegir colores"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si usamos integrales para evaluar el flujo de tráfico durante 24 horas, calculamos...", options: ["La cantidad total de autos que pasaron ese día", "La velocidad de un solo auto", "El costo de la gasolina", "La longitud de la calle"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si usamos derivadas en el proyecto urbano, probablemente estamos buscando...", options: ["Minimizar el costo de una obra civil o maximizar la eficiencia", "Calcular el área de un parque", "Sumar presupuestos", "Saber cuánta gente vive ahí"], answerIndex: 0, timeLimit: 20 },
+        { question: "La matemática variacional es una herramienta para...", options: ["La toma de decisiones gerenciales e ingenieriles", "Hacer la tarea", "Adivinar", "Medir longitudes con regla"], answerIndex: 0, timeLimit: 20 },
+        { question: "Un modelo matemático bien optimizado puede significar para un país...", options: ["Ahorros de millones de pesos y menor impacto ambiental", "No tiene impacto en la vida real", "Gastar más dinero", "Solo un ejercicio escolar"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion50": [
+        { question: "El límite de una función (Bloque 1) nos enseñó a...", options: ["Analizar qué pasa al acercarnos infinitamente a un punto", "Calcular áreas", "Encontrar el centro de masa", "Sumar fracciones"], answerIndex: 0, timeLimit: 20 },
+        { question: "La Derivada (Bloque 2) es la herramienta maestra para...", options: ["Medir el cambio instantáneo y encontrar óptimos (máximos/mínimos)", "Calcular el volumen", "Dibujar círculos", "Saber la historia pasada"], answerIndex: 0, timeLimit: 20 },
+        { question: "La Integral (Bloque 3) es el arte de...", options: ["Acumular pedacitos infinitamente pequeños para hallar totales (áreas, volúmenes, trabajo)", "Restar cosas", "Medir pendientes", "Dividir entre cero"], answerIndex: 0, timeLimit: 20 },
+        { question: "El Teorema Fundamental del Cálculo logró unir...", options: ["El cálculo diferencial (derivadas) con el cálculo integral (áreas)", "La física con la química", "La suma con la resta elemental", "A Newton y a Leibniz como amigos"], answerIndex: 0, timeLimit: 20 },
+        { question: "¡Felicidades! Has terminado el curso. El Pensamiento Variacional es la ciencia de...", options: ["Entender, predecir y optimizar el cambio en el Universo", "Aprenderse fórmulas de memoria", "Pasar exámenes sin entender", "Hacer cálculos en papel"], answerIndex: 0, timeLimit: 20 }
     ]
 };

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 47 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Centro de Masa */
+        .seesaw { width: 80%; height: 4px; background: white; position: relative; margin-top: 30px; }
+        .pivot { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid #facc15; position: absolute; left: 50%; top: 4px; transform: translateX(-50%); }
+        .weight-1 { width: 30px; height: 30px; background: #3b82f6; position: absolute; bottom: 4px; left: 10%; border-radius: 5px; }
+        .weight-2 { width: 20px; height: 20px; background: #ef4444; position: absolute; bottom: 4px; right: 20%; border-radius: 5px; }
+
+        /* 2. Trabajo Físico */
+        .spring-cont { display: flex; align-items: center; width: 80%; }
+        .wall { width: 10px; height: 50px; background: #94a3b8; }
+        .spring { flex-grow: 1; height: 20px; background: repeating-linear-gradient(90deg, transparent, transparent 5px, #facc15 5px, #facc15 10px); transition: width 1s infinite alternate; }
+        .block { width: 30px; height: 30px; background: #10b981; }
+
+        /* Simulador: Equilibrio */
+        .balance-sim { background: #0f172a; border: 4px solid #facc15; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
+        .beam-area { position: relative; height: 100px; margin-top: 20px; }
+        .beam { width: 100%; height: 6px; background: #64748b; position: absolute; top: 40px; transition: transform 0.2s; transform-origin: center; }
+        .triangle { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 30px solid #facc15; position: absolute; left: 50%; top: 46px; transform: translateX(-50%); }
+        .box { width: 40px; height: 40px; background: #3b82f6; position: absolute; top: 0; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .slider-group { color: white; margin-top: 15px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion47-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 47</div>
+            <h1>Aplicaciones Físicas</h1>
+            <p>Usando el cálculo para encontrar Centros de Masa y Trabajo Mecánico.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar la integral definida para resolver problemas de física e ingeniería, específicamente calculando el centro de gravedad de placas (centroide) y el trabajo realizado por fuerzas variables.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #facc15; border-top: 5px solid #facc15;">
+                <h2 style="color: #facc15;">📖 Teoría: Integrando la Física</h2>
+                <div class="math-box" style="border-color:#facc15; color:#fef08a; text-align:left;">
+                    <strong>Trabajo (W):</strong> Si jalas un bloque con una fuerza constante, W = Fuerza x Distancia. Pero si jalas un resorte, la fuerza cambia en cada milímetro (Ley de Hooke: $F(x) = kx$).<br>
+                    Para fuerzas variables: <strong>$W = \int_{a}^{b} F(x) dx$</strong><br><br>
+                    <strong>Centroide ($\bar{x}, \bar{y}$):</strong> El punto de equilibrio de una placa (como sostener una bandeja con un dedo). Se calcula integrando los "momentos" de la figura y dividiendo entre el área total.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Casos Prácticos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Momento y Equilibrio:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El principio de la palanca de Arquímedes. Un objeto pesado cerca del centro se equilibra con uno ligero lejos del centro. La integral suma estos efectos infinitos.</p>
+                        <div class="css-graphic"><div class="seesaw"><div class="weight-1"></div><div class="weight-2"></div><div class="pivot"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Estirando el Resorte:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Cada cm que estiras un resorte cuesta más trabajo que el anterior. El área bajo la gráfica de $F(x) = kx$ es el Trabajo total.</p>
+                        <div class="css-graphic"><div class="spring-cont"><div class="wall"></div><div class="spring" style="width:50%;"></div><div class="block"></div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #facc15;">
+                <h2 style="color: #facc15;">⚖️ Simulador: Centro de Masa (1D)</h2>
+                <p>Equilibra la viga moviendo la caja azul. El pivote está en el centro ($x=0$). La caja roja (fija) pesa 20kg y está en $x=4$. La caja azul pesa 40kg.</p>
+
+                <div class="balance-sim">
+                    <div class="beam-area">
+                        <div class="beam" id="sim-beam">
+                            <div class="box" id="box-blue" style="left: 20%; background:#3b82f6;">40</div>
+                            <div class="box" id="box-red" style="right: 10%; background:#ef4444;">20</div>
+                        </div>
+                        <div class="triangle"></div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>Posición Caja Azul ($x$): <span id="pos-val">-3</span></label><br>
+                        <input type="range" id="pos-slider" min="-5" max="0" step="0.5" value="-3" style="width: 80%; margin-top:10px;">
+                    </div>
+                    <div id="bal-msg" style="margin-top:10px; font-weight:bold; font-size:1.2em; color:#ef4444;">Desbalanceado</div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS46.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS48.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('pos-slider');
+        const boxBlue = document.getElementById('box-blue');
+        const beam = document.getElementById('sim-beam');
+        const msg = document.getElementById('bal-msg');
+        const posVal = document.getElementById('pos-val');
+
+        // Physics: Pivot is at 50% (x=0). 
+        // Red box is at x=4, Weight=20 => Torque = 20 * 4 = 80
+        // Blue box is at x, Weight=40 => Torque = 40 * x
+        // Balance when 40*x + 80 = 0 => x = -2
+
+        function updateBalance() {
+            const x = parseFloat(slider.value);
+            posVal.innerText = x;
+
+            // Visual map: x=[-5, 5] -> left=[0%, 100%]
+            // Box width is 40px, let's just use percentage for simplicity
+            const pct = ((x + 5) / 10) * 100;
+            boxBlue.style.left = `calc(${pct}% - 20px)`; // Center box
+
+            const torque = (40 * x) + 80;
+
+            if(torque === 0) {
+                beam.style.transform = "rotate(0deg)";
+                msg.innerText = "¡Equilibrio Perfecto! Centro de masa en 0.";
+                msg.style.color = "#10b981";
+            } else if (torque > 0) {
+                // Rotates clockwise
+                beam.style.transform = "rotate(15deg)";
+                msg.innerText = "Cae a la derecha";
+                msg.style.color = "#ef4444";
+            } else {
+                beam.style.transform = "rotate(-15deg)";
+                msg.innerText = "Cae a la izquierda";
+                msg.style.color = "#ef4444";
+            }
+        }
+
+        slider.addEventListener('input', updateBalance);
+        updateBalance(); // init
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion47', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion47');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion47', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

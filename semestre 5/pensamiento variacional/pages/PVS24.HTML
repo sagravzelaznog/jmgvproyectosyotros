@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 24 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Fuerzas Netas */
+        .force-container {
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .mass {
+            width: 40px; height: 40px; background: #94a3b8; border-radius: 5px; position: absolute; z-index: 2;
+            animation: moveMass 4s infinite alternate ease-in-out;
+        }
+        .arrow { position: absolute; height: 4px; background: white; top: 50%; transform: translateY(-50%); }
+        .arrow::after {
+            content: ''; position: absolute; right: -5px; top: -3px; border-left: 5px solid white; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+        }
+        .arrow.left { left: 20%; width: 50px; background: #ef4444; }
+        .arrow.left::after { border-left:none; border-right: 5px solid #ef4444; right: auto; left: -5px; }
+        .arrow.right { right: 20%; width: 80px; background: #10b981; }
+        .arrow.right::after { border-left: 5px solid #10b981; }
+        @keyframes moveMass { 0% { transform: translateX(-20px); } 100% { transform: translateX(30px); } }
+
+        /* 2. Beneficios */
+        .profit-chart {
+            display: flex; align-items: flex-end; gap: 10px; height: 80px;
+        }
+        .revenue { width: 30px; height: 70px; background: #10b981; border-radius: 2px 2px 0 0; position: relative; }
+        .cost { width: 30px; height: 40px; background: #ef4444; border-radius: 2px 2px 0 0; position: relative; }
+        .profit { width: 30px; height: 30px; background: #3b82f6; border-radius: 2px 2px 0 0; position: relative; animation: showProfit 3s infinite; }
+        @keyframes showProfit { 0%, 50% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        /* 3. Caudal Combinado */
+        .pipe-system {
+            width: 80%; height: 80px; position: relative;
+        }
+        .pipe1 { position: absolute; top: 10px; left: 0; width: 40%; height: 20px; background: #475569; border-radius: 10px; border-right: none;}
+        .pipe2 { position: absolute; bottom: 10px; left: 0; width: 40%; height: 20px; background: #475569; border-radius: 10px; border-right: none;}
+        .pipe-main { position: absolute; top: 20px; right: 0; width: 60%; height: 40px; background: #475569; border-radius: 0 10px 10px 0;}
+        .water-flow { position: absolute; height: 100%; background: #3b82f6; border-radius: 10px; animation: flowWater 2s infinite linear; }
+        .pipe1 .water-flow { width: 50%; opacity: 0.6; }
+        .pipe2 .water-flow { width: 50%; opacity: 0.6; }
+        .pipe-main .water-flow { width: 100%; animation: flowWaterMain 2s infinite linear; }
+        @keyframes flowWater { 0% { left: 0; } 100% { left: 100%; } }
+        @keyframes flowWaterMain { 0% { left: 0; opacity: 0.8; } 100% { left: 50%; opacity: 0; } }
+
+        /* Simulador: Laboratorio */
+        .lab-simulator {
+            background: #0f172a;
+            border: 4px solid #ef4444;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+        .equation-builder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .eq-box {
+            background: #1e293b;
+            border: 2px dashed #64748b;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-family: monospace;
+            font-size: 1.2em;
+        }
+        .operator { font-size: 2em; color: #f59e0b; font-weight: bold; }
+        .result-box {
+            background: #334155;
+            border: 2px solid #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            color: #10b981;
+            font-family: monospace;
+            font-size: 1.5em;
+            margin-top: 10px;
+            min-height: 50px;
+        }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion24-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS24()">
+            <div class="badge">Bloque 2 | Sesión 24</div>
+            <h1>Derivada de Sumas y Restas</h1>
+            <p>Aplicar linealidad en la derivación de sistemas compuestos.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Esta es la regla que nos da un respiro. Nos dice: 'Si tienes un polinomio enorme, no te asustes. Divídelo en pedacitos (términos) y deriva cada uno por separado'. Es el principio de superposición de la física."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aprender la propiedad de linealidad de la derivada: La derivada de una suma de funciones es igual a la suma de las derivadas individuales. Esto permite derivar polinomios largos de manera rápida.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #ef4444; border-top: 5px solid #ef4444;">
+                <h2 style="color: #ef4444;">📖 Teoría: Divide y Vencerás</h2>
+                <div class="math-box" style="border-color:#ef4444; color:#fca5a5; text-align:left;">
+                    <strong>$[f(x) \pm g(x)]' = f'(x) \pm g'(x)$</strong><br><br>
+                    Si tienes un polinomio con varios términos sumando o restando, puedes <strong>derivar cada término de forma totalmente independiente</strong> y mantener los signos originales.<br>
+                    <em>Ejemplo: $y = 5x^3 - 2x^2 + 7x - 4$</em><br>
+                    Derivamos término por término:<br>
+                    $y' = 15x^2 - 4x + 7 - 0$
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos en el Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Fuerzas Netas (Física):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Dos fuerzas (f y g) actúan sobre un bloque. La aceleración total es la derivada de la posición total $f(t) + g(t)$.</p>
+                        <div class="css-graphic">
+                            <div class="force-container">
+                                <div class="arrow left"></div>
+                                <div class="mass"></div>
+                                <div class="arrow right"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Beneficios (Economía):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El beneficio es Ingresos menos Costos. $B(x) = I(x) - C(x)$. Para maximizar beneficio derivamos: $B'(x) = I'(x) - C'(x)$.</p>
+                        <div class="css-graphic">
+                            <div class="profit-chart">
+                                <div class="revenue">I</div>
+                                <div class="cost">C</div>
+                                <div class="profit">B</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Caudal Combinado:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Dos tuberías llenan un tanque. El caudal total de llenado es la suma de las derivadas de volumen de cada tubería.</p>
+                        <div class="css-graphic">
+                            <div class="pipe-system">
+                                <div class="pipe1"><div class="water-flow"></div></div>
+                                <div class="pipe2"><div class="water-flow"></div></div>
+                                <div class="pipe-main"><div class="water-flow"></div></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #ef4444;">
+                <h2 style="color: #ef4444;">🧪 Laboratorio de Superposición</h2>
+                <p>Haz clic en cada término (componente físico) para derivarlo de manera independiente. Observa cómo la aceleración neta (derivada total) es simplemente la suma de las partes.</p>
+
+                <div class="lab-simulator">
+                    <div class="equation-builder">
+                        <div class="eq-box" id="term1" style="cursor: pointer;" onclick="deriveTerm(1, '3x^2', '6x')">Posición Motor 1: <br><span style="color:#f59e0b">3x²</span></div>
+                        <div class="operator">+</div>
+                        <div class="eq-box" id="term2" style="cursor: pointer;" onclick="deriveTerm(2, '5x', '5')">Posición Motor 2: <br><span style="color:#f59e0b">5x</span></div>
+                        <div class="operator">-</div>
+                        <div class="eq-box" id="term3" style="cursor: pointer;" onclick="deriveTerm(3, '10', '0')">Fricción Fija: <br><span style="color:#f59e0b">10</span></div>
+                    </div>
+                    <div class="result-box" id="net-result">
+                        Aceleración Neta $y'$ = <span id="res1">?</span> + <span id="res2">?</span> - <span id="res3">?</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS23.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS25.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        let derived = { 1: false, 2: false, 3: false };
+
+        window.deriveTerm = function(id, original, derivative) {
+            if(derived[id]) return;
+            
+            const box = document.getElementById(`term${id}`);
+            box.innerHTML = `Derivada:<br><span style="color:#10b981">${derivative}</span>`;
+            box.style.borderColor = '#10b981';
+            
+            document.getElementById(`res${id}`).innerText = derivative;
+            derived[id] = true;
+
+            checkAllDerived();
+        };
+
+        function checkAllDerived() {
+            if(derived[1] && derived[2] && derived[3]) {
+                setTimeout(() => {
+                    document.getElementById('net-result').innerHTML = `Aceleración Neta $y'$ = <strong>6x + 5</strong> <br><small style="color:#94a3b8">(El 0 desaparece)</small>`;
+                    if(window.MathJax) {
+                        window.MathJax.typesetPromise();
+                    }
+                }, 1000);
+            }
+        }
+
+        window.unlockTeacherTipsS24 = function() {
+            const tip = document.querySelector('#sesion24-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion24', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion24');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion24', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

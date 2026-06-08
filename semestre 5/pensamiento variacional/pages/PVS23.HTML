@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 23 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Vehículo de Física */
+        .road {
+            width: 100%;
+            height: 40px;
+            background: #475569;
+            position: absolute;
+            bottom: 20px;
+            border-top: 2px dashed #94a3b8;
+        }
+        .car {
+            width: 50px;
+            height: 25px;
+            background: #ef4444;
+            border-radius: 5px 15px 0 0;
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            animation: driveCar 4s infinite cubic-bezier(0.5, 0, 1, 1); /* Accelerating */
+        }
+        .car::after, .car::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            width: 12px; height: 12px;
+            background: #0f172a;
+            border-radius: 50%;
+        }
+        .car::before { left: 5px; }
+        .car::after { right: 5px; }
+        @keyframes driveCar {
+            0% { left: 0%; }
+            100% { left: 100%; }
+        }
+
+        /* 2. Crecimiento Económico */
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            height: 80px;
+        }
+        .bar {
+            width: 20px;
+            background: #10b981;
+            animation: growBar 3s infinite alternate ease-in-out;
+            border-radius: 2px 2px 0 0;
+        }
+        .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 20px; animation-delay: 0.2s; }
+        .bar:nth-child(3) { height: 40px; animation-delay: 0.4s; }
+        .bar:nth-child(4) { height: 70px; animation-delay: 0.6s; }
+        @keyframes growBar {
+            0% { transform: scaleY(0.5); transform-origin: bottom; }
+            100% { transform: scaleY(1.2); transform-origin: bottom; }
+        }
+
+        /* 3. Deformación de vigas */
+        .beam-container {
+            width: 80%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .support {
+            width: 10px; height: 40px; background: #64748b;
+            position: absolute; bottom: 0;
+        }
+        .support.left { left: 0; }
+        .support.right { right: 0; }
+        .beam {
+            width: 100%; height: 10px; background: #cbd5e1;
+            position: absolute; top: 30px;
+            animation: bendBeam 2s infinite alternate ease-in-out;
+            transform-origin: center;
+            border-radius: 5px;
+        }
+        @keyframes bendBeam {
+            0% { border-radius: 5px; height: 10px; top: 30px; }
+            100% { border-radius: 50% 50% 0 0; height: 20px; top: 25px; background: #f59e0b; } /* Visual representation of bending */
+        }
+
+        /* Simulador: Motor Algebraico */
+        .algebra-engine {
+            background: #0f172a;
+            border: 4px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        .engine-display {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .formula-input {
+            font-size: 2em;
+            color: white;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .input-box {
+            background: transparent;
+            border: 2px solid #64748b;
+            color: #f59e0b;
+            font-size: 1em;
+            width: 60px;
+            text-align: center;
+            border-radius: 5px;
+            outline: none;
+            font-family: monospace;
+        }
+        .input-box:focus {
+            border-color: #10b981;
+        }
+        .exponent {
+            font-size: 0.6em;
+            vertical-align: super;
+        }
+        .animation-area {
+            margin-top: 20px;
+            min-height: 80px;
+            position: relative;
+            width: 100%;
+        }
+        .step-text {
+            font-size: 1.5em;
+            color: #94a3b8;
+            position: absolute;
+            width: 100%;
+            transition: all 0.5s;
+            opacity: 0;
+            font-family: monospace;
+        }
+        .step-text.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .step-text.exit {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .derive-btn {
+            padding: 15px 30px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .derive-btn:hover { background: #059669; transform: scale(1.05); }
+        .derive-btn:disabled { background: #475569; cursor: not-allowed; transform: none; }
+
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion23-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS23()">
+            <div class="badge">Bloque 2 | Sesión 23</div>
+            <h1>Derivada de Polinomios (Regla de la Potencia)</h1>
+            <p>Derivar polinomios de variable real de forma eficiente.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "La regla de la potencia es la herramienta más usada. La metáfora es simple: 'El exponente baja a multiplicar, y le restamos uno a la corona'. Jueguen con el script interactivo."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Manejar con fluidez la regla de la potencia para derivar cualquier término polinomial de la forma $ax^n$. Esta regla simplifica todo el cálculo diferencial algebraico.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: La Regla de la Potencia</h2>
+                <div class="math-box" style="border-color:#10b981; color:#a7f3d0; text-align:left;">
+                    <strong>Si $f(x) = ax^n$, entonces $f'(x) = a \cdot n \cdot x^{n-1}$</strong><br><br>
+                    <strong>Pasos Mentales:</strong><br>
+                    1. El exponente "$n$" "baja" a multiplicar al coeficiente "$a$".<br>
+                    2. Al exponente original "$n$" se le resta exactamente $1$.<br>
+                    <em>Ejemplo: $f(x) = 5x^3 \Rightarrow f'(x) = 5(3)x^2 = 15x^2$</em>
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos en el Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Posición a Velocidad:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Si la posición de un coche es $s(t) = 3t^2$, su velocidad instantánea (derivada) es $v(t) = 6t$.</p>
+                        <div class="css-graphic">
+                            <div class="road"></div>
+                            <div class="car"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Crecimiento Económico:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Modelar el incremento del PIB usando polinomios. $P(t) = 2t^3$. La tasa de crecimiento es $6t^2$.</p>
+                        <div class="css-graphic">
+                            <div class="chart">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Deformación de Vigas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">En ingeniería civil, las ecuaciones de flexión son polinomios de grado 4 que se derivan para hallar pendientes.</p>
+                        <div class="css-graphic">
+                            <div class="beam-container">
+                                <div class="support left"></div>
+                                <div class="beam"></div>
+                                <div class="support right"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">⚙️ Motor Algebraico JS</h2>
+                <p>Ingresa un coeficiente y un exponente. Haz clic en derivar para observar paso a paso la animación del algoritmo de la potencia.</p>
+
+                <div class="algebra-engine">
+                    <div class="engine-display">
+                        <div class="formula-input">
+                            $f(x) =$ 
+                            <input type="number" id="coef" class="input-box" value="4"> 
+                            $x$
+                            <input type="number" id="expo" class="input-box exponent" value="3" style="width:40px; margin-top:-20px;">
+                        </div>
+                        <div class="animation-area">
+                            <div class="step-text" id="step-1"></div>
+                            <div class="step-text" id="step-2"></div>
+                            <div class="step-text" id="step-3" style="color: #10b981; font-weight: bold; font-size: 1.8em;"></div>
+                        </div>
+                    </div>
+                    <button class="derive-btn" id="btn-derive" onclick="animateDerivation()">¡Derivar!</button>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS22.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS24.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        function animateDerivation() {
+            const btn = document.getElementById('btn-derive');
+            const coefInput = document.getElementById('coef').value;
+            const expoInput = document.getElementById('expo').value;
+            
+            const a = parseFloat(coefInput) || 0;
+            const n = parseFloat(expoInput) || 0;
+
+            const s1 = document.getElementById('step-1');
+            const s2 = document.getElementById('step-2');
+            const s3 = document.getElementById('step-3');
+
+            // Reset
+            s1.className = 'step-text';
+            s2.className = 'step-text';
+            s3.className = 'step-text';
+            btn.disabled = true;
+
+            // Step 1: Bajar exponente
+            setTimeout(() => {
+                s1.innerHTML = `f'(x) = (${a}) · <span style="color:#ef4444;">(${n})</span> x<sup>${n} - 1</sup>`;
+                s1.classList.add('active');
+            }, 500);
+
+            // Step 2: Multiplicar
+            setTimeout(() => {
+                s1.classList.remove('active');
+                s1.classList.add('exit');
+                
+                s2.innerHTML = `f'(x) = <span style="color:#f59e0b;">${a*n}</span> x<sup>${n} - 1</sup>`;
+                s2.classList.add('active');
+            }, 2500);
+
+            // Step 3: Resultado final
+            setTimeout(() => {
+                s2.classList.remove('active');
+                s2.classList.add('exit');
+                
+                let finalExpo = n - 1;
+                let resultHTML = `f'(x) = ${a*n}`;
+                if (finalExpo === 1) resultHTML += `x`;
+                else if (finalExpo !== 0) resultHTML += `x<sup>${finalExpo}</sup>`;
+                
+                s3.innerHTML = resultHTML;
+                s3.classList.add('active');
+                btn.disabled = false;
+            }, 4500);
+        }
+
+        window.unlockTeacherTipsS23 = function() {
+            const tip = document.querySelector('#sesion23-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion23', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion23');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion23', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

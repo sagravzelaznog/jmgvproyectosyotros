@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 22 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Termómetro Constante */
+        .thermometer {
+            width: 20px;
+            height: 80px;
+            background: #cbd5e1;
+            border-radius: 10px;
+            position: relative;
+            border: 2px solid #475569;
+        }
+        .mercury {
+            width: 100%;
+            height: 50%;
+            background: #ef4444;
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px;
+        }
+        .temp-label {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        /* 2. Tinaco llenándose linealmente */
+        .water-tank {
+            width: 60px;
+            height: 80px;
+            border: 3px solid #64748b;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .water {
+            width: 100%;
+            background: #3b82f6;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            animation: fillTank 4s infinite linear;
+        }
+        @keyframes fillTank {
+            0% { height: 0%; }
+            100% { height: 100%; }
+        }
+
+        /* 3. Costo fijo */
+        .money-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .bill {
+            width: 50px;
+            height: 15px;
+            background: #10b981;
+            border: 1px solid #059669;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6em;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Simulador: Juego de Reacción */
+        .reaction-game {
+            background: #0f172a;
+            border: 4px solid #3b82f6;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .game-screen {
+            background: #1e293b;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            position: relative;
+        }
+        .function-display {
+            font-size: 2.5em;
+            font-family: monospace;
+            color: #f59e0b;
+            margin: 10px 0;
+        }
+        .timer-bar {
+            width: 100%;
+            height: 5px;
+            background: #ef4444;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform-origin: left;
+            transition: transform 0.1s linear;
+        }
+        .game-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .btn-answer {
+            padding: 15px;
+            background: #334155;
+            color: white;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-answer:hover { background: #475569; }
+        .score-board {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #10b981;
+        }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion22-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS22()">
+            <div class="badge">Bloque 2 | Sesión 22</div>
+            <h1>Reglas de Derivación: Constantes y Lineales</h1>
+            <p>Agilizar el cálculo mediante fórmulas directas sin usar los 4 pasos.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "A partir de hoy, abandonamos los 4 pasos para efectos prácticos. Entramos al mundo de las fórmulas rápidas. f(x)=5 es una línea plana, su pendiente es 0. f(x)=3x es una recta, su pendiente siempre es 3."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender y aplicar geométricamente las dos reglas más simples de derivación: la regla de la constante ($f(x) = c \Rightarrow f'(x) = 0$) y la regla de la función lineal ($f(x) = mx \Rightarrow f'(x) = m$).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: Fórmulas Directas</h2>
+                <p>Derivar usando el límite es exacto pero lento. Los matemáticos crearon reglas directas:</p>
+                <div class="math-box" style="border-color:#3b82f6; color:#93c5fd; text-align:left;">
+                    • <strong>Constante:</strong> $f(x) = c$ (un número solo). Su gráfica es horizontal, no tiene pendiente. Por tanto, $f'(x) = 0$.<br><br>
+                    • <strong>Lineal:</strong> $f(x) = mx$. Su gráfica es una recta inclinada. La pendiente en cualquier punto es simplemente la inclinación "$m$". Por tanto, $f'(x) = m$.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos Prácticos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Temperatura Constante:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El aire acondicionado a 24°C fijos. La tasa de cambio (derivada) es 0.</p>
+                        <div class="css-graphic">
+                            <div class="thermometer">
+                                <div class="mercury"></div>
+                                <div class="temp-label">24°</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Llenado Lineal:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Un tinaco se llena a 5 L/min. Su volumen $V(t) = 5t$. Su derivada es 5 constante.</p>
+                        <div class="css-graphic">
+                            <div class="water-tank">
+                                <div class="water"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Costo Fijo:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Una renta de $500 mensuales. No importa cuántos productos fabriques, el costo no cambia respecto a x. $C(x)=500 \Rightarrow C'(x)=0$.</p>
+                        <div class="css-graphic">
+                            <div class="money-stack">
+                                <div class="bill">$100</div>
+                                <div class="bill">$100</div>
+                                <div class="bill">$100</div>
+                                <div class="bill">$100</div>
+                                <div class="bill">$100</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">⚡ Juego de Reacción Rápida</h2>
+                <p>Selecciona rápidamente la derivada correcta para la función mostrada antes de que se acabe el tiempo.</p>
+
+                <div class="reaction-game">
+                    <div class="game-screen">
+                        <div id="game-status">Presiona INICIAR para jugar</div>
+                        <div class="function-display" id="game-function">f(x) = ?</div>
+                        <div class="timer-bar" id="game-timer" style="transform: scaleX(0);"></div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="btn-answer" onclick="checkReactionAnswer(0)" id="btn-ans-0" disabled>0</button>
+                        <button class="btn-answer" onclick="checkReactionAnswer('m')" id="btn-ans-m" disabled>m</button>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button onclick="startGame()" style="padding:10px 20px; background:#3b82f6; color:white; border:none; border-radius:5px; cursor:pointer;">INICIAR</button>
+                    </div>
+                    <div class="score-board">Puntuación: <span id="game-score">0</span></div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS21.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS23.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        // Simulador Logic
+        let score = 0;
+        let currentAnswer = null;
+        let timerInterval;
+        let timeLeft = 100;
+        let isPlaying = false;
+
+        const questions = [
+            { f: "f(x) = 8", ans: 0, m: "8" },
+            { f: "f(x) = 4x", ans: 'm', m: "4" },
+            { f: "f(x) = -2", ans: 0, m: "-2" },
+            { f: "f(x) = -5x", ans: 'm', m: "-5" },
+            { f: "f(x) = 100", ans: 0, m: "100" },
+            { f: "f(x) = x", ans: 'm', m: "1" }
+        ];
+
+        function startGame() {
+            score = 0;
+            document.getElementById('game-score').innerText = score;
+            document.getElementById('btn-ans-0').disabled = false;
+            document.getElementById('btn-ans-m').disabled = false;
+            isPlaying = true;
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            if(!isPlaying) return;
+            clearInterval(timerInterval);
+            
+            const q = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('game-function').innerText = q.f;
+            currentAnswer = q.ans;
+            
+            if(q.ans === 'm') {
+                document.getElementById('btn-ans-m').innerText = q.m;
+                document.getElementById('btn-ans-m').setAttribute('data-val', q.m);
+            } else {
+                // Randomize the other button just to keep it dynamic
+                let fakeM = Math.floor(Math.random() * 10) + 1;
+                document.getElementById('btn-ans-m').innerText = fakeM;
+                document.getElementById('btn-ans-m').setAttribute('data-val', fakeM);
+            }
+
+            timeLeft = 100;
+            document.getElementById('game-timer').style.transform = `scaleX(1)`;
+            document.getElementById('game-status').innerText = "¡Rápido!";
+            
+            timerInterval = setInterval(() => {
+                timeLeft -= 2; // Speed of timer
+                document.getElementById('game-timer').style.transform = `scaleX(${Math.max(0, timeLeft/100)})`;
+                
+                if(timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    gameOver();
+                }
+            }, 50);
+        }
+
+        window.checkReactionAnswer = function(ansType) {
+            if(!isPlaying) return;
+            
+            if(ansType === currentAnswer) {
+                score += 10;
+                document.getElementById('game-score').innerText = score;
+                document.getElementById('game-status').innerText = "¡Correcto!";
+                nextQuestion();
+            } else {
+                gameOver();
+            }
+        };
+
+        function gameOver() {
+            isPlaying = false;
+            clearInterval(timerInterval);
+            document.getElementById('game-status').innerText = `Juego Terminado. Puntos: ${score}`;
+            document.getElementById('btn-ans-0').disabled = true;
+            document.getElementById('btn-ans-m').disabled = true;
+        }
+
+        window.unlockTeacherTipsS22 = function() {
+            const tip = document.querySelector('#sesion22-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion22', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion22');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion22', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

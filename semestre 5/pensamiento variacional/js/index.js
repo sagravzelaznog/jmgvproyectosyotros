@@ -67,9 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
     sessions.push({ id: 19, title: "La Derivada y la Recta Tangente", description: "Interpretar geométricamente la derivada.", block: 2, link: "pages/PVS19.HTML", status: "active" });
     sessions.push({ id: 20, title: "Regla de los Cuatro Pasos", description: "Calcular derivadas de funciones lineales y cuadráticas por definición.", block: 2, link: "pages/PVS20.HTML", status: "active" });
     sessions.push({ id: 21, title: "Regla de los Cuatro Pasos II", description: "Consolidando el cálculo por definición y sus implicaciones algebraicas.", block: 2, link: "pages/PVS21.HTML", status: "active" });
+    sessions.push({ id: 22, title: "Reglas de Derivación: Constantes y Lineales", description: "Agilizar el cálculo mediante fórmulas directas.", block: 2, link: "pages/PVS22.HTML", status: "active" });
+    sessions.push({ id: 23, title: "Derivada de Polinomios (Regla de la Potencia)", description: "Derivar polinomios de variable real de forma eficiente.", block: 2, link: "pages/PVS23.HTML", status: "active" });
+    sessions.push({ id: 24, title: "Derivada de Sumas y Restas", description: "Aplicar linealidad en la derivación de sistemas compuestos.", block: 2, link: "pages/PVS24.HTML", status: "active" });
+    sessions.push({ id: 25, title: "Derivada del Producto y Cociente", description: "Analizar variaciones de funciones interactuando entre sí.", block: 2, link: "pages/PVS25.HTML", status: "active" });
 
     // Generate the remaining sessions
-    for (let i = 22; i <= 50; i++) {
+    for (let i = 26; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

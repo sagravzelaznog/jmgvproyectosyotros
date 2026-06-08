@@ -389,6 +389,33 @@ export const questionDatabase = {
         { question: "Al derivar 1/x, el resultado final (límite cuando h tiende a 0) es:", options: ["-1 / x^2", "1 / x", "-x", "0"], answerIndex: 0, timeLimit: 20 },
         { question: "¿Qué representa físicamente la derivada del volumen de un cubo metálico calentándose?", options: ["La tasa de expansión térmica del metal", "El color del metal", "El peso de la caja", "El ruido que hace"], answerIndex: 0, timeLimit: 20 },
         { question: "Si la resistencia de un cable es inversamente proporcional a su grosor (R = 1/A), al aumentar el área...", options: ["La resistencia cae drásticamente (comportamiento similar a -1/x^2)", "La resistencia sube", "La electricidad se detiene", "El voltaje desaparece"], answerIndex: 0, timeLimit: 20 },
-        { question: "El simulador de relevos de los 4 pasos demuestra que derivar es...", options: ["Un algoritmo sistemático y secuencial", "Una adivinanza aleatoria", "Solo medir con regla", "Exclusivo para sumas"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion22": [
+        { question: "La derivada de una constante (ej. f(x) = 5) es siempre...", options: ["0", "1", "5", "x"], answerIndex: 0, timeLimit: 20 },
+        { question: "Físicamente, ¿qué significa que la derivada sea cero?", options: ["Que no hay cambio (es constante)", "Que la velocidad es infinita", "Que el objeto desaparece", "Que hay un error"], answerIndex: 0, timeLimit: 20 },
+        { question: "La derivada de una función lineal f(x) = 3x es...", options: ["3", "x", "0", "3x^2"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si un tinaco se llena a un ritmo constante de 10 litros por minuto, ¿cuál es su derivada?", options: ["10", "0", "Variable", "Infinito"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cuál es la derivada de f(x) = x?", options: ["1", "0", "x", "-1"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion23": [
+        { question: "Según la regla de la potencia, la derivada de x^n es...", options: ["n*x^(n-1)", "x^(n+1)", "n*x", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Calcula la derivada de f(x) = x^3:", options: ["3x^2", "x^2", "3x", "6x"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la posición de un coche está dada por x^2, ¿qué representa su derivada (2x)?", options: ["La velocidad", "La aceleración", "El peso", "El frenado"], answerIndex: 0, timeLimit: 20 },
+        { question: "Calcula la derivada de f(x) = 4x^5:", options: ["20x^4", "9x^4", "4x^4", "20x^6"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué sucede con el exponente al aplicar la regla de la potencia?", options: ["Baja a multiplicar al coeficiente y se reduce en 1", "Se hace cero", "Pasa a dividir", "Se queda igual"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion24": [
+        { question: "La regla de la suma/resta nos permite derivar polinomios largos...", options: ["Término por término de forma independiente", "Multiplicándolos todos primero", "Borrando el más pequeño", "Dividiendo entre dos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Calcula la derivada de f(x) = x^2 + 3x:", options: ["2x + 3", "2x", "x^2 + 3", "5x"], answerIndex: 0, timeLimit: 20 },
+        { question: "En física, la derivada de las sumas se aplica al...", options: ["Calcular la fuerza neta o velocidad neta combinada", "Medir la temperatura aislada", "Detener el tiempo", "Anular la gravedad"], answerIndex: 0, timeLimit: 20 },
+        { question: "Calcula la derivada de f(x) = 5x^3 - 2x + 10:", options: ["15x^2 - 2", "15x^2", "15x^2 - 2x", "5x^2 - 2"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si un negocio tiene Ingresos I(x) y Costos C(x), la derivada de su Beneficio B(x)=I(x)-C(x) es...", options: ["I'(x) - C'(x)", "I(x) + C(x)", "0", "I'(x) * C'(x)"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion25": [
+        { question: "La regla del producto para derivar f(x) = U * V es:", options: ["U'*V + U*V'", "U' * V'", "U + V", "U'*V - U*V'"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Por qué no podemos simplemente multiplicar las derivadas (U' * V')?", options: ["Porque el cambio en un factor se multiplica por el tamaño actual del otro factor interactuando simultáneamente", "Porque da cero", "Porque Newton lo prohibió", "Porque es muy fácil"], answerIndex: 0, timeLimit: 20 },
+        { question: "En la regla del cociente (U/V), el denominador resultante siempre queda...", options: ["Elevado al cuadrado (V^2)", "Igual (V)", "Eliminado", "Multiplicado por U"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si calculas la derivada de (x^2) * (x^3) usando la regla del producto, el resultado final es equivalente a derivar...", options: ["x^5", "x^6", "x", "x^2.5"], answerIndex: 0, timeLimit: 20 },
+        { question: "El signo principal que separa a los términos en el numerador de la regla del cociente es:", options: ["Un signo de resta (-)", "Un signo de suma (+)", "Multiplicación (*)", "Igual (=)"], answerIndex: 0, timeLimit: 20 }
     ]
 };

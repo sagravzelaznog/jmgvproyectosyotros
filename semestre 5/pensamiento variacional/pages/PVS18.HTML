@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,126 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         .css-graphic {
-            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
-            margin: 15px 0; display: flex; align-items: center; justify-content: center;
-            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
-            color: #94a3b8; font-family: monospace;
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Bloque Magistral */
+        .magistral-quote {
+            background: linear-gradient(135deg, #0f172a 0%, #2e1065 100%);
+            border-left: 5px solid #8b5cf6;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            grid-column: span 2;
+        }
+        .magistral-quote::before {
+            content: '❝';
+            position: absolute;
+            font-size: 4em;
+            color: rgba(139, 92, 246, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        .magistral-title {
+            color: #a78bfa;
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .magistral-text {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* 1. Fotograma / Velocímetro */
+        .dash {
+            width: 80px; height: 40px; border: 4px solid #8b5cf6; border-radius: 40px 40px 0 0; position: relative; overflow: hidden;
+        }
+        .dash-needle {
+            width: 40px; height: 3px; background: #fff; position: absolute; bottom: 0; left: 40px; transform-origin: left center;
+            animation: revDash 3s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .camera-flash {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; opacity: 0; pointer-events: none;
+            animation: flashPhoto 3s infinite;
+        }
+        @keyframes revDash { 0% { transform: rotate(-180deg); } 50%, 100% { transform: rotate(-45deg); } }
+        @keyframes flashPhoto { 0%, 48% { opacity: 0; } 50% { opacity: 1; } 52%, 100% { opacity: 0; } }
+
+        /* 2. Carga de Celular */
+        .phone {
+            width: 40px; height: 80px; border: 3px solid #cbd5e1; border-radius: 5px; position: relative; padding: 2px;
+        }
+        .battery {
+            width: 100%; background: #10b981; position: absolute; bottom: 2px; left: 0; border-radius: 2px;
+            animation: chargeBat 4s infinite cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        .phone::before { content:''; position:absolute; top:-4px; left:12px; width:16px; height:4px; background:#cbd5e1; border-radius:2px 2px 0 0; }
+        @keyframes chargeBat { 0% { height: 10%; background:#ef4444; } 20% { height: 50%; background:#f59e0b; } 100% { height: 95%; background:#10b981; } }
+
+        /* 3. Bomba de Agua */
+        .pump {
+            width: 40px; height: 40px; background: #475569; border-radius: 50%; position: relative; display:flex; align-items:center; justify-content:center;
+            animation: pumpVibrate 0.1s infinite;
+        }
+        .pump-blade { width: 30px; height: 4px; background: #94a3b8; animation: spinBlade 0.5s infinite linear; }
+        .water-drop { position:absolute; right:-20px; width:10px; height:10px; background:#38bdf8; border-radius:50%; animation: shootWater 0.5s infinite linear; }
+        @keyframes spinBlade { 100% { transform: rotate(360deg); } }
+        @keyframes pumpVibrate { 0% { transform: translate(1px,1px); } 50% { transform: translate(-1px,-1px); } 100% { transform: translate(1px,-1px); } }
+        @keyframes shootWater { 0% { right: -10px; opacity: 1; } 100% { right: -60px; opacity: 0; } }
+
+        /* Simulador Secante a Tangente */
+        .sec-simulator {
+            background: #0f172a;
+            border: 4px solid #8b5cf6;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            text-align: center;
+        }
+        .canvas-container {
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
+        .controls { margin-top: 15px; }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+        }
+        input[type=range] { width: 60%; }
     </style>
 </head>
+
 <body>
     <div class="session-progress-container">
         <span style="font-size: 1.2em;">📚</span>
@@ -31,37 +145,78 @@
             <a href="../index.html" class="back-btn">⬅ Inicio</a>
             <div class="badge">Bloque 2 | Sesión 18</div>
             <h1>Tasa de Variación Instantánea</h1>
-            <p>Transitar de la variación promedio a la instantánea.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+            <p>El puente matemático entre el promedio y la inmediatez absoluta.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Imaginen que toman una foto. La velocidad instantánea es lo que marca el velocímetro en esa milésima de segundo donde el tiempo se congela."</div>
         </header>
 
         <div class="info-body">
+            <div class="magistral-quote">
+                <div class="magistral-title">El Concepto Magistral: Colapsar el Tiempo</div>
+                <div class="magistral-text">
+                    "Antes de Newton y Leibniz, la humanidad solo podía calcular velocidades 'promedio' en intervalos de tiempo grandes (Rectas Secantes). Pero la naturaleza no se mueve en promedios, el universo evoluciona instante a instante. Al usar el 'Límite' para encoger el intervalo de tiempo hasta hacerlo infinitamente cercano a cero, los matemáticos lograron colapsar el tiempo a un solo fotograma de la realidad. Acababan de inventar la Tasa Instantánea: La Derivada."
+                </div>
+            </div>
+
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>La velocidad promedio se calcula en un intervalo largo (Secante). Si encogemos ese intervalo de tiempo hasta que casi sea cero usando el límite, obtenemos la velocidad en ese instante exacto (Tangente).</p>
+                <p>Comprender cómo la Tasa de Variación Promedio (pendiente Secante) se transforma en la Tasa de Variación Instantánea (pendiente Tangente) al hacer que la distancia entre los dos puntos de medición tienda a cero.</p>
             </section>
 
-            <section class="info-card examples-card" style="grid-column: span 2;">
-                <h2>📝 Ejemplos Prácticos</h2>
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: De Secante a Tangente</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#a78bfa; text-align:left;">
+                    • <strong>Promedio (Secante):</strong> Mide entre t=1 y t=5.<br>
+                    m = (f(5) - f(1)) / (5 - 1)<br><br>
+                    • <strong>Instantánea (Tangente):</strong> El tiempo 'h' entre mediciones tiende a 0.<br>
+                    m_tan = Lim (h→0) [f(x+h) - f(x)] / h
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
                 <ul class="custom-list">
-                    <li><b>El Velocímetro:</b> <p style="font-size: 0.9em; margin: 5px 0;">No te dice la velocidad de todo tu viaje, te dice la velocidad de ESTE segundo.</p></li>
-                    <li><b>Carga de celular:</b> <p style="font-size: 0.9em; margin: 5px 0;">Porcentaje de batería recuperado justo en el minuto 15.</p></li>
-                    <li><b>Flujo de bomba:</b> <p style="font-size: 0.9em; margin: 5px 0;">Litros inyectados por segundo instantáneo.</p></li>
+                    <li>
+                        <b>Fotograma del Velocímetro:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El radar de tránsito toma una foto; mide tu velocidad en un lapso 'h' casi cero.</p>
+                        <div class="css-graphic">
+                            <div class="dash"><div class="dash-needle"></div></div>
+                            <div class="camera-flash"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Carga de Celular:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El ritmo de carga cambia; la tasa instantánea en el minuto 5 es muy alta, en el 90 es baja.</p>
+                        <div class="css-graphic">
+                            <div class="phone"><div class="battery"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Flujo de una Bomba:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Los litros exactos inyectados por segundo varían según la presión instantánea.</p>
+                        <div class="css-graphic">
+                            <div class="pump"><div class="pump-blade"></div><div class="water-drop"></div></div>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
-            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
-                <h2 style="color: #38bdf8;">Simulador: Secante a Tangente</h2>
-                <p>Desliza la barra para acercar el punto B al punto A. Verás cómo la línea Secante se transforma mágicamente en la línea Tangente.</p>
-                
-            <div style="background:#1e293b; border: 4px solid #8b5cf6; padding:20px; border-radius:10px; text-align:center;">
-                <canvas id="sec-canvas" width="300" height="150" style="background:#0f172a; width:100%; border-radius:8px;"></canvas>
-                <br><br>
-                <label style="color:white;">Distancia entre puntos (h):</label>
-                <input type="range" id="sec-slider" min="0" max="100" value="100" oninput="drawSecant()">
-            </div>
-        
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📐 Simulador: El Colapso de la Secante</h2>
+                <p>Desliza la barra para reducir la distancia temporal 'h' entre las dos mediciones. Observa cómo la línea Secante roja se ajusta hasta convertirse en la línea Tangente verde perfecta.</p>
+
+                <div class="sec-simulator">
+                    <div class="canvas-container">
+                        <canvas id="sec-canvas"></canvas>
+                    </div>
+                    <div class="controls">
+                        <div class="slider-group">
+                            <label>Intervalo de Tiempo (h):</label>
+                            <input type="range" id="sec-slider" min="0" max="100" value="100" oninput="drawSecant()">
+                        </div>
+                    </div>
+                </div>
             </section>
+
         </div>
         
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
@@ -85,7 +240,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.initSimS18) window.initSimS18();
+            if(window.drawSecant) window.drawSecant();
 
             new KahootQuiz('quiz-mount-point', 'sesion18', async (score, percentage) => {
                 if(percentage === 100) {

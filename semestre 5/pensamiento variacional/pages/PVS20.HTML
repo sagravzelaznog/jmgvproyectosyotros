@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,105 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         .css-graphic {
-            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
-            margin: 15px 0; display: flex; align-items: center; justify-content: center;
-            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
-            color: #94a3b8; font-family: monospace;
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Bloque Magistral */
+        .magistral-quote {
+            background: linear-gradient(135deg, #0f172a 0%, #450a0a 100%);
+            border-left: 5px solid #ef4444;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            grid-column: span 2;
+        }
+        .magistral-quote::before {
+            content: '❝';
+            position: absolute;
+            font-size: 4em;
+            color: rgba(239, 68, 68, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        .magistral-title {
+            color: #f87171;
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .magistral-text {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* 1. Caída Libre */
+        .sky-fall { width: 100%; height: 100%; position: relative; }
+        .falling-ball {
+            width: 15px; height: 15px; background: white; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%);
+            animation: freeFall 2s infinite cubic-bezier(0.5, 0, 1, 1);
+        }
+        .motion-blur {
+            position: absolute; width: 15px; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5)); left: 50%; transform: translateX(-50%);
+            animation: followFall 2s infinite cubic-bezier(0.5, 0, 1, 1);
+        }
+        @keyframes freeFall { 0% { top: -20px; } 100% { top: 120px; } }
+        @keyframes followFall { 0% { top: -50px; } 100% { top: 90px; } }
+
+        /* 2. Costo Marginal */
+        .econ-graph { width: 100%; height: 100%; position: relative; border-left: 2px solid #64748b; border-bottom: 2px solid #64748b; }
+        .econ-curve { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; border-bottom: 4px solid #ef4444; border-radius: 0 0 0 100%; transform: scaleX(2) translateY(-20px); }
+        .econ-dot { position: absolute; width: 10px; height: 10px; background: white; border-radius: 50%; bottom: 30px; left: 60px; box-shadow: 0 0 10px white; }
+        .econ-tangent { position: absolute; width: 60px; height: 2px; background: #f59e0b; bottom: 34px; left: 35px; transform: rotate(-30deg); }
+
+        /* 3. Mancha Circular */
+        .oil-spill {
+            width: 10px; height: 10px; background: rgba(0,0,0,0.8); border-radius: 50%; position: relative;
+            animation: expandSpill 3s infinite cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        .oil-ring {
+            position: absolute; width: 100%; height: 100%; border: 2px solid rgba(0,0,0,0.5); border-radius: 50%; top: -2px; left: -2px;
+            animation: rippleSpill 3s infinite cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        @keyframes expandSpill { 0% { transform: scale(1); } 100% { transform: scale(8); opacity: 0.5; } }
+        @keyframes rippleSpill { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        /* Simulador 4 Pasos */
+        .step-simulator {
+            background: #0f172a; border: 4px solid #ef4444; border-radius: 15px; padding: 20px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); text-align: left;
+            color: white; font-family: monospace; font-size: 1.1em;
+        }
+        .algo-step { padding: 10px; margin: 5px 0; border-radius: 5px; transition: all 0.3s; }
+        .algo-0 { background: #1e293b; color: #94a3b8; }
+        .algo-1 { background: rgba(59, 130, 246, 0.2); border-left: 4px solid #3b82f6; display: none; }
+        .algo-2 { background: rgba(245, 158, 11, 0.2); border-left: 4px solid #f59e0b; display: none; }
+        .algo-3 { background: rgba(168, 85, 247, 0.2); border-left: 4px solid #a855f7; display: none; }
+        .algo-4 { background: rgba(16, 185, 129, 0.2); border-left: 4px solid #10b981; display: none; font-size: 1.3em; font-weight: bold; }
+        
+        .btn-algo {
+            background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1.1em; cursor: pointer; width: 100%; margin-top: 15px; font-weight: bold; text-transform: uppercase;
         }
     </style>
 </head>
+
 <body>
     <div class="session-progress-container">
         <span style="font-size: 1.2em;">📚</span>
@@ -30,56 +123,77 @@
         <header class="info-header" ondblclick="unlockTeacherTipsS20()">
             <a href="../index.html" class="back-btn">⬅ Inicio</a>
             <div class="badge">Bloque 2 | Sesión 20</div>
-            <h1>Regla de los Cuatro Pasos</h1>
-            <p>Calcular derivadas de funciones lineales y cuadráticas por definición.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+            <h1>Regla de los 4 Pasos</h1>
+            <p>Calcular derivadas de funciones mediante el álgebra por definición.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Esta sesión es puro sudor algebraico. Newton no tenía 'fórmulas mágicas' todavía; él tenía que hacer estos 4 pasos a mano para cada maldita función que quería derivar. Hagan que valoren el esfuerzo."</div>
         </header>
 
         <div class="info-body">
+            <div class="magistral-quote">
+                <div class="magistral-title">El Concepto Magistral: El Salto de Newton</div>
+                <div class="magistral-text">
+                    "Isaac Newton necesitaba calcular la gravedad, pero las matemáticas de su época eran inútiles para cuerpos en movimiento. Así que, durante la cuarentena por la Peste Negra, inventó un algoritmo divino: La Regla de los 4 Pasos. Un proceso algebraico destructivo que, mediante la manipulación de binomios y el uso del Límite, purificaba la ecuación original hasta revelar su esencia oculta: la Derivada. Acababa de inventar el Cálculo."
+                </div>
+            </div>
+
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Antes de tener atajos, los genios como Newton usaban este proceso algebraico duro: 1) Sumar h. 2) Restar f(x). 3) Dividir entre h. 4) Aplicar el límite cuando h->0.</p>
+                <p>Aplicar rigurosamente el algoritmo formal (La Definición de Derivada) para transformar una función normal f(x) en su derivada f'(x) a través de cuatro operaciones inquebrantables.</p>
             </section>
 
-            <section class="info-card examples-card" style="grid-column: span 2;">
-                <h2>📝 Ejemplos Prácticos</h2>
+            <section class="info-card" style="grid-column: span 2; border-color: #ef4444; border-top: 5px solid #ef4444;">
+                <h2 style="color: #ef4444;">📖 Teoría: El Algoritmo Universal</h2>
+                <div class="math-box" style="border-color:#ef4444; color:#f87171; text-align:left;">
+                    Partiendo de tu función original <strong>f(x)</strong>:<br><br>
+                    <strong>1) Sumar 'h':</strong> Cambia todas las 'x' por '(x+h)'.<br>
+                    <strong>2) Restar f(x):</strong> Réstale la función original completa.<br>
+                    <strong>3) Dividir entre 'h':</strong> Elimina la 'h' del denominador.<br>
+                    <strong>4) Aplicar el Límite:</strong> Sustituye las 'h' restantes con 0.<br><br>
+                    Lo que sobrevive es <strong>f'(x)</strong>.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
                 <ul class="custom-list">
-                    <li><b>Caída libre:</b> <p style="font-size: 0.9em; margin: 5px 0;">Obtener velocidad a partir de la distancia (x²).</p></li>
-                    <li><b>Costo marginal:</b> <p style="font-size: 0.9em; margin: 5px 0;">Cuánto cuesta fabricar la SIGUIENTE unidad.</p></li>
-                    <li><b>Mancha circular:</b> <p style="font-size: 0.9em; margin: 5px 0;">Tasa de crecimiento del área de un derrame.</p></li>
+                    <li>
+                        <b>Caída Libre de un Cuerpo:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Derivar la distancia $x^2$ te arroja la ecuación matemática exacta de la Aceleración.</p>
+                        <div class="css-graphic">
+                            <div class="sky-fall"><div class="motion-blur"></div><div class="falling-ball"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Costo Marginal (Economía):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Calcular cuánto nos costará fabricar la <em>siguiente</em> unidad en una línea de producción.</p>
+                        <div class="css-graphic">
+                            <div class="econ-graph"><div class="econ-curve"></div><div class="econ-tangent"></div><div class="econ-dot"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Mancha de Petróleo:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Medir la velocidad a la que se expande el área circular de un derrame tóxico.</p>
+                        <div class="css-graphic">
+                            <div class="oil-spill"><div class="oil-ring"></div></div>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
-            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
-                <h2 style="color: #38bdf8;">Simulador: Algoritmo de 4 Pasos</h2>
-                <p>Haz clic en cada paso para aplicar el algoritmo a f(x) = x^2. ¡Observa el álgebra destruirse y simplificarse ante tus ojos!</p>
-                
-            <div style="background:#0f172a; border: 4px solid #ef4444; padding:20px; border-radius:10px; text-align:left; color:white; font-family:monospace; font-size:1.1em;">
-                <div id="step-0" style="color:#94a3b8;">f(x) = x²</div>
-                <div id="step-1" style="display:none;">1) f(x+h) = (x+h)² = x² + 2xh + h²</div>
-                <div id="step-2" style="display:none; color:#f59e0b;">2) - f(x) = 2xh + h²</div>
-                <div id="step-3" style="display:none; color:#38bdf8;">3) / h = 2x + h</div>
-                <div id="step-4" style="display:none; color:#10b981;">4) lim(h->0) = 2x</div>
-                <br>
-                <button onclick="nextStep()" style="padding:10px; background:#ef4444; color:white; border:none; border-radius:5px; cursor:pointer;">Siguiente Paso ➡</button>
-            </div>
-            <script>
-                let currentStep = 0;
-                function nextStep() {
-                    currentStep++;
-                    if(currentStep > 4) {
-                        currentStep = 0;
-                        document.getElementById('step-1').style.display='none';
-                        document.getElementById('step-2').style.display='none';
-                        document.getElementById('step-3').style.display='none';
-                        document.getElementById('step-4').style.display='none';
-                    } else {
-                        document.getElementById('step-'+currentStep).style.display='block';
-                    }
-                }
-            </script>
-        
+            <section class="info-card strategy-card" style="border-color: #ef4444;">
+                <h2 style="color: #ef4444;">⚙️ Simulador: El Motor Numérico</h2>
+                <p>Haz clic para ejecutar el algoritmo de Newton sobre la función cuadrática <strong>f(x) = x²</strong>. Observa el desarrollo de binomios y la destrucción algebraica.</p>
+
+                <div class="step-simulator">
+                    <div class="algo-step algo-0" id="step-0">Base: f(x) = x²</div>
+                    <div class="algo-step algo-1" id="step-1">1) f(x+h) = (x+h)² = <strong>x² + 2xh + h²</strong></div>
+                    <div class="algo-step algo-2" id="step-2">2) - f(x) = x² + 2xh + h² - x² = <strong>2xh + h²</strong></div>
+                    <div class="algo-step algo-3" id="step-3">3) / h = (2xh + h²) / h = <strong>2x + h</strong></div>
+                    <div class="algo-step algo-4" id="step-4">4) lim(h→0) [2x + h] = <strong>2x</strong></div>
+                    <button class="btn-algo" onclick="nextAlgoStep()">Ejecutar Siguiente Paso ➡</button>
+                </div>
             </section>
+
         </div>
         
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
@@ -102,9 +216,22 @@
             document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            if(window.initSimS20) window.initSimS20();
+        // Local JS for steps
+        let currentStep = 0;
+        window.nextAlgoStep = function() {
+            currentStep++;
+            if(currentStep > 4) {
+                currentStep = 0;
+                document.getElementById('step-1').style.display='none';
+                document.getElementById('step-2').style.display='none';
+                document.getElementById('step-3').style.display='none';
+                document.getElementById('step-4').style.display='none';
+            } else {
+                document.getElementById('step-'+currentStep).style.display='block';
+            }
+        };
 
+        document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion20', async (score, percentage) => {
                 if(percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);

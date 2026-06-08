@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,132 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         .css-graphic {
-            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
-            margin: 15px 0; display: flex; align-items: center; justify-content: center;
-            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
-            color: #94a3b8; font-family: monospace;
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Bloque Magistral */
+        .magistral-quote {
+            background: linear-gradient(135deg, #0f172a 0%, #3b0764 100%);
+            border-left: 5px solid #a855f7;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            grid-column: span 2;
+        }
+        .magistral-quote::before {
+            content: '❝';
+            position: absolute;
+            font-size: 4em;
+            color: rgba(168, 85, 247, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        .magistral-title {
+            color: #c084fc;
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .magistral-text {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* 1. Duna de Arena (Topografía) */
+        .dune {
+            width: 100%; height: 60px; background: #b45309; border-radius: 50% 50% 0 0; position: absolute; bottom: 0;
+            clip-path: polygon(0 100%, 30% 20%, 70% 80%, 100% 40%, 100% 100%);
+        }
+        .hiker {
+            width: 8px; height: 15px; background: white; border-radius: 5px; position: absolute;
+            animation: hikeDune 6s infinite linear;
+        }
+        @keyframes hikeDune {
+            0% { left: 0%; bottom: 0px; transform: rotate(45deg); }
+            30% { left: 30%; bottom: 48px; transform: rotate(0deg); } /* Pico */
+            70% { left: 70%; bottom: 12px; transform: rotate(-45deg); } /* Valle */
+            100% { left: 100%; bottom: 36px; transform: rotate(45deg); }
+        }
+
+        /* 2. Panel Solar Curvo */
+        .solar-panel {
+            width: 80px; height: 80px; border-bottom: 4px solid #38bdf8; border-radius: 50%; position: relative;
+        }
+        .sunray {
+            position: absolute; width: 2px; height: 100px; background: #fef08a; top: -80px; left: 40px; transform-origin: bottom center;
+            animation: reflectSun 4s infinite alternate;
+        }
+        @keyframes reflectSun {
+            0% { transform: rotate(-30deg); }
+            100% { transform: rotate(30deg); }
+        }
+
+        /* 3. Puente Colgante */
+        .bridge-tower {
+            width: 6px; height: 60px; background: #94a3b8; position: absolute; bottom: 10px;
+        }
+        .t-left { left: 20px; } .t-right { right: 20px; }
+        .main-cable {
+            position: absolute; left: 20px; bottom: 30px; width: calc(100% - 40px); height: 60px;
+            border-bottom: 3px solid white; border-radius: 50%;
+        }
+        .road-deck {
+            position: absolute; left: 0; bottom: 10px; width: 100%; height: 6px; background: #334155;
+        }
+
+        /* Simulador Tangente */
+        .tan-simulator {
+            background: #0f172a;
+            border: 4px solid #a855f7;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            text-align: center;
+        }
+        .canvas-container {
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
+        .controls { margin-top: 15px; }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+        }
+        input[type=range] { width: 60%; }
+        #tan-slope { font-size: 1.2em; font-family: monospace; font-weight: bold; color: #c084fc; margin-top: 10px; }
     </style>
 </head>
+
 <body>
     <div class="session-progress-container">
         <span style="font-size: 1.2em;">📚</span>
@@ -31,38 +151,79 @@
             <a href="../index.html" class="back-btn">⬅ Inicio</a>
             <div class="badge">Bloque 2 | Sesión 19</div>
             <h1>La Derivada y la Recta Tangente</h1>
-            <p>Interpretar geométricamente la derivada.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+            <p>Interpretar geométricamente la máquina de fabricar pendientes.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "La Tierra es redonda, pero a nuestros ojos parece plana. ¿Por qué? Porque somos tan pequeños que nuestra vista actúa como una recta tangente tocando la esfera en un solo punto."</div>
         </header>
 
         <div class="info-body">
+            <div class="magistral-quote">
+                <div class="magistral-title">El Concepto Magistral: Linealización Local</div>
+                <div class="magistral-text">
+                    "Si tomas un círculo perfecto y haces zoom sobre su borde un millón de veces, dejarás de ver una curva y verás una línea completamente recta. A este fenómeno le llamamos 'Linealización Local'. El universo natural es curvo y caótico, pero la Derivada nos permite convertir cualquier curva compleja en una línea recta simple en un instante minúsculo. El mundo, visto muy de cerca, siempre es plano."
+                </div>
+            </div>
+
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>La Derivada (f'(x)) es una máquina que nos fabrica pendientes. Si le das un valor de X, la derivada te escupe la inclinación exacta que tiene la curva en ese milímetro.</p>
+                <p>Comprender visualmente que la Derivada de una función (f'(x)) es simplemente la Pendiente ("m", la inclinación) de una línea recta tangente que roza a la curva en un solo punto.</p>
             </section>
 
-            <section class="info-card examples-card" style="grid-column: span 2;">
-                <h2>📝 Ejemplos Prácticos</h2>
+            <section class="info-card" style="grid-column: span 2; border-color: #a855f7; border-top: 5px solid #a855f7;">
+                <h2 style="color: #a855f7;">📖 Teoría: Radiografía de la Curva</h2>
+                <p>La Derivada funciona como un escáner que lee el terreno:</p>
+                <div class="math-box" style="border-color:#a855f7; color:#c084fc; text-align:left;">
+                    • <strong>Derivada Positiva (+):</strong> La recta sube (Crecimiento).<br>
+                    • <strong>Derivada Negativa (-):</strong> La recta baja (Decrecimiento).<br>
+                    • <strong>Derivada Cero (0):</strong> La recta es perfectamente horizontal (Es la cima de una montaña o el fondo de un valle).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
                 <ul class="custom-list">
-                    <li><b>Duna de arena:</b> <p style="font-size: 0.9em; margin: 5px 0;">Inclinación del terreno paso a paso.</p></li>
-                    <li><b>Reflexión solar:</b> <p style="font-size: 0.9em; margin: 5px 0;">Ángulo de los espejos en paneles solares curvos.</p></li>
-                    <li><b>Cable de tensión:</b> <p style="font-size: 0.9em; margin: 5px 0;">Tensión máxima en el puente colgante.</p></li>
+                    <li>
+                        <b>Escalada de Dunas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">La dificultad al subir depende de la "pendiente tangente" exacta donde pisas.</p>
+                        <div class="css-graphic">
+                            <div class="dune"></div><div class="hiker"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Reflexión en Paneles Solares:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El rayo de luz rebota respecto a la línea tangente del punto de impacto.</p>
+                        <div class="css-graphic">
+                            <div class="solar-panel"><div class="sunray"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Puentes Colgantes:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">La tensión mecánica en cada punto del cable depende de su derivada (inclinación).</p>
+                        <div class="css-graphic">
+                            <div class="bridge-tower t-left"></div><div class="bridge-tower t-right"></div>
+                            <div class="main-cable"></div><div class="road-deck"></div>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
-            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
-                <h2 style="color: #38bdf8;">Simulador: Escáner de Tangentes</h2>
-                <p>Desliza el escáner a través de la parábola. Observa cómo la recta tangente cambia de negativa (bajada), a cero (valle), a positiva (subida).</p>
-                
-            <div style="background:#1e293b; border: 4px solid #a855f7; padding:20px; border-radius:10px; text-align:center;">
-                <canvas id="tan-canvas" width="300" height="150" style="background:#0f172a; width:100%; border-radius:8px;"></canvas>
-                <br><br>
-                <label style="color:white;">Posición de Escaneo (x):</label>
-                <input type="range" id="tan-slider" min="0" max="100" value="50" oninput="drawTangent()">
-                <div id="tan-slope" style="color:#a855f7; font-weight:bold; margin-top:5px;">Pendiente (m): 0</div>
-            </div>
-        
+            <section class="info-card strategy-card" style="border-color: #a855f7;">
+                <h2 style="color: #a855f7;">🔍 Simulador: Escáner de Tangentes</h2>
+                <p>Desliza el escáner (X) a través del valle parabólico. Observa la inclinación de la Recta Tangente: fíjate cómo se vuelve completamente horizontal ($m=0$) en el fondo exacto del valle.</p>
+
+                <div class="tan-simulator">
+                    <div class="canvas-container">
+                        <canvas id="tan-canvas"></canvas>
+                    </div>
+                    <div class="controls">
+                        <div class="slider-group">
+                            <label>Posición Escáner X:</label>
+                            <input type="range" id="tan-slider" min="0" max="100" value="50" oninput="drawTangent()">
+                        </div>
+                        <div id="tan-slope">Pendiente (m): 0.00</div>
+                    </div>
+                </div>
             </section>
+
         </div>
         
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
@@ -86,7 +247,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.initSimS19) window.initSimS19();
+            if(window.drawTangent) window.drawTangent();
 
             new KahootQuiz('quiz-mount-point', 'sesion19', async (score, percentage) => {
                 if(percentage === 100) {

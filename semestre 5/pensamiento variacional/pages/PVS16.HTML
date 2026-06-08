@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         .css-graphic {
-            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
-            margin: 15px 0; display: flex; align-items: center; justify-content: center;
-            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
-            color: #94a3b8; font-family: monospace;
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Bloque Magistral */
+        .magistral-quote {
+            background: linear-gradient(135deg, #0f172a 0%, #422006 100%);
+            border-left: 5px solid #f59e0b;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            grid-column: span 2;
+        }
+        .magistral-quote::before {
+            content: '❝';
+            position: absolute;
+            font-size: 4em;
+            color: rgba(245, 158, 11, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        .magistral-title {
+            color: #fbbf24;
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .magistral-text {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* 1. Tubería Continua */
+        .pipe {
+            width: 80%; height: 20px; background: #64748b; border: 2px solid #94a3b8; border-radius: 10px; position: relative; overflow: hidden;
+        }
+        .water-flow {
+            width: 50px; height: 100%; background: #3b82f6; opacity: 0.8;
+            animation: flowPipe 2s infinite linear;
+        }
+        @keyframes flowPipe {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(300px); }
+        }
+
+        /* 2. Circuito Cerrado */
+        .circuit {
+            width: 80px; height: 50px; border: 4px solid #f59e0b; border-radius: 5px; position: relative;
+        }
+        .bulb {
+            width: 20px; height: 20px; background: #fef08a; border-radius: 50%; position: absolute; top: -12px; left: 26px;
+            box-shadow: 0 0 15px #fef08a; animation: pulseLight 1s infinite alternate;
+        }
+        .electron {
+            width: 8px; height: 8px; background: white; border-radius: 50%; position: absolute;
+            animation: runCircuit 2s infinite linear;
+        }
+        @keyframes pulseLight { 0% { opacity: 0.7; } 100% { opacity: 1; box-shadow: 0 0 25px #fef08a; } }
+        @keyframes runCircuit {
+            0% { top: -4px; left: -4px; }
+            25% { top: -4px; left: 76px; }
+            50% { top: 46px; left: 76px; }
+            75% { top: 46px; left: -4px; }
+            100% { top: -4px; left: -4px; }
+        }
+
+        /* 3. Proyectil */
+        .sky { width: 100%; height: 100%; position: relative; }
+        .ball {
+            width: 12px; height: 12px; background: #ef4444; border-radius: 50%; position: absolute;
+            animation: throwBall 3s infinite cubic-bezier(0.2, 0.8, 0.8, 0.2);
+        }
+        .path-dot {
+            width: 3px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 50%; position: absolute;
+        }
+        @keyframes throwBall {
+            0% { left: 10%; bottom: 10px; }
+            50% { left: 50%; bottom: 80px; }
+            100% { left: 90%; bottom: 10px; }
+        }
+
+        /* Simulador Continuidad */
+        .cont-simulator {
+            background: #0f172a;
+            border: 4px solid #f59e0b;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            text-align: center;
+        }
+        .canvas-container {
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
+        .btn-toggle {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 5px;
         }
     </style>
 </head>
+
 <body>
     <div class="session-progress-container">
         <span style="font-size: 1.2em;">📚</span>
@@ -30,40 +157,85 @@
         <header class="info-header" ondblclick="unlockTeacherTipsS16()">
             <a href="../index.html" class="back-btn">⬅ Inicio</a>
             <div class="badge">Bloque 1 | Sesión 16</div>
-            <h1>Continuidad de Funciones</h1>
-            <p>Definir la continuidad en un punto.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+            <h1>Continuidad de Funciones I</h1>
+            <p>Definir la continuidad matemática en un punto exacto.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Si puedes trazar la gráfica con un lápiz sin levantarlo del papel, es continua". Es la definición más intuitiva que jamás olvidarán.</div>
         </header>
 
         <div class="info-body">
+            <div class="magistral-quote">
+                <div class="magistral-title">El Concepto Magistral: El Continuo Espacio-Tiempo</div>
+                <div class="magistral-text">
+                    "Karl Weierstrass revolucionó las matemáticas al formalizar el 'continuo'. En nuestro universo observable, la materia y la energía fluyen sin 'teletransportarse' espontáneamente de un punto a otro. Una función continua es el espejo matemático de la realidad física: garantiza que si el tiempo avanza un microsegundo, el objeto solo se moverá un micrómetro, sin desaparecer mágicamente para reaparecer en el otro lado de la galaxia."
+                </div>
+            </div>
+
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Una función es continua si la puedes dibujar sin despegar el lápiz del papel. Matemáticamente: f(a) existe, el límite en 'a' existe, y ambos son exactamente iguales.</p>
+                <p>Establecer las 3 reglas de oro para que un punto sea continuo: 1) El punto debe existir, 2) El Límite debe existir (la predicción por ambos lados coincide), y 3) La predicción del Límite debe ser EXACTAMENTE el valor real del punto.</p>
             </section>
 
-            <section class="info-card examples-card" style="grid-column: span 2;">
-                <h2>📝 Ejemplos Prácticos</h2>
+            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+                <h2 style="color: #f59e0b;">📖 Teoría: Las 3 Condiciones</h2>
+                <div class="math-box" style="border-color:#f59e0b; color:#f59e0b; text-align:left;">
+                    Para que f(x) sea continua en x = a:<br><br>
+                    1. <strong>f(a) está definida:</strong> No hay un "agujero negro" en la función.<br>
+                    2. <strong>Lim x→a f(x) existe:</strong> Los lados izquierdo y derecho apuntan al mismo lugar.<br>
+                    3. <strong>Lim x→a f(x) = f(a):</strong> El camino y el destino son exactamente los mismos.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
                 <ul class="custom-list">
-                    <li><b>Flujo continuo de agua:</b> <p style="font-size: 0.9em; margin: 5px 0;">Sin interrupciones en la tubería.</p></li>
-                    <li><b>Circuito cerrado:</b> <p style="font-size: 0.9em; margin: 5px 0;">La electricidad fluye sin switches abiertos.</p></li>
-                    <li><b>Trayectoria de proyectil:</b> <p style="font-size: 0.9em; margin: 5px 0;">Un balón no se teletransporta en el aire.</p></li>
+                    <li>
+                        <b>Tubería Ininterrumpida:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El agua fluye suavemente sin cortes abruptos ni fugas por huecos (discontinuidades).</p>
+                        <div class="css-graphic">
+                            <div class="pipe"><div class="water-flow"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Circuito Cerrado:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Un foco enciende continuamente porque el flujo de electrones (f(x)) no tiene "saltos" vacíos.</p>
+                        <div class="css-graphic">
+                            <div class="circuit"><div class="bulb"></div><div class="electron"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Trayectoria Balística:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Un balón en el aire traza una parábola perfecta; nunca se "salta" coordenadas.</p>
+                        <div class="css-graphic">
+                            <div class="sky">
+                                <div class="path-dot" style="left:20%;bottom:30px;"></div>
+                                <div class="path-dot" style="left:30%;bottom:52px;"></div>
+                                <div class="path-dot" style="left:40%;bottom:70px;"></div>
+                                <div class="path-dot" style="left:60%;bottom:70px;"></div>
+                                <div class="path-dot" style="left:70%;bottom:52px;"></div>
+                                <div class="path-dot" style="left:80%;bottom:30px;"></div>
+                                <div class="ball"></div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
-            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
-                <h2 style="color: #38bdf8;">Simulador: Dibujo Continuo</h2>
-                <p>Intenta unir los dos puntos. Si hay un hoyo (discontinuidad removible) o un salto (discontinuidad de salto), fallarás.</p>
-                
-            <div style="background:#1e293b; border: 4px solid #f59e0b; padding:20px; border-radius:10px; text-align:center;">
-                <canvas id="cont-canvas" width="300" height="150" style="background:#0f172a; width:100%; border-radius:8px;"></canvas>
-                <div style="margin-top:10px;">
-                    <button onclick="setContMode('continuo')" style="padding:5px;">Continua</button>
-                    <button onclick="setContMode('hueco')" style="padding:5px;">Hueco</button>
-                    <button onclick="setContMode('salto')" style="padding:5px;">Salto</button>
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">🔀 Simulador: Dibujo Sin Levantar el Lápiz</h2>
+                <p>Cambia el modo de la función. Si pones un "HUECO", falla la Condición 3. Si pones un "SALTO", falla la Condición 2. Solo el modo "CONTINUA" permite que la máquina trace la línea sin interrupciones.</p>
+
+                <div class="cont-simulator">
+                    <div class="canvas-container">
+                        <canvas id="cont-canvas"></canvas>
+                    </div>
+                    <div>
+                        <button class="btn-toggle" style="background:#10b981;" onclick="setContMode('continuo')">✔ Continua</button>
+                        <button class="btn-toggle" style="background:#ef4444;" onclick="setContMode('hueco')">✖ Hueco (Falla Lim=f(x))</button>
+                        <button class="btn-toggle" style="background:#ef4444;" onclick="setContMode('salto')">✖ Salto (Falla Limite)</button>
+                    </div>
                 </div>
-            </div>
-        
             </section>
+
         </div>
         
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
@@ -87,7 +259,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.initSimS16) window.initSimS16();
+            if(window.drawCont) window.drawCont();
 
             new KahootQuiz('quiz-mount-point', 'sesion16', async (score, percentage) => {
                 if(percentage === 100) {

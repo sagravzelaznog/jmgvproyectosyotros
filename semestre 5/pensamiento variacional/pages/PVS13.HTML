@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         .css-graphic {
-            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
-            margin: 15px 0; display: flex; align-items: center; justify-content: center;
-            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
-            color: #94a3b8; font-family: monospace;
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Bloque Magistral */
+        .magistral-quote {
+            background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+            border-left: 5px solid #10b981;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            position: relative;
+            grid-column: span 2;
+        }
+        .magistral-quote::before {
+            content: '❝';
+            position: absolute;
+            font-size: 4em;
+            color: rgba(16, 185, 129, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        .magistral-title {
+            color: #34d399;
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .magistral-text {
+            color: #e2e8f0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* 1. Suma de Variaciones (Agua) */
+        .tank-container {
+            display: flex; gap: 10px; align-items: flex-end; height: 80px; width: 100px;
+        }
+        .tank {
+            width: 30px; border: 2px solid white; border-top: none; position: relative; border-radius: 0 0 5px 5px; height: 100%;
+        }
+        .water {
+            position: absolute; bottom: 0; width: 100%; background: #38bdf8; border-radius: 0 0 3px 3px;
+        }
+        .w1 { height: 20px; }
+        .w2 { height: 30px; }
+        .w3 { height: 50px; background: #10b981; } /* Suma */
+        .plus-sign { color: white; font-weight: bold; margin-bottom: 15px; }
+
+        /* 2. Parábola Polinomial */
+        .poly-graph {
+            width: 100%; height: 100%; position: relative; border-left: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .poly-curve {
+            position: absolute; width: 100%; height: 100%;
+            border-bottom: 3px solid #10b981; border-radius: 50%;
+            transform: scale(1.5) translateY(-20px);
+        }
+        .tracker {
+            position: absolute; width: 10px; height: 10px; background: #f59e0b; border-radius: 50%;
+            animation: trackParabola 4s infinite linear alternate;
+        }
+        @keyframes trackParabola {
+            0% { left: 10%; top: 20px; }
+            50% { left: 50%; top: 80px; }
+            100% { left: 90%; top: 20px; }
+        }
+
+        /* 3. Raíz (Piedra cayendo) */
+        .cliff {
+            position: absolute; left: 20px; top: 0; width: 30px; height: 100px; background: #475569; border-radius: 0 0 10px 0;
+        }
+        .stone {
+            position: absolute; left: 40px; width: 10px; height: 10px; background: #cbd5e1; border-radius: 50%;
+            animation: dropStone 2s infinite ease-in;
+        }
+        @keyframes dropStone {
+            0% { top: 0px; }
+            100% { top: 120px; }
+        }
+
+        /* Simulador Propiedades */
+        .prop-simulator {
+            background: #0f172a;
+            border: 4px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            text-align: center;
+        }
+        .calc-display {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 2em;
+            color: #10b981;
+            font-family: monospace;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+            margin-top: 15px;
+        }
+        input[type=range] { width: 60%; }
     </style>
 </head>
+
 <body>
     <div class="session-progress-container">
         <span style="font-size: 1.2em;">📚</span>
@@ -31,37 +153,87 @@
             <a href="../index.html" class="back-btn">⬅ Inicio</a>
             <div class="badge">Bloque 1 | Sesión 13</div>
             <h1>Propiedades de los Límites</h1>
-            <p>Formalizar el cálculo algebraico de límites.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+            <p>Formalizar el cálculo algebraico directo de límites.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Diles: "Si el terreno es plano y firme (funciones continuas como polinomios), no necesitas mirar el mapa (tabular). Solo da el paso final (sustitución directa)".</div>
         </header>
 
         <div class="info-body">
+            <div class="magistral-quote">
+                <div class="magistral-title">El Concepto Magistral: La Aritmética de lo Infinitamente Cercano</div>
+                <div class="magistral-text">
+                    "Las propiedades algebraicas de los límites son un milagro lógico. Nos afirman que el tejido de las matemáticas es estable. Si dos fenómenos físicos se fusionan, el límite de sus destinos combinados es exactamente igual a sumar los límites de sus destinos individuales. Podemos sumar, restar, multiplicar y extraer raíces al infinito microscópico, y las leyes fundamentales de la aritmética sobrevivirán intactas al borde del abismo."
+                </div>
+            </div>
+
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>El límite de una suma es la suma de los límites. Podemos sustituir el valor directamente si la función no se 'rompe' (si no da división por cero).</p>
+                <p>Abandonar las engorrosas tablas de valores para calcular límites instantáneamente usando el álgebra. Aprenderás que si una función es un Polinomio, puedes evaluar el límite sustituyendo 'x' de forma directa.</p>
             </section>
 
-            <section class="info-card examples-card" style="grid-column: span 2;">
-                <h2>📝 Ejemplos Prácticos</h2>
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: Teoremas Principales</h2>
+                <div class="math-box" style="border-color:#10b981; color:#10b981; text-align:left;">
+                    • <strong>Suma:</strong> Lim [f(x) + g(x)] = Lim f(x) + Lim g(x)<br>
+                    • <strong>Producto:</strong> Lim [f(x) * g(x)] = Lim f(x) * Lim g(x)<br>
+                    • <strong>Constante:</strong> Lim [c * f(x)] = c * Lim f(x)<br>
+                    • <strong>Evaluación:</strong> Si f(x) es un polinomio, Lim x→a f(x) = f(a)
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
                 <ul class="custom-list">
-                    <li><b>Suma de variaciones:</b> <p style="font-size: 0.9em; margin: 5px 0;">Combinar la presión del agua y la atmosférica.</p></li>
-                    <li><b>Límites polinomiales:</b> <p style="font-size: 0.9em; margin: 5px 0;">Trayectorias parabólicas sin interrupciones.</p></li>
-                    <li><b>Límites con raíces:</b> <p style="font-size: 0.9em; margin: 5px 0;">Cálculo de tiempos en caída libre.</p></li>
+                    <li>
+                        <b>Suma de Variaciones:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Sumar la presión atmosférica límite a la presión hidroestática límite.</p>
+                        <div class="css-graphic">
+                            <div class="tank-container">
+                                <div class="tank"><div class="water w1"></div></div>
+                                <div class="plus-sign">+</div>
+                                <div class="tank"><div class="water w2"></div></div>
+                                <div class="plus-sign">=</div>
+                                <div class="tank"><div class="water w3"></div></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Límites Polinomiales:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Cualquier trayectoria sin agujeros se puede evaluar por sustitución directa.</p>
+                        <div class="css-graphic">
+                            <div class="poly-graph">
+                                <div class="poly-curve"></div>
+                                <div class="tracker"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Límites con Raíces:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Calcular el límite de la velocidad de una piedra usando funciones radicales.</p>
+                        <div class="css-graphic">
+                            <div class="cliff"></div>
+                            <div class="stone"></div>
+                        </div>
+                    </li>
                 </ul>
             </section>
 
-            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
-                <h2 style="color: #38bdf8;">Simulador: Evaluación Directa</h2>
-                <p>Arrastra la barra para cambiar el valor de X y ver la sustitución automática en f(x) = 2x^2 + 3.</p>
-                
-            <div style="background:#1e293b; border: 4px solid #10b981; padding:20px; border-radius:10px; text-align:center;">
-                <div id="prop-text" style="font-size:2em; color:white; font-family:monospace;">f(x) = 2(0)² + 3 = 3</div>
-                <br><br>
-                <label style="color:white;">Valor de X:</label>
-                <input type="range" id="prop-slider" min="-5" max="5" value="0" oninput="evalProp()">
-            </div>
-        
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">🔢 Simulador: Pizarrón de Sustitución Directa</h2>
+                <p>Arrastra el deslizador para modificar el valor al que 'tiende' X. Al ser un polinomio, verás que el límite se resuelve insertando el valor en la función f(x) = 2x² + 3.</p>
+
+                <div class="prop-simulator">
+                    <div class="calc-display" id="prop-text">
+                        f(0) = 2(0)² + 3 = 3
+                    </div>
+                    <div class="controls">
+                        <div class="slider-group">
+                            <label>X tiende a:</label>
+                            <input type="range" id="prop-slider" min="-5" max="5" value="0" oninput="evalProp()">
+                        </div>
+                    </div>
+                </div>
             </section>
+
         </div>
         
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
@@ -85,7 +257,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.initSimS13) window.initSimS13();
+            if(window.evalProp) window.evalProp();
 
             new KahootQuiz('quiz-mount-point', 'sesion13', async (score, percentage) => {
                 if(percentage === 100) {

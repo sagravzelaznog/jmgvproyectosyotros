@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 42 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Procesos Inversos */
+        .cycle { display: flex; align-items: center; justify-content: center; gap: 20px; font-family: monospace; font-size: 1.5em; color: white; }
+        .c-arr { color: #facc15; font-size: 1.5em; display: flex; flex-direction: column; align-items: center; line-height: 0.5; }
+        .c-arr span { font-size: 0.4em; color: #94a3b8; margin: 5px 0; }
+
+        /* 2. Evaluar F(b) - F(a) */
+        .eval-box { border: 2px solid #10b981; padding: 10px; border-radius: 8px; color: #10b981; font-family: monospace; font-size: 1.2em; text-align: center; }
+        .e-step { margin: 5px 0; }
+
+        /* 3. Newton y Leibniz */
+        .portraits { display: flex; gap: 20px; }
+        .frame { width: 60px; height: 80px; border: 4px solid #d4af37; background: #334155; position: relative; }
+        .head { width: 30px; height: 30px; background: white; border-radius: 50%; position: absolute; top: 10px; left: 15px; }
+        .body { width: 50px; height: 40px; background: #94a3b8; border-radius: 20px 20px 0 0; position: absolute; bottom: 0; left: 5px; }
+        .name { position: absolute; bottom: -25px; color: white; font-size: 0.6em; width: 100%; text-align: center; }
+
+        /* Simulador: Rompecabezas TFC */
+        .tfc-sim { background: #0f172a; border: 4px solid #ef4444; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+        .puzzle-area { display: flex; justify-content: space-around; margin-top: 20px; }
+        .puz-slot { width: 80px; height: 80px; border: 2px dashed #64748b; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.5em; color: #64748b; }
+        .puz-piece { width: 80px; height: 80px; background: #3b82f6; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 1.5em; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: transform 0.2s; margin: 10px; }
+        .puz-piece:hover { transform: scale(1.1); }
+        .pieces-container { display: flex; justify-content: center; gap: 10px; margin-top: 20px; padding: 10px; background: #1e293b; border-radius: 10px; }
+        .math-sym { font-size: 2em; color: white; display: flex; align-items: center; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion42-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 42</div>
+            <h1>Teorema Fundamental del Cálculo</h1>
+            <p>El puente matemático entre las Derivadas (Pendientes) y las Integrales (Áreas).</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender que la derivación y la integración son operaciones inversas y utilizar la regla $F(b) - F(a)$ para calcular áreas de manera exacta sin necesidad de sumas infinitas.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #ef4444; border-top: 5px solid #ef4444;">
+                <h2 style="color: #ef4444;">📖 Teoría: El Gran Descubrimiento</h2>
+                <div class="math-box" style="border-color:#ef4444; color:#fca5a5; text-align:left;">
+                    Antes de Newton y Leibniz, calcular áreas requería geometría compleja y exhaustiva (Sumas de Riemann).<br>
+                    El TFC demostró que para encontrar el área bajo $f(x)$, solo necesitas conocer su <strong>antiderivada</strong> $F(x)$.<br><br>
+                    <strong>La Fórmula Mágica:</strong> $\int_{a}^{b} f(x) dx = F(b) - F(a)$<br>
+                    <em>¡El área es simplemente evaluar la función integrada en el límite final y restarle la inicial!</em>
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 El TFC en Acción</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Procesos Inversos:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Así como la suma deshace la resta, integrar deshace a la derivada.</p>
+                        <div class="css-graphic"><div class="cycle"><div>F(x)</div><div class="c-arr"><span>Deriva</span>➡<br>⬅<span>Integra</span></div><div>f(x)</div></div></div>
+                    </li>
+                    <li>
+                        <b>Evaluación Rápida:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Para $\int_{0}^{3} 2x dx$, la antiderivada es $x^2$.<br>Evaluamos: $(3)^2 - (0)^2 = 9$. ¡El área es 9, sin dibujar un solo rectángulo!</p>
+                        <div class="css-graphic"><div class="eval-box"><div class="e-step">F(x) = x²</div><div class="e-step">F(3) = 9</div><div class="e-step">F(0) = 0</div><div class="e-step">9 - 0 = 9</div></div></div>
+                    </li>
+                    <li>
+                        <b>Los Padres del Cálculo:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Newton y Leibniz descubrieron esto casi al mismo tiempo, lo que generó una enorme disputa histórica sobre quién fue el primero.</p>
+                        <div class="css-graphic"><div class="portraits"><div class="frame"><div class="head"></div><div class="body"></div><div class="name">Newton</div></div><div class="frame"><div class="head"></div><div class="body"></div><div class="name">Leibniz</div></div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #ef4444;">
+                <h2 style="color: #ef4444;">🧩 Rompecabezas del TFC</h2>
+                <p>Arma la expresión correcta del Teorema Fundamental del Cálculo. Haz clic en las piezas en el orden correcto para llenar los huecos.</p>
+
+                <div class="tfc-sim">
+                    <div style="color:white; font-size:1.5em; margin-bottom:10px;">$\int_{a}^{b} f(x) dx =$</div>
+                    
+                    <div class="puzzle-area">
+                        <div class="puz-slot" id="slot-1">?</div>
+                        <div class="math-sym">-</div>
+                        <div class="puz-slot" id="slot-2">?</div>
+                    </div>
+
+                    <div class="pieces-container" id="pieces">
+                        <div class="puz-piece" onclick="selectPiece(this, 'F(a)')">F(a)</div>
+                        <div class="puz-piece" onclick="selectPiece(this, 'f(b)')">f(b)</div>
+                        <div class="puz-piece" onclick="selectPiece(this, 'F(b)')">F(b)</div>
+                        <div class="puz-piece" onclick="selectPiece(this, '+ C')">+ C</div>
+                    </div>
+
+                    <div id="tfc-msg" style="color:#10b981; font-weight:bold; margin-top:20px; font-size:1.5em; opacity:0;">¡Teorema Completado! F(b) - F(a)</div>
+                    <button id="reset-btn" onclick="resetPuzzle()" style="display:none; margin: 10px auto; padding: 5px 15px; border-radius: 5px; background: #334155; color: white; border: none; cursor: pointer;">Reiniciar</button>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS41.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS43.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        let currentSlot = 1;
+        const slot1 = document.getElementById('slot-1');
+        const slot2 = document.getElementById('slot-2');
+        const msg = document.getElementById('tfc-msg');
+        const rst = document.getElementById('reset-btn');
+
+        window.selectPiece = function(el, val) {
+            if(currentSlot === 1) {
+                if(val === 'F(b)') {
+                    slot1.innerText = val;
+                    slot1.style.borderColor = "#10b981";
+                    slot1.style.color = "#10b981";
+                    el.style.visibility = 'hidden';
+                    currentSlot++;
+                } else {
+                    el.style.backgroundColor = "#ef4444";
+                    setTimeout(() => el.style.backgroundColor = "#3b82f6", 500);
+                }
+            } else if(currentSlot === 2) {
+                if(val === 'F(a)') {
+                    slot2.innerText = val;
+                    slot2.style.borderColor = "#10b981";
+                    slot2.style.color = "#10b981";
+                    el.style.visibility = 'hidden';
+                    msg.style.opacity = 1;
+                    rst.style.display = 'block';
+                } else {
+                    el.style.backgroundColor = "#ef4444";
+                    setTimeout(() => el.style.backgroundColor = "#3b82f6", 500);
+                }
+            }
+        };
+
+        window.resetPuzzle = function() {
+            currentSlot = 1;
+            slot1.innerText = '?'; slot1.style.borderColor = "#64748b"; slot1.style.color = "#64748b";
+            slot2.innerText = '?'; slot2.style.borderColor = "#64748b"; slot2.style.color = "#64748b";
+            msg.style.opacity = 0;
+            rst.style.display = 'none';
+            document.querySelectorAll('.puz-piece').forEach(p => p.style.visibility = 'visible');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion42', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion42');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion42', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

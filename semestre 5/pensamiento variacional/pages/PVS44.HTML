@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 44 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Cadena Reversa */
+        .chain-box { border: 2px solid #8b5cf6; border-radius: 8px; padding: 10px; color: white; display: flex; align-items: center; gap: 10px; font-family: monospace; }
+        .inner-u { background: #3b82f6; padding: 5px; border-radius: 5px; }
+        .deriv-du { background: #10b981; padding: 5px; border-radius: 5px; }
+
+        /* Simulador: Encuentra U y du */
+        .subst-sim { background: #0f172a; border: 4px solid #f59e0b; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+        .integral-eq { font-family: monospace; font-size: 2em; color: white; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 5px; }
+        .clickable-term { cursor: pointer; padding: 5px; border-radius: 5px; transition: all 0.2s; border: 2px solid transparent; }
+        .clickable-term:hover { background: rgba(255,255,255,0.1); border-color: white; }
+        .selected-u { background: #3b82f6; color: white; border-color: #60a5fa; }
+        .selected-du { background: #10b981; color: white; border-color: #34d399; }
+        .selection-panel { display: flex; justify-content: space-around; margin-top: 15px; }
+        .sel-box { padding: 10px; border-radius: 8px; background: #1e293b; width: 40%; font-family: monospace; font-size: 1.2em; border: 2px solid #64748b; }
+        .sel-box span { color: #94a3b8; font-size: 0.8em; }
+        .btn-check { margin-top: 20px; padding: 10px 20px; background: #facc15; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: black; font-size: 1.1em; transition: 0.2s; }
+        .btn-check:hover { background: #fde047; transform: scale(1.05); }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion44-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 44</div>
+            <h1>Integración por Sustitución</h1>
+            <p>El "Caballo de Troya" del cálculo: El Cambio de Variable.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar el método de sustitución ($u$ y $du$) para resolver integrales de funciones compuestas, entendiendo que es el proceso inverso de la Regla de la Cadena.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+                <h2 style="color: #f59e0b;">📖 Teoría: Reversando la Cadena</h2>
+                <div class="math-box" style="border-color:#f59e0b; color:#fde68a; text-align:left;">
+                    No existe regla del producto ni de la cadena directa para Integrar. Si tenemos una integral compleja, necesitamos un disfraz.<br><br>
+                    <strong>El Truco:</strong><br>
+                    1. Llama <strong>$u$</strong> a la parte "interior" de la función más fea.<br>
+                    2. Deriva $u$ para encontrar <strong>$du$</strong>.<br>
+                    3. Si $du$ (o casi) está multiplicando en tu integral, ¡bingo! Reemplaza todo para que quede una integral facilita solo en términos de $u$.<br>
+                    4. Integra y regresa la $u$ a su valor original de $x$.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 ¿Cómo elegir 'U'?</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>La pareja perfecta:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Busca una función cuya derivada esté nadando allí mismo a su lado. Ej: Si ves un $x^2$ dentro de un coseno, busca si hay un $2x$ multiplicando afuera.</p>
+                        <div class="css-graphic"><div class="chain-box">∫ cos(<span class="inner-u">x²</span>) · <span class="deriv-du">2x dx</span></div></div>
+                    </li>
+                    <li>
+                        <b>Disfraces comunes de U:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">- El exponente de la $e$.<br>- Lo que está dentro de un paréntesis elevado a una potencia.<br>- El denominador de una fracción.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">🕵️ Juego: Encuentra la U y du</h2>
+                <p>Haz clic en el término que debe ser <strong>U</strong>. Luego, haz clic en el término que representa su derivada <strong>du</strong>.</p>
+
+                <div class="subst-sim">
+                    <div class="integral-eq">
+                        ∫
+                        <div class="clickable-term" id="term1" onclick="selectTerm(this, '2x')">2x</div>
+                        ·
+                        <div class="clickable-term" id="term2" onclick="selectTerm(this, 'cos')">cos</div>
+                        (
+                        <div class="clickable-term" id="term3" onclick="selectTerm(this, 'x²')">x²</div>
+                        ) dx
+                    </div>
+                    
+                    <div class="selection-panel">
+                        <div class="sel-box" id="box-u" style="border-color:#3b82f6;"><span>$u =$</span> <br><strong id="u-val">?</strong></div>
+                        <div class="sel-box" id="box-du" style="border-color:#10b981;"><span>$du =$</span> <br><strong id="du-val">?</strong></div>
+                    </div>
+
+                    <button class="btn-check" onclick="checkSubst()">Verificar</button>
+                    <div id="subst-msg" style="margin-top:10px; font-weight:bold; font-size:1.2em;"></div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS43.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS45.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        let mode = 'u'; // selecting u first, then du
+        let uChoice = '';
+        let duChoice = '';
+        let uElem = null;
+        let duElem = null;
+
+        const uVal = document.getElementById('u-val');
+        const duVal = document.getElementById('du-val');
+        const msg = document.getElementById('subst-msg');
+
+        window.selectTerm = function(el, val) {
+            // Remove previous selections if re-clicking
+            if(el.classList.contains('selected-u')) {
+                el.classList.remove('selected-u');
+                uChoice = ''; uVal.innerText = '?'; mode = 'u'; return;
+            }
+            if(el.classList.contains('selected-du')) {
+                el.classList.remove('selected-du');
+                duChoice = ''; duVal.innerText = '?'; return;
+            }
+
+            if(mode === 'u') {
+                if(uElem) uElem.classList.remove('selected-u');
+                el.classList.add('selected-u');
+                uChoice = val;
+                uVal.innerText = val;
+                uElem = el;
+                mode = 'du'; // Switch to du mode
+            } else {
+                if(duElem) duElem.classList.remove('selected-du');
+                el.classList.add('selected-du');
+                duChoice = val;
+                duVal.innerText = val + " dx";
+                duElem = el;
+            }
+        };
+
+        window.checkSubst = function() {
+            if(!uChoice || !duChoice) {
+                msg.innerText = "¡Selecciona U y du primero!";
+                msg.style.color = "#ef4444";
+                return;
+            }
+
+            if(uChoice === 'x²' && duChoice === '2x') {
+                msg.innerHTML = "¡Excelente! La integral se reduce a: <br><span style='color:#facc15;'>∫ cos(u) du</span>";
+                msg.style.color = "#10b981";
+            } else {
+                msg.innerText = "Error. Pista: La derivada de U debe coincidir con du.";
+                msg.style.color = "#ef4444";
+            }
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion44', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion44');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion44', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

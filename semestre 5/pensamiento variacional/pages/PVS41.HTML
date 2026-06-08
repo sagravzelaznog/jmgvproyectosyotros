@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 41 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Integral con Límites */
+        .integral-def { font-size: 3.5em; color: #facc15; font-family: serif; position: relative; display: flex; align-items: center; }
+        .limit { font-size: 0.3em; color: #3b82f6; position: absolute; font-family: sans-serif; font-weight: bold; }
+        .lim-b { top: 0; left: 25px; } .lim-a { bottom: 0; left: 15px; }
+        .fx { font-family: monospace; font-size: 0.6em; margin-left: 10px; color: white; }
+
+        /* 2. Área Neta */
+        .net-area { width: 100%; height: 80px; position: relative; border-bottom: 2px solid white; display: flex; align-items: center; justify-content: center; }
+        .sine-wave { position: absolute; width: 100%; height: 100%; }
+        .area-pos { position: absolute; top: 0; left: 10%; width: 30%; height: 50%; background: rgba(16,185,129,0.3); border-radius: 50% 50% 0 0; border: 2px solid #10b981; border-bottom: none; display: flex; align-items: center; justify-content: center; color: #10b981; font-weight: bold; }
+        .area-neg { position: absolute; top: 50%; left: 40%; width: 30%; height: 50%; background: rgba(239,68,68,0.3); border-radius: 0 0 50% 50%; border: 2px solid #ef4444; border-top: none; display: flex; align-items: center; justify-content: center; color: #ef4444; font-weight: bold; }
+
+        /* Simulador: Ventana de Tiempo */
+        .limit-sim { background: #0f172a; border: 4px solid #3b82f6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .graph-panel { background: #1e293b; width: 100%; height: 150px; border-radius: 8px; position: relative; margin-bottom: 15px; border-bottom: 2px solid #64748b; }
+        .graph-fill { position: absolute; bottom: 0; height: 100%; background: rgba(59,130,246,0.3); clip-path: polygon(0 100%, 100% 100%, 100% 0); transition: all 0.1s; }
+        .line-a, .line-b { position: absolute; top: 0; bottom: 0; width: 2px; background: #facc15; }
+        .line-a::after { content: 'a'; position: absolute; bottom: -20px; color: #facc15; font-family: monospace; }
+        .line-b::after { content: 'b'; position: absolute; bottom: -20px; color: #facc15; font-family: monospace; }
+        .controls { color: white; display: flex; flex-direction: column; gap: 10px; }
+        .val-disp { font-family: monospace; font-size: 1.5em; color: #facc15; background: #1e293b; padding: 5px 10px; border-radius: 5px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion41-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 41</div>
+            <h1>La Integral Definida</h1>
+            <p>De funciones abstractas a números reales midiendo áreas específicas.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Introducir el concepto de límites de integración ($a$ y $b$) para transformar una integral indefinida (que devuelve una familia de funciones) en una Integral Definida (que devuelve un valor numérico: un área).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: Poniendo Límites</h2>
+                <div class="math-box" style="border-color:#3b82f6; color:#93c5fd; text-align:left;">
+                    La Integral Indefinida nos da una fórmula: $\int 2x dx = x^2 + C$.<br><br>
+                    La <strong>Integral Definida</strong> evalúa esa fórmula entre un punto inicial ($a$) y uno final ($b$). Se escribe:<br>
+                    $\int_{a}^{b} f(x) dx$<br>
+                    El resultado ya no es una fórmula con "x", ¡es un número! Ese número representa el <strong>área neta</strong> bajo la curva entre $x=a$ y $x=b$.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Conceptos Clave</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Sintaxis:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El número de abajo ($a$) es donde empiezas a medir. El de arriba ($b$) es donde terminas. Si $a = b$, el área es $0$ (una línea no tiene área).</p>
+                        <div class="css-graphic"><div class="integral-def">∫<span class="limit lim-b">b</span><span class="limit lim-a">a</span><span class="fx">f(x) dx = Número</span></div></div>
+                    </li>
+                    <li>
+                        <b>Área Neta (Positiva y Negativa):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Si la curva está por encima del eje X, el área suma (+). Si está por debajo, el área resta (-). El resultado de la integral es la suma algebraica de ambas.</p>
+                        <div class="css-graphic"><div class="net-area"><div class="area-pos">+A</div><div class="area-neg">-A</div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">⏱️ Simulador: Ventana de Integración</h2>
+                <p>Tenemos la función $f(x) = x$ (una línea recta). Su área forma triángulos y trapecios.<br>
+                Mueve los límites $a$ (inicio) y $b$ (fin) para ver cómo cambia el área exacta (Integral Definida).</p>
+
+                <div class="limit-sim">
+                    <div class="graph-panel">
+                        <!-- f(x) = x -->
+                        <div style="position:absolute; width:100%; height:100%; border-top: 2px solid #8b5cf6; transform-origin: 0 0; transform: rotate(15deg); top:0; left:0;"></div>
+                        <div class="graph-fill" id="g-fill"></div>
+                        <div class="line-a" id="l-a"></div>
+                        <div class="line-b" id="l-b"></div>
+                    </div>
+                    
+                    <div class="controls">
+                        <label>Límite Inferior ($a$): <span id="val-a">2</span></label>
+                        <input type="range" id="slider-a" min="0" max="10" value="2">
+                        
+                        <label>Límite Superior ($b$): <span id="val-b">8</span></label>
+                        <input type="range" id="slider-b" min="0" max="10" value="8">
+                        
+                        <div style="margin-top:10px;">$\int_{a}^{b} x dx =$</div>
+                        <div class="val-disp" id="area-val">30</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS40.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS42.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const sliderA = document.getElementById('slider-a');
+        const sliderB = document.getElementById('slider-b');
+        const lA = document.getElementById('l-a');
+        const lB = document.getElementById('l-b');
+        const gFill = document.getElementById('g-fill');
+        const valA = document.getElementById('val-a');
+        const valB = document.getElementById('val-b');
+        const areaVal = document.getElementById('area-val');
+
+        function updateLimits() {
+            let a = parseInt(sliderA.value);
+            let b = parseInt(sliderB.value);
+
+            // Prevent a > b
+            if(a > b) {
+                if(this.id === 'slider-a') { sliderB.value = a; b = a; }
+                else { sliderA.value = b; a = b; }
+            }
+
+            valA.innerText = a;
+            valB.innerText = b;
+
+            // Visuals (0-10 mapped to 0-100%)
+            lA.style.left = (a * 10) + '%';
+            lB.style.left = (b * 10) + '%';
+
+            gFill.style.left = (a * 10) + '%';
+            gFill.style.width = ((b - a) * 10) + '%';
+
+            // Area calculation = integral of x dx = (x^2)/2 evaluated from a to b
+            const area = (Math.pow(b, 2) / 2) - (Math.pow(a, 2) / 2);
+            areaVal.innerText = area;
+
+            if(area === 0) areaVal.style.color = "#ef4444";
+            else areaVal.style.color = "#10b981";
+        }
+
+        sliderA.addEventListener('input', updateLimits);
+        sliderB.addEventListener('input', updateLimits);
+        updateLimits();
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion41', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion41');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion41', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

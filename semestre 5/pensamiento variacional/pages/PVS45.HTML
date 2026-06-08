@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 45 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Mnemotecnia */
+        .cow-scene { display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 2em; }
+        .cow-icon { animation: bounce 2s infinite alternate; }
+        .formula-text { font-family: monospace; color: white; display: flex; gap: 10px; }
+        .f-u { color: #3b82f6; } .f-dv { color: #ef4444; } .f-v { color: #facc15; } .f-du { color: #10b981; }
+        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+
+        /* 2. Regla ILATE */
+        .ilate-boxes { display: flex; gap: 5px; }
+        .ilbox { width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
+        .i1 { background: #8b5cf6; } .i2 { background: #3b82f6; } .i3 { background: #10b981; border: 2px solid white; transform: scale(1.1); box-shadow: 0 0 10px #10b981; } .i4 { background: #facc15; color: black; } .i5 { background: #ef4444; }
+
+        /* Simulador: Clasificador ILATE */
+        .ilate-sim { background: #0f172a; border: 4px solid #8b5cf6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+        .func-display { font-size: 2em; font-family: monospace; color: white; margin-bottom: 20px; background: #1e293b; padding: 10px; border-radius: 8px; }
+        .ilate-btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .btn-ilate { padding: 10px 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; color: white; font-size: 1.1em; transition: 0.2s; }
+        .btn-ilate:hover { opacity: 0.8; transform: scale(1.05); }
+        #btn-i { background: #8b5cf6; } #btn-l { background: #3b82f6; } #btn-a { background: #10b981; } #btn-t { background: #facc15; color: black; } #btn-e { background: #ef4444; }
+        .result-panel { margin-top: 15px; font-size: 1.2em; font-weight: bold; height: 30px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion45-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 45</div>
+            <h1>Integración por Partes</h1>
+            <p>La regla del producto invertida: "Un Día Vi Una Vaca..."</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar la técnica de Integración por Partes para integrar el producto de dos funciones algebraicas y/o trascendentes, apoyándose en la mnemotecnia ILATE.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: Rompiendo Productos</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#ddd6fe; text-align:left;">
+                    Si la integral contiene dos funciones distintas multiplicándose (ej: $x \cdot e^x$) y la Sustitución no sirve, usamos Integración por Partes.<br><br>
+                    <strong>La Fórmula:</strong> $\int u dv = u \cdot v - \int v du$<br>
+                    <strong>Objetivo:</strong> Elegir "$u$" de tal forma que al derivarla se vuelva más sencilla (para el $du$), y que "$dv$" sea fácil de integrar (para encontrar $v$). Si eliges bien, la segunda integral ($\int v du$) será más fácil que la original.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Trucos Mnemotécnicos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>La Vaca:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">"Un Día Vi Una Vaca Vestida De Uniforme". Es la forma clásica de recordar el orden de las letras en la fórmula.</p>
+                        <div class="css-graphic"><div class="cow-scene"><div class="formula-text">∫<span class="f-u">u</span><span class="f-dv">dv</span> = <span class="f-u">u</span><span class="f-v">v</span> - ∫<span class="f-v">v</span><span class="f-du">du</span></div><div class="cow-icon">🐄</div></div></div>
+                    </li>
+                    <li>
+                        <b>La regla ILATE:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Inversa, Logarítmica, Algebraica, Trigonométrica, Exponencial. La letra que aparezca primero en esta palabra, esa debe ser tu "$u$".</p>
+                        <div class="css-graphic"><div class="ilate-boxes"><div class="ilbox i1">I</div><div class="ilbox i2">L</div><div class="ilbox i3">A</div><div class="ilbox i4">T</div><div class="ilbox i5">E</div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">🧠 Clasificador ILATE</h2>
+                <p>Identifica de qué tipo es la función mostrada para entrenar tu cerebro a elegir "$u$" correctamente.</p>
+
+                <div class="ilate-sim">
+                    <div class="func-display" id="sim-func">x²</div>
+                    
+                    <div class="ilate-btn-group">
+                        <button class="btn-ilate" id="btn-i" onclick="checkIlate('I')">Inversa</button>
+                        <button class="btn-ilate" id="btn-l" onclick="checkIlate('L')">Logarítmica</button>
+                        <button class="btn-ilate" id="btn-a" onclick="checkIlate('A')">Algebraica</button>
+                        <button class="btn-ilate" id="btn-t" onclick="checkIlate('T')">Trigonométrica</button>
+                        <button class="btn-ilate" id="btn-e" onclick="checkIlate('E')">Exponencial</button>
+                    </div>
+
+                    <div class="result-panel" id="ilate-msg"></div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS44.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="#" class="nav-btn" style="opacity: 0.5; pointer-events: none;">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const functions = [
+            { expr: "x²", type: "A" },
+            { expr: "ln(x)", type: "L" },
+            { expr: "e^{2x}", type: "E" },
+            { expr: "sen(x)", type: "T" },
+            { expr: "tan^{-1}(x)", type: "I" },
+            { expr: "3x + 5", type: "A" }
+        ];
+
+        let currentFunc = 0;
+        const display = document.getElementById('sim-func');
+        const msg = document.getElementById('ilate-msg');
+
+        function loadFunc() {
+            display.innerHTML = `\\(${functions[currentFunc].expr}\\)`;
+            if(window.MathJax) MathJax.typesetPromise([display]);
+            msg.innerText = "";
+        }
+
+        window.checkIlate = function(type) {
+            if(type === functions[currentFunc].type) {
+                msg.innerText = "¡Correcto!";
+                msg.style.color = "#10b981";
+                setTimeout(() => {
+                    currentFunc = (currentFunc + 1) % functions.length;
+                    loadFunc();
+                }, 1000);
+            } else {
+                msg.innerText = "Incorrecto. Intenta de nuevo.";
+                msg.style.color = "#ef4444";
+            }
+        };
+
+        // load first
+        setTimeout(loadFunc, 500);
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion45', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion45');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion45', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

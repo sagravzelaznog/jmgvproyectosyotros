@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 43 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Área F - G */
+        .curves-math { font-size: 2em; color: white; display: flex; align-items: center; font-family: monospace; }
+        .c-fx { color: #3b82f6; } .c-gx { color: #ef4444; }
+
+        /* 2. Ganancia Neta */
+        .profit-graph { width: 100%; height: 100px; position: relative; border-bottom: 2px solid white; border-left: 2px solid white; }
+        .rev-line { position: absolute; width: 100%; height: 2px; background: #3b82f6; top: 20px; transform-origin: 0 0; transform: rotate(5deg); }
+        .cost-line { position: absolute; width: 100%; height: 2px; background: #ef4444; top: 60px; transform-origin: 0 0; transform: rotate(-5deg); }
+        .profit-area { position: absolute; left: 35%; top: 30px; background: rgba(16,185,129,0.3); border: 1px dashed #10b981; width: 30%; height: 30px; display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 0.8em; font-weight: bold; }
+
+        /* Simulador: Sombreado Dinámico */
+        .shadow-sim { background: #0f172a; border: 4px solid #10b981; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        .canvas-area { background: #1e293b; width: 100%; height: 150px; border-radius: 8px; position: relative; border-left: 2px solid #64748b; border-bottom: 2px solid #64748b; margin-bottom: 15px; }
+        .slider-group { color: white; margin-top: 10px; display: flex; justify-content: space-around; }
+        .stat-badge { background: #334155; padding: 5px 15px; border-radius: 20px; font-family: monospace; color: white; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion43-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 43</div>
+            <h1>Área entre Curvas</h1>
+            <p>Calculando el espacio delimitado por dos o más funciones.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Plantear y resolver integrales definidas para encontrar el área encerrada entre dos funciones, identificando cuál curva va por "arriba" y cuál por "abajo".</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: Arriba menos Abajo</h2>
+                <div class="math-box" style="border-color:#10b981; color:#a7f3d0; text-align:left;">
+                    Si quieres encontrar el área encerrada <em>entre</em> dos curvas, $f(x)$ y $g(x)$, no puedes integrar desde el eje X.<br><br>
+                    <strong>La regla de oro:</strong> Integral de (Curva Superior - Curva Inferior).<br>
+                    $Area = \int_{a}^{b} [f(x) - g(x)] dx$<br><br>
+                    Si las curvas se cruzan y cambian de posición (la de abajo pasa arriba), debes partir la integral en dos partes para evitar que el área se anule.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Aplicaciones Prácticas</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Área = (Arriba) - (Abajo):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Al restar la función inferior, le estamos quitando el "espacio en blanco" que sobra hasta el suelo (eje X).</p>
+                        <div class="css-graphic"><div class="curves-math">∫ (<span class="c-fx">f(x)</span> - <span class="c-gx">g(x)</span>) dx</div></div>
+                    </li>
+                    <li>
+                        <b>Ganancia Neta (Economía):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Si $f(x)$ es la curva de <em>Ingresos</em> y $g(x)$ la de <em>Costos</em>, el área verde entre ellas representa la <strong>Ganancia Neta</strong> total de la empresa.</p>
+                        <div class="css-graphic"><div class="profit-graph"><div class="rev-line"></div><div class="cost-line"></div><div class="profit-area">Ganancia</div><div style="position:absolute; right:5px; top:35px; color:#3b82f6; font-size:0.6em;">I(x)</div><div style="position:absolute; right:5px; top:55px; color:#ef4444; font-size:0.6em;">C(x)</div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">🎨 Simulador: Sombreado Dinámico</h2>
+                <p>Observa el área entre la curva azul $f(x) = x^2$ y la línea roja $g(x) = mx$.<br>
+                Ajusta la pendiente $m$ para mover la línea roja. El simulador calculará automáticamente los puntos de corte y el área encerrada.</p>
+
+                <div class="shadow-sim">
+                    <div class="canvas-area">
+                        <canvas id="areaCanvas"></canvas>
+                    </div>
+                    
+                    <div style="color:white; margin-bottom:10px;">Ajustar $g(x) = mx$</div>
+                    <input type="range" id="m-slider" min="1" max="10" value="5" style="width: 80%;">
+                    
+                    <div class="slider-group">
+                        <div class="stat-badge">Corte b: <span id="corte-val" style="color:#facc15;">5</span></div>
+                        <div class="stat-badge">Área: <span id="area-val" style="color:#10b981;">20.83</span> u²</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS42.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS44.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const canvas = document.getElementById('areaCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('m-slider');
+        const corteVal = document.getElementById('corte-val');
+        const areaVal = document.getElementById('area-val');
+
+        function drawCurves() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            const w = canvas.width;
+            const h = canvas.height;
+            const m = parseFloat(slider.value); // slope
+
+            ctx.clearRect(0,0,w,h);
+
+            // Scale mapping: Domain X: [0, 10], Range Y: [0, 100]
+            function pxX(x) { return (x / 10) * w; }
+            function pxY(y) { return h - (y / 100) * h; }
+
+            // Math: f(x) = x^2, g(x) = mx. Intersection where x^2 = mx => x=0 and x=m.
+            // Area = Integral from 0 to m of (mx - x^2) dx = [m(x^2)/2 - (x^3)/3] from 0 to m
+            // Area = (m^3)/2 - (m^3)/3 = (m^3)/6
+            const area = Math.pow(m, 3) / 6;
+            corteVal.innerText = m.toFixed(1);
+            areaVal.innerText = area.toFixed(2);
+
+            // 1. Draw fill area (shade between 0 and m)
+            ctx.beginPath();
+            ctx.fillStyle = "rgba(16, 185, 129, 0.3)";
+            // Top curve is mx (straight line)
+            ctx.moveTo(pxX(0), pxY(0));
+            ctx.lineTo(pxX(m), pxY(m*m));
+            // Bottom curve is x^2, trace backwards
+            for(let x=m; x>=0; x-=0.1) {
+                ctx.lineTo(pxX(x), pxY(x*x));
+            }
+            ctx.fill();
+
+            // 2. Draw g(x) = mx (Red line)
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#ef4444";
+            ctx.moveTo(pxX(0), pxY(0));
+            ctx.lineTo(pxX(10), pxY(m*10));
+            ctx.stroke();
+
+            // 3. Draw f(x) = x^2 (Blue curve)
+            ctx.beginPath();
+            ctx.strokeStyle = "#3b82f6";
+            ctx.moveTo(pxX(0), pxY(0));
+            for(let x=0; x<=10; x+=0.2) {
+                ctx.lineTo(pxX(x), pxY(x*x));
+            }
+            ctx.stroke();
+
+            // Intersect point
+            ctx.beginPath();
+            ctx.fillStyle = "#facc15";
+            ctx.arc(pxX(m), pxY(m*m), 5, 0, Math.PI*2);
+            ctx.fill();
+        }
+
+        slider.addEventListener('input', drawCurves);
+        window.addEventListener('resize', drawCurves);
+        setTimeout(drawCurves, 100);
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion43', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion43');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion43', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -516,6 +516,40 @@ export const questionDatabase = {
         { question: "Una 'Suma de Riemann' aproxima el área usando...", options: ["Rectángulos que se ajustan bajo la curva", "Círculos concéntricos", "Triángulos rectángulos", "Líneas diagonales"], answerIndex: 0, timeLimit: 20 },
         { question: "¿Cómo se hace más exacta la aproximación del área en las sumas de Riemann?", options: ["Haciendo rectángulos cada vez más delgados (usando infinitos rectángulos)", "Usando rectángulos más altos", "Pintando los rectángulos de otro color", "Sumando menos rectángulos"], answerIndex: 0, timeLimit: 20 },
         { question: "Si la gráfica representa velocidad, el área bajo la curva representa...", options: ["Distancia total recorrida", "Aceleración", "Costo", "Fuerza"], answerIndex: 0, timeLimit: 20 },
-        { question: "El área neta bajo una gráfica de 'uso de electricidad (kW) vs tiempo (h)' es...", options: ["Energía total consumida (kWh)", "El voltaje máximo", "La tarifa a pagar por kW", "El amperaje"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion41": [
+        { question: "La Integral Definida se diferencia de la Indefinida porque...", options: ["Tiene límites de integración (a y b) y devuelve un número", "No tiene solución", "Devuelve una función con '+ C'", "Solo se aplica a líneas rectas"], answerIndex: 0, timeLimit: 20 },
+        { question: "En la expresión ∫(de a hasta b), el valor 'a' representa...", options: ["El límite inferior (dónde empieza el área)", "La aceleración", "El área total", "El límite superior"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la función es f(x)=3 (una línea horizontal), la integral definida entre 0 y 5 es...", options: ["15 (área de un rectángulo 5x3)", "5", "3", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué sucede si evaluamos una integral definida donde a = b?", options: ["El resultado es cero, no hay área", "El resultado es infinito", "Da un error matemático", "El resultado es la derivada"], answerIndex: 0, timeLimit: 20 },
+        { question: "Una integral definida puede dar un resultado negativo si...", options: ["La curva está por debajo del eje X", "Nunca da negativo", "Evaluamos de izquierda a derecha", "Usamos la constante C"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion42": [
+        { question: "El Teorema Fundamental del Cálculo nos dice que la derivación y la integración son...", options: ["Procesos inversos", "Lo mismo", "Procesos sin relación", "Operaciones geométricas"], answerIndex: 0, timeLimit: 20 },
+        { question: "La regla para evaluar una integral definida es calcular: F(b) - F(a). ¿Qué es 'F'?", options: ["La antiderivada de la función", "La función original", "La derivada", "La fuerza"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Por qué desaparece la constante '+ C' al evaluar F(b) - F(a)?", options: ["Porque se resta a sí misma y se cancela", "Porque es igual a cero", "Porque nos equivocamos", "Porque C no existe"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si integramos la velocidad v(t) entre t=2 y t=5, ¿qué obtenemos?", options: ["El desplazamiento exacto ocurrido entre esos segundos", "La velocidad máxima", "La aceleración en t=3", "La posición inicial"], answerIndex: 0, timeLimit: 20 },
+        { question: "Isaac Newton y Gottfried Leibniz son famosos en cálculo porque...", options: ["Descubrieron el Teorema Fundamental independientemente", "Construyeron las primeras calculadoras", "Inventaron las fracciones", "Resolvieron Sudokus"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion43": [
+        { question: "Para calcular el área encerrada entre dos curvas f(x) (arriba) y g(x) (abajo), integramos...", options: ["La resta f(x) - g(x)", "La suma f(x) + g(x)", "El producto f(x) * g(x)", "La derivada g'(x)"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f(x) son Ingresos y g(x) son Costos, el área entre ellas representa...", options: ["La ganancia neta total", "La quiebra de la empresa", "El precio del producto", "Los impuestos"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué necesitamos conocer antes de plantear la integral entre curvas?", options: ["Los puntos donde se cruzan o intersectan (para los límites a y b)", "El color de la gráfica", "La aceleración", "El volumen de revolución"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la curva g(x) pasa a estar por encima de f(x), el área f-g se vuelve...", options: ["Negativa, hay que separar la integral en tramos", "Cero", "Infinita", "Positiva"], answerIndex: 0, timeLimit: 20 },
+        { question: "El área entre curvas es muy usada en...", options: ["Ingeniería, economía y cálculo de probabilidades", "Gramática", "Música", "Historia"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion44": [
+        { question: "La integración por Sustitución (o cambio de variable) se usa principalmente para...", options: ["Revertir la Regla de la Cadena de las derivadas", "Revertir la Regla del Producto", "Sumar fracciones", "Dibujar círculos"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué buscamos al elegir la variable auxiliar 'u'?", options: ["Una parte de la función cuya derivada también esté presente multiplicando", "El número más grande", "Una letra bonita", "El denominador siempre"], answerIndex: 0, timeLimit: 20 },
+        { question: "En la integral ∫ 2x * cos(x^2) dx, ¿qué elegirías como 'u'?", options: ["u = x^2 (porque su derivada es 2x)", "u = cos", "u = 2x", "u = dx"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al hacer el cambio de variable, el 'dx' se convierte en...", options: ["du / u'", "du * u", "dx", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al terminar de integrar respecto a 'u' (en indefinidas), el último paso es...", options: ["Sustituir 'u' de regreso por su expresión original con 'x'", "Olvidarse de la 'x'", "Borrar todo", "Evaluar F(b)-F(a)"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion45": [
+        { question: "La Integración por Partes sirve para resolver integrales que provienen de...", options: ["La regla del producto de derivadas", "La regla de la cadena", "Sumas y restas simples", "Raíces cuadradas"], answerIndex: 0, timeLimit: 20 },
+        { question: "La famosa frase para recordar la fórmula es: 'Un Día Vi...'", options: ["Una Vaca - Vestida De Uniforme ( ∫ u dv = uv - ∫ v du )", "Un Venado - Volando", "Una Ventana - Verde", "Un Viejo - Viajero"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Para qué sirve el acrónimo ILATE (Inversa, Logarítmica, Algebraica, Trigonométrica, Exponencial)?", options: ["Para saber a qué término llamar 'u' (prioridad de izquierda a derecha)", "Para dibujar", "Para nombrar planetas", "Es el nombre del inventor"], answerIndex: 0, timeLimit: 20 },
+        { question: "En ∫ x*e^x dx, según ILATE, ¿quién debe ser 'u'?", options: ["x (porque es Algebraica y va antes que Exponencial)", "e^x", "dx", "e"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al usar Integración por Partes, nuestro objetivo es que la segunda integral (∫ v du)...", options: ["Sea más fácil de resolver que la integral original", "Sea idéntica", "Sea imposible", "Desaparezca automáticamente"], answerIndex: 0, timeLimit: 20 }
     ]
 };

@@ -258,9 +258,10 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
-    gap: 8px;
+    gap: 15px;
 }
+.top-nav { margin-bottom: 25px; margin-top: 10px; }
+.bottom-nav { margin-top: 30px; margin-bottom: 40px; }
 .nav-btn {
     background: rgba(255,255,255,0.1);
     color: white;

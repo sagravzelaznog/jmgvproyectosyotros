@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 27 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Concentración de Reactivos */
+        .beaker {
+            width: 40px; height: 60px; border: 3px solid #cbd5e1; border-top: none; border-radius: 0 0 10px 10px; position: relative; overflow: hidden;
+        }
+        .liquid {
+            position: absolute; bottom: 0; width: 100%; height: 50%; background: #a855f7;
+            animation: changeColor 4s infinite alternate;
+        }
+        .bubble {
+            width: 5px; height: 5px; background: white; border-radius: 50%; position: absolute; bottom: 10px; left: 15px;
+            animation: riseBubble 2s infinite ease-in;
+        }
+        @keyframes changeColor { 0% { background: #3b82f6; } 100% { background: #ec4899; } }
+        @keyframes riseBubble { 0% { bottom: 10px; opacity: 1; } 100% { bottom: 60px; opacity: 0; } }
+
+        /* 2. Contracción Térmica */
+        .bridge-gap { display: flex; gap: 5px; align-items: center; }
+        .bridge-part { width: 50px; height: 10px; background: #64748b; border-radius: 2px; }
+        .gap { width: 2px; height: 15px; background: #ef4444; animation: expandGap 3s infinite alternate; }
+        @keyframes expandGap { 0% { width: 2px; background: #ef4444; } 100% { width: 15px; background: #3b82f6; } }
+
+        /* 3. Presión Atmosférica */
+        .mountain {
+            width: 0; height: 0; border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 80px solid #475569; position: relative;
+        }
+        .altimeter {
+            position: absolute; left: 5px; bottom: -80px; width: 10px; height: 10px; background: #f59e0b; border-radius: 50%;
+            animation: climbMountain 4s infinite alternate ease-in-out;
+        }
+        @keyframes climbMountain { 0% { left: -40px; bottom: -80px; } 100% { left: -5px; bottom: -10px; } }
+
+        /* Simulador: Laboratorio de Tasas Vinculadas */
+        .lab-sim {
+            background: #0f172a;
+            border: 4px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        .balloon-area {
+            height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+        }
+        .balloon {
+            width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #ec4899, #be185d); border-radius: 50%;
+            transition: all 0.1s; position: relative;
+        }
+        .balloon::after {
+            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 0; height: 0;
+            border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid #be185d;
+        }
+        .slider-container { margin: 20px 0; color: white; }
+        .data-panel {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; background: #1e293b; padding: 15px; border-radius: 8px; color: #94a3b8; font-family: monospace;
+        }
+        .data-val { font-size: 1.5em; color: #10b981; font-weight: bold; }
+        .formula-bar { margin-top: 15px; font-size: 1.2em; color: #f59e0b; }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion27-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS27()">
+            <div class="badge">Bloque 2 | Sesión 27</div>
+            <h1>Regla de la Cadena II</h1>
+            <p>Tasas vinculadas: Cuando el cambio de una variable afecta a otra en cascada.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "La notación de Leibniz (dy/dx) brilla aquí. Es muy fácil para los alumnos ver que (dy/du) * (du/dx) se 'cancela' el 'du', quedando dy/dx. Es una regla de oro nemotécnica."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar la regla de la cadena para resolver problemas de ciencias experimentales usando notación diferencial. Comprender que $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: Notación de Leibniz</h2>
+                <div class="math-box" style="border-color:#10b981; color:#a7f3d0; text-align:left;">
+                    Si tenemos variables interconectadas: $Y$ depende de $U$, y $U$ depende de $X$.<br>
+                    Para saber cómo cambia $Y$ respecto a $X$, multiplicamos las tasas intermedias:<br>
+                    <strong>$\frac{dY}{dX} = \frac{dY}{dU} \cdot \frac{dU}{dX}$</strong><br><br>
+                    <em>Es como el tipo de cambio de moneda: Pesos a Dólares por Dólares a Euros da Pesos a Euros.</em>
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ciencias Experimentales</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Concentración en Química:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">La concentración de reactivo $C$ depende de la temperatura $T$, y $T$ baja con el tiempo $t$. $\frac{dC}{dt} = \frac{dC}{dT} \cdot \frac{dT}{dt}$</p>
+                        <div class="css-graphic">
+                            <div class="beaker">
+                                <div class="liquid"></div>
+                                <div class="bubble"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Contracción Térmica (Física):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">La longitud de un puente $L$ depende de la temperatura ambiental, que a su vez depende de la hora del día.</p>
+                        <div class="css-graphic">
+                            <div class="bridge-gap">
+                                <div class="bridge-part"></div><div class="gap"></div><div class="bridge-part"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Presión por Altitud:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Al subir una montaña en coche, la altitud cambia con el tiempo, y la presión atmosférica cambia con la altitud.</p>
+                        <div class="css-graphic">
+                            <div class="mountain">
+                                <div class="altimeter"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">🎈 Laboratorio de Tasas Vinculadas</h2>
+                <p>Mueve el deslizador de tiempo ($t$) para inflar el globo. Observa cómo el tiempo aumenta el radio ($r$), y el radio aumenta el volumen ($V$). Las tasas se multiplican.</p>
+
+                <div class="lab-sim">
+                    <div class="balloon-area">
+                        <div class="balloon" id="sim-balloon"></div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        Tiempo ($t$ seg): <span id="t-val">1</span><br>
+                        <input type="range" min="1" max="10" value="1" id="time-slider" style="width: 80%; margin-top:10px;">
+                    </div>
+
+                    <div class="data-panel">
+                        <div>Radio ($r$)<br><span class="data-val" id="val-r">2 cm</span></div>
+                        <div>$\frac{dr}{dt}$ (Tasa)<br><span class="data-val" style="color:#f59e0b">2</span></div>
+                        <div>$\frac{dV}{dr}$ (Tasa)<br><span class="data-val" style="color:#3b82f6" id="val-dvdr">12.6</span></div>
+                    </div>
+
+                    <div class="formula-bar">
+                        $\frac{dV}{dt} = \frac{dV}{dr} \cdot \frac{dr}{dt} =$ <span id="val-dvdt" style="color:white; font-weight:bold;">25.1</span> $cm^3/s$
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS26.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS28.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\nBanco: Mercado Pago\nCorreo (PayPal): primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('time-slider');
+        const balloon = document.getElementById('sim-balloon');
+        const tVal = document.getElementById('t-val');
+        const rVal = document.getElementById('val-r');
+        const dVdrVal = document.getElementById('val-dvdr');
+        const dVdtVal = document.getElementById('val-dvdt');
+
+        slider.addEventListener('input', (e) => {
+            const t = parseFloat(e.target.value);
+            tVal.innerText = t;
+            
+            // Model: r = 2t
+            const r = 2 * t;
+            rVal.innerText = r + " cm";
+            
+            // Visual balloon size
+            const baseSize = 50;
+            balloon.style.width = (baseSize + (t * 15)) + "px";
+            balloon.style.height = (baseSize + (t * 15)) + "px";
+
+            // dV/dr of Volume = (4/3)pi r^3 -> 4 pi r^2
+            const dVdr = 4 * Math.PI * Math.pow(r, 2);
+            dVdrVal.innerText = dVdr.toFixed(1);
+
+            // dr/dt = 2
+            const drdt = 2;
+
+            // dV/dt
+            const dVdt = dVdr * drdt;
+            dVdtVal.innerText = dVdt.toFixed(1);
+        });
+
+        window.unlockTeacherTipsS27 = function() {
+            const tip = document.querySelector('#sesion27-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion27', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion27');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion27', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

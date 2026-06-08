@@ -416,6 +416,40 @@ export const questionDatabase = {
         { question: "¿Por qué no podemos simplemente multiplicar las derivadas (U' * V')?", options: ["Porque el cambio en un factor se multiplica por el tamaño actual del otro factor interactuando simultáneamente", "Porque da cero", "Porque Newton lo prohibió", "Porque es muy fácil"], answerIndex: 0, timeLimit: 20 },
         { question: "En la regla del cociente (U/V), el denominador resultante siempre queda...", options: ["Elevado al cuadrado (V^2)", "Igual (V)", "Eliminado", "Multiplicado por U"], answerIndex: 0, timeLimit: 20 },
         { question: "Si calculas la derivada de (x^2) * (x^3) usando la regla del producto, el resultado final es equivalente a derivar...", options: ["x^5", "x^6", "x", "x^2.5"], answerIndex: 0, timeLimit: 20 },
-        { question: "El signo principal que separa a los términos en el numerador de la regla del cociente es:", options: ["Un signo de resta (-)", "Un signo de suma (+)", "Multiplicación (*)", "Igual (=)"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion26": [
+        { question: "La regla de la cadena se utiliza principalmente para derivar...", options: ["Funciones compuestas (una función dentro de otra)", "Sumas simples", "Constantes aisladas", "Solo fracciones"], answerIndex: 0, timeLimit: 20 },
+        { question: "La analogía visual más común para la regla de la cadena es:", options: ["Las muñecas rusas (matrioskas)", "Una caja registradora", "Un dominó", "Una rueda de la fortuna"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si y = f(g(x)), la derivada y' es:", options: ["f'(g(x)) * g'(x)", "f'(x) + g'(x)", "f'(g'(x))", "f(x) * g(x)"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cuál es la derivada de (2x + 1)^2 usando la regla de la cadena?", options: ["4(2x + 1)", "2(2x + 1)", "4x + 2", "4x"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un sistema de engranajes anidados, si A mueve a B y B mueve a C, el movimiento total de C respecto a A es un ejemplo de...", options: ["Tasas de cambio multiplicativas (Regla de la Cadena)", "Regla de la Suma", "Aceleración Cero", "Regla del Cociente"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion27": [
+        { question: "Las tasas vinculadas (o relacionadas) estudian...", options: ["Cómo el cambio de una variable afecta la tasa de cambio de otra", "Por qué los polinomios tienen raíces", "Cómo sumar fracciones rápidamente", "El origen de las constantes"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si inflas un globo esférico, el volumen y el radio son...", options: ["Variables cuyas tasas de crecimiento están vinculadas", "Constantes", "Inversamente proporcionales", "Independientes entre sí"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cuál es la derivada de la función interna en y = (x^2 + 3)^4 ?", options: ["2x", "4", "x^2", "3"], answerIndex: 0, timeLimit: 20 },
+        { question: "En química, si la concentración depende de la temperatura y la temperatura depende del tiempo...", options: ["Se usa la regla de la cadena para hallar el cambio de concentración por tiempo", "No se pueden calcular tasas", "La derivada es siempre cero", "Se usa la regla del cociente"], answerIndex: 0, timeLimit: 20 },
+        { question: "La regla de la cadena requiere que multipliquemos la derivada externa por...", options: ["La derivada interna", "La función original", "Una constante", "El exponente"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion28": [
+        { question: "¿Qué representa la segunda derivada de la posición respecto al tiempo en física?", options: ["Aceleración", "Velocidad", "Masa", "Distancia total"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f(x) = x^3, ¿cuál es su segunda derivada f''(x)?", options: ["6x", "3x^2", "x", "6"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cómo se llama la gráfica que muestra la velocidad cambiando en el tiempo?", options: ["Gráfica v-t, cuya pendiente es la aceleración", "Gráfica circular", "Histograma", "Diagrama de Venn"], answerIndex: 0, timeLimit: 20 },
+        { question: "En una curva epidémica, el punto donde los casos dejan de acelerar y empiezan a frenar su crecimiento se llama...", options: ["Punto de inflexión", "Cero absoluto", "Asíntota", "Vértice"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué nos dice la tercera derivada de la posición?", options: ["El 'Tirón' (Jerk) o cambio de la aceleración", "El volumen", "El costo total", "El área bajo la curva"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion29": [
+        { question: "Si la primera derivada f'(x) es positiva en un intervalo, la función original está...", options: ["Creciendo (subiendo)", "Decreciendo (bajando)", "Constante (plana)", "Indefinida"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un perfil topográfico, ¿qué significa que f'(x) < 0 ?", options: ["Estás yendo cuesta abajo", "Estás yendo cuesta arriba", "Estás en la cima", "Estás detenido"], answerIndex: 0, timeLimit: 20 },
+        { question: "Un ciclo bursátil donde las acciones suben sostenidamente se caracteriza por...", options: ["Tener derivada positiva la mayor parte del tiempo", "Tener derivada negativa siempre", "Derivada cero constante", "No tener derivada"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f'(x) = 0, ¿qué podemos inferir sobre ese instante exacto?", options: ["Es un punto crítico (posible pico o valle, ni crece ni decrece ahí)", "Que la función ya no existe", "Que hay un error", "Que es una línea vertical"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para determinar si el nivel de agua de una represa bajará mañana, necesitamos proyectar que la tasa neta f'(t) sea...", options: ["Negativa", "Positiva", "Cero", "Infinita"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion30": [
+        { question: "El criterio de la primera derivada nos sirve para encontrar...", options: ["Puntos máximos y mínimos (óptimos)", "El área total", "Asintotas oblicuas", "El origen de coordenadas"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f'(x) pasa de ser Positiva a Negativa, hemos encontrado un...", options: ["Máximo local", "Mínimo local", "Punto de inflexión vertical", "Asintota horizontal"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para encontrar la hora del día con mayor temperatura según un modelo polinomial, debemos...", options: ["Igualar la derivada a cero y despejar x", "Multiplicar todo por cero", "Sumar las temperaturas", "Graficar sin derivar"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f'(x) pasa de ser Negativa a Positiva, el punto crítico es un...", options: ["Mínimo", "Máximo", "Raíz", "Error"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un problema de optimización de combustible, buscamos matemáticamente...", options: ["El punto mínimo de la función de consumo", "El punto máximo del gasto", "Que el consumo sea infinito", "Acelerar sin límite"], answerIndex: 0, timeLimit: 20 }
     ]
 };

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 29 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Demanda Eléctrica */
+        .demand-chart { display: flex; align-items: flex-end; height: 100%; width: 90%; gap: 2px; }
+        .d-bar { flex: 1; background: #3b82f6; border-radius: 2px 2px 0 0; }
+        .d-bar.up { background: #10b981; }
+        .d-bar.down { background: #ef4444; }
+
+        /* 2. Niveles de Agua */
+        .dam { width: 60px; height: 80px; border: 4px solid #64748b; border-top: none; position: relative; border-radius: 0 0 10px 10px; }
+        .water-level { position: absolute; bottom: 0; width: 100%; height: 80%; background: #3b82f6; animation: waterDrain 5s infinite alternate ease-in-out; }
+        @keyframes waterDrain { 0% { height: 90%; } 100% { height: 20%; background: #ef4444; } }
+
+        /* 3. Ciclos Bursátiles */
+        .stock-line { width: 100%; height: 2px; background: rgba(255,255,255,0.2); position: relative; }
+        .stock-dot { width: 10px; height: 10px; border-radius: 50%; background: #10b981; position: absolute; top: -4px; animation: stockMove 4s infinite linear; }
+        @keyframes stockMove { 
+            0% { left: 0; transform: translateY(0); background: #10b981; }
+            30% { left: 30%; transform: translateY(-40px); background: #10b981; }
+            50% { left: 50%; transform: translateY(-20px); background: #ef4444; }
+            80% { left: 80%; transform: translateY(-50px); background: #10b981; }
+            100% { left: 100%; transform: translateY(-10px); background: #ef4444; }
+        }
+
+        /* Simulador: Explorador Topográfico */
+        .topo-sim {
+            background: #0f172a; border: 4px solid #10b981; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        .canvas-area {
+            background: #1e293b; border-radius: 8px; width: 100%; height: 200px; position: relative; overflow: hidden; border-bottom: 2px solid #64748b;
+        }
+        #mountainCanvas { width: 100%; height: 100%; }
+        .rover {
+            width: 20px; height: 15px; background: white; border-radius: 3px; position: absolute; bottom: 0; left: 0; transition: all 0.05s linear; z-index: 10;
+        }
+        .rover::after { content: ''; width: 4px; height: 4px; border-radius: 50%; background: black; position: absolute; bottom: -2px; left: 2px; box-shadow: 12px 0 0 black; }
+        .sim-stats {
+            display: flex; justify-content: space-around; margin-top: 15px; font-family: monospace; font-size: 1.2em;
+        }
+        .stat-box { padding: 10px; border-radius: 5px; background: #334155; width: 45%; }
+        .s-up { color: #10b981; border: 1px solid #10b981; }
+        .s-down { color: #ef4444; border: 1px solid #ef4444; }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion29-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS29()">
+            <div class="badge">Bloque 2 | Sesión 29</div>
+            <h1>Crecimiento y Decrecimiento</h1>
+            <p>Usar el signo de la derivada para predecir el comportamiento futuro.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "La derivada es un radar. Si sale positiva, vamos para arriba. Si sale negativa, vamos para abajo. Si sale cero, estamos en la cima o en el fondo. Pintar las curvas de verde y rojo ayuda muchísimo visualmente."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Analizar los intervalos donde una función crece o decrece evaluando el signo algebraico de la primera derivada ($f'(x)$).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: El Signo de la Pendiente</h2>
+                <div class="math-box" style="border-color:#10b981; color:#a7f3d0; text-align:left;">
+                    La primera derivada nos dice la dirección de la función original:<br>
+                    🟢 <strong>$f'(x) > 0$</strong> : La función está <strong>creciendo</strong> (va hacia arriba).<br>
+                    🔴 <strong>$f'(x) < 0$</strong> : La función está <strong>decreciendo</strong> (va hacia abajo).<br>
+                    ⚪ <strong>$f'(x) = 0$</strong> : Punto crítico (ni sube ni baja en ese instante preciso).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Aplicaciones Reales</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Demanda Eléctrica:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Durante el amanecer $f'(x)>0$ (encienden fábricas). Al mediodía hay un pico $f'(x)=0$. En la noche $f'(x)<0$ (todos duermen).</p>
+                        <div class="css-graphic">
+                            <div class="demand-chart">
+                                <div class="d-bar up" style="height:20%"></div><div class="d-bar up" style="height:40%"></div><div class="d-bar up" style="height:80%"></div>
+                                <div class="d-bar" style="height:90%"></div>
+                                <div class="d-bar down" style="height:60%"></div><div class="d-bar down" style="height:30%"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Niveles de Presas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">En sequía, el volumen decrece. La derivada es consistentemente negativa, advirtiendo escasez inminente.</p>
+                        <div class="css-graphic">
+                            <div class="dam"><div class="water-level"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Ciclos Bursátiles:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Los analistas financieros buscan los puntos donde la derivada cambia de negativa (caída) a positiva (recuperación) para comprar.</p>
+                        <div class="css-graphic">
+                            <div class="stock-line"><div class="stock-dot"></div></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">🏔️ Explorador Topográfico</h2>
+                <p>Dale play al explorador. Observa cómo pinta el terreno de <strong>Verde</strong> cuando sube ($f'(x)>0$) y de <strong>Rojo</strong> cuando baja ($f'(x)<0$).</p>
+
+                <div class="topo-sim">
+                    <div class="canvas-area">
+                        <canvas id="mountainCanvas"></canvas>
+                        <div class="rover" id="sim-rover"></div>
+                    </div>
+                    <div class="sim-stats">
+                        <div class="stat-box s-up" id="stat-up">Creciendo<br>$f'(x) > 0$</div>
+                        <div class="stat-box s-down" id="stat-down">Decreciendo<br>$f'(x) < 0$</div>
+                    </div>
+                    <button onclick="startRover()" style="margin-top:20px; padding:10px 20px; background:#10b981; color:white; border:none; border-radius:5px; cursor:pointer;">▶ Iniciar Exploración</button>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS28.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS30.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\nBanco: Mercado Pago\nCorreo (PayPal): primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const canvas = document.getElementById('mountainCanvas');
+        const ctx = canvas.getContext('2d');
+        const rover = document.getElementById('sim-rover');
+        let roverAnim;
+
+        // Resize canvas internally
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+
+        // Draw base curve
+        function drawCurve() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(255,255,255,0.2)";
+            ctx.lineWidth = 2;
+            for(let x=0; x<canvas.width; x++){
+                let y = getY(x);
+                if(x===0) ctx.moveTo(x,y);
+                else ctx.lineTo(x,y);
+            }
+            ctx.stroke();
+        }
+
+        function getY(x) {
+            // Function: sin wave + some slope
+            const scale = canvas.width / 10;
+            return canvas.height/2 - Math.sin(x/scale)*50 - Math.cos(x/(scale*2))*30;
+        }
+
+        function getDeriv(x) {
+            const h = 0.1;
+            return (getY(x+h) - getY(x))/h;
+        }
+
+        drawCurve();
+
+        window.startRover = function() {
+            clearInterval(roverAnim);
+            drawCurve();
+            let x = 0;
+            const statUp = document.getElementById('stat-up');
+            const statDown = document.getElementById('stat-down');
+
+            roverAnim = setInterval(() => {
+                x += 2;
+                if(x > canvas.width) {
+                    clearInterval(roverAnim);
+                    return;
+                }
+
+                let y = getY(x);
+                let deriv = getDeriv(x); // Remember Y axis is inverted in canvas!
+                // So if deriv < 0 in canvas, it means it's going UP visually
+                // Let's invert deriv for mathematical logic
+                let mathDeriv = -deriv;
+
+                rover.style.left = `${x - 10}px`;
+                rover.style.top = `${y - 15}px`;
+
+                // Draw trail
+                ctx.beginPath();
+                ctx.moveTo(x-2, getY(x-2));
+                ctx.lineTo(x, y);
+                ctx.lineWidth = 4;
+
+                if(mathDeriv > 0) {
+                    ctx.strokeStyle = "#10b981"; // Green
+                    statUp.style.background = "rgba(16,185,129,0.3)";
+                    statDown.style.background = "#334155";
+                    rover.style.transform = `rotate(-15deg)`;
+                } else {
+                    ctx.strokeStyle = "#ef4444"; // Red
+                    statUp.style.background = "#334155";
+                    statDown.style.background = "rgba(239,68,68,0.3)";
+                    rover.style.transform = `rotate(15deg)`;
+                }
+                ctx.stroke();
+
+            }, 30);
+        };
+
+        window.unlockTeacherTipsS29 = function() {
+            const tip = document.querySelector('#sesion29-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion29', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion29');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion29', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

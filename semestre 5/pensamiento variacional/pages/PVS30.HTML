@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 30 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Panel Solar */
+        .sun-path { width: 100%; height: 100px; border-radius: 100px 100px 0 0; border: 2px dashed #64748b; border-bottom: none; position: relative; }
+        .sun { width: 20px; height: 20px; background: #facc15; border-radius: 50%; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px #facc15; }
+        .panel { width: 40px; height: 5px; background: #3b82f6; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .energy-beam { width: 2px; height: 100px; background: #facc15; position: absolute; left: 50%; top: 0; opacity: 0.5; }
+
+        /* 2. Gasto Combustible */
+        .fuel-curve { width: 80%; height: 60px; border-bottom: 2px solid #94a3b8; border-left: 2px solid #94a3b8; position: relative; display: flex; align-items: flex-end; justify-content: center; }
+        .curve-line { width: 100%; height: 100%; border-radius: 0 0 50% 50%; border-bottom: 3px solid #ef4444; }
+        .min-point { width: 8px; height: 8px; background: #10b981; border-radius: 50%; position: absolute; bottom: -3px; }
+
+        /* 3. Pico Voltaje */
+        .volt-wave { width: 100%; height: 2px; background: #cbd5e1; position: relative; }
+        .sine-wave { position: absolute; width: 100%; height: 100%; top: -30px; border-top: 3px solid #eab308; border-radius: 50% 50% 0 0; }
+        .max-dot { width: 10px; height: 10px; background: white; border-radius: 50%; position: absolute; top: -33px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 15px white; }
+
+        /* Simulador: Buscador de Picos */
+        .peak-sim {
+            background: #0f172a; border: 4px solid #f59e0b; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+        .temp-display { font-size: 3em; color: #ef4444; font-weight: bold; font-family: monospace; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        .time-slider-container { margin: 20px 0; color: white; }
+        .sim-slider { width: 80%; margin-top: 10px; }
+        .math-panel { background: #1e293b; border-radius: 8px; padding: 15px; margin-top: 15px; font-family: monospace; color: #94a3b8; }
+        .deriv-val { font-size: 1.5em; color: #3b82f6; font-weight: bold; }
+        .deriv-zero { color: #10b981; }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion30-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS30()">
+            <div class="badge">Bloque 2 | Sesión 30</div>
+            <h1>Máximos y Mínimos</h1>
+            <p>Optimización básica: Encontrar los puntos donde la derivada es cero.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Esta es la joya de la corona del bloque 2. Toda la optimización en ingeniería e IA se basa en buscar donde la derivada se hace cero para minimizar el error o maximizar la eficiencia. Muéstrenles cómo igualar f'(x) a 0 es como 'detener la pelota en el aire' al lanzarla hacia arriba."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar el Criterio de la Primera Derivada para localizar puntos óptimos (Máximos y Mínimos locales) igualando $f'(x)$ a cero.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+                <h2 style="color: #f59e0b;">📖 Teoría: El Criterio de la Primera Derivada</h2>
+                <div class="math-box" style="border-color:#f59e0b; color:#fde68a; text-align:left;">
+                    Para que una curva cambie de subir a bajar (o viceversa), tiene que aplanarse por un instante.<br>
+                    <strong>Paso 1:</strong> Derivar $f(x)$ para obtener $f'(x)$.<br>
+                    <strong>Paso 2:</strong> Igualar a cero ($f'(x) = 0$) y resolver para $x$. Estos son los <em>Puntos Críticos</em>.<br>
+                    <strong>Paso 3:</strong> Si $f'(x)$ cambia de + a -, es un <strong>Máximo</strong>. Si cambia de - a +, es un <strong>Mínimo</strong>.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Optimización en la Realidad</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Rendimiento Solar (Máximo):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">La captación de energía sube en la mañana, se estabiliza al mediodía (derivada = 0), y baja en la tarde.</p>
+                        <div class="css-graphic">
+                            <div class="sun-path"><div class="sun"></div><div class="energy-beam"></div><div class="panel"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Consumo de Combustible (Mínimo):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Ir muy lento gasta por el motor encendido mucho tiempo. Ir muy rápido gasta por resistencia aerodinámica. Hay una velocidad óptima donde el gasto toca fondo.</p>
+                        <div class="css-graphic">
+                            <div class="fuel-curve"><div class="curve-line"></div><div class="min-point"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Picos de Voltaje:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">En corriente alterna, los capacitores se diseñan para soportar los voltajes máximos donde $V'(t) = 0$.</p>
+                        <div class="css-graphic">
+                            <div class="volt-wave"><div class="sine-wave"></div><div class="max-dot"></div></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">🌡️ Buscador de Pico de Temperatura</h2>
+                <p>Modelo de temperatura desde el amanecer (t=0): $T(t) = -t^2 + 12t + 20$.<br>
+                Encuentra la hora exacta donde la temperatura alcanza su <strong>máximo</strong> usando la derivada.</p>
+
+                <div class="peak-sim">
+                    <div class="time-slider-container">
+                        Hora (t): <span id="time-val" style="font-weight:bold; color:#facc15;">0</span> hr<br>
+                        <input type="range" min="0" max="12" step="0.5" value="0" class="sim-slider" id="t-slider">
+                    </div>
+                    
+                    <div class="temp-display" id="temp-val">20.0 °C</div>
+                    
+                    <div class="math-panel">
+                        $T'(t) = -2t + 12$<br><br>
+                        Pendiente actual ($T'$):<br>
+                        <span class="deriv-val" id="deriv-val">12</span>
+                        <div id="optimum-msg" style="margin-top: 10px; color: #10b981; font-weight: bold; opacity: 0; transition: opacity 0.3s;">
+                            ¡MÁXIMO ENCONTRADO! $T'(t) = 0$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS29.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="#" class="nav-btn" style="opacity: 0.5; pointer-events: none;">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\nBanco: Mercado Pago\nCorreo (PayPal): primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('t-slider');
+        const timeVal = document.getElementById('time-val');
+        const tempVal = document.getElementById('temp-val');
+        const derivVal = document.getElementById('deriv-val');
+        const optMsg = document.getElementById('optimum-msg');
+
+        slider.addEventListener('input', (e) => {
+            const t = parseFloat(e.target.value);
+            timeVal.innerText = t.toFixed(1);
+            
+            // T(t) = -t^2 + 12t + 20
+            const temp = -(t*t) + (12*t) + 20;
+            tempVal.innerText = temp.toFixed(1) + " °C";
+
+            // T'(t) = -2t + 12
+            const deriv = -2*t + 12;
+            derivVal.innerText = deriv.toFixed(1);
+
+            if(Math.abs(deriv) < 0.1) {
+                derivVal.classList.add('deriv-zero');
+                optMsg.style.opacity = 1;
+                tempVal.style.color = "#10b981";
+                tempVal.style.textShadow = "0 0 15px rgba(16,185,129,0.8)";
+            } else {
+                derivVal.classList.remove('deriv-zero');
+                optMsg.style.opacity = 0;
+                tempVal.style.color = "#ef4444";
+                tempVal.style.textShadow = "0 0 10px rgba(239,68,68,0.5)";
+            }
+        });
+
+        window.unlockTeacherTipsS30 = function() {
+            const tip = document.querySelector('#sesion30-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion30', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion30');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion30', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 28 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Vehículo Eléctrico (Aceleración) */
+        .track { width: 100%; height: 2px; background: #64748b; position: absolute; bottom: 30px; }
+        .ev-car {
+            width: 40px; height: 20px; background: #10b981; border-radius: 5px; position: absolute; bottom: 30px; left: 0;
+            animation: accelCar 4s infinite cubic-bezier(0.5, 0, 1, 1);
+        }
+        @keyframes accelCar { 0% { left: 0%; } 100% { left: 100%; } }
+
+        /* 2. Curva Epidémica (Inflexión) */
+        .epi-chart { display: flex; align-items: flex-end; gap: 3px; height: 80px; width: 80%; }
+        .epi-bar { width: 10px; background: #ef4444; border-radius: 2px 2px 0 0; }
+        /* Logistic curve shape */
+        .epi-bar:nth-child(1) { height: 5%; }
+        .epi-bar:nth-child(2) { height: 10%; }
+        .epi-bar:nth-child(3) { height: 25%; }
+        .epi-bar:nth-child(4) { height: 50%; background: #f59e0b; } /* Inflexion point */
+        .epi-bar:nth-child(5) { height: 75%; }
+        .epi-bar:nth-child(6) { height: 90%; }
+        .epi-bar:nth-child(7) { height: 98%; }
+
+        /* 3. Momento de Flexión */
+        .structure { width: 80%; height: 20px; background: #94a3b8; border-radius: 5px; position: relative; animation: bendStruct 3s infinite alternate ease-in-out; }
+        .weight { width: 20px; height: 20px; background: #3b82f6; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); }
+        @keyframes bendStruct { 0% { transform: translateY(0); border-radius: 5px; } 100% { transform: translateY(10px); border-radius: 0 0 50% 50%; background: #ef4444; } }
+
+        /* Simulador: Gráficas Sincronizadas */
+        .sync-sim {
+            background: #0f172a; border: 4px solid #3b82f6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .anim-zone { height: 60px; background: #1e293b; border-radius: 8px; position: relative; margin-bottom: 20px; overflow: hidden; }
+        .sim-car { width: 30px; height: 20px; background: #3b82f6; position: absolute; bottom: 10px; left: 10px; border-radius: 5px; transition: left 0.1s linear; }
+        
+        .charts-container { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .chart-box { background: #1e293b; border-radius: 8px; padding: 10px; color: white; font-family: monospace; font-size: 0.9em; position: relative; height: 100px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .chart-title { position: absolute; top: 5px; left: 10px; color: #94a3b8; font-weight: bold; }
+        .chart-fill { width: 100%; background: #3b82f6; transition: height 0.1s linear; border-radius: 2px 2px 0 0; }
+        .c-pos .chart-fill { background: #10b981; }
+        .c-vel .chart-fill { background: #f59e0b; }
+        .c-acc .chart-fill { background: #ef4444; }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion28-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS28()">
+            <div class="badge">Bloque 2 | Sesión 28</div>
+            <h1>Derivadas de Orden Superior</h1>
+            <p>Comprender el "cambio del cambio": Aceleración, concavidad y tirón.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Si derivar una vez es saber a qué velocidad vamos, derivar dos veces es saber si estamos pisando el acelerador o el freno. Denles el ejemplo de ir en un coche ciegos: no sientes la velocidad (1ra derivada), pero SÍ sientes la aceleración (2da derivada) cuando te pegas al asiento."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aprender a calcular derivadas sucesivas $f''(x)$, $f'''(x)$ y comprender su significado físico (aceleración) y geométrico (concavidad y puntos de inflexión).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: El Cambio del Cambio</h2>
+                <div class="math-box" style="border-color:#3b82f6; color:#93c5fd; text-align:left;">
+                    Al derivar una derivada, obtenemos una <strong>Derivada de Orden Superior</strong>.<br>
+                    • <strong>$f(x)$</strong> : Posición (metros)<br>
+                    • <strong>$f'(x)$</strong> : Velocidad (m/s) $\leftarrow$ Tasa de cambio de la posición.<br>
+                    • <strong>$f''(x)$</strong> : Aceleración (m/s²) $\leftarrow$ Tasa de cambio de la velocidad.<br>
+                    • <strong>$f'''(x)$</strong> : Tirón o Jerk (m/s³) $\leftarrow$ Tasa de cambio de la aceleración.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos Físicos y Geométricos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Aceleración Vehicular:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Pisamos el pedal a fondo. La posición $x(t) = 2t^2$. Su primera derivada es la velocidad $v(t) = 4t$. Su segunda derivada es la aceleración constante $a(t) = 4$.</p>
+                        <div class="css-graphic">
+                            <div class="track"></div><div class="ev-car"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Curvas Epidémicas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El "pico de contagios" es cuando $f''(x) = 0$ (Punto de inflexión). Los casos siguen creciendo, pero cada vez más lento.</p>
+                        <div class="css-graphic">
+                            <div class="epi-chart">
+                                <div class="epi-bar"></div><div class="epi-bar"></div><div class="epi-bar"></div>
+                                <div class="epi-bar"></div><div class="epi-bar"></div><div class="epi-bar"></div><div class="epi-bar"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Momento de Flexión:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">En ingeniería civil, la carga es la 4ta derivada de la curva de la viga elástica. El momento flector es la 2da derivada.</p>
+                        <div class="css-graphic">
+                            <div class="structure"><div class="weight"></div></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">🚗 Simulador de Cinemática</h2>
+                <p>Posición $x(t) = t^2$. Dale play para ver cómo cambian simultáneamente la posición, la velocidad ($2t$) y la aceleración ($2$).</p>
+
+                <div class="sync-sim">
+                    <div class="anim-zone">
+                        <div class="sim-car" id="s-car"></div>
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart-box c-pos">
+                            <div class="chart-title">$x(t) = t^2$ (Posición)</div>
+                            <div class="chart-fill" id="bar-pos" style="height:0%;"></div>
+                        </div>
+                        <div class="chart-box c-vel">
+                            <div class="chart-title">$v(t) = 2t$ (Velocidad)</div>
+                            <div class="chart-fill" id="bar-vel" style="height:0%;"></div>
+                        </div>
+                        <div class="chart-box c-acc">
+                            <div class="chart-title">$a(t) = 2$ (Acel.)</div>
+                            <div class="chart-fill" id="bar-acc" style="height:0%;"></div>
+                        </div>
+                    </div>
+                    <button onclick="runSim()" style="margin-top:20px; padding:10px 20px; background:#3b82f6; color:white; border:none; border-radius:5px; cursor:pointer;">▶ Simular Movimiento</button>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS27.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS29.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\nBanco: Mercado Pago\nCorreo (PayPal): primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        let simInterval;
+        window.runSim = function() {
+            clearInterval(simInterval);
+            let t = 0;
+            const car = document.getElementById('s-car');
+            const bPos = document.getElementById('bar-pos');
+            const bVel = document.getElementById('bar-vel');
+            const bAcc = document.getElementById('bar-acc');
+
+            bAcc.style.height = '50%'; // Acceleration is constant 2
+
+            simInterval = setInterval(() => {
+                t += 0.05; // dt
+                
+                let pos = Math.pow(t, 2);
+                let vel = 2 * t;
+                
+                // Normalizing for UI (max t = 10)
+                // pos max = 100, vel max = 20
+                if(t > 10) {
+                    clearInterval(simInterval);
+                    return;
+                }
+
+                car.style.left = `calc(${pos}% - 10px)`; // Car moves quadratically
+                bPos.style.height = `${pos}%`; // Parabola filling
+                bVel.style.height = `${(vel / 20) * 100}%`; // Linear filling
+                
+            }, 50);
+        };
+
+        window.unlockTeacherTipsS28 = function() {
+            const tip = document.querySelector('#sesion28-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion28', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion28');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion28', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

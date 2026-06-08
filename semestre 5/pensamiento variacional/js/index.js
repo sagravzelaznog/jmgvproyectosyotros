@@ -2,6 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('sessions-container');
     const filterBtns = document.querySelectorAll('.filter-btn');
 
+    const sesionesActivas = [
+        'sesion01', 'sesion02', 'sesion03', 'sesion04', 'sesion05',
+        'sesion06', 'sesion07', 'sesion08', 'sesion09', 'sesion10',
+        'sesion11', 'sesion12', 'sesion13', 'sesion14', 'sesion15',
+        'sesion16', 'sesion17', 'sesion18', 'sesion19', 'sesion20',
+        'sesion21', 'sesion22', 'sesion23', 'sesion24', 'sesion25',
+        'sesion26', 'sesion27', 'sesion28', 'sesion29', 'sesion30'
+    ];
+
     // Data for the 50 sessions
     const sessions = [];
 

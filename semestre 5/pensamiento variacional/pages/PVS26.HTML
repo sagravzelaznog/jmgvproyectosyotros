@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 26 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Ondas Sísmicas */
+        .epicenter {
+            width: 10px; height: 10px; background: #ef4444; border-radius: 50%; position: relative;
+        }
+        .wave {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border: 2px solid #ef4444; border-radius: 50%; opacity: 0;
+            animation: seismicWave 3s infinite linear;
+        }
+        .wave:nth-child(2) { animation-delay: 1s; }
+        .wave:nth-child(3) { animation-delay: 2s; }
+        @keyframes seismicWave { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 100px; height: 100px; opacity: 0; } }
+
+        /* 2. Engranajes */
+        .gears { display: flex; align-items: center; gap: 5px; }
+        .gear {
+            width: 40px; height: 40px; border: 4px dashed #94a3b8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.7em; color: white;
+            animation: spinGear 4s infinite linear;
+        }
+        .gear.small { width: 25px; height: 25px; border-color: #3b82f6; animation: spinGearRev 2s infinite linear; }
+        .gear.large { width: 60px; height: 60px; border-color: #10b981; animation: spinGearRev 8s infinite linear; }
+        @keyframes spinGear { 100% { transform: rotate(360deg); } }
+        @keyframes spinGearRev { 100% { transform: rotate(-360deg); } }
+
+        /* 3. Múltiples Capas (Calor) */
+        .wall { display: flex; align-items: stretch; height: 60px; width: 60%; }
+        .layer { flex: 1; position: relative; overflow: hidden; }
+        .l1 { background: #ef4444; } /* Caliente */
+        .l2 { background: #f59e0b; }
+        .l3 { background: #3b82f6; } /* Frío */
+        .heat-flow {
+            position: absolute; height: 4px; width: 20px; background: white; top: 50%; transform: translateY(-50%);
+            animation: flowHeat 2s infinite linear;
+        }
+        @keyframes flowHeat { 0% { left: -20px; opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+        /* Simulador: Matrioskas */
+        .matrioska-sim {
+            background: #0f172a;
+            border: 4px solid #8b5cf6;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .boxes-container {
+            display: flex; justify-content: center; margin-bottom: 20px; min-height: 150px; align-items: center; gap: 20px;
+        }
+        .m-box {
+            background: #1e293b; border: 2px dashed #8b5cf6; border-radius: 8px; padding: 15px; cursor: pointer; transition: all 0.3s; position: relative; color: white; font-family: monospace; font-size: 1.2em; display: inline-block;
+        }
+        .m-box:hover { background: #334155; transform: scale(1.05); }
+        .m-box.opened {
+            background: transparent; border-style: solid; border-color: #475569; cursor: default; transform: none; display: flex; gap: 10px; align-items: center;
+        }
+        .derivative-text {
+            color: #10b981; font-weight: bold; margin-top: 10px; font-size: 1.2em; opacity: 0; transition: opacity 0.5s;
+        }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion26-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS26()">
+            <div class="badge">Bloque 2 | Sesión 26</div>
+            <h1>Regla de la Cadena I</h1>
+            <p>Derivar funciones compuestas: fenómenos que ocurren dentro de otros fenómenos.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Usen la analogía de las muñecas rusas (Matrioskas) o de abrir regalos. Primero abres la caja exterior (derivas lo de afuera) y luego multiplicas por lo que sacas de la caja interior (derivas lo de adentro)."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aprender a derivar funciones anidadas $f(g(x))$. Entender cómo las tasas de cambio de eventos secuenciales se multiplican entre sí, un principio fundamental en sistemas mecánicos y físicos.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: Función de una Función</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#c4b5fd; text-align:left;">
+                    <strong>Regla de la Cadena:</strong><br>
+                    Si $y = f(g(x))$, entonces $y' = f'(g(x)) \cdot g'(x)$<br><br>
+                    <strong>El Algoritmo Visual:</strong><br>
+                    1. Deriva la función "externa" dejando lo de adentro intacto.<br>
+                    2. Multiplica el resultado por la derivada de la función "interna".
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Sistemas Anidados</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Propagación Sísmica:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El daño depende de la vibración, y la vibración depende del tiempo. Daño respecto al tiempo es una función compuesta.</p>
+                        <div class="css-graphic">
+                            <div class="epicenter">
+                                <div class="wave"></div><div class="wave"></div><div class="wave"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Engranajes Mecánicos:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El motor mueve la rueda A, A mueve a B, B mueve a C. Las relaciones de giro se multiplican consecutivamente.</p>
+                        <div class="css-graphic">
+                            <div class="gears">
+                                <div class="gear large">A</div>
+                                <div class="gear">B</div>
+                                <div class="gear small">C</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Capas de Aislamiento:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">El calor atraviesa ladrillo, aislante y yeso. Cada capa filtra la tasa de transferencia original.</p>
+                        <div class="css-graphic">
+                            <div class="wall">
+                                <div class="layer l1"><div class="heat-flow"></div></div>
+                                <div class="layer l2"><div class="heat-flow"></div></div>
+                                <div class="layer l3"><div class="heat-flow"></div></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">🪆 Matrioskas Algebraicas</h2>
+                <p>Derivaremos la función $y = (3x + 1)^2$. Haz clic en la "caja externa" para derivarla, lo cual extraerá el contenido interior, que luego deberás derivar también.</p>
+
+                <div class="matrioska-sim">
+                    <div style="color:#94a3b8; margin-bottom: 10px;">Función Original: $y = (3x + 1)^2$</div>
+                    
+                    <div class="boxes-container" id="box-area">
+                        <div class="m-box" id="box-outer" onclick="openOuterBox()">
+                            Caja Externa: $(\ ...\ )^2$<br>
+                            <small style="color:#f59e0b">Click para derivar exterior</small>
+                        </div>
+                    </div>
+                    
+                    <div class="derivative-text" id="final-result"></div>
+                    <button onclick="resetMatrioska()" style="margin-top:15px; padding:8px 15px; background:transparent; color:#64748b; border:1px solid #64748b; border-radius:5px; cursor:pointer;">Reiniciar</button>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS25.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS27.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\nBanco: Mercado Pago\nCorreo (PayPal): primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        window.openOuterBox = function() {
+            const container = document.getElementById('box-area');
+            container.innerHTML = `
+                <div style="border: 2px solid #10b981; padding: 10px; border-radius: 8px; background: rgba(16,185,129,0.1);">
+                    <span style="color:#10b981;">2</span>(3x + 1)<sup style="color:#10b981;">1</sup>
+                </div>
+                <div style="font-size: 1.5em; color: white;">*</div>
+                <div class="m-box" id="box-inner" onclick="openInnerBox()" style="border-color: #f59e0b;">
+                    Caja Interna: $3x + 1$<br>
+                    <small style="color:#f59e0b">Click para derivar interior</small>
+                </div>
+            `;
+            if(window.MathJax) window.MathJax.typesetPromise();
+        };
+
+        window.openInnerBox = function() {
+            const container = document.getElementById('box-area');
+            container.innerHTML = `
+                <div style="border: 2px solid #10b981; padding: 10px; border-radius: 8px; background: rgba(16,185,129,0.1);">
+                    <span style="color:#10b981;">2</span>(3x + 1)
+                </div>
+                <div style="font-size: 1.5em; color: white;">*</div>
+                <div style="border: 2px solid #f59e0b; padding: 10px; border-radius: 8px; background: rgba(245,158,11,0.1); color: #f59e0b; font-size: 1.2em; font-family: monospace;">
+                    3
+                </div>
+            `;
+            const result = document.getElementById('final-result');
+            result.innerHTML = `Derivada Final: $y' = 6(3x + 1) = 18x + 6$`;
+            result.style.opacity = "1";
+            if(window.MathJax) window.MathJax.typesetPromise();
+        };
+
+        window.resetMatrioska = function() {
+            const container = document.getElementById('box-area');
+            container.innerHTML = `
+                <div class="m-box" id="box-outer" onclick="openOuterBox()">
+                    Caja Externa: $(\\ ...\\ )^2$<br>
+                    <small style="color:#f59e0b">Click para derivar exterior</small>
+                </div>
+            `;
+            const result = document.getElementById('final-result');
+            result.style.opacity = "0";
+            if(window.MathJax) window.MathJax.typesetPromise();
+        };
+
+        window.unlockTeacherTipsS26 = function() {
+            const tip = document.querySelector('#sesion26-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion26', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion26');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion26', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

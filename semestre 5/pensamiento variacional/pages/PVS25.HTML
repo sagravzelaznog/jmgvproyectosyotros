@@ -28,26 +28,79 @@
 
         /* 1. Voltaje = I x R (Producto) */
         .circuit {
-            display: flex; align-items: center; gap: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
+
         .component {
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
             animation: pulseComp 2s infinite alternate;
         }
-        .comp-I { background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
-        .comp-R { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; animation-delay: 1s; }
-        .multiply-sign { color: white; font-size: 2em; }
-        @keyframes pulseComp { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+
+        .comp-I {
+            background: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+        }
+
+        .comp-R {
+            background: #f59e0b;
+            box-shadow: 0 0 10px #f59e0b;
+            animation-delay: 1s;
+        }
+
+        .multiply-sign {
+            color: white;
+            font-size: 2em;
+        }
+
+        @keyframes pulseComp {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.2);
+            }
+        }
 
         /* 2. Densidad = Pob / Area (Cociente) */
         .density-container {
-            width: 80px; height: 80px; border: 2px solid #cbd5e1; position: relative;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #cbd5e1;
+            position: relative;
         }
+
         .person {
-            width: 8px; height: 8px; background: #ef4444; border-radius: 50%; position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            position: absolute;
             animation: popPerson 3s infinite;
         }
-        @keyframes popPerson { 0%, 100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }
+
+        @keyframes popPerson {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
         /* Simulador: Ensamblador */
         .assembler-game {
@@ -58,6 +111,7 @@
             text-align: center;
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
         }
+
         .target-formula {
             background: #1e293b;
             padding: 15px;
@@ -71,12 +125,13 @@
             justify-content: center;
             gap: 10px;
         }
+
         .slot {
             display: inline-block;
             width: 60px;
             height: 40px;
             border: 2px dashed #64748b;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 5px;
             line-height: 36px;
             vertical-align: middle;
@@ -84,9 +139,20 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-        .slot.filled { border-style: solid; border-color: #10b981; background: rgba(16, 185, 129, 0.2); }
-        .fraction-line { width: 100%; height: 2px; background: white; margin: 5px 0; }
-        
+
+        .slot.filled {
+            border-style: solid;
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .fraction-line {
+            width: 100%;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+        }
+
         .pieces-tray {
             display: flex;
             gap: 10px;
@@ -94,6 +160,7 @@
             flex-wrap: wrap;
             margin-top: 20px;
         }
+
         .piece {
             padding: 10px 20px;
             background: #334155;
@@ -105,8 +172,17 @@
             font-family: monospace;
             transition: transform 0.2s, background 0.2s;
         }
-        .piece:hover { background: #475569; transform: translateY(-3px); }
-        .piece.used { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+        .piece:hover {
+            background: #475569;
+            transform: translateY(-3px);
+        }
+
+        .piece.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
     </style>
     <script>
         window.MathJax = {
@@ -131,24 +207,30 @@
             <div class="badge">Bloque 2 | Sesión 25</div>
             <h1>Derivada del Producto y Cociente</h1>
             <p>Analizar variaciones de funciones interactuando entre sí.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Es común que los alumnos quieran solo multiplicar o dividir las derivadas. Recuérdenles que cuando dos variables interactúan, el crecimiento de una afecta a la otra. ¡Tienen que ensamblar la fórmula completa!"</div>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "Es común que los alumnos quieran solo multiplicar o
+                dividir las derivadas. Recuérdenles que cuando dos variables interactúan, el crecimiento de una afecta a
+                la otra. ¡Tienen que ensamblar la fórmula completa!"</div>
         </header>
 
         <div class="info-body">
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Comprender que la derivada de un producto no es el producto de las derivadas. Aprenderemos a estructurar las fórmulas de $(U \cdot V)'$ y $(U / V)'$ para fenómenos interdependientes.</p>
+                <p>Comprender que la derivada de un producto no es el producto de las derivadas. Aprenderemos a
+                    estructurar las fórmulas de $(U \cdot V)'$ y $(U / V)'$ para fenómenos interdependientes.</p>
             </section>
 
-            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+            <section class="info-card"
+                style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
                 <h2 style="color: #f59e0b;">📖 Teoría: Interacción de Variables</h2>
                 <div class="math-box" style="border-color:#f59e0b; color:#fcd34d; text-align:left;">
                     <strong>Regla del Producto:</strong><br>
                     Si $y = U \cdot V$<br>
-                    $y' = U'V + UV'$ <small>(Derivada del primero por el segundo, más el primero por la derivada del segundo)</small><br><br>
+                    $y' = U'V + UV'$ <small>(Derivada del primero por el segundo, más el primero por la derivada del
+                        segundo)</small><br><br>
                     <strong>Regla del Cociente:</strong><br>
                     Si $y = \frac{U}{V}$<br>
-                    $y' = \frac{U'V - UV'}{V^2}$ <small>(Similar al producto, pero restando y dividiendo entre el de abajo al cuadrado)</small>
+                    $y' = \frac{U'V - UV'}{V^2}$ <small>(Similar al producto, pero restando y dividiendo entre el de
+                        abajo al cuadrado)</small>
                 </div>
             </section>
 
@@ -157,7 +239,9 @@
                 <ul class="custom-list">
                     <li>
                         <b>Voltaje (Producto):</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">$V(t) = I(t) \cdot R(t)$. Si la corriente y la resistencia cambian al mismo tiempo por el calor, el cambio del voltaje usa la regla del producto.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">$V(t) = I(t) \cdot R(t)$. Si la corriente y
+                            la resistencia cambian al mismo tiempo por el calor, el cambio del voltaje usa la regla del
+                            producto.</p>
                         <div class="css-graphic">
                             <div class="circuit">
                                 <div class="component comp-I">I</div>
@@ -168,7 +252,9 @@
                     </li>
                     <li>
                         <b>Densidad Poblacional (Cociente):</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">$D(t) = \frac{Poblacion(t)}{Area(t)}$. Si la población crece pero la ciudad pierde terreno, la tasa neta requiere la regla del cociente.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">$D(t) = \frac{Poblacion(t)}{Area(t)}$. Si la
+                            población crece pero la ciudad pierde terreno, la tasa neta requiere la regla del cociente.
+                        </p>
                         <div class="css-graphic">
                             <div class="density-container">
                                 <div class="person" style="top:10%; left:20%; animation-delay:0s;"></div>
@@ -183,14 +269,16 @@
 
             <section class="info-card strategy-card" style="border-color: #f59e0b;">
                 <h2 style="color: #f59e0b;">🧩 Ensamblador de Fórmulas</h2>
-                <p>Armemos la derivada de <strong>$y = \frac{x^2}{3x}$</strong>. Haz clic en las piezas en el orden correcto para llenar los espacios de la regla del cociente: $\frac{U'V - UV'}{V^2}$</p>
+                <p>Armemos la derivada de <strong>$y = \frac{x^2}{3x}$</strong>. Haz clic en las piezas en el orden
+                    correcto para llenar los espacios de la regla del cociente: $\frac{U'V - UV'}{V^2}$</p>
 
                 <div class="assembler-game">
                     <div style="color: #94a3b8; margin-bottom:10px;">$U = x^2$ &nbsp;|&nbsp; $V = 3x$</div>
-                    
+
                     <div class="target-formula" style="flex-direction: column;">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="slot" id="slot-1"></span> * <span class="slot" id="slot-2"></span> - <span class="slot" id="slot-3"></span> * <span class="slot" id="slot-4"></span>
+                            <span class="slot" id="slot-1"></span> * <span class="slot" id="slot-2"></span> - <span
+                                class="slot" id="slot-3"></span> * <span class="slot" id="slot-4"></span>
                         </div>
                         <div class="fraction-line"></div>
                         <div style="display: flex; align-items: center;">
@@ -208,26 +296,29 @@
                         <div class="piece" onclick="selectPiece(this, 'x²')">x² (U)</div>
                         <div class="piece" onclick="selectPiece(this, '3x')">3x (V)</div>
                     </div>
-                    
-                    <button onclick="resetGame()" style="margin-top:20px; padding:8px 15px; background:transparent; color:#64748b; border:1px solid #64748b; border-radius:5px; cursor:pointer;">Reiniciar</button>
+
+                    <button onclick="resetGame()"
+                        style="margin-top:20px; padding:8px 15px; background:transparent; color:#64748b; border:1px solid #64748b; border-radius:5px; cursor:pointer;">Reiniciar</button>
                 </div>
             </section>
 
         </div>
-        
+
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
 
-        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+        <footer
+            style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
             <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
         </footer>
         <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
             <a href="PVS24.HTML" class="nav-btn">⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
-            <!-- Link to next block later -->
-            <a href="PVS26.HTML" class="nav-btn" style="opacity:0.5; pointer-events:none;">Siguiente Bloque ➡</a>
-            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+            <a href="PVS26.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#"
+                onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;"
+                class="nav-btn btn-support">☕ Apoyar</a>
         </nav>
-        
+
     </div>
 
     <script src="../js/env.js"></script>
@@ -238,20 +329,20 @@
         const correctSequence = ['2x', '3x', 'x²', '3', '3x'];
         let currentStep = 0;
 
-        window.selectPiece = function(element, value) {
-            if(element.classList.contains('used')) return;
+        window.selectPiece = function (element, value) {
+            if (element.classList.contains('used')) return;
 
-            if(value === correctSequence[currentStep]) {
+            if (value === correctSequence[currentStep]) {
                 // Correct
                 element.classList.add('used');
                 const slot = document.getElementById(`slot-${currentStep + 1}`);
                 slot.innerText = value;
                 slot.classList.add('filled');
                 document.getElementById('game-feedback').innerText = "";
-                
+
                 currentStep++;
-                
-                if(currentStep === correctSequence.length) {
+
+                if (currentStep === correctSequence.length) {
                     document.getElementById('game-feedback').style.color = "#10b981";
                     document.getElementById('game-feedback').innerText = "¡Fórmula ensamblada correctamente!";
                 }
@@ -262,10 +353,10 @@
             }
         };
 
-        window.resetGame = function() {
+        window.resetGame = function () {
             currentStep = 0;
             document.getElementById('game-feedback').innerText = "";
-            for(let i=1; i<=5; i++) {
+            for (let i = 1; i <= 5; i++) {
                 const slot = document.getElementById(`slot-${i}`);
                 slot.innerText = "";
                 slot.classList.remove('filled');
@@ -274,9 +365,9 @@
             pieces.forEach(p => p.classList.remove('used'));
         };
 
-        window.unlockTeacherTipsS25 = function() {
+        window.unlockTeacherTipsS25 = function () {
             const tip = document.querySelector('#sesion25-variacional .teacher-tip');
-            if(tip) tip.classList.toggle('hidden');
+            if (tip) tip.classList.toggle('hidden');
         };
     </script>
     <script type="module">
@@ -294,10 +385,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion25', async (score, percentage) => {
-                if(percentage === 100) {
+                if (percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion25');
-                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random() * 10000);
                     localStorage.setItem('pv_student_id', tempStudentId);
                     await saveProgressToFirebase(tempStudentId, 'sesion25', score, true);
                     window.location.href = '../index.html';
@@ -308,4 +399,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -482,7 +482,40 @@ export const questionDatabase = {
         { question: "En la presentación de proyectos, ¿cuál es la mejor forma de justificar un diseño?", options: ["Demostrar que minimiza costos o maximiza eficiencia según el cálculo", "Decir que se ve bonito", "Copiar otro diseño", "Solo mostrar el resultado final"], answerIndex: 0, timeLimit: 20 },
         { question: "¿Qué demuestra la viabilidad de un proyecto optimizado?", options: ["Que cumple las normativas y los mínimos matemáticos son posibles físicamente", "Que la derivada es cero", "Que es infinito", "Que usa muchos materiales"], answerIndex: 0, timeLimit: 20 },
         { question: "Una rúbrica de evaluación técnica revisa...", options: ["Procedimiento matemático, normativa y aplicabilidad", "Si el plano tiene color", "La letra del documento", "Si el equipo habló fuerte"], answerIndex: 0, timeLimit: 20 },
-        { question: "El objetivo de compartir los proyectos en plenaria es...", options: ["Recibir retroalimentación y comparar métodos de optimización", "Ver quién terminó antes", "Copiar resultados", "Cumplir el tiempo libre"], answerIndex: 0, timeLimit: 20 },
-        { question: "El Pensamiento Variacional en este bloque nos enseñó principalmente a...", options: ["Predecir, controlar y optimizar el cambio usando derivadas", "Sumar y restar rápido", "Hacer polígonos", "Usar calculadoras"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion36": [
+        { question: "Un diferencial 'dx' o 'dy' representa...", options: ["Un cambio infinitamente pequeño en esa variable", "Una derivada igual a cero", "Una constante gigante", "Un error de dedo"], answerIndex: 0, timeLimit: 20 },
+        { question: "La fórmula de aproximación lineal usando diferenciales es...", options: ["dy = f'(x) * dx", "dy = f(x) + dx", "dy = dx / f'(x)", "dy = 0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si un cable metálico se calienta, podemos usar diferenciales para...", options: ["Aproximar cuánto crecerá su longitud (dilatación)", "Saber de qué está hecho", "Pintarlo", "Enfriarlo"], answerIndex: 0, timeLimit: 20 },
+        { question: "El 'dx' en aplicaciones de ingeniería a menudo representa...", options: ["El margen de error o la tolerancia de fabricación", "El costo total", "La altura", "La velocidad de la luz"], answerIndex: 0, timeLimit: 20 },
+        { question: "La aproximación lineal asume que, si haces zoom suficiente, cualquier curva...", options: ["Se ve como una línea recta", "Se vuelve un círculo", "Desaparece", "Se vuelve vertical"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion37": [
+        { question: "La antiderivada es el proceso matemático que...", options: ["Revierte o deshace una derivada", "Eleva al cuadrado", "Hace cero a la función", "Deriva dos veces"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si tienes la velocidad de un objeto, ¿cómo encuentras su posición?", options: ["Calculando la antiderivada (integrando)", "Derivando la velocidad", "Multiplicando por cero", "Sumando la aceleración"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la derivada es 2x, ¿cuál podría ser la función original?", options: ["x^2", "x^3", "2", "x"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si el Costo Marginal (la derivada) es constante en 5, ¿cuál es el Costo Total (la antiderivada)?", options: ["5x + C", "5", "x/5", "x^5"], answerIndex: 0, timeLimit: 20 },
+        { question: "La antiderivada no es única, siempre representa una 'familia' de curvas que difieren por...", options: ["Una constante de integración (+ C)", "Una X", "Un exponente", "Un signo menos"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion38": [
+        { question: "Según la regla de la potencia inversa, la integral de x^n es...", options: ["(x^(n+1))/(n+1) + C", "n*x^(n-1)", "x^n / n", "x^(n-1) / n"], answerIndex: 0, timeLimit: 20 },
+        { question: "La integral de una constante 'k' respecto a x es...", options: ["kx + C", "0", "k^2", "x/k"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cómo se llama el símbolo '∫'?", options: ["Signo de integral (una 'S' alargada de Suma)", "Derivada", "Raíz", "Diferencial"], answerIndex: 0, timeLimit: 20 },
+        { question: "La integral de una suma ( ∫(f(x)+g(x))dx ) es igual a...", options: ["La suma de sus integrales separadas", "El producto de sus integrales", "Cero", "La derivada de la suma"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para verificar si integraste correctamente, puedes...", options: ["Derivar tu respuesta para ver si obtienes la función original", "Volver a integrar", "Restar C", "Elevar al cuadrado"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion39": [
+        { question: "En cálculo, ¿qué es la 'C' al final de una integral indefinida?", options: ["La constante de integración", "El costo final", "La aceleración", "El centro de la curva"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cómo podemos descubrir el valor exacto de 'C'?", options: ["Usando un dato de la vida real llamado 'Condición Inicial'", "Adivinando", "Siempre es cero", "Siempre es uno"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si lanzas una pelota desde un balcón de 20 metros, la posición inicial P(0) es...", options: ["20 (lo que define a la constante C)", "0", "9.8", "-20"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un problema de población de bacterias, ¿qué representaría 'C'?", options: ["La población en el tiempo t=0", "El número de bacterias que mueren", "La tasa de reproducción", "El tipo de bacteria"], answerIndex: 0, timeLimit: 20 },
+        { question: "Geométricamente, cambiar el valor de 'C' en una gráfica causa que la curva...", options: ["Se desplace hacia arriba o hacia abajo en el eje Y", "Se vuelva más ancha", "Cambie de dirección", "Se vuelva una línea recta"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion40": [
+        { question: "¿Cuál era el 'Problema del Área' clásico en el cálculo?", options: ["Calcular el área exacta bajo curvas irregulares", "Medir un círculo perfecto", "Calcular el área de un cuadrado", "Encontrar el perímetro de un triángulo"], answerIndex: 0, timeLimit: 20 },
+        { question: "Una 'Suma de Riemann' aproxima el área usando...", options: ["Rectángulos que se ajustan bajo la curva", "Círculos concéntricos", "Triángulos rectángulos", "Líneas diagonales"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cómo se hace más exacta la aproximación del área en las sumas de Riemann?", options: ["Haciendo rectángulos cada vez más delgados (usando infinitos rectángulos)", "Usando rectángulos más altos", "Pintando los rectángulos de otro color", "Sumando menos rectángulos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la gráfica representa velocidad, el área bajo la curva representa...", options: ["Distancia total recorrida", "Aceleración", "Costo", "Fuerza"], answerIndex: 0, timeLimit: 20 },
+        { question: "El área neta bajo una gráfica de 'uso de electricidad (kW) vs tiempo (h)' es...", options: ["Energía total consumida (kWh)", "El voltaje máximo", "La tarifa a pagar por kW", "El amperaje"], answerIndex: 0, timeLimit: 20 }
     ]
 };

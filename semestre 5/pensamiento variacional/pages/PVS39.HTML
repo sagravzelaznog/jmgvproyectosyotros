@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 39 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Caída Libre */
+        .building { width: 40px; height: 100px; background: #475569; position: absolute; bottom: 0; left: 20px; }
+        .ball { width: 15px; height: 15px; background: #ef4444; border-radius: 50%; position: absolute; left: 60px; top: 20px; animation: dropBall 2s infinite ease-in; }
+        @keyframes dropBall { 0% { top: 20px; } 100% { top: 100px; } }
+        .h0-line { width: 30px; height: 2px; border-top: 2px dashed white; position: absolute; top: 20px; left: 60px; }
+        .h0-text { position: absolute; top: 5px; left: 65px; font-size: 0.7em; color: white; }
+
+        /* 2. Población Inicial */
+        .petri-dish { width: 80px; height: 80px; border: 4px solid #94a3b8; border-radius: 50%; background: rgba(255,255,255,0.1); position: relative; }
+        .bact { width: 5px; height: 5px; background: #10b981; border-radius: 50%; position: absolute; }
+        .b1 { top: 30px; left: 30px; } .b2 { top: 40px; left: 50px; } .b3 { top: 50px; left: 30px; }
+
+        /* Simulador: Encontrando C */
+        .c-sim { background: #0f172a; border: 4px solid #f59e0b; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+        .graph-area { background: #1e293b; width: 100%; height: 150px; border-radius: 8px; position: relative; overflow: hidden; border-left: 2px solid #cbd5e1; border-bottom: 2px solid #cbd5e1; }
+        .target-dot { width: 12px; height: 12px; background: #facc15; border-radius: 50%; position: absolute; left: 0; transform: translateY(-50%); box-shadow: 0 0 10px #facc15; }
+        .parabola { position: absolute; width: 100%; height: 100%; top: 0; left: 0; border-top: 4px solid #3b82f6; border-radius: 0 100% 0 0; transition: top 0.2s; }
+        .slider-group { color: white; display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
+        .c-val-disp { font-family: monospace; font-size: 1.5em; color: #facc15; font-weight: bold; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion39-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 39</div>
+            <h1>Condiciones Iniciales</h1>
+            <p>Descubriendo el verdadero valor de la constante "C".</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Utilizar condiciones iniciales (datos conocidos en $t=0$ o $x=0$) para calcular el valor exacto de la constante de integración $C$ y obtener una función específica.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+                <h2 style="color: #f59e0b;">📖 Teoría: Anclando la Curva</h2>
+                <div class="math-box" style="border-color:#f59e0b; color:#fde68a; text-align:left;">
+                    La antiderivada nos da una familia de curvas paralelas: $f(x) + C$.<br>
+                    Geométricamente, $C$ mueve la curva hacia arriba o hacia abajo.<br><br>
+                    Para encontrar <strong>cuál</strong> de todas esas curvas es la correcta, necesitamos una "pista", un punto por el que sabemos que la curva debe pasar. A esto se le llama <em>Condición Inicial</em>.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 La "C" en la Vida Real</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Altura Inicial (Física):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Al integrar la gravedad, obtenemos la posición. La constante $C$ es la altura del balcón ($h_0$) desde donde soltaste la pelota en $t=0$.</p>
+                        <div class="css-graphic"><div class="building"></div><div class="h0-line"></div><div class="h0-text">h0 = C</div><div class="ball"></div></div>
+                    </li>
+                    <li>
+                        <b>Población Inicial (Biología):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Al integrar la tasa de reproducción bacteriana, obtenemos la curva de población. $C$ es el número de bacterias que pusiste en la placa de Petri el Día Cero ($P_0$).</p>
+                        <div class="css-graphic"><div class="petri-dish"><div class="bact b1"></div><div class="bact b2"></div><div class="bact b3"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Costo Fijo (Economía):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Al integrar el costo marginal de fabricar un producto obtenemos el Costo Total. $C$ es el Costo Fijo (renta, luz) que pagas aunque fabriques 0 productos.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">🎯 Applet: Anclando la Función</h2>
+                <p>Sabemos que la posición de un cohete obedece a $y(t) = t^2 + C$.<br>
+                El radar dice que en $t=0$, la altura era exactamente $50$m. Ajusta $C$ hasta que la curva pase por la Condición Inicial (el punto amarillo).</p>
+
+                <div class="c-sim">
+                    <div class="graph-area">
+                        <!-- El punto objetivo (condición inicial) está al 50% de altura en Y, X=0 -->
+                        <div class="target-dot" style="top: 50%;"></div>
+                        <div class="parabola" id="sim-curve"></div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>Ajustar Constante C:</label>
+                        <input type="range" id="c-slider" min="0" max="100" value="0" style="width: 80%;">
+                        <div class="c-val-disp" id="c-val">C = 0</div>
+                        <div id="c-msg" style="color:#10b981; font-weight:bold; margin-top:5px; opacity:0; transition:0.3s;">¡Curva anclada correctamente!</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS38.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS40.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('c-slider');
+        const curve = document.getElementById('sim-curve');
+        const cValDisp = document.getElementById('c-val');
+        const msg = document.getElementById('c-msg');
+
+        slider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            cValDisp.innerText = `C = ${val}`;
+
+            // Visual: top 0 means max Y (C=100), top 150px means min Y (C=0)
+            // Target is at 50% (75px), which should correspond to C=50
+            const topPx = 150 - (val / 100) * 150;
+            curve.style.top = topPx + 'px';
+
+            if(Math.abs(val - 50) < 3) {
+                curve.style.borderColor = "#10b981";
+                cValDisp.style.color = "#10b981";
+                msg.style.opacity = 1;
+            } else {
+                curve.style.borderColor = "#3b82f6";
+                cValDisp.style.color = "#facc15";
+                msg.style.opacity = 0;
+            }
+        });
+        
+        // Initial setup
+        curve.style.top = '150px';
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion39', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion39');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion39', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

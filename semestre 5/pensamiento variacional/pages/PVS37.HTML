@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 37 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Posición a Velocidad */
+        .track { width: 80%; height: 4px; background: #64748b; position: relative; }
+        .car { width: 20px; height: 15px; background: #3b82f6; position: absolute; top: -5px; border-radius: 3px; animation: moveCar 3s infinite linear; }
+        @keyframes moveCar { 0% { left: 0; } 100% { left: 100%; } }
+        .speed-read { position: absolute; top: -30px; font-family: monospace; color: #10b981; }
+
+        /* 2. Recuperar Funciones */
+        .func-box { border: 2px solid #8b5cf6; padding: 10px; border-radius: 8px; color: #c4b5fd; display: flex; align-items: center; gap: 10px; }
+        .arrow { font-size: 1.5em; color: #facc15; }
+
+        /* Simulador: Jeopardy / Memorama */
+        .jeopardy-sim { background: #0f172a; border: 4px solid #3b82f6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .j-card { background: #1e293b; border: 2px solid #3b82f6; border-radius: 8px; padding: 20px; font-family: monospace; font-size: 1.2em; color: white; cursor: pointer; transition: all 0.3s; transform-style: preserve-3d; }
+        .j-card:hover { transform: scale(1.05); border-color: #60a5fa; }
+        .j-card.solved { background: #10b981; border-color: white; transform: scale(0.95); cursor: default; }
+        .j-card.selected { border-color: #facc15; box-shadow: 0 0 15px #facc15; }
+        .score-display { font-size: 1.5em; color: #facc15; font-weight: bold; margin-bottom: 10px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion37-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 37</div>
+            <h1>Antiderivadas</h1>
+            <p>El proceso inverso: Encontrar la función original a partir de su derivada.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender el concepto de la Antiderivada (o Integral Indefinida) como el proceso matemático inverso a la derivación, incluyendo la familia de curvas y la constante "C".</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: "Des-Derivando"</h2>
+                <div class="math-box" style="border-color:#3b82f6; color:#93c5fd; text-align:left;">
+                    Si te doy la función $f(x) = x^2$, tú me dices que su derivada es $f'(x) = 2x$.<br>
+                    <strong>La pregunta ahora es al revés:</strong> Si la derivada es $2x$, ¿quién era la función original?<br><br>
+                    <strong>¡Atención!</strong> La derivada de $x^2 + 5$ también es $2x$. La derivada de $x^2 - 100$ también es $2x$. Por lo tanto, la antiderivada de $2x$ es <strong>$x^2 + C$</strong> (donde C es una constante cualquiera).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Aplicaciones Clave</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>De Velocidad a Posición:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El velocímetro te da la derivada (km/h). Integrando la velocidad respecto al tiempo, puedes calcular cuántos kilómetros has avanzado en total.</p>
+                        <div class="css-graphic"><div class="track"><div class="speed-read">v(t)</div><div class="car"></div></div></div>
+                    </li>
+                    <li>
+                        <b>De Costo Marginal a Costo Total:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Si sé cuánto me cuesta fabricar "una pieza extra" en la fábrica (Costo Marginal), puedo integrar para obtener la función del Costo Total de producción.</p>
+                        <div class="css-graphic"><div class="func-box"><span>C'(x)</span> <span class="arrow">⇄</span> <span>C(x) + K</span></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">🎮 Jeopardy de Integrales</h2>
+                <p>Encuentra el par correcto: Haz clic en una Derivada y luego en la Antiderivada que la originó. ¡No olvides la '+ C'!</p>
+
+                <div class="jeopardy-sim">
+                    <div class="score-display">Puntaje: <span id="j-score">0</span></div>
+                    <div class="cards-grid" id="game-grid">
+                        <!-- Generado por JS -->
+                    </div>
+                    <div id="win-msg" style="color:#10b981; font-weight:bold; font-size:1.5em; margin-top:15px; display:none;">¡Todas las parejas encontradas!</div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS36.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS38.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const pairs = [
+            { deriv: "2x", anti: "x² + C", id: 1 },
+            { deriv: "3x²", anti: "x³ + C", id: 2 },
+            { deriv: "1", anti: "x + C", id: 3 },
+            { deriv: "0", anti: "C", id: 4 }
+        ];
+
+        let deck = [];
+        pairs.forEach(p => {
+            deck.push({ text: p.deriv, matchId: p.id, type: 'deriv' });
+            deck.push({ text: p.anti, matchId: p.id, type: 'anti' });
+        });
+
+        // Shuffle
+        deck = deck.sort(() => Math.random() - 0.5);
+
+        const grid = document.getElementById('game-grid');
+        let selected = null;
+        let score = 0;
+
+        deck.forEach((card, index) => {
+            const div = document.createElement('div');
+            div.className = 'j-card';
+            div.innerHTML = `<span>${card.text}</span>`;
+            div.dataset.id = card.matchId;
+            div.dataset.index = index;
+
+            div.onclick = () => {
+                if(div.classList.contains('solved')) return;
+
+                if(!selected) {
+                    selected = div;
+                    div.classList.add('selected');
+                } else {
+                    if(selected.dataset.index === div.dataset.index) {
+                        // Clicked same card
+                        selected.classList.remove('selected');
+                        selected = null;
+                        return;
+                    }
+
+                    if(selected.dataset.id === div.dataset.id) {
+                        // Match!
+                        div.classList.add('solved');
+                        selected.classList.add('solved');
+                        selected.classList.remove('selected');
+                        selected = null;
+                        score += 25;
+                        document.getElementById('j-score').innerText = score;
+                        if(score === 100) document.getElementById('win-msg').style.display = 'block';
+                    } else {
+                        // Wrong
+                        div.style.backgroundColor = "#ef4444";
+                        selected.style.backgroundColor = "#ef4444";
+                        setTimeout(() => {
+                            div.style.backgroundColor = "";
+                            selected.style.backgroundColor = "";
+                            selected.classList.remove('selected');
+                            selected = null;
+                        }, 500);
+                    }
+                }
+            };
+            grid.appendChild(div);
+        });
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion37', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion37');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion37', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

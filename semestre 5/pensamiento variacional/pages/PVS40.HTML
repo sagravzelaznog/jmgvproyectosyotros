@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 40 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Área Irregular */
+        .curve-area { width: 100%; height: 100%; position: relative; display: flex; align-items: flex-end; }
+        .c-fill { width: 100%; height: 100%; background: rgba(59,130,246,0.3); border-top: 3px solid #3b82f6; border-radius: 0 100% 0 0; position: relative; }
+
+        /* 2. Distancia Recorrida (v vs t) */
+        .vt-graph { width: 80%; height: 80%; border-left: 2px solid white; border-bottom: 2px solid white; position: relative; }
+        .vt-line { width: 100%; height: 2px; background: #facc15; position: absolute; top: 20px; transform-origin: 0 0; transform: rotate(15deg); }
+        .vt-area { width: 100%; height: 60px; background: rgba(250,204,21,0.2); position: absolute; bottom: 0; clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 30%); }
+        .label-v { position: absolute; left: -15px; top: 0; color: white; font-size: 0.8em; }
+        .label-t { position: absolute; right: 0; bottom: -20px; color: white; font-size: 0.8em; }
+
+        /* 3. Trabajo F vs d */
+        .work-graph { width: 80%; height: 80%; border-left: 2px solid white; border-bottom: 2px solid white; position: relative; }
+        .w-area { width: 70%; height: 50%; background: rgba(16,185,129,0.3); border: 1px solid #10b981; position: absolute; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; color: #10b981; font-weight: bold; }
+
+        /* Simulador: Sumas de Riemann */
+        .riemann-sim { background: #0f172a; border: 4px solid #8b5cf6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+        .canvas-container { background: #1e293b; width: 100%; height: 180px; border-radius: 8px; position: relative; margin-bottom: 15px; border-left: 2px solid #64748b; border-bottom: 2px solid #64748b; }
+        .slider-group { color: white; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .area-display { font-family: monospace; font-size: 1.5em; color: #8b5cf6; background: #1e293b; padding: 5px 15px; border-radius: 5px; margin-top: 10px; }
+        .exact-area { font-family: monospace; font-size: 0.9em; color: #10b981; margin-top: 5px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion40-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 3 | Sesión 40</div>
+            <h1>El Problema del Área</h1>
+            <p>Sumas de Riemann: Acercándonos a lo exacto a través de lo infinito.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender cómo se calcula el área bajo una curva irregular aproximándola con rectángulos (Sumas de Riemann), sentando las bases de la Integral Definida.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: Rectángulos Infinitos</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#ddd6fe; text-align:left;">
+                    No existe fórmula geométrica sencilla para el área bajo la curva $f(x) = x^2$.<br>
+                    <strong>La solución de Riemann:</strong> Rellenar el área con rectángulos de base $\Delta x$ y altura $f(x)$.<br>
+                    Si usamos 4 rectángulos anchos, el error es grande. Si usamos 100 rectángulos delgados, el error es mínimo.<br>
+                    Cuando la cantidad de rectángulos tiende a infinito ($n \to \infty$), la aproximación se vuelve <strong>exacta</strong>.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 ¿Qué significa esa Área?</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Área Geométrica:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Calcular los metros cuadrados exactos de un terreno curvo delimitado por un río (la curva $f(x)$) y carreteras rectas (ejes).</p>
+                        <div class="css-graphic"><div class="curve-area"><div class="c-fill"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Distancia Total (Física):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Si la gráfica es "Velocidad vs Tiempo", el área neta bajo esa curva es exactamente la Distancia en metros que avanzaste.</p>
+                        <div class="css-graphic"><div class="vt-graph"><div class="label-v">v</div><div class="label-t">t</div><div class="vt-area"></div><div class="vt-line"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Trabajo (Ingeniería):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Si la gráfica es "Fuerza vs Distancia", el área bajo la curva representa el Trabajo total realizado ($W$) medido en Joules.</p>
+                        <div class="css-graphic"><div class="work-graph"><div class="w-area">W</div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📊 Simulador: Sumas de Riemann</h2>
+                <p>Aproximando el área de $f(x) = x^2$ entre $x=0$ y $x=4$.<br>
+                Aumenta el número de rectángulos ($n$) para mejorar la precisión.</p>
+
+                <div class="riemann-sim">
+                    <div class="canvas-container">
+                        <canvas id="riemannCanvas"></canvas>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>Cantidad de Rectángulos ($n$): <span id="n-val" style="font-weight:bold; color:#facc15;">4</span></label>
+                        <input type="range" id="n-slider" min="2" max="100" value="4" style="width: 80%;">
+                        <div class="area-display">Área Aprox: <span id="aprox-val">0</span> u²</div>
+                        <div class="exact-area">Área Exacta Matemática: 21.33 u²</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS39.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS41.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const canvas = document.getElementById('riemannCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('n-slider');
+        const nVal = document.getElementById('n-val');
+        const aproxVal = document.getElementById('aprox-val');
+
+        function drawRiemann() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            const w = canvas.width;
+            const h = canvas.height;
+            const n = parseInt(slider.value);
+            nVal.innerText = n;
+
+            ctx.clearRect(0,0,w,h);
+
+            // Function f(x) = x^2, domain [0, 4], range [0, 16]
+            const domain = 4;
+            const maxFx = 16;
+            
+            // Map x to px
+            function pxX(x) { return (x / domain) * w; }
+            function pxY(y) { return h - (y / maxFx) * h; }
+
+            const dx = domain / n;
+            let areaAprox = 0;
+
+            // Draw Rectangles (Right Riemann Sum)
+            for(let i=1; i<=n; i++) {
+                let x = i * dx; // right endpoint
+                let fx = x * x;
+                areaAprox += fx * dx;
+
+                let rx = pxX(x - dx);
+                let rw = pxX(dx);
+                let ry = pxY(fx);
+                let rh = h - ry;
+
+                ctx.fillStyle = "rgba(139, 92, 246, 0.4)";
+                ctx.fillRect(rx, ry, rw, rh);
+                ctx.strokeStyle = "#8b5cf6";
+                ctx.strokeRect(rx, ry, rw, rh);
+            }
+
+            aproxVal.innerText = areaAprox.toFixed(2);
+
+            // Draw Curve over it
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#10b981";
+            ctx.moveTo(pxX(0), pxY(0));
+            for(let px=0; px<=w; px++) {
+                let x = (px / w) * domain;
+                let fx = x*x;
+                ctx.lineTo(pxX(x), pxY(fx));
+            }
+            ctx.stroke();
+        }
+
+        slider.addEventListener('input', drawRiemann);
+        window.addEventListener('resize', drawRiemann);
+        setTimeout(drawRiemann, 100);
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion40', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion40');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion40', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

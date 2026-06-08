@@ -61,7 +61,7 @@ export const AppController = {
         const navContainers = document.querySelectorAll('.session-nav');
         if (navContainers.length === 0) return;
 
-        const match = window.location.pathname.match(/PVS(\d+)\.HTML/i);
+        const match = window.location.pathname.match(/PVS(\d+)(?:\.HTML)?/i);
         if (!match) return;
 
         const currentNum = parseInt(match[1]);

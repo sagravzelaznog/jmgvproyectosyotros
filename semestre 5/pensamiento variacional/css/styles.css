@@ -261,17 +261,7 @@
     gap: 15px;
 }
 .top-nav { margin-bottom: 25px; margin-top: 10px; }
-.bottom-nav { 
-    margin-top: 30px; 
-    margin-bottom: 40px; 
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.1, 0.9, 0.2, 1);
-}
-.bottom-nav.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.bottom-nav { margin-top: 30px; margin-bottom: 40px; }
 .nav-btn {
     background: rgba(255,255,255,0.1);
     color: white;
@@ -295,4 +285,16 @@
 .btn-disabled { opacity: 0.3; pointer-events: none; }
 @media (max-width: 400px) {
     .nav-btn { font-size: 0.75em; padding: 8px 4px; }
+}
+
+
+/* Footer & Final Nav */
+.site-footer {
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #94a3b8;
+    font-size: 0.85em;
+    font-family: 'Outfit', sans-serif;
 }

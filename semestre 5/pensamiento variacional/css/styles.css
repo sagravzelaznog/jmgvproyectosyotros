@@ -298,3 +298,23 @@
     font-size: 0.85em;
     font-family: 'Outfit', sans-serif;
 }
+
+
+/* Footer and Nav Updates */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 0.85em;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+.session-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.bottom-nav { margin-top: 30px; margin-bottom: 10px; }

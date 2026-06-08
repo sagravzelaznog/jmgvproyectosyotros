@@ -260,8 +260,17 @@
     width: 100%;
     gap: 15px;
 }
-.top-nav { margin-bottom: 25px; margin-top: 10px; }
-.bottom-nav { margin-top: 30px; margin-bottom: 40px; }
+/* Session Navigation Update */
+.bottom-nav-all { margin-top: 40px; margin-bottom: 20px; }
+.session-footer {
+    text-align: center;
+    padding: 20px 0 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 20px;
+    color: #64748b;
+    font-size: 0.85em;
+    font-family: 'Outfit', sans-serif;
+}
 .nav-btn {
     background: rgba(255,255,255,0.1);
     color: white;

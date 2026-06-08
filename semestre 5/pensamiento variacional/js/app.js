@@ -4,6 +4,7 @@
 export const AppController = {
     init: function () {
         this.renderGlobalUI();
+        this.renderSessionNav();
         this.bindEvents();
         this.calculateGlobalProgress();
     },
@@ -54,6 +55,35 @@ export const AppController = {
             `;
             document.body.insertAdjacentHTML('beforeend', navHtml);
         }
+    },
+
+    renderSessionNav: function () {
+        const navContainers = document.querySelectorAll('.session-nav');
+        if (navContainers.length === 0) return;
+
+        const match = window.location.pathname.match(/PVS(\d+)\.HTML/i);
+        if (!match) return;
+
+        const currentNum = parseInt(match[1]);
+        const prevNum = currentNum - 1;
+        const nextNum = currentNum + 1;
+
+        const prevHref = prevNum > 0 ? `PVS${prevNum.toString().padStart(2, '0')}.HTML` : '#';
+        const nextHref = nextNum <= 50 ? `PVS${nextNum.toString().padStart(2, '0')}.HTML` : '#';
+
+        const prevDisabled = prevNum > 0 ? '' : 'style="opacity: 0.5; pointer-events: none;"';
+        const nextDisabled = nextNum <= 50 ? '' : 'style="opacity: 0.5; pointer-events: none;"';
+
+        const navHtml = `
+            <a href="${prevHref}" class="nav-btn" ${prevDisabled}>⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="${nextHref}" class="nav-btn" ${nextDisabled}>Siguiente ➡</a>
+        `;
+
+        navContainers.forEach(nav => {
+            nav.innerHTML = navHtml;
+            nav.style.cssText = "margin-bottom: 40px; width: 100%; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;";
+        });
     },
 
     bindEvents: function () {

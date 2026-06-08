@@ -5,11 +5,11 @@
     font-family: 'Segoe UI', system-ui, sans-serif;
     max-width: 900px;
     margin: 40px auto;
-    background: #f8f9fa;
+    background: #1e293b; /* Dark mode background */
     border-radius: 16px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    color: #212529;
+    color: #f8fafc; /* Light text for max contrast */
 }
 
 .infographic-container .info-header {
@@ -67,10 +67,10 @@
 }
 
 .infographic-container .info-card {
-    background: white;
+    background: #0f172a; /* Dark card background */
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border-top: 5px solid;
 }
 
@@ -106,11 +106,11 @@
 }
 
 .examples-card h2 {
-    color: #5f27cd;
+    color: #a855f7; /* Bright purple for dark mode */
 }
 
 .activities-card h2 {
-    color: #ee5253;
+    color: #ef4444; /* Bright red for dark mode */
 }
 
 .strategy-card h2 {
@@ -124,11 +124,12 @@
 }
 
 .custom-list li {
-    background: #f1f2f6;
+    background: #1e293b; /* Dark background for list items */
+    color: #f8fafc;
     margin-bottom: 10px;
     padding: 12px 15px;
     border-radius: 6px;
-    border-left: 4px solid #5f27cd;
+    border-left: 4px solid #a855f7;
 }
 
 .custom-list.numbered {
@@ -148,7 +149,7 @@
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    background: #ee5253;
+    background: #ef4444;
     color: white;
     width: 20px;
     height: 20px;
@@ -164,7 +165,7 @@
 .simulator-box {
     margin-top: 20px;
     padding: 20px;
-    background: #c8d6e5;
+    background: #1e293b; /* Dark box */
     border-radius: 12px;
 }
 
@@ -260,17 +261,8 @@
     width: 100%;
     gap: 15px;
 }
-/* Session Navigation Update */
-.bottom-nav-all { margin-top: 40px; margin-bottom: 20px; }
-.session-footer {
-    text-align: center;
-    padding: 20px 0 10px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 20px;
-    color: #64748b;
-    font-size: 0.85em;
-    font-family: 'Outfit', sans-serif;
-}
+.top-nav { margin-bottom: 25px; margin-top: 10px; }
+.bottom-nav { margin-top: 30px; margin-bottom: 40px; }
 .nav-btn {
     background: rgba(255,255,255,0.1);
     color: white;

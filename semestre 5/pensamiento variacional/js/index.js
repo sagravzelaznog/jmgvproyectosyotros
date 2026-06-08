@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'sesion11', 'sesion12', 'sesion13', 'sesion14', 'sesion15',
         'sesion16', 'sesion17', 'sesion18', 'sesion19', 'sesion20',
         'sesion21', 'sesion22', 'sesion23', 'sesion24', 'sesion25',
-        'sesion26', 'sesion27', 'sesion28', 'sesion29', 'sesion30'
+        'sesion26', 'sesion27', 'sesion28', 'sesion29', 'sesion30',
+        'sesion31', 'sesion32', 'sesion33', 'sesion34', 'sesion35'
     ];
 
     // Data for the 50 sessions

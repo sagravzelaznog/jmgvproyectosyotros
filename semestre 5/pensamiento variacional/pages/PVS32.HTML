@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 32 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Cercar Terreno */
+        .fence-area { width: 100px; height: 60px; border: 4px dashed #f59e0b; position: relative; background: rgba(245,158,11,0.2); animation: resizeFence 4s infinite alternate ease-in-out; }
+        @keyframes resizeFence { 0% { width: 120px; height: 40px; } 100% { width: 60px; height: 80px; } }
+
+        /* 2. Caja sin tapa */
+        .box-flat { width: 80px; height: 80px; background: #64748b; position: relative; }
+        .cut-corner { position: absolute; width: 20px; height: 20px; background: #1e293b; border: 1px dashed white; }
+        .tl { top: 0; left: 0; } .tr { top: 0; right: 0; } .bl { bottom: 0; left: 0; } .br { bottom: 0; right: 0; }
+        .box-flat { animation: boxFold 3s infinite alternate; }
+        @keyframes boxFold { 100% { transform: scale(0.8) rotateX(45deg); } }
+
+        /* 3. Ruta más corta */
+        .route-map { width: 100%; height: 100%; position: relative; }
+        .point { width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; position: absolute; }
+        .p1 { top: 20px; left: 20px; } .p2 { bottom: 20px; right: 20px; }
+        .path { position: absolute; height: 3px; background: #10b981; top: 24px; left: 24px; transform-origin: 0 0; width: 0; animation: drawPath 2s infinite alternate; }
+        @keyframes drawPath { 100% { width: 150px; transform: rotate(35deg); } }
+
+        /* Simulador: Recorte de Caja */
+        .box-sim { background: #0f172a; border: 4px solid #facc15; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
+        .sim-container { display: flex; justify-content: center; gap: 40px; align-items: center; margin-bottom: 20px; }
+        .sim-flat { width: 150px; height: 100px; background: #3b82f6; position: relative; transition: all 0.2s; }
+        .sc { position: absolute; background: #0f172a; transition: all 0.2s; }
+        .s-tl { top: 0; left: 0; } .s-tr { top: 0; right: 0; } .s-bl { bottom: 0; left: 0; } .s-br { bottom: 0; right: 0; }
+        .sim-stats { font-family: monospace; color: white; text-align: left; background: #1e293b; padding: 15px; border-radius: 8px; width: 150px; }
+        .vol-display { font-size: 1.5em; color: #10b981; font-weight: bold; margin-top: 10px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion32-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 2 | Sesión 32</div>
+            <h1>Introducción a la Optimización</h1>
+            <p>Traducir problemas reales a modelos matemáticos para encontrar la mejor solución.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aprender la metodología para modelar problemas de optimización: identificar la función objetivo, establecer restricciones, y encontrar el óptimo usando derivadas.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #facc15; border-top: 5px solid #facc15;">
+                <h2 style="color: #facc15;">📖 Teoría: El Proceso de Optimización</h2>
+                <div class="math-box" style="border-color:#facc15; color:#fef08a; text-align:left;">
+                    1. <strong>Función Objetivo:</strong> ¿Qué queremos maximizar (volumen, ganancia) o minimizar (costo, distancia)? Ej: $V = L \cdot A \cdot h$.<br>
+                    2. <strong>Restricción:</strong> Las limitaciones del mundo real (dinero, material). Ej: Solo tengo 20m de malla para cercar.<br>
+                    3. <strong>Sustitución:</strong> Despejar de la restricción y meter en el objetivo para que quede una sola variable ($x$).<br>
+                    4. <strong>Derivar e igualar a 0:</strong> $V'(x) = 0$ nos da el punto mágico.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Problemas Clásicos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Terreno Rectangular (Área Máxima):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Tienes 100m de malla. ¿Qué largo y ancho dan más área? (Spoiler: Un cuadrado perfecto optimiza el área).</p>
+                        <div class="css-graphic"><div class="fence-area"></div></div>
+                    </li>
+                    <li>
+                        <b>Caja sin Tapa (Volumen Máximo):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Cortar cuadrados de las esquinas de un cartón. Si cortas mucho, queda muy angosta; si cortas poco, queda muy chaparra.</p>
+                        <div class="css-graphic"><div class="box-flat"><div class="cut-corner tl"></div><div class="cut-corner tr"></div><div class="cut-corner bl"></div><div class="cut-corner br"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Ruta Más Corta:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Líneas eléctricas desde una planta hasta una fábrica cruzando un río. Minimizar la distancia diagonal minimiza el costo.</p>
+                        <div class="css-graphic"><div class="route-map"><div class="point p1"></div><div class="point p2"></div><div class="path"></div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #facc15;">
+                <h2 style="color: #facc15;">📦 Simulador: Diseño de Caja</h2>
+                <p>Tenemos un cartón de 15x10 cm. Queremos armar una caja doblando los bordes. Ajusta el corte de las esquinas ($x$) para maximizar el volumen.</p>
+
+                <div class="box-sim">
+                    <div class="sim-container">
+                        <div class="sim-flat" id="cardboard">
+                            <div class="sc s-tl" id="c1"></div><div class="sc s-tr" id="c2"></div>
+                            <div class="sc s-bl" id="c3"></div><div class="sc s-br" id="c4"></div>
+                        </div>
+                        <div class="sim-stats">
+                            <div>Corte ($x$): <span id="cut-val">0</span> cm</div>
+                            <div>Largo: <span id="len-val">15</span> cm</div>
+                            <div>Ancho: <span id="wid-val">10</span> cm</div>
+                            <div class="vol-display" id="vol-val">0 cm³</div>
+                        </div>
+                    </div>
+                    <input type="range" id="x-slider" min="0" max="5" step="0.1" value="0" style="width: 80%;">
+                    <div style="color:#94a3b8; font-size:0.9em; margin-top:10px;">$V(x) = x(15 - 2x)(10 - 2x)$</div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS31.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS33.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('x-slider');
+        const cutVal = document.getElementById('cut-val');
+        const lenVal = document.getElementById('len-val');
+        const widVal = document.getElementById('wid-val');
+        const volVal = document.getElementById('vol-val');
+        const corners = [document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'), document.getElementById('c4')];
+
+        slider.addEventListener('input', (e) => {
+            const x = parseFloat(e.target.value);
+            cutVal.innerText = x.toFixed(1);
+            
+            const l = 15 - 2*x;
+            const w = 10 - 2*x;
+            lenVal.innerText = l.toFixed(1);
+            widVal.innerText = w.toFixed(1);
+
+            const v = x * l * w;
+            volVal.innerText = v.toFixed(1) + " cm³";
+
+            // Visual update
+            // Max x visually is 5, which maps to 50px
+            const px = x * 10;
+            corners.forEach(c => {
+                c.style.width = px + "px";
+                c.style.height = px + "px";
+            });
+
+            if(Math.abs(x - 1.96) < 0.1) { // Exact max is ~1.96
+                volVal.style.color = "#facc15";
+                volVal.style.textShadow = "0 0 10px #facc15";
+            } else {
+                volVal.style.color = "#10b981";
+                volVal.style.textShadow = "none";
+            }
+        });
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion32', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion32');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion32', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

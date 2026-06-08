@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 31 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Transición de subida a estabilización */
+        .logistic-curve { width: 80%; height: 80px; position: relative; display: flex; align-items: flex-end; }
+        .l-line { width: 100%; height: 100%; background: transparent; border-left: 2px solid #3b82f6; border-top: 2px solid #3b82f6; border-radius: 50% 0 0 0; }
+        .inflection-pt { width: 12px; height: 12px; background: #facc15; border-radius: 50%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px #facc15; }
+
+        /* 2. Peraltes en carretera */
+        .road { width: 80%; height: 60px; background: #475569; position: relative; border-radius: 0 0 50% 50%; border-top: 4px dashed white; transform: perspective(100px) rotateX(20deg); }
+        .car-top { width: 15px; height: 25px; background: #ef4444; position: absolute; top: 10px; left: 20%; border-radius: 3px; animation: driveCurve 3s infinite alternate ease-in-out; }
+        @keyframes driveCurve { 0% { left: 10%; transform: rotate(-10deg); } 100% { left: 80%; transform: rotate(10deg); } }
+
+        /* 3. Fatiga de materiales */
+        .beam { width: 80%; height: 20px; background: #94a3b8; border-radius: 5px; position: relative; animation: fatigueBend 1s infinite alternate; }
+        .crack { position: absolute; width: 0; height: 10px; background: black; top: -5px; left: 50%; transform: translateX(-50%); animation: crackGrow 5s forwards; }
+        @keyframes fatigueBend { 0% { transform: translateY(-5px); border-radius: 10% 10% 0 0; } 100% { transform: translateY(5px); border-radius: 0 0 10% 10%; } }
+        @keyframes crackGrow { 0% { width: 0; } 100% { width: 4px; } }
+
+        /* Simulador: Diseño de Carretera */
+        .road-sim {
+            background: #0f172a; border: 4px solid #8b5cf6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .canvas-area { background: #1e293b; width: 100%; height: 150px; border-radius: 8px; position: relative; overflow: hidden; margin-bottom: 15px; }
+        .slider-group { display: flex; align-items: center; justify-content: center; gap: 15px; color: white; margin-top: 10px; }
+        .info-pill { background: #334155; padding: 5px 15px; border-radius: 20px; font-family: monospace; color: #a7f3d0; }
+    </style>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion31-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS31()">
+            <div class="badge">Bloque 2 | Sesión 31</div>
+            <h1>Concavidad y Puntos de Inflexión</h1>
+            <p>El criterio de la segunda derivada: Analizando la curvatura y los cambios de tendencia.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): "La concavidad es hacia dónde 'mira' la curva. Si mira arriba (U), la segunda derivada es +. Si mira abajo (n), es -. El punto donde cambia de una a otra es el punto de inflexión."</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Analizar la curvatura de las funciones utilizando el Criterio de la Segunda Derivada ($f''(x)$) para identificar puntos de inflexión y optimizar transiciones en la infraestructura.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: El Criterio de la Segunda Derivada</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#ddd6fe; text-align:left;">
+                    • Si $f''(x) > 0$, la curva es <strong>Cóncava Hacia Arriba</strong> (como una "U" o una copa que retiene agua).<br>
+                    • Si $f''(x) < 0$, la curva es <strong>Cóncava Hacia Abajo</strong> (como un domo o paraguas).<br>
+                    • Si $f''(x) = 0$ y cambia de signo, existe un <strong>Punto de Inflexión</strong> (cambio de curvatura).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Aplicaciones Prácticas</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Estabilización de Curvas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El punto amarillo es la inflexión: donde el crecimiento deja de acelerar y empieza a frenar su ritmo para estabilizarse.</p>
+                        <div class="css-graphic">
+                            <div class="logistic-curve"><div class="l-line"></div><div class="inflection-pt"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Diseño de Peraltes:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Las carreteras cambian de curvatura suavemente. En el punto de inflexión, el peralte debe ser exactamente cero (plano).</p>
+                        <div class="css-graphic">
+                            <div class="road"><div class="car-top"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Fatiga de Materiales:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Al someter una viga a cambios constantes de concavidad (+ a -), el material sufre estrés cíclico y puede fracturarse.</p>
+                        <div class="css-graphic">
+                            <div class="beam"><div class="crack"></div></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">🛣️ Diseño de Carretera Segura</h2>
+                <p>Ajusta el "peralte" (inclinación) de esta transición de carretera usando el modelo cúbico $y = ax^3$. Busca mantener una curvatura suave y segura.</p>
+
+                <div class="road-sim">
+                    <div class="canvas-area">
+                        <canvas id="roadCanvas"></canvas>
+                    </div>
+                    <div class="slider-group">
+                        <label>Factor 'a' (Curvatura):</label>
+                        <input type="range" id="curve-slider" min="-50" max="50" value="20" style="width: 150px;">
+                    </div>
+                    <div style="display:flex; justify-content:space-around; margin-top:15px;">
+                        <div class="info-pill" id="concave-left">Izquierda: n</div>
+                        <div class="info-pill" style="background:#facc15; color:black;">Inflexión: (0,0)</div>
+                        <div class="info-pill" id="concave-right">Derecha: U</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS30.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS32.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const canvas = document.getElementById('roadCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('curve-slider');
+        const cLeft = document.getElementById('concave-left');
+        const cRight = document.getElementById('concave-right');
+
+        function drawRoad() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            const w = canvas.width;
+            const h = canvas.height;
+            const a = parseFloat(slider.value) / 1000; // scaling
+
+            ctx.clearRect(0,0,w,h);
+            
+            // Draw axes
+            ctx.strokeStyle = "rgba(255,255,255,0.1)";
+            ctx.beginPath(); ctx.moveTo(w/2, 0); ctx.lineTo(w/2, h); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, h/2); ctx.lineTo(w, h/2); ctx.stroke();
+
+            // Draw cubic curve y = ax^3
+            ctx.beginPath();
+            ctx.lineWidth = 4;
+            for(let px=0; px<w; px++) {
+                let x = px - w/2;
+                let y = a * Math.pow(x, 3);
+                
+                // For visualization, limit y to height
+                let py = h/2 - y;
+
+                if(px === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+
+            // Gradient stroke based on concavity (y'' = 6ax)
+            let grad = ctx.createLinearGradient(0,0,w,0);
+            if(a > 0) {
+                grad.addColorStop(0, "#ef4444"); // x<0, y''<0 (down)
+                grad.addColorStop(0.5, "#facc15"); // x=0
+                grad.addColorStop(1, "#10b981"); // x>0, y''>0 (up)
+                cLeft.innerText = "Izquierda: Cóncava Abajo (-)";
+                cRight.innerText = "Derecha: Cóncava Arriba (+)";
+            } else if (a < 0) {
+                grad.addColorStop(0, "#10b981");
+                grad.addColorStop(0.5, "#facc15");
+                grad.addColorStop(1, "#ef4444");
+                cLeft.innerText = "Izquierda: Cóncava Arriba (+)";
+                cRight.innerText = "Derecha: Cóncava Abajo (-)";
+            } else {
+                grad.addColorStop(0, "#cbd5e1");
+                grad.addColorStop(1, "#cbd5e1");
+                cLeft.innerText = "Plano";
+                cRight.innerText = "Plano";
+            }
+            ctx.strokeStyle = grad;
+            ctx.stroke();
+
+            // Inflection point marker
+            ctx.beginPath();
+            ctx.arc(w/2, h/2, 6, 0, Math.PI*2);
+            ctx.fillStyle = "#facc15";
+            ctx.fill();
+        }
+
+        slider.addEventListener('input', drawRoad);
+        window.addEventListener('resize', drawRoad);
+        // Initial draw after a small delay to let CSS load
+        setTimeout(drawRoad, 100);
+
+        window.unlockTeacherTipsS31 = function() {
+            const tip = document.querySelector('#sesion31-variacional .teacher-tip');
+            if(tip) tip.classList.toggle('hidden');
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion31', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion31');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion31', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

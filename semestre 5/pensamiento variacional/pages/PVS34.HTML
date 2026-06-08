@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 34 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Red Subterránea CFE */
+        .trench { width: 80%; height: 40px; background: #475569; position: relative; border-radius: 5px; }
+        .cable { width: 100%; height: 6px; background: #ef4444; position: absolute; top: 17px; }
+        .norm-line { width: 100%; height: 2px; border-top: 2px dashed #facc15; position: absolute; top: 5px; }
+        .norm-text { position: absolute; top: -15px; left: 10px; font-size: 0.7em; color: #facc15; font-family: monospace; }
+
+        /* 2. Caída de Tensión */
+        .voltage-graph { display: flex; align-items: flex-end; width: 80%; height: 80px; border-left: 2px solid white; border-bottom: 2px solid white; position: relative; }
+        .v-bar { flex: 1; background: #3b82f6; margin: 0 2px; }
+        .limit-line { width: 100%; height: 2px; background: #ef4444; position: absolute; top: 20px; } /* 3% limit */
+
+        /* 3. Transformadores */
+        .grid-map { width: 100px; height: 100px; background: #334155; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 5px; }
+        .city-block { background: #64748b; border-radius: 3px; position: relative; }
+        .transformer { width: 15px; height: 15px; background: #10b981; position: absolute; top: -5px; right: -5px; border-radius: 3px; box-shadow: 0 0 10px #10b981; }
+
+        /* Simulador: Diseño de Cableado Normativo */
+        .norm-sim { background: #0f172a; border: 4px solid #ef4444; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+        .cable-gauge-sim { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; position: relative; height: 120px; background: #1e293b; border-radius: 8px; }
+        .cable-cross { border-radius: 50%; background: #ca8a04; border: 4px solid #334155; transition: all 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .status-panel { display: flex; justify-content: space-around; font-family: monospace; margin-top: 15px; }
+        .status-box { padding: 10px; border-radius: 5px; background: #334155; width: 45%; }
+        .pass { color: #10b981; border: 1px solid #10b981; }
+        .fail { color: #ef4444; border: 1px solid #ef4444; animation: flashWarning 1s infinite alternate; }
+        @keyframes flashWarning { 0% { background: rgba(239,68,68,0.2); } 100% { background: rgba(239,68,68,0.5); } }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion34-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 2 | Sesión 34</div>
+            <h1>Optimización en Infraestructura II</h1>
+            <p>Optimización Matemática sujeta a Estándares y Normativas Técnicas.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Integrar constantes de tolerancia y restricciones normativas (como las de CFE) en los modelos de optimización, evaluando si el óptimo matemático es viable legal o técnicamente.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #ef4444; border-top: 5px solid #ef4444;">
+                <h2 style="color: #ef4444;">📖 Teoría: Restricciones de Desigualdad</h2>
+                <div class="math-box" style="border-color:#ef4444; color:#fca5a5; text-align:left;">
+                    A veces el punto más barato ($f'(x) = 0$) es peligroso o ilegal.<br>
+                    En la vida real, optimizamos sujeta a: $x \le Límite\_Normativo$.<br>
+                    Si el mínimo matemático rompe la norma, la solución óptima <strong>real</strong> es el valor exacto del límite normativo.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Normas vs Costos</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Profundidad de Zanjas CFE:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Matemáticamente, enterrar el cable a 10cm es lo más barato. Pero la norma exige mínimo 60cm de profundidad. El "óptimo" se descarta.</p>
+                        <div class="css-graphic"><div class="trench"><div class="norm-text">Norma: 60cm min</div><div class="norm-line"></div><div class="cable"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Caída de Tensión:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El cable más delgado ahorra cobre (dinero), pero pierde mucha energía en calor. La norma prohíbe perder más del 3% del voltaje original.</p>
+                        <div class="css-graphic"><div class="voltage-graph"><div class="limit-line"></div><div class="v-bar" style="height:95%"></div><div class="v-bar" style="height:90%"></div><div class="v-bar" style="height:85%"></div><div class="v-bar" style="height:70%; background:#ef4444;"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Capacidad de Transformadores:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Se deben agrupar casas para minimizar el número de transformadores, pero sin superar el límite de carga (KVA) dictado por el fabricante.</p>
+                        <div class="css-graphic"><div class="grid-map"><div class="city-block"><div class="transformer"></div></div><div class="city-block"></div><div class="city-block"></div><div class="city-block"><div class="transformer"></div></div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #ef4444;">
+                <h2 style="color: #ef4444;">⚡ Proyecto Nazas: Fase B (Media Tensión)</h2>
+                <p>Ajusta el grosor (calibre) del cableado. Un cable más grueso cuesta mucho más dinero, pero un cable muy delgado viola la norma CFE de caída de tensión máxima (3%).</p>
+
+                <div class="norm-sim">
+                    <div class="cable-gauge-sim">
+                        <div class="cable-cross" id="sim-cable" style="width:40px; height:40px;">AWG 6</div>
+                    </div>
+                    
+                    <input type="range" id="gauge-slider" min="1" max="10" value="3" style="width: 80%;">
+                    <div style="color:white; margin-top:5px;">Grosor del cable (mm²)</div>
+
+                    <div class="status-panel">
+                        <div class="status-box" id="stat-cost">
+                            Costo Material<br>
+                            <span style="font-size:1.5em; color:white;">\$<span id="cost-val">15000</span></span>
+                        </div>
+                        <div class="status-box fail" id="stat-norm">
+                            Caída de Tensión<br>
+                            <span style="font-size:1.5em;" id="volt-val">4.5%</span><br>
+                            <small id="norm-msg">RECHAZADO CFE (>3%)</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS33.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS35.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('gauge-slider');
+        const cable = document.getElementById('sim-cable');
+        const costVal = document.getElementById('cost-val');
+        const voltVal = document.getElementById('volt-val');
+        const statNorm = document.getElementById('stat-norm');
+        const normMsg = document.getElementById('norm-msg');
+
+        function updateNormSim() {
+            const val = parseInt(slider.value); // 1 (thin) to 10 (thick)
+            
+            // Visual size
+            const size = 20 + (val * 8);
+            cable.style.width = size + 'px';
+            cable.style.height = size + 'px';
+
+            // AWG approx
+            const awg = 14 - val; 
+            cable.innerText = `AWG ${awg}`;
+
+            // Cost calculation (thicker = exponentially more expensive)
+            const cost = 5000 + Math.pow(val, 2) * 800;
+            costVal.innerText = cost;
+
+            // Voltage drop calculation (thicker = less drop)
+            const drop = 8 / val; 
+            voltVal.innerText = drop.toFixed(1) + "%";
+
+            if(drop <= 3.0) {
+                statNorm.className = "status-box pass";
+                normMsg.innerText = "APROBADO CFE (≤3%)";
+                if(drop > 2.5) {
+                    // This is the sweet spot: approved and cheapest possible!
+                    cable.style.boxShadow = "0 0 20px #10b981";
+                } else {
+                    cable.style.boxShadow = "none";
+                }
+            } else {
+                statNorm.className = "status-box fail";
+                normMsg.innerText = "RECHAZADO CFE (>3%)";
+                cable.style.boxShadow = "none";
+            }
+        }
+
+        slider.addEventListener('input', updateNormSim);
+        updateNormSim();
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion34', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion34');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion34', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

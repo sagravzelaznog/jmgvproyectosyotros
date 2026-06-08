@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 33 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Ductos cilíndricos */
+        .pipe-container { display: flex; gap: 10px; align-items: flex-end; }
+        .pipe { border: 2px solid #94a3b8; background: rgba(148,163,184,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em; }
+        .p-small { width: 40px; height: 40px; } .p-opt { width: 70px; height: 70px; border-color: #10b981; background: rgba(16,185,129,0.2); } .p-large { width: 90px; height: 90px; }
+
+        /* 2. Zapata Cimentación */
+        .ground { width: 100%; height: 40px; background: #475569; position: absolute; bottom: 0; border-top: 2px dashed #94a3b8; display: flex; justify-content: center; align-items: flex-start; }
+        .zapata { width: 60px; height: 20px; background: #3b82f6; border-radius: 3px; position: relative; }
+        .columna { width: 20px; height: 60px; background: #cbd5e1; position: absolute; bottom: 20px; left: 20px; }
+
+        /* 3. Postes de alumbrado */
+        .street { width: 100%; height: 20px; background: #334155; position: absolute; bottom: 10px; display: flex; justify-content: space-around; align-items: flex-end; }
+        .pole { width: 4px; height: 60px; background: #94a3b8; position: relative; }
+        .lamp { width: 15px; height: 5px; background: #facc15; position: absolute; top: 0; left: -5px; border-radius: 5px; box-shadow: 0 10px 20px rgba(250,204,21,0.5); }
+
+        /* Simulador: Fraccionamiento Nazas A */
+        .nazas-sim { background: #0f172a; border: 4px solid #3b82f6; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .map-area { background: #1e293b; width: 100%; height: 180px; border-radius: 8px; position: relative; margin-bottom: 15px; }
+        .house { width: 20px; height: 20px; background: #ef4444; position: absolute; border-radius: 3px; }
+        .h1 { top: 20px; left: 20px; } .h2 { bottom: 20px; left: 40px; } .h3 { top: 40px; right: 20px; } .h4 { bottom: 30px; right: 50px; }
+        .main-pipe { height: 4px; background: #3b82f6; position: absolute; top: 50%; left: 0; transform: translateY(-50%); transition: width 0.2s; }
+        .branch { width: 2px; background: #60a5fa; position: absolute; }
+        .slider-group { color: white; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .cost-display { font-size: 1.5em; font-family: monospace; color: #10b981; font-weight: bold; background: #1e293b; padding: 5px 15px; border-radius: 5px; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion33-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 2 | Sesión 33</div>
+            <h1>Optimización en Infraestructura I</h1>
+            <p>Reducción de costos y materiales en proyectos de ingeniería civil.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar el cálculo diferencial para resolver problemas reales de reducción de costos y materiales en infraestructura, planteando funciones objetivo de costo.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: Función de Costo Total</h2>
+                <div class="math-box" style="border-color:#3b82f6; color:#93c5fd; text-align:left;">
+                    En infraestructura, no solo minimizamos distancias, minimizamos <strong>dinero</strong>.<br>
+                    $Costo = (Precio\_Material\_A \cdot Cantidad\_A) + (Precio\_Material\_B \cdot Cantidad\_B)$<br>
+                    Al expresar Cantidad A y B en términos de una sola variable $x$, derivamos $C'(x)=0$ para encontrar el diseño más barato posible.
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Aplicaciones Prácticas</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Ductos Cilíndricos:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">¿Por qué las tuberías son redondas? El círculo es la forma geométrica que encierra el mayor volumen transversal con el menor perímetro (menor costo de PVC).</p>
+                        <div class="css-graphic"><div class="pipe-container"><div class="pipe p-small">Sub</div><div class="pipe p-opt">Óptimo</div><div class="pipe p-large">Sob</div></div></div>
+                    </li>
+                    <li>
+                        <b>Zapatas de Cimentación:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Una base ancha requiere menos profundidad, pero más concreto superficial. Derivamos para hallar el equilibrio perfecto entre ancho y grosor.</p>
+                        <div class="css-graphic"><div class="ground"><div class="zapata"><div class="columna"></div></div></div></div>
+                    </li>
+                    <li>
+                        <b>Postes de Alumbrado:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Muchos postes juntos = mucha luz pero muy caro. Postes separados = baratos pero oscuros. La derivada optimiza la distancia focal.</p>
+                        <div class="css-graphic"><div class="street"><div class="pole"><div class="lamp"></div></div><div class="pole"><div class="lamp"></div></div><div class="pole"><div class="lamp"></div></div></div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">💧 Proyecto Nazas: Fase A (Agua)</h2>
+                <p>Tira la tubería principal (azul oscuro) a través de la colonia irregular. Mientras más larga, más corta será la tubería secundaria a las casas (azul claro). Minimiza el costo total.</p>
+
+                <div class="nazas-sim">
+                    <div class="map-area" id="mapa-nazas">
+                        <div class="house h1"></div><div class="house h2"></div><div class="house h3"></div><div class="house h4"></div>
+                        <div class="main-pipe" id="pipe-main" style="width: 50%;"></div>
+                        <!-- Ramales generados por JS -->
+                    </div>
+                    <div class="slider-group">
+                        <label>Longitud Tubería Principal ($x$):</label>
+                        <input type="range" id="pipe-slider" min="10" max="90" value="50" style="width: 80%;">
+                        <div class="cost-display" id="total-cost">Costo: \$0</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS32.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS34.HTML" class="nav-btn">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        const slider = document.getElementById('pipe-slider');
+        const pipeMain = document.getElementById('pipe-main');
+        const costDisplay = document.getElementById('total-cost');
+        const mapArea = document.getElementById('mapa-nazas');
+
+        // Pre-defined house X positions (approximate % for simplicity)
+        const houses = [
+            { id: 'h1', x: 10, y: 20, isTop: true },
+            { id: 'h2', x: 20, y: 150, isTop: false }, // Using bottom: 20px so y is roughly 150 in 180px height container
+            { id: 'h3', x: 80, y: 40, isTop: true },
+            { id: 'h4', x: 70, y: 130, isTop: false }
+        ];
+
+        // Create branches
+        houses.forEach((h, i) => {
+            const branch = document.createElement('div');
+            branch.className = 'branch';
+            branch.id = 'branch-' + i;
+            branch.style.left = `calc(${h.x}% + 10px)`; // Align with house center
+            mapArea.appendChild(branch);
+        });
+
+        function updateSimulation() {
+            const x = parseInt(slider.value); // 10 to 90
+            pipeMain.style.width = x + '%';
+
+            let totalSecondaryCost = 0;
+            const mainCostPerUnit = 5;
+            const secCostPerUnit = 8; // Secondary is more expensive (requires digging small trenches)
+
+            houses.forEach((h, i) => {
+                const branch = document.getElementById('branch-' + i);
+                let branchLen = 0;
+
+                if (h.x <= x) {
+                    // Main pipe reaches this house horizontally
+                    branch.style.display = 'block';
+                    if(h.isTop) {
+                        branch.style.top = (h.y + 20) + 'px';
+                        branch.style.height = (90 - h.y - 20) + 'px'; // 90 is center
+                        branchLen = 90 - h.y - 20;
+                    } else {
+                        branch.style.top = '90px';
+                        branch.style.height = (h.y - 90) + 'px';
+                        branchLen = h.y - 90;
+                    }
+                } else {
+                    // Main pipe doesn't reach, house needs diagonal or longer pipe.
+                    // For simulation, we just hide it and apply a massive penalty cost
+                    branch.style.display = 'none';
+                    branchLen = 150; // Penalty
+                }
+                
+                totalSecondaryCost += branchLen * secCostPerUnit;
+            });
+
+            const totalCost = (x * mainCostPerUnit) + totalSecondaryCost;
+            costDisplay.innerText = `Costo Total: \$${totalCost}`;
+
+            // Provide visual feedback for optimum
+            if(totalCost < 1600) {
+                costDisplay.style.color = "#facc15";
+            } else {
+                costDisplay.style.color = "#10b981";
+            }
+        }
+
+        slider.addEventListener('input', updateSimulation);
+        updateSimulation();
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion33', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion33');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion33', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

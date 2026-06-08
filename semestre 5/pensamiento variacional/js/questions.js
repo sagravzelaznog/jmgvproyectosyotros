@@ -449,7 +449,40 @@ export const questionDatabase = {
         { question: "El criterio de la primera derivada nos sirve para encontrar...", options: ["Puntos máximos y mínimos (óptimos)", "El área total", "Asintotas oblicuas", "El origen de coordenadas"], answerIndex: 0, timeLimit: 20 },
         { question: "Si f'(x) pasa de ser Positiva a Negativa, hemos encontrado un...", options: ["Máximo local", "Mínimo local", "Punto de inflexión vertical", "Asintota horizontal"], answerIndex: 0, timeLimit: 20 },
         { question: "Para encontrar la hora del día con mayor temperatura según un modelo polinomial, debemos...", options: ["Igualar la derivada a cero y despejar x", "Multiplicar todo por cero", "Sumar las temperaturas", "Graficar sin derivar"], answerIndex: 0, timeLimit: 20 },
-        { question: "Si f'(x) pasa de ser Negativa a Positiva, el punto crítico es un...", options: ["Mínimo", "Máximo", "Raíz", "Error"], answerIndex: 0, timeLimit: 20 },
-        { question: "En un problema de optimización de combustible, buscamos matemáticamente...", options: ["El punto mínimo de la función de consumo", "El punto máximo del gasto", "Que el consumo sea infinito", "Acelerar sin límite"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion31": [
+        { question: "La segunda derivada nos da información sobre la...", options: ["Concavidad de la curva", "Velocidad constante", "Asíntota vertical", "Intersección con Y"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f''(x) > 0, decimos que la función es...", options: ["Cóncava hacia arriba (forma de U)", "Cóncava hacia abajo (forma de n)", "Totalmente plana", "Circular"], answerIndex: 0, timeLimit: 20 },
+        { question: "Un punto de inflexión ocurre cuando la segunda derivada...", options: ["Vale cero y hay cambio de concavidad", "Es infinita", "Es siempre positiva", "Se vuelve fraccionaria"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al diseñar una curva en carretera, un punto de inflexión indica...", options: ["El cambio de viraje de izquierda a derecha", "Un tope en el camino", "El final de la calle", "Una pendiente infinita"], answerIndex: 0, timeLimit: 20 },
+        { question: "El Criterio de la Segunda Derivada establece que si f'(c)=0 y f''(c)>0, entonces hay un...", options: ["Mínimo local", "Máximo local", "Punto de no retorno", "Agujero en la gráfica"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion32": [
+        { question: "¿Cuál es el objetivo principal de la optimización en cálculo?", options: ["Encontrar el valor máximo o mínimo posible dadas unas restricciones", "Adivinar la respuesta", "Dibujar funciones circulares", "Sumar todos los datos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para encontrar el área máxima de un rectángulo con perímetro fijo, ¿qué hacemos primero?", options: ["Plantear la función objetivo y la restricción", "Derivar sin pensar", "Multiplicar todo por cero", "Medir con regla"], answerIndex: 0, timeLimit: 20 },
+        { question: "En un problema de caja de volumen máximo sin tapa, la variable a optimizar es el...", options: ["Volumen", "Peso", "Color de la caja", "Material de origen"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué se debe igualar a cero para hallar el punto óptimo?", options: ["La primera derivada de la función objetivo", "La función original", "La restricción", "El dominio"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué nos dice la restricción en un problema de optimización?", options: ["Los límites físicos o económicos que tenemos (ej. material disponible)", "El resultado final", "Si habrá o no derivada", "Nada importante"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion33": [
+        { question: "Si buscamos abaratar el costo de una tubería, debemos...", options: ["Minimizar la función de Costo", "Maximizar la función de Costo", "Igualar el costo al volumen", "Pagar el doble"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Por qué los ductos cilíndricos son tan comunes en infraestructura?", options: ["Porque optimizan el área transversal con el mínimo perímetro posible", "Porque es fácil hacerlos redondos", "Por coincidencia", "Porque no tienen derivadas"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para la zapata de cimentación, ¿qué buscamos usualmente con el cálculo?", options: ["Dimensiones que distribuyan la carga segura usando menos material", "Que sea lo más profunda y cara posible", "Que no toque la tierra", "Que la derivada sea siempre positiva"], answerIndex: 0, timeLimit: 20 },
+        { question: "En una instalación de agua en un fraccionamiento, la 'ruta más corta' busca optimizar...", options: ["Metros lineales de PVC (Longitud)", "La presión del agua directamente", "El sabor del agua", "La concavidad de la calle"], answerIndex: 0, timeLimit: 20 },
+        { question: "El paso final tras igualar f'(x)=0 en problemas reales es...", options: ["Verificar si es un mínimo real y si la dimensión tiene sentido físico", "Dejar de hacer cálculos", "Cobrar el proyecto", "Dibujar la caja"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion34": [
+        { question: "¿Qué es una restricción normativa (ej. normas CFE)?", options: ["Un límite legal o técnico que nuestras funciones deben respetar", "Una sugerencia", "Un error de cálculo", "Una asíntota"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la caída de tensión no puede superar el 3%, esto representa...", options: ["Una desigualdad en nuestras restricciones", "La función a derivar", "La segunda derivada", "Un punto de inflexión"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al optimizar cableado bajo normativas, a veces el 'óptimo matemático'...", options: ["Se rechaza porque viola una norma oficial", "Es siempre la mejor opción", "No existe", "Se ignora siempre"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para asegurar que los transformadores no se sobrecarguen, optimizamos...", options: ["El número y ubicación respetando el radio de cobertura", "El color de la pintura", "El peso de la caja", "La velocidad de instalación"], answerIndex: 0, timeLimit: 20 },
+        { question: "En proyectos de ingeniería, el cálculo diferencial es una herramienta para...", options: ["Toma de decisiones fundamentadas y seguras", "Hacer los planos más grandes", "Gastar más presupuesto", "Evitar el uso de computadoras"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion35": [
+        { question: "En la presentación de proyectos, ¿cuál es la mejor forma de justificar un diseño?", options: ["Demostrar que minimiza costos o maximiza eficiencia según el cálculo", "Decir que se ve bonito", "Copiar otro diseño", "Solo mostrar el resultado final"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué demuestra la viabilidad de un proyecto optimizado?", options: ["Que cumple las normativas y los mínimos matemáticos son posibles físicamente", "Que la derivada es cero", "Que es infinito", "Que usa muchos materiales"], answerIndex: 0, timeLimit: 20 },
+        { question: "Una rúbrica de evaluación técnica revisa...", options: ["Procedimiento matemático, normativa y aplicabilidad", "Si el plano tiene color", "La letra del documento", "Si el equipo habló fuerte"], answerIndex: 0, timeLimit: 20 },
+        { question: "El objetivo de compartir los proyectos en plenaria es...", options: ["Recibir retroalimentación y comparar métodos de optimización", "Ver quién terminó antes", "Copiar resultados", "Cumplir el tiempo libre"], answerIndex: 0, timeLimit: 20 },
+        { question: "El Pensamiento Variacional en este bloque nos enseñó principalmente a...", options: ["Predecir, controlar y optimizar el cambio usando derivadas", "Sumar y restar rápido", "Hacer polígonos", "Usar calculadoras"], answerIndex: 0, timeLimit: 20 }
     ]
 };

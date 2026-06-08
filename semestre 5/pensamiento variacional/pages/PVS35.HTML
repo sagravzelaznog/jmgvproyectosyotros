@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 35 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic { width: 100%; height: 120px; background: #1e293b; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; position: relative; overflow: hidden; }
+
+        /* 1. Presentación Formal */
+        .stage { width: 100%; height: 60px; background: #334155; position: absolute; bottom: 0; border-top: 2px solid #64748b; }
+        .projector-screen { width: 60px; height: 40px; background: white; border: 2px solid #cbd5e1; position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        .speaker { width: 15px; height: 30px; background: #3b82f6; position: absolute; bottom: 60px; left: 30%; border-radius: 5px; animation: speakAnim 1s infinite alternate; }
+        @keyframes speakAnim { 100% { transform: scaleY(1.1); } }
+
+        /* 2. Rúbrica de Evaluación */
+        .rubric { width: 80px; height: 100px; background: white; position: relative; border-radius: 5px; padding: 5px; display: flex; flex-direction: column; gap: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+        .r-line { width: 100%; height: 4px; background: #cbd5e1; }
+        .r-check { width: 10px; height: 10px; background: #10b981; border-radius: 50%; position: absolute; right: 5px; top: 15px; animation: popCheck 2s infinite; }
+        @keyframes popCheck { 0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+        /* 3. Ahorros Económicos */
+        .money-bag { font-size: 3em; animation: bounceBag 2s infinite; }
+        .savings { position: absolute; color: #10b981; font-weight: bold; font-family: monospace; font-size: 1.2em; top: 20px; opacity: 0; animation: floatSavings 2s infinite linear; }
+        @keyframes bounceBag { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes floatSavings { 0% { top: 20px; opacity: 1; } 100% { top: -20px; opacity: 0; } }
+
+        /* Simulador: Rúbrica Interactiva */
+        .rubric-sim { background: #0f172a; border: 4px solid #8b5cf6; border-radius: 15px; padding: 20px; text-align: left; box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); color: white; }
+        .rubric-item { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #64748b; transition: all 0.3s; cursor: pointer; }
+        .rubric-item:hover { background: #334155; }
+        .r-title { font-weight: bold; font-size: 1.1em; }
+        .r-desc { font-size: 0.8em; color: #94a3b8; margin-top: 5px; }
+        .r-score { font-family: monospace; font-size: 1.5em; background: #0f172a; padding: 5px 15px; border-radius: 5px; color: #8b5cf6; }
+        .total-score { text-align: center; font-size: 2em; margin-top: 20px; font-weight: bold; color: #10b981; }
+    </style>
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="session-progress-container"><span style="font-size: 1.2em;">📚</span><div class="session-progress-bar-bg"><div class="session-progress-fill" id="session-progress"></div></div></div>
+
+    <div class="infographic-container" id="sesion35-variacional">
+        <header class="info-header">
+            <div class="badge">Bloque 2 | Sesión 35</div>
+            <h1>Presentación de Proyectos</h1>
+            <p>Comunicación de resultados, justificaciones matemáticas y cierre del Bloque 2.</p>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Desarrollar habilidades de comunicación técnica argumentando cómo el cálculo diferencial resolvió un problema real de optimización, sometiendo el trabajo a co-evaluación grupal.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: El Cierre del Proyecto</h2>
+                <div class="math-box" style="border-color:#8b5cf6; color:#ddd6fe; text-align:left;">
+                    El cálculo no termina en el papel. El ingeniero debe convencer a los inversores o al gobierno de que su modelo matemático es correcto y seguro.<br>
+                    <strong>Ejes de Presentación:</strong><br>
+                    1. <strong>El Modelo:</strong> ¿Cuál fue la función objetivo $f(x)$ y la restricción?<br>
+                    2. <strong>La Derivada:</strong> Demostrar que $f'(x)=0$ realmente minimizó el costo.<br>
+                    3. <strong>La Normativa:</strong> ¿Cumplimos las reglas de CFE / Obra Civil?
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Actividades de Cierre</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Exposición Formal:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Los equipos presentan sus memorias de cálculo frente al grupo, defendiendo por qué eligieron cierto calibre de cable o diseño de tubería.</p>
+                        <div class="css-graphic"><div class="stage"></div><div class="projector-screen"></div><div class="speaker"></div></div>
+                    </li>
+                    <li>
+                        <b>Evaluación por Rúbricas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Se evalúa rigor matemático, cumplimiento de normativas y claridad en la exposición. Co-evaluación entre pares.</p>
+                        <div class="css-graphic"><div class="rubric"><div class="r-line"></div><div class="r-line"></div><div class="r-line"></div><div class="r-check"></div></div></div>
+                    </li>
+                    <li>
+                        <b>Discusión de Ahorros:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Comparar cuánto habría costado el fraccionamiento usando "intuición" vs usando el "óptimo matemático". ¡El cálculo ahorra millones!</p>
+                        <div class="css-graphic"><div class="money-bag">💰</div><div class="savings">+$15,000</div></div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📋 Simulador de Co-Evaluación</h2>
+                <p>Haz clic en los criterios para calificar el proyecto de un compañero imaginario. ¡Asegúrate de ser justo!</p>
+
+                <div class="rubric-sim">
+                    <div class="rubric-item" onclick="toggleScore(this, 30)">
+                        <div>
+                            <div class="r-title">1. Modelo Matemático (0-30%)</div>
+                            <div class="r-desc">Planteó correctamente la función objetivo y la restricción.</div>
+                        </div>
+                        <div class="r-score">0%</div>
+                    </div>
+                    <div class="rubric-item" onclick="toggleScore(this, 30)">
+                        <div>
+                            <div class="r-title">2. Proceso de Derivación (0-30%)</div>
+                            <div class="r-desc">Calculó correctamente f'(x) y demostró que es el mínimo absoluto.</div>
+                        </div>
+                        <div class="r-score">0%</div>
+                    </div>
+                    <div class="rubric-item" onclick="toggleScore(this, 20)">
+                        <div>
+                            <div class="r-title">3. Cumplimiento Normativo (0-20%)</div>
+                            <div class="r-desc">El diseño respeta el límite de 3% de caída de tensión de CFE.</div>
+                        </div>
+                        <div class="r-score">0%</div>
+                    </div>
+                    <div class="rubric-item" onclick="toggleScore(this, 20)">
+                        <div>
+                            <div class="r-title">4. Claridad y Defensa (0-20%)</div>
+                            <div class="r-desc">Pudo explicar el porqué de sus resultados ante preguntas del grupo.</div>
+                        </div>
+                        <div class="r-score">0%</div>
+                    </div>
+                    <div class="total-score" id="rubric-total">Calificación Total: 0%</div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS34.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="#" class="nav-btn" style="opacity: 0.5; pointer-events: none;">Siguiente ➡</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script>
+        let total = 0;
+        window.toggleScore = function(element, maxPoints) {
+            const scoreDiv = element.querySelector('.r-score');
+            let current = parseInt(scoreDiv.innerText);
+            
+            if(current === 0) {
+                current = maxPoints;
+                element.style.borderLeftColor = "#10b981";
+                total += maxPoints;
+            } else {
+                current = 0;
+                element.style.borderLeftColor = "#64748b";
+                total -= maxPoints;
+            }
+            
+            scoreDiv.innerText = current + "%";
+            document.getElementById('rubric-total').innerText = "Calificación Total: " + total + "%";
+            
+            if(total >= 80) document.getElementById('rubric-total').style.color = "#10b981";
+            else if(total >= 60) document.getElementById('rubric-total').style.color = "#facc15";
+            else document.getElementById('rubric-total').style.color = "#ef4444";
+        };
+    </script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion35', async (score, percentage) => {
+                if(percentage === 100) {
+                    AppController.markSessionCompleted('sesion35');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion35', score, true);
+                    window.location.href = '../index.html';
+                } else { window.location.href = '../index.html'; }
+            });
+        });
+    </script>
+</body>
+</html>

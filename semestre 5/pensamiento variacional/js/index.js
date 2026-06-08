@@ -56,9 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
     sessions.push({ id: 8, title: "Funciones Logarítmicas", description: "Comprender la función inversa a la exponencial y las escalas logarítmicas.", block: 1, link: "pages/PVS08.HTML", status: "active" });
     sessions.push({ id: 9, title: "Funciones Trigonométricas I", description: "Análisis de fenómenos cíclicos y periódicos mediante el Seno y Coseno.", block: 1, link: "pages/PVS09.HTML", status: "active" });
     sessions.push({ id: 10, title: "Funciones Trigonométricas II", description: "Conectando la trigonometría con la infraestructura eléctrica mundial.", block: 1, link: "pages/PVS10.HTML", status: "active" });
+    sessions.push({ id: 11, title: "Noción Intuitiva de Límite", description: "Acercarse al concepto de límite de manera gráfica y numéricamente.", block: 1, link: "pages/PVS11.HTML", status: "active" });
+    sessions.push({ id: 12, title: "Límites Laterales", description: "Entender la direccionalidad al evaluar límites.", block: 1, link: "pages/PVS12.HTML", status: "active" });
+    sessions.push({ id: 13, title: "Propiedades de los Límites", description: "Formalizar el cálculo algebraico de límites.", block: 1, link: "pages/PVS13.HTML", status: "active" });
+    sessions.push({ id: 14, title: "Indeterminaciones 0/0", description: "Resolver límites que requieren factorización.", block: 1, link: "pages/PVS14.HTML", status: "active" });
+    sessions.push({ id: 15, title: "Límites al Infinito", description: "Analizar el comportamiento asintótico de largo plazo.", block: 1, link: "pages/PVS15.HTML", status: "active" });
+    sessions.push({ id: 16, title: "Continuidad de Funciones", description: "Definir la continuidad en un punto.", block: 1, link: "pages/PVS16.HTML", status: "active" });
+    sessions.push({ id: 17, title: "Continuidad e Infraestructura", description: "Aplicar continuidad a problemas de la vida real.", block: 1, link: "pages/PVS17.HTML", status: "active" });
+    sessions.push({ id: 18, title: "Tasa de Variación Instantánea", description: "Transitar de la variación promedio a la instantánea.", block: 2, link: "pages/PVS18.HTML", status: "active" });
+    sessions.push({ id: 19, title: "La Derivada y la Recta Tangente", description: "Interpretar geométricamente la derivada.", block: 2, link: "pages/PVS19.HTML", status: "active" });
+    sessions.push({ id: 20, title: "Regla de los Cuatro Pasos", description: "Calcular derivadas de funciones lineales y cuadráticas por definición.", block: 2, link: "pages/PVS20.HTML", status: "active" });
 
     // Generate the remaining sessions
-    for (let i = 11; i <= 50; i++) {
+    for (let i = 21; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

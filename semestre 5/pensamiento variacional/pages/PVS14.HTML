@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 14 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%; height: 120px; background: #1e293b; border-radius: 12px;
+            margin: 15px 0; display: flex; align-items: center; justify-content: center;
+            padding: 15px; box-sizing: border-box; position: relative; overflow: hidden;
+            color: #94a3b8; font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion14-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS14()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 14</div>
+            <h1>Indeterminaciones 0/0</h1>
+            <p>Resolver límites que requieren factorización.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Explica con pasión y usa ejemplos reales.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Si al sustituir nos da 0/0, ¡no es cero ni infinito! Es un 'fantasma' matemático que nos dice que hay un factor oculto que debemos eliminar factorizando o racionalizando.</p>
+            </section>
+
+            <section class="info-card examples-card" style="grid-column: span 2;">
+                <h2>📝 Ejemplos Prácticos</h2>
+                <ul class="custom-list">
+                    <li><b>Velocidad instantánea inicial:</b> <p style="font-size: 0.9em; margin: 5px 0;">Tiempo cero sobre distancia cero.</p></li>
+                    <li><b>Agujeros en gráficas:</b> <p style="font-size: 0.9em; margin: 5px 0;">Una discontinuidad removible.</p></li>
+                    <li><b>Márgenes de error cero:</b> <p style="font-size: 0.9em; margin: 5px 0;">Tolerancias de maquinaria precisas.</p></li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #38bdf8; grid-column: span 2;">
+                <h2 style="color: #38bdf8;">Simulador: Escape Room 0/0</h2>
+                <p>La bóveda dice f(x) = (x² - 9)/(x - 3) evaluado en x=3. Si metes 0 te dará error. ¡Factoriza y pon la respuesta real para abrirla!</p>
+                
+            <div style="background:#0f172a; border: 4px solid #ef4444; padding:20px; border-radius:10px; text-align:center;">
+                <div id="vault-status" style="font-size:3em;">🔒</div>
+                <p style="color:white;">lim(x->3) (x² - 9)/(x - 3)</p>
+                <input type="number" id="vault-input" style="padding:10px; font-size:1.2em; width:100px;">
+                <button onclick="checkVault()" style="padding:10px; background:#ef4444; color:white; border:none; border-radius:5px;">Abrir Bóveda</button>
+            </div>
+        
+            </section>
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.initSimS14) window.initSimS14();
+
+            new KahootQuiz('quiz-mount-point', 'sesion14', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion14');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion14', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -459,3 +459,244 @@ window.toggleMic = toggleMic;
 window.drawSineWave = drawSineWave;
 window.drawThreePhase = drawThreePhase;
 window.togglePhase = togglePhase;
+
+
+// S11 to S20 Logic
+function unlockTeacherTipsS11() { unlockTips('sesion11-variacional'); }
+window.unlockTeacherTipsS11 = unlockTeacherTipsS11;
+function unlockTeacherTipsS12() { unlockTips('sesion12-variacional'); }
+window.unlockTeacherTipsS12 = unlockTeacherTipsS12;
+function unlockTeacherTipsS13() { unlockTips('sesion13-variacional'); }
+window.unlockTeacherTipsS13 = unlockTeacherTipsS13;
+function unlockTeacherTipsS14() { unlockTips('sesion14-variacional'); }
+window.unlockTeacherTipsS14 = unlockTeacherTipsS14;
+function unlockTeacherTipsS15() { unlockTips('sesion15-variacional'); }
+window.unlockTeacherTipsS15 = unlockTeacherTipsS15;
+function unlockTeacherTipsS16() { unlockTips('sesion16-variacional'); }
+window.unlockTeacherTipsS16 = unlockTeacherTipsS16;
+function unlockTeacherTipsS17() { unlockTips('sesion17-variacional'); }
+window.unlockTeacherTipsS17 = unlockTeacherTipsS17;
+function unlockTeacherTipsS18() { unlockTips('sesion18-variacional'); }
+window.unlockTeacherTipsS18 = unlockTeacherTipsS18;
+function unlockTeacherTipsS19() { unlockTips('sesion19-variacional'); }
+window.unlockTeacherTipsS19 = unlockTeacherTipsS19;
+function unlockTeacherTipsS20() { unlockTips('sesion20-variacional'); }
+window.unlockTeacherTipsS20 = unlockTeacherTipsS20;
+
+// S11 Zoom
+function drawZoom() {
+    const canvas = document.getElementById('zoom-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const zoom = document.getElementById('zoom-slider').value;
+    ctx.clearRect(0,0,300,150);
+    ctx.beginPath();
+    ctx.moveTo(0, 150);
+    ctx.lineTo(150 - 50/zoom, 75 + 50/zoom); // left side approach
+    ctx.strokeStyle = "#f59e0b"; ctx.lineWidth = 4; ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.moveTo(150 + 50/zoom, 75 - 50/zoom); // right side approach
+    ctx.lineTo(300, 0);
+    ctx.stroke();
+    
+    // Hole
+    ctx.beginPath();
+    ctx.arc(150, 75, 5 + parseInt(zoom)/5, 0, 2*Math.PI);
+    ctx.strokeStyle = "white"; ctx.stroke();
+}
+window.drawZoom = drawZoom;
+window.initSimS11 = drawZoom;
+
+// S12 Bridge
+function drawBridge() {
+    const canvas = document.getElementById('bridge-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const x = document.getElementById('bridge-slider').value;
+    ctx.clearRect(0,0,300,150);
+    
+    // Left road
+    ctx.fillStyle = "#334155"; ctx.fillRect(0, 70, 150, 10);
+    // Right road (offset)
+    ctx.fillRect(150, 90, 150, 10);
+    
+    // Car 1 (Left)
+    ctx.fillStyle = "#ef4444";
+    ctx.fillRect(x*1.3, 50, 20, 20);
+    
+    // Car 2 (Right) coming backwards
+    ctx.fillStyle = "#3b82f6";
+    ctx.fillRect(300 - x*1.3, 70, 20, 20);
+    
+    if(x > 95) {
+        ctx.fillStyle = "white";
+        ctx.fillText("¡Límites no coinciden! Choque evitado.", 50, 30);
+    }
+}
+window.drawBridge = drawBridge;
+window.initSimS12 = drawBridge;
+
+// S13 Prop
+function evalProp() {
+    const x = document.getElementById('prop-slider').value;
+    const text = document.getElementById('prop-text');
+    if(text) text.innerText = `f(x) = 2(${x})² + 3 = ${2*x*x + 3}`;
+}
+window.evalProp = evalProp;
+
+// S14 Vault
+function checkVault() {
+    const val = document.getElementById('vault-input').value;
+    const status = document.getElementById('vault-status');
+    if(val == "6") {
+        status.innerText = "🔓 ABIERTA";
+        alert("¡Correcto! Factorizando: (x-3)(x+3)/(x-3) = x+3. Limite = 3+3 = 6.");
+    } else {
+        status.innerText = "🚨 ERROR";
+    }
+}
+window.checkVault = checkVault;
+
+// S15 Inf
+function drawInf() {
+    const canvas = document.getElementById('inf-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const t = document.getElementById('inf-slider').value;
+    document.getElementById('inf-time').innerText = t;
+    ctx.clearRect(0,0,300,150);
+    
+    // Asymptote
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath(); ctx.moveTo(0, 30); ctx.lineTo(300, 30);
+    ctx.strokeStyle = "rgba(255,255,255,0.5)"; ctx.stroke();
+    ctx.setLineDash([]);
+    
+    // Curve
+    ctx.beginPath();
+    for(let i=0; i<=t*3; i++) {
+        let y = 150 - 120*(1 - Math.exp(-0.05*i));
+        if(i===0) ctx.moveTo(i, y);
+        else ctx.lineTo(i, y);
+    }
+    ctx.strokeStyle = "#3b82f6"; ctx.lineWidth = 3; ctx.stroke();
+}
+window.drawInf = drawInf;
+window.initSimS15 = drawInf;
+
+// S16 Cont
+let contMode = "continuo";
+window.setContMode = (m) => { contMode = m; drawCont(); }
+function drawCont() {
+    const canvas = document.getElementById('cont-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,300,150);
+    
+    ctx.beginPath();
+    if(contMode === "continuo") {
+        ctx.moveTo(0,100); ctx.lineTo(300,50);
+        ctx.strokeStyle="#10b981"; ctx.lineWidth=4; ctx.stroke();
+    } else if(contMode === "hueco") {
+        ctx.moveTo(0,100); ctx.lineTo(145, 75); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(155, 73); ctx.lineTo(300, 50); ctx.stroke();
+        ctx.beginPath(); ctx.arc(150, 74, 5, 0, 2*Math.PI); ctx.stroke();
+        ctx.fillStyle="#10b981"; ctx.fillRect(148, 20, 4, 4); // point displaced
+    } else {
+        ctx.moveTo(0,100); ctx.lineTo(150, 75); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(150, 25); ctx.lineTo(300, 50); ctx.stroke();
+    }
+}
+window.drawCont = drawCont;
+window.initSimS16 = drawCont;
+
+// S17 Ramp
+function drawRamp() {
+    const canvas = document.getElementById('ramp-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const b = parseInt(document.getElementById('ramp-slider').value);
+    document.getElementById('ramp-val').innerText = b;
+    ctx.clearRect(0,0,300,150);
+    
+    ctx.beginPath();
+    ctx.moveTo(0, 100); ctx.lineTo(150, 100); // Fixed left
+    ctx.moveTo(150, 100 - b); ctx.lineTo(300, 50); // Right adjustable
+    ctx.strokeStyle="#38bdf8"; ctx.lineWidth=6; ctx.stroke();
+    
+    if(b === 0) {
+        ctx.fillStyle = "#10b981";
+        ctx.fillText("¡Rampa Continua!", 100, 30);
+    } else {
+        ctx.fillStyle = "#ef4444";
+        ctx.fillText("¡Discontinuidad de Salto! Peligro.", 60, 30);
+    }
+}
+window.drawRamp = drawRamp;
+window.initSimS17 = drawRamp;
+
+// S18 Secant
+function drawSecant() {
+    const canvas = document.getElementById('sec-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const h = parseInt(document.getElementById('sec-slider').value);
+    ctx.clearRect(0,0,300,150);
+    
+    // curve
+    ctx.beginPath();
+    for(let x=0; x<=300; x+=5) {
+        let y = 150 - (x*x)/600;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle="rgba(255,255,255,0.3)"; ctx.stroke();
+    
+    // points
+    let x1 = 100; let y1 = 150 - (x1*x1)/600;
+    let x2 = 100 + h; let y2 = 150 - (x2*x2)/600;
+    
+    ctx.fillStyle="white";
+    ctx.beginPath(); ctx.arc(x1,y1,5,0,2*Math.PI); ctx.fill();
+    ctx.beginPath(); ctx.arc(x2,y2,5,0,2*Math.PI); ctx.fill();
+    
+    // line
+    ctx.beginPath(); ctx.moveTo(0, y1 - (y2-y1)/(x2-x1)*x1); ctx.lineTo(300, y1 + (y2-y1)/(x2-x1)*(300-x1));
+    ctx.strokeStyle = h < 5 ? "#10b981" : "#ef4444";
+    ctx.lineWidth=2; ctx.stroke();
+}
+window.drawSecant = drawSecant;
+window.initSimS18 = drawSecant;
+
+// S19 Tan
+function drawTangent() {
+    const canvas = document.getElementById('tan-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const pos = parseInt(document.getElementById('tan-slider').value);
+    ctx.clearRect(0,0,300,150);
+    
+    // curve (valley)
+    ctx.beginPath();
+    for(let x=0; x<=300; x+=5) {
+        let y = (x-150)*(x-150)/200 + 30;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle="white"; ctx.stroke();
+    
+    let x1 = (pos/100)*300;
+    let y1 = (x1-150)*(x1-150)/200 + 30;
+    let slope = (x1-150)/100; // derivative of x^2/200 is 2x/200 = x/100
+    
+    document.getElementById('tan-slope').innerText = "Pendiente (m): " + slope.toFixed(2);
+    
+    ctx.beginPath(); ctx.arc(x1,y1,5,0,2*Math.PI); ctx.fillStyle="#a855f7"; ctx.fill();
+    
+    ctx.beginPath();
+    ctx.moveTo(x1 - 50, y1 - 50*slope);
+    ctx.lineTo(x1 + 50, y1 + 50*slope);
+    ctx.strokeStyle="#a855f7"; ctx.lineWidth=3; ctx.stroke();
+}
+window.drawTangent = drawTangent;
+window.initSimS19 = drawTangent;
+

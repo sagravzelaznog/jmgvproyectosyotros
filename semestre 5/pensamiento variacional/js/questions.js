@@ -291,5 +291,95 @@ export const questionDatabase = {
         { question: "Si una fase cae a cero voltios, las otras dos fases...", options: ["Tienen voltaje suficiente para evitar que el motor pare", "También caen a cero", "Explotan", "Se invierten"], answerIndex: 0, timeLimit: 20 },
         { question: "120 grados en radianes equivalen matemáticamente a:", options: ["2π/3 radianes", "π/2 radianes", "π radianes", "1 radián"], answerIndex: 0, timeLimit: 30 },
         { question: "Gracias a la trigonometría, la infraestructura mundial puede...", options: ["Transmitir energía eficientemente a largas distancias", "Evitar sismos", "Refrigerar computadoras", "Cargar baterías de celular instantáneamente"], answerIndex: 0, timeLimit: 30 }
+        ],
+    "sesion11": [
+        { question: "¿Qué es un límite en matemáticas?", options: ["El valor al que se aproxima una función", "El final de una recta", "Un error de cálculo", "El punto medio"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para encontrar el límite cuando x se acerca a 3, evaluamos...", options: ["Valores muy cercanos a 3, como 2.99 y 3.01", "Solamente el 0", "Valores negativos", "Números muy grandes"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si f(2) no existe (es un hueco), ¿puede existir el límite en x=2?", options: ["Sí, porque el límite evalúa la cercanía, no el punto exacto", "No, es imposible", "Solo si es cero", "Solo si es infinito"], answerIndex: 0, timeLimit: 20 },
+        { question: "En la vida real, un límite se parece a...", options: ["Frenar un auto acercándose a un muro sin chocar", "Acelerar indefinidamente", "Contar dinero", "Medir un círculo"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si al acercarnos por la izquierda da 5 y por la derecha da 5...", options: ["El límite es 5", "El límite es 10", "No existe", "El límite es 0"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué significa que la población llegue a un 'límite de recursos'?", options: ["Que la gráfica se aplana horizontalmente (asíntota)", "Que cae en picada", "Que crece infinitamente", "Que desaparece"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para tabular un límite acercándose a 1, usamos...", options: ["0.9, 0.99, 0.999", "1, 2, 3", "10, 100, 1000", "0.1, 0.2, 0.3"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion12": [
+        { question: "Un límite lateral por la izquierda se denota con...", options: ["x -> a^-", "x -> a^+", "x -> -a", "x -> a"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para que el límite general exista, los límites laterales deben ser...", options: ["Iguales", "Diferentes", "Cero", "Infinitos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si el límite por izquierda es 3 y por derecha es 5...", options: ["El límite no existe", "El límite es 4", "El límite es 8", "El límite es 0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Una gráfica con un 'salto' (como un escalón) indica...", options: ["Que los límites laterales no coinciden", "Que la función es continua", "Un error de dibujo", "Que el límite es infinito"], answerIndex: 0, timeLimit: 20 },
+        { question: "El costo de un estacionamiento que sube a la hora exacta es una...", options: ["Función escalonada", "Función lineal", "Función cuadrática", "Función seno"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Al encender un foco, el voltaje salta de 0 a 110V. ¿Existe límite en ese instante?", options: ["No, los laterales son distintos", "Sí, es 110", "Sí, es 0", "Sí, es 55"], answerIndex: 0, timeLimit: 20 },
+        { question: "Acercarse por la derecha de 0 implica evaluar en...", options: ["0.1, 0.01, 0.001", "-0.1, -0.01", "1, 2, 3", "-1, -2, -3"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion13": [
+        { question: "La forma más rápida de evaluar un límite polinomial es...", options: ["Sustitución directa", "Hacer una tabla inmensa", "Límites laterales", "Adivinar"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite de una suma es igual a...", options: ["La suma de los límites", "La resta", "Cero", "La multiplicación"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite de una constante, por ejemplo límite de 5 cuando x->2 es:", options: ["5", "2", "10", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si al sustituir obtenemos un número real normal, significa que...", options: ["Ese es el límite", "Hay un error", "Tenemos que factorizar", "El límite no existe"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite de [f(x) * g(x)] es...", options: ["El límite de f(x) por el límite de g(x)", "La división", "Cero", "No se puede calcular"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si evaluamos lim x->3 de (x^2), el resultado es:", options: ["9", "6", "3", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las propiedades de los límites nos permiten...", options: ["Simplificar cálculos complejos separándolos en partes", "Hacer las gráficas más grandes", "Eliminar las x", "Resolver integrales"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion14": [
+        { question: "¿Qué significa obtener 0/0 al sustituir un límite?", options: ["Es una indeterminación, hay que factorizar", "Que el límite es cero", "Que el límite es infinito", "Que no tiene solución matemática"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para resolver (x^2 - 4)/(x - 2) cuando x->2, usamos:", options: ["Diferencia de cuadrados", "Fórmula general", "Trigonometría", "Logaritmos"], answerIndex: 0, timeLimit: 20 },
+        { question: "Una vez factorizado y cancelado el término problema...", options: ["Volveos a hacer sustitución directa", "El límite es cero", "Terminamos", "Cambiamos de signo"], answerIndex: 0, timeLimit: 20 },
+        { question: "Visualmente, una indeterminación 0/0 que se puede factorizar es...", options: ["Un agujero en la gráfica", "Una asíntota vertical", "Una línea rota", "Un salto"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si nos queda 5/0, eso significa...", options: ["Que es una asíntota (infinito), no un hueco", "Que hay que factorizar", "Que es cero", "Que es 5"], answerIndex: 0, timeLimit: 20 },
+        { question: "Racionalizar es una técnica útil cuando el límite indeterminado tiene...", options: ["Raíces cuadradas", "Seno y coseno", "Exponentes muy altos", "Letras distintas"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite de (x^2-9)/(x-3) cuando x->3 es:", options: ["6", "0", "Infinito", "3"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion15": [
+        { question: "Evaluar un límite al infinito significa investigar...", options: ["El comportamiento a largo plazo de la función", "El origen de la función", "Dónde cruza el eje Y", "La velocidad inicial"], answerIndex: 0, timeLimit: 20 },
+        { question: "Visualmente, un límite al infinito que resulta en un número concreto se ve como...", options: ["Una asíntota horizontal", "Un agujero", "Una asíntota vertical", "Una parábola"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si el grado del polinomio de arriba es igual al de abajo...", options: ["El límite es la división de sus coeficientes principales", "El límite es cero", "El límite es infinito", "No existe"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si el grado del denominador es mayor...", options: ["El límite es cero", "El límite es infinito", "Es indeterminado", "Es 1"], answerIndex: 0, timeLimit: 20 },
+        { question: "La capacidad de carga de un ecosistema es un ejemplo de...", options: ["Límite al infinito (Asíntota horizontal)", "Límite al cero", "Indeterminación 0/0", "Asíntota vertical"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite de 1/x cuando x tiende a infinito es:", options: ["0", "1", "Infinito", "-1"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué pasa si calentamos un metal infinitamente cerca del sol?", options: ["Tiende a la temperatura de la superficie solar", "Se enfría", "Se vuelve cero", "Se vuelve negativo"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion16": [
+        { question: "La definición intuitiva de continuidad es...", options: ["Dibujar la gráfica sin despegar el lápiz", "Que siempre crezca", "Que sea una recta", "Que cruce el cero"], answerIndex: 0, timeLimit: 20 },
+        { question: "Condición 1 de Continuidad matemática:", options: ["Que f(a) exista (punto relleno)", "Que el límite sea infinito", "Que empiece en cero", "Que sea positiva"], answerIndex: 0, timeLimit: 20 },
+        { question: "Condición 2 de Continuidad matemática:", options: ["Que el límite cuando x->a exista (laterales iguales)", "Que el límite sea cero", "Que la gráfica sea recta", "Que no haya curvas"], answerIndex: 0, timeLimit: 20 },
+        { question: "Condición 3 de Continuidad matemática:", options: ["Que el límite sea exactamente igual a f(a)", "Que el límite sea mayor", "Que sea múltiplo de 2", "No existe condición 3"], answerIndex: 0, timeLimit: 20 },
+        { question: "Un switch de luz apagado representa una discontinuidad tipo...", options: ["De salto", "Removible (hueco)", "Asintótica (infinito)", "Continua"], answerIndex: 0, timeLimit: 20 },
+        { question: "La trayectoria de un balón en el aire es un fenómeno...", options: ["Continuo", "Discontinuo de salto", "Discontinuo asintótico", "Indeterminado"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si una gráfica tiene un hueco relleno en otra parte, ¿es continua ahí?", options: ["No, porque el límite no coincide con el punto", "Sí", "Depende del grosor de la línea", "Solo si es un número par"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion17": [
+        { question: "Al diseñar una rampa peatonal, la función a trozos debe ser...", options: ["Continua en el punto de unión", "Discontinua", "Trigonométrica infinita", "Logarítmica"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si dos cables tienen diferente voltaje y se unen mal, provocan...", options: ["Un salto eléctrico (cortocircuito, discontinuidad)", "Energía infinita", "Un flujo laminar", "Continuidad perfecta"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las funciones definidas a trozos se usan para...", options: ["Modelar fenómenos que cambian de comportamiento según condiciones", "Dibujar círculos", "Confundir", "Evitar el uso de números"], answerIndex: 0, timeLimit: 20 },
+        { question: "Para que f(x) = {2x si x<1, k si x>=1} sea continua, 'k' debe valer:", options: ["2", "1", "0", "-2"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Una montaña rusa puede tener un diseño discontinuo en sus rieles?", options: ["No, causaría un accidente fatal", "Sí, es más divertido", "Solo en las curvas", "Depende de la velocidad"], answerIndex: 0, timeLimit: 20 },
+        { question: "El empalme de dos tramos de carretera busca garantizar...", options: ["Continuidad", "Discontinuidad", "Infinitos", "Asintotas"], answerIndex: 0, timeLimit: 20 },
+        { question: "Las discontinuidades en servicios (cortes de luz) representan...", options: ["Fallas y caídas abruptas del servicio", "Eficiencia", "Acumulación", "Mejoras del sistema"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion18": [
+        { question: "La Tasa de Variación Promedio equivale geométricamente a...", options: ["La pendiente de la recta secante", "La pendiente de la recta tangente", "El área bajo la curva", "Una asíntota"], answerIndex: 0, timeLimit: 20 },
+        { question: "La Tasa de Variación Instantánea equivale geométricamente a...", options: ["La pendiente de la recta tangente", "La pendiente secante", "La longitud de arco", "El límite al infinito"], answerIndex: 0, timeLimit: 20 },
+        { question: "El velocímetro de tu auto mide...", options: ["Velocidad instantánea", "Velocidad promedio del día", "Aceleración", "Distancia"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Cómo se convierte una secante en tangente?", options: ["Acercando los dos puntos hasta que la distancia entre ellos tienda a cero", "Separando los puntos infinitamente", "Dibujando más rectas", "Borrando el plano"], answerIndex: 0, timeLimit: 20 },
+        { question: "El límite cuando 'h' tiende a cero de (f(x+h) - f(x))/h es la definición de:", options: ["Derivada", "Integral", "Asíntota", "Función constante"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si manejas a 120km/h y chocas contra un radar, el radar registra tu...", options: ["Velocidad instantánea", "Velocidad promedio", "Desplazamiento total", "Frenado"], answerIndex: 0, timeLimit: 20 },
+        { question: "La letra 'h' en la fórmula de derivación representa...", options: ["La pequeñísima diferencia en el eje X (delta x)", "La altura del eje Y", "La hora", "El infinito"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion19": [
+        { question: "La Derivada de una función en un punto x te da como resultado...", options: ["El valor numérico de la pendiente de la recta tangente ahí", "El área de la figura", "La longitud de la curva", "El volumen"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la recta tangente va 'de bajada', la derivada será...", options: ["Negativa", "Positiva", "Cero", "Infinita"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si te encuentras en el fondo exacto de un valle curvo, la pendiente es...", options: ["Cero (completamente horizontal)", "Negativa", "Positiva", "Infinita"], answerIndex: 0, timeLimit: 20 },
+        { question: "La recta tangente toca a la curva en...", options: ["Un solo punto localmente", "Dos puntos", "Infinitos puntos", "Ningún punto"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Por qué es útil conocer la pendiente en una duna de arena?", options: ["Para calcular si un vehículo volcará o no", "Para saber cuánta arena hay", "Para predecir el clima", "Para nada"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la función es f(x) = x^2, su derivada fabrica pendientes según la regla:", options: ["2x", "x", "x^3", "2"], answerIndex: 0, timeLimit: 20 },
+        { question: "Geométricamente, f'(x) es sinónimo de...", options: ["Pendiente 'm'", "Intersección 'b'", "Altura 'y'", "Distancia 'd'"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion20": [
+        { question: "El primer paso de la regla por definición es...", options: ["Sustituir cada 'x' por '(x+h)'", "Restar la función original", "Dividir entre h", "Aplicar el límite"], answerIndex: 0, timeLimit: 20 },
+        { question: "En el paso 2 (restar f(x)), ¿qué suele ocurrir algebraicamente?", options: ["Se eliminan los términos que no tienen la letra 'h'", "El ejercicio se vuelve infinito", "Se borra la X", "Terminamos"], answerIndex: 0, timeLimit: 20 },
+        { question: "El paso 3 (dividir entre h) sirve para...", options: ["Eliminar la 'h' que causa la indeterminación 0/0", "Hacer los números más pequeños", "Cumplir reglas de división", "Cambiar de signo"], answerIndex: 0, timeLimit: 20 },
+        { question: "El último paso es aplicar el límite h->0. ¿Qué le pasa a las 'h' sobrantes?", options: ["Se vuelven cero y desaparecen", "Se vuelven uno", "Se vuelven infinito", "Se vuelven X"], answerIndex: 0, timeLimit: 20 },
+        { question: "La derivada de f(x) = x^2 calculada con los 4 pasos da:", options: ["2x", "x^2 + 2x", "2", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "Esta regla general es conocida formalmente como...", options: ["Derivada por Definición", "Teorema de Pitágoras", "Ley de Ohm", "Regla de la Cadena"], answerIndex: 0, timeLimit: 20 },
+        { question: "El costo marginal en economía representa:", options: ["La derivada de la función de costos (costo del siguiente elemento)", "El costo total", "El dinero ahorrado", "Un costo promedio falso"], answerIndex: 0, timeLimit: 20 }
     ]
 };

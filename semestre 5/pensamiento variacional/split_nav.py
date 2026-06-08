@@ -29,8 +29,8 @@ for file in files:
             
     bottom_nav_html = f"""
             <nav class="session-nav bottom-nav">
-                <a href="{next_link}" class="{next_class}">Siguiente ➡</a>
                 <a href="#" onclick="alert('¡Gracias por tu intención de apoyar el proyecto! Pronto habilitaremos los donativos.'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+                <a href="{next_link}" class="{next_class}">Siguiente ➡</a>
             </nav>"""
     
     with open(file, "r", encoding="utf-8") as f:

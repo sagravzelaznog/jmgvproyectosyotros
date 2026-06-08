@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 6 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Bacterias multiplicándose */
+        .bacteria {
+            width: 15px;
+            height: 15px;
+            background: #10b981;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 10px #10b981;
+            animation: multiply 3s infinite;
+        }
+        .b1 { left: 50%; top: 50%; animation-delay: 0s; }
+        .b2 { left: 40%; top: 40%; animation-delay: 1s; opacity: 0; }
+        .b3 { left: 60%; top: 60%; animation-delay: 1.5s; opacity: 0; }
+        .b4 { left: 30%; top: 60%; animation-delay: 2s; opacity: 0; }
+        .b5 { left: 70%; top: 40%; animation-delay: 2.2s; opacity: 0; }
+        
+        @keyframes multiply {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        /* 2. Interés Compuesto */
+        .coin-stack {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 80px;
+        }
+        .stack {
+            width: 20px;
+            background: linear-gradient(to top, #f59e0b, #fbbf24);
+            border-radius: 3px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+        .s1 { height: 10px; }
+        .s2 { height: 20px; }
+        .s3 { height: 40px; }
+        .s4 { height: 80px; }
+
+        /* 3. Rumores (Red de Nodos) */
+        .node {
+            width: 10px;
+            height: 10px;
+            background: #38bdf8;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 8px #38bdf8;
+        }
+        .n0 { left: 10%; top: 50%; }
+        .n1 { left: 30%; top: 30%; }
+        .n2 { left: 30%; top: 70%; }
+        .n3 { left: 50%; top: 20%; }
+        .n4 { left: 50%; top: 50%; }
+        .n5 { left: 50%; top: 80%; }
+        
+        .line {
+            position: absolute;
+            height: 2px;
+            background: rgba(56, 189, 248, 0.5);
+            transform-origin: left center;
+        }
+        .l1 { left: 10%; top: 50%; width: 25px; transform: rotate(-45deg); }
+        .l2 { left: 10%; top: 50%; width: 25px; transform: rotate(45deg); }
+        .l3 { left: 30%; top: 30%; width: 25px; transform: rotate(-20deg); }
+        .l4 { left: 30%; top: 70%; width: 25px; transform: rotate(20deg); }
+
+        /* Simulador Exponencial */
+        .expo-simulator {
+            background: #0f172a;
+            border: 4px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            text-align: center;
+        }
+        .chart-area {
+            width: 100%;
+            height: 150px;
+            background: #1e293b;
+            border-bottom: 2px solid white;
+            border-left: 2px solid white;
+            position: relative;
+            margin-top: 15px;
+        }
+        .curve {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 100%, 0 100%, 10% 98%, 20% 95%, 30% 90%, 40% 80%, 50% 65%, 60% 45%, 70% 20%, 80% 0, 100% 0, 100% 100%);
+            background: linear-gradient(to top, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.8));
+            transition: clip-path 0.5s ease;
+        }
+        .controls { margin-top: 15px; }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+        }
+        input[type=range] { width: 60%; }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion6-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS6()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 6</div>
+            <h1>Funciones Exponenciales I</h1>
+            <p>Modelado digital del crecimiento y decrecimiento acelerado.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Inicia la clase con el cuento del "Ajedrez y los granos de trigo". Pídeles que saquen calculadoras y traten de multiplicar 2x2x2... hasta 64. ¡Verás cómo se asombran cuando la calculadora marque ERROR por rebasar los límites!</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender cómo ciertos fenómenos en la naturaleza, la economía y la sociedad no crecen de manera constante, sino que su velocidad de crecimiento se multiplica drásticamente con el tiempo. Esto se modela matemáticamente como <strong>f(x) = a^x</strong>.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #10b981; border-top: 5px solid #10b981;">
+                <h2 style="color: #10b981;">📖 Teoría: El Crecimiento Acelerado</h2>
+                <p>A diferencia de una función lineal (y = mx + b) donde el crecimiento es un "paso" fijo, en la función exponencial la variable independiente <em>x</em> se encuentra en el <strong>exponente</strong>. Esto significa que la cantidad se multiplica por una base constante en cada intervalo.</p>
+                <div class="math-box" style="border-color:#10b981; color:#10b981;">
+                    f(x) = a^x  <br>
+                    Si a > 1 ➔ Crecimiento Exponencial <br>
+                    Si 0 < a < 1 ➔ Decrecimiento Exponencial
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Multiplicación Bacteriana:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Una bacteria se divide en dos, luego en cuatro, ocho...</p>
+                        <div class="css-graphic">
+                            <div class="bacteria b1"></div>
+                            <div class="bacteria b2"></div>
+                            <div class="bacteria b3"></div>
+                            <div class="bacteria b4"></div>
+                            <div class="bacteria b5"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Interés Compuesto:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El dinero en el banco genera intereses sobre los intereses previos.</p>
+                        <div class="css-graphic">
+                            <div class="coin-stack">
+                                <div class="stack s1"></div>
+                                <div class="stack s2"></div>
+                                <div class="stack s3"></div>
+                                <div class="stack s4"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Propagación de Rumores:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Una persona le cuenta a dos, esas dos a cuatro...</p>
+                        <div class="css-graphic">
+                            <div class="node n0"></div>
+                            <div class="line l1"></div><div class="line l2"></div>
+                            <div class="node n1"></div><div class="node n2"></div>
+                            <div class="line l3"></div><div class="line l4"></div>
+                            <div class="node n3"></div><div class="node n4"></div><div class="node n5"></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #10b981;">
+                <h2 style="color: #10b981;">📈 Simulador: Curva Exponencial</h2>
+                <p>Modifica la <strong>Base (a)</strong> y observa cómo altera radicalmente la inclinación de la gráfica de crecimiento f(x) = a^x.</p>
+
+                <div class="expo-simulator">
+                    <div class="chart-area">
+                        <div class="curve" id="expo-curve"></div>
+                    </div>
+                    <div class="controls">
+                        <div class="slider-group">
+                            <label>Base (a): <span id="base-val">2.0</span></label>
+                            <input type="range" id="base-slider" min="1.1" max="4.0" step="0.1" value="2.0" oninput="updateExpoCurve()">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.updateExpoCurve) window.updateExpoCurve();
+
+            new KahootQuiz('quiz-mount-point', 'sesion6', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion6');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion6', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

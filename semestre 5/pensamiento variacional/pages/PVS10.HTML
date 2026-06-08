@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 10 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. 60 Hz Plug */
+        .plug-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .plug {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .hole {
+            width: 6px;
+            height: 12px;
+            background: #0f172a;
+            position: absolute;
+            top: 14px;
+            border-radius: 2px;
+        }
+        .h1 { left: 10px; }
+        .h2 { right: 10px; }
+        .spark {
+            font-size: 2em;
+            animation: flashSpark 0.016s infinite alternate; /* 60Hz = ~16ms */
+        }
+        @keyframes flashSpark {
+            0% { opacity: 0; filter: brightness(1); }
+            100% { opacity: 1; filter: brightness(2); }
+        }
+
+        /* 2. Fasores (Círculo y vector) */
+        .phasor-circle {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #a855f7;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .phasor-circle::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+        .vector {
+            width: 40px;
+            height: 2px;
+            background: #a855f7;
+            position: absolute;
+            left: 50%;
+            transform-origin: left center;
+            animation: spinVector 2s infinite linear;
+        }
+        .vector::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #a855f7;
+        }
+        @keyframes spinVector {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 3. Trifásico (Tres ondas estáticas desfasadas) */
+        .three-phase {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .p-wave {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            height: 80px;
+            background-size: 40px 80px;
+            opacity: 0.7;
+        }
+        /* Trick to draw sine with radial gradients in CSS */
+        .w1 { background: radial-gradient(circle at 10px 40px, transparent 10px, #ef4444 12px, transparent 14px); background-size: 40px 80px; }
+        .w2 { background: radial-gradient(circle at 10px 40px, transparent 10px, #10b981 12px, transparent 14px); background-size: 40px 80px; transform: translateX(13px); }
+        .w3 { background: radial-gradient(circle at 10px 40px, transparent 10px, #3b82f6 12px, transparent 14px); background-size: 40px 80px; transform: translateX(26px); }
+
+        /* Simulador Sistema Trifásico */
+        .three-phase-simulator {
+            background: #0f172a;
+            border: 4px solid #a855f7;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            text-align: center;
+        }
+        .canvas-container {
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
+        .btn-toggle {
+            background: #a855f7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion10-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS10()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 10</div>
+            <h1>Funciones Trigonométricas II</h1>
+            <p>Conectando la trigonometría con la infraestructura eléctrica mundial.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Diles: "Si metes los dedos al enchufe, no te da un golpe constante, te da 60 golpes por segundo". La frecuencia de 60Hz es la velocidad a la que la función Seno completa ciclos en nuestra red eléctrica.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Demostrar de forma aplicada que toda nuestra red eléctrica y de comunicaciones está fundamentada en el desfase matemático de las funciones seno y coseno. Analizaremos el poderoso sistema <strong>Trifásico</strong> industrial.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #a855f7; border-top: 5px solid #a855f7;">
+                <h2 style="color: #a855f7;">📖 Teoría: Desfase y Sistemas Trifásicos</h2>
+                <p>En lugar de enviar energía con una sola "onda" que a ratos vale cero, los ingenieros envían tres funciones de Seno al mismo tiempo, pero desfasadas por 120° matemáticos. De esta forma, cuando una onda cae a cero, las otras dos están entregando poder.</p>
+                <div class="math-box" style="border-color:#a855f7; color:#a855f7; font-size:1em;">
+                    L1: V1(t) = V_max * sen(wt) <br>
+                    L2: V2(t) = V_max * sen(wt - 120°) <br>
+                    L3: V3(t) = V_max * sen(wt + 120°)
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>La Frecuencia 60Hz:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El voltaje en México oscila 60 veces por segundo, imperceptible para el ojo humano.</p>
+                        <div class="css-graphic">
+                            <div class="plug-container">
+                                <div class="plug"><div class="hole h1"></div><div class="hole h2"></div></div>
+                                <div class="spark">⚡</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Fasores y Generadores:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Los motores giran en círculos; el eje Y de su giro proyecta una onda senoidal pura.</p>
+                        <div class="css-graphic">
+                            <div class="phasor-circle"><div class="vector"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Red Eléctrica Industrial (Trifásica):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Tres fases de tensión trabajando en armonía matemática para evitar caídas de poder.</p>
+                        <div class="css-graphic">
+                            <div class="three-phase">
+                                <div class="p-wave w1"></div>
+                                <div class="p-wave w2"></div>
+                                <div class="p-wave w3"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #a855f7;">
+                <h2 style="color: #a855f7;">🔌 Proyecto Práctico: Modelado Trifásico</h2>
+                <p>Activa las tres líneas de voltaje para visualizar cómo el desfase de 120° (2π/3 radianes) garantiza que la suma de potencias mantenga girando los grandes motores industriales.</p>
+
+                <div class="three-phase-simulator">
+                    <div class="canvas-container">
+                        <canvas id="three-phase-canvas"></canvas>
+                    </div>
+                    <div>
+                        <button class="btn-toggle" style="background:#ef4444;" onclick="togglePhase(0)">Fase 1 (0°)</button>
+                        <button class="btn-toggle" style="background:#10b981;" onclick="togglePhase(1)">Fase 2 (120°)</button>
+                        <button class="btn-toggle" style="background:#3b82f6;" onclick="togglePhase(2)">Fase 3 (240°)</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.drawThreePhase) window.drawThreePhase(); // Initialize canvas
+
+            new KahootQuiz('quiz-mount-point', 'sesion10', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion10');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion10', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -51,8 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
         status: "active"
     });
 
+    sessions.push({ id: 6, title: "Funciones Exponenciales I", description: "Modelado digital del crecimiento y decrecimiento acelerado.", block: 1, link: "pages/PVS06.HTML", status: "active" });
+    sessions.push({ id: 7, title: "Funciones Exponenciales II", description: "Aplicaciones térmicas y la Ley de Enfriamiento de Newton.", block: 1, link: "pages/PVS07.HTML", status: "active" });
+    sessions.push({ id: 8, title: "Funciones Logarítmicas", description: "Comprender la función inversa a la exponencial y las escalas logarítmicas.", block: 1, link: "pages/PVS08.HTML", status: "active" });
+    sessions.push({ id: 9, title: "Funciones Trigonométricas I", description: "Análisis de fenómenos cíclicos y periódicos mediante el Seno y Coseno.", block: 1, link: "pages/PVS09.HTML", status: "active" });
+    sessions.push({ id: 10, title: "Funciones Trigonométricas II", description: "Conectando la trigonometría con la infraestructura eléctrica mundial.", block: 1, link: "pages/PVS10.HTML", status: "active" });
+
     // Generate the remaining sessions
-    for (let i = 6; i <= 50; i++) {
+    for (let i = 11; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

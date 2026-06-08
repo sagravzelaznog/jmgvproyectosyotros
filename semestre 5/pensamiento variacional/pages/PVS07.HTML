@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 7 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Taza de Café Enfriándose */
+        .cup {
+            width: 40px;
+            height: 35px;
+            background: #f8fafc;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            border: 2px solid #cbd5e1;
+            margin-top: 20px;
+        }
+        .cup::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 5px;
+            width: 10px;
+            height: 15px;
+            border: 3px solid #f8fafc;
+            border-radius: 50%;
+        }
+        .steam {
+            width: 4px;
+            height: 15px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 5px;
+            position: absolute;
+            bottom: 40px;
+            animation: riseSteam 3s infinite ease-out;
+            filter: blur(2px);
+        }
+        .st1 { left: 10px; animation-delay: 0s; }
+        .st2 { left: 20px; animation-delay: 0.5s; height: 20px; }
+        .st3 { left: 30px; animation-delay: 1s; }
+
+        @keyframes riseSteam {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-30px) scale(2); opacity: 0; }
+        }
+
+        /* 2. Motor enfriándose */
+        .engine {
+            width: 50px;
+            height: 50px;
+            background: #ef4444;
+            border-radius: 8px;
+            box-shadow: 0 0 20px #ef4444;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            padding: 2px;
+            animation: coolEngine 5s infinite alternate;
+        }
+        .engine div { background: rgba(0,0,0,0.5); border-radius: 2px; }
+
+        @keyframes coolEngine {
+            0% { background: #ef4444; box-shadow: 0 0 20px #ef4444; }
+            100% { background: #64748b; box-shadow: 0 0 0 transparent; }
+        }
+
+        /* 3. Pérdida térmica en vivienda */
+        .house {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            position: relative;
+            margin-top: 20px;
+        }
+        .house::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -5px;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 20px solid #2563eb;
+        }
+        .heat-wave {
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: #ef4444;
+            border-radius: 2px;
+            animation: escapeHeat 2s infinite linear;
+        }
+        .hw1 { top: -25px; left: 15px; transform: rotate(-45deg); }
+        .hw2 { top: 10px; left: -15px; transform: rotate(180deg); }
+        .hw3 { top: 10px; right: -15px; transform: rotate(0deg); }
+
+        @keyframes escapeHeat {
+            0% { transform: translateX(0) scale(1); opacity: 1; }
+            100% { transform: translateX(20px) scale(0); opacity: 0; }
+        }
+
+        /* Simulador Ley de Enfriamiento */
+        .cooling-simulator {
+            background: #0f172a;
+            border: 4px solid #ef4444;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+            text-align: center;
+        }
+        .thermometer {
+            width: 20px;
+            height: 120px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 0 auto 15px;
+            position: relative;
+            border: 2px solid white;
+            overflow: hidden;
+        }
+        .mercury {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ef4444;
+            transition: height 0.3s ease, background 0.3s ease;
+        }
+        .thermometer::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 30px;
+            height: 30px;
+            background: inherit;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .controls { margin-top: 15px; }
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+        input[type=range] { width: 80%; max-width: 300px; }
+        .temp-readout {
+            font-size: 2em;
+            font-weight: 800;
+            color: #ef4444;
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion7-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS7()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 7</div>
+            <h1>Funciones Exponenciales II</h1>
+            <p>Aplicaciones térmicas y la Ley de Enfriamiento de Newton.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Lleva un termo con agua hirviendo y un termómetro digital de cocina. Midan la temperatura cada minuto al inicio de la clase y anótenlo en el pizarrón. Verán que los primeros minutos baja rapidísimo, y luego se estanca.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Aplicar modelos exponenciales decrecientes a situaciones físicas reales, comprendiendo cómo los objetos calientes pierden temperatura rápidamente al principio y lentamente después, buscando el equilibrio con el ambiente (asíntota).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #ef4444; border-top: 5px solid #ef4444;">
+                <h2 style="color: #ef4444;">📖 Teoría: Ley de Enfriamiento de Newton</h2>
+                <p>La tasa a la que un cuerpo pierde calor es proporcional a la diferencia de temperatura entre el cuerpo y su entorno. Esto se modela con un exponente <strong>negativo</strong>, creando una curva que decae pero nunca cruza la temperatura ambiente.</p>
+                <div class="math-box" style="border-color:#ef4444; color:#ef4444;">
+                    T(t) = Ta + (To - Ta) * e^(-kt)  <br>
+                    Ta = Temp. Ambiente | To = Temp. Inicial | k = Constante
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Enfriamiento de Líquidos:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Una taza de café caliente en una habitación fría.</p>
+                        <div class="css-graphic">
+                            <div class="steam st1"></div><div class="steam st2"></div><div class="steam st3"></div>
+                            <div class="cup"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Disipación de Motores:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El cofre de un auto después de ser apagado.</p>
+                        <div class="css-graphic">
+                            <div class="engine"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Pérdida Térmica en Viviendas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Fuga de calefacción a través de ventanas en invierno.</p>
+                        <div class="css-graphic">
+                            <div class="house">
+                                <div class="heat-wave hw1"></div><div class="heat-wave hw2"></div><div class="heat-wave hw3"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #ef4444;">
+                <h2 style="color: #ef4444;">🌡️ Simulador: Enfriamiento de Agua Hirviendo</h2>
+                <p>Desliza el tiempo transcurrido (Minutos) y observa cómo la temperatura decae exponencialmente hacia la temperatura ambiente (25°C).</p>
+
+                <div class="cooling-simulator">
+                    <div class="thermometer">
+                        <div class="mercury" id="thermo-mercury"></div>
+                    </div>
+                    <div class="temp-readout" id="temp-readout">100.0 °C</div>
+                    
+                    <div class="controls">
+                        <div class="slider-group">
+                            <label>Tiempo Transcurrido: <span id="time-val">0</span> min</label>
+                            <input type="range" id="time-slider" min="0" max="60" step="1" value="0" oninput="updateCoolingCurve()">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.updateCoolingCurve) window.updateCoolingCurve();
+
+            new KahootQuiz('quiz-mount-point', 'sesion7', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion7');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion7', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

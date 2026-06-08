@@ -283,3 +283,176 @@ function processFunction() {
 
 window.unlockTeacherTipsS5 = unlockTeacherTipsS5;
 window.processFunction = processFunction;
+
+// =========================================================
+// SCRIPT: SESIÓN 6 a 10 PENSAMIENTO VARIACIONAL
+// =========================================================
+
+function unlockTeacherTipsS6() { unlockTips('sesion6-variacional'); }
+function unlockTeacherTipsS7() { unlockTips('sesion7-variacional'); }
+function unlockTeacherTipsS8() { unlockTips('sesion8-variacional'); }
+function unlockTeacherTipsS9() { unlockTips('sesion9-variacional'); }
+function unlockTeacherTipsS10() { unlockTips('sesion10-variacional'); }
+
+function unlockTips(id) {
+    const pwd = prompt("🔐 MODO MAESTRO\nIngrese el código de acceso: ");
+    if (pwd === "1983") {
+        const tips = document.querySelectorAll('#' + id + ' .teacher-tip');
+        let unlocked = false;
+        tips.forEach(t => { t.classList.remove('hidden'); unlocked = true; });
+        if (unlocked) alert("✅ ¡Modo Maestro Activado!");
+    } else if (pwd !== null) {
+        alert("❌ Código incorrecto.");
+    }
+}
+
+// S6
+function updateExpoCurve() {
+    const slider = document.getElementById('base-slider');
+    if(!slider) return;
+    const base = parseFloat(slider.value);
+    document.getElementById('base-val').innerText = base.toFixed(1);
+    
+    let points = [];
+    for(let x=0; x<=10; x++) {
+        let maxVal = Math.pow(4, 10);
+        let y = Math.pow(base, x);
+        let percentX = x * 10;
+        let percentY = 100 - ((y / maxVal) * 100);
+        if(base < 2) percentY = 100 - ((y / Math.pow(2, 10)) * 100);
+        if(percentY < 0) percentY = 0;
+        points.push(${percentX}% %);
+    }
+    const polygon = polygon(0 100%, 0 100%, , 100% 0, 100% 100%);
+    document.getElementById('expo-curve').style.clipPath = polygon;
+}
+
+// S7
+function updateCoolingCurve() {
+    const slider = document.getElementById('time-slider');
+    if(!slider) return;
+    const t = parseFloat(slider.value);
+    document.getElementById('time-val').innerText = t;
+    
+    const temp = 25 + 75 * Math.exp(-0.05 * t);
+    document.getElementById('temp-readout').innerText = temp.toFixed(1) + " °C";
+    document.getElementById('thermo-mercury').style.height = temp + '%';
+}
+
+// S8
+let micInterval = null;
+function toggleMic() {
+    const btn = document.getElementById('btn-mic');
+    if(!btn) return;
+    
+    if(micInterval) {
+        clearInterval(micInterval);
+        micInterval = null;
+        btn.classList.remove('active');
+        btn.innerText = "Activar Micrófono Simulado";
+        document.getElementById('db-val').innerText = "--";
+        document.getElementById('db-led').style.width = '0%';
+    } else {
+        btn.classList.add('active');
+        btn.innerText = "Detener Simulación";
+        
+        micInterval = setInterval(() => {
+            const db = Math.floor(Math.random() * (120 - 30 + 1)) + 30;
+            document.getElementById('db-val').innerText = db;
+            const w = (db / 140) * 100;
+            document.getElementById('db-led').style.width = w + '%';
+        }, 300);
+    }
+}
+
+// S9 & S10 Global Animation
+let s9Phase = 0;
+let s10Time = 0;
+let activePhases = [true, true, true];
+
+function animateCanvas() {
+    drawSineWave();
+    drawThreePhase();
+    requestAnimationFrame(animateCanvas);
+}
+requestAnimationFrame(animateCanvas);
+
+function drawSineWave() {
+    const canvas = document.getElementById('sine-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.clientWidth;
+    const height = canvas.height = canvas.clientHeight;
+    
+    const ampSlider = document.getElementById('amp-slider');
+    const freqSlider = document.getElementById('freq-slider');
+    if(!ampSlider) return;
+    
+    const A = parseFloat(ampSlider.value);
+    const f = parseFloat(freqSlider.value);
+    
+    ctx.clearRect(0, 0, width, height);
+    
+    ctx.beginPath();
+    ctx.moveTo(0, height/2);
+    ctx.lineTo(width, height/2);
+    ctx.strokeStyle = "rgba(255,255,255,0.2)";
+    ctx.stroke();
+    
+    ctx.beginPath();
+    for(let x=0; x<width; x++) {
+        const y = height/2 - A * Math.sin(f * x + s9Phase);
+        if(x===0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    
+    s9Phase += 0.1;
+}
+
+function togglePhase(idx) {
+    activePhases[idx] = !activePhases[idx];
+}
+
+function drawThreePhase() {
+    const canvas = document.getElementById('three-phase-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.clientWidth;
+    const height = canvas.height = canvas.clientHeight;
+    
+    ctx.clearRect(0, 0, width, height);
+    
+    const A = 50;
+    const f = 0.05;
+    const colors = ["#ef4444", "#10b981", "#3b82f6"];
+    const offsets = [0, (2*Math.PI)/3, (4*Math.PI)/3];
+    
+    for(let i=0; i<3; i++) {
+        if(!activePhases[i]) continue;
+        ctx.beginPath();
+        for(let x=0; x<width; x++) {
+            const y = height/2 - A * Math.sin(f * x - offsets[i] + s10Time);
+            if(x===0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = colors[i];
+        ctx.lineWidth = 3;
+        ctx.stroke();
+    }
+    s10Time += 0.05;
+}
+
+window.unlockTeacherTipsS6 = unlockTeacherTipsS6;
+window.unlockTeacherTipsS7 = unlockTeacherTipsS7;
+window.unlockTeacherTipsS8 = unlockTeacherTipsS8;
+window.unlockTeacherTipsS9 = unlockTeacherTipsS9;
+window.unlockTeacherTipsS10 = unlockTeacherTipsS10;
+window.updateExpoCurve = updateExpoCurve;
+window.updateCoolingCurve = updateCoolingCurve;
+window.toggleMic = toggleMic;
+window.drawSineWave = drawSineWave;
+window.drawThreePhase = drawThreePhase;
+window.togglePhase = togglePhase;

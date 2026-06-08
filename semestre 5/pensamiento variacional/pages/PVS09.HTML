@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 9 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Corriente Alterna */
+        .ac-wave {
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .electron {
+            width: 10px;
+            height: 10px;
+            background: #eab308;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            box-shadow: 0 0 10px #eab308;
+            animation: oscillateAC 1s infinite ease-in-out;
+        }
+        @keyframes oscillateAC {
+            0% { transform: translateX(20px); }
+            50% { transform: translateX(120px); }
+            100% { transform: translateX(20px); }
+        }
+
+        /* 2. Mareas */
+        .tide-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(to bottom, #0f172a 50%, #1e3a8a 50%);
+        }
+        .moon {
+            width: 30px;
+            height: 30px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 20%;
+            box-shadow: 0 0 15px white;
+            animation: moonOrbit 6s infinite linear;
+        }
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #3b82f6;
+            opacity: 0.8;
+            animation: tideRise 6s infinite ease-in-out;
+        }
+        @keyframes moonOrbit {
+            0% { left: -10%; }
+            100% { left: 110%; }
+        }
+        @keyframes tideRise {
+            0% { height: 20%; }
+            50% { height: 70%; }
+            100% { height: 20%; }
+        }
+
+        /* 3. Péndulo Simple */
+        .pendulum-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .pivot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .string {
+            width: 2px;
+            height: 80px;
+            background: rgba(255,255,255,0.5);
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform-origin: top center;
+            animation: swing 2s infinite ease-in-out alternate;
+        }
+        .bob {
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            left: -9px;
+            box-shadow: 0 0 10px #ef4444;
+        }
+        @keyframes swing {
+            0% { transform: rotate(30deg); }
+            100% { transform: rotate(-30deg); }
+        }
+
+        /* Simulador Trigonométrico */
+        .trig-simulator {
+            background: #0f172a;
+            border: 4px solid #3b82f6;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            text-align: center;
+        }
+        .canvas-container {
+            background: #1e293b;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 150px;
+        }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            color: white;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        input[type=range] { width: 50%; }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion9-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS9()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 9</div>
+            <h1>Funciones Trigonométricas I</h1>
+            <p>Análisis de fenómenos cíclicos y periódicos mediante el Seno y Coseno.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Ata una pluma pesada al extremo de un hilo y cuélgala como péndulo. Pon un papel en movimiento constante por debajo y deja que la pluma marque su trayectoria. ¡Se formará una onda senoidal perfecta frente a sus ojos!</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Comprender que las funciones trigonométricas (Seno y Coseno) no son solo "para resolver triángulos", sino que son los modelos matemáticos por excelencia para describir cualquier fenómeno que se repite en el tiempo (ciclos).</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #3b82f6; border-top: 5px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">📖 Teoría: Anatomía de una Onda</h2>
+                <p>Todo ciclo se dibuja como una ola infinita. Su comportamiento está definido por dos características vitales:</p>
+                <div class="math-box" style="border-color:#3b82f6; color:#3b82f6; text-align:left;">
+                    <strong>y = A * sen(Bx)</strong> <br>
+                    • <strong>Amplitud (A):</strong> Qué tan "alta" o "fuerte" es la ola. (Ej: Volumen del sonido).<br>
+                    • <strong>Periodo / Frecuencia (B):</strong> Qué tan "rápido" se repite el ciclo. (Ej: Tono agudo o grave).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Corriente Alterna:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Los electrones en los cables de casa no viajan rectos, vibran adelante y atrás.</p>
+                        <div class="css-graphic">
+                            <div class="ac-wave"><div class="electron"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Las Mareas:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El nivel del mar sube y baja predeciblemente guiado por la Luna.</p>
+                        <div class="css-graphic" style="padding:0;">
+                            <div class="tide-container">
+                                <div class="moon"></div>
+                                <div class="water"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Péndulo Simple:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Cualquier sistema que oscila (columpios, resortes) obedece a estas leyes.</p>
+                        <div class="css-graphic">
+                            <div class="pendulum-container">
+                                <div class="pivot"></div>
+                                <div class="string"><div class="bob"></div></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #3b82f6;">
+                <h2 style="color: #3b82f6;">🌊 Simulador: Osciloscopio Web</h2>
+                <p>Controla las propiedades de la función Seno <code>y = A*sen(f*x)</code> y observa cómo se estira o comprime la onda.</p>
+
+                <div class="trig-simulator">
+                    <div class="canvas-container">
+                        <canvas id="sine-canvas"></canvas>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>Amplitud (A):</label>
+                        <input type="range" id="amp-slider" min="10" max="60" value="30" oninput="drawSineWave()">
+                    </div>
+                    <div class="slider-group">
+                        <label>Frecuencia (f):</label>
+                        <input type="range" id="freq-slider" min="0.01" max="0.1" step="0.01" value="0.05" oninput="drawSineWave()">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.drawSineWave) window.drawSineWave(); // Initialize canvas
+
+            new KahootQuiz('quiz-mount-point', 'sesion9', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion9');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion9', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

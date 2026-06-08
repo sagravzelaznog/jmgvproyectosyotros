@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Sismo (Casa Temblorosa) */
+        .seism-house {
+            width: 40px;
+            height: 40px;
+            background: #f59e0b;
+            position: relative;
+            animation: shake 0.5s infinite;
+        }
+        .seism-house::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 20px solid #d97706;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        /* 2. Tubo de Ensayo pH */
+        .test-tube {
+            width: 20px;
+            height: 80px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: #ec4899;
+            animation: changePh 4s infinite alternate;
+        }
+        @keyframes changePh {
+            0% { background: #ef4444; } /* Ácido */
+            50% { background: #10b981; } /* Neutro */
+            100% { background: #3b82f6; } /* Alcalino */
+        }
+
+        /* 3. Ondas Sonoras */
+        .speaker {
+            width: 20px;
+            height: 40px;
+            background: #94a3b8;
+            border-radius: 4px;
+            position: absolute;
+            left: 20%;
+        }
+        .speaker::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 5px;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 10px solid #64748b;
+        }
+        .sound-wave {
+            position: absolute;
+            border-right: 2px solid #38bdf8;
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulseWave 1.5s infinite linear;
+        }
+        .sw1 { width: 30px; height: 30px; left: calc(20% + 20px); animation-delay: 0s; }
+        .sw2 { width: 60px; height: 60px; left: calc(20% + 20px); animation-delay: 0.5s; }
+        .sw3 { width: 90px; height: 90px; left: calc(20% + 20px); animation-delay: 1s; }
+
+        @keyframes pulseWave {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Simulador Decibelímetro */
+        .db-meter {
+            background: #0f172a;
+            border: 4px solid #f59e0b;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            text-align: center;
+        }
+        .db-display {
+            font-size: 3em;
+            font-weight: 900;
+            color: #f59e0b;
+            margin: 10px 0;
+            font-family: monospace;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .led-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+        }
+        .led-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 60%, #ef4444 100%);
+            transition: width 0.1s;
+        }
+        .controls { margin-top: 15px; }
+        .btn-mic {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-mic.active {
+            background: #ef4444;
+            animation: pulseBtn 1s infinite;
+        }
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion8-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS8()">
+            <a href="../index.html" class="back-btn">⬅ Inicio</a>
+            <div class="badge">Bloque 1 | Sesión 8</div>
+            <h1>Funciones Logarítmicas</h1>
+            <p>Comprender la función inversa a la exponencial y las escalas logarítmicas.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Pide a los alumnos que descarguen una app de Sonómetro (Sound Meter). Haz que midan el silencio absoluto y luego griten todos juntos. Explica que la escala de decibelios "comprime" números inmensos de presión acústica en una escala del 0 al 140 para que el cerebro los entienda.</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Las funciones logarítmicas son la <strong>operación inversa</strong> de las exponenciales. Su magia radica en "comprimir" rangos de números gigantescos o microscópicos en escalas manejables (0 a 10, o 0 a 140) para poder estudiarlos sin volvernos locos con los ceros.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #f59e0b; border-top: 5px solid #f59e0b;">
+                <h2 style="color: #f59e0b;">📖 Teoría: Comprimiendo el Universo</h2>
+                <p>Cuando un fenómeno crece de manera exponencial (como un terremoto), graficarlo de forma lineal es imposible porque la línea se dispara al cielo de inmediato. El logaritmo convierte las multiplicaciones masivas en simples sumas.</p>
+                <div class="math-box" style="border-color:#f59e0b; color:#f59e0b;">
+                    y = log_a(x)  ➔  a^y = x <br>
+                    Si un terremoto grado 4 es "X" de fuerte, un grado 5 es 10 veces más fuerte (no 1 vez más).
+                </div>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos del Entorno</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Escala Richter (Sismos):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Mide la energía liberada. Un 7.0 es muchísimo más destructivo que un 6.0.</p>
+                        <div class="css-graphic">
+                            <div class="seism-house"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>pH en Química:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Mide la concentración de iones de hidrógeno en una escala del 0 al 14.</p>
+                        <div class="css-graphic">
+                            <div class="test-tube"><div class="liquid"></div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Decibelios (Acústica):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Nuestros oídos perciben el sonido logarítmicamente para no dañarse.</p>
+                        <div class="css-graphic">
+                            <div class="speaker"></div>
+                            <div class="sound-wave sw1"></div><div class="sound-wave sw2"></div><div class="sound-wave sw3"></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #f59e0b;">
+                <h2 style="color: #f59e0b;">🎙️ Simulador: Decibelímetro Virtual</h2>
+                <p>Presiona el botón para "escuchar" el sonido ambiente simulado. Observa cómo la barra de decibelios (dB) condensa la inmensa presión sonora.</p>
+
+                <div class="db-meter">
+                    <div class="db-display"><span id="db-val">--</span> dB</div>
+                    <div class="led-bar">
+                        <div class="led-fill" id="db-led"></div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn-mic" id="btn-mic" onclick="toggleMic()">Activar Micrófono Simulado</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+        <br><br>
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion8', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion8');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion8', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -251,3 +251,37 @@
         grid-column: span 1;
     }
 }
+
+/* Session Navigation */
+.session-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+.nav-btn {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.nav-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+.btn-support { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; border-color: #f59e0b; font-weight: 800; }
+.btn-support:hover { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; }
+.btn-disabled { opacity: 0.3; pointer-events: none; }
+@media (max-width: 400px) {
+    .nav-btn { font-size: 0.75em; padding: 8px 4px; }
+}

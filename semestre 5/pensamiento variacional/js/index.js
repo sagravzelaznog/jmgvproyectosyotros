@@ -42,8 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
         status: "active"
     });
 
+    sessions.push({
+        id: 5,
+        title: "Funciones de Variable Real",
+        description: "El concepto de función como modelo matemático del entorno (Representación).",
+        block: 1,
+        link: "pages/PVS05.HTML",
+        status: "active"
+    });
+
     // Generate the remaining sessions
-    for (let i = 5; i <= 50; i++) {
+    for (let i = 6; i <= 50; i++) {
         let blockNum = 1;
         if (i >= 17 && i <= 33) blockNum = 2;
         if (i >= 34) blockNum = 3;

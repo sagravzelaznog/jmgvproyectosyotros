@@ -235,3 +235,51 @@ function calculateLoad() {
 
 window.unlockTeacherTipsS4 = unlockTeacherTipsS4;
 window.calculateLoad = calculateLoad;
+
+// =========================================================
+// SCRIPT: SESIÓN 5 PENSAMIENTO VARIACIONAL
+// =========================================================
+
+function unlockTeacherTipsS5() {
+    const pwd = prompt("🔐 MODO MAESTRO (Pensamiento Variacional)\nIngrese el código de acceso: ");
+    if (pwd === "1983") {
+        const tips = document.querySelectorAll('#sesion5-variacional .teacher-tip');
+        let unlocked = false;
+        tips.forEach(tip => {
+            if (tip.classList.contains('hidden')) {
+                tip.classList.remove('hidden');
+                unlocked = true;
+            }
+        });
+        if (unlocked) alert("✅ ¡Modo Maestro Activado!");
+    } else if (pwd !== null) {
+        alert("❌ Código incorrecto. Acceso denegado.");
+    }
+}
+
+function processFunction() {
+    const inputVal = document.getElementById('func-input').value;
+    if (inputVal === '') return;
+    
+    const x = parseFloat(inputVal);
+    const rule = document.getElementById('func-rule').value;
+    const gears = document.getElementById('machine-gears');
+    const outputBox = document.getElementById('func-output');
+    
+    // Animate gears
+    gears.classList.add('spin');
+    outputBox.innerText = "...";
+    
+    setTimeout(() => {
+        let y = 0;
+        if (rule === 'double') y = 2 * x;
+        else if (rule === 'square') y = x * x;
+        else if (rule === 'plusTen') y = x + 10;
+        
+        outputBox.innerText = y;
+        gears.classList.remove('spin');
+    }, 1000);
+}
+
+window.unlockTeacherTipsS5 = unlockTeacherTipsS5;
+window.processFunction = processFunction;

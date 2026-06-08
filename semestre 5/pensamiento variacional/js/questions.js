@@ -202,5 +202,49 @@ export const questionDatabase = {
             answerIndex: 0,
             timeLimit: 30
         }
+    ],
+    "sesion5": [
+        {
+            question: "¿Qué es el Dominio de una función?",
+            options: ["Todos los valores posibles de entrada (x)", "Los valores de salida (y)", "La gráfica trazada", "El nombre de la función"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "¿Qué es el Rango o Imagen de una función?",
+            options: ["Los resultados o salidas producidas (y)", "Las entradas de la función", "El valor cero", "La distancia entre puntos"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Para que una relación sea considerada una Función, un valor de 'x' puede tener...",
+            options: ["Únicamente un solo valor de 'y'", "Dos valores de 'y'", "Infinitos valores de 'y'", "Ningún valor de 'y'"],
+            answerIndex: 0,
+            timeLimit: 30
+        },
+        {
+            question: "¿Cómo funciona la Prueba de la Línea Vertical?",
+            options: ["Si cruza la gráfica una sola vez, es Función", "Si cruza dos veces, es Función", "Debe ser horizontal", "Mide el área bajo la curva"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Si la regla de correspondencia es f(x) = 3x, ¿cuál es la salida para x=4?",
+            options: ["12", "7", "43", "1"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "Una tarifa de taxi que sube $10 por cada kilómetro es un ejemplo de...",
+            options: ["Función escalonada o a trozos", "Relación no funcional", "Función constante", "Aceleración"],
+            answerIndex: 0,
+            timeLimit: 20
+        },
+        {
+            question: "La 'Máquina de Funciones' nos enseña que f(x) es...",
+            options: ["Una regla de transformación de datos", "Un número estático", "Solo un dibujo", "Una variable aleatoria"],
+            answerIndex: 0,
+            timeLimit: 30
+        }
     ]
 };

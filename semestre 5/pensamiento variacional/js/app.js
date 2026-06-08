@@ -78,6 +78,7 @@ export const AppController = {
             <a href="${prevHref}" class="nav-btn" ${prevDisabled}>⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
             <a href="${nextHref}" class="nav-btn" ${nextDisabled}>Siguiente ➡</a>
+            <a href="#" id="open-support" class="nav-btn" style="background:#f59e0b; color:white; border:none;">☕ Apoyar</a>
         `;
 
         navContainers.forEach(nav => {
@@ -139,7 +140,11 @@ export const AppController = {
     }
 };
 
-// Iniciar cuando el DOM cargue
-document.addEventListener('DOMContentLoaded', () => {
+// Iniciar de forma segura dependiendo del estado del DOM
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        AppController.init();
+    });
+} else {
     AppController.init();
-});
+}

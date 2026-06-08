@@ -75,17 +75,6 @@ export const questionDatabase = {
             ],
             "answerIndex": 2,
             "timeLimit": 20
-        },
-        {
-            "question": "¿Cómo refuta la física moderna las paradojas de Zenón?",
-            "options": [
-                "Demostrando que el tiempo y el espacio son continuos pero cuantizables (se pueden cruzar)",
-                "Dando la razón matemática a Zenón",
-                "Prohibiendo las carreras con tortugas",
-                "Modificando la velocidad de la luz"
-            ],
-            "answerIndex": 0,
-            "timeLimit": 30
         }
     ],
     "sesion2": [

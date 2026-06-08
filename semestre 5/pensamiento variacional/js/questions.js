@@ -381,5 +381,14 @@ export const questionDatabase = {
         { question: "La derivada de f(x) = x^2 calculada con los 4 pasos da:", options: ["2x", "x^2 + 2x", "2", "0"], answerIndex: 0, timeLimit: 20 },
         { question: "Esta regla general es conocida formalmente como...", options: ["Derivada por Definición", "Teorema de Pitágoras", "Ley de Ohm", "Regla de la Cadena"], answerIndex: 0, timeLimit: 20 },
         { question: "El costo marginal en economía representa:", options: ["La derivada de la función de costos (costo del siguiente elemento)", "El costo total", "El dinero ahorrado", "Un costo promedio falso"], answerIndex: 0, timeLimit: 20 }
+    ],
+    "sesion21": [
+        { question: "¿Por qué derivar f(x) = 1/x usando los 4 pasos es más difícil que x^2?", options: ["Requiere manipulación de fracciones algebraicas complejas", "Porque es imposible", "Porque la gráfica es recta", "Porque las matemáticas fallan"], answerIndex: 0, timeLimit: 20 },
+        { question: "En el paso 2 de f(x)=1/x, al restar fracciones obtenemos un denominador común que es...", options: ["x(x+h)", "1", "h", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué objetivo perseguimos en el álgebra de los pasos 2 y 3?", options: ["Eliminar la 'h' del denominador global para evitar la división entre cero", "Hacer la ecuación más grande", "Sumar 10", "Encontrar el valor de x"], answerIndex: 0, timeLimit: 20 },
+        { question: "Al derivar 1/x, el resultado final (límite cuando h tiende a 0) es:", options: ["-1 / x^2", "1 / x", "-x", "0"], answerIndex: 0, timeLimit: 20 },
+        { question: "¿Qué representa físicamente la derivada del volumen de un cubo metálico calentándose?", options: ["La tasa de expansión térmica del metal", "El color del metal", "El peso de la caja", "El ruido que hace"], answerIndex: 0, timeLimit: 20 },
+        { question: "Si la resistencia de un cable es inversamente proporcional a su grosor (R = 1/A), al aumentar el área...", options: ["La resistencia cae drásticamente (comportamiento similar a -1/x^2)", "La resistencia sube", "La electricidad se detiene", "El voltaje desaparece"], answerIndex: 0, timeLimit: 20 },
+        { question: "El simulador de relevos de los 4 pasos demuestra que derivar es...", options: ["Un algoritmo sistemático y secuencial", "Una adivinanza aleatoria", "Solo medir con regla", "Exclusivo para sumas"], answerIndex: 0, timeLimit: 20 }
     ]
 };

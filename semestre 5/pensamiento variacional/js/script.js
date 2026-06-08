@@ -702,6 +702,25 @@ window.initSimS19 = drawTangent;
 
 
 
+// S21 Logic
+function unlockTeacherTipsS21() { unlockTips('sesion21-variacional'); }
+window.unlockTeacherTipsS21 = unlockTeacherTipsS21;
+
+function runRelayStep(step) {
+    document.getElementById('relay-step-' + step).classList.add('visible');
+    document.getElementById('btn-s' + step).classList.remove('active');
+    document.getElementById('btn-s' + step).disabled = true;
+    if(step < 4) {
+        let nextBtn = document.getElementById('btn-s' + (step+1));
+        nextBtn.disabled = false;
+        nextBtn.classList.add('active');
+    } else {
+        // Success animation or message
+        setTimeout(() => alert("🏁 ¡Carrera completada! Hemos demostrado que la derivada de 1/x es -1/x²."), 500);
+    }
+}
+window.runRelayStep = runRelayStep;
+
 // Reveal bottom nav when scrolling to the end
 document.addEventListener('DOMContentLoaded', () => {
     const bottomNav = document.querySelector('.bottom-nav');

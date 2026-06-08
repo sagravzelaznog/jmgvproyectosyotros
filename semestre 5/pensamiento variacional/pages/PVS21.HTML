@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 21 - Pensamiento Variacional</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/quiz-kahoot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .css-graphic {
+            width: 100%;
+            height: 120px;
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. Expansión Térmica */
+        .metal-block {
+            width: 50px;
+            height: 50px;
+            background: #94a3b8;
+            border-radius: 8px;
+            animation: thermalExpansion 4s infinite alternate ease-in-out;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        @keyframes thermalExpansion {
+            0% { transform: scale(1); background: #94a3b8; box-shadow: 0 0 5px rgba(148,163,184,0.5); }
+            100% { transform: scale(1.6); background: #ef4444; box-shadow: 0 0 25px rgba(239,68,68,0.8); }
+        }
+
+        /* 2. Trayectoria Parabólica */
+        .field {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-bottom: 3px solid #22c55e;
+        }
+        .ball {
+            width: 15px;
+            height: 15px;
+            background: #f97316;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            animation: throwBall 3s infinite cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .ball::after {
+            content: '⚽';
+            position: absolute;
+            top: -12px; left: -2px;
+            font-size: 1.2em;
+        }
+        @keyframes throwBall {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, -80px) scale(1.2); }
+            100% { transform: translate(200px, 0) scale(1); }
+        }
+
+        /* 3. Resistencia de Cables */
+        .cable-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 80%;
+        }
+        .cable {
+            width: 100%;
+            background: #334155;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .cable.thick { height: 30px; }
+        .cable.thin { height: 10px; }
+        
+        .electron {
+            position: absolute;
+            width: 6px; height: 6px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #38bdf8;
+        }
+        .cable.thick .electron { animation: flowThick 2s infinite linear; }
+        .cable.thin .electron { animation: flowThin 4s infinite linear; } /* slower due to resistance */
+        
+        @keyframes flowThick { 0% { left: -10px; } 100% { left: 110%; } }
+        @keyframes flowThin { 0% { left: -10px; } 100% { left: 110%; } }
+
+        /* Simulador Carrera de Relevos */
+        .relay-simulator {
+            background: #0f172a;
+            border: 4px solid #8b5cf6;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .board {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 200px;
+            margin-bottom: 20px;
+            position: relative;
+            font-family: monospace;
+            font-size: 1.2em;
+        }
+        .math-step {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 3px solid #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+        .math-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .highlight { color: #f59e0b; font-weight: bold; }
+        .cancel { color: #ef4444; text-decoration: line-through; }
+        .result { color: #10b981; font-weight: bold; font-size: 1.3em;}
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .step-btn {
+            flex: 1;
+            padding: 15px;
+            background: #334155;
+            color: white;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .step-btn.active {
+            background: #8b5cf6;
+            border-color: #a855f7;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+            transform: scale(1.05);
+        }
+        .step-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="session-progress-container">
+        <span style="font-size: 1.2em;">📚</span>
+        <div class="session-progress-bar-bg">
+            <div class="session-progress-fill" id="session-progress"></div>
+        </div>
+    </div>
+
+    <div class="infographic-container" id="sesion21-variacional">
+        <header class="info-header" ondblclick="unlockTeacherTipsS21()">
+            <div class="badge">Bloque 2 | Sesión 21</div>
+            <h1>Regla de los Cuatro Pasos II</h1>
+            <p>Consolidando el cálculo por definición y sus implicaciones algebraicas.</p>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Divide al salón en 4 grupos. Para calcular la derivada de f(x)=1/x, que el Grupo 1 haga el paso 1, pase el papel al Grupo 2 para el paso 2, y así sucesivamente. ¡Gamificación instantánea física!</div>
+        </header>
+
+        <div class="info-body">
+            <section class="info-card goal-card">
+                <h2>🎯 Propósito Formativo</h2>
+                <p>Consolidar la habilidad de calcular derivadas por definición (Regla de los 4 pasos) enfrentando funciones que implican mayores retos algebraicos (como funciones racionales o polinomios de grado superior), entendiendo matemáticamente qué significa simplificar el incremento $\Delta x$ o $h$.</p>
+            </section>
+
+            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+                <h2 style="color: #8b5cf6;">📖 Teoría: El Álgebra del Cambio</h2>
+                <p>En la sesión anterior aprendimos el algoritmo. Sin embargo, cuando la función es más compleja, por ejemplo <strong>f(x) = 1/x</strong>, el álgebra en los pasos 2 y 3 se vuelve el verdadero desafío.</p>
+                <p>El objetivo siempre es el mismo: <strong>eliminar la "h" del denominador</strong> para evitar la división entre cero al aplicar el límite en el Paso 4. Esto a menudo requiere sumar fracciones algebraicas, aplicar binomios al cuadrado/cubo o racionalizar.</p>
+            </section>
+
+            <section class="info-card examples-card">
+                <h2>📝 Ejemplos en Ingeniería</h2>
+                <ul class="custom-list">
+                    <li>
+                        <b>Expansión Térmica Volumétrica:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">El volumen de un cubo metálico V(x) = x³ se expande al calentarse. Derivar x³ requiere un binomio al cubo algebraicamente.</p>
+                        <div class="css-graphic">
+                            <div class="metal-block">V(x)</div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Trayectoria Parabólica:</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">La derivada de y = -x² + bx nos da la inclinación exacta del balón en cada instante del vuelo.</p>
+                        <div class="css-graphic">
+                            <div class="field">
+                                <div class="ball"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <b>Resistencia de Cables (Racionales):</b>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">La resistencia R = k/A disminuye si el área A aumenta. Derivar 1/x nos ayuda a optimizar el grosor del cobre.</p>
+                        <div class="css-graphic">
+                            <div class="cable-container">
+                                <div class="cable thick">
+                                    <div class="electron" style="top:5px; animation-delay: 0s;"></div>
+                                    <div class="electron" style="top:15px; animation-delay: 0.5s;"></div>
+                                    <div class="electron" style="top:10px; animation-delay: 1s;"></div>
+                                </div>
+                                <div class="cable thin">
+                                    <div class="electron" style="top:2px; animation-delay: 0s;"></div>
+                                    <div class="electron" style="top:2px; animation-delay: 1.5s;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="info-card strategy-card" style="border-color: #8b5cf6;">
+                <h2 style="color: #8b5cf6;">🏃 Carrera de Relevos: Los 4 Pasos</h2>
+                <p>Derivaremos la función racional <strong>f(x) = 1/x</strong>. Presiona cada botón para que el siguiente "corredor" realice su paso algebraico.</p>
+
+                <div class="relay-simulator">
+                    <div class="board">
+                        <div style="color:white; margin-bottom: 20px;">Meta: Derivar <span class="highlight">f(x) = 1 / x</span></div>
+                        
+                        <div class="math-step" id="relay-step-1">
+                            <strong>1. Sustituir (x+h):</strong><br>
+                            f(x+h) = 1 / <span class="highlight">(x+h)</span>
+                        </div>
+                        
+                        <div class="math-step" id="relay-step-2">
+                            <strong>2. Restar f(x):</strong><br>
+                            [1 / (x+h)] - [1 / x] <br>
+                            <em>Mínimo común múltiplo...</em><br>
+                            = [x - (x+h)] / [x(x+h)] <br>
+                            = [<span class="cancel">x</span> - <span class="cancel">x</span> - h] / [x(x+h)] <br>
+                            = <span class="highlight">-h / [x(x+h)]</span>
+                        </div>
+                        
+                        <div class="math-step" id="relay-step-3">
+                            <strong>3. Dividir entre h:</strong><br>
+                            ( -h / [x(x+h)] ) / h <br>
+                            <em>Se cancelan las "h"...</em><br>
+                            = <span class="cancel">-h</span> / [<span class="cancel">h</span> * x(x+h)] <br>
+                            = <span class="highlight">-1 / [x(x+h)]</span>
+                        </div>
+                        
+                        <div class="math-step" id="relay-step-4">
+                            <strong>4. Límite h → 0:</strong><br>
+                            lim -1 / [x(x + <span class="cancel">0</span>)] <br>
+                            = -1 / (x * x) <br>
+                            <span class="result">f'(x) = -1 / x²</span> 🏁
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="step-btn active" id="btn-s1" onclick="runRelayStep(1)">Corredor 1</button>
+                        <button class="step-btn" id="btn-s2" onclick="runRelayStep(2)" disabled>Corredor 2</button>
+                        <button class="step-btn" id="btn-s3" onclick="runRelayStep(3)" disabled>Corredor 3</button>
+                        <button class="step-btn" id="btn-s4" onclick="runRelayStep(4)" disabled>Corredor 4 (Meta)</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <div id="quiz-mount-point" style="margin-top: 30px;"></div>
+
+        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+            <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
+        </footer>
+        <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
+            <a href="PVS20.HTML" class="nav-btn">⬅ Anterior</a>
+            <a href="../index.html" class="nav-btn">🏠 Inicio</a>
+            <a href="PVS22.HTML" class="nav-btn">Siguiente ➡</a>
+            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara realizar tu donativo, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+        </nav>
+        
+    </div>
+
+    <script src="../js/env.js"></script>
+    <script src="../js/script.js"></script>
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { AppController } from '../js/app.js';
+        import { KahootQuiz } from '../js/quiz-kahoot.js';
+        import { saveProgressToFirebase } from '../js/firebase-setup.js';
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            document.getElementById('session-progress').style.width = Math.min(scrollPercent * 100, 100) + '%';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new KahootQuiz('quiz-mount-point', 'sesion21', async (score, percentage) => {
+                if(percentage === 100) {
+                    alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
+                    AppController.markSessionCompleted('sesion21');
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    localStorage.setItem('pv_student_id', tempStudentId);
+                    await saveProgressToFirebase(tempStudentId, 'sesion21', score, true);
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

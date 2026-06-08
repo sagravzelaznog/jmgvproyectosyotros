@@ -33,10 +33,11 @@
             padding: 20px 30px;
             margin: 20px 0;
             border-radius: 0 10px 10px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             position: relative;
             grid-column: span 2;
         }
+
         .magistral-quote::before {
             content: '❝';
             position: absolute;
@@ -46,6 +47,7 @@
             left: 10px;
             font-family: serif;
         }
+
         .magistral-title {
             color: #94a3b8;
             font-size: 1.2em;
@@ -54,6 +56,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+
         .magistral-text {
             color: #e2e8f0;
             font-size: 1.1em;
@@ -64,42 +67,148 @@
 
         /* 1. Cable ininterrumpido */
         .cable-joint {
-            display: flex; width: 100%; height: 20px; align-items: center; justify-content: center;
+            display: flex;
+            width: 100%;
+            height: 20px;
+            align-items: center;
+            justify-content: center;
         }
-        .wire { width: 40%; height: 6px; background: #fbbf24; box-shadow: 0 0 5px #fbbf24; }
-        .joint { width: 20%; height: 12px; background: #475569; border-radius: 10px; }
+
+        .wire {
+            width: 40%;
+            height: 6px;
+            background: #fbbf24;
+            box-shadow: 0 0 5px #fbbf24;
+        }
+
+        .joint {
+            width: 20%;
+            height: 12px;
+            background: #475569;
+            border-radius: 10px;
+        }
+
         .pulse {
-            width: 15px; height: 15px; background: white; border-radius: 50%; box-shadow: 0 0 20px white;
-            animation: movePulse 2s infinite linear; position: absolute; left: 0;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px white;
+            animation: movePulse 2s infinite linear;
+            position: absolute;
+            left: 0;
         }
-        @keyframes movePulse { 0% { left: 10%; } 100% { left: 90%; } }
+
+        @keyframes movePulse {
+            0% {
+                left: 10%;
+            }
+
+            100% {
+                left: 90%;
+            }
+        }
 
         /* 2. Rampa Peatonal */
         .sidewalk-container {
-            width: 100%; height: 100%; position: relative;
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
-        .sidewalk1 { position: absolute; left: 0; bottom: 10px; width: 40px; height: 30px; background: #94a3b8; border-top: 4px solid #cbd5e1; }
-        .sidewalk-ramp { position: absolute; left: 40px; bottom: 10px; width: 60px; height: 30px; background: #94a3b8; border-top: 4px solid #cbd5e1; transform: skewY(20deg); transform-origin: left bottom; }
-        .sidewalk2 { position: absolute; left: 100px; bottom: 31px; width: 80px; height: 30px; background: #94a3b8; border-top: 4px solid #cbd5e1; }
-        .wheelchair { position: absolute; width: 15px; height: 15px; background: #3b82f6; border-radius: 50%; bottom: 45px; left: 10px; animation: rollRamp 3s infinite linear; }
+
+        .sidewalk1 {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            width: 40px;
+            height: 30px;
+            background: #94a3b8;
+            border-top: 4px solid #cbd5e1;
+        }
+
+        .sidewalk-ramp {
+            position: absolute;
+            left: 40px;
+            bottom: 10px;
+            width: 60px;
+            height: 30px;
+            background: #94a3b8;
+            border-top: 4px solid #cbd5e1;
+            transform: skewY(20deg);
+            transform-origin: left bottom;
+        }
+
+        .sidewalk2 {
+            position: absolute;
+            left: 100px;
+            bottom: 31px;
+            width: 80px;
+            height: 30px;
+            background: #94a3b8;
+            border-top: 4px solid #cbd5e1;
+        }
+
+        .wheelchair {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #3b82f6;
+            border-radius: 50%;
+            bottom: 45px;
+            left: 10px;
+            animation: rollRamp 3s infinite linear;
+        }
+
         @keyframes rollRamp {
-            0% { left: 10px; bottom: 45px; }
-            40% { left: 40px; bottom: 45px; }
-            70% { left: 100px; bottom: 66px; }
-            100% { left: 150px; bottom: 66px; }
+            0% {
+                left: 10px;
+                bottom: 45px;
+            }
+
+            40% {
+                left: 40px;
+                bottom: 45px;
+            }
+
+            70% {
+                left: 100px;
+                bottom: 66px;
+            }
+
+            100% {
+                left: 150px;
+                bottom: 66px;
+            }
         }
 
         /* 3. Transición Térmica */
         .thermal-bar {
-            width: 80%; height: 20px; border-radius: 10px;
+            width: 80%;
+            height: 20px;
+            border-radius: 10px;
             background: linear-gradient(to right, #ef4444, #f59e0b, #10b981, #3b82f6);
             position: relative;
         }
+
         .heat-wave {
-            width: 30px; height: 30px; background: rgba(255,255,255,0.3); border-radius: 50%; position: absolute; top: -5px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
             animation: thermalFlow 4s infinite linear alternate;
         }
-        @keyframes thermalFlow { 0% { left: 0%; } 100% { left: calc(100% - 30px); } }
+
+        @keyframes thermalFlow {
+            0% {
+                left: 0%;
+            }
+
+            100% {
+                left: calc(100% - 30px);
+            }
+        }
 
         /* Simulador Rampa */
         .ramp-simulator {
@@ -110,6 +219,7 @@
             box-shadow: 0 0 20px rgba(100, 116, 139, 0.3);
             text-align: center;
         }
+
         .canvas-container {
             background: #1e293b;
             border-radius: 8px;
@@ -117,12 +227,17 @@
             overflow: hidden;
             position: relative;
         }
+
         canvas {
             display: block;
             width: 100%;
             height: 150px;
         }
-        .controls { margin-top: 15px; }
+
+        .controls {
+            margin-top: 15px;
+        }
+
         .slider-group {
             display: flex;
             align-items: center;
@@ -130,7 +245,10 @@
             gap: 15px;
             color: white;
         }
-        input[type=range] { width: 60%; }
+
+        input[type=range] {
+            width: 60%;
+        }
     </style>
 </head>
 
@@ -147,31 +265,40 @@
             <div class="badge">Bloque 1 | Sesión 17</div>
             <h1>Continuidad e Infraestructura</h1>
             <p>Aplicar la continuidad a funciones a trozos en problemas de ingeniería reales.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Diles: "Casi nada en la vida real es una sola fórmula. Todo es una 'función a trozos' (pedazos de tubo, bloques de concreto). El trabajo del ingeniero es que esos trozos sean Continuos en sus uniones."</div>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Diles: "Casi nada en la vida real es una sola
+                fórmula. Todo es una 'función a trozos' (pedazos de tubo, bloques de concreto). El trabajo del ingeniero
+                es que esos trozos sean Continuos en sus uniones."</div>
         </header>
 
         <div class="info-body">
             <div class="magistral-quote">
                 <div class="magistral-title">El Concepto Magistral: La Teoría de Fallas Catastróficas</div>
                 <div class="magistral-text">
-                    "Toda nuestra civilización está construida sobre Funciones a Trozos. Rara vez podemos crear un puente o una carretera de una sola pieza infinita; ensamblamos bloques, soldamos vigas, empalmamos cables. Si en el punto exacto de unión (x=a), la función de la Viga 1 no empata milimétricamente con la función de la Viga 2, se genera una Discontinuidad. Y en ingeniería, una discontinuidad espacial no es un error en el papel, es un puente colapsando bajo su propio peso."
+                    "Toda nuestra civilización está construida sobre Funciones a Trozos. Rara vez podemos crear un
+                    puente o una carretera de una sola pieza infinita; ensamblamos bloques, soldamos vigas, empalmamos
+                    cables. Si en el punto exacto de unión (x=a), la función de la Viga 1 no empata milimétricamente con
+                    la función de la Viga 2, se genera una Discontinuidad. Y en ingeniería, una discontinuidad espacial
+                    no es un error en el papel, es un puente colapsando bajo su propio peso."
                 </div>
             </div>
 
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Aprender a forzar matemáticamente la continuidad. Encontraremos la constante "k" (el pegamento matemático) para que dos ecuaciones diferentes se conecten perfectamente sin dejar huecos ni saltos.</p>
+                <p>Aprender a forzar matemáticamente la continuidad. Encontraremos la constante "k" (el pegamento
+                    matemático) para que dos ecuaciones diferentes se conecten perfectamente sin dejar huecos ni saltos.
+                </p>
             </section>
 
-            <section class="info-card" style="grid-column: span 2; border-color: #64748b; border-top: 5px solid #64748b;">
+            <section class="info-card"
+                style="grid-column: span 2; border-color: #64748b; border-top: 5px solid #64748b;">
                 <h2 style="color: #64748b;">📖 Teoría: Soldando Funciones a Trozos</h2>
                 <p>Tenemos dos tramos de carretera que deben unirse en el kilómetro 5 (x=5):</p>
                 <div class="math-box" style="border-color:#64748b; color:#94a3b8; text-align:left;">
-                    Tramo 1: f(x) = 2x + 10  (Para x < 5)<br>
-                    Tramo 2: f(x) = kx       (Para x >= 5)<br><br>
-                    Evaluamos el límite por la izquierda: 2(5) + 10 = 20.<br>
-                    Evaluamos el límite por la derecha: k(5) = 5k.<br>
-                    <strong>Para que haya Continuidad:</strong> 20 = 5k  =>  <strong>k = 4</strong>.
+                    Tramo 1: f(x) = 2x + 10 (Para x < 5)<br>
+                        Tramo 2: f(x) = kx (Para x >= 5)<br><br>
+                        Evaluamos el límite por la izquierda: 2(5) + 10 = 20.<br>
+                        Evaluamos el límite por la derecha: k(5) = 5k.<br>
+                        <strong>Para que haya Continuidad:</strong> 20 = 5k => <strong>k = 4</strong>.
                 </div>
             </section>
 
@@ -180,29 +307,38 @@
                 <ul class="custom-list">
                     <li>
                         <b>Cableado Ininterrumpido:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Empalmes eléctricos de alta tensión donde la resistencia debe ser continua.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Empalmes eléctricos de alta tensión donde la
+                            resistencia debe ser continua.</p>
                         <div class="css-graphic">
                             <div class="cable-joint">
-                                <div class="wire"></div><div class="joint"></div><div class="wire"></div>
+                                <div class="wire"></div>
+                                <div class="joint"></div>
+                                <div class="wire"></div>
                                 <div class="pulse"></div>
                             </div>
                         </div>
                     </li>
                     <li>
                         <b>Rampas Peatonales:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Conectar dos banquetas de diferente altura usando una función lineal intermedia.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Conectar dos banquetas de diferente altura
+                            usando una función lineal intermedia.</p>
                         <div class="css-graphic">
                             <div class="sidewalk-container">
-                                <div class="sidewalk1"></div><div class="sidewalk-ramp"></div><div class="sidewalk2"></div>
+                                <div class="sidewalk1"></div>
+                                <div class="sidewalk-ramp"></div>
+                                <div class="sidewalk2"></div>
                                 <div class="wheelchair"></div>
                             </div>
                         </div>
                     </li>
                     <li>
                         <b>Transiciones Térmicas:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Aislamiento de tuberías industriales para evitar choques térmicos abruptos.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">Aislamiento de tuberías industriales para evitar
+                            choques térmicos abruptos.</p>
                         <div class="css-graphic">
-                            <div class="thermal-bar"><div class="heat-wave"></div></div>
+                            <div class="thermal-bar">
+                                <div class="heat-wave"></div>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -210,7 +346,9 @@
 
             <section class="info-card strategy-card" style="border-color: #64748b;">
                 <h2 style="color: #64748b;">🛣️ Simulador: Ingeniería Civil</h2>
-                <p>Estás diseñando una rampa que conecta la carretera inferior con el puente superior. Ajusta la alineación vertical (la constante 'k') de la rampa. Si falla la continuidad, provocarás un choque.</p>
+                <p>Estás diseñando una rampa que conecta la carretera inferior con el puente superior. Ajusta la
+                    alineación vertical (la constante 'k') de la rampa. Si falla la continuidad, provocarás un choque.
+                </p>
 
                 <div class="ramp-simulator">
                     <div class="canvas-container">
@@ -226,23 +364,26 @@
             </section>
 
         </div>
-        
+
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
 
-        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+        <footer
+            style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
             <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
         </footer>
         <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
             <a href="PVS16.HTML" class="nav-btn">⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
             <a href="PVS18.HTML" class="nav-btn">Siguiente ➡</a>
-            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+            <a href="#"
+                onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;"
+                class="nav-btn btn-support">☕ Apoyar</a>
         </nav>
-        
-        
-        
-        
-        
+
+
+
+
+
     </div>
 
     <script src="../js/env.js"></script>
@@ -262,13 +403,13 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.drawRamp) window.drawRamp();
+            if (window.drawRamp) window.drawRamp();
 
             new KahootQuiz('quiz-mount-point', 'sesion17', async (score, percentage) => {
-                if(percentage === 100) {
+                if (percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion17');
-                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random() * 10000);
                     localStorage.setItem('pv_student_id', tempStudentId);
                     await saveProgressToFirebase(tempStudentId, 'sesion17', score, true);
                     window.location.href = '../index.html';
@@ -278,6 +419,7 @@
             });
         });
     </script>
-    
+
 </body>
+
 </html>

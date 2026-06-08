@@ -2,13 +2,13 @@
 // Lógica global de la WebApp (PWA, UI, Modals, Progress)
 
 export const AppController = {
-    init: function() {
+    init: function () {
         this.renderGlobalUI();
         this.bindEvents();
         this.calculateGlobalProgress();
     },
 
-    renderGlobalUI: function() {
+    renderGlobalUI: function () {
         // Inyectar Barra de Progreso Global
         const progressContainer = document.createElement('div');
         progressContainer.className = 'global-progress-container';
@@ -23,8 +23,9 @@ export const AppController = {
                     <h2>🌟 Apoya el Proyecto</h2>
                     <p>Tu contribución nos ayuda a mantener esta plataforma educativa gratuita y sin anuncios.</p>
                     <div class="support-bank-details">
-                        CLABE: 0000 0000 0000 0000 00<br>
-                        Banco: Tu Banco<br>
+                        CLABE: 7229 6902 0087 7667 53<br>
+                        Banco: Mercado Pago<br>
+                        Correo (PayPal): primomanuel@hotmail.com<br>
                         Concepto: Apoyo PV
                     </div>
                     <p style="font-size: 0.8em; color: var(--text-secondary);">¡Gracias por ser parte del cambio educativo!</p>
@@ -38,7 +39,7 @@ export const AppController = {
             const currentPath = window.location.pathname;
             const isHome = currentPath.endsWith('index.html') || currentPath.endsWith('/');
             const homeLink = isHome ? 'index.html' : '../index.html';
-            
+
             const navHtml = `
                 <nav class="bottom-nav">
                     <a href="${homeLink}" class="nav-item ${isHome ? 'active' : ''}">
@@ -55,9 +56,9 @@ export const AppController = {
         }
     },
 
-    bindEvents: function() {
+    bindEvents: function () {
         const supportModal = document.getElementById('support-modal');
-        
+
         // Botones para abrir modal
         const openBtns = document.querySelectorAll('#open-support, #open-support-nav');
         openBtns.forEach(btn => {
@@ -78,7 +79,7 @@ export const AppController = {
         });
     },
 
-    calculateGlobalProgress: function() {
+    calculateGlobalProgress: function () {
         // Leemos de localStorage por si no hay red, aunque luego se puede sincronizar con Firebase
         let completedCount = 0;
         const totalSessions = 50;
@@ -97,12 +98,12 @@ export const AppController = {
         }
 
         const statElem = document.getElementById('global-progress-text');
-        if(statElem) {
+        if (statElem) {
             statElem.innerText = `${Math.round(percentage)}% Completado`;
         }
     },
 
-    markSessionCompleted: function(sessionId) {
+    markSessionCompleted: function (sessionId) {
         localStorage.setItem(`pv_${sessionId}_completed`, 'true');
         this.calculateGlobalProgress();
     }

@@ -209,4 +209,119 @@
             }
         }
     </style>
-</head>\n<body
+</head>\n<body>\n    <div class="layout">\n        <aside class="sidebar">\n            <h2>Módulos</h2>\n            <a href="index.html">🏠 Volver al Hub</a>\n<a href="masterclass01.html" >M1: Relaciones</a>\n<a href="masterclass02.html" >M2: Funciones</a>\n<a href="masterclass03.html" >M3: Notación</a>\n<a href="masterclass04.html" >M4: Clasificación</a>\n<a href="masterclass05.html" >M5: Valor</a>\n<a href="masterclass06.html" >M6: Dominio y Rango</a>\n<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>\n<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>\n<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>\n<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>\n<a href="masterclass07_05.html" class="active">M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>\n<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>\n<a href="masterclass07_07.html" >M7.7: 7.7 Función Raíz Cuadrada</a>\n<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>\n<a href="masterclass07_09.html" >M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>\n<a href="masterclass07_10.html" >M7.10: 7.10 Función Característica (Función Indicadora)</a>\n<a href="masterclass08.html" >M8: Gráficas y Transform.</a>\n<a href="masterclass09.html" >M9: Desplazamientos</a>\n<a href="masterclass10.html" >M10: Alargamientos</a>\n<a href="masterclass11.html" >M11: Reflexiones</a>\n<a href="masterclass12.html" >M12: Crecientes</a>\n<a href="actividades.html" >Recursos Prácticos</a>\n<a href="tarea.html" >Evaluación Final</a>\n\n        </aside>\n        <main class="main-content">\n            <div class="section">\n<h2>7.5 Funciones Potencia: $f(x) = x^n$</h2>\n<h3>7.5 Funciones Potencia: $f(x) = x^n$</h3>
+            <p>Las funciones potencia son de la forma $f(x) = x^n$, donde $n$ es un número real constante. Estas funciones son fundamentales en el estudio del cálculo y tienen propiedades interesantes que varían según el valor del exponente $n$.</p>
+            
+            <h4>Características generales:</h4>
+            <ul>
+                <li><strong>Dominio:</strong> Depende del valor de $n$ (generalmente $\mathbb{R}$ para $n$ entero positivo)</li>
+                <li><strong>Continuidad:</strong> Continuas en todo su dominio</li>
+                <li><strong>Derivabilidad:</strong> Derivables en todo su dominio (excepto posiblemente en $x=0$ para ciertos valores de $n$)</li>
+            </ul>
+
+            <h4>Casos según el exponente $n$:</h4>
+            
+            <div class="example">
+                <h4>1. Exponente entero positivo ($n \in \mathbb{Z}^+$)</h4>
+                <p><strong>Características:</strong></p>
+                <ul>
+                    <li>$f(x) = x^n$ donde $n$ es entero positivo</li>
+                    <li>Dominio: $\mathbb{R}$</li>
+                    <li>Si $n$ es par: función par ($f(-x) = f(x)$)</li>
+                    <li>Si $n$ es impar: función impar ($f(-x) = -f(x)$)</li>
+                </ul>
+                
+                <p><strong>Ejemplos:</strong></p>
+                <ul>
+                    <li>$f(x) = x^2$ (parabólica, abre hacia arriba)</li>
+                    <li>$f(x) = x^3$ (cúbica, crece más rápido que la cuadrática)</li>
+                    <li>$f(x) = x^4$ (forma de "W" más pronunciada)</li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <h4>2. Exponente entero negativo ($n \in \mathbb{Z}^-$)</h4>
+                <p><strong>Características:</strong></p>
+                <ul>
+                    <li>$f(x) = x^n = \frac{1}{x^{-n}}$ donde $n$ es entero positivo</li>
+                    <li>Dominio: $\mathbb{R} - \{0\}$</li>
+                    <li>Asíntotas vertical en $x=0$ y horizontal en $y=0$</li>
+                </ul>
+                
+                <p><strong>Ejemplos:</strong></p>
+                <ul>
+                    <li>$f(x) = x^{-1} = \frac{1}{x}$ (hipérbola rectangular)</li>
+                    <li>$f(x) = x^{-2} = \frac{1}{x^2}$ (siempre positiva, dos ramas)</li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <h4>3. Exponente fraccionario ($n \in \mathbb{Q}$)</h4>
+                <p><strong>Características:</strong></p>
+                <ul>
+                    <li>$f(x) = x^{p/q} = \sqrt[q]{x^p}$ donde $p,q$ son enteros coprimos</li>
+                    <li>Dominio: Depende de $p$ y $q$</li>
+                    <li>Para $q$ impar: dominio es $\mathbb{R}$</li>
+                    <li>Para $q$ par: dominio es $[0, \infty)$</li>
+                </ul>
+                
+                <p><strong>Ejemplos:</strong></p>
+                <ul>
+                    <li>$f(x) = x^{1/2} = \sqrt{x}$ (raíz cuadrada)</li>
+                    <li>$f(x) = x^{2/3} = \sqrt[3]{x^2}$ (raíz cúbica de $x^2$)</li>
+                </ul>
+            </div>
+            
+            <div class="example">
+                <h4>4. Exponente irracional ($n \in \mathbb{R} - \mathbb{Q}$)</h4>
+                <p><strong>Características:</strong></p>
+                <ul>
+                    <li>$f(x) = x^n$ donde $n$ es irracional</li>
+                    <li>Dominio: $x > 0$ (generalmente)</li>
+                    <li>Comportamiento similar a las exponenciales</li>
+                </ul>
+                
+                <p><strong>Ejemplos:</strong></p>
+                <ul>
+                    <li>$f(x) = x^{\sqrt{2}}$</li>
+                    <li>$f(x) = x^{\pi}$</li>
+                </ul>
+            </div>
+            
+            <h4>Propiedades importantes:</h4>
+            <ol>
+                <li><strong>Derivada:</strong> $\frac{d}{dx}x^n = nx^{n-1}$</li>
+                <li><strong>Integral indefinida:</strong> $\int x^n dx = \frac{x^{n+1}}{n+1} + C$ (para $n \neq -1$)</li>
+                <li><strong>Límites en el infinito:</strong>
+                    <ul>
+                        <li>Si $n > 0$: $\lim_{x \to \infty} x^n = \infty$</li>
+                        <li>Si $n < 0$: $\lim_{x \to \infty} x^n = 0$</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <div class="exercise">
+                <h3>Ejercicio 1:</h3>
+                <p>Para cada función, determina su dominio, simetrías y comportamiento en los extremos:</p>
+                <ol>
+                    <li>$f(x) = x^5$</li>
+                    <li>$g(x) = x^{-3}$</li>
+                    <li>$h(x) = x^{3/2}$</li>
+                </ol>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio 2:</h3>
+                <p>Demuestra que la derivada de $f(x) = x^n$ es $f'(x) = nx^{n-1}$ para $n$ entero positivo usando la definición de derivada:</p>
+                <p>$$
+                f'(x) = \lim_{h \to 0} \frac{(x+h)^n - x^n}{h}
+                $$</p>
+                <p><em>Sugerencia:</em> Usa el binomio de Newton para desarrollar $(x+h)^n$.</p>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio 3:</h3>
+                <p>Grafica en un mismo sistema de coordenadas las funciones $f(x) = x$, $g(x) = x^2$, $h(x) = x^3$ y $k(x) = x^4$ para $x \in [-2, 2]$. Describe las diferencias en su comportamiento.</p>
+            </div>
+
+            \n</div>\n            \n            <div class="nav-buttons">\n                <a href="masterclass07_04.html" class="nav-btn">← Anterior</a>\n                <a href="masterclass07_06.html" class="nav-btn">Siguiente →</a>\n            </div>\n        </main>\n    </div>\n</body>\n</html>

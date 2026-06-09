@@ -20,71 +20,149 @@
         };
     </script>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg-light: #f9f9f9;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #333;
+            background-color: #fff;
         }
-        .container {
-            max-width: 1200px;
+        .layout {
+            display: flex;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
+        }
+        .sidebar {
+            width: 320px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1200px;
         }
         h1, h2, h3 {
-            color: #2c3e50;
+            color: var(--primary);
+            scroll-margin-top: 30px;
         }
         .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .example {
             background-color: #e8f4f8;
-            padding: 15px;
-            border-left: 4px solid #3498db;
-            margin: 15px 0;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
         }
         .exercise {
             background-color: #e8f8f0;
-            padding: 15px;
+            padding: 20px;
             border-left: 4px solid #2ecc71;
-            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
         }
-        .toc {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 30px;
+        .toc h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
         }
         .toc a {
-            color: #2980b9;
+            color: var(--primary);
             text-decoration: none;
+            display: block;
+            padding: 6px 0;
+            transition: color 0.3s;
         }
         .toc a:hover {
-            text-decoration: underline;
+            color: var(--accent);
+            font-weight: bold;
         }
         .toc ul {
             list-style-type: none;
-            padding-left: 20px;
+            padding-left: 0;
+        }
+        .toc ul ul {
+            padding-left: 15px;
+            font-size: 0.9em;
+            border-left: 2px solid #eaeaea;
+            margin-left: 5px;
         }
         .toc li {
-            margin: 8px 0;
+            margin: 5px 0;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+        #back-to-top:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+            .main-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cálculo Diferencial: Relaciones y Funciones</h1>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc">
+                <h2>Índice de Contenido</h2>
+                <ul id="indice">
+                    <!-- Los elementos del índice se generarán dinámicamente con JavaScript -->
+                </ul>
+            </div>
+        </aside>
         
-        <div class="toc">
-            <h2>Índice</h2>
-            <ul id="indice">
-                <!-- Los elementos del índice se generarán dinámicamente con JavaScript -->
-            </ul>
-        </div>
+        <main class="main-content">
+            <h1>Cálculo Diferencial: Relaciones y Funciones</h1>
 
         <div class="section" id="relaciones">
             <h2>1. Relaciones</h2>
@@ -2413,26 +2491,65 @@
                 <li>Grafica la función f(x) = |x - 2| + 1 y describe sus características principales.</li>
             </ol>
         </div>
+        </main>
     </div>
+
+    <button id="back-to-top" title="Volver arriba">
+        <i class="fas fa-arrow-up"></i> ↑
+    </button>
 
     <script>
         // Script para generar automáticamente el índice
         document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('h2');
+            const sections = document.querySelectorAll('.section');
             const indice = document.getElementById('indice');
             
             sections.forEach(section => {
-                const id = section.parentElement.id;
-                if (id) {
+                const id = section.id;
+                const h2 = section.querySelector('h2');
+                
+                if (id && h2) {
                     const li = document.createElement('li');
                     const a = document.createElement('a');
                     a.href = `#${id}`;
-                    a.textContent = section.textContent;
+                    a.textContent = h2.textContent;
                     li.appendChild(a);
+                    
+                    // Agregar subíndice para los h3
+                    const h3s = section.querySelectorAll('h3');
+                    if (h3s.length > 0) {
+                        const ulSub = document.createElement('ul');
+                        h3s.forEach((h3, index) => {
+                            // Asignar ID al h3 si no tiene para poder enlazarlo
+                            if (!h3.id) h3.id = `${id}-sub-${index}`;
+                            
+                            const liSub = document.createElement('li');
+                            const aSub = document.createElement('a');
+                            aSub.href = `#${h3.id}`;
+                            aSub.textContent = h3.textContent;
+                            liSub.appendChild(aSub);
+                            ulSub.appendChild(liSub);
+                        });
+                        li.appendChild(ulSub);
+                    }
+                    
                     indice.appendChild(li);
                 }
             });
+
+            // Lógica del botón Back to Top
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
-    </script>
-</body>
+    </script></body>
 </html>

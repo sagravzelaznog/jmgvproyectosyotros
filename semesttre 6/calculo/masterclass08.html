@@ -1,176 +1,212 @@
-<!DOCTYPE html>\n<html lang="es">\n\n<body>\n    <div class="layout">\n        <aside class="sidebar">\n            <h2>Módulos</h2>\n            <a href="index.html">🏠 Volver al Hub</a>\n<a href="masterclass01.html" >M1: Relaciones</a>\n<a href="masterclass02.html" >M2: Funciones</a>\n<a href="masterclass03.html" >M3: Notación</a>\n<a href="masterclass04.html" >M4: Clasificación</a>\n<a href="masterclass05.html" >M5: Valor</a>\n<a href="masterclass06.html" >M6: Dominio y Rango</a>\n<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>\n<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>\n<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>\n<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>\n<a href="masterclass07_05.html" >M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>\n<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>\n<a href="masterclass07_07.html" >M7.7: 7.7 Función Raíz Cuadrada</a>\n<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>\n<a href="masterclass07_09.html" >M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>\n<a href="masterclass07_10.html" >M7.10: 7.10 Función Característica (Función Indicadora)</a>\n<a href="masterclass08.html" class="active">M8: Gráficas y Transform.</a>\n<a href="masterclass09.html" >M9: Desplazamientos</a>\n<a href="masterclass10.html" >M10: Alargamientos</a>\n<a href="masterclass11.html" >M11: Reflexiones</a>\n<a href="masterclass12.html" >M12: Crecientes</a>\n<a href="actividades.html" >Recursos Prácticos</a>\n<a href="tarea.html" >Evaluación Final</a>\n\n        </aside>\n        <main class="main-content">\n            \n            <div class="section" id="graficas-transformaciones">
-            <h2>Masterclass 8: Gráficas de Funciones y sus Transformaciones</h2>
-            <p>Las transformaciones de funciones nos permiten modificar gráficas conocidas para obtener nuevas funciones. Comprender estas transformaciones es esencial para graficar funciones complejas a partir de otras más simples.</p>
-            
-            <h3>8.1 Transformaciones Básicas</h3>
-            <p>Sea $y = f(x)$ una función conocida. Las transformaciones básicas son:</p>
-            
-            <table class="table">
-                <tr>
-                    <th>Transformación</th>
-                    <th>Ecuación</th>
-                    <th>Efecto en la gráfica</th>
-                </tr>
-                <tr>
-                    <td>Traslación vertical</td>
-                    <td>$y = f(x) + k$</td>
-                    <td>Desplaza la gráfica $k$ unidades hacia arriba ($k>0$) o abajo ($k<0$)</td>
-                </tr>
-                <tr>
-                    <td>Traslación horizontal</td>
-                    <td>$y = f(x - h)$</td>
-                    <td>Desplaza la gráfica $h$ unidades a la derecha ($h>0$) o izquierda ($h<0$)</td>
-                </tr>
-                <tr>
-                    <td>Reflexión en el eje x</td>
-                    <td>$y = -f(x)$</td>
-                    <td>Invierte la gráfica verticalmente</td>
-                </tr>
-                <tr>
-                    <td>Reflexión en el eje y</td>
-                    <td>$y = f(-x)$</td>
-                    <td>Invierte la gráfica horizontalmente</td>
-                </tr>
-                <tr>
-                    <td>Escalamiento vertical</td>
-                    <td>$y = a\cdot f(x)$</td>
-                    <td>Estira ($a>1$) o contrae ($0<a<1$) verticalmente</td>
-                </tr>
-                <tr>
-                    <td>Escalamiento horizontal</td>
-                    <td>$y = f(b\cdot x)$</td>
-                    <td>Contrae ($b>1$) o estira ($0<b<1$) horizontalmente</td>
-                </tr>
-            </table>
-            
-            <div class="example">
-                <h4>Ejemplo 1: Transformaciones de $f(x) = x^2$</h4>
-                <p>Analicemos la función $g(x) = -2(x-3)^2 + 1$:</p>
-                <ol>
-                    <li>Traslación horizontal: $(x-3)$ desplaza la gráfica 3 unidades a la derecha</li>
-                    <li>Reflexión vertical: El signo negativo invierte la parábola</li>
-                    <li>Escalamiento vertical: El factor 2 estira la gráfica verticalmente</li>
-                    <li>Traslación vertical: El +1 sube la gráfica 1 unidad</li>
-                </ol>
-                <p><strong>Vértice:</strong> $(3, 1)$</p>
-                <p><strong>Eje de simetría:</strong> $x = 3$</p>
-            </div>
-            
-            <h3>8.2 Transformaciones de Funciones Valor Absoluto</h3>
-            <p>La función valor absoluto básica $f(x) = |x|$ tiene forma de V con vértice en $(0,0)$. Su forma general es:</p>
-            <p>$$
-            f(x) = a|b(x - h)| + k
-            $$
-            donde:
-            <ul>
-                <li>$(h, k)$ es el vértice</li>
-                <li>$a$ determina la abertura y orientación</li>
-                <li>$b$ afecta el ancho de la V</li>
-            </ul>
-            </p>
-            
-            <div class="exercise">
-                <h3>Ejercicio 1:</h3>
-                <p>Dada la función $f(x) = |x|$, determina las transformaciones necesarias para obtener:</p>
-                <ol>
-                    <li>$g(x) = |x + 2| - 3$</li>
-                    <li>$h(x) = -2|x - 1| + 4$</li>
-                    <li>$j(x) = \frac{1}{2}|3x|$</li>
-                </ol>
-            </div>
-            
-            <h3>8.3 Transformaciones de Funciones Racionales</h3>
-            <p>Para funciones racionales de la forma $f(x) = \frac{a}{x - h} + k$:</p>
-            <ul>
-                <li>Asíntota vertical: $x = h$</li>
-                <li>Asíntota horizontal: $y = k$</li>
-                <li>El parámetro $a$ afecta el estiramiento y la orientación</li>
-            </ul>
-            
-            <div class="example">
-                <h4>Ejemplo 2: Transformación de $f(x) = \frac{1}{x}$</h4>
-                <p>Sea $g(x) = \frac{2}{x + 3} - 1$:</p>
-                <ol>
-                    <li>Traslación horizontal: $x + 3$ desplaza la asíntota vertical a $x = -3$</li>
-                    <li>Escalamiento vertical: El 2 estira la gráfica</li>
-                    <li>Traslación vertical: El -1 baja la gráfica 1 unidad</li>
-                </ol>
-                <p><strong>Asíntotas:</strong> $x = -3$, $y = -1$</p>
-            </div>
-            
-            <h3>8.4 Transformaciones de Funciones Exponenciales</h3>
-            <p>La forma general es $f(x) = a\cdot b^{c(x - h)} + k$ donde:</p>
-            <ul>
-                <li>$(h, k)$ es la traslación del punto de referencia</li>
-                <li>$a$ es el estiramiento/reflexión vertical</li>
-                <li>$b$ es la base de la función exponencial</li>
-                <li>$c$ afecta la tasa de crecimiento/decaimiento</li>
-            </ul>
-            
-            <div class="exercise">
-                <h3>Ejercicio 2:</h3>
-                <p>Para la función $f(x) = 2^x$:</p>
-                <ol>
-                    <li>Describe las transformaciones necesarias para obtener $g(x) = 3\cdot 2^{x-1} - 2$</li>
-                    <li>Encuentra la asíntota horizontal de $g(x)$</li>
-                    <li>Grafica $f(x)$ y $g(x)$ en el mismo plano</li>
-                </ol>
-            </div>
-            
-            <h3>8.5 Combinación de Transformaciones</h3>
-            <p>Al aplicar múltiples transformaciones, sigue este orden recomendado:</p>
-            <ol>
-                <li>Reflexiones</li>
-                <li>Escalamientos (estiramientos/compresiones)</li>
-                <li>Traslaciones</li>
-            </ol>
-            
-            <div class="example">
-                <h4>Ejemplo 3: Transformaciones múltiples</h4>
-                <p>Sea $f(x) = \sqrt{x}$. Aplicar las siguientes transformaciones para obtener $g(x)$:</p>
-                <ol>
-                    <li>Reflejar sobre el eje y: $f(-x) = \sqrt{-x}$</li>
-                    <li>Desplazar 2 unidades a la derecha: $f(-(x-2)) = \sqrt{-(x-2)}$</li>
-                    <li>Estirar verticalmente por un factor de 3: $3\sqrt{-(x-2)}$</li>
-                    <li>Bajar 1 unidad: $g(x) = 3\sqrt{-(x-2)} - 1$</li>
-                </ol>
-                <p><strong>Dominio:</strong> $(-\infty, 2]$</p>
-                <p><strong>Rango:</strong> $[-1, \infty)$</p>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 3:</h3>
-                <p>Dada la función $f(x) = x^3$, encuentra la ecuación de la función $g(x)$ que resulta de aplicar las siguientes transformaciones en orden:</p>
-                <ol>
-                    <li>Desplazar 1 unidad a la izquierda</li>
-                    <li>Reflejar sobre el eje x</li>
-                    <li>Estirar verticalmente por un factor de 2</li>
-                    <li>Bajar 3 unidades</li>
-                </ol>
-                <p>Luego, grafica tanto $f(x)$ como $g(x)$ en el mismo plano coordenado.</p>
-            </div>
-            
-            <h3>8.6 Transformaciones de Funciones Periódicas</h3>
-            <p>Para funciones como seno y coseno, la forma general es:</p>
-            <p>$$
-            f(x) = A\sin\left(\frac{2\pi}{B}(x - C)\right) + D
-            $$
-            donde:
-            <ul>
-                <li>$|A|$ es la amplitud (estira/contrae verticalmente)</li>
-                <li>$B$ es el período ($T = \frac{2\pi}{|B|}$)</li>
-                <li>$C$ es el desplazamiento de fase (horizontal)</li>
-                <li>$D$ es el desplazamiento vertical</li>
-            </ul>
-            </p>
-            
-            <div class="exercise">
-                <h3>Ejercicio 4:</h3>
-                <p>Dada la función $f(x) = \cos(x)$:</p>
-                <ol>
-                    <li>Encuentra la ecuación de una función coseno con amplitud 3, período $\pi$, desplazada $\frac{\pi}{4}$ a la derecha y 2 unidades hacia arriba.</li>
-                    <li>¿Cuál es el rango de la función transformada?</li>
-                    <li>Grafica tanto la función original como la transformada en el intervalo $[-\pi, 2\pi]$.</li>
-                </ol>
-            </div>
-        </div>\n            \n\n            \n            <div class="nav-buttons">\n                <a href="masterclass07_10.html" class="nav-btn">← Anterior</a>\n                <a href="masterclass09.html" class="nav-btn">Siguiente →</a>\n            </div>\n        </main>\n    </div>\n</body>\n</html>
+<!DOCTYPE html>\n<html lang="es">\n<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTERCLASS08 - Cálculo Diferencial</title>
+    <link rel="icon" href="data:;base64,=">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 900;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .math-block {
+            background-color: rgba(0,0,0,0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .math-block { background-color: rgba(255,255,255,0.03); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>\n<body

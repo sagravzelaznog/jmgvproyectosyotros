@@ -1,127 +1,212 @@
-<!DOCTYPE html>\n<html lang="es">\n\n<body>\n    <div class="layout">\n        <aside class="sidebar">\n            <h2>Módulos</h2>\n            <a href="index.html">🏠 Volver al Hub</a>\n<a href="masterclass01.html" >M1: Relaciones</a>\n<a href="masterclass02.html" >M2: Funciones</a>\n<a href="masterclass03.html" >M3: Notación</a>\n<a href="masterclass04.html" >M4: Clasificación</a>\n<a href="masterclass05.html" >M5: Valor</a>\n<a href="masterclass06.html" >M6: Dominio y Rango</a>\n<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>\n<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>\n<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>\n<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>\n<a href="masterclass07_05.html" >M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>\n<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>\n<a href="masterclass07_07.html" class="active">M7.7: 7.7 Función Raíz Cuadrada</a>\n<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>\n<a href="masterclass07_09.html" >M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>\n<a href="masterclass07_10.html" >M7.10: 7.10 Función Característica (Función Indicadora)</a>\n<a href="masterclass08.html" >M8: Gráficas y Transform.</a>\n<a href="masterclass09.html" >M9: Desplazamientos</a>\n<a href="masterclass10.html" >M10: Alargamientos</a>\n<a href="masterclass11.html" >M11: Reflexiones</a>\n<a href="masterclass12.html" >M12: Crecientes</a>\n<a href="actividades.html" >Recursos Prácticos</a>\n<a href="tarea.html" >Evaluación Final</a>\n\n        </aside>\n        <main class="main-content">\n            <div class="section">\n<h2>7.7 Función Raíz Cuadrada</h2>\n<h3>7.7 Función Raíz Cuadrada</h3>
-            <p>La función raíz cuadrada es una función de la forma:</p>
-            <p>$$
-            f(x) = \sqrt{x}
-            $$
-            donde $x \geq 0$.</p>
-            
-            <h4>Características principales:</h4>
-            <ul>
-                <li><strong>Dominio:</strong> $[0, \infty)$</li>
-                <li><strong>Rango:</strong> $[0, \infty)$</li>
-                <li><strong>Intersecciones:</strong> $(0,0)$</li>
-                <li><strong>Monotonía:</strong> Estrictamente creciente en todo su dominio</li>
-                <li><strong>Concavidad:</strong> Cóncava hacia abajo</li>
-                <li><strong>Derivada:</strong> $f'(x) = \frac{1}{2\sqrt{x}}$ para $x > 0$</li>
-            </ul>
-            
-            <h4>Forma general:</h4>
-            <p>$$
-            f(x) = a\sqrt{b(x - h)} + k
-            $$
-            donde:
-            <ul>
-                <li>$a$: Estiramiento/compresión vertical y reflexión</li>
-                <li>$b$: Estiramiento/compresión horizontal y reflexión</li>
-                <li>$(h, k)$: Traslación del punto inicial</li>
-            </ul>
-            </p>
-            
-            <div class="example">
-                <h4>Ejemplo 1: Análisis de $f(x) = 2\sqrt{x - 1} + 3$</h4>
-                
-                <h5>Paso 1: Identificar transformaciones</h5>
-                <ul>
-                    <li>Desplazamiento horizontal: 1 unidad a la derecha ($h=1$)</li>
-                    <li>Estiramiento vertical: factor 2 ($a=2$)</li>
-                    <li>Desplazamiento vertical: 3 unidades hacia arriba ($k=3$)</li>
-                </ul>
-                
-                <h5>Paso 2: Dominio</h5>
-                <p>$
-                x - 1 \geq 0 \\
-                x \geq 1
-                $
-                <strong>Dominio:</strong> $[1, \infty)$</p>
-                
-                <h5>Paso 3: Rango</h5>
-                <p>Como $\sqrt{x-1} \geq 0$, entonces:
-                $
-                2\sqrt{x-1} \geq 0 \\
-                2\sqrt{x-1} + 3 \geq 3
-                $
-                <strong>Rango:</strong> $[3, \infty)$</p>
-                
-                <h5>Paso 4: Puntos clave</h5>
-                <ul>
-                    <li>Punto inicial: $(1, 3)$</li>
-                    <li>Intersección con el eje Y: No tiene (fuera del dominio)</li>
-                    <li>Intersección con el eje X: $f(x) = 0 \Rightarrow x = \frac{13}{4}$</li>
-                </ul>
-            </div>
-            
-            <h4>Propiedades importantes:</h4>
-            <ol>
-                <li><strong>Inversa:</strong> La función raíz cuadrada es la inversa de $f(x) = x^2$ para $x \geq 0$</li>
-                <li><strong>Límites:</strong>
-                    <ul>
-                        <li>$\lim_{x \to 0^+} \sqrt{x} = 0$</li>
-                        <li>$\lim_{x \to \infty} \sqrt{x} = \infty$</li>
-                    </ul>
-                </li>
-                <li><strong>Derivada:</strong> $\frac{d}{dx}\sqrt{x} = \frac{1}{2\sqrt{x}}$</li>
-                <li><strong>Integral indefinida:</strong> $\int \sqrt{x} \, dx = \frac{2}{3}x^{3/2} + C$</li>
-            </ol>
-            
-            <h4>Aplicaciones prácticas:</h4>
-            <div class="example">
-                <h5>Ejemplo 2: Aplicación en física</h5>
-                <p>La velocidad $v$ de un objeto en caída libre después de caer una distancia $d$ está dada por:</p>
-                <p>$$
-                v = \sqrt{2gd}
-                $$
-                donde $g$ es la aceleración debida a la gravedad ($9.8\,m/s^2$).</p>
-                
-                <p><strong>a) ¿Cuál es la velocidad después de caer 45 metros?</strong></p>
-                <p>$
-                v = \sqrt{2 \times 9.8 \times 45} \\
-                v \approx \sqrt{882} \\
-                v \approx 29.7\,m/s
-                $</p>
-                
-                <p><strong>b) ¿Qué distancia debe caer para alcanzar 50 m/s?</strong></p>
-                <p>$
-                50 = \sqrt{2 \times 9.8 \times d} \\
-                2500 = 19.6d \\
-                d \approx 127.55\,m
-                $</p>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 1:</h3>
-                <p>Para cada función, determina:</p>
-                <ol>
-                    <li>Dominio y rango</li>
-                    <li>Intersecciones con los ejes</li>
-                    <li>Transformaciones aplicadas a $f(x) = \sqrt{x}$</li>
-                </ol>
-                <p>a) $f(x) = \sqrt{x + 4}$</p>
-                <p>b) $g(x) = -2\sqrt{x} + 1$</p>
-                <p>c) $h(x) = \sqrt{4 - x}$</p>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 2:</h3>
-                <p>Resuelve las siguientes ecuaciones con raíces cuadradas:</p>
-                <p>a) $\sqrt{2x + 3} = 5$</p>
-                <p>b) $x - \sqrt{x + 6} = 0$</p>
-                <p>c) $\sqrt{x + 5} - \sqrt{x - 3} = 2$</p>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 3:</h3>
-                <p>Un agricultor tiene 100 metros de cerca para construir un corral rectangular adyacente a un río (por lo que solo necesita cercar tres lados). Expresa el área del corral como función del ancho y encuentra las dimensiones que maximizan el área.</p>
-                <p><em>Sugerencia:</em> Si $x$ es el ancho, el largo será $100 - 2x$.</p>
-            </div>
+<!DOCTYPE html>\n<html lang="es">\n<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTERCLASS07_07 - Cálculo Diferencial</title>
+    <link rel="icon" href="data:;base64,=">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
 
-            \n</div>\n            \n            <div class="nav-buttons">\n                <a href="masterclass07_06.html" class="nav-btn">← Anterior</a>\n                <a href="masterclass07_08.html" class="nav-btn">Siguiente →</a>\n            </div>\n        </main>\n    </div>\n</body>\n</html>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 900;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .math-block {
+            background-color: rgba(0,0,0,0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .math-block { background-color: rgba(255,255,255,0.03); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>\n<body

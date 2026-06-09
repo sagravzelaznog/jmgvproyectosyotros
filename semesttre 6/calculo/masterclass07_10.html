@@ -1,118 +1,212 @@
-<!DOCTYPE html>\n<html lang="es">\n\n<body>\n    <div class="layout">\n        <aside class="sidebar">\n            <h2>Módulos</h2>\n            <a href="index.html">🏠 Volver al Hub</a>\n<a href="masterclass01.html" >M1: Relaciones</a>\n<a href="masterclass02.html" >M2: Funciones</a>\n<a href="masterclass03.html" >M3: Notación</a>\n<a href="masterclass04.html" >M4: Clasificación</a>\n<a href="masterclass05.html" >M5: Valor</a>\n<a href="masterclass06.html" >M6: Dominio y Rango</a>\n<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>\n<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>\n<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>\n<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>\n<a href="masterclass07_05.html" >M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>\n<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>\n<a href="masterclass07_07.html" >M7.7: 7.7 Función Raíz Cuadrada</a>\n<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>\n<a href="masterclass07_09.html" >M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>\n<a href="masterclass07_10.html" class="active">M7.10: 7.10 Función Característica (Función Indicadora)</a>\n<a href="masterclass08.html" >M8: Gráficas y Transform.</a>\n<a href="masterclass09.html" >M9: Desplazamientos</a>\n<a href="masterclass10.html" >M10: Alargamientos</a>\n<a href="masterclass11.html" >M11: Reflexiones</a>\n<a href="masterclass12.html" >M12: Crecientes</a>\n<a href="actividades.html" >Recursos Prácticos</a>\n<a href="tarea.html" >Evaluación Final</a>\n\n        </aside>\n        <main class="main-content">\n            <div class="section">\n<h2>7.10 Función Característica (Función Indicadora)</h2>\n<h3>7.10 Función Característica (Función Indicadora)</h3>
-            <p>La función característica (también llamada función indicadora) de un subconjunto $A$ de un conjunto universal $X$ es una función que indica la pertenencia de un elemento a dicho subconjunto. Se denota por $\mathbf{1}_A$ o $\chi_A$ y se define como:</p>
-            
-            <p>$$
-            \mathbf{1}_A(x) = 
-            \begin{cases} 
-            1 & \text{si } x \in A \\
-            0 & \text{si } x \notin A
-            \end{cases}
-            $$</p>
-            
-            <h4>Características principales:</h4>
-            <ul>
-                <li><strong>Dominio:</strong> El conjunto universal $X$ que contiene a $A$</li>
-                <li><strong>Rango:</strong> $\{0, 1\}$ (conjunto binario)</li>
-                <li><strong>Inyectividad:</strong> No es inyectiva a menos que $A$ sea $\emptyset$ o $X$</li>
-                <li><strong>Sobreyectividad:</strong> Depende del codominio considerado</li>
-                <li><strong>Discontinuidades:</strong> Presenta discontinuidades en la frontera de $A$</li>
-            </ul>
-            
-            <h4>Propiedades algebraicas:</h4>
-            <ol>
-                <li>$\mathbf{1}_{A \cap B} = \mathbf{1}_A \cdot \mathbf{1}_B$</li>
-                <li>$\mathbf{1}_{A \cup B} = \mathbf{1}_A + \mathbf{1}_B - \mathbf{1}_{A \cap B}$</li>
-                <li>$\mathbf{1}_{A^c} = 1 - \mathbf{1}_A$ (donde $A^c$ es el complemento de $A$)</li>
-                <li>$\mathbf{1}_{A \Delta B} = |\mathbf{1}_A - \mathbf{1}_B|$ (diferencia simétrica)</li>
-                <li>$\mathbf{1}_{A \times B}(x,y) = \mathbf{1}_A(x) \cdot \mathbf{1}_B(y)$</li>
-            </ol>
-            
-            <div class="example">
-                <h4>Ejemplo 1: Función característica de un intervalo</h4>
-                <p>Sea $A = [2, 5) \subset \mathbb{R}$. La función característica de $A$ es:</p>
-                <p>$$
-                \mathbf{1}_{[2,5)}(x) = 
-                \begin{cases}
-                1 & \text{si } 2 \leq x < 5 \\
-                0 & \text{en otro caso}
-                \end{cases}
-                $$</p>
-                
-                <p><strong>Evaluaciones:</strong></p>
-                <ul>
-                    <li>$\mathbf{1}_{[2,5)}(3) = 1$ porque $3 \in [2,5)$</li>
-                    <li>$\mathbf{1}_{[2,5)}(1) = 0$ porque $1 \notin [2,5)$</li>
-                    <li>$\mathbf{1}_{[2,5)}(5) = 0$ porque $5 \notin [2,5)$ (el intervalo es cerrado en 2 y abierto en 5)</li>
-                </ul>
-            </div>
-            
-            <h4>Aplicaciones en probabilidad:</h4>
-            <p>En teoría de probabilidad, la función característica de un evento $A$ (denotada a veces como $I_A$) es una variable aleatoria que toma el valor 1 si $A$ ocurre y 0 en caso contrario.</p>
-            
-            <div class="example">
-                <h5>Ejemplo 2: Lanzamiento de un dado</h5>
-                <p>Sea $\Omega = \{1,2,3,4,5,6\}$ el espacio muestral del lanzamiento de un dado justo. Definimos el evento $A$: "sale un número par".</p>
-                <p>$$
-                A = \{2,4,6\}
-                $$
-                La función característica de $A$ es:
-                $$
-                \mathbf{1}_A(\omega) = 
-                \begin{cases}
-                1 & \text{si } \omega \in \{2,4,6\} \\
-                0 & \text{en otro caso}
-                \end{cases}
-                $$</p>
-                
-                <p>La probabilidad del evento $A$ puede expresarse como la esperanza de su función característica:
-                $$
-                P(A) = E[\mathbf{1}_A] = \frac{1}{2}
-                $$
-                </p>
-            </div>
-            
-            <h4>Relación con la función de Heaviside:</h4>
-            <p>La función escalón unitario o función de Heaviside $H(x)$ puede verse como una generalización de la función característica para intervalos de la forma $[a, \infty)$:</p>
-            <p>$$
-            H(x - a) = \mathbf{1}_{[a,\infty)}(x)
-            $$</p>
-            
-            <div class="exercise">
-                <h3>Ejercicio 1:</h3>
-                <p>Para los siguientes conjuntos, escribe su función característica y evalúala en los puntos dados:</p>
-                <ol>
-                    <li>$A = \{1, 3, 5, 7\} \subset \mathbb{Z}$. Evalúa en $x = 3, 4, 8$.</li>
-                    <li>$B = (-\infty, 0) \subset \mathbb{R}$. Evalúa en $x = -2, 0, 5$.</li>
-                    <li>$C = \{x \in \mathbb{R} \mid x^2 < 4\}$. Evalúa en $x = -3, 0, 1.5, 2$.</li>
-                </ol>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 2:</h3>
-                <p>Demuestra las siguientes propiedades de las funciones características:</p>
-                <ol>
-                    <li>$\mathbf{1}_{A \cap B} = \mathbf{1}_A \cdot \mathbf{1}_B$</li>
-                    <li>$\mathbf{1}_{A \cup B} = \mathbf{1}_A + \mathbf{1}_B - \mathbf{1}_A \cdot \mathbf{1}_B$</li>
-                    <li>$\mathbf{1}_{A^c} = 1 - \mathbf{1}_A$</li>
-                </ol>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 3:</h3>
-                <p>En un supermercado, se ofrece un descuento especial a los clientes que compren más de $500 pero menos de $1000. Define una función característica que indique si un monto de compra $x$ califica para el descuento.</p>
-                <ol>
-                    <li>Escribe la expresión matemática de la función característica.</li>
-                    <li>Si en un día las compras fueron de $320, $780, $1200 y $450, ¿cuáles califican para el descuento?</li>
-                    <li>¿Cómo modificarías la función si se agregara la condición de que los clientes con membresía premium también obtienen descuento en compras de exactamente $1000?</li>
-                </ol>
-            </div>
-            
-            <h4>Función característica en series de Fourier:</h4>
-            <p>Las funciones características son fundamentales en el análisis de Fourier, donde permiten representar señales discontinuas. Por ejemplo, la función pulso rectangular puede expresarse como la diferencia de dos funciones escalón:</p>
-            <p>$$
-            \Pi(t) = H\left(t + \frac{1}{2}\right) - H\left(t - \frac{1}{2}\right)
-            $$
-            donde $H(t)$ es la función escalón unitario.</p>
-        </div>
-            
-            \n</div>\n            \n            <div class="nav-buttons">\n                <a href="masterclass07_09.html" class="nav-btn">← Anterior</a>\n                <a href="masterclass08.html" class="nav-btn">Siguiente →</a>\n            </div>\n        </main>\n    </div>\n</body>\n</html>
+<!DOCTYPE html>\n<html lang="es">\n<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTERCLASS07_10 - Cálculo Diferencial</title>
+    <link rel="icon" href="data:;base64,=">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 900;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .math-block {
+            background-color: rgba(0,0,0,0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .math-block { background-color: rgba(255,255,255,0.03); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>\n<body

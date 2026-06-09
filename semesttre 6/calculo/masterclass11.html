@@ -1,152 +1,212 @@
-<!DOCTYPE html>\n<html lang="es">\n\n<body>\n    <div class="layout">\n        <aside class="sidebar">\n            <h2>Módulos</h2>\n            <a href="index.html">🏠 Volver al Hub</a>\n<a href="masterclass01.html" >M1: Relaciones</a>\n<a href="masterclass02.html" >M2: Funciones</a>\n<a href="masterclass03.html" >M3: Notación</a>\n<a href="masterclass04.html" >M4: Clasificación</a>\n<a href="masterclass05.html" >M5: Valor</a>\n<a href="masterclass06.html" >M6: Dominio y Rango</a>\n<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>\n<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>\n<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>\n<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>\n<a href="masterclass07_05.html" >M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>\n<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>\n<a href="masterclass07_07.html" >M7.7: 7.7 Función Raíz Cuadrada</a>\n<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>\n<a href="masterclass07_09.html" >M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>\n<a href="masterclass07_10.html" >M7.10: 7.10 Función Característica (Función Indicadora)</a>\n<a href="masterclass08.html" >M8: Gráficas y Transform.</a>\n<a href="masterclass09.html" >M9: Desplazamientos</a>\n<a href="masterclass10.html" >M10: Alargamientos</a>\n<a href="masterclass11.html" class="active">M11: Reflexiones</a>\n<a href="masterclass12.html" >M12: Crecientes</a>\n<a href="actividades.html" >Recursos Prácticos</a>\n<a href="tarea.html" >Evaluación Final</a>\n\n        </aside>\n        <main class="main-content">\n            \n            <div class="section" id="reflexiones">
-            <h2>Masterclass 11: Reflexiones de Funciones</h2>
-            <p>Las reflexiones son transformaciones que producen el efecto de espejo de una gráfica sobre un eje o punto de referencia. Son fundamentales para entender simetrías y relaciones entre funciones.</p>
-            
-            <h3>11.1 Reflexión sobre el Eje X</h3>
-            <p>Una reflexión sobre el eje x invierte verticalmente la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
-            <p>$$
-            y = -f(x)
-            $$
-            Efecto: Todos los puntos $(x, y)$ se transforman en $(x, -y)$.</p>
-            
-            <div class="example">
-                <h5>Ejemplo 1: Reflexión de una parábola</h5>
-                <p>Sea $f(x) = x^2 - 2x + 1$, entonces:</p>
-                <p>$$
-                -f(x) = -x^2 + 2x - 1
-                $$
-                La parábola que abría hacia arriba ahora abre hacia abajo.</p>
-            </div>
-            
-            <h3>11.2 Reflexión sobre el Eje Y</h3>
-            <p>Una reflexión sobre el eje y invierte horizontalmente la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
-            <p>$$
-            y = f(-x)
-            $$
-            Efecto: Todos los puntos $(x, y)$ se transforman en $(-x, y)$.</p>
-            
-            <div class="example">
-                <h5>Ejemplo 2: Reflexión de una función cúbica</h5>
-                <p>Sea $f(x) = x^3 - x$, entonces:</p>
-                <p>$$
-                f(-x) = (-x)^3 - (-x) = -x^3 + x
-                $$
-                La función cambia su comportamiento en los extremos.</p>
-            </div>
-            
-            <h3>11.3 Reflexión sobre el Origen</h3>
-            <p>Una reflexión sobre el origen es equivalente a una rotación de 180° alrededor del origen.</p>
-            
-            <h4>Forma general:</h4>
-            <p>$$
-            y = -f(-x)
-            $$
-            Efecto: Todos los puntos $(x, y)$ se transforman en $(-x, -y)$.</p>
-            
-            <div class="example">
-                <h5>Ejemplo 3: Función impar</h5>
-                <p>Sea $f(x) = x^3$, entonces:</p>
-                <p>$$
-                -f(-x) = -(-x)^3 = x^3 = f(x)
-                $$
-                Las funciones impares son invariantes bajo esta transformación.</p>
-            </div>
-            
-            <h3>11.4 Propiedades de las Reflexiones</h3>
-            <table class="table">
-                <tr>
-                    <th>Tipo de Reflexión</th>
-                    <th>Transformación</th>
-                    <th>Punto Invariante</th>
-                    <th>Efecto en Simetría</th>
-                </tr>
-                <tr>
-                    <td>Sobre eje x</td>
-                    <td>$(x, y) \rightarrow (x, -y)$</td>
-                    <td>Puntos en el eje x</td>
-                    <td>Invierte simetría vertical</td>
-                </tr>
-                <tr>
-                    <td>Sobre eje y</td>
-                    <td>$(x, y) \rightarrow (-x, y)$</td>
-                    <td>Puntos en el eje y</td>
-                    <td>Invierte simetría horizontal</td>
-                </tr>
-                <tr>
-                    <td>Sobre origen</td>
-                    <td>$(x, y) \rightarrow (-x, -y)$</td>
-                    <td>Solo el origen (0,0)</td>
-                    <td>Preserva simetría impar</td>
-                </tr>
-                <tr>
-                    <td>Sobre la recta y = x</td>
-                    <td>$(x, y) \rightarrow (y, x)$</td>
-                    <td>Puntos donde y = x</td>
-                    <td>Obtiene la función inversa</td>
-                </tr>
-            </table>
-            
-            <h3>11.5 Reflexión sobre la Recta y = x</h3>
-            <p>Esta reflexión intercambia las coordenadas x e y, lo que geométricamente corresponde a la función inversa.</p>
-            
-            <h4>Forma general:</h4>
-            <p>$$
-            x = f(y) \quad \text{o equivalentemente} \quad y = f^{-1}(x)
-            $$
-            Efecto: Todos los puntos $(x, y)$ se transforman en $(y, x)$.</p>
-            
-            <div class="example">
-                <h5>Ejemplo 4: Función raíz cuadrada</h5>
-                <p>Sea $f(x) = x^2$ para $x \geq 0$, entonces su inversa es:</p>
-                <p>$$
-                f^{-1}(x) = \sqrt{x}
-                $$
-                La gráfica de $\sqrt{x}$ es la reflexión de $x^2$ sobre la recta $y = x$.</p>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 1: Identificar reflexiones</h3>
-                <p>Para cada par de funciones, indica qué tipo de reflexión transforma f(x) en g(x):</p>
-                <ol>
-                    <li>$f(x) = e^x$ y $g(x) = e^{-x}$</li>
-                    <li>$f(x) = \ln(x)$ y $g(x) = -\ln(x)$</li>
-                    <li>$f(x) = \sin(x)$ y $g(x) = -\sin(-x)$</li>
-                </ol>
-            </div>
-            
-            <div class="exercise">
-                <h3>Ejercicio 2: Aplicaciones de reflexiones</h3>
-                <p>Dada la función $f(x) = \frac{1}{x-2} + 1$:</p>
-                <ol>
-                    <li>Encuentra la ecuación después de reflejarla sobre el eje x.</li>
-                    <li>Luego, refleja el resultado sobre el eje y.</li>
-                    <li>Finalmente, refleja sobre la recta y = x.</li>
-                    <li>Grafica todas las transformaciones.</li>
-                </ol>
-            </div>
-            
-            <h3>11.6 Reflexiones Múltiples</h3>
-            <p>Las reflexiones pueden combinarse con otras transformaciones para obtener efectos más complejos.</p>
-            
-            <h4>Propiedades importantes:</h4>
-            <ul>
-                <li>Dos reflexiones sobre el mismo eje devuelven la función original: $-(-f(x)) = f(x)$</li>
-                <li>Reflejar sobre el eje x y luego sobre el eje y es equivalente a reflejar sobre el origen</li>
-                <li>La composición de reflexiones sobre ejes perpendiculares equivale a una rotación de 180°</li>
-            </ul>
-            
-            <div class="example">
-                <h5>Ejemplo 5: Transformaciones múltiples</h5>
-                <p>Sea $f(x) = \sqrt{x}$. Aplicar en orden:</p>
-                <ol>
-                    <li>Reflexión horizontal: $f(-x) = \sqrt{-x}$</li>
-                    <li>Reflexión vertical: $-\sqrt{-x}$</li>
-                    <li>Reflexión sobre y = x: $x = -\sqrt{-y} \Rightarrow y = -x^2$ para $x \leq 0$</li>
-                </ol>
-                <p>El resultado final es la rama izquierda de una parábola invertida.</p>
-            </div>
-        </div>\n            \n\n            \n            <div class="nav-buttons">\n                <a href="masterclass10.html" class="nav-btn">← Anterior</a>\n                <a href="masterclass12.html" class="nav-btn">Siguiente →</a>\n            </div>\n        </main>\n    </div>\n</body>\n</html>
+<!DOCTYPE html>\n<html lang="es">\n<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTERCLASS11 - Cálculo Diferencial</title>
+    <link rel="icon" href="data:;base64,=">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 900;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .math-block {
+            background-color: rgba(0,0,0,0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .math-block { background-color: rgba(255,255,255,0.03); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>\n<body

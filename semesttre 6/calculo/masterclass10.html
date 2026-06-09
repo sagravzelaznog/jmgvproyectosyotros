@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 10: Alargamientos y Contracciones de Funciones - Cálculo</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+
+        .sidebar h2 {
+            padding: 0 20px;
+            font-size: 1.2em;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .sidebar a.active {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 700;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .section h2 {
+            font-size: 2.2em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: none;
+            margin-bottom: 30px;
+        }
+
+        .example {
+            background-color: rgba(56, 189, 248, 0.05);
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+        }
+
+        .exercise {
+            background-color: rgba(16, 185, 129, 0.05);
+            padding: 20px;
+            border-left: 4px solid #10b981;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .MathJax { color: var(--math-color) !important; }
+
+        @media (max-width: 768px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main-content { padding: 20px; }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Módulos</h2>
+            <a href="index.html">🏠 Volver al Hub</a><a href="masterclass01.html" >M1: Relaciones</a><a href="masterclass02.html" >M2: Funciones</a><a href="masterclass03.html" >M3: Notación de Funciones</a><a href="masterclass04.html" >M4: Clasificación de Func...</a><a href="masterclass05.html" >M5: Valor de una Función</a><a href="masterclass06.html" >M6: Dominio, Contradomini...</a><a href="masterclass07.html" >M7: Tipos de Funciones</a><a href="masterclass08.html" >M8: Gráficas de Funciones...</a><a href="masterclass09.html" >M9: Desplazamientos de Fu...</a><a href="masterclass10.html" class="active">M10: Alargamientos y Cont...</a><a href="masterclass11.html" >M11: Reflexiones de Funci...</a><a href="masterclass12.html" >M12: Funciones Crecientes...</a><a href="actividades.html" >Recursos Prácticos: Activ...</a><a href="tarea.html" >Evaluación: Tarea Final</a>
+        </aside>
+        <main class="main-content">
+            <div class="section" id="alargamientos">
+            <h2>Masterclass 10: Alargamientos y Contracciones de Funciones</h2>
+            <p>Los alargamientos y contracciones son transformaciones que modifican el tamaño de la gráfica de una función sin cambiar su forma general. Estas transformaciones pueden ser verticales u horizontales y son fundamentales para ajustar funciones a diferentes contextos.</p>
+            
+            <h3>10.1 Alargamientos y Contracciones Verticales</h3>
+            <p>Estas transformaciones modifican la altura de la gráfica de la función.</p>
+            
+            <h4>Forma general:</h4>
+            <p>$$
+            y = a \cdot f(x)
+            $$
+            donde:
+            <ul>
+                <li>Si $|a| > 1$: Estiramiento vertical por un factor de $a$</li>
+                <li>Si $0 < |a| < 1$: Contracción vertical por un factor de $1/a$</li>
+                <li>Si $a < 0$: Inversión vertical (reflexión sobre el eje x) además del escalamiento</li>
+            </ul>
+            </p>
+            
+            <div class="example">
+                <h5>Ejemplo 1: Transformación vertical de una función seno</h5>
+                <p>Sea $f(x) = \sin(x)$, entonces:</p>
+                <ul>
+                    <li>$2\sin(x)$: Estiramiento vertical por factor 2 (amplitud = 2)</li>
+                    <li>$\frac{1}{2}\sin(x)$: Contracción vertical por factor 1/2 (amplitud = 0.5)</li>
+                    <li>$-\sin(x)$: Inversión vertical (reflexión sobre el eje x)</li>
+                </ul>
+                <p>La amplitud de la función seno cambia de 1 a $|a|$.</p>
+            </div>
+            
+            <h3>10.2 Alargamientos y Contracciones Horizontales</h3>
+            <p>Estas transformaciones modifican el ancho de la gráfica de la función.</p>
+            
+            <h4>Forma general:</h4>
+            <p>$$
+            y = f(bx)
+            $$
+            donde:
+            <ul>
+                <li>Si $|b| > 1$: Contracción horizontal por un factor de $1/b$</li>
+                <li>Si $0 < |b| < 1$: Estiramiento horizontal por un factor de $1/b$</li>
+                <li>Si $b < 0$: Inversión horizontal (reflexión sobre el eje y) además del escalamiento</li>
+            </ul>
+            <strong>Nota:</strong> El efecto horizontal es contraintuitivo: un factor mayor que 1 contrae, no expande.
+            </p>
+            
+            <div class="example">
+                <h5>Ejemplo 2: Transformación horizontal de una función coseno</h5>
+                <p>Sea $f(x) = \cos(x)$, entonces:</p>
+                <ul>
+                    <li>$\cos(2x)$: Contracción horizontal por factor 1/2 (periodo = $\pi$)</li>
+                    <li>$\cos(x/2)$: Estiramiento horizontal por factor 2 (periodo = $4\pi$)</li>
+                    <li>$\cos(-x) = \cos(x)$: No hay cambio (el coseno es par)</li>
+                </ul>
+                <p>El período de la función coseno cambia de $2\pi$ a $2\pi/|b|$.</p>
+            </div>
+            
+            <h3>10.3 Combinación de Alargamientos y Contracciones</h3>
+            <p>Podemos combinar estiramientos/contracciones verticales y horizontales:</p>
+            <p>$$
+            y = a \cdot f(bx)
+            $$
+            donde $a$ afecta la escala vertical y $b$ la escala horizontal.</p>
+            
+            <div class="example">
+                <h5>Ejemplo 3: Transformación combinada de una función cuadrática</h5>
+                <p>Sea $f(x) = x^2$, entonces $g(x) = 3(2x)^2 = 12x^2$:</p>
+                <ul>
+                    <li>Contracción horizontal por factor 1/2</li>
+                    <li>Estiramiento vertical por factor 3</li>
+                    <li>El vértice permanece en (0,0)</li>
+                </ul>
+                <p>La parábola se hace más estrecha y alta.</p>
+            </div>
+            
+            <h3>10.4 Efecto en Características Clave</h3>
+            <p>Los alargamientos y contracciones afectan diferentes propiedades de las funciones:</p>
+            
+            <table class="table">
+                <tr>
+                    <th>Función</th>
+                    <th>Propiedad Afectada</th>
+                    <th>Efecto</th>
+                </tr>
+                <tr>
+                    <td>$f(x) = \sin(x)$, $\cos(x)$</td>
+                    <td>Amplitud</td>
+                    <td>$a$ multiplica la amplitud</td>
+                </tr>
+                <tr>
+                    <td>$f(x) = \sin(bx)$, $\cos(bx)$</td>
+                    <td>Período</td>
+                    <td>Nuevo período = $2\pi/|b|$</td>
+                </tr>
+                <tr>
+                    <td>$f(x) = \tan(x)$</td>
+                    <td>Periodo</td>
+                    <td>Nuevo período = $\pi/|b|$</td>
+                </tr>
+                <tr>
+                    <td>Funciones lineales</td>
+                    <td>Pendiente</td>
+                    <td>$m_{nueva} = a \cdot m_{original} \cdot b$</td>
+                </tr>
+            </table>
+            
+            <div class="exercise">
+                <h3>Ejercicio 1:</h3>
+                <p>Dada la función $f(x) = x^3 - x$:</p>
+                <ol>
+                    <li>¿Qué transformación representa $g(x) = 2f(x)$? Describe el efecto en la gráfica.</li>
+                    <li>¿Y $h(x) = f(\frac{1}{2}x)$? Describe el efecto en la gráfica.</li>
+                    <li>Grafica $f(x)$, $g(x)$ y $h(x)$ en el mismo plano.</li>
+                </ol>
+            </div>
+            
+            <div class="exercise">
+                <h3>Ejercicio 2:</h3>
+                <p>Para la función $f(x) = \sqrt{x}$:</p>
+                <ol>
+                    <li>Encuentra la ecuación después de un estiramiento vertical por factor 3 y una contracción horizontal por factor 1/2.</li>
+                    <li>¿Cuál es el dominio y rango de la función transformada?</li>
+                    <li>Grafica la función original y la transformada.</li>
+                </ol>
+            </div>
+            
+            <h3>10.5 Aplicaciones Prácticas</h3>
+            <p>Los alargamientos y contracciones tienen numerosas aplicaciones:</p>
+            <ul>
+                <li><strong>Física:</strong> Ajuste de ondas sonoras, ondas electromagnéticas y movimiento armónico.</li>
+                <li>Ingeniería: Escalamiento de modelos a tamaño real.</li>
+                <li>Economía: Ajuste de curvas de oferta y demanda a diferentes escalas.</li>
+                <li>Procesamiento de señales: Compresión y expansión de señales en el tiempo.</li>
+            </ul>
+            
+            <div class="example">
+                <h5>Ejemplo 4: Aplicación en acústica</h5>
+                <p>La intensidad del sonido percibida sigue una escala logarítmica. Si $I_0$ es la intensidad de referencia, la intensidad percibida $\beta$ en decibelios es:</p>
+                <p>$$
+                \beta = 10\log_{10}\left(\frac{I}{I_0}\right)
+                $$
+                Un aumento en la intensidad por un factor de 10 corresponde a un aumento de 10 dB en la intensidad percibida.</p>
+            </div>
+        </div>
+            
+            <div class="nav-buttons">
+                <a href="masterclass09.html" class="nav-btn">← Anterior</a>
+                <a href="masterclass11.html" class="nav-btn">Siguiente →</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+echo "# CURSO-INFORMATICA-FERNANDA-" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/avilafer0809-cell/CURSO-INFORMATICA-FERNANDA-.git
+git push -u origin main

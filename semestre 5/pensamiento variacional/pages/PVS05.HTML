@@ -30,11 +30,12 @@
         .sun-path {
             width: 80%;
             height: 100px;
-            border-top: 2px dashed rgba(255,255,255,0.2);
+            border-top: 2px dashed rgba(255, 255, 255, 0.2);
             border-radius: 50% 50% 0 0;
             position: absolute;
             bottom: 10px;
         }
+
         .sun {
             font-size: 2em;
             position: absolute;
@@ -45,9 +46,23 @@
         }
 
         @keyframes moveSun {
-            0% { transform: translate(0, 0) scale(0.8); filter: drop-shadow(0 0 5px #eab308); opacity: 0.5; }
-            50% { transform: translate(110px, -70px) scale(1.2); filter: drop-shadow(0 0 20px #eab308); opacity: 1; }
-            100% { transform: translate(220px, 0) scale(0.8); filter: drop-shadow(0 0 5px #ef4444); opacity: 0.5; }
+            0% {
+                transform: translate(0, 0) scale(0.8);
+                filter: drop-shadow(0 0 5px #eab308);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(110px, -70px) scale(1.2);
+                filter: drop-shadow(0 0 20px #eab308);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(220px, 0) scale(0.8);
+                filter: drop-shadow(0 0 5px #ef4444);
+                opacity: 0.5;
+            }
         }
 
         /* 2. Función Escalonada (Taxi) */
@@ -55,9 +70,10 @@
             width: 80%;
             height: 80%;
             position: relative;
-            border-left: 2px solid rgba(255,255,255,0.3);
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
+
         .step {
             position: absolute;
             height: 4px;
@@ -65,21 +81,34 @@
             box-shadow: 0 0 10px #a855f7;
             width: 25%;
         }
-        .step-1 { bottom: 20%; left: 0%; }
-        .step-2 { bottom: 50%; left: 25%; }
-        .step-3 { bottom: 80%; left: 50%; }
+
+        .step-1 {
+            bottom: 20%;
+            left: 0%;
+        }
+
+        .step-2 {
+            bottom: 50%;
+            left: 25%;
+        }
+
+        .step-3 {
+            bottom: 80%;
+            left: 50%;
+        }
 
         /* 3. Radiación Solar (Medidor) */
         .meter {
             width: 100px;
             height: 50px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50px 50px 0 0;
             position: relative;
             overflow: hidden;
             border: 2px solid #38bdf8;
             border-bottom: none;
         }
+
         .needle {
             width: 4px;
             height: 40px;
@@ -92,8 +121,13 @@
         }
 
         @keyframes swingNeedle {
-            0% { transform: rotate(-70deg); }
-            100% { transform: rotate(70deg); }
+            0% {
+                transform: rotate(-70deg);
+            }
+
+            100% {
+                transform: rotate(70deg);
+            }
         }
 
         /* Máquina de Funciones */
@@ -106,20 +140,29 @@
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
             position: relative;
         }
+
         .gears {
             font-size: 2.5em;
             margin: 10px 0;
             display: inline-block;
         }
+
         .gears.spin {
             animation: spinGears 1s linear infinite;
         }
+
         @keyframes spinGears {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
-        .input-group { margin: 15px 0; }
-        .input-group input, .input-group select {
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group input,
+        .input-group select {
             padding: 10px;
             border-radius: 8px;
             border: none;
@@ -129,7 +172,7 @@
             width: 80%;
             max-width: 200px;
         }
-        
+
         .btn-process {
             background: #a855f7;
             color: white;
@@ -142,20 +185,24 @@
             margin-top: 10px;
             transition: all 0.3s;
         }
-        .btn-process:active { transform: scale(0.95); }
+
+        .btn-process:active {
+            transform: scale(0.95);
+        }
 
         .output-box {
             margin-top: 20px;
             font-size: 2em;
             font-weight: 900;
             color: #10b981;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             padding: 10px;
             min-height: 50px;
         }
+
         .math-box {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 15px;
             border-radius: 8px;
             font-family: monospace;
@@ -166,14 +213,6 @@
             border-left: 4px solid #a855f7;
         }
     </style>
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -189,23 +228,33 @@
             <div class="badge">Bloque 1 | Sesión 5</div>
             <h1>Funciones de Variable Real</h1>
             <p>El concepto de función como modelo matemático del entorno (Representación).</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Lleva una caja de cartón al salón (la 'Máquina'). Haz que un alumno inserte un número escrito en un papel (el Dominio), tú aplicas mentalmente una regla (por ej. multiplicarlo por 2) y sacas un nuevo papel con la respuesta (el Rango). Esto ayuda a visualizar que f(x) es solo una transformación de datos.</div>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Lleva una caja de cartón al salón (la 'Máquina'). Haz
+                que un alumno inserte un número escrito en un papel (el Dominio), tú aplicas mentalmente una regla (por
+                ej. multiplicarlo por 2) y sacas un nuevo papel con la respuesta (el Rango). Esto ayuda a visualizar que
+                f(x) es solo una transformación de datos.</div>
         </header>
 
         <div class="info-body">
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Revisar y formalizar el concepto matemático de <strong>Función</strong>, entendiendo sus tres componentes clave: Dominio (entradas), Rango (salidas) y la Regla de Correspondencia.</p>
+                <p>Revisar y formalizar el concepto matemático de <strong>Función</strong>, entendiendo sus tres
+                    componentes clave: Dominio (entradas), Rango (salidas) y la Regla de Correspondencia.</p>
             </section>
 
-            <section class="info-card" style="grid-column: span 2; border-color: #a855f7; border-top: 5px solid #a855f7;">
+            <section class="info-card"
+                style="grid-column: span 2; border-color: #a855f7; border-top: 5px solid #a855f7;">
                 <h2 style="color: #a855f7;">📖 Teoría: ¿Qué es una Función?</h2>
-                <p>Una función matemática <strong>f(x)</strong> es una regla de correspondencia que asocia a cada elemento de un conjunto inicial (llamado <em>Dominio</em> o <em>Variable Independiente 'x'</em>) un <strong>único</strong> elemento de un conjunto final (llamado <em>Rango</em>, <em>Imagen</em> o <em>Variable Dependiente 'y'</em>).</p>
+                <p>Una función matemática <strong>f(x)</strong> es una regla de correspondencia que asocia a cada
+                    elemento de un conjunto inicial (llamado <em>Dominio</em> o <em>Variable Independiente 'x'</em>) un
+                    <strong>único</strong> elemento de un conjunto final (llamado <em>Rango</em>, <em>Imagen</em> o
+                    <em>Variable Dependiente 'y'</em>).
+                </p>
                 <div class="math-box">
-                    y = f(x)  <br> 
+                    y = f(x) <br>
                     Entrada (x) ➔ [ Regla Matemática f() ] ➔ Salida (y)
                 </div>
-                <p><strong>Nota:</strong> Para que una relación sea considerada función, un valor de 'x' no puede producir dos valores distintos de 'y' al mismo tiempo.</p>
+                <p><strong>Nota:</strong> Para que una relación sea considerada función, un valor de 'x' no puede
+                    producir dos valores distintos de 'y' al mismo tiempo.</p>
             </section>
 
             <section class="info-card examples-card">
@@ -213,7 +262,8 @@
                 <ul class="custom-list">
                     <li>
                         <b>Temperatura vs Hora del día:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Para cada hora del día (x) existe una única temperatura ambiente (y).</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Para cada hora del día (x) existe una única
+                            temperatura ambiente (y).</p>
                         <div class="css-graphic">
                             <div class="sun-path">
                                 <div class="sun">☀️</div>
@@ -222,7 +272,8 @@
                     </li>
                     <li>
                         <b>Costo de Pasaje vs Distancia:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Las tarifas de los taxis o autobuses saltan en bloque (función escalonada).</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Las tarifas de los taxis o autobuses saltan
+                            en bloque (función escalonada).</p>
                         <div class="css-graphic">
                             <div class="step-graph">
                                 <div class="step step-1"></div>
@@ -233,7 +284,8 @@
                     </li>
                     <li>
                         <b>Radiación Solar Diaria:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">La intensidad solar es una función dependiente de las coordenadas y el tiempo.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 0 0;">La intensidad solar es una función dependiente
+                            de las coordenadas y el tiempo.</p>
                         <div class="css-graphic">
                             <div class="meter">
                                 <div class="needle"></div>
@@ -245,14 +297,15 @@
 
             <section class="info-card strategy-card" style="border-color: #a855f7;">
                 <h2 style="color: #a855f7;">🤖 Simulador: Máquina de Funciones</h2>
-                <p>Introduce un valor (Dominio), selecciona la regla f(x), y enciende la máquina para obtener la salida (Rango).</p>
+                <p>Introduce un valor (Dominio), selecciona la regla f(x), y enciende la máquina para obtener la salida
+                    (Rango).</p>
 
                 <div class="machine-box">
                     <div class="input-group">
                         <label style="display:block; color:white; margin-bottom:5px;">Entrada (x):</label>
                         <input type="number" id="func-input" value="5">
                     </div>
-                    
+
                     <div class="input-group">
                         <label style="display:block; color:white; margin-bottom:5px;">Regla f(x):</label>
                         <select id="func-rule">
@@ -263,7 +316,7 @@
                     </div>
 
                     <div class="gears" id="machine-gears">⚙️⚙️</div>
-                    
+
                     <button class="btn-process" onclick="processFunction()">PROCESAR DATOS</button>
 
                     <div class="output-box" id="func-output">
@@ -276,28 +329,33 @@
             <section class="info-card activities-card">
                 <h2>⚙️ Actividades de Refuerzo</h2>
                 <ol class="custom-list numbered">
-                    <li><b>Tabulación Manual:</b> Construir tablas de valores (x, y) a partir de expresiones algebraicas.</li>
-                    <li><b>Identificación Gráfica:</b> Usar la prueba de la línea vertical para decidir si una curva dibujada es función o simple relación.</li>
+                    <li><b>Tabulación Manual:</b> Construir tablas de valores (x, y) a partir de expresiones
+                        algebraicas.</li>
+                    <li><b>Identificación Gráfica:</b> Usar la prueba de la línea vertical para decidir si una curva
+                        dibujada es función o simple relación.</li>
                 </ol>
             </section>
         </div>
-        
+
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
 
-        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+        <footer
+            style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
             <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
         </footer>
         <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
             <a href="PVS04.HTML" class="nav-btn">⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
             <a href="PVS06.HTML" class="nav-btn">Siguiente ➡</a>
-            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+            <a href="#"
+                onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara realizar tu donativo, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;"
+                class="nav-btn btn-support">☕ Apoyar</a>
         </nav>
-        
-        
-        
-        
-        
+
+
+
+
+
     </div>
 
     <script src="../js/env.js"></script>
@@ -318,10 +376,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion5', async (score, percentage) => {
-                if(percentage === 100) {
+                if (percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion5');
-                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random() * 10000);
                     localStorage.setItem('pv_student_id', tempStudentId);
                     await saveProgressToFirebase(tempStudentId, 'sesion5', score, true);
                     window.location.href = '../index.html';
@@ -331,6 +389,7 @@
             });
         });
     </script>
-    
+
 </body>
+
 </html>

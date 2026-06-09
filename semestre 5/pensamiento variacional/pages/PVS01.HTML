@@ -17,21 +17,14 @@
             border-radius: 15px;
             margin: 15px auto;
             display: block;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
+
         .concept-image:hover {
             transform: scale(1.02);
         }
     </style>
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -63,10 +56,17 @@
             </section>
 
             <!-- Teoría / Enunciado -->
-            <section class="info-card" style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
+            <section class="info-card"
+                style="grid-column: span 2; border-color: #8b5cf6; border-top: 5px solid #8b5cf6;">
                 <h2 style="color: #8b5cf6;">📖 La Paradoja de Zenón y el Infinito</h2>
-                <p><strong>Enunciado Literal:</strong> "El movimiento es una ilusión. Para que un móvil llegue a su destino, primero debe alcanzar la mitad de la distancia que lo separa del mismo, luego la mitad de la mitad restante, y así infinitamente. Dado que una distancia finita se puede dividir infinitamente en mitades, es imposible que se complete el recorrido."</p>
-                <p>Esta paradoja filosófica obligó a la ciencia y las matemáticas a replantearse la naturaleza del espacio, el tiempo y el <em>infinito</em>. Siglos después, el Cálculo demostró que, aunque las divisiones sean infinitas, la suma de ellas converge a un valor finito (el Límite), explicando matemáticamente que el movimiento sí es posible.</p>
+                <p><strong>Enunciado Literal:</strong> "El movimiento es una ilusión. Para que un móvil llegue a su
+                    destino, primero debe alcanzar la mitad de la distancia que lo separa del mismo, luego la mitad de
+                    la mitad restante, y así infinitamente. Dado que una distancia finita se puede dividir infinitamente
+                    en mitades, es imposible que se complete el recorrido."</p>
+                <p>Esta paradoja filosófica obligó a la ciencia y las matemáticas a replantearse la naturaleza del
+                    espacio, el tiempo y el <em>infinito</em>. Siglos después, el Cálculo demostró que, aunque las
+                    divisiones sean infinitas, la suma de ellas converge a un valor finito (el Límite), explicando
+                    matemáticamente que el movimiento sí es posible.</p>
             </section>
 
             <!-- 3 Ejemplos -->
@@ -75,16 +75,19 @@
                 <ul class="custom-list">
                     <li>
                         <b>Aquiles y la Tortuga:</b> El corredor más rápido nunca alcanza a la tortuga si le da ventaja.
-                        <img src="../assets/images/aquiles_tortuga_1780862733060.png" alt="Aquiles y la tortuga" class="concept-image">
+                        <img src="../assets/images/aquiles_tortuga_1780862733060.png" alt="Aquiles y la tortuga"
+                            class="concept-image">
                     </li>
                     <li>
                         <b>La Dicotomía:</b> Para cruzar un estadio, primero debes llegar a la mitad, luego a la mitad
                         del tramo restante, infinitamente.
-                        <img src="../assets/images/dicotomia_zenon_1780862743489.png" alt="Dicotomía de Zenón" class="concept-image">
+                        <img src="../assets/images/dicotomia_zenon_1780862743489.png" alt="Dicotomía de Zenón"
+                            class="concept-image">
                     </li>
                     <li>
                         <b>Aproximación al Área (Arquímedes):</b> Llenar un círculo con polígonos de cada vez más lados.
-                        <img src="../assets/images/arquimedes_area_1780862753737.png" alt="Método de Exhausción" class="concept-image">
+                        <img src="../assets/images/arquimedes_area_1780862753737.png" alt="Método de Exhausción"
+                            class="concept-image">
                     </li>
                 </ul>
             </section>
@@ -118,24 +121,27 @@
                 </ol>
             </section>
         </div>
-        
+
         <!-- Gamificación: Quiz Interactivo -->
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
 
-        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+        <footer
+            style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
             <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
         </footer>
         <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
             <a href="PVS00.HTML" class="nav-btn btn-disabled">⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
             <a href="PVS02.HTML" class="nav-btn">Siguiente ➡</a>
-            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+            <a href="#"
+                onclick="alert('¡Gracias por tu apoyo a la educación!\\n\\nPara realizar tu donativo, puedes usar:\\n\\n💳 CLABE Interbancaria: 722969020087766753\\n✉️ PayPal: primomanuel@hotmail.com'); return false;"
+                class="nav-btn btn-support">☕ Apoyar</a>
         </nav>
-        
-        
-        
-        
-        
+
+
+
+
+
     </div>
 
     <!-- Scripts -->
@@ -159,10 +165,10 @@
         // Iniciar Quiz Kahoot
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion1', async (score, percentage) => {
-                if(percentage === 100) {
+                if (percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion1');
-                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random() * 10000);
                     localStorage.setItem('pv_student_id', tempStudentId);
                     await saveProgressToFirebase(tempStudentId, 'sesion1', score, true);
                     window.location.href = '../index.html';
@@ -172,7 +178,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>

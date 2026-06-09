@@ -44,6 +44,7 @@
             height: 4px;
             background: rgba(255, 255, 255, 0.2);
         }
+
         .road::after {
             content: '';
             position: absolute;
@@ -55,6 +56,7 @@
             box-shadow: 0 0 10px #0ea5e9;
             animation: moveRoad 2s linear infinite;
         }
+
         .car-emoji {
             position: absolute;
             bottom: 25px;
@@ -64,25 +66,58 @@
         }
 
         @keyframes moveRoad {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(200%);
+            }
         }
+
         @keyframes bounceCar {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-3px); }
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-3px);
+            }
         }
+
         @keyframes pulseBolt {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #eab308); }
-            50% { transform: scale(1.2); filter: drop-shadow(0 0 15px #eab308); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 5px #eab308); }
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px #eab308);
+            }
+
+            50% {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 15px #eab308);
+            }
+
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px #eab308);
+            }
         }
+
         @keyframes loadEnergy {
-            0% { width: 30%; background: #22c55e; box-shadow: 0 0 10px #22c55e; }
-            100% { width: 90%; background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+            0% {
+                width: 30%;
+                background: #22c55e;
+                box-shadow: 0 0 10px #22c55e;
+            }
+
+            100% {
+                width: 90%;
+                background: #ef4444;
+                box-shadow: 0 0 10px #ef4444;
+            }
         }
 
         .math-box {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 15px;
             border-radius: 8px;
             font-family: monospace;
@@ -97,9 +132,11 @@
         .sim-control {
             margin: 15px 0;
         }
+
         .sim-control input {
             width: 100%;
         }
+
         .sim-gauge {
             background: #0f172a;
             color: #38bdf8;
@@ -117,20 +154,13 @@
             border: 4px solid #38bdf8;
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
+
         .sim-gauge small {
             font-size: 0.3em;
             color: var(--text-secondary);
             font-weight: 400;
         }
     </style>
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -146,22 +176,29 @@
             <div class="badge">Bloque 1 | Sesión 3</div>
             <h1>Tasa de Variación Promedio I</h1>
             <p>Entendiendo el cambio matemático en un intervalo de tiempo y espacio.</p>
-            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Invita a los alumnos al patio. Mide 10 metros, haz que un alumno camine y otro corra. Calculen la velocidad promedio in situ midiendo el tiempo con su celular.</div>
+            <div class="teacher-tip hidden">💡 TIP MAESTRO (1983): Invita a los alumnos al patio. Mide 10 metros, haz
+                que un alumno camine y otro corra. Calculen la velocidad promedio in situ midiendo el tiempo con su
+                celular.</div>
         </header>
 
         <div class="info-body">
             <section class="info-card goal-card">
                 <h2>🎯 Propósito Formativo</h2>
-                <p>Introducir el concepto fundamental del cálculo: entender y calcular la variación (cambio) de una magnitud en relación con un intervalo (generalmente el tiempo o la distancia).</p>
+                <p>Introducir el concepto fundamental del cálculo: entender y calcular la variación (cambio) de una
+                    magnitud en relación con un intervalo (generalmente el tiempo o la distancia).</p>
             </section>
 
-            <section class="info-card" style="grid-column: span 2; border-color: #1dd1a1; border-top: 5px solid #1dd1a1;">
+            <section class="info-card"
+                style="grid-column: span 2; border-color: #1dd1a1; border-top: 5px solid #1dd1a1;">
                 <h2 style="color: #1dd1a1;">📖 Teoría: La Razón de Cambio</h2>
-                <p><strong>Enunciado Teórico:</strong> La tasa de variación promedio mide cuánto cambia una variable (como la posición, la temperatura o el costo) en función de otra (como el tiempo o el número de artículos), dentro de un intervalo específico.</p>
+                <p><strong>Enunciado Teórico:</strong> La tasa de variación promedio mide cuánto cambia una variable
+                    (como la posición, la temperatura o el costo) en función de otra (como el tiempo o el número de
+                    artículos), dentro de un intervalo específico.</p>
                 <div class="math-box">
                     m = Δy / Δx = [f(x₂) - f(x₁)] / [x₂ - x₁]
                 </div>
-                <p>En el mundo real, a esto le llamamos "Velocidad" (cambio de distancia sobre tiempo), "Crecimiento" (cambio de población sobre tiempo) o "Pendiente" en una gráfica matemática.</p>
+                <p>En el mundo real, a esto le llamamos "Velocidad" (cambio de distancia sobre tiempo), "Crecimiento"
+                    (cambio de población sobre tiempo) o "Pendiente" en una gráfica matemática.</p>
             </section>
 
             <section class="info-card examples-card">
@@ -169,7 +206,9 @@
                 <ul class="custom-list">
                     <li>
                         <b>Velocidad Promedio (Carretera a Saltillo):</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Al dividir la distancia total recorrida entre el tiempo total del viaje, obtenemos una velocidad teórica constante. Nos dice qué tan rápido cambió la posición del auto en ese lapso de tiempo.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Al dividir la distancia total recorrida entre
+                            el tiempo total del viaje, obtenemos una velocidad teórica constante. Nos dice qué tan
+                            rápido cambió la posición del auto en ese lapso de tiempo.</p>
                         <div class="css-graphic">
                             <div class="road"></div>
                             <div class="car-emoji">🚙💨</div>
@@ -177,7 +216,9 @@
                     </li>
                     <li>
                         <b>Crecimiento Poblacional (Mensual):</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Mide cuántos habitantes se suman a una región cada mes. Si las barras suben más abruptamente, significa que la tasa (o pendiente) de crecimiento es más acelerada.</p>
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Mide cuántos habitantes se suman a una región
+                            cada mes. Si las barras suben más abruptamente, significa que la tasa (o pendiente) de
+                            crecimiento es más acelerada.</p>
                         <div class="css-graphic">
                             <div class="bar" style="height: 20%"></div>
                             <div class="bar" style="height: 40%"></div>
@@ -187,11 +228,17 @@
                     </li>
                     <li>
                         <b>Consumo Eléctrico Promedio Semanal:</b>
-                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Representa la variación de kilovatios por hora (kWh) que gasta una vivienda. Monitorear esta tasa nos permite predecir si el próximo recibo de luz llegará más alto.</p>
-                        <div class="css-graphic" style="justify-content: center; align-items: center; flex-direction: column;">
+                        <p style="font-size: 0.9em; margin: 5px 0 10px 0;">Representa la variación de kilovatios por
+                            hora (kWh) que gasta una vivienda. Monitorear esta tasa nos permite predecir si el próximo
+                            recibo de luz llegará más alto.</p>
+                        <div class="css-graphic"
+                            style="justify-content: center; align-items: center; flex-direction: column;">
                             <div style="font-size: 2.5em; animation: pulseBolt 1.5s infinite;">⚡</div>
-                            <div style="width: 80%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 15px;">
-                                <div style="height: 100%; border-radius: 3px; animation: loadEnergy 3s infinite alternate;"></div>
+                            <div
+                                style="width: 80%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 15px;">
+                                <div
+                                    style="height: 100%; border-radius: 3px; animation: loadEnergy 3s infinite alternate;">
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -200,7 +247,8 @@
 
             <section class="info-card strategy-card">
                 <h2>📱 Simulador de Variación (Velocímetro)</h2>
-                <p>Juega con las variables espaciales (Δy) y temporales (Δx) para calcular dinámicamente la Velocidad Promedio (Pendiente).</p>
+                <p>Juega con las variables espaciales (Δy) y temporales (Δx) para calcular dinámicamente la Velocidad
+                    Promedio (Pendiente).</p>
 
                 <div class="simulator-box">
                     <div class="sim-gauge" id="gauge-display">
@@ -212,7 +260,7 @@
                         <label>Distancia (Δy): <span id="dist-label">0</span> km</label>
                         <input type="range" id="dist-slider" min="0" max="500" value="0" oninput="calculateSpeed()">
                     </div>
-                    
+
                     <div class="sim-control">
                         <label>Tiempo (Δx): <span id="time-label">1</span> h</label>
                         <input type="range" id="time-slider" min="1" max="10" value="1" oninput="calculateSpeed()">
@@ -223,28 +271,33 @@
             <section class="info-card activities-card">
                 <h2>⚙️ Actividades de Refuerzo</h2>
                 <ol class="custom-list numbered">
-                    <li><b>Cálculo de pendientes algebraicas:</b> Resolver ejercicios clásicos usando la fórmula m = Δy/Δx.</li>
-                    <li><b>Llenado de tablas de datos:</b> Completar los valores de distancia según una velocidad constante.</li>
+                    <li><b>Cálculo de pendientes algebraicas:</b> Resolver ejercicios clásicos usando la fórmula m =
+                        Δy/Δx.</li>
+                    <li><b>Llenado de tablas de datos:</b> Completar los valores de distancia según una velocidad
+                        constante.</li>
                 </ol>
             </section>
         </div>
-        
+
         <div id="quiz-mount-point" style="margin-top: 30px;"></div>
 
-        <footer style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
+        <footer
+            style="text-align: center; margin-top: 50px; padding: 20px 0 10px 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9em;">
             <p>copyright &copy; JMGV-PTEL-2026. Curso Pensamiento Variacional. Todos los derechos reservados.</p>
         </footer>
         <nav class="session-nav" style="margin-bottom: 40px; width: 100%; display: flex; gap: 15px;">
             <a href="PVS02.HTML" class="nav-btn">⬅ Anterior</a>
             <a href="../index.html" class="nav-btn">🏠 Inicio</a>
             <a href="PVS04.HTML" class="nav-btn">Siguiente ➡</a>
-            <a href="#" onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara depósitos o transferencias, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;" class="nav-btn btn-support">☕ Apoyar</a>
+            <a href="#"
+                onclick="alert('¡Gracias por tu apoyo a la educación!\n\nPara realizar tu donativo, puedes usar:\n\n💳 CLABE Interbancaria: 722969020087766753\n✉️ PayPal: primomanuel@hotmail.com'); return false;"
+                class="nav-btn btn-support">☕ Apoyar</a>
         </nav>
-        
-        
-        
-        
-        
+
+
+
+
+
     </div>
 
     <script src="../js/env.js"></script>
@@ -265,10 +318,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             new KahootQuiz('quiz-mount-point', 'sesion3', async (score, percentage) => {
-                if(percentage === 100) {
+                if (percentage === 100) {
                     alert(`¡Excelente! Has obtenido el 100% de aciertos. Guardando progreso...`);
                     AppController.markSessionCompleted('sesion3');
-                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random()*10000);
+                    const tempStudentId = localStorage.getItem('pv_student_id') || 'estudiante_' + Math.floor(Math.random() * 10000);
                     localStorage.setItem('pv_student_id', tempStudentId);
                     await saveProgressToFirebase(tempStudentId, 'sesion3', score, true);
                     window.location.href = '../index.html';
@@ -278,6 +331,7 @@
             });
         });
     </script>
-    
+
 </body>
+
 </html>

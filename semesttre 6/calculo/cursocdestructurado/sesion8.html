@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 8: Funciones Especiales</title>
+    <link rel="stylesheet" href="global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="curso-styles.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        .spec-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin:2rem 0}
+        .spec-card{background:var(--bg-card);border:2px solid var(--dark-outline);padding:1.5rem;border-radius:12px}
+        .spec-card h4{margin-top:0}
+        .spec-card.abs{box-shadow:5px 5px 0px var(--pastel-gold)}
+        .spec-card.step{box-shadow:5px 5px 0px var(--pastel-blue)}
+        .spec-card.piece{box-shadow:5px 5px 0px var(--pastel-purple)}
+        .graph-panel{background:#1a252f;border-radius:15px;padding:2rem;margin:2rem 0;color:white;box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center}
+        .graph-panel h3{color:var(--accent-color);margin-top:0}
+        .btn-group{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:1rem 0}
+        .demo-btn{padding:10px 18px;border-radius:8px;border:2px solid var(--dark-outline);font-weight:bold;cursor:pointer;box-shadow:3px 3px 0px var(--dark-outline);transition:all .2s;color:#111}
+        .demo-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--dark-outline)}
+        .info-panel{background:#2c3e50;padding:15px;border-radius:8px;margin-top:15px;border-top:3px solid var(--primary-color)}
+    </style>
+</head>
+<body>
+<main class="page-container">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+    <div class="sesion-header">
+        <h1 class="sesion-title">Funciones Especiales</h1>
+        <p class="sesion-subtitle">Sesión 8 - Módulo 3: Gráficas y Transformaciones</p>
+    </div>
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
+        <p style="margin-bottom:0;margin-top:.5rem">Identificar y graficar funciones especiales: valor absoluto, mayor entero (escalonada) y funciones definidas por partes, comprendiendo sus características únicas.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>Funciones con Reglas Especiales</h2>
+
+        <div class="spec-cards">
+            <div class="spec-card abs">
+                <h4 style="color:var(--pastel-gold)"><i class="fas fa-arrows-alt-v"></i> Valor Absoluto</h4>
+                <p>$$f(x) = |x| = \begin{cases} x & \text{si } x \geq 0 \\ -x & \text{si } x < 0 \end{cases}$$</p>
+                <ul>
+                    <li>Gráfica en forma de <strong>"V"</strong></li>
+                    <li>Siempre devuelve valores $\geq 0$</li>
+                    <li>Dominio: $\mathbb{R}$ | Rango: $[0, \infty)$</li>
+                    <li>$|x|$ = distancia de $x$ al origen</li>
+                </ul>
+            </div>
+            <div class="spec-card step">
+                <h4 style="color:var(--pastel-blue)"><i class="fas fa-stairs"></i> Mayor Entero (Piso)</h4>
+                <p>$$f(x) = \lfloor x \rfloor$$</p>
+                <ul>
+                    <li>Devuelve el entero más grande $\leq x$</li>
+                    <li>Gráfica <strong>escalonada</strong></li>
+                    <li>$\lfloor 2.7 \rfloor = 2$, $\lfloor -1.3 \rfloor = -2$</li>
+                    <li>Dominio: $\mathbb{R}$ | Rango: $\mathbb{Z}$</li>
+                </ul>
+            </div>
+            <div class="spec-card piece">
+                <h4 style="color:var(--pastel-purple)"><i class="fas fa-puzzle-piece"></i> Definida por Partes</h4>
+                <p>$$f(x) = \begin{cases} \text{regla 1} & \text{si condición 1} \\ \text{regla 2} & \text{si condición 2} \end{cases}$$</p>
+                <ul>
+                    <li>Diferentes reglas para diferentes intervalos</li>
+                    <li>Cada "pieza" puede ser cualquier función</li>
+                    <li>Importante verificar continuidad en las uniones</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong><i class="fas fa-lightbulb"></i> ¡El Valor Absoluto en acción!</strong>
+            <p style="margin-bottom:0;margin-top:.5rem">$|x - 3|$ mide la <em>distancia</em> entre $x$ y 3 en la recta numérica. Por eso $|x - 3| < 2$ significa "los números que están a menos de 2 unidades del 3", es decir $1 < x < 5$.</p>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-eye"></i> Visualizador de Funciones Especiales</h2>
+        <div class="graph-panel">
+            <h3>Selecciona una función especial</h3>
+            <div class="btn-group">
+                <button class="demo-btn" style="background:var(--pastel-gold)" onclick="drawS('abs')">$|x|$</button>
+                <button class="demo-btn" style="background:var(--pastel-turquoise)" onclick="drawS('abs2')">$|x-2|+1$</button>
+                <button class="demo-btn" style="background:var(--pastel-blue)" onclick="drawS('floor')">$\lfloor x \rfloor$</button>
+                <button class="demo-btn" style="background:var(--pastel-purple)" onclick="drawS('piece')">Por partes</button>
+            </div>
+            <canvas id="gc" width="500" height="400" style="background:#0d1117;border-radius:10px;border:2px solid var(--border-color);max-width:100%"></canvas>
+            <div class="info-panel" id="sInfo"><p style="color:#7f8c8d"><i class="fas fa-hand-pointer"></i> Selecciona una función.</p></div>
+        </div>
+    </div>
+
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {"question":"📐 ¿Cuánto vale |−7|?","options":["-7","7","0","49"],"correctIndex":1,"explanation":"El valor absoluto siempre devuelve la magnitud positiva. |−7| = 7."},
+            {"question":"🧠 ¿Cómo es la gráfica de f(x) = |x|?","options":["Una línea recta","Una parábola","Una 'V' con vértice en el origen","Un escalón"],"correctIndex":2,"explanation":"La gráfica de |x| tiene forma de V: baja en diagonal por la izquierda y sube en diagonal por la derecha, con vértice en (0,0)."},
+            {"question":"🎯 ¿Cuánto vale ⌊3.9⌋ (piso de 3.9)?","options":["4","3","3.9","0"],"correctIndex":1,"explanation":"La función piso devuelve el mayor entero que es menor o igual al número. ⌊3.9⌋ = 3."},
+            {"question":"🤯 ¿Cuánto vale ⌊−2.1⌋?","options":["-2","-3","-2.1","0"],"correctIndex":1,"explanation":"¡Cuidado con los negativos! ⌊−2.1⌋ = −3 porque −3 es el mayor entero ≤ −2.1. No es −2, porque −2 > −2.1."},
+            {"question":"📏 La gráfica de |x − 2| + 1 tiene su vértice en...","options":["(0, 1)","(2, 1)","(-2, 1)","(2, -1)"],"correctIndex":1,"explanation":"Es una traslación de |x|: 2 unidades a la derecha (por x-2) y 1 hacia arriba (por +1). Vértice: (2, 1)."},
+            {"question":"💡 Una función definida por partes puede tener...","options":["Solo líneas rectas","Solo una regla para todo x","Diferentes reglas en diferentes intervalos","Solo valores positivos"],"correctIndex":2,"explanation":"Las funciones por partes usan diferentes fórmulas según el intervalo de x, permitiendo combinar comportamientos diferentes."}
+        ]
+        </script>
+    </div>
+
+    <div class="qr-container"><h3><i class="fas fa-qrcode"></i> Menú de Sesiones</h3><p>Escanea para acceder al hub.</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jmgvproyectosyotros.netlify.app/semesttre%206/calculo/cursocdestructurado/index.html" alt="QR Code"></div>
+    <div class="sesion-navigation">
+        <a href="sesion7.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Sesión 7</a>
+        <a href="index.html" class="nav-btn"><i class="fas fa-map"></i> Mapa</a>
+        <a href="sesion9.html" class="nav-btn next">Sesión 9 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+<footer class="footer"><p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p></footer>
+<script>
+const cv=document.getElementById('gc'),ct=cv.getContext('2d');
+function drawS(t){
+    const w=cv.width,h=cv.height,ox=w/2,oy=h/2,s=30;
+    ct.clearRect(0,0,w,h);
+    ct.strokeStyle='#1e2a3a';ct.lineWidth=1;for(let i=-10;i<=10;i++){ct.beginPath();ct.moveTo(ox+i*s,0);ct.lineTo(ox+i*s,h);ct.stroke();ct.beginPath();ct.moveTo(0,oy+i*s);ct.lineTo(w,oy+i*s);ct.stroke()}
+    ct.strokeStyle='#4a5568';ct.lineWidth=2;ct.beginPath();ct.moveTo(0,oy);ct.lineTo(w,oy);ct.stroke();ct.beginPath();ct.moveTo(ox,0);ct.lineTo(ox,h);ct.stroke();
+    ct.fillStyle='#a0aec0';ct.font='11px sans-serif';for(let i=-7;i<=7;i++){if(i!==0){ct.fillText(i,ox+i*s-4,oy+15);ct.fillText(i,ox+8,oy-i*s+4)}}
+
+    const cols={abs:'#F4D03F',abs2:'#88D8B0',floor:'#A1C9F1',piece:'#DCD6F7'};
+    ct.strokeStyle=cols[t];ct.lineWidth=3;
+
+    if(t==='abs'||t==='abs2'){
+        ct.beginPath();let f=true;
+        for(let px=0;px<w;px++){const x=(px-ox)/s;let y=t==='abs'?Math.abs(x):Math.abs(x-2)+1;const py=oy-y*s;if(py<-50||py>h+50){f=true;continue}if(f){ct.moveTo(px,py);f=false}else ct.lineTo(px,py)}
+        ct.stroke();
+        const vx=t==='abs'?ox:ox+2*s,vy=t==='abs'?oy:oy-1*s;
+        ct.fillStyle=cols[t];ct.beginPath();ct.arc(vx,vy,5,0,Math.PI*2);ct.fill();
+    }
+    if(t==='floor'){
+        for(let n=-7;n<=7;n++){
+            const x1=ox+n*s,x2=ox+(n+1)*s,y=oy-n*s;
+            ct.beginPath();ct.moveTo(x1,y);ct.lineTo(x2,y);ct.stroke();
+            ct.fillStyle=cols[t];ct.beginPath();ct.arc(x1,y,4,0,Math.PI*2);ct.fill();
+            ct.fillStyle='#0d1117';ct.strokeStyle=cols[t];ct.lineWidth=2;ct.beginPath();ct.arc(x2,y,4,0,Math.PI*2);ct.fill();ct.stroke();
+            ct.strokeStyle=cols[t];ct.lineWidth=3;
+        }
+    }
+    if(t==='piece'){
+        // f(x) = x+2 if x<-1, x² if -1≤x≤2, -x+6 if x>2
+        ct.beginPath();let f=true;
+        for(let px=0;px<w;px+=.5){const x=(px-ox)/s;let y;
+            if(x<-1)y=x+2;else if(x<=2)y=x*x;else y=-x+6;
+            const py=oy-y*s;if(py<-50||py>h+50){f=true;continue}if(f){ct.moveTo(px,py);f=false}else ct.lineTo(px,py)}
+        ct.stroke();
+        // Junction points
+        ct.fillStyle=cols[t];
+        ct.beginPath();ct.arc(ox+(-1)*s,oy-1*s,5,0,Math.PI*2);ct.fill();
+        ct.beginPath();ct.arc(ox+2*s,oy-4*s,5,0,Math.PI*2);ct.fill();
+    }
+
+    const info={abs:'<strong>f(x) = |x|</strong> — Valor absoluto<br>Vértice: (0, 0) | Dom: ℝ | Ran: [0, ∞)',abs2:'<strong>f(x) = |x−2| + 1</strong> — V.A. desplazado<br>Vértice: (2, 1) | Dom: ℝ | Ran: [1, ∞)',floor:'<strong>f(x) = ⌊x⌋</strong> — Función piso (escalonada)<br>● = incluido, ○ = excluido | Dom: ℝ | Ran: ℤ',piece:'<strong>Por partes:</strong> x+2 si x<−1, x² si −1≤x≤2, −x+6 si x>2<br>Observa cómo cambia la regla en cada intervalo.'};
+    document.getElementById('sInfo').innerHTML=`<p>${info[t]}</p>`;
+}
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="env.js"></script><script src="progress-tracker.js"></script><script src="quiz-engine.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{if(window.markLessonCompleted)window.markLessonCompleted('calculo_relaciones_funciones','sesion8')});</script>
+</body>
+</html>

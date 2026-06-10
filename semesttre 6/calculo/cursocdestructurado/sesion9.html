@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 9: Comportamiento e Inversas</title>
+    <link rel="stylesheet" href="global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="curso-styles.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        .concept-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:2rem 0}
+        .concept-card{background:var(--bg-card);border:2px solid var(--dark-outline);padding:1.5rem;border-radius:12px}
+        .concept-card h4{margin-top:0}
+        .concept-card.mono{box-shadow:5px 5px 0px var(--pastel-green)}
+        .concept-card.inj{box-shadow:5px 5px 0px var(--pastel-blue)}
+        .concept-card.inv{box-shadow:5px 5px 0px var(--pastel-purple)}
+        .graph-panel{background:#1a252f;border-radius:15px;padding:2rem;margin:2rem 0;color:white;box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center}
+        .graph-panel h3{color:var(--accent-color);margin-top:0}
+        .btn-group{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:1rem 0}
+        .demo-btn{padding:10px 18px;border-radius:8px;border:2px solid var(--dark-outline);font-weight:bold;cursor:pointer;box-shadow:3px 3px 0px var(--dark-outline);transition:all .2s;color:#111}
+        .demo-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--dark-outline)}
+        .info-panel{background:#2c3e50;padding:15px;border-radius:8px;margin-top:15px;border-top:3px solid var(--primary-color)}
+    </style>
+</head>
+<body>
+<main class="page-container">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+    <div class="sesion-header">
+        <h1 class="sesion-title">Comportamiento e Inversas</h1>
+        <p class="sesion-subtitle">Sesión 9 - Módulo 3: Gráficas y Transformaciones</p>
+    </div>
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
+        <p style="margin-bottom:0;margin-top:.5rem">Analizar el comportamiento de funciones (crecientes y decrecientes), entender el concepto de función inyectiva y calcular/graficar la función inversa.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>Características Clave de las Funciones</h2>
+
+        <div class="concept-cards">
+            <div class="concept-card mono">
+                <h4 style="color:var(--pastel-green)"><i class="fas fa-chart-line"></i> Monotonía</h4>
+                <ul>
+                    <li><strong>Creciente:</strong> Si $x_1 < x_2$, entonces $f(x_1) < f(x_2)$. "Sube de izquierda a derecha."</li>
+                    <li><strong>Decreciente:</strong> Si $x_1 < x_2$, entonces $f(x_1) > f(x_2)$. "Baja de izquierda a derecha."</li>
+                </ul>
+            </div>
+            <div class="concept-card inj">
+                <h4 style="color:var(--pastel-blue)"><i class="fas fa-arrows-alt-h"></i> Inyectividad</h4>
+                <p><strong>Función Inyectiva (1 a 1):</strong> Cada valor de $y$ proviene de un ÚNICO valor de $x$.</p>
+                <ul>
+                    <li>Prueba de la <strong>Línea Horizontal</strong>: Si una línea horizontal cruza la gráfica más de una vez, NO es inyectiva.</li>
+                    <li>Ej: $f(x) = x^2$ NO es inyectiva porque $(-2)^2 = 4$ y $(2)^2 = 4$.</li>
+                </ul>
+            </div>
+            <div class="concept-card inv">
+                <h4 style="color:var(--pastel-purple)"><i class="fas fa-exchange-alt"></i> Función Inversa</h4>
+                <p><strong>$f^{-1}(x)$</strong>: Deshace lo que hace $f$.</p>
+                <ul>
+                    <li>Solo existe si $f(x)$ es <strong>inyectiva</strong>.</li>
+                    <li>El dominio de $f$ es el rango de $f^{-1}$.</li>
+                    <li>El rango de $f$ es el dominio de $f^{-1}$.</li>
+                    <li>Gráficamente, es el reflejo sobre la línea $y = x$.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong><i class="fas fa-wrench"></i> ¿Cómo hallar la inversa?</strong>
+            <p style="margin-bottom:0;margin-top:.5rem">1. Escribe $y = f(x)$.<br>2. Intercambia $x$ e $y$: $x = f(y)$.<br>3. Despeja $y$.<br>Ejemplo: $f(x) = 2x - 3 \Rightarrow y = 2x - 3 \Rightarrow x = 2y - 3 \Rightarrow 2y = x + 3 \Rightarrow f^{-1}(x) = \frac{x + 3}{2}$.</p>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-mirror"></i> Explorador de Inversas</h2>
+        <p>Observa cómo la función y su inversa son simétricas respecto a la línea $y = x$.</p>
+        <div class="graph-panel">
+            <h3>Visualizador de Función Inversa</h3>
+            <div class="btn-group">
+                <button class="demo-btn" style="background:var(--pastel-green)" onclick="drawI('line')">$y = 2x - 4$</button>
+                <button class="demo-btn" style="background:var(--pastel-blue)" onclick="drawI('cube')">$y = x^3$</button>
+                <button class="demo-btn" style="background:var(--pastel-orange)" onclick="drawI('exp')">$y = e^x$</button>
+                <button class="demo-btn" style="background:var(--pastel-red)" onclick="drawI('quad')">$y = x^2$ (Falla)</button>
+            </div>
+            <canvas id="gc" width="500" height="400" style="background:#0d1117;border-radius:10px;border:2px solid var(--border-color);max-width:100%"></canvas>
+            <div class="info-panel" id="iInfo"><p style="color:#7f8c8d"><i class="fas fa-hand-pointer"></i> Selecciona una función.</p></div>
+        </div>
+    </div>
+
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {"question":"📈 Si una función siempre 'sube' de izquierda a derecha, se llama...","options":["Decreciente","Constante","Creciente","Exponencial"],"correctIndex":2,"explanation":"Una función creciente es aquella en la que a medida que x aumenta, y también aumenta."},
+            {"question":"📏 ¿Para qué sirve la prueba de la línea horizontal?","options":["Para saber si es función","Para saber si es inyectiva","Para hallar el dominio","Para encontrar asíntotas"],"correctIndex":1,"explanation":"La línea horizontal verifica que cada valor de 'y' provenga de un solo 'x'. Si cruza más de una vez, no es inyectiva."},
+            {"question":"🪞 La gráfica de la función inversa f⁻¹(x) es un reflejo de f(x) sobre...","options":["El eje X","El eje Y","El origen","La línea y = x"],"correctIndex":3,"explanation":"Como intercambiamos las coordenadas (x,y) por (y,x), la simetría se da respecto a la diagonal y = x."},
+            {"question":"🧠 ¿Cuál de estas funciones NO tiene inversa (a menos que restrinjamos su dominio)?","options":["f(x) = 2x","f(x) = x³","f(x) = eˣ","f(x) = x²"],"correctIndex":3,"explanation":"f(x) = x² no es inyectiva (p.ej. f(2)=4 y f(-2)=4), por lo tanto no tiene inversa en todo ℝ."},
+            {"question":"🎯 Si f(x) = 3x, ¿cuál es su inversa f⁻¹(x)?","options":["-3x","x/3","1/(3x)","x-3"],"correctIndex":1,"explanation":"y = 3x → Intercambiando: x = 3y → Despejando y: y = x/3."},
+            {"question":"💡 Si el dominio de f(x) es [0, ∞) y su rango es [2, ∞), ¿cuál es el dominio de f⁻¹(x)?","options":["[0, ∞)","[2, ∞)","Todos los reales","(0, 2]"],"correctIndex":1,"explanation":"El dominio de la inversa es exactamente el rango de la función original."}
+        ]
+        </script>
+    </div>
+
+    <div class="qr-container"><h3><i class="fas fa-qrcode"></i> Menú de Sesiones</h3><p>Escanea para acceder al hub.</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jmgvproyectosyotros.netlify.app/semesttre%206/calculo/cursocdestructurado/index.html" alt="QR Code"></div>
+    <div class="sesion-navigation">
+        <a href="sesion8.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Sesión 8</a>
+        <a href="index.html" class="nav-btn"><i class="fas fa-map"></i> Mapa</a>
+        <a href="sesion10.html" class="nav-btn next">Sesión 10 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+<footer class="footer"><p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p></footer>
+<script>
+const cv=document.getElementById('gc'),ct=cv.getContext('2d');
+function drawI(t){
+    const w=cv.width,h=cv.height,ox=w/2,oy=h/2,s=30;
+    ct.clearRect(0,0,w,h);
+    ct.strokeStyle='#1e2a3a';ct.lineWidth=1;for(let i=-10;i<=10;i++){ct.beginPath();ct.moveTo(ox+i*s,0);ct.lineTo(ox+i*s,h);ct.stroke();ct.beginPath();ct.moveTo(0,oy+i*s);ct.lineTo(w,oy+i*s);ct.stroke()}
+    ct.strokeStyle='#4a5568';ct.lineWidth=2;ct.beginPath();ct.moveTo(0,oy);ct.lineTo(w,oy);ct.stroke();ct.beginPath();ct.moveTo(ox,0);ct.lineTo(ox,h);ct.stroke();
+    ct.fillStyle='#a0aec0';ct.font='11px sans-serif';for(let i=-7;i<=7;i++){if(i!==0){ct.fillText(i,ox+i*s-4,oy+15);ct.fillText(i,ox+8,oy-i*s+4)}}
+
+    // Draw y = x (diagonal)
+    ct.setLineDash([5,5]);ct.strokeStyle='rgba(255,255,255,.4)';ct.lineWidth=1;
+    ct.beginPath();ct.moveTo(ox-10*s,oy+10*s);ct.lineTo(ox+10*s,oy-10*s);ct.stroke();
+    ct.setLineDash([]);
+
+    const c1='var(--pastel-blue)',c2='var(--pastel-purple)';
+    
+    // Original Function
+    ct.strokeStyle=c1;ct.lineWidth=3;ct.beginPath();let f1=true;
+    for(let px=0;px<w;px++){const x=(px-ox)/s;let y;
+        if(t==='line')y=2*x-4;else if(t==='cube')y=Math.pow(x,3);else if(t==='exp')y=Math.exp(x);else if(t==='quad')y=x*x;
+        const py=oy-y*s;if(py<-50||py>h+50){f1=true;continue}if(f1){ct.moveTo(px,py);f1=false}else ct.lineTo(px,py)}
+    ct.stroke();
+
+    // Inverse Function
+    ct.strokeStyle=c2;ct.lineWidth=3;ct.beginPath();let f2=true;
+    for(let px=0;px<w;px+=.5){const x=(px-ox)/s;let y;
+        if(t==='line')y=(x+4)/2;else if(t==='cube')y=Math.sign(x)*Math.pow(Math.abs(x),1/3);else if(t==='exp'){if(x<=0){f2=true;continue}y=Math.log(x)}
+        else if(t==='quad'){
+            // Draw horizontal line failure demo
+            ct.setLineDash([5,5]);ct.strokeStyle='var(--pastel-red)';ct.lineWidth=2;ct.beginPath();ct.moveTo(0,oy-4*s);ct.lineTo(w,oy-4*s);ct.stroke();
+            ct.fillStyle='var(--pastel-red)';ct.beginPath();ct.arc(ox-2*s,oy-4*s,5,0,Math.PI*2);ct.fill();ct.beginPath();ct.arc(ox+2*s,oy-4*s,5,0,Math.PI*2);ct.fill();
+            break;
+        }
+        const py=oy-y*s;if(py<-50||py>h+50){f2=true;continue}if(f2){ct.moveTo(px,py);f2=false}else ct.lineTo(px,py)}
+    ct.stroke();
+
+    const info={line:`<strong style="color:${c1}">f(x) = 2x - 4</strong> y <strong style="color:${c2}">f⁻¹(x) = (x+4)/2</strong><br>Son simétricas respecto a la línea punteada y=x.`,cube:`<strong style="color:${c1}">f(x) = x³</strong> y <strong style="color:${c2}">f⁻¹(x) = ∛x</strong><br>Siempre creciente, por tanto inyectiva.`,exp:`<strong style="color:${c1}">f(x) = eˣ</strong> y <strong style="color:${c2}">f⁻¹(x) = ln(x)</strong><br>Clásico ejemplo de funciones inversas.`,quad:`<strong style="color:var(--pastel-red)">¡Falla la prueba de la línea horizontal!</strong><br>La línea cruza en x=-2 y x=2 (ambos dan y=4). No es inyectiva, no tiene inversa global.`};
+    document.getElementById('iInfo').innerHTML=`<p>${info[t]}</p>`;
+}
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="env.js"></script><script src="progress-tracker.js"></script><script src="quiz-engine.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{if(window.markLessonCompleted)window.markLessonCompleted('calculo_relaciones_funciones','sesion9')});</script>
+</body>
+</html>

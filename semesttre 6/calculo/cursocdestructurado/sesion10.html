@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 10: Composición y Modelos Matemáticos</title>
+    <link rel="stylesheet" href="global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="curso-styles.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        .machine-container{background:#1a252f;border-radius:15px;padding:2rem;margin:2rem 0;color:white;box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center;position:relative;overflow:hidden}
+        .machine-container h3{color:var(--accent-color);margin-top:0}
+        .pipeline{display:flex;align-items:center;justify-content:center;gap:20px;margin:3rem 0;position:relative}
+        .func-box{background:#2c3e50;border:3px solid var(--border-color);padding:20px;border-radius:12px;min-width:120px;z-index:2;position:relative;transition:all .3s}
+        .func-box.active{border-color:var(--pastel-gold);box-shadow:0 0 15px var(--pastel-gold);transform:scale(1.05)}
+        .data-bubble{background:var(--pastel-green);color:#111;font-weight:bold;padding:10px 15px;border-radius:20px;position:absolute;z-index:3;transition:all 1s ease-in-out;opacity:0}
+        .arrow{font-size:2rem;color:#7f8c8d;z-index:1}
+        .controls{display:flex;gap:10px;justify-content:center;margin-top:2rem}
+        .btn-run{background:var(--pastel-blue);color:#111;border:2px solid var(--dark-outline);border-radius:8px;padding:10px 20px;font-weight:bold;cursor:pointer;box-shadow:3px 3px 0px var(--dark-outline)}
+        .model-card{background:var(--bg-card);border:2px solid var(--dark-outline);padding:1.5rem;border-radius:12px;margin:1rem 0;box-shadow:5px 5px 0px var(--pastel-orange)}
+        .info-panel{background:#2c3e50;padding:15px;border-radius:8px;margin-top:15px;border-top:3px solid var(--primary-color)}
+    </style>
+</head>
+<body>
+<main class="page-container">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+    <div class="sesion-header">
+        <h1 class="sesion-title">Composición y Modelos Matemáticos</h1>
+        <p class="sesion-subtitle">Sesión 10 - Módulo 4: Operaciones y Aplicaciones</p>
+    </div>
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
+        <p style="margin-bottom:0;margin-top:.5rem">Evaluar y construir funciones compuestas, y aplicar modelos matemáticos usando funciones para resolver problemas de la vida real.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>Operaciones con Funciones</h2>
+        <p>Además de sumar, restar, multiplicar o dividir funciones, existe una operación única para ellas: la <strong>Composición</strong>.</p>
+        
+        <div class="model-card" style="box-shadow:5px 5px 0px var(--pastel-purple)">
+            <h4 style="color:var(--pastel-purple);margin-top:0"><i class="fas fa-link"></i> Composición: $(f \circ g)(x)$</h4>
+            <p>Se lee "$f$ composición $g$" o "$f$ de $g$ de $x$".</p>
+            <p>$$ (f \circ g)(x) = f(g(x)) $$</p>
+            <p>Significa que la salida de $g(x)$ se convierte en la <strong>entrada</strong> de $f(x)$. Es como una línea de ensamblaje.</p>
+            <p><em>Ejemplo:</em> Si $f(x) = x^2$ y $g(x) = x + 3$<br>
+            $f(g(x)) = f(x+3) = (x+3)^2$<br>
+            $g(f(x)) = g(x^2) = x^2 + 3$</p>
+            <p><strong>¡Atención!</strong> Por lo general, $f(g(x)) \neq g(f(x))$. No es conmutativa.</p>
+        </div>
+
+        <h2>Modelos Matemáticos</h2>
+        <p>Un modelo matemático es una función que describe un fenómeno del mundo real. Nos permite predecir resultados.</p>
+
+        <div class="model-card">
+            <h4 style="color:var(--pastel-orange);margin-top:0"><i class="fas fa-chart-line"></i> Ejemplo de Modelado: Negocios</h4>
+            <p>Una fábrica vende sillas. Producir cada silla cuesta \$20, y los gastos fijos son \$500.<br>
+            <strong>Costo:</strong> $C(x) = 20x + 500$<br>
+            Se venden a \$50 cada una.<br>
+            <strong>Ingreso:</strong> $I(x) = 50x$<br>
+            <strong>Utilidad (Ganancia):</strong> $U(x) = I(x) - C(x) = 50x - (20x + 500) = 30x - 500$</p>
+            <p>¿Cuántas sillas ($x$) deben vender para no tener pérdidas ($U(x) \geq 0$)?<br>
+            $30x - 500 \geq 0 \Rightarrow 30x \geq 500 \Rightarrow x \geq 16.6$ (Mínimo 17 sillas).</p>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-cogs"></i> Máquina de Composición</h2>
+        <p>Observa cómo el número 2 pasa por la función $g$ y su resultado alimenta a la función $f$.</p>
+        
+        <div class="machine-container">
+            <h3>$(f \circ g)(2) = f(g(2))$</h3>
+            <p>Sea $g(x) = 3x$ y $f(x) = x + 4$</p>
+            
+            <div class="pipeline">
+                <div id="data1" class="data-bubble" style="left:0">2</div>
+                
+                <div style="width:60px"></div> <!-- Entrada -->
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                
+                <div id="box-g" class="func-box">
+                    <h4 style="margin:0;color:var(--pastel-green)">g(x) = 3x</h4>
+                    <p id="res-g" style="margin:10px 0 0;font-weight:bold;color:var(--pastel-gold)"></p>
+                </div>
+                
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                
+                <div id="box-f" class="func-box">
+                    <h4 style="margin:0;color:var(--pastel-blue)">f(x) = x + 4</h4>
+                    <p id="res-f" style="margin:10px 0 0;font-weight:bold;color:var(--pastel-gold)"></p>
+                </div>
+                
+                <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                <div style="width:60px; border:2px dashed var(--pastel-gold); padding:10px; border-radius:10px; font-weight:bold" id="final-res">?</div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn-run" onclick="runMachine()"><i class="fas fa-play"></i> Iniciar Proceso</button>
+            </div>
+            <div class="info-panel" id="mInfo">
+                <p>Presiona Iniciar para ver el recorrido del dato.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ FINAL DE CURSO -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {"question":"🧩 Si f(x)=x² y g(x)=x-1, ¿cuánto es f(g(x))?","options":["x² - 1","(x-1)²","x² - x","x - 1²"],"correctIndex":1,"explanation":"f(g(x)) = f(x-1). Al sustituir (x-1) donde hay una x en f, obtenemos (x-1)²."},
+            {"question":"🧩 Si f(x)=x² y g(x)=x-1, ¿cuánto es g(f(x))?","options":["(x-1)²","x² - 1","x² - x","x² + 1"],"correctIndex":1,"explanation":"g(f(x)) = g(x²). Al sustituir x² donde hay una x en g, obtenemos x² - 1. Como ves, f(g(x)) ≠ g(f(x))."},
+            {"question":"🧮 Si h(x) = 2x+3 y k(x) = 5, ¿cuánto es h(k(x))?","options":["10x+3","13","2x+8","10"],"correctIndex":1,"explanation":"h(k(x)) = h(5) = 2(5) + 3 = 10 + 3 = 13."},
+            {"question":"🏭 Un taxista cobra $20 fijos más $10 por cada km. ¿Cuál es el modelo matemático de la tarifa T respecto a los km recorridos x?","options":["T(x) = 20x + 10","T(x) = 10x + 20","T(x) = 30x","T(x) = 20 + 10/x"],"correctIndex":1,"explanation":"El costo variable es 10x (10 por cada km), más el costo fijo de 20. Así, T(x) = 10x + 20."},
+            {"question":"🎯 ¿Qué significa (f ∘ g)(3)?","options":["Multiplicar f(3) por g(3)","Evaluar f en 3 y sumarle g en 3","Encontrar g(3), y usar ese resultado como entrada para f","Encontrar f(3), y usar ese resultado como entrada para g"],"correctIndex":2,"explanation":"Se evalúa de adentro hacia afuera: primero hallamos g(3), y ese valor se mete en f(x)."}
+        ]
+        </script>
+    </div>
+
+    <div class="qr-container"><h3><i class="fas fa-qrcode"></i> Menú de Sesiones</h3><p>Escanea para acceder al hub.</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jmgvproyectosyotros.netlify.app/semesttre%206/calculo/cursocdestructurado/index.html" alt="QR Code"></div>
+    <div class="sesion-navigation" style="justify-content:center">
+        <a href="sesion9.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Sesión 9</a>
+        <a href="index.html" class="nav-btn" style="background:var(--pastel-green)"><i class="fas fa-award"></i> Finalizar Curso y Volver al Mapa</a>
+    </div>
+</main>
+<footer class="footer"><p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p></footer>
+
+<script>
+function runMachine(){
+    const d=document.getElementById('data1'),bg=document.getElementById('box-g'),bf=document.getElementById('box-f');
+    const rg=document.getElementById('res-g'),rf=document.getElementById('res-f'),fr=document.getElementById('final-res'),mi=document.getElementById('mInfo');
+    
+    // Reset
+    d.style.transition='none';d.style.left='0';d.style.opacity='1';d.innerText='2';
+    bg.classList.remove('active');bf.classList.remove('active');
+    rg.innerText='';rf.innerText='';fr.innerText='?';fr.style.color='white';
+    
+    // Step 1: Move to g(x)
+    setTimeout(()=>{
+        d.style.transition='all 1s ease';d.style.left='140px';
+        mi.innerHTML='<p>1. El dato (2) entra en g(x).</p>';
+    },100);
+    
+    // Step 2: Compute g(x)
+    setTimeout(()=>{
+        d.style.opacity='0';bg.classList.add('active');
+        rg.innerText='g(2) = 3(2) = 6';
+        mi.innerHTML='<p>2. g(x) procesa la entrada: 3 × 2 = 6.</p>';
+    },1100);
+    
+    // Step 3: Move from g to f
+    setTimeout(()=>{
+        bg.classList.remove('active');
+        d.innerText='6';d.style.left='140px';d.style.opacity='1';
+        setTimeout(()=>{d.style.left='370px';},50);
+        mi.innerHTML='<p>3. El resultado (6) sale de g y viaja hacia f(x).</p>';
+    },2500);
+    
+    // Step 4: Compute f(x)
+    setTimeout(()=>{
+        d.style.opacity='0';bf.classList.add('active');
+        rf.innerText='f(6) = 6 + 4 = 10';
+        mi.innerHTML='<p>4. f(x) procesa la nueva entrada: 6 + 4 = 10.</p>';
+    },3600);
+    
+    // Step 5: Final output
+    setTimeout(()=>{
+        bf.classList.remove('active');
+        fr.innerText='10';fr.style.color='var(--pastel-green)';
+        mi.innerHTML='<p style="color:var(--pastel-green);font-weight:bold">¡Completado! (f ∘ g)(2) = 10</p>';
+    },5000);
+}
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="env.js"></script><script src="progress-tracker.js"></script><script src="quiz-engine.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{if(window.markLessonCompleted)window.markLessonCompleted('calculo_relaciones_funciones','sesion10')});</script>
+</body>
+</html>

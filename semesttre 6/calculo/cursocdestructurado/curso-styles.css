@@ -1,15 +1,15 @@
 /* curso-styles.css - Estilos Globales para el Curso Estructurado */
 :root {
-    --primary-color: #00f3ff;
-    --secondary-color: #ff007f;
-    --accent-color: #ccff00;
-    --bg-main: #0b0b13;
-    --bg-card: #151525;
-    --border-color: #2d2d44;
-    --text-heading: #ffffff;
+    --primary-color: #ff2a4b; /* Vibrant Red */
+    --secondary-color: #3b82f6; /* Vibrant Blue */
+    --accent-color: #f43f5e; /* Rose Red Accent */
+    --bg-main: #070b14; /* Deep Dark Blue Background */
+    --bg-card: #111827; /* Dark Slate Blue Card */
+    --border-color: #1e293b;
+    --text-heading: #f8fafc;
     --text-main: #e2e8f0;
     --text-muted: #94a3b8;
-    --shadow-soft: 0 8px 30px rgba(0,0,0,0.5);
+    --shadow-soft: 0 8px 30px rgba(0,0,0,0.6);
 }
 
 /* Modificadores globales para asegurar buen contraste */
@@ -42,8 +42,8 @@ a {
 }
 
 .pros-card {
-    background: #112a20;
-    border-left: 5px solid var(--accent-color);
+    background: #1e1b2e; /* Darker red-tint background */
+    border-left: 5px solid var(--primary-color);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: var(--shadow-soft);
@@ -51,7 +51,7 @@ a {
 }
 
 .cons-card {
-    background: #2a1120;
+    background: #172033; /* Darker blue-tint background */
     border-left: 5px solid var(--secondary-color);
     padding: 1.5rem;
     border-radius: 8px;
@@ -79,7 +79,7 @@ a {
 .component-btn {
     position: absolute;
     background: var(--primary-color);
-    color: #000; /* Letras negras para buen contraste sobre fondos neon */
+    color: #fff; /* Letras blancas sobre rojo */
     border: none;
     width: 40px;
     height: 40px;
@@ -87,7 +87,7 @@ a {
     font-weight: bold;
     font-size: 1.2rem;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 42, 75, 0.8);
     transition: transform 0.3s;
     animation: pulseBtn 2s infinite;
 }
@@ -97,9 +97,9 @@ a {
 }
 
 @keyframes pulseBtn {
-    0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(0, 243, 255, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 42, 75, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0); }
 }
 
 .info-panel {
@@ -123,7 +123,7 @@ a {
    ========================================= */
 .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
 .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative;}
-.roadmap-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-shadow: 0 0 15px rgba(0, 243, 255, 0.6); }
+.roadmap-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-shadow: 0 0 15px rgba(255, 42, 75, 0.6); }
 .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
 
 .qr-container {
@@ -146,7 +146,7 @@ a {
 
 .course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
 .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
-.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.5s ease; box-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.5s ease; box-shadow: 0 0 15px rgba(255, 42, 75, 0.5); }
 .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; color: var(--text-main); }
 
 .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
@@ -156,14 +156,14 @@ a {
 
 .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
 .session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.session-card.completed { border-left: 5px solid var(--accent-color); background: rgba(204, 255, 0, 0.05); box-shadow: 0 0 10px rgba(204, 255, 0, 0.2); }
+.session-card.completed { border-left: 5px solid var(--accent-color); background: rgba(244, 63, 94, 0.05); box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
 .session-card.completed .status-icon { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
 
 .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .status-icon { color: var(--border-color); font-size: 1.2rem; }
 
 .session-info { flex-grow: 1; }
-.session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: #000; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+.session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: #fff; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
 .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: var(--text-heading); }
 .session-desc { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
 

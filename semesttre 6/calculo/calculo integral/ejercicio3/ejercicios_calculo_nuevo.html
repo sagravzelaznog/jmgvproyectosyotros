@@ -2124,10 +2124,12 @@ const { jsPDF } = window.jspdf;
                 // Format the solution steps
                 let solution = '';
                 if (ex.formula) {
-                    solution += `Fórmula: $${ex.formula}$\\n`;
+                    solution += `Fórmula: $${ex.formula}$\
+`;
                 }
                 if (ex.steps && ex.steps.length > 0) {
-                    solution += ex.steps.map((step, i) => `${i + 1}. ${step}`).join('\\n');
+                    solution += ex.steps.map((step, i) => `${i + 1}. ${step}`).join('\
+');
                 }
                 
                 // Format the final result

@@ -720,7 +720,8 @@
                 feedback += '<p>❌ Simplificación incorrecta. Correcto: x + 2 (para x ≠ 2)</p>';
             }
             
-            alert(feedback + `\n\nPuntuación: ${score}/3`);
+            alert(feedback + `
+\nPuntuación: ${score}/3`);
             
             if (score >= 2) {
                 completedExercises.add('ejercicio1');
@@ -757,7 +758,8 @@
                 feedback += '<p>❌ Función b) incorrecta. Correcto: Sí inyectiva, no sobreyectiva, no biyectiva</p>';
             }
             
-            alert(feedback + `\n\nPuntuación: ${score}/2`);
+            alert(feedback + `
+\nPuntuación: ${score}/2`);
             
             if (score >= 1) {
                 completedExercises.add('ejercicio2');
@@ -803,7 +805,8 @@
                 feedback += '<p>❌ Dominio de (g∘f) incorrecto</p>';
             }
             
-            alert(feedback + `\n\nPuntuación: ${score}/3`);
+            alert(feedback + `
+\nPuntuación: ${score}/3`);
             
             if (score >= 2) {
                 completedExercises.add('ejercicio3');
@@ -841,7 +844,8 @@
                 feedback += '<p>❌ Falta la verificación</p>';
             }
             
-            alert(feedback + `\n\nPuntuación: ${score}/3`);
+            alert(feedback + `
+\nPuntuación: ${score}/3`);
             
             if (score >= 2) {
                 completedExercices.add('ejercicio4');
@@ -879,7 +883,8 @@
                 feedback += '<p>❌ Falta descripción de gráficas</p>';
             }
             
-            alert(feedback + `\n\nPuntuación: ${score}/3`);
+            alert(feedback + `
+\nPuntuación: ${score}/3`);
             
             if (score >= 2) {
                 completedExercises.add('ejercicio5');
@@ -920,7 +925,9 @@
                 message = 'Continúa estudiando y practicando. Revisa los conceptos fundamentales.';
             }
             
-            alert(`Progreso Final: ${Math.round(finalProgress)}%\n\n${message}`);
+            alert(`Progreso Final: ${Math.round(finalProgress)}%
+
+${message}`);
         }
 
         // Actualizar MathJax cuando sea necesario

@@ -4,13 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sesión 1: Relaciones y Funciones</title>
-    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="../../../../Ciencias%20y%20Especialidades/global-lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="curso-styles.css">
+    <!-- MathJax para Fórmulas Matemáticas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
     <style>
-        /* Posiciones específicas para el SVG de la Sesión 1 */
-        #btn-relacion { top: 40%; left: 20%; }
-        #btn-funcion { top: 40%; right: 20%; }
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons-grid { grid-template-columns: 1fr; }
+        }
+
+        .pros-card {
+            background: #f0fdf4;
+            border-left: 5px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cons-card {
+            background: #fef2f2;
+            border-left: 5px solid #e74c3c;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Interactive Diagram */
+        .math-diagram {
+            background: #1a252f;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .svg-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .component-btn {
+            position: absolute;
+            background: var(--accent-color);
+            color: #111;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.8);
+            transition: transform 0.3s;
+        }
+
+        .component-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .info-panel {
+            background: #2c3e50;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 100px;
+            border-top: 3px solid var(--primary-color);
+            text-align: left;
+        }
+
+        .info-panel h3 { color: var(--accent-color); margin-top: 0; }
+        
+        .arrow-path {
+            stroke: #f1c40f;
+            stroke-width: 3;
+            marker-end: url(#arrowhead);
+            fill: none;
+        }
+        
+        .arrow-path.relation { stroke: #e74c3c; }
+        .arrow-path.function { stroke: #2ecc71; }
     </style>
 </head>
 <body>
@@ -19,116 +105,87 @@
     <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
 
     <div class="sesion-header">
-        <h1 class="sesion-title">Relaciones y Funciones</h1>
+        <h1 class="sesion-title">Introducción a Relaciones y Funciones</h1>
         <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Básicos</p>
     </div>
 
     <div class="info-box">
         <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
-        <p style="margin-bottom: 0; margin-top: 0.5rem;">Diferenciar claramente entre una relación matemática y una función, comprendiendo la regla de asignación única a través de diagramas sagitales y pares ordenados.</p>
+        <p style="margin-bottom: 0; margin-top: 0.5rem;">Diferenciar claramente entre una relación matemática y una función, entendiendo cómo los elementos de dos conjuntos interactúan bajo una regla de correspondencia y cómo se representan a través de diagramas de Venn y pares ordenados.</p>
     </div>
 
     <div class="teoria-section">
-        <h2>¿Cuál es la diferencia?</h2>
-        <p>En matemáticas, a menudo conectamos elementos de un conjunto de entrada con elementos de un conjunto de salida. Pero hay reglas estrictas sobre cómo se pueden hacer estas conexiones.</p>
+        <h2>¿Qué es una Relación y qué es una Función?</h2>
+        <p>En el mundo de las matemáticas, asociamos elementos de un grupo con elementos de otro grupo constantemente. Dependiendo de las reglas de esta asociación, podemos clasificarlas en <strong>Relaciones</strong> o <strong>Funciones</strong>.</p>
 
         <div class="pros-cons-grid">
-            <div class="pros-card">
-                <h3 style="color:var(--accent-color); margin-top:0;"><i class="fas fa-project-diagram"></i> Relación</h3>
-                <p>Es una <strong>regla de correspondencia</strong> entre los elementos de dos conjuntos.</p>
+            <div class="cons-card">
+                <h3 style="color:#c0392b; margin-top:0;"><i class="fas fa-project-diagram"></i> La Relación</h3>
+                <p>Es cualquier regla de correspondencia entre los elementos de dos conjuntos.</p>
                 <ul>
-                    <li>Un elemento del primer conjunto puede tener <strong>más de un</strong> elemento asignado en el segundo.</li>
-                    <li>No hay restricciones de exclusividad.</li>
-                    <li><em>Ejemplo: Un padre (conjunto A) puede tener varios hijos (conjunto B).</em></li>
+                    <li>No hay reglas estrictas.</li>
+                    <li>Un elemento del Conjunto A puede asociarse con <strong>varios</strong> elementos del Conjunto B.</li>
+                    <li>Ejemplo en pares ordenados: $R = \\{(x_1, y_1), (x_1, y_2)\\}$. ¡El mismo $x_1$ tiene dos valores de $y$!</li>
                 </ul>
             </div>
             
-            <div class="cons-card">
-                <h3 style="color:var(--secondary-color); margin-top:0;"><i class="fas fa-function"></i> Función</h3>
-                <p>Es una regla de correspondencia <strong>estricta</strong>.</p>
+            <div class="pros-card">
+                <h3 style="color:#27ae60; margin-top:0;"><i class="fas fa-function"></i> La Función $f(x)$</h3>
+                <p>Es una relación especial y más estricta que resuelve problemas predictibles.</p>
                 <ul>
-                    <li>A cada elemento del primer conjunto (dominio) le asocia un <strong>único y solo un</strong> elemento del segundo conjunto (contradominio).</li>
-                    <li>Si <em>x</em> se mapea a <em>y1</em> y <em>y2</em>, entonces <strong>NO</strong> es función.</li>
-                    <li><em>Ejemplo: Cada persona (conjunto A) tiene una sola huella dactilar (conjunto B).</em></li>
+                    <li>Asocia a <strong>cada elemento</strong> del primer conjunto (Dominio) un <strong>único</strong> elemento del segundo conjunto (Contradominio).</li>
+                    <li>No puede haber dos pares con el mismo primer elemento.</li>
+                    <li>Ejemplo: $f = \\{(x_1, y_1), (x_2, y_2)\\}$. Cada $x$ es única.</li>
                 </ul>
             </div>
         </div>
+        <p><em>Regla de Oro:</em> <strong>Todas las funciones son relaciones, pero NO todas las relaciones son funciones.</strong></p>
     </div>
 
     <div class="practica-section">
-        <h2>Diagramas Sagitales Interactivos</h2>
-        <p>Toca (o haz clic) en los botones para analizar si el diagrama representa una Relación o una Función.</p>
+        <h2>Diagramas Interactivos de Correspondencia</h2>
+        <p>Observa cómo las flechas conectan los puntos del Conjunto A con el Conjunto B. Toca los botones inferiores para ver la diferencia gráfica entre una Relación y una Función.</p>
 
-        <div class="solar-diagram">
+        <div class="math-diagram">
             <div class="svg-container">
-                <svg viewBox="0 0 800 400" width="100%" height="100%" style="background:#0f172a; border-radius:10px;">
-                    <!-- Conjuntos Izquierda (Relacion) -->
-                    <ellipse cx="150" cy="200" rx="60" ry="120" fill="transparent" stroke="#3498db" stroke-width="3" stroke-dasharray="5,5"/>
-                    <text x="150" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">A</text>
-                    <ellipse cx="300" cy="200" rx="60" ry="120" fill="transparent" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,5"/>
-                    <text x="300" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">B</text>
-                    
-                    <!-- Puntos A1 -->
-                    <circle cx="150" cy="130" r="5" fill="white"/>
-                    <text x="130" y="135" fill="white" font-family="sans-serif">x1</text>
-                    <circle cx="150" cy="200" r="5" fill="white"/>
-                    <text x="130" y="205" fill="white" font-family="sans-serif">x2</text>
-                    <circle cx="150" cy="270" r="5" fill="white"/>
-                    <text x="130" y="275" fill="white" font-family="sans-serif">x3</text>
-
-                    <!-- Puntos B1 -->
-                    <circle cx="300" cy="130" r="5" fill="white"/>
-                    <text x="320" y="135" fill="white" font-family="sans-serif">y1</text>
-                    <circle cx="300" cy="200" r="5" fill="white"/>
-                    <text x="320" y="205" fill="white" font-family="sans-serif">y2</text>
-                    <circle cx="300" cy="270" r="5" fill="white"/>
-                    <text x="320" y="275" fill="white" font-family="sans-serif">y3</text>
-
-                    <!-- Flechas Relacion (x2 va a y1 y y3) -->
-                    <path d="M 155 130 L 290 130" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-                    <path d="M 155 200 L 290 135" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-                    <path d="M 155 200 L 290 265" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-                    <path d="M 155 270 L 290 270" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-
-                    <!-- Conjuntos Derecha (Funcion) -->
-                    <ellipse cx="500" cy="200" rx="60" ry="120" fill="transparent" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,5"/>
-                    <text x="500" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">X</text>
-                    <ellipse cx="650" cy="200" rx="60" ry="120" fill="transparent" stroke="#f39c12" stroke-width="3" stroke-dasharray="5,5"/>
-                    <text x="650" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">Y</text>
-
-                    <!-- Puntos X2 -->
-                    <circle cx="500" cy="130" r="5" fill="white"/>
-                    <text x="480" y="135" fill="white" font-family="sans-serif">1</text>
-                    <circle cx="500" cy="200" r="5" fill="white"/>
-                    <text x="480" y="205" fill="white" font-family="sans-serif">2</text>
-                    <circle cx="500" cy="270" r="5" fill="white"/>
-                    <text x="480" y="275" fill="white" font-family="sans-serif">3</text>
-
-                    <!-- Puntos Y2 -->
-                    <circle cx="650" cy="165" r="5" fill="white"/>
-                    <text x="670" y="170" fill="white" font-family="sans-serif">a</text>
-                    <circle cx="650" cy="235" r="5" fill="white"/>
-                    <text x="670" y="240" fill="white" font-family="sans-serif">b</text>
-
-                    <!-- Flechas Funcion (Varias x van a una misma y, ES VALIDO) -->
-                    <path d="M 505 130 L 640 160" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-                    <path d="M 505 200 L 640 170" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-                    <path d="M 505 270 L 640 240" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
-
+                <svg viewBox="0 0 600 300" width="100%" height="100%">
                     <defs>
-                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                          <path d="M0,0 L0,6 L9,3 z" fill="white" />
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#f1c40f" />
                         </marker>
                     </defs>
-                </svg>
+                    
+                    <!-- Conjunto A -->
+                    <ellipse cx="200" cy="150" rx="60" ry="120" fill="transparent" stroke="white" stroke-width="2"/>
+                    <text x="200" y="20" font-family="sans-serif" font-size="18" fill="white" text-anchor="middle">Conjunto A</text>
+                    
+                    <circle cx="200" cy="80" r="5" fill="white"/> <text x="180" y="85" fill="white">$x_1$</text>
+                    <circle cx="200" cy="150" r="5" fill="white"/> <text x="180" y="155" fill="white">$x_2$</text>
+                    <circle cx="200" cy="220" r="5" fill="white"/> <text x="180" y="225" fill="white">$x_3$</text>
 
-                <button class="component-btn" id="btn-relacion" onclick="showInfo('relacion')"><i class="fas fa-search"></i></button>
-                <button class="component-btn" id="btn-funcion" onclick="showInfo('funcion')"><i class="fas fa-search"></i></button>
+                    <!-- Conjunto B -->
+                    <ellipse cx="400" cy="150" rx="60" ry="120" fill="transparent" stroke="white" stroke-width="2"/>
+                    <text x="400" y="20" font-family="sans-serif" font-size="18" fill="white" text-anchor="middle">Conjunto B</text>
+                    
+                    <circle cx="400" cy="80" r="5" fill="white"/> <text x="415" y="85" fill="white">$y_1$</text>
+                    <circle cx="400" cy="150" r="5" fill="white"/> <text x="415" y="155" fill="white">$y_2$</text>
+                    <circle cx="400" cy="220" r="5" fill="white"/> <text x="415" y="225" fill="white">$y_3$</text>
+
+                    <!-- Flechas Dinámicas (se controlan por JS) -->
+                    <g id="arrows-group">
+                        <text x="300" y="150" fill="#7f8c8d" text-anchor="middle">Selecciona una opción abajo</text>
+                    </g>
+                </svg>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 15px;">
+                <button class="nav-btn" onclick="drawRelation()" style="background: #e74c3c;">Dibujar Relación</button>
+                <button class="nav-btn" onclick="drawFunction()" style="background: #2ecc71;">Dibujar Función</button>
             </div>
 
             <div class="info-panel" id="desc-box">
-                <h3 style="color:#bdc3c7;"><i class="fas fa-hand-pointer"></i> Selecciona una lupa</h3>
-                <p>Haz clic en los botones sobre los diagramas para revelar su análisis.</p>
+                <h3 style="color:#bdc3c7;"><i class="fas fa-hand-pointer"></i> Interacción</h3>
+                <p>Uza los botones para visualizar cómo se mapean los elementos.</p>
             </div>
         </div>
     </div>
@@ -138,75 +195,86 @@
         <script type="application/json">
         [
             {
-                "question": "En un diagrama, el elemento x=4 del primer conjunto se enlaza con y=10 y y=15 del segundo conjunto. ¿Qué representa este diagrama?",
+                "question": "¿Cuál es la principal diferencia entre una relación y una función matemática?",
                 "options": [
-                    "Una Función.",
-                    "Una Relación.",
-                    "Un Conjunto Vacío."
+                    "Una función solo utiliza números positivos, mientras que la relación utiliza negativos.",
+                    "En una función, a cada elemento del primer conjunto le corresponde un ÚNICO elemento del segundo conjunto.",
+                    "La relación es representada con letras y la función con números."
                 ],
                 "correctIndex": 1,
-                "explanation": "Es una relación. Para que sea función, el elemento x=4 solo podría enlazarse con un único valor en el contradominio. Al tener dos salidas (10 y 15), rompe la regla de unicidad."
+                "explanation": "La definición principal establece que en una función, cada valor de 'x' (Dominio) solo puede estar asociado a un solo valor de 'y' (Contradominio). Si un 'x' tuviera dos flechas hacia 'y', sería solo una relación."
             },
             {
-                "question": "Si definimos la regla: 'A cada estudiante se le asigna su número de identificación estudiantil único'. ¿Esto modela una función?",
+                "question": "Observa el siguiente conjunto de pares ordenados: {(1, 4), (2, 5), (1, 6), (3, 7)}. ¿Esto representa una función o una relación?",
                 "options": [
-                    "Sí, porque a cada entrada le corresponde exactamente una salida.",
-                    "No, porque muchos estudiantes tienen el mismo número.",
-                    "No, es solo una relación de bases de datos."
+                    "Es una Función.",
+                    "Es una Relación.",
+                    "No es ninguna de las dos."
+                ],
+                "correctIndex": 1,
+                "explanation": "Es una Relación. Fíjate en los pares (1, 4) y (1, 6). El número 1 en 'x' se está repitiendo y apunta a dos valores distintos de 'y' (4 y 6). En una función, el primer elemento no puede repetirse."
+            },
+            {
+                "question": "¿Cómo se llama formalmente al primer conjunto (Conjunto A) del cual salen las flechas en un diagrama de función?",
+                "options": [
+                    "Dominio.",
+                    "Contradominio.",
+                    "Rango."
                 ],
                 "correctIndex": 0,
-                "explanation": "Correcto. Dado que ningún estudiante puede tener dos o más identificaciones simultáneas en el sistema principal, cumple perfectamente la regla estricta de una función."
-            },
-            {
-                "question": "Observa los pares ordenados: {(1, 5), (2, 5), (3, 5)}. ¿Representan una función?",
-                "options": [
-                    "No, porque todos tienen el número 5.",
-                    "Sí, porque cada elemento de entrada (1, 2, 3) tiene una única asignación.",
-                    "No se puede saber sin una gráfica."
-                ],
-                "correctIndex": 1,
-                "explanation": "Es VÁLIDO en una función que múltiples valores de 'x' apunten a un mismo valor de 'y' (en este caso el 5). Lo que NO es válido es que un mismo valor de 'x' apunte a múltiples 'y'."
+                "explanation": "El primer conjunto se llama Dominio (las 'x'). El segundo conjunto al que llegan las flechas es el Contradominio (las 'y')."
             }
         ]
         </script>
     </div>
 
+    <!-- QR Code para escanear y volver al menú -->
+    <div class="qr-container">
+        <h3><i class="fas fa-qrcode"></i> Menú de Sesiones</h3>
+        <p>Escanea para acceder al hub del curso desde tu celular.</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jmgvproyectosyotros.netlify.app/semesttre%206/calculo/cursocdestructurado/index.html" alt="QR Code">
+    </div>
+
     <!-- Navegación Inferior -->
     <div class="sesion-navigation">
         <a href="index.html" class="nav-btn"><i class="fas fa-map"></i> Volver al Mapa</a>
-        <a href="sesion2.html" class="nav-btn next">Siguiente Sesión (Dominio y Rango) <i class="fas fa-arrow-right"></i></a>
+        <a href="sesion2.html" class="nav-btn next">Siguiente Sesión (Notación) <i class="fas fa-arrow-right"></i></a>
     </div>
 
 </main>
 
-<footer class="footer" style="text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border-color);">
-    <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial</em>. TODOS LOS DERECHOS RESERVADOS.</p>
+<footer class="footer">
+    <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
 </footer>
 
 <script>
-    const infos = {
-        'relacion': {
-            title: "Es Solo una Relación",
-            text: "Observa el punto <strong>x2</strong> en el conjunto A. De él salen DOS flechas (hacia y1 y y3). Por culpa de esta doble asignación, este diagrama <strong>no es una función</strong>, se queda en la categoría de relación general."
-        },
-        'funcion': {
-            title: "Es una Función Válida",
-            text: "Aunque los elementos <strong>1</strong> y <strong>2</strong> del conjunto X apunten al mismo elemento <strong>a</strong> en el conjunto Y, esto es perfectamente válido. Lo importante es que de cada elemento de X sale <strong>exactamente una sola flecha</strong>."
-        }
-    };
+    function drawRelation() {
+        const group = document.getElementById('arrows-group');
+        group.innerHTML = `
+            <path d="M 205 80 L 395 80" class="arrow-path relation" />
+            <path d="M 205 80 L 395 150" class="arrow-path relation" /> <!-- Repite X1 -->
+            <path d="M 205 150 L 395 220" class="arrow-path relation" />
+            <path d="M 205 220 L 395 220" class="arrow-path relation" />
+        `;
+        document.getElementById('desc-box').innerHTML = `
+            <h3 style="color:#e74c3c;">Esto es una Relación</h3>
+            <p>Fíjate cómo del elemento <strong>$x_1$</strong> salen DOS flechas (apuntando a $y_1$ y $y_2$). Esto rompe la regla de unicidad, por lo que es una relación, no una función.</p>
+        `;
+        MathJax.typeset();
+    }
 
-    function showInfo(id) {
-        const box = document.getElementById('desc-box');
-        box.innerHTML = `<h3>${infos[id].title}</h3><p>${infos[id].text}</p>`;
-        
-        document.querySelectorAll('.component-btn').forEach(b => {
-            b.style.background = "var(--primary-color)";
-            b.style.transform = "scale(1)";
-        });
-        
-        const btn = document.getElementById('btn-' + id);
-        btn.style.background = "var(--secondary-color)";
-        btn.style.transform = "scale(1.1)";
+    function drawFunction() {
+        const group = document.getElementById('arrows-group');
+        group.innerHTML = `
+            <path d="M 205 80 L 395 150" class="arrow-path function" />
+            <path d="M 205 150 L 395 80" class="arrow-path function" />
+            <path d="M 205 220 L 395 220" class="arrow-path function" />
+        `;
+        document.getElementById('desc-box').innerHTML = `
+            <h3 style="color:#2ecc71;">Esto es una Función</h3>
+            <p>Observa que de cada elemento de 'x' sale <strong>solamente una flecha</strong>. No importa si dos flechas llegan al mismo punto en 'y', lo importante es que de 'A' cada quien envíe solo un enlace.</p>
+        `;
+        MathJax.typeset();
     }
 </script>
 
@@ -214,13 +282,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="../../../../env.js"></script>
-<script src="../../../../progress-tracker.js"></script>
-<script src="../../../../quiz-engine.js"></script>
+<script src="../../../env.js"></script>
+<script src="../../../../Ciencias%20y%20Especialidades/progress-tracker.js"></script>
+<script src="../../../../Ciencias%20y%20Especialidades/quiz-engine.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       if (window.markLessonCompleted) {
-          window.markLessonCompleted('calculo_dif_relaciones', 'sesion1');
+          window.markLessonCompleted('calculo_relaciones_funciones', 'sesion1');
       }
   });
 </script>

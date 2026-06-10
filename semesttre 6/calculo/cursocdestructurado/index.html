@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Diferencial | Relaciones y Funciones</title>
-    <link rel="stylesheet" href="../../global-lesson.css">
+    <title>Cálculo Diferencial: Relaciones y Funciones | Mapa de Conocimiento</title>
+    <link rel="stylesheet" href="../../../../Ciencias%20y%20Especialidades/global-lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="curso-styles.css">
+    <style>
+        .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+        .roadmap-header h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 1rem; }
+        .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+        
+        .course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #3498db, #2ecc71); transition: width 0.5s ease; }
+        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; }
+        
+        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
+        
+        .module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
+        .module-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        
+        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
+        .session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .session-card.completed { border-left: 5px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
+        .session-card.completed .status-icon { color: #2ecc71; }
+        
+        .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .status-icon { color: var(--border-color); font-size: 1.2rem; }
+        
+        .session-info { flex-grow: 1; }
+        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: var(--text-heading); }
+        .session-desc { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
+    </style>
 </head>
 <body class="roadmap-page">
 
-    <div class="back-nav">
-        <a href="../../../../index.html"><i class="fas fa-arrow-left"></i> Volver al Directorio de Proyectos</a>
-    </div>
-
     <div class="roadmap-header">
-        <div class="qr-container">
-            <img src="qrcode.png" alt="QR Code del Curso">
-            <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">Escanea para móvil</p>
-        </div>
-        <h1><i class="fas fa-square-root-variable"></i> Cálculo Diferencial</h1>
-        <p>10 sesiones interactivas para dominar el concepto de Relaciones y Funciones matemáticas.</p>
+        <h1><i class="fas fa-square-root-variable"></i> Relaciones y Funciones</h1>
+        <p>10 sesiones interactivas para dominar los fundamentos del Cálculo Diferencial y Modelos Matemáticos.</p>
         
         <div class="course-progress-container">
             <div class="progress-bar-bg">
@@ -37,14 +58,14 @@
         
         <!-- MÓDULO 1 -->
         <div class="module-group">
-            <div class="module-title"><i class="fas fa-book-open"></i> Módulo 1: Conceptos Básicos</div>
+            <div class="module-title"><i class="fas fa-shapes"></i> Módulo 1: Conceptos Básicos</div>
             
             <a href="sesion1.html" class="session-card" data-lesson="sesion1">
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 1</span>
-                    <h3 class="session-name">Relaciones y Funciones</h3>
-                    <p class="session-desc">Diferencias entre relación y función, regla de correspondencia y diagramas sagitales.</p>
+                    <h3 class="session-name">Introducción a Relaciones y Funciones</h3>
+                    <p class="session-desc">Reglas de correspondencia, pares ordenados y diagramas de flechas.</p>
                 </div>
             </a>
 
@@ -52,8 +73,8 @@
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 2</span>
-                    <h3 class="session-name">Dominio, Contradominio y Rango</h3>
-                    <p class="session-desc">Análisis de los conjuntos de entrada y salida, y la prueba de la recta vertical.</p>
+                    <h3 class="session-name">Notación y Valor de una Función</h3>
+                    <p class="session-desc">Evaluación de funciones en puntos específicos algebraicamente.</p>
                 </div>
             </a>
 
@@ -61,22 +82,22 @@
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 3</span>
-                    <h3 class="session-name">Notación y Valor de una Función</h3>
-                    <p class="session-desc">Evaluación de funciones f(x) y sustitución de variables independientes.</p>
+                    <h3 class="session-name">Dominio, Contradominio y Rango</h3>
+                    <p class="session-desc">Determinación del conjunto de valores posibles para X y para Y.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 2 -->
         <div class="module-group">
-            <div class="module-title"><i class="fas fa-project-diagram"></i> Módulo 2: Tipos de Funciones</div>
+            <div class="module-title"><i class="fas fa-chart-area"></i> Módulo 2: Clasificación y Tipos de Funciones</div>
             
             <a href="sesion4.html" class="session-card" data-lesson="sesion4">
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 4</span>
-                    <h3 class="session-name">Funciones Algebraicas</h3>
-                    <p class="session-desc">Polinomiales, racionales y con radicales. Determinación de sus dominios.</p>
+                    <h3 class="session-name">Funciones Algebraicas Básicas</h3>
+                    <p class="session-desc">Función constante, función lineal y función cuadrática (parábolas).</p>
                 </div>
             </a>
 
@@ -84,8 +105,8 @@
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 5</span>
-                    <h3 class="session-name">Funciones Trascendentes</h3>
-                    <p class="session-desc">Exponenciales, logarítmicas y trigonométricas.</p>
+                    <h3 class="session-name">Funciones Racionales y Radicales</h3>
+                    <p class="session-desc">División entre cero, asíntotas verticales y restricciones de raíces.</p>
                 </div>
             </a>
 
@@ -93,22 +114,22 @@
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 6</span>
-                    <h3 class="session-name">Funciones Especiales</h3>
-                    <p class="session-desc">Función constante, identidad, valor absoluto y función mayor entero (escalón).</p>
+                    <h3 class="session-name">Funciones Trascendentes</h3>
+                    <p class="session-desc">Funciones exponenciales, logarítmicas y trigonométricas.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 3 -->
         <div class="module-group">
-            <div class="module-title"><i class="fas fa-chart-line"></i> Módulo 3: Gráficas y Transformaciones</div>
+            <div class="module-title"><i class="fas fa-bezier-curve"></i> Módulo 3: Gráficas y Transformaciones</div>
 
             <a href="sesion7.html" class="session-card" data-lesson="sesion7">
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 7</span>
-                    <h3 class="session-name">Desplazamientos y Alargamientos</h3>
-                    <p class="session-desc">Modificación de la gráfica base sumando y multiplicando constantes.</p>
+                    <h3 class="session-name">Transformaciones Gráficas</h3>
+                    <p class="session-desc">Desplazamientos, alargamientos y reflexiones de funciones conocidas.</p>
                 </div>
             </a>
 
@@ -116,52 +137,56 @@
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 8</span>
-                    <h3 class="session-name">Reflexiones</h3>
-                    <p class="session-desc">Reflexión vertical y horizontal sobre los ejes X y Y.</p>
+                    <h3 class="session-name">Funciones Especiales</h3>
+                    <p class="session-desc">Función valor absoluto, mayor entero (escalonada) y característica.</p>
+                </div>
+            </a>
+
+            <a href="sesion9.html" class="session-card" data-lesson="sesion9">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 9</span>
+                    <h3 class="session-name">Comportamiento e Inversas</h3>
+                    <p class="session-desc">Funciones inyectivas/biyectivas, crecientes/decrecientes y función inversa.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 4 -->
         <div class="module-group">
-            <div class="module-title"><i class="fas fa-cogs"></i> Módulo 4: Operaciones y Propiedades</div>
-
-            <a href="sesion9.html" class="session-card" data-lesson="sesion9">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 9</span>
-                    <h3 class="session-name">Operaciones y Composición</h3>
-                    <p class="session-desc">Suma, resta, multiplicación, división y función compuesta f(g(x)).</p>
-                </div>
-            </a>
+            <div class="module-title"><i class="fas fa-layer-group"></i> Módulo 4: Operaciones y Aplicaciones</div>
 
             <a href="sesion10.html" class="session-card" data-lesson="sesion10">
                 <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 10</span>
-                    <h3 class="session-name">Clasificación de Correspondencia</h3>
-                    <p class="session-desc">Funciones inyectivas, suprayectivas, biyectivas y función inversa.</p>
+                    <h3 class="session-name">Composición y Modelos Matemáticos</h3>
+                    <p class="session-desc">Operaciones con funciones y aplicación para resolver problemas de la vida real.</p>
                 </div>
             </a>
         </div>
 
     </div>
 
-    <footer class="footer" style="text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border-color);">
-        <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial</em>. TODOS LOS DERECHOS RESERVADOS.</p>
+    <div style="text-align: center; margin-bottom: 40px;">
+        <a href="../../index.html" style="color: var(--text-color); font-weight: bold; text-decoration: none;">← Volver al Hub Principal de Cálculo</a>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
     </footer>
 
     <!-- Firebase y Lógica de Progreso -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="../../../../env.js"></script>
-    <script src="../../../../progress-tracker.js"></script>
+    <script src="../../../env.js"></script>
+    <script src="../../../../Ciencias%20y%20Especialidades/progress-tracker.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             if (typeof window.getUserProgress === 'function') {
-                const progress = await window.getUserProgress('calculo_dif_relaciones');
+                const progress = await window.getUserProgress('calculo_relaciones_funciones');
                 const totalLessons = 10;
                 let completedCount = 0;
 

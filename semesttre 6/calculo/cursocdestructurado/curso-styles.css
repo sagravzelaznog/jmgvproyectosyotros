@@ -1,185 +1,172 @@
-/* curso-styles.css - Estilos Globales para el Curso Estructurado */
 :root {
-    --primary-color: #ff2a4b; /* Vibrant Red */
-    --secondary-color: #3b82f6; /* Vibrant Blue */
-    --accent-color: #f43f5e; /* Rose Red Accent */
-    --bg-main: #070b14; /* Deep Dark Blue Background */
-    --bg-card: #111827; /* Dark Slate Blue Card */
-    --border-color: #1e293b;
-    --text-heading: #f8fafc;
-    --text-main: #e2e8f0;
-    --text-muted: #94a3b8;
-    --shadow-soft: 0 8px 30px rgba(0,0,0,0.6);
+    --bg-main: #15151e;
+    --bg-card: #22222e;
+    --text-main: #f0f0f5;
+    --text-muted: #a0a0b5;
+    --text-heading: #ffffff;
+    --border-color: #323245;
+    
+    /* Adolescent Pastel Palette */
+    --pastel-green: #A8E6CF;
+    --pastel-gold: #F4D03F;
+    --pastel-red: #FF9A9E;
+    --pastel-blue: #A1C9F1;
+    --pastel-purple: #DCD6F7;
+    --pastel-turquoise: #88D8B0;
+    --pastel-orange: #FFCB9A;
+    --dark-outline: #09090b;
+    
+    --primary-color: var(--pastel-purple);
+    --accent-color: var(--pastel-turquoise);
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Modificadores globales para asegurar buen contraste */
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-heading);
+/* Interactive Elements - Pastel with dark outline */
+.session-card {
+    background-color: var(--bg-card);
+    border: 2px solid var(--dark-outline) !important;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px var(--dark-outline) !important;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-a {
-    color: var(--primary-color);
+.session-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0px var(--pastel-purple) !important;
+    border-color: var(--dark-outline) !important;
 }
 
-/* =========================================
-   Estilos Reutilizables de las Sesiones
-   ========================================= */
-.pros-cons-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 2rem 0;
+.session-card.completed {
+    background: rgba(168, 230, 207, 0.1) !important;
+    border-color: var(--dark-outline) !important;
+    box-shadow: 4px 4px 0px var(--pastel-green) !important;
 }
 
-@media (max-width: 768px) {
-    .pros-cons-grid { grid-template-columns: 1fr; }
+.session-card.completed .status-icon {
+    color: var(--pastel-green) !important;
 }
 
+.session-badge {
+    background-color: var(--pastel-blue) !important;
+    color: var(--dark-outline) !important;
+    border: 2px solid var(--dark-outline);
+    box-shadow: 3px 3px 0px var(--dark-outline);
+    font-weight: 800;
+}
+
+.module-title {
+    color: var(--pastel-gold) !important;
+    border-bottom: 2px dashed var(--border-color) !important;
+}
+
+.roadmap-header h1 {
+    color: var(--pastel-turquoise) !important;
+    text-shadow: 2px 2px 0px var(--dark-outline);
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--pastel-blue), var(--pastel-purple), var(--pastel-turquoise)) !important;
+    border-right: 2px solid var(--dark-outline);
+}
+
+/* Pros and cons grids */
 .pros-card {
-    background: #1e1b2e; /* Darker red-tint background */
-    border-left: 5px solid var(--primary-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow-soft);
+    background-color: var(--bg-card) !important;
+    border: 2px solid var(--dark-outline) !important;
+    box-shadow: 5px 5px 0px var(--pastel-green) !important;
     color: var(--text-main);
+}
+
+.pros-card h3 {
+    color: var(--pastel-green) !important;
 }
 
 .cons-card {
-    background: #172033; /* Darker blue-tint background */
-    border-left: 5px solid var(--secondary-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow-soft);
+    background-color: var(--bg-card) !important;
+    border: 2px solid var(--dark-outline) !important;
+    box-shadow: 5px 5px 0px var(--pastel-red) !important;
     color: var(--text-main);
 }
 
-.solar-diagram {
-    background: var(--bg-card);
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 2rem 0;
-    color: var(--text-heading);
-    text-align: center;
-    box-shadow: var(--shadow-soft);
-}
-
-.svg-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
+.cons-card h3 {
+    color: var(--pastel-red) !important;
 }
 
 .component-btn {
-    position: absolute;
-    background: var(--primary-color);
-    color: #fff; /* Letras blancas sobre rojo */
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    background-color: var(--pastel-gold) !important;
+    color: var(--dark-outline) !important;
+    border: 2px solid var(--dark-outline) !important;
+    box-shadow: 3px 3px 0px var(--dark-outline) !important;
     font-weight: bold;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 42, 75, 0.8);
-    transition: transform 0.3s;
-    animation: pulseBtn 2s infinite;
+    animation: none !important;
 }
 
 .component-btn:hover {
-    transform: scale(1.2);
+    background-color: var(--pastel-orange) !important;
+    box-shadow: 5px 5px 0px var(--dark-outline) !important;
+    transform: translate(-2px, -2px) !important;
 }
 
-@keyframes pulseBtn {
-    0% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 42, 75, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0); }
+.nav-btn {
+    background-color: var(--pastel-purple) !important;
+    color: var(--dark-outline) !important;
+    border: 2px solid var(--dark-outline) !important;
+    box-shadow: 4px 4px 0px var(--dark-outline) !important;
+    font-weight: 800 !important;
+    transition: all 0.2s;
 }
 
-.info-panel {
-    background: var(--bg-main);
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
-    min-height: 100px;
-    border-top: 3px solid var(--primary-color);
-    text-align: left;
-    color: var(--text-main);
+.nav-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--pastel-blue) !important;
 }
 
-.info-panel h3 { 
-    color: var(--primary-color); 
-    margin-top: 0; 
+.info-box {
+    background: rgba(136, 216, 176, 0.15) !important;
+    border: 2px solid var(--pastel-turquoise) !important;
+    box-shadow: 5px 5px 0px var(--dark-outline);
+    border-radius: 12px;
 }
 
-/* =========================================
-   Estilos del Roadmap / Hub (index.html)
-   ========================================= */
-.roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
-.roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative;}
-.roadmap-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-shadow: 0 0 15px rgba(255, 42, 75, 0.6); }
-.roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+.info-box strong {
+    color: var(--pastel-turquoise);
+}
 
+/* QR Code Section */
 .qr-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--bg-card);
+    border: 2px solid var(--dark-outline);
+    box-shadow: 8px 8px 0px var(--pastel-purple);
+    border-radius: 16px;
+    max-width: 320px;
 }
+
 .qr-container img {
-    width: 100px;
+    border: 4px solid var(--dark-outline);
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-@media (max-width: 768px) {
-    .qr-container {
-        position: static;
-        margin-top: 20px;
-    }
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+    background: white;
+    padding: 5px;
 }
 
-.course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
-.progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
-.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.5s ease; box-shadow: 0 0 15px rgba(255, 42, 75, 0.5); }
-.progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; color: var(--text-main); }
-
-.roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
-
-.module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
-.module-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
-
-.session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
-.session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.session-card.completed { border-left: 5px solid var(--accent-color); background: rgba(244, 63, 94, 0.05); box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
-.session-card.completed .status-icon { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
-
-.session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.status-icon { color: var(--border-color); font-size: 1.2rem; }
-
-.session-info { flex-grow: 1; }
-.session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: #fff; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
-.session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: var(--text-heading); }
-.session-desc { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
-
-.back-nav {
-    margin-bottom: 20px;
-    text-align: left;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 0 1rem;
+.qr-container h3 {
+    color: var(--pastel-turquoise);
+    margin-bottom: 0.5rem;
+    font-weight: 800;
 }
-.back-nav a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-.back-nav a:hover {
-    text-decoration: underline;
+
+.qr-container p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
 }

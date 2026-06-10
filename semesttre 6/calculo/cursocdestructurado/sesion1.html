@@ -107,16 +107,6 @@
     <div class="sesion-header">
         <h1 class="sesion-title">Introducción a Relaciones y Funciones</h1>
         <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Básicos</p>
-        
-        <div class="course-progress-container" style="margin-top: 20px;">
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="course-progress-fill" style="width: 0%;"></div>
-            </div>
-            <div class="progress-stats">
-                <span>Tu Progreso en el Curso: <strong id="course-progress-text">0%</strong></span>
-                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/10</span>
-            </div>
-        </div>
     </div>
 
     <div class="info-box">
@@ -205,74 +195,74 @@
         <script type="application/json">
         [
             {
-                "question": "¿Cuál es la principal diferencia entre una relación y una función matemática?",
+                "question": "¿Qué es una relación matemática?",
                 "options": [
-                    "Una función solo utiliza números positivos, mientras que la relación utiliza negativos.",
-                    "En una función, a cada elemento del primer conjunto le corresponde un ÚNICO elemento del segundo conjunto.",
-                    "La relación es representada con letras y la función con números."
+                    "Una correspondencia donde cada elemento del dominio tiene un solo valor.",
+                    "Una regla de correspondencia entre los elementos de dos conjuntos sin restricciones.",
+                    "Una línea paralela al eje Y."
                 ],
                 "correctIndex": 1,
-                "explanation": "La definición principal establece que en una función, cada valor de 'x' (Dominio) solo puede estar asociado a un solo valor de 'y' (Contradominio). Si un 'x' tuviera dos flechas hacia 'y', sería solo una relación."
+                "explanation": "Una relación es cualquier regla de correspondencia entre los elementos de dos conjuntos, sin importar si un elemento del primero se asocia con múltiples del segundo."
             },
             {
-                "question": "Observa el siguiente conjunto de pares ordenados: {(1, 4), (2, 5), (1, 6), (3, 7)}. ¿Esto representa una función o una relación?",
+                "question": "¿Cuál es la característica principal de una función?",
                 "options": [
-                    "Es una Función.",
-                    "Es una Relación.",
-                    "No es ninguna de las dos."
-                ],
-                "correctIndex": 1,
-                "explanation": "Es una Relación. Fíjate en los pares (1, 4) y (1, 6). El número 1 en 'x' se está repitiendo y apunta a dos valores distintos de 'y' (4 y 6). En una función, el primer elemento no puede repetirse."
-            },
-            {
-                "question": "¿Cómo se llama formalmente al primer conjunto (Conjunto A) del cual salen las flechas en un diagrama de función?",
-                "options": [
-                    "Dominio.",
-                    "Contradominio.",
-                    "Rango."
+                    "A cada elemento del primer conjunto le asocia un único elemento del segundo.",
+                    "Un elemento del primer conjunto puede apuntar a varios del segundo.",
+                    "No utiliza diagramas de flechas."
                 ],
                 "correctIndex": 0,
-                "explanation": "El primer conjunto se llama Dominio (las 'x'). El segundo conjunto al que llegan las flechas es el Contradominio (las 'y')."
+                "explanation": "En una función, cada valor de 'x' (dominio) debe estar emparejado exactamente con un solo valor de 'y' (contradominio)."
             },
             {
-                "question": "En una gráfica en el plano cartesiano, ¿qué prueba se utiliza visualmente para determinar si la curva representa una función o solo una relación?",
+                "question": "¿Qué prueba visual se utiliza para determinar si una gráfica es una función o una relación?",
                 "options": [
                     "La prueba de la recta horizontal.",
                     "La prueba de la recta vertical.",
-                    "La prueba del origen."
+                    "La prueba del círculo."
                 ],
                 "correctIndex": 1,
-                "explanation": "La prueba de la recta vertical consiste en trazar líneas verticales. Si alguna línea toca la gráfica en MÁS de un punto, significa que un mismo valor de 'x' tiene varios valores de 'y', por lo que es una relación y no una función."
+                "explanation": "Si trazas una recta vertical y corta la gráfica en más de un punto, el mismo valor de 'x' tiene múltiples valores de 'y', lo que indica que es una relación."
             },
             {
-                "question": "Si definimos una función f: A → B, ¿qué es el 'Rango' o Imagen?",
+                "question": "Observa los pares: {(2, 4), (3, 9), (4, 16), (5, 25)}. ¿Representa una función o relación?",
                 "options": [
-                    "Todos los elementos posibles del conjunto A.",
-                    "Todos los elementos posibles del conjunto B.",
-                    "Únicamente los elementos del conjunto B que efectivamente están asociados a algún elemento de A."
+                    "Función.",
+                    "Relación.",
+                    "No es posible saberlo."
+                ],
+                "correctIndex": 0,
+                "explanation": "Es una Función. Los primeros elementos (2, 3, 4, 5) no se repiten."
+            },
+            {
+                "question": "En y = f(x), ¿cómo se conoce a la variable 'x'?",
+                "options": [
+                    "Variable dependiente.",
+                    "Constante trascendente.",
+                    "Variable independiente."
                 ],
                 "correctIndex": 2,
-                "explanation": "El Contradominio (o Codominio) es todo el conjunto B. Pero el Rango son solo los 'y' que sí reciben flecha. No todos los valores posibles de B terminan siendo el resultado de la función."
+                "explanation": "La 'x' es independiente porque elegimos libremente sus valores. La 'y' es dependiente porque su valor depende de 'x'."
             },
             {
-                "question": "¿Cuál es la 'Regla de Oro' sobre las relaciones y funciones?",
+                "question": "¿Cómo se llama el conjunto de valores posibles que puede tomar la variable dependiente (Y)?",
                 "options": [
-                    "Todas las relaciones son funciones, pero no todas las funciones son relaciones.",
-                    "Todas las funciones son relaciones, pero NO todas las relaciones son funciones.",
-                    "Una relación nunca puede ser una función."
+                    "Dominio.",
+                    "Rango o imagen.",
+                    "Eje X."
                 ],
                 "correctIndex": 1,
-                "explanation": "Una función es un subconjunto más estricto de las relaciones. Cualquier asociación es una relación, pero para ganarse el título de 'función', debe cumplir la regla de unicidad."
+                "explanation": "El conjunto de todos los valores resultantes (eje Y) forma el rango."
             },
             {
-                "question": "Al matemático e inventor del cálculo Leibniz (1646-1716) y a Newton se les asocia con:",
+                "question": "Las funciones trigonométricas (seno, coseno) pertenecen al grupo de funciones:",
                 "options": [
-                    "La invención del álgebra lineal.",
-                    "La invención independiente del cálculo diferencial y el análisis infinitesimal.",
-                    "La primera definición de matriz."
+                    "Algebraicas.",
+                    "Trascendentes.",
+                    "Implícitas."
                 ],
                 "correctIndex": 1,
-                "explanation": "El cálculo diferencial surgió casi simultáneamente bajo la forma de teoría de fluxiones de Newton y la forma del cálculo de diferenciales de G. W. Leibniz."
+                "explanation": "Las matemáticas se dividen en algebraicas y trascendentes (trigonométricas, exponenciales y logarítmicas)."
             }
         ]
         </script>
@@ -332,32 +322,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="../../../env.js"></script>
-<script src="../../../../Ciencias%20y%20Especialidades/progress-tracker.js"></script>
-<script src="../../../../Ciencias%20y%20Especialidades/quiz-engine.js"></script>
+<script src="env.js"></script>
+<script src="progress-tracker.js"></script>
+<script src="quiz-engine.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Marcar como completada la lección actual
+  document.addEventListener('DOMContentLoaded', () => {
       if (window.markLessonCompleted) {
-          await window.markLessonCompleted('calculo_relaciones_funciones', 'sesion1');
-      }
-      
-      // 2. Actualizar barra de progreso del curso
-      if (typeof window.getUserProgress === 'function') {
-          const progress = await window.getUserProgress('calculo_relaciones_funciones');
-          const totalLessons = 10;
-          let completedCount = 0;
-          
-          for (let i = 1; i <= totalLessons; i++) {
-              if (progress[`sesion${i}`] === true) {
-                  completedCount++;
-              }
-          }
-
-          const percentage = Math.round((completedCount / totalLessons) * 100);
-          document.getElementById('course-progress-fill').style.width = percentage + '%';
-          document.getElementById('course-progress-text').textContent = percentage + '%';
-          document.getElementById('course-completed-count').textContent = completedCount;
+          window.markLessonCompleted('calculo_relaciones_funciones', 'sesion1');
       }
   });
 </script>

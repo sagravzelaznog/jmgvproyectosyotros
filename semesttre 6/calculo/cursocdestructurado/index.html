@@ -7,9 +7,21 @@
     <link rel="stylesheet" href="../../global-lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #00f3ff;
+            --secondary-color: #ff007f;
+            --accent-color: #ccff00;
+            --bg-main: #0b0b13;
+            --bg-card: #151525;
+            --border-color: #2d2d44;
+            --text-heading: #ffffff;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --shadow-soft: 0 8px 30px rgba(0,0,0,0.5);
+        }
         .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
         .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative;}
-        .roadmap-header h1 { font-size: 2.5rem; color: #3498db; margin-bottom: 1rem; }
+        .roadmap-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-shadow: 0 0 15px rgba(0, 243, 255, 0.6); }
         .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
         
         .qr-container {
@@ -32,7 +44,7 @@
 
         .course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
         .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #3498db, #9b59b6); transition: width 0.5s ease; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.5s ease; box-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
         .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; }
         
         .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
@@ -42,8 +54,8 @@
         
         .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
         .session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .session-card.completed { border-left: 5px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
-        .session-card.completed .status-icon { color: #2ecc71; }
+        .session-card.completed { border-left: 5px solid var(--accent-color); background: rgba(204, 255, 0, 0.05); box-shadow: 0 0 10px rgba(204, 255, 0, 0.2); }
+        .session-card.completed .status-icon { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
         
         .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .status-icon { color: var(--border-color); font-size: 1.2rem; }

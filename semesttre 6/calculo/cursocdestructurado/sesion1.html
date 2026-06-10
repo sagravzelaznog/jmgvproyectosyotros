@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="../../global-lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #00f3ff;
+            --secondary-color: #ff007f;
+            --accent-color: #ccff00;
+            --bg-main: #0b0b13;
+            --bg-card: #151525;
+            --border-color: #2d2d44;
+            --text-heading: #ffffff;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --shadow-soft: 0 8px 30px rgba(0,0,0,0.5);
+        }
         .pros-cons-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -19,16 +31,16 @@
         }
 
         .pros-card {
-            background: #f0fdf4;
-            border-left: 5px solid #2ecc71;
+            background: #112a20;
+            border-left: 5px solid var(--accent-color);
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: var(--shadow-soft);
         }
 
         .cons-card {
-            background: #fdf2f8;
-            border-left: 5px solid #9b59b6;
+            background: #2a1120;
+            border-left: 5px solid var(--secondary-color);
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: var(--shadow-soft);
@@ -55,7 +67,7 @@
         .component-btn {
             position: absolute;
             background: var(--primary-color);
-            color: white;
+            color: #000;
             border: none;
             width: 40px;
             height: 40px;
@@ -63,7 +75,7 @@
             font-weight: bold;
             font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
             transition: transform 0.3s;
             animation: pulseBtn 2s infinite;
         }
@@ -73,9 +85,9 @@
         }
 
         @keyframes pulseBtn {
-            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(52, 152, 219, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 243, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
         }
 
         /* Positions */
@@ -116,7 +128,7 @@
 
         <div class="pros-cons-grid">
             <div class="pros-card">
-                <h3 style="color:#27ae60; margin-top:0;"><i class="fas fa-project-diagram"></i> Relación</h3>
+                <h3 style="color:var(--accent-color); margin-top:0;"><i class="fas fa-project-diagram"></i> Relación</h3>
                 <p>Es una <strong>regla de correspondencia</strong> entre los elementos de dos conjuntos.</p>
                 <ul>
                     <li>Un elemento del primer conjunto puede tener <strong>más de un</strong> elemento asignado en el segundo.</li>
@@ -126,7 +138,7 @@
             </div>
             
             <div class="cons-card">
-                <h3 style="color:#9b59b6; margin-top:0;"><i class="fas fa-function"></i> Función</h3>
+                <h3 style="color:var(--secondary-color); margin-top:0;"><i class="fas fa-function"></i> Función</h3>
                 <p>Es una regla de correspondencia <strong>estricta</strong>.</p>
                 <ul>
                     <li>A cada elemento del primer conjunto (dominio) le asocia un <strong>único y solo un</strong> elemento del segundo conjunto (contradominio).</li>
@@ -287,7 +299,7 @@
         });
         
         const btn = document.getElementById('btn-' + id);
-        btn.style.background = "#9b59b6";
+        btn.style.background = "var(--secondary-color)";
         btn.style.transform = "scale(1.1)";
     }
 </script>

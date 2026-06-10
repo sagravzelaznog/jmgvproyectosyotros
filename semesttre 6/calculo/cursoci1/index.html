@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Diferencial - Hub</title>
+    <link rel="icon" href="data:;base64,=">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+        
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+            }
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            font-weight: 900;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hub-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-decoration: none;
+            color: var(--text-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+        }
+
+        .hub-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        @media (prefers-color-scheme: dark) {
+            .hub-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .hub-card h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.3em;
+            flex: 1;
+        }
+
+        .btn-enter {
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .back-root {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .back-root a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid var(--text-color);
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .back-root a:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .m7-card {
+            grid-column: 1 / -1; 
+            display: block;
+            cursor: default;
+        }
+        .m7-card:hover {
+            transform: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: transparent;
+        }
+        .sub-pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .sub-pill {
+            background-color: var(--bg-color);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            border: 1px solid var(--primary);
+            transition: all 0.2s;
+        }
+        .sub-pill:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Cálculo Diferencial</h1>
+        <p>Aprende a tu propio ritmo. Selecciona tu clase para comenzar.</p>
+    </div>
+    
+    <div class="grid">
+        <a href="masterclass01.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 1: Relaciones</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass02.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 2: Funciones</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass03.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 3: Notación</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass04.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 4: Clasificación</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass05.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 5: Valor</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass06.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 6: Dominio y Rango</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        
+        <div class="hub-card m7-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 7: Tipos de Funciones</h3>
+            <div class="sub-pill-container">
+                <a href="masterclass07_01.html" class="sub-pill">1. Función Constante</a>
+                <a href="masterclass07_02.html" class="sub-pill">2. Funciones Lineales</a>
+                <a href="masterclass07_03.html" class="sub-pill">3. Función Identidad</a>
+                <a href="masterclass07_04.html" class="sub-pill">4. Funciones Cuadráticas</a>
+                <a href="masterclass07_05.html" class="sub-pill">5. Funciones Potencia</a>
+                <a href="masterclass07_06.html" class="sub-pill">6. Funciones Racionales</a>
+                <a href="masterclass07_07.html" class="sub-pill">7. Función Raíz Cuadrada</a>
+                <a href="masterclass07_08.html" class="sub-pill">8. Función Valor Absoluto</a>
+                <a href="masterclass07_09.html" class="sub-pill">9. Función Mayor Entero</a>
+                <a href="masterclass07_10.html" class="sub-pill">10. Función Característica</a>
+            </div>
+        </div>
+
+        <a href="masterclass08.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 8: Gráficas y Transform.</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass09.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 9: Desplazamientos</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass10.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 10: Alargamientos</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass11.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 11: Reflexiones</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="masterclass12.html" class="hub-card">
+            <div class="card-icon">📚</div>
+            <h3>Masterclass 12: Crecientes</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="actividades.html" class="hub-card">
+            <div class="card-icon">✍️</div>
+            <h3>Recursos Prácticos</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+        <a href="tarea.html" class="hub-card">
+            <div class="card-icon">🏆</div>
+            <h3>Evaluación Final</h3>
+            <span class="btn-enter">Entrar →</span>
+        </a>
+    </div>
+    
+    <div class="back-root">
+        <a href="../../../index.html">← Volver al Menú Principal</a>
+    </div>
+</body>
+</html>

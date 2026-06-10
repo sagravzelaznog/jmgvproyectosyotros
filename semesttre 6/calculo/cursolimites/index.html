@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Diferencial: Límites | Mapa de Conocimiento</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="curso-styles.css">
+    <style>
+        .roadmap-page { background-color: #1a1a2e; color: #e0e0e0; font-family: 'Inter', sans-serif; }
+        .roadmap-header { text-align: center; padding: 3rem 1rem; background: #16213e; border-bottom: 1px solid #0f3460; }
+        .roadmap-header h1 { font-size: 2.5rem; color: #e94560; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .roadmap-header p { font-size: 1.2rem; color: #a2a2a2; max-width: 600px; margin: 0 auto 2rem; }
+        
+        .course-progress-container { max-width: 600px; margin: 0 auto; background: #0f3460; padding: 1.5rem; border-radius: 12px; border: 2px solid #e94560; box-shadow: 0 4px 15px rgba(233, 69, 96, 0.2); }
+        .progress-bar-bg { width: 100%; height: 12px; background: #1a1a2e; border-radius: 6px; overflow: hidden; margin-bottom: 1rem; border: 1px solid #16213e; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #e94560, #f9a826); transition: width 0.5s ease; }
+        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; color: #e0e0e0; }
+        
+        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
+        
+        .module-group { margin-bottom: 3rem; background: #16213e; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 2px solid #0f3460; }
+        .module-title { font-size: 1.5rem; font-weight: 700; color: #f9a826; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid #0f3460; padding-bottom: 0.5rem; }
+        
+        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: #1a1a2e; border: 2px solid #0f3460; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.3s; margin-bottom: 1rem; }
+        .session-card:hover { transform: translateX(5px) translateY(-2px); border-color: #e94560; box-shadow: 5px 5px 0px #e94560; }
+        .session-card.completed { border-left: 6px solid #2ecc71; background: rgba(46, 204, 113, 0.1); border-color: #2ecc71; }
+        .session-card.completed .status-icon { color: #2ecc71; }
+        
+        .session-status { width: 45px; height: 45px; border-radius: 50%; background: #0f3460; border: 2px solid #16213e; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .status-icon { color: #a2a2a2; font-size: 1.2rem; }
+        
+        .session-info { flex-grow: 1; }
+        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: #e94560; color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #e0e0e0; }
+        .session-desc { margin: 0; font-size: 0.95rem; color: #a2a2a2; }
+    </style>
+</head>
+<body class="roadmap-page">
+
+    <div class="roadmap-header">
+        <h1><i class="fas fa-bullseye"></i> Curso Interactivo de Límites</h1>
+        <p>Aprende el concepto fundamental del cálculo diferencial: desde la intuición gráfica hasta los límites al infinito.</p>
+        
+        <div class="course-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="course-progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-stats">
+                <span>Progreso del Curso: <strong id="course-progress-text">0%</strong></span>
+                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/4</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="roadmap-container">
+        
+        <!-- MÓDULO 1 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-search"></i> Módulo 1: Conceptos Básicos de Límites</div>
+            
+            <a href="sesion1.html" class="session-card" data-lesson="sesion1">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:#3498db">Sesión 1</span>
+                    <h3 class="session-name">Definición Intuitiva y Límites Laterales</h3>
+                    <p class="session-desc">Aproximaciones por izquierda y derecha, y la existencia del límite.</p>
+                </div>
+            </a>
+
+            <a href="sesion2.html" class="session-card" data-lesson="sesion2">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:#9b59b6">Sesión 2</span>
+                    <h3 class="session-name">Definición Formal (Épsilon-Delta)</h3>
+                    <p class="session-desc">El rigor matemático detrás del concepto de límite.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- MÓDULO 2 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-magic"></i> Módulo 2: Límites Indeterminados</div>
+            
+            <a href="sesion3.html" class="session-card" data-lesson="sesion3">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:#e67e22">Sesión 3</span>
+                    <h3 class="session-name">Límites por Evaluación y Factorización</h3>
+                    <p class="session-desc">Cómo resolver indeterminaciones 0/0 aplicando álgebra.</p>
+                </div>
+            </a>
+
+            <a href="sesion4.html" class="session-card" data-lesson="sesion4">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:#1abc9c">Sesión 4</span>
+                    <h3 class="session-name">Racionalización de Límites</h3>
+                    <p class="session-desc">Técnicas algebraicas con raíces cuadradas y conjugados.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- MÓDULO 3 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-infinity"></i> Módulo 3: Infinito y Asíntotas</div>
+            
+            <a href="sesion5.html" class="session-card" data-lesson="sesion5">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:#e74c3c">Sesión 5</span>
+                    <h3 class="session-name">Límites al Infinito</h3>
+                    <p class="session-desc">Comportamiento de las funciones cuando x crece indefinidamente.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+        <a href="../index.html" style="color: #a2a2a2; font-weight: bold; text-decoration: none; padding: 10px 20px; border: 2px solid #0f3460; border-radius: 8px;">← Volver al Hub General de Cálculo</a>
+    </div>
+
+    <!-- Firebase y Lógica de Progreso -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../../env.js"></script>
+    <script src="../../progress-tracker.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof window.getUserProgress === 'function') {
+                // ID DEL CURSO: calculo_limites
+                const progress = await window.getUserProgress('calculo_limites');
+                const totalLessons = 5; 
+                let completedCount = 0;
+
+                const cards = document.querySelectorAll('.session-card');
+                cards.forEach(card => {
+                    const lessonId = card.getAttribute('data-lesson');
+                    if (progress && progress[lessonId] === true) {
+                        card.classList.add('completed');
+                        completedCount++;
+                    }
+                });
+
+                const percentage = Math.round((completedCount / totalLessons) * 100);
+                document.getElementById('course-progress-fill').style.width = percentage + '%';
+                document.getElementById('course-progress-text').textContent = percentage + '%';
+                document.getElementById('course-completed-count').textContent = completedCount;
+            }
+        });
+    </script>
+</body>
+</html>

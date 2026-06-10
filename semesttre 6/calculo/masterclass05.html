@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS05 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,15 +237,12 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="valor-funcion">
+                    <div class="section" id="valor-funcion">
             <h2>Masterclass 5: Valor de una Función</h2>
             <p>El valor de una función en un punto específico de su dominio es el resultado que se obtiene al sustituir la variable independiente por dicho valor en la expresión que define la función.</p>
-            
-            <h3>5.1 Evaluación de funciones</h3>
+                    <h3>5.1 Evaluación de funciones</h3>
             <p>Dada una función $f(x)$, para encontrar el valor de la función en $x = a$, simplemente sustituimos $x$ por $a$ en la expresión de $f(x)$.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1:</h4>
                 <p>Sea $f(x) = 2x^2 - 3x + 1$. Calcular $f(2)$.</p>
                 <p><strong>Solución:</strong></p>
@@ -265,11 +256,9 @@
                 $
                 </p>
             </div>
-            
-            <h3>5.2 Evaluación con expresiones algebraicas</h3>
+                    <h3>5.2 Evaluación con expresiones algebraicas</h3>
             <p>También podemos evaluar funciones en expresiones algebraicas más complejas.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 2:</h4>
                 <p>Para la misma función $f(x) = 2x^2 - 3x + 1$, calculemos $f(a + h)$.</p>
                 <p><strong>Solución:</strong></p>
@@ -282,15 +271,13 @@
                 $
                 </p>
             </div>
-            
-            <h3>5.3 Diferencia de cocientes</h3>
+                    <h3>5.3 Diferencia de cocientes</h3>
             <p>Un concepto importante en cálculo es el cociente de diferencias, que se utiliza para calcular la tasa de cambio promedio de una función.</p>
             <p>$$
             \frac{f(x + h) - f(x)}{h}
             $$
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 3:</h4>
                 <p>Calcular el cociente de diferencias para $f(x) = x^2 - 2x$.</p>
                 <p><strong>Solución:</strong></p>
@@ -304,8 +291,7 @@
                 $
                 </p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Dada la función $g(x) = \frac{1}{x - 2}$, calcula:</p>
                 <ol>
@@ -316,10 +302,8 @@
                 </ol>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass04.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass06.html" class="nav-btn">Siguiente →</a>
             </div>

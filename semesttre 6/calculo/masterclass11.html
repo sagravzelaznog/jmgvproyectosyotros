@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS11 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,21 +237,17 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="reflexiones">
+                    <div class="section" id="reflexiones">
             <h2>Masterclass 11: Reflexiones de Funciones</h2>
             <p>Las reflexiones son transformaciones que producen el efecto de espejo de una gráfica sobre un eje o punto de referencia. Son fundamentales para entender simetrías y relaciones entre funciones.</p>
-            
-            <h3>11.1 Reflexión sobre el Eje X</h3>
+                    <h3>11.1 Reflexión sobre el Eje X</h3>
             <p>Una reflexión sobre el eje x invierte verticalmente la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = -f(x)
             $$
             Efecto: Todos los puntos $(x, y)$ se transforman en $(x, -y)$.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 1: Reflexión de una parábola</h5>
                 <p>Sea $f(x) = x^2 - 2x + 1$, entonces:</p>
                 <p>$$
@@ -265,17 +255,14 @@
                 $$
                 La parábola que abría hacia arriba ahora abre hacia abajo.</p>
             </div>
-            
-            <h3>11.2 Reflexión sobre el Eje Y</h3>
+                    <h3>11.2 Reflexión sobre el Eje Y</h3>
             <p>Una reflexión sobre el eje y invierte horizontalmente la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = f(-x)
             $$
             Efecto: Todos los puntos $(x, y)$ se transforman en $(-x, y)$.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 2: Reflexión de una función cúbica</h5>
                 <p>Sea $f(x) = x^3 - x$, entonces:</p>
                 <p>$$
@@ -283,17 +270,14 @@
                 $$
                 La función cambia su comportamiento en los extremos.</p>
             </div>
-            
-            <h3>11.3 Reflexión sobre el Origen</h3>
+                    <h3>11.3 Reflexión sobre el Origen</h3>
             <p>Una reflexión sobre el origen es equivalente a una rotación de 180° alrededor del origen.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = -f(-x)
             $$
             Efecto: Todos los puntos $(x, y)$ se transforman en $(-x, -y)$.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 3: Función impar</h5>
                 <p>Sea $f(x) = x^3$, entonces:</p>
                 <p>$$
@@ -301,8 +285,7 @@
                 $$
                 Las funciones impares son invariantes bajo esta transformación.</p>
             </div>
-            
-            <h3>11.4 Propiedades de las Reflexiones</h3>
+                    <h3>11.4 Propiedades de las Reflexiones</h3>
             <table class="table">
                 <tr>
                     <th>Tipo de Reflexión</th>
@@ -335,17 +318,14 @@
                     <td>Obtiene la función inversa</td>
                 </tr>
             </table>
-            
-            <h3>11.5 Reflexión sobre la Recta y = x</h3>
+                    <h3>11.5 Reflexión sobre la Recta y = x</h3>
             <p>Esta reflexión intercambia las coordenadas x e y, lo que geométricamente corresponde a la función inversa.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             x = f(y) \quad \text{o equivalentemente} \quad y = f^{-1}(x)
             $$
             Efecto: Todos los puntos $(x, y)$ se transforman en $(y, x)$.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 4: Función raíz cuadrada</h5>
                 <p>Sea $f(x) = x^2$ para $x \geq 0$, entonces su inversa es:</p>
                 <p>$$
@@ -353,8 +333,7 @@
                 $$
                 La gráfica de $\sqrt{x}$ es la reflexión de $x^2$ sobre la recta $y = x$.</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1: Identificar reflexiones</h3>
                 <p>Para cada par de funciones, indica qué tipo de reflexión transforma f(x) en g(x):</p>
                 <ol>
@@ -363,8 +342,7 @@
                     <li>$f(x) = \sin(x)$ y $g(x) = -\sin(-x)$</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2: Aplicaciones de reflexiones</h3>
                 <p>Dada la función $f(x) = \frac{1}{x-2} + 1$:</p>
                 <ol>
@@ -374,18 +352,15 @@
                     <li>Grafica todas las transformaciones.</li>
                 </ol>
             </div>
-            
-            <h3>11.6 Reflexiones Múltiples</h3>
+                    <h3>11.6 Reflexiones Múltiples</h3>
             <p>Las reflexiones pueden combinarse con otras transformaciones para obtener efectos más complejos.</p>
-            
-            <h4>Propiedades importantes:</h4>
+                    <h4>Propiedades importantes:</h4>
             <ul>
                 <li>Dos reflexiones sobre el mismo eje devuelven la función original: $-(-f(x)) = f(x)$</li>
                 <li>Reflejar sobre el eje x y luego sobre el eje y es equivalente a reflejar sobre el origen</li>
                 <li>La composición de reflexiones sobre ejes perpendiculares equivale a una rotación de 180°</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 5: Transformaciones múltiples</h5>
                 <p>Sea $f(x) = \sqrt{x}$. Aplicar en orden:</p>
                 <ol>
@@ -396,10 +371,8 @@
                 <p>El resultado final es la rama izquierda de una parábola invertida.</p>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass10.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass12.html" class="nav-btn">Siguiente →</a>
             </div>

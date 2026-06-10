@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS07_07 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -251,8 +245,7 @@
             f(x) = \sqrt{x}
             $$
             donde $x \geq 0$.</p>
-            
-            <h4>Características principales:</h4>
+                    <h4>Características principales:</h4>
             <ul>
                 <li><strong>Dominio:</strong> $[0, \infty)$</li>
                 <li><strong>Rango:</strong> $[0, \infty)$</li>
@@ -261,8 +254,7 @@
                 <li><strong>Concavidad:</strong> Cóncava hacia abajo</li>
                 <li><strong>Derivada:</strong> $f'(x) = \frac{1}{2\sqrt{x}}$ para $x > 0$</li>
             </ul>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             f(x) = a\sqrt{b(x - h)} + k
             $$
@@ -273,41 +265,35 @@
                 <li>$(h, k)$: Traslación del punto inicial</li>
             </ul>
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1: Análisis de $f(x) = 2\sqrt{x - 1} + 3$</h4>
-                
-                <h5>Paso 1: Identificar transformaciones</h5>
+                            <h5>Paso 1: Identificar transformaciones</h5>
                 <ul>
                     <li>Desplazamiento horizontal: 1 unidad a la derecha ($h=1$)</li>
                     <li>Estiramiento vertical: factor 2 ($a=2$)</li>
                     <li>Desplazamiento vertical: 3 unidades hacia arriba ($k=3$)</li>
                 </ul>
-                
-                <h5>Paso 2: Dominio</h5>
+                            <h5>Paso 2: Dominio</h5>
                 <p>$
                 x - 1 \geq 0 \\
                 x \geq 1
                 $
                 <strong>Dominio:</strong> $[1, \infty)$</p>
-                
-                <h5>Paso 3: Rango</h5>
+                            <h5>Paso 3: Rango</h5>
                 <p>Como $\sqrt{x-1} \geq 0$, entonces:
                 $
                 2\sqrt{x-1} \geq 0 \\
                 2\sqrt{x-1} + 3 \geq 3
                 $
                 <strong>Rango:</strong> $[3, \infty)$</p>
-                
-                <h5>Paso 4: Puntos clave</h5>
+                            <h5>Paso 4: Puntos clave</h5>
                 <ul>
                     <li>Punto inicial: $(1, 3)$</li>
                     <li>Intersección con el eje Y: No tiene (fuera del dominio)</li>
                     <li>Intersección con el eje X: $f(x) = 0 \Rightarrow x = \frac{13}{4}$</li>
                 </ul>
             </div>
-            
-            <h4>Propiedades importantes:</h4>
+                    <h4>Propiedades importantes:</h4>
             <ol>
                 <li><strong>Inversa:</strong> La función raíz cuadrada es la inversa de $f(x) = x^2$ para $x \geq 0$</li>
                 <li><strong>Límites:</strong>
@@ -319,8 +305,7 @@
                 <li><strong>Derivada:</strong> $\frac{d}{dx}\sqrt{x} = \frac{1}{2\sqrt{x}}$</li>
                 <li><strong>Integral indefinida:</strong> $\int \sqrt{x} \, dx = \frac{2}{3}x^{3/2} + C$</li>
             </ol>
-            
-            <h4>Aplicaciones prácticas:</h4>
+                    <h4>Aplicaciones prácticas:</h4>
             <div class="example">
                 <h5>Ejemplo 2: Aplicación en física</h5>
                 <p>La velocidad $v$ de un objeto en caída libre después de caer una distancia $d$ está dada por:</p>
@@ -328,23 +313,20 @@
                 v = \sqrt{2gd}
                 $$
                 donde $g$ es la aceleración debida a la gravedad ($9.8\,m/s^2$).</p>
-                
-                <p><strong>a) ¿Cuál es la velocidad después de caer 45 metros?</strong></p>
+                            <p><strong>a) ¿Cuál es la velocidad después de caer 45 metros?</strong></p>
                 <p>$
                 v = \sqrt{2 \times 9.8 \times 45} \\
                 v \approx \sqrt{882} \\
                 v \approx 29.7\,m/s
                 $</p>
-                
-                <p><strong>b) ¿Qué distancia debe caer para alcanzar 50 m/s?</strong></p>
+                            <p><strong>b) ¿Qué distancia debe caer para alcanzar 50 m/s?</strong></p>
                 <p>$
                 50 = \sqrt{2 \times 9.8 \times d} \\
                 2500 = 19.6d \\
                 d \approx 127.55\,m
                 $</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Para cada función, determina:</p>
                 <ol>
@@ -356,25 +338,21 @@
                 <p>b) $g(x) = -2\sqrt{x} + 1$</p>
                 <p>c) $h(x) = \sqrt{4 - x}$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Resuelve las siguientes ecuaciones con raíces cuadradas:</p>
                 <p>a) $\sqrt{2x + 3} = 5$</p>
                 <p>b) $x - \sqrt{x + 6} = 0$</p>
                 <p>c) $\sqrt{x + 5} - \sqrt{x - 3} = 2$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>Un agricultor tiene 100 metros de cerca para construir un corral rectangular adyacente a un río (por lo que solo necesita cercar tres lados). Expresa el área del corral como función del ancho y encuentra las dimensiones que maximizan el área.</p>
                 <p><em>Sugerencia:</em> Si $x$ es el ancho, el largo será $100 - 2x$.</p>
             </div>
 
-            
-</div>
-            
-            <div class="nav-buttons">
+        </div>
+                    <div class="nav-buttons">
                 <a href="masterclass07_06.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass07_08.html" class="nav-btn">Siguiente →</a>
             </div>

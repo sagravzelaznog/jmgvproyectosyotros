@@ -6,7 +6,6 @@
     <title>Módulo 3: Continuidad - Cálculo Diferencial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -296,12 +295,10 @@
                 margin: 10px;
                 padding: 20px;
             }
-            
-            .module-title {
+                    .module-title {
                 font-size: 2rem;
             }
-            
-            .content-section {
+                    .content-section {
                 padding: 20px;
             }
         }
@@ -362,8 +359,7 @@
 
         <!-- Contenido de las Pestañas -->
         <div class="tab-content" id="moduleTabsContent">
-            
-            <!-- Pestaña 1: Conceptos Básicos -->
+                    <!-- Pestaña 1: Conceptos Básicos -->
             <div class="tab-pane fade show active" id="conceptos" role="tabpanel">
                 <div class="content-section">
                     <h2 class="section-title">
@@ -375,12 +371,10 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-eye"></i> Definición Intuitiva de Continuidad</h4>
                         <p>Una función es <strong>continua</strong> en un punto si podemos dibujar su gráfica en ese punto sin levantar el lápiz del papel. Esto significa que no hay "saltos" o "huecos" en la gráfica.</p>
-                        
-                        <div class="interactive-element" onclick="showIntuitiveExample()">
+                                            <div class="interactive-element" onclick="showIntuitiveExample()">
                             <i class="fas fa-play"></i> Ver Ejemplo Visual de Continuidad
                         </div>
-                        
-                        <div id="intuitiveExample" style="display: none;">
+                                            <div id="intuitiveExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="continuityCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -395,8 +389,7 @@
                     <div class="definition-box">
                         <h4><i class="fas fa-calculator"></i> Definición Formal de Continuidad</h4>
                         <p>Una función $f(x)$ es continua en un punto $x = a$ si se cumplen las siguientes tres condiciones:</p>
-                        
-                        <div class="step-by-step">
+                                            <div class="step-by-step">
                             <div class="step">
                                 <span class="step-number">1</span>
                                 <strong>$f(a)$ está definida:</strong> El punto $a$ debe estar en el dominio de la función.
@@ -421,8 +414,7 @@
                     <div class="example-box">
                         <h4><i class="fas fa-book"></i> Ejemplo 1: Verificar Continuidad</h4>
                         <p><strong>Problema:</strong> Determinar si la función $f(x) = x^2 + 3x - 2$ es continua en $x = 1$.</p>
-                        
-                        <div class="step-by-step">
+                                            <div class="step-by-step">
                             <div class="step">
                                 <span class="step-number">1</span>
                                 <strong>Verificar que $f(1)$ está definida:</strong><br>
@@ -440,8 +432,7 @@
                                 $\lim_{x \to 1} f(x) = f(1) = 2$ ✓
                             </div>
                         </div>
-                        
-                        <div class="alert alert-success mt-3">
+                                            <div class="alert alert-success mt-3">
                             <strong>Conclusión:</strong> La función $f(x) = x^2 + 3x - 2$ es continua en $x = 1$.
                         </div>
                     </div>
@@ -450,25 +441,21 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-arrows-alt-h"></i> Continuidad por la Izquierda y Derecha</h4>
                         <p>Una función puede ser continua por un lado pero no por el otro:</p>
-                        
-                        <ul>
+                                            <ul>
                             <li><strong>Continuidad por la derecha:</strong> $\lim_{x \to a^+} f(x) = f(a)$</li>
                             <li><strong>Continuidad por la izquierda:</strong> $\lim_{x \to a^-} f(x) = f(a)$</li>
                         </ul>
-                        
-                        <p><strong>Teorema:</strong> Una función es continua en un punto si y solo si es continua tanto por la izquierda como por la derecha en ese punto.</p>
+                                            <p><strong>Teorema:</strong> Una función es continua en un punto si y solo si es continua tanto por la izquierda como por la derecha en ese punto.</p>
                     </div>
 
                     <!-- Continuidad en Intervalos -->
                     <div class="definition-box">
                         <h4><i class="fas fa-chart-area"></i> Continuidad en Intervalos</h4>
                         <p>Una función es continua en un intervalo si es continua en cada punto de ese intervalo.</p>
-                        
-                        <div class="interactive-element" onclick="showIntervalExample()">
+                                            <div class="interactive-element" onclick="showIntervalExample()">
                             <i class="fas fa-chart-line"></i> Ver Ejemplo de Continuidad en Intervalos
                         </div>
-                        
-                        <div id="intervalExample" style="display: none;">
+                                            <div id="intervalExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="intervalCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -483,8 +470,7 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-balance-scale"></i> Teorema del Valor Intermedio</h4>
                         <p><strong>Enunciado:</strong> Si $f$ es una función continua en el intervalo cerrado $[a, b]$ y $k$ es cualquier número entre $f(a)$ y $f(b)$, entonces existe al menos un número $c$ en $(a, b)$ tal que $f(c) = k$.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo de Aplicación:</h5>
                             <p>Considera la función $f(x) = x^3 - x + 1$ en el intervalo $[0, 2]$.</p>
                             <ul>
@@ -518,8 +504,7 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-list"></i> Clasificación de Discontinuidades</h4>
                         <p>Las discontinuidades se clasifican según el comportamiento de la función en el punto problemático:</p>
-                        
-                        <div class="row">
+                                            <div class="row">
                             <div class="col-md-4">
                                 <div class="card h-100">
                                     <div class="card-body text-center">
@@ -554,16 +539,14 @@
                     <div class="example-box">
                         <h4><i class="fas fa-tools"></i> Discontinuidad Evitable</h4>
                         <p><strong>Definición:</strong> Una función tiene una discontinuidad evitable en $x = a$ si $\lim_{x \to a} f(x)$ existe pero $\lim_{x \to a} f(x) \neq f(a)$.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo:</h5>
                             <p>Considera la función:</p>
                             <p>$$f(x) = \begin{cases} 
                             \frac{x^2 - 4}{x - 2} & \text{si } x \neq 2 \\
                             5 & \text{si } x = 2
                             \end{cases}$$</p>
-                            
-                            <div class="step-by-step">
+                                                    <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
                                     <strong>Calcular el límite:</strong><br>
@@ -581,12 +564,10 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="interactive-element" onclick="showRemovableExample()">
+                                            <div class="interactive-element" onclick="showRemovableExample()">
                             <i class="fas fa-chart-line"></i> Ver Gráfica de Discontinuidad Evitable
                         </div>
-                        
-                        <div id="removableExample" style="display: none;">
+                                            <div id="removableExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="removableCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -600,16 +581,14 @@
                     <div class="example-box">
                         <h4><i class="fas fa-level-up-alt"></i> Discontinuidad de Salto</h4>
                         <p><strong>Definición:</strong> Una función tiene una discontinuidad de salto en $x = a$ si los límites laterales existen pero son diferentes.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo:</h5>
                             <p>Considera la función escalón:</p>
                             <p>$$f(x) = \begin{cases} 
                             x + 1 & \text{si } x < 0 \\
                             x - 1 & \text{si } x \geq 0
                             \end{cases}$$</p>
-                            
-                            <div class="step-by-step">
+                                                    <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
                                     <strong>Límite por la izquierda:</strong><br>
@@ -627,12 +606,10 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="interactive-element" onclick="showJumpExample()">
+                                            <div class="interactive-element" onclick="showJumpExample()">
                             <i class="fas fa-chart-line"></i> Ver Gráfica de Discontinuidad de Salto
                         </div>
-                        
-                        <div id="jumpExample" style="display: none;">
+                                            <div id="jumpExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="jumpCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -646,13 +623,11 @@
                     <div class="example-box">
                         <h4><i class="fas fa-infinity"></i> Discontinuidad Infinita</h4>
                         <p><strong>Definición:</strong> Una función tiene una discontinuidad infinita en $x = a$ si al menos uno de los límites laterales es infinito.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo:</h5>
                             <p>Considera la función:</p>
                             <p>$$f(x) = \frac{1}{x}$$</p>
-                            
-                            <div class="step-by-step">
+                                                    <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
                                     <strong>Límite por la izquierda:</strong><br>
@@ -670,12 +645,10 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="interactive-element" onclick="showInfiniteExample()">
+                                            <div class="interactive-element" onclick="showInfiniteExample()">
                             <i class="fas fa-chart-line"></i> Ver Gráfica de Discontinuidad Infinita
                         </div>
-                        
-                        <div id="infiniteExample" style="display: none;">
+                                            <div id="infiniteExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="infiniteCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -689,8 +662,7 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-chart-area"></i> Análisis Gráfico de Discontinuidades</h4>
                         <p>Para identificar discontinuidades gráficamente, busca:</p>
-                        
-                        <div class="row">
+                                            <div class="row">
                             <div class="col-md-6">
                                 <ul>
                                     <li><strong>Huecos:</strong> Puntos donde la gráfica tiene un "agujero"</li>
@@ -704,8 +676,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div id="allDiscontinuities" style="display: none;">
+                                            <div id="allDiscontinuities" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="allDiscontinuitiesCanvas" width="600" height="400"></canvas>
                                 <p class="mt-3">
@@ -738,8 +709,7 @@
                     <div class="definition-box">
                         <h4><i class="fas fa-plus-circle"></i> Operaciones con Funciones Continuas</h4>
                         <p>Si $f$ y $g$ son funciones continuas en un punto $x = a$, entonces las siguientes funciones también son continuas en $x = a$:</p>
-                        
-                        <div class="row">
+                                            <div class="row">
                             <div class="col-md-6">
                                 <ul>
                                     <li><strong>Suma:</strong> $f + g$</li>
@@ -762,8 +732,7 @@
                     <div class="example-box">
                         <h4><i class="fas fa-book"></i> Ejemplo: Operaciones con Funciones Continuas</h4>
                         <p><strong>Problema:</strong> Demostrar que $h(x) = \frac{x^2 + 3x - 2}{x + 1}$ es continua en $x = 2$.</p>
-                        
-                        <div class="step-by-step">
+                                            <div class="step-by-step">
                             <div class="step">
                                 <span class="step-number">1</span>
                                 <strong>Identificar las funciones componentes:</strong><br>
@@ -796,12 +765,10 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-sitemap"></i> Continuidad de Funciones Compuestas</h4>
                         <p><strong>Teorema:</strong> Si $g$ es continua en $x = a$ y $f$ es continua en $g(a)$, entonces la función compuesta $f \circ g$ es continua en $x = a$.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo:</h5>
                             <p>Demostrar que $h(x) = \sin(x^2 + 1)$ es continua en $x = 0$.</p>
-                            
-                            <div class="step-by-step">
+                                                    <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
                                     <strong>Identificar las funciones:</strong><br>
@@ -830,12 +797,10 @@
                     <div class="definition-box">
                         <h4><i class="fas fa-mountain"></i> Teorema de Weierstrass</h4>
                         <p><strong>Enunciado:</strong> Si $f$ es una función continua en un intervalo cerrado $[a, b]$, entonces $f$ alcanza su valor máximo y su valor mínimo en ese intervalo.</p>
-                        
-                        <div class="example-box">
+                                            <div class="example-box">
                             <h5>Ejemplo de Aplicación:</h5>
                             <p>Considera la función $f(x) = x^2 - 4x + 3$ en el intervalo $[0, 4]$.</p>
-                            
-                            <div class="step-by-step">
+                                                    <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
                                     <strong>Verificar continuidad:</strong><br>
@@ -859,12 +824,10 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="interactive-element" onclick="showWeierstrassExample()">
+                                            <div class="interactive-element" onclick="showWeierstrassExample()">
                             <i class="fas fa-chart-area"></i> Ver Gráfica del Teorema de Weierstrass
                         </div>
-                        
-                        <div id="weierstrassExample" style="display: none;">
+                                            <div id="weierstrassExample" style="display: none;">
                             <div class="canvas-container">
                                 <canvas id="weierstrassCanvas" width="600" height="300"></canvas>
                                 <p class="mt-3">
@@ -878,8 +841,7 @@
                     <div class="concept-box">
                         <h4><i class="fas fa-star"></i> Funciones Continuas Importantes</h4>
                         <p>Las siguientes funciones son continuas en sus dominios:</p>
-                        
-                        <div class="row">
+                                            <div class="row">
                             <div class="col-md-6">
                                 <ul>
                                     <li><strong>Polinomios:</strong> $P(x) = a_n x^n + \cdots + a_1 x + a_0$</li>
@@ -920,12 +882,10 @@
                     <div class="exercise-box">
                         <h4><i class="fas fa-pencil-alt"></i> Ejercicio 1: Verificar Continuidad</h4>
                         <p><strong>Problema:</strong> Determinar si la función $f(x) = \frac{x^2 - 9}{x - 3}$ es continua en $x = 3$.</p>
-                        
-                        <div class="interactive-element" onclick="showExercise1Solution()">
+                                            <div class="interactive-element" onclick="showExercise1Solution()">
                             <i class="fas fa-eye"></i> Ver Solución Paso a Paso
                         </div>
-                        
-                        <div id="exercise1Solution" style="display: none;">
+                                            <div id="exercise1Solution" style="display: none;">
                             <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
@@ -954,12 +914,10 @@
                         x^2 & \text{si } x < 1 \\
                         2x - 1 & \text{si } x \geq 1
                         \end{cases}$$</p>
-                        
-                        <div class="interactive-element" onclick="showExercise2Solution()">
+                                            <div class="interactive-element" onclick="showExercise2Solution()">
                             <i class="fas fa-eye"></i> Ver Solución Paso a Paso
                         </div>
-                        
-                        <div id="exercise2Solution" style="display: none;">
+                                            <div id="exercise2Solution" style="display: none;">
                             <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
@@ -989,12 +947,10 @@
                     <div class="exercise-box">
                         <h4><i class="fas fa-pencil-alt"></i> Ejercicio 3: Teorema del Valor Intermedio</h4>
                         <p><strong>Problema:</strong> Usar el Teorema del Valor Intermedio para demostrar que la ecuación $x^3 + x - 1 = 0$ tiene al menos una solución real.</p>
-                        
-                        <div class="interactive-element" onclick="showExercise3Solution()">
+                                            <div class="interactive-element" onclick="showExercise3Solution()">
                             <i class="fas fa-eye"></i> Ver Solución Paso a Paso
                         </div>
-                        
-                        <div id="exercise3Solution" style="display: none;">
+                                            <div id="exercise3Solution" style="display: none;">
                             <div class="step-by-step">
                                 <div class="step">
                                     <span class="step-number">1</span>
@@ -1029,24 +985,20 @@
                     <!-- Ejercicios Interactivos -->
                     <div class="quiz-container">
                         <h4><i class="fas fa-question-circle"></i> Quiz de Continuidad</h4>
-                        
-                        <div class="quiz-question">
+                                            <div class="quiz-question">
                             <p>¿Cuál de las siguientes funciones es continua en $x = 0$?</p>
                         </div>
-                        
-                        <ul class="quiz-options" id="quiz1">
+                                            <ul class="quiz-options" id="quiz1">
                             <li data-answer="a">$f(x) = \frac{1}{x}$</li>
                             <li data-answer="b">$f(x) = |x|$</li>
                             <li data-answer="c">$f(x) = \frac{x}{|x|}$</li>
                             <li data-answer="d">$f(x) = \frac{1}{x^2}$</li>
                         </ul>
-                        
-                        <div class="feedback-box" id="feedback1">
+                                            <div class="feedback-box" id="feedback1">
                             <p><strong>Respuesta correcta:</strong> b) $f(x) = |x|$</p>
                             <p>La función valor absoluto es continua en todos los puntos, incluyendo $x = 0$.</p>
                         </div>
-                        
-                        <button class="btn btn-custom mt-3" onclick="checkAnswer('quiz1', 'b', 'feedback1')">
+                                            <button class="btn btn-custom mt-3" onclick="checkAnswer('quiz1', 'b', 'feedback1')">
                             Verificar Respuesta
                         </button>
                     </div>
@@ -1116,24 +1068,20 @@
                     <!-- Evaluación Final -->
                     <div class="quiz-container">
                         <h4><i class="fas fa-graduation-cap"></i> Evaluación Final</h4>
-                        
-                        <div class="quiz-question">
+                                            <div class="quiz-question">
                             <p><strong>Pregunta 1:</strong> Una función $f(x)$ es continua en $x = a$ si y solo si:</p>
                         </div>
-                        
-                        <ul class="quiz-options" id="finalQuiz1">
+                                            <ul class="quiz-options" id="finalQuiz1">
                             <li data-answer="a">$f(a)$ está definida</li>
                             <li data-answer="b">$\lim_{x \to a} f(x)$ existe</li>
                             <li data-answer="c">$\lim_{x \to a} f(x) = f(a)$</li>
                             <li data-answer="d">Todas las anteriores</li>
                         </ul>
-                        
-                        <div class="feedback-box" id="finalFeedback1">
+                                            <div class="feedback-box" id="finalFeedback1">
                             <p><strong>Respuesta correcta:</strong> d) Todas las anteriores</p>
                             <p>Las tres condiciones son necesarias para la continuidad.</p>
                         </div>
-                        
-                        <button class="btn btn-custom mt-3" onclick="checkAnswer('finalQuiz1', 'd', 'finalFeedback1')">
+                                            <button class="btn btn-custom mt-3" onclick="checkAnswer('finalQuiz1', 'd', 'finalFeedback1')">
                             Verificar Respuesta
                         </button>
                     </div>
@@ -1294,8 +1242,7 @@
         function checkAnswer(quizId, correctAnswer, feedbackId) {
             const options = document.querySelectorAll(`#${quizId} li`);
             const feedback = document.getElementById(feedbackId);
-            
-            options.forEach(option => {
+                    options.forEach(option => {
                 option.classList.remove('selected', 'correct', 'incorrect');
                 if (option.dataset.answer === correctAnswer) {
                     option.classList.add('correct');
@@ -1303,11 +1250,9 @@
                     option.classList.add('incorrect');
                 }
             });
-            
-            feedback.style.display = 'block';
+                    feedback.style.display = 'block';
             feedback.classList.add('feedback-correct');
-            
-            updateProgress('ejercicios', 1);
+                    updateProgress('ejercicios', 1);
         }
 
         // Función para actualizar el progreso
@@ -1319,21 +1264,17 @@
                 propiedades: 3,
                 ejercicios: 4
             };
-            
-            const percentage = Math.round((progress[section] / maxPoints[section]) * 100);
+                    const percentage = Math.round((progress[section] / maxPoints[section]) * 100);
             document.getElementById(`${section}Progress`).style.width = `${percentage}%`;
             document.getElementById(`${section}Score`).textContent = `${progress[section]}/${maxPoints[section]}`;
-            
-            // Actualizar progreso general
+                    // Actualizar progreso general
             const totalProgress = Object.values(progress).reduce((a, b) => a + b, 0);
             const totalMax = Object.values(maxPoints).reduce((a, b) => a + b, 0);
             const generalPercentage = Math.round((totalProgress / totalMax) * 100);
-            
-            document.getElementById('generalProgress').style.width = `${generalPercentage}%`;
+                    document.getElementById('generalProgress').style.width = `${generalPercentage}%`;
             document.getElementById('generalScore').textContent = `${generalPercentage}%`;
             document.getElementById('overallProgress').textContent = `${generalPercentage}%`;
-            
-            // Mostrar certificado si se completa el módulo
+                    // Mostrar certificado si se completa el módulo
             if (generalPercentage >= 80) {
                 document.getElementById('certificate').style.display = 'block';
             }
@@ -1343,11 +1284,9 @@
         function drawContinuityExample() {
             const canvas = document.getElementById('continuityCanvas');
             const ctx = canvas.getContext('2d');
-            
-            // Limpiar canvas
+                    // Limpiar canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1356,8 +1295,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función continua (azul)
+                    // Función continua (azul)
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1367,8 +1305,7 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Función con discontinuidad (roja)
+                    // Función con discontinuidad (roja)
             ctx.strokeStyle = '#dc3545';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1378,16 +1315,14 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 320; x < canvas.width - 50; x++) {
                 const y = canvas.height / 2 - (Math.cos((x - 50) * 0.02) * 30 + (x - 50) * 0.05) + 20;
                 if (x === 320) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Etiquetas
+                    // Etiquetas
             ctx.fillStyle = '#333';
             ctx.font = '14px Arial';
             ctx.fillText('Función Continua', 100, 80);
@@ -1397,10 +1332,8 @@
         function drawIntervalExample() {
             const canvas = document.getElementById('intervalCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1409,8 +1342,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función con discontinuidad en x = 2
+                    // Función con discontinuidad en x = 2
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1420,22 +1352,19 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 320; x < canvas.width - 50; x++) {
                 const y = canvas.height / 2 - ((x - 50) * 0.3) + 30;
                 if (x === 320) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Marcar discontinuidad
+                    // Marcar discontinuidad
             ctx.fillStyle = '#dc3545';
             ctx.beginPath();
             ctx.arc(300, canvas.height / 2 - 75, 5, 0, 2 * Math.PI);
             ctx.fill();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('x = 2', 280, canvas.height / 2 - 90);
         }
@@ -1443,10 +1372,8 @@
         function drawRemovableExample() {
             const canvas = document.getElementById('removableCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1455,8 +1382,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función con hueco
+                    // Función con hueco
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1466,16 +1392,14 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 320; x < canvas.width - 50; x++) {
                 const y = canvas.height / 2 - ((x - 50) * 0.2);
                 if (x === 320) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Dibujar hueco
+                    // Dibujar hueco
             ctx.fillStyle = 'white';
             ctx.beginPath();
             ctx.arc(300, canvas.height / 2 - 50, 8, 0, 2 * Math.PI);
@@ -1483,8 +1407,7 @@
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.stroke();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('Hueco', 280, canvas.height / 2 - 70);
         }
@@ -1492,10 +1415,8 @@
         function drawJumpExample() {
             const canvas = document.getElementById('jumpCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1504,8 +1425,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función con salto
+                    // Función con salto
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1515,24 +1435,21 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 320; x < canvas.width - 50; x++) {
                 const y = canvas.height / 2 - ((x - 50) * 0.2) + 40;
                 if (x === 320) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Dibujar salto
+                    // Dibujar salto
             ctx.strokeStyle = '#dc3545';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(300, canvas.height / 2 - 50);
             ctx.lineTo(300, canvas.height / 2 - 10);
             ctx.stroke();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('Salto', 280, canvas.height / 2 - 70);
         }
@@ -1540,10 +1457,8 @@
         function drawInfiniteExample() {
             const canvas = document.getElementById('infiniteCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1552,8 +1467,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función 1/x
+                    // Función 1/x
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1563,16 +1477,14 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 320; x < canvas.width - 50; x++) {
                 const y = canvas.height / 2 + (100 / ((x - 300) * 0.01));
                 if (x === 320) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Asíntota vertical
+                    // Asíntota vertical
             ctx.strokeStyle = '#dc3545';
             ctx.lineWidth = 2;
             ctx.setLineDash([5, 5]);
@@ -1581,8 +1493,7 @@
             ctx.lineTo(300, canvas.height - 50);
             ctx.stroke();
             ctx.setLineDash([]);
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('x = 0', 280, canvas.height / 2 - 20);
         }
@@ -1590,10 +1501,8 @@
         function drawAllDiscontinuities() {
             const canvas = document.getElementById('allDiscontinuitiesCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -1602,8 +1511,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Discontinuidad evitable
+                    // Discontinuidad evitable
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1612,19 +1520,16 @@
             ctx.moveTo(220, 120);
             ctx.lineTo(300, 100);
             ctx.stroke();
-            
-            // Hueco
+                    // Hueco
             ctx.fillStyle = 'white';
             ctx.beginPath();
             ctx.arc(210, 135, 5, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '10px Arial';
             ctx.fillText('Evitable', 150, 80);
-            
-            // Discontinuidad de salto
+                    // Discontinuidad de salto
             ctx.strokeStyle = '#28a745';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1633,11 +1538,9 @@
             ctx.moveTo(450, 120);
             ctx.lineTo(550, 100);
             ctx.stroke();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.fillText('De Salto', 450, 80);
-            
-            // Discontinuidad infinita
+                    // Discontinuidad infinita
             ctx.strokeStyle = '#dc3545';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1647,26 +1550,22 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.beginPath();
+                    ctx.beginPath();
             for (let x = 220; x < 300; x++) {
                 const y = 300 + (50 / ((x - 200) * 0.02));
                 if (x === 220) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.fillText('Infinita', 150, 350);
         }
 
         function drawWeierstrassExample() {
             const canvas = document.getElementById('weierstrassCanvas');
             const ctx = canvas.getContext('2d');
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Dibujar ejes
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1675,8 +1574,7 @@
             ctx.moveTo(canvas.width / 2, 50);
             ctx.lineTo(canvas.width / 2, canvas.height - 50);
             ctx.stroke();
-            
-            // Función cuadrática
+                    // Función cuadrática
             ctx.strokeStyle = '#007bff';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -1686,22 +1584,19 @@
                 else ctx.lineTo(x, y);
             }
             ctx.stroke();
-            
-            // Marcar máximo y mínimo
+                    // Marcar máximo y mínimo
             ctx.fillStyle = '#dc3545';
             ctx.beginPath();
             ctx.arc(300, canvas.height / 2 + 50, 5, 0, 2 * Math.PI);
             ctx.fill();
-            
-            ctx.fillStyle = '#28a745';
+                    ctx.fillStyle = '#28a745';
             ctx.beginPath();
             ctx.arc(200, canvas.height / 2 - 50, 5, 0, 2 * Math.PI);
             ctx.fill();
             ctx.beginPath();
             ctx.arc(400, canvas.height / 2 - 50, 5, 0, 2 * Math.PI);
             ctx.fill();
-            
-            ctx.fillStyle = '#333';
+                    ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('Mínimo', 300, canvas.height / 2 + 70);
             ctx.fillText('Máximo', 200, canvas.height / 2 - 70);

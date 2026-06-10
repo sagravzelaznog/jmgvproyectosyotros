@@ -6,7 +6,6 @@
     <title>Módulo 5: Ecuaciones Diferenciales - Cálculo Integral</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -28,8 +27,7 @@
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        .module-header {
+            .module-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
@@ -38,35 +36,30 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        
-        .module-title {
+            .module-title {
             font-size: 2.5em;
             margin: 0 0 10px 0;
             font-weight: 700;
         }
-        
-        .module-subtitle {
+            .module-subtitle {
             font-size: 1.2em;
             opacity: 0.9;
             margin: 0;
         }
-        
-        .progress-bar {
+            .progress-bar {
             background: rgba(255,255,255,0.2);
             height: 8px;
             border-radius: 4px;
             margin-top: 20px;
             overflow: hidden;
         }
-        
-        .progress-fill {
+            .progress-fill {
             background: #4CAF50;
             height: 100%;
             width: 100%;
             transition: width 0.3s ease;
         }
-        
-        .content-section {
+            .content-section {
             background: white;
             margin: 20px 0;
             padding: 30px;
@@ -74,8 +67,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-left: 5px solid #667eea;
         }
-        
-        .section-title {
+            .section-title {
             color: #667eea;
             font-size: 1.8em;
             margin-bottom: 20px;
@@ -83,12 +75,10 @@
             align-items: center;
             gap: 15px;
         }
-        
-        .section-icon {
+            .section-icon {
             font-size: 1.5em;
         }
-        
-        .learning-objective {
+            .learning-objective {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             padding: 20px;
@@ -98,8 +88,7 @@
             font-size: 1.1em;
             font-weight: 600;
         }
-        
-        .example-box {
+            .example-box {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 10px;
@@ -107,8 +96,7 @@
             margin: 20px 0;
             border-left: 5px solid #28a745;
         }
-        
-        .example-title {
+            .example-title {
             color: #28a745;
             font-weight: bold;
             font-size: 1.2em;
@@ -117,8 +105,7 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .step {
+            .step {
             background: white;
             border: 1px solid #dee2e6;
             border-radius: 8px;
@@ -126,8 +113,7 @@
             margin: 15px 0;
             border-left: 4px solid #007bff;
         }
-        
-        .step-number {
+            .step-number {
             background: #007bff;
             color: white;
             width: 30px;
@@ -139,24 +125,21 @@
             font-weight: bold;
             margin-right: 15px;
         }
-        
-        .interactive-demo {
+            .interactive-demo {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 25px;
             border-radius: 10px;
             margin: 20px 0;
         }
-        
-        .demo-title {
+            .demo-title {
             font-size: 1.3em;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        .formula-highlight {
+            .formula-highlight {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
             border-radius: 5px;
@@ -164,22 +147,19 @@
             margin: 15px 0;
             border-left: 4px solid #f39c12;
         }
-        
-        .formula-title {
+            .formula-title {
             color: #f39c12;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        
-        .exercise-box {
+            .exercise-box {
             background: #e8f5e8;
             border: 2px solid #28a745;
             border-radius: 10px;
             padding: 25px;
             margin: 20px 0;
         }
-        
-        .exercise-title {
+            .exercise-title {
             color: #28a745;
             font-weight: bold;
             font-size: 1.2em;
@@ -188,8 +168,7 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .solution-toggle {
+            .solution-toggle {
             background: #007bff;
             color: white;
             border: none;
@@ -199,12 +178,10 @@
             margin: 10px 0;
             transition: background 0.3s ease;
         }
-        
-        .solution-toggle:hover {
+            .solution-toggle:hover {
             background: #0056b3;
         }
-        
-        .solution {
+            .solution {
             display: none;
             background: white;
             border: 1px solid #dee2e6;
@@ -212,14 +189,12 @@
             padding: 20px;
             margin-top: 15px;
         }
-        
-        .navigation-buttons {
+            .navigation-buttons {
             display: flex;
             justify-content: space-between;
             margin: 30px 0;
         }
-        
-        .nav-button {
+            .nav-button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -233,21 +208,18 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .nav-button:hover {
+            .nav-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        
-        .tips-box {
+            .tips-box {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border: 2px solid #ff9a9e;
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
         }
-        
-        .tips-title {
+            .tips-title {
             color: #d63031;
             font-weight: bold;
             font-size: 1.2em;
@@ -256,8 +228,7 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .visualization-container {
+            .visualization-container {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 10px;
@@ -265,27 +236,22 @@
             margin: 20px 0;
             text-align: center;
         }
-        
-        .visualization-title {
+            .visualization-title {
             color: #495057;
             font-weight: bold;
             margin-bottom: 15px;
         }
-        
-        @media (max-width: 768px) {
+            @media (max-width: 768px) {
             .module-container {
                 padding: 10px;
             }
-            
-            .module-title {
+                    .module-title {
                 font-size: 2em;
             }
-            
-            .content-section {
+                    .content-section {
                 padding: 20px;
             }
-            
-            .navigation-buttons {
+                    .navigation-buttons {
                 flex-direction: column;
                 gap: 15px;
             }
@@ -330,8 +296,7 @@
                     Ejemplo 1: Identificando Ecuaciones Diferenciales
                 </div>
                 <p>Clasifica las siguientes ecuaciones:</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>$y' = 2x + 3$</strong>
                     <p><strong>Respuesta:</strong> Ecuación diferencial ordinaria de primer orden, lineal</p>
@@ -375,8 +340,7 @@
                     Verificación de Soluciones
                 </div>
                 <p>Para verificar si una función es solución de una ecuación diferencial, sustituimos la función y sus derivadas en la ecuación.</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Ejemplo:</strong> Verificar si $y = e^{2x}$ es solución de $y' = 2y$
                     <p><strong>Solución:</strong></p>
@@ -407,8 +371,7 @@
                     Ejemplo 2: Resolución Paso a Paso - Variables Separables
                 </div>
                 <p><strong>Resolver:</strong> $\frac{dy}{dx} = x^2y$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Separar variables:</strong>
                     <p>$$\frac{dy}{dx} = x^2y$$</p>
@@ -444,8 +407,7 @@
                     Ejemplo 3: Problema de Valor Inicial
                 </div>
                 <p><strong>Resolver:</strong> $\frac{dy}{dx} = \frac{y^2}{x^2}$ con condición inicial $y(1) = 2$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Separar variables:</strong>
                     <p>$$\frac{dy}{dx} = \frac{y^2}{x^2}$$</p>
@@ -496,8 +458,7 @@
                     Ejemplo 4: Ecuación Homogénea
                 </div>
                 <p><strong>Resolver:</strong> $(x^2 + y^2)dx - 2xy \, dy = 0$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Verificar que es homogénea:</strong>
                     <p>$$\frac{dy}{dx} = \frac{x^2 + y^2}{2xy} = \frac{x^2\left(1 + \frac{y^2}{x^2}\right)}{2xy} = \frac{x\left(1 + \frac{y^2}{x^2}\right)}{2y}$$</p>
@@ -561,8 +522,7 @@
                     Ejemplo 5: Ecuación Exacta
                 </div>
                 <p><strong>Resolver:</strong> $(2xy + 3)dx + (x^2 - 1)dy = 0$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Verificar exactitud:</strong>
                     <p>$M(x,y) = 2xy + 3$ y $N(x,y) = x^2 - 1$</p>
@@ -616,8 +576,7 @@
                     Ejemplo 6: Ecuación Lineal con Factor Integrante
                 </div>
                 <p><strong>Resolver:</strong> $\frac{dy}{dx} + 2xy = x$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Identificar P(x) y Q(x):</strong>
                     <p>$P(x) = 2x$ y $Q(x) = x$</p>
@@ -667,8 +626,7 @@
                     Ejemplo 7: Crecimiento Exponencial
                 </div>
                 <p><strong>Problema:</strong> Una población de bacterias crece a una tasa proporcional a su tamaño actual. Si inicialmente hay 1000 bacterias y después de 2 horas hay 2000, ¿cuántas habrá después de 6 horas?</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Modelo matemático:</strong>
                     <p>$$\frac{dP}{dt} = kP$$</p>
@@ -708,8 +666,7 @@
                     Ejemplo 8: Ley de Enfriamiento de Newton
                 </div>
                 <p><strong>Problema:</strong> Un objeto a 100°C se coloca en un ambiente a 20°C. La temperatura del objeto disminuye a 80°C en 10 minutos. ¿Cuánto tiempo tardará en llegar a 30°C?</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">1</span>
                     <strong>Modelo matemático:</strong>
                     <p>$$\frac{dT}{dt} = -k(T - T_a)$$</p>

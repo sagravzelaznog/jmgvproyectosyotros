@@ -8,7 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -279,12 +278,10 @@
             .floating-menu {
                 display: none;
             }
-            
-            .module-title {
+                    .module-title {
                 font-size: 2rem;
             }
-            
-            .content-section {
+                    .content-section {
                 padding: 1rem;
             }
         }
@@ -486,28 +483,23 @@
                         <div class="theorem-box">
                             <h4><i class="fas fa-gavel"></i> Teoremas Fundamentales</h4>
                             <p>Si $\lim_{x \to a} f(x) = L$ y $\lim_{x \to a} g(x) = M$, entonces:</p>
-                            
-                            <div class="formula-display">
+                                                    <div class="formula-display">
                                 <strong>1. Límite de una constante:</strong><br>
                                 $\lim_{x \to a} c = c$
                             </div>
-                            
-                            <div class="formula-display">
+                                                    <div class="formula-display">
                                 <strong>2. Límite de la suma:</strong><br>
                                 $\lim_{x \to a} [f(x) + g(x)] = L + M$
                             </div>
-                            
-                            <div class="formula-display">
+                                                    <div class="formula-display">
                                 <strong>3. Límite del producto:</strong><br>
                                 $\lim_{x \to a} [f(x) \cdot g(x)] = L \cdot M$
                             </div>
-                            
-                            <div class="formula-display">
+                                                    <div class="formula-display">
                                 <strong>4. Límite del cociente:</strong><br>
                                 $\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}$ (si M ≠ 0)
                             </div>
-                            
-                            <div class="formula-display">
+                                                    <div class="formula-display">
                                 <strong>5. Límite de una potencia:</strong><br>
                                 $\lim_{x \to a} [f(x)]^n = L^n$
                             </div>
@@ -541,8 +533,7 @@
                             <div class="formula-display">
                                 $\lim_{x \to a} f(x) = +\infty$ o $\lim_{x \to a} f(x) = -\infty$
                             </div>
-                            
-                            <p><strong>Límites al infinito:</strong> Cuando x tiende a infinito:</p>
+                                                    <p><strong>Límites al infinito:</strong> Cuando x tiende a infinito:</p>
                             <div class="formula-display">
                                 $\lim_{x \to +\infty} f(x) = L$ o $\lim_{x \to -\infty} f(x) = L$
                             </div>
@@ -977,7 +968,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    
     <script>
         // Variables globales
         let currentSection = 'concepto-limite';
@@ -1043,8 +1033,7 @@
             const sections = ['concepto-limite', 'propiedades-limites', 'tecnicas-calculo', 'limites-especiales', 'continuidad', 'ejercicios', 'evaluacion'];
             const currentIndex = sections.indexOf(currentSection);
             progresoModulo = Math.round(((currentIndex + 1) / sections.length) * 100);
-            
-            document.getElementById('progressBar').style.width = progresoModulo + '%';
+                    document.getElementById('progressBar').style.width = progresoModulo + '%';
             document.getElementById('progressPercent').textContent = progresoModulo + '%';
         }
 
@@ -1117,19 +1106,15 @@
         function drawLimiteGraph(x, fx) {
             const canvas = document.getElementById('limiteCanvas');
             if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
             const width = canvas.width;
             const height = canvas.height;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            // Configurar coordenadas
+                    ctx.clearRect(0, 0, width, height);
+                    // Configurar coordenadas
             const centerX = width / 2;
             const centerY = height / 2;
             const scale = 50;
-            
-            // Dibujar ejes
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1138,35 +1123,29 @@
             ctx.moveTo(centerX, 0);
             ctx.lineTo(centerX, height);
             ctx.stroke();
-            
-            // Dibujar función f(x) = 3x + 1
+                    // Dibujar función f(x) = 3x + 1
             ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            
-            for (let i = 0; i < width; i++) {
+                    for (let i = 0; i < width; i++) {
                 const xCoord = (i - centerX) / scale;
                 const yCoord = 3 * xCoord + 1;
                 const pixelY = centerY - yCoord * scale;
-                
-                if (i === 0) {
+                            if (i === 0) {
                     ctx.moveTo(i, pixelY);
                 } else {
                     ctx.lineTo(i, pixelY);
                 }
             }
             ctx.stroke();
-            
-            // Marcar punto actual
+                    // Marcar punto actual
             const pixelX = centerX + x * scale;
             const pixelY = centerY - fx * scale;
-            
-            ctx.fillStyle = '#dc3545';
+                    ctx.fillStyle = '#dc3545';
             ctx.beginPath();
             ctx.arc(pixelX, pixelY, 6, 0, 2 * Math.PI);
             ctx.fill();
-            
-            // Etiquetas
+                    // Etiquetas
             ctx.fillStyle = '#333';
             ctx.font = '14px Arial';
             ctx.fillText('x', width - 20, centerY - 10);
@@ -1178,18 +1157,14 @@
         function drawLimitesLaterales(a) {
             const canvas = document.getElementById('limitesLateralesCanvas');
             if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
             const width = canvas.width;
             const height = canvas.height;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const centerX = width / 2;
+                    ctx.clearRect(0, 0, width, height);
+                    const centerX = width / 2;
             const centerY = height / 2;
             const scale = 80;
-            
-            // Dibujar ejes
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1198,63 +1173,53 @@
             ctx.moveTo(centerX, 0);
             ctx.lineTo(centerX, height);
             ctx.stroke();
-            
-            // Dibujar función con discontinuidad
+                    // Dibujar función con discontinuidad
             ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
-            
-            // Lado izquierdo
+                    // Lado izquierdo
             ctx.beginPath();
             for (let i = 0; i < centerX + a * scale; i++) {
                 const xCoord = (i - centerX) / scale;
                 const yCoord = xCoord * xCoord; // f(x) = x²
                 const pixelY = centerY - yCoord * scale;
-                
-                if (i === 0) {
+                            if (i === 0) {
                     ctx.moveTo(i, pixelY);
                 } else {
                     ctx.lineTo(i, pixelY);
                 }
             }
             ctx.stroke();
-            
-            // Lado derecho (con salto)
+                    // Lado derecho (con salto)
             ctx.beginPath();
             for (let i = centerX + a * scale; i < width; i++) {
                 const xCoord = (i - centerX) / scale;
                 const yCoord = xCoord * xCoord + 1; // f(x) = x² + 1
                 const pixelY = centerY - yCoord * scale;
-                
-                if (i === centerX + a * scale) {
+                            if (i === centerX + a * scale) {
                     ctx.moveTo(i, pixelY);
                 } else {
                     ctx.lineTo(i, pixelY);
                 }
             }
             ctx.stroke();
-            
-            // Marcar punto de discontinuidad
+                    // Marcar punto de discontinuidad
             const pixelX = centerX + a * scale;
             const limiteIzquierda = a * a;
             const limiteDerecha = a * a + 1;
-            
-            // Punto izquierdo
+                    // Punto izquierdo
             ctx.fillStyle = '#28a745';
             ctx.beginPath();
             ctx.arc(pixelX, centerY - limiteIzquierda * scale, 4, 0, 2 * Math.PI);
             ctx.fill();
-            
-            // Punto derecho
+                    // Punto derecho
             ctx.fillStyle = '#ffc107';
             ctx.beginPath();
             ctx.arc(pixelX, centerY - limiteDerecha * scale, 4, 0, 2 * Math.PI);
             ctx.fill();
-            
-            // Actualizar valores
+                    // Actualizar valores
             document.getElementById('limiteIzquierda').textContent = limiteIzquierda.toFixed(2);
             document.getElementById('limiteDerecha').textContent = limiteDerecha.toFixed(2);
-            
-            // Etiquetas
+                    // Etiquetas
             ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('x', width - 20, centerY - 10);
@@ -1264,18 +1229,14 @@
         function drawLimitesEspeciales(tipo) {
             const canvas = document.getElementById('limitesEspecialesCanvas');
             if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
             const width = canvas.width;
             const height = canvas.height;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const centerX = width / 2;
+                    ctx.clearRect(0, 0, width, height);
+                    const centerX = width / 2;
             const centerY = height / 2;
             const scale = 100;
-            
-            // Dibujar ejes
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1284,17 +1245,13 @@
             ctx.moveTo(centerX, 0);
             ctx.lineTo(centerX, height);
             ctx.stroke();
-            
-            ctx.strokeStyle = '#667eea';
+                    ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            
-            let resultado = 1;
-            
-            for (let i = 0; i < width; i++) {
+                    let resultado = 1;
+                    for (let i = 0; i < width; i++) {
                 const xCoord = (i - centerX) / scale;
-                
-                let yCoord;
+                            let yCoord;
                 switch(tipo) {
                     case 'sin':
                         yCoord = xCoord === 0 ? 1 : Math.sin(xCoord) / xCoord;
@@ -1313,27 +1270,22 @@
                         resultado = 1;
                         break;
                 }
-                
-                const pixelY = centerY - yCoord * scale;
-                
-                if (i === 0) {
+                            const pixelY = centerY - yCoord * scale;
+                            if (i === 0) {
                     ctx.moveTo(i, pixelY);
                 } else {
                     ctx.lineTo(i, pixelY);
                 }
             }
             ctx.stroke();
-            
-            // Marcar punto en x = 0
+                    // Marcar punto en x = 0
             ctx.fillStyle = '#dc3545';
             ctx.beginPath();
             ctx.arc(centerX, centerY - resultado * scale, 6, 0, 2 * Math.PI);
             ctx.fill();
-            
-            // Actualizar resultado
+                    // Actualizar resultado
             document.getElementById('resultadoEspecial').textContent = resultado;
-            
-            // Etiquetas
+                    // Etiquetas
             ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('x', width - 20, centerY - 10);
@@ -1343,18 +1295,14 @@
         function drawContinuidad(tipo) {
             const canvas = document.getElementById('continuidadCanvas');
             if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
+                    const ctx = canvas.getContext('2d');
             const width = canvas.width;
             const height = canvas.height;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const centerX = width / 2;
+                    ctx.clearRect(0, 0, width, height);
+                    const centerX = width / 2;
             const centerY = height / 2;
             const scale = 60;
-            
-            // Dibujar ejes
+                    // Dibujar ejes
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1363,18 +1311,14 @@
             ctx.moveTo(centerX, 0);
             ctx.lineTo(centerX, height);
             ctx.stroke();
-            
-            ctx.strokeStyle = '#667eea';
+                    ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            
-            let estado = 'Continua';
-            
-            for (let i = 0; i < width; i++) {
+                    let estado = 'Continua';
+                    for (let i = 0; i < width; i++) {
                 const xCoord = (i - centerX) / scale;
                 let yCoord;
-                
-                switch(tipo) {
+                            switch(tipo) {
                     case 'continua':
                         yCoord = xCoord * xCoord; // f(x) = x²
                         estado = 'Continua';
@@ -1392,21 +1336,17 @@
                         estado = 'Discontinuidad infinita';
                         break;
                 }
-                
-                const pixelY = centerY - yCoord * scale;
-                
-                if (i === 0) {
+                            const pixelY = centerY - yCoord * scale;
+                            if (i === 0) {
                     ctx.moveTo(i, pixelY);
                 } else {
                     ctx.lineTo(i, pixelY);
                 }
             }
             ctx.stroke();
-            
-            // Actualizar estado
+                    // Actualizar estado
             document.getElementById('estadoContinuidad').textContent = estado;
-            
-            // Etiquetas
+                    // Etiquetas
             ctx.fillStyle = '#333';
             ctx.font = '12px Arial';
             ctx.fillText('x', width - 20, centerY - 10);
@@ -1432,19 +1372,16 @@
                 2: 2, // sin(2x)/x = 2sin(2x)/(2x) = 2·1 = 2
                 3: 0.25 // (√(x+4)-2)/x = (√(x+4)-2)(√(x+4)+2)/(x(√(x+4)+2)) = x/(x(√(x+4)+2)) = 1/(√(x+4)+2), cuando x→0: 1/(2+2) = 1/4 = 0.25
             };
-            
-            const respuestaUsuario = parseFloat(document.getElementById(`ejercicio${numero}Respuesta`).value);
+                    const respuestaUsuario = parseFloat(document.getElementById(`ejercicio${numero}Respuesta`).value);
             const respuestaCorrecta = respuestas[numero];
             const resultadoDiv = document.getElementById(`ejercicio${numero}Resultado`);
-            
-            if (Math.abs(respuestaUsuario - respuestaCorrecta) < 0.01) {
+                    if (Math.abs(respuestaUsuario - respuestaCorrecta) < 0.01) {
                 resultadoDiv.innerHTML = '<div class="alert alert-success"><i class="fas fa-check"></i> ¡Correcto!</div>';
                 ejerciciosCompletados++;
             } else {
                 resultadoDiv.innerHTML = `<div class="alert alert-danger"><i class="fas fa-times"></i> Incorrecto. La respuesta correcta es ${respuestaCorrecta}</div>`;
             }
-            
-            updateEjerciciosProgress();
+                    updateEjerciciosProgress();
         }
 
         function updateEjerciciosProgress() {
@@ -1459,21 +1396,17 @@
                 pregunta2: '1',
                 pregunta3: 'c'
             };
-            
-            let correctas = 0;
+                    let correctas = 0;
             let total = 3;
-            
-            Object.keys(respuestas).forEach(pregunta => {
+                    Object.keys(respuestas).forEach(pregunta => {
                 const respuestaSeleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
                 if (respuestaSeleccionada && respuestaSeleccionada.value === respuestas[pregunta]) {
                     correctas++;
                 }
             });
-            
-            const porcentaje = Math.round((correctas / total) * 100);
+                    const porcentaje = Math.round((correctas / total) * 100);
             const resultadoDiv = document.getElementById('resultadoEvaluacion');
-            
-            let mensaje = '';
+                    let mensaje = '';
             if (porcentaje >= 80) {
                 mensaje = `<div class="alert alert-success"><h4><i class="fas fa-trophy"></i> ¡Excelente!</h4><p>Obtuviste ${correctas}/${total} respuestas correctas (${porcentaje}%)</p></div>`;
             } else if (porcentaje >= 60) {
@@ -1481,8 +1414,7 @@
             } else {
                 mensaje = `<div class="alert alert-danger"><h4><i class="fas fa-exclamation-triangle"></i> Necesitas repasar</h4><p>Obtuviste ${correctas}/${total} respuestas correctas (${porcentaje}%)</p></div>`;
             }
-            
-            resultadoDiv.innerHTML = mensaje;
+                    resultadoDiv.innerHTML = mensaje;
             resultadoDiv.style.display = 'block';
         }
 

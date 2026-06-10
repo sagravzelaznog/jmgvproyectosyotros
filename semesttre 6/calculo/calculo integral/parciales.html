@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solución de Integral - Problema de Valor Inicial</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 				<script>
 					window.MathJax = {
@@ -171,8 +170,7 @@
 
     <div class="container">
         <h1>Resolución de Integral: Problema de Valor Inicial</h1>
-        
-        <div class="intro">
+            <div class="intro">
             <p>Este módulo auto-explicativo muestra la solución paso a paso de la integral usando <strong>fracciones parciales</strong>, incluyendo la evaluación de la constante \(c\).</p>
             <div class="math-block">
                 $$\int x' = \int -\frac{3y^2 - 12y + 3}{(2-y)^2(y+1)} dy$$
@@ -301,8 +299,7 @@
                     currentStep++;
                     const stepEl = document.getElementById(`step-${currentStep}`);
                     stepEl.classList.add("active");
-                    
-                    btnReset.disabled = false;
+                                    btnReset.disabled = false;
 
                     if (currentStep === totalSteps) {
                         btnNext.disabled = true;

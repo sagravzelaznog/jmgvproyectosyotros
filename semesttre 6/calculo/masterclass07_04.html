@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS07_04 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -251,8 +245,7 @@
             f(x) = ax^2 + bx + c
             $$
             donde $a$, $b$ y $c$ son números reales y $a \neq 0$.</p>
-            
-            <h4>Características principales:</h4>
+                    <h4>Características principales:</h4>
             <ul>
                 <li><strong>Gráfica:</strong> Una parábola que abre hacia arriba si $a > 0$ o hacia abajo si $a < 0$</li>
                 <li><strong>Vértice:</strong> Punto de máximo o mínimo de la parábola</li>
@@ -261,26 +254,22 @@
                 <li><strong>Dominio:</strong> $\mathbb{R}$ (todos los números reales)</li>
                 <li><strong>Rango:</strong> Depende de la dirección de apertura de la parábola</li>
             </ul>
-            
-            <h4>Formas de la función cuadrática:</h4>
+                    <h4>Formas de la función cuadrática:</h4>
             <ol>
                 <li><strong>Forma general:</strong> $f(x) = ax^2 + bx + c$</li>
                 <li><strong>Forma vértice:</strong> $f(x) = a(x - h)^2 + k$ donde $(h,k)$ es el vértice</li>
                 <li><strong>Forma factorizada:</strong> $f(x) = a(x - r_1)(x - r_2)$ donde $r_1$ y $r_2$ son las raíces</li>
             </ol>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1: Análisis de una función cuadrática</h4>
                 <p>Sea $f(x) = x^2 - 4x + 3$</p>
-                
-                <h5>Paso 1: Identificar coeficientes</h5>
+                            <h5>Paso 1: Identificar coeficientes</h5>
                 <ul>
                     <li>$a = 1$ (coeficiente de $x^2$)</li>
                     <li>$b = -4$ (coeficiente de $x$)</li>
                     <li>$c = 3$ (término independiente)</li>
                 </ul>
-                
-                <h5>Paso 2: Encontrar el vértice</h5>
+                            <h5>Paso 2: Encontrar el vértice</h5>
                 <p>Fórmula del vértice: $\left(-\frac{b}{2a}, f\left(-\frac{b}{2a}\right)\right)$</p>
                 <p>$$
                 h = -\frac{b}{2a} = -\frac{-4}{2(1)} = 2
@@ -289,23 +278,19 @@
                 k = f(2) = (2)^2 - 4(2) + 3 = 4 - 8 + 3 = -1
                 $$
                 <strong>Vértice:</strong> $(2, -1)$</p>
-                
-                <h5>Paso 3: Encontrar las raíces</h5>
+                            <h5>Paso 3: Encontrar las raíces</h5>
                 <p>Fórmula general: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</p>
                 <p>$$
                 x = \frac{-(-4) \pm \sqrt{(-4)^2 - 4(1)(3)}}{2(1)} = \frac{4 \pm \sqrt{16 - 12}}{2} = \frac{4 \pm 2}{2}
                 $$
                 <strong>Raíces:</strong> $x = 3$ y $x = 1$</p>
-                
-                <h5>Paso 4: Determinar el rango</h5>
+                            <h5>Paso 4: Determinar el rango</h5>
                 <p>Como $a = 1 > 0$, la parábola abre hacia arriba.</p>
                 <p><strong>Rango:</strong> $[-1, \infty)$</p>
-                
-                <h5>Paso 5: Eje de simetría</h5>
+                            <h5>Paso 5: Eje de simetría</h5>
                 <p>Es la recta vertical que pasa por el vértice: $x = 2$</p>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 2: Aplicación práctica</h4>
                 <p>Un proyectil es lanzado hacia arriba con una velocidad inicial de 40 m/s desde una altura de 2 metros. La altura $h$ (en metros) en función del tiempo $t$ (en segundos) está dada por:</p>
                 <p>$$
@@ -321,16 +306,14 @@
                 $$
                 h(4.08) = -4.9(4.08)^2 + 40(4.08) + 2 \approx 83.6 \text{ metros}
                 $$</p>
-                
-                <p><strong>b) ¿Cuándo toca el suelo el proyectil?</strong></p>
+                            <p><strong>b) ¿Cuándo toca el suelo el proyectil?</strong></p>
                 <p>Resolvemos $h(t) = 0$:</p>
                 <p>$$
                 t = \frac{-40 \pm \sqrt{40^2 - 4(-4.9)(2)}}{2(-4.9)} \approx 8.25 \text{ segundos}
                 $$
                 (Solo consideramos la solución positiva)</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Para la función $f(x) = 2x^2 - 8x + 5$:</p>
                 <ol>
@@ -340,22 +323,18 @@
                     <li>Grafica la función</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Un agricultor tiene 100 metros de cerca para construir un corral rectangular. ¿Qué dimensiones debe tener el corral para que el área sea máxima?</p>
                 <p><em>Sugerencia:</em> Expresa el área en función de una variable y encuentra el máximo.</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>Convierte la función $f(x) = 3x^2 - 12x + 5$ a la forma vértice completando el cuadrado.</p>
             </div>
 
-            
-</div>
-            
-            <div class="nav-buttons">
+        </div>
+                    <div class="nav-buttons">
                 <a href="masterclass07_03.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass07_05.html" class="nav-btn">Siguiente →</a>
             </div>

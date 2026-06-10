@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS04 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,26 +237,22 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="clasificacion">
+                    <div class="section" id="clasificacion">
             <h2>Masterclass 4: Clasificación de Funciones</h2>
             <p>Las funciones se pueden clasificar de diferentes maneras según sus características. A continuación, presentamos las principales clasificaciones:</p>
-            
-            <h3>4.1 Según la relación entre dominio y codominio</h3>
+                    <h3>4.1 Según la relación entre dominio y codominio</h3>
             <ul>
                 <li><strong>Inyectivas (uno a uno):</strong> Cada elemento del codominio es imagen de a lo sumo un elemento del dominio.</li>
                 <li><strong>Sobreyectivas:</strong> Todo elemento del codominio es imagen de al menos un elemento del dominio.</li>
                 <li><strong>Biyectivas:</strong> Son inyectivas y sobreyectivas a la vez.</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo de función inyectiva:</h4>
                 <p>$f(x) = 2x + 3$ es inyectiva porque líneas horizontales la cortan a lo más en un punto.</p>
                 <h4>Ejemplo de función sobreyectiva:</h4>
                 <p>$f: \mathbb{R} \rightarrow [0, \infty)$ definida por $f(x) = x^2$ es sobreyectiva.</p>
             </div>
-            
-            <h3>4.2 Según su comportamiento</h3>
+                    <h3>4.2 Según su comportamiento</h3>
             <ul>
                 <li><strong>Crecientes:</strong> Si $x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$</li>
                 <li><strong>Decrecientes:</strong> Si $x_1 < x_2 \Rightarrow f(x_1) > f(x_2)$</li>
@@ -270,8 +260,7 @@
                 <li><strong>Pares:</strong> $f(-x) = f(x)$ para todo $x$ en el dominio</li>
                 <li><strong>Impares:</strong> $f(-x) = -f(x)$ para todo $x$ en el dominio</li>
             </ul>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Clasifica las siguientes funciones según su comportamiento:</p>
                 <ol>
@@ -282,10 +271,8 @@
                 </ol>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass03.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass05.html" class="nav-btn">Siguiente →</a>
             </div>

@@ -6,7 +6,6 @@
     <title>Ejercicios Módulo 5: Ecuaciones Diferenciales - Cálculo Integral</title>
     <link rel="stylesheet" href="styles-main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -506,13 +505,11 @@
         function toggleSolution(id) {
             const solution = document.getElementById(id);
             const button = solution.previousElementSibling;
-            
-            if (solution.style.display === 'none' || solution.style.display === '') {
+                    if (solution.style.display === 'none' || solution.style.display === '') {
                 solution.style.display = 'block';
                 button.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar Solución';
                 button.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
-                
-                // Marcar ejercicio como completado
+                            // Marcar ejercicio como completado
                 const exerciseNumber = id.replace('sol', '');
                 const checkItem = document.querySelector(`[data-exercise="${exerciseNumber}"]`);
                 if (checkItem && !checkItem.classList.contains('completed')) {
@@ -530,8 +527,7 @@
             const completed = document.querySelectorAll('.check-item.completed').length;
             const total = document.querySelectorAll('.check-item').length;
             const percentage = (completed / total) * 100;
-            
-            document.getElementById('progressFill').style.width = percentage + '%';
+                    document.getElementById('progressFill').style.width = percentage + '%';
         }
 
         // Animación de entrada para las tarjetas de ejercicio

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller de Cálculo: Sumas de Riemann</title>
     <link rel="stylesheet" href="style.css">
-    
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
@@ -230,8 +228,7 @@
 
             exercises.forEach((ex, index) => {
                 const row = document.createElement('tr');
-                
-                row.innerHTML = `
+                            row.innerHTML = `
                     <td><strong>${index + 1}</strong></td>
                     <td>$$${ex.latex}$$</td>
                     <td>
@@ -260,8 +257,7 @@
             exercises.forEach((ex, index) => {
                 const deltaInput = document.getElementById(`delta-${index}`);
                 const areaInput = document.getElementById(`area-${index}`);
-                
-                // Validar Delta
+                            // Validar Delta
                 if (parseFloat(deltaInput.value) === ex.delta) {
                     deltaInput.classList.remove('is-invalid');
                     deltaInput.classList.add('is-valid');
@@ -286,8 +282,7 @@
             const resultBox = document.getElementById('result-box');
             const scoreText = document.getElementById('score');
             const msg = document.getElementById('feedback-msg');
-            
-            resultBox.style.display = 'block';
+                    resultBox.style.display = 'block';
             resultBox.className = 'result-container'; // Reset class
 
             const percentage = (score / total) * 100;
@@ -303,8 +298,7 @@
                 resultBox.classList.add('result-danger');
                 msg.textContent = "Sigue practicando. Revisa las fórmulas al inicio.";
             }
-            
-            // Scroll al resultado
+                    // Scroll al resultado
             resultBox.scrollIntoView({ behavior: 'smooth' });
         }
 

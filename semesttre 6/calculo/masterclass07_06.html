@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS07_06 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -251,8 +245,7 @@
             f(x) = \frac{P(x)}{Q(x)}
             $$
             donde $P(x)$ y $Q(x)$ son polinomios y $Q(x) \neq 0$.</p>
-            
-            <h4>Características principales:</h4>
+                    <h4>Características principales:</h4>
             <ul>
                 <li><strong>Dominio:</strong> Todos los números reales excepto donde $Q(x) = 0$</li>
                 <li><strong>Asíntotas verticales:</strong> Ocurren en los ceros del denominador (si no se cancelan con el numerador)</li>
@@ -262,8 +255,7 @@
 
             <h4>Análisis de asíntotas:</h4>
             <p>Dada $f(x) = \frac{P(x)}{Q(x)} = \frac{a_nx^n + \cdots}{b_mx^m + \cdots}$</p>
-            
-            <table class="table">
+                    <table class="table">
                 <tr>
                     <th>Relación de grados</th>
                     <th>Asíntota horizontal</th>
@@ -290,54 +282,44 @@
                     <td>$\frac{x^3}{x + 1}$</td>
                 </tr>
             </table>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1: Análisis de una función racional simple</h4>
                 <p>Analizar $f(x) = \frac{x - 2}{x^2 - 4}$</p>
-                
-                <h5>Paso 1: Factorizar</h5>
+                            <h5>Paso 1: Factorizar</h5>
                 <p>$$
                 f(x) = \frac{x - 2}{(x - 2)(x + 2)} = \frac{1}{x + 2}, \quad x \neq 2
                 $$
                 <strong>Hueco en $x = 2$</strong> porque el factor $(x-2)$ se cancela.</p>
-                
-                <h5>Paso 2: Dominio</h5>
+                            <h5>Paso 2: Dominio</h5>
                 <p>$\mathbb{R} - \{-2, 2\}$ (excluyendo donde se anula el denominador)</p>
-                
-                <h5>Paso 3: Asíntotas</h5>
+                            <h5>Paso 3: Asíntotas</h5>
                 <ul>
                     <li><strong>Vertical:</strong> $x = -2$ (donde se anula el denominador después de simplificar)</li>
                     <li><strong>Horizontal:</strong> $y = 0$ (grado del numerador $<$ grado del denominador)</li>
                 </ul>
-                
-                <h5>Paso 4: Intersecciones</h5>
+                            <h5>Paso 4: Intersecciones</h5>
                 <ul>
                     <li>Eje X: No tiene (numerador nunca es cero)</li>
                     <li>Eje Y: $f(0) = -\frac{1}{2}$</li>
                 </ul>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 2: Función con asíntota oblicua</h4>
                 <p>Analizar $f(x) = \frac{x^2 + 1}{x - 1}$</p>
-                
-                <h5>Paso 1: División de polinomios</h5>
+                            <h5>Paso 1: División de polinomios</h5>
                 <p>$$
                 f(x) = x + 1 + \frac{2}{x - 1}
                 $$
                 <strong>Asíntota oblicua:</strong> $y = x + 1$</p>
-                
-                <h5>Paso 2: Dominio</h5>
+                            <h5>Paso 2: Dominio</h5>
                 <p>$\mathbb{R} - \{1\}$</p>
-                
-                <h5>Paso 3: Asíntotas</h5>
+                            <h5>Paso 3: Asíntotas</h5>
                 <ul>
                     <li><strong>Vertical:</strong> $x = 1$</li>
                     <li><strong>Oblicua:</strong> $y = x + 1$</li>
                 </ul>
             </div>
-            
-            <h4>Propiedades importantes:</h4>
+                    <h4>Propiedades importantes:</h4>
             <ol>
                 <li><strong>Comportamiento cerca de asíntotas verticales:</strong>
                     <ul>
@@ -348,8 +330,7 @@
                 <li><strong>Derivada:</strong> Se puede encontrar usando la regla del cociente</li>
                 <li><strong>Integrales:</strong> A menudo requieren descomposición en fracciones parciales</li>
             </ol>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Para cada función racional, determina:</p>
                 <ol>
@@ -361,23 +342,19 @@
                 <p>a) $f(x) = \frac{2x}{x^2 - 9}$</p>
                 <p>b) $g(x) = \frac{x^2 - 4}{x^2 - x - 6}$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Encuentra la ecuación de la asíntota oblicua (si existe) para:</p>
                 <p>a) $f(x) = \frac{x^2 + 3x + 2}{x - 1}$</p>
                 <p>b) $g(x) = \frac{x^3 - 1}{x^2 + 1}$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>Grafica la función $f(x) = \frac{x^2 - 1}{x^2 - 4}$ incluyendo todas sus asíntotas, intersecciones y comportamiento asintótico.</p>
             </div>
 
-            
-</div>
-            
-            <div class="nav-buttons">
+        </div>
+                    <div class="nav-buttons">
                 <a href="masterclass07_05.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass07_07.html" class="nav-btn">Siguiente →</a>
             </div>

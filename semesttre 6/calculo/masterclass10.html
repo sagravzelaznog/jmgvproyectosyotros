@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS10 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,15 +237,12 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="alargamientos">
+                    <div class="section" id="alargamientos">
             <h2>Masterclass 10: Alargamientos y Contracciones de Funciones</h2>
             <p>Los alargamientos y contracciones son transformaciones que modifican el tamaño de la gráfica de una función sin cambiar su forma general. Estas transformaciones pueden ser verticales u horizontales y son fundamentales para ajustar funciones a diferentes contextos.</p>
-            
-            <h3>10.1 Alargamientos y Contracciones Verticales</h3>
+                    <h3>10.1 Alargamientos y Contracciones Verticales</h3>
             <p>Estas transformaciones modifican la altura de la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = a \cdot f(x)
             $$
@@ -262,8 +253,7 @@
                 <li>Si $a < 0$: Inversión vertical (reflexión sobre el eje x) además del escalamiento</li>
             </ul>
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 1: Transformación vertical de una función seno</h5>
                 <p>Sea $f(x) = \sin(x)$, entonces:</p>
                 <ul>
@@ -273,11 +263,9 @@
                 </ul>
                 <p>La amplitud de la función seno cambia de 1 a $|a|$.</p>
             </div>
-            
-            <h3>10.2 Alargamientos y Contracciones Horizontales</h3>
+                    <h3>10.2 Alargamientos y Contracciones Horizontales</h3>
             <p>Estas transformaciones modifican el ancho de la gráfica de la función.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = f(bx)
             $$
@@ -289,8 +277,7 @@
             </ul>
             <strong>Nota:</strong> El efecto horizontal es contraintuitivo: un factor mayor que 1 contrae, no expande.
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 2: Transformación horizontal de una función coseno</h5>
                 <p>Sea $f(x) = \cos(x)$, entonces:</p>
                 <ul>
@@ -300,15 +287,13 @@
                 </ul>
                 <p>El período de la función coseno cambia de $2\pi$ a $2\pi/|b|$.</p>
             </div>
-            
-            <h3>10.3 Combinación de Alargamientos y Contracciones</h3>
+                    <h3>10.3 Combinación de Alargamientos y Contracciones</h3>
             <p>Podemos combinar estiramientos/contracciones verticales y horizontales:</p>
             <p>$$
             y = a \cdot f(bx)
             $$
             donde $a$ afecta la escala vertical y $b$ la escala horizontal.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 3: Transformación combinada de una función cuadrática</h5>
                 <p>Sea $f(x) = x^2$, entonces $g(x) = 3(2x)^2 = 12x^2$:</p>
                 <ul>
@@ -318,11 +303,9 @@
                 </ul>
                 <p>La parábola se hace más estrecha y alta.</p>
             </div>
-            
-            <h3>10.4 Efecto en Características Clave</h3>
+                    <h3>10.4 Efecto en Características Clave</h3>
             <p>Los alargamientos y contracciones afectan diferentes propiedades de las funciones:</p>
-            
-            <table class="table">
+                    <table class="table">
                 <tr>
                     <th>Función</th>
                     <th>Propiedad Afectada</th>
@@ -349,8 +332,7 @@
                     <td>$m_{nueva} = a \cdot m_{original} \cdot b$</td>
                 </tr>
             </table>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Dada la función $f(x) = x^3 - x$:</p>
                 <ol>
@@ -359,8 +341,7 @@
                     <li>Grafica $f(x)$, $g(x)$ y $h(x)$ en el mismo plano.</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Para la función $f(x) = \sqrt{x}$:</p>
                 <ol>
@@ -369,8 +350,7 @@
                     <li>Grafica la función original y la transformada.</li>
                 </ol>
             </div>
-            
-            <h3>10.5 Aplicaciones Prácticas</h3>
+                    <h3>10.5 Aplicaciones Prácticas</h3>
             <p>Los alargamientos y contracciones tienen numerosas aplicaciones:</p>
             <ul>
                 <li><strong>Física:</strong> Ajuste de ondas sonoras, ondas electromagnéticas y movimiento armónico.</li>
@@ -378,8 +358,7 @@
                 <li>Economía: Ajuste de curvas de oferta y demanda a diferentes escalas.</li>
                 <li>Procesamiento de señales: Compresión y expansión de señales en el tiempo.</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 4: Aplicación en acústica</h5>
                 <p>La intensidad del sonido percibida sigue una escala logarítmica. Si $I_0$ es la intensidad de referencia, la intensidad percibida $\beta$ en decibelios es:</p>
                 <p>$$
@@ -388,10 +367,8 @@
                 Un aumento en la intensidad por un factor de 10 corresponde a un aumento de 10 dB en la intensidad percibida.</p>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass09.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass11.html" class="nav-btn">Siguiente →</a>
             </div>

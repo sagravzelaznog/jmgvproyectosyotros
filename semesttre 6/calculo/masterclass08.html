@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS08 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,15 +237,12 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="graficas-transformaciones">
+                    <div class="section" id="graficas-transformaciones">
             <h2>Masterclass 8: Gráficas de Funciones y sus Transformaciones</h2>
             <p>Las transformaciones de funciones nos permiten modificar gráficas conocidas para obtener nuevas funciones. Comprender estas transformaciones es esencial para graficar funciones complejas a partir de otras más simples.</p>
-            
-            <h3>8.1 Transformaciones Básicas</h3>
+                    <h3>8.1 Transformaciones Básicas</h3>
             <p>Sea $y = f(x)$ una función conocida. Las transformaciones básicas son:</p>
-            
-            <table class="table">
+                    <table class="table">
                 <tr>
                     <th>Transformación</th>
                     <th>Ecuación</th>
@@ -288,8 +279,7 @@
                     <td>Contrae ($b>1$) o estira ($0<b<1$) horizontalmente</td>
                 </tr>
             </table>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1: Transformaciones de $f(x) = x^2$</h4>
                 <p>Analicemos la función $g(x) = -2(x-3)^2 + 1$:</p>
                 <ol>
@@ -301,8 +291,7 @@
                 <p><strong>Vértice:</strong> $(3, 1)$</p>
                 <p><strong>Eje de simetría:</strong> $x = 3$</p>
             </div>
-            
-            <h3>8.2 Transformaciones de Funciones Valor Absoluto</h3>
+                    <h3>8.2 Transformaciones de Funciones Valor Absoluto</h3>
             <p>La función valor absoluto básica $f(x) = |x|$ tiene forma de V con vértice en $(0,0)$. Su forma general es:</p>
             <p>$$
             f(x) = a|b(x - h)| + k
@@ -314,8 +303,7 @@
                 <li>$b$ afecta el ancho de la V</li>
             </ul>
             </p>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Dada la función $f(x) = |x|$, determina las transformaciones necesarias para obtener:</p>
                 <ol>
@@ -324,16 +312,14 @@
                     <li>$j(x) = \frac{1}{2}|3x|$</li>
                 </ol>
             </div>
-            
-            <h3>8.3 Transformaciones de Funciones Racionales</h3>
+                    <h3>8.3 Transformaciones de Funciones Racionales</h3>
             <p>Para funciones racionales de la forma $f(x) = \frac{a}{x - h} + k$:</p>
             <ul>
                 <li>Asíntota vertical: $x = h$</li>
                 <li>Asíntota horizontal: $y = k$</li>
                 <li>El parámetro $a$ afecta el estiramiento y la orientación</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 2: Transformación de $f(x) = \frac{1}{x}$</h4>
                 <p>Sea $g(x) = \frac{2}{x + 3} - 1$:</p>
                 <ol>
@@ -343,8 +329,7 @@
                 </ol>
                 <p><strong>Asíntotas:</strong> $x = -3$, $y = -1$</p>
             </div>
-            
-            <h3>8.4 Transformaciones de Funciones Exponenciales</h3>
+                    <h3>8.4 Transformaciones de Funciones Exponenciales</h3>
             <p>La forma general es $f(x) = a\cdot b^{c(x - h)} + k$ donde:</p>
             <ul>
                 <li>$(h, k)$ es la traslación del punto de referencia</li>
@@ -352,8 +337,7 @@
                 <li>$b$ es la base de la función exponencial</li>
                 <li>$c$ afecta la tasa de crecimiento/decaimiento</li>
             </ul>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Para la función $f(x) = 2^x$:</p>
                 <ol>
@@ -362,16 +346,14 @@
                     <li>Grafica $f(x)$ y $g(x)$ en el mismo plano</li>
                 </ol>
             </div>
-            
-            <h3>8.5 Combinación de Transformaciones</h3>
+                    <h3>8.5 Combinación de Transformaciones</h3>
             <p>Al aplicar múltiples transformaciones, sigue este orden recomendado:</p>
             <ol>
                 <li>Reflexiones</li>
                 <li>Escalamientos (estiramientos/compresiones)</li>
                 <li>Traslaciones</li>
             </ol>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 3: Transformaciones múltiples</h4>
                 <p>Sea $f(x) = \sqrt{x}$. Aplicar las siguientes transformaciones para obtener $g(x)$:</p>
                 <ol>
@@ -383,8 +365,7 @@
                 <p><strong>Dominio:</strong> $(-\infty, 2]$</p>
                 <p><strong>Rango:</strong> $[-1, \infty)$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>Dada la función $f(x) = x^3$, encuentra la ecuación de la función $g(x)$ que resulta de aplicar las siguientes transformaciones en orden:</p>
                 <ol>
@@ -395,8 +376,7 @@
                 </ol>
                 <p>Luego, grafica tanto $f(x)$ como $g(x)$ en el mismo plano coordenado.</p>
             </div>
-            
-            <h3>8.6 Transformaciones de Funciones Periódicas</h3>
+                    <h3>8.6 Transformaciones de Funciones Periódicas</h3>
             <p>Para funciones como seno y coseno, la forma general es:</p>
             <p>$$
             f(x) = A\sin\left(\frac{2\pi}{B}(x - C)\right) + D
@@ -409,8 +389,7 @@
                 <li>$D$ es el desplazamiento vertical</li>
             </ul>
             </p>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 4:</h3>
                 <p>Dada la función $f(x) = \cos(x)$:</p>
                 <ol>
@@ -420,10 +399,8 @@
                 </ol>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass07_10.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass09.html" class="nav-btn">Siguiente →</a>
             </div>

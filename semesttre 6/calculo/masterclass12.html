@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS12 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,30 +237,24 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="funciones-crecientes-decrecientes">
+                    <div class="section" id="funciones-crecientes-decrecientes">
             <h2>Masterclass 12: Funciones Crecientes y Decrecientes</h2>
             <p>El estudio de los intervalos donde una función crece o decrece es fundamental para comprender su comportamiento global y sus características principales.</p>
-            
-            <h3>12.1 Definiciones Formales</h3>
+                    <h3>12.1 Definiciones Formales</h3>
             <p>Sea $f$ una función definida en un intervalo $I$:</p>
-            
-            <h4>Función Creciente</h4>
+                    <h4>Función Creciente</h4>
             <p>Se dice que $f$ es <strong>creciente</strong> en $I$ si para todo par de números $x_1, x_2 \in I$ con $x_1 < x_2$, se cumple que:</p>
             <p>$$
             f(x_1) < f(x_2)
             $$</p>
-            
-            <h4>Función Decreciente</h4>
+                    <h4>Función Decreciente</h4>
             <p>Se dice que $f$ es <strong>decreciente</strong> en $I$ si para todo par de números $x_1, x_2 \in I$ con $x_1 < x_2$, se cumple que:</p>
             <p>$$
             f(x_1) > f(x_2)
             $$</p>
-            
-            <h4>Función No Decreciente y No Creciente</h4>
+                    <h4>Función No Decreciente y No Creciente</h4>
             <p>Si las desigualdades no son estrictas ($\leq$ o $\geq$), se habla de funciones <em>no decrecientes</em> o <em>no crecientes</em> respectivamente.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 1: Identificación visual</h5>
                 <p>Considera la función $f(x) = x^3 - 3x$:</p>
                 <ul>
@@ -275,15 +263,13 @@
                 </ul>
                 <p>Los puntos $x = -1$ y $x = 1$ son puntos críticos donde la función cambia su comportamiento.</p>
             </div>
-            
-            <h3>12.2 Criterio de la Primera Derivada</h3>
+                    <h3>12.2 Criterio de la Primera Derivada</h3>
             <p>Si $f$ es derivable en un intervalo abierto $I$:</p>
             <ul>
                 <li>Si $f'(x) > 0$ para todo $x \in I$, entonces $f$ es creciente en $I$</li>
                 <li>Si $f'(x) < 0$ para todo $x \in I$, entonces $f$ es decreciente en $I$</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 2: Uso de la derivada</h5>
                 <p>Sea $f(x) = x^2 - 4x + 3$. Su derivada es $f'(x) = 2x - 4$.</p>
                 <p>Analizando el signo de $f'(x)$:</p>
@@ -292,19 +278,16 @@
                     <li>$f'(x) < 0$ cuando $x < 2$ → Decreciente en $(-\infty, 2)$</li>
                 </ul>
             </div>
-            
-            <h3>12.3 Puntos Críticos y Extremos</h3>
+                    <h3>12.3 Puntos Críticos y Extremos</h3>
             <p>Un punto $c$ en el dominio de $f$ es un <strong>punto crítico</strong> si $f'(c) = 0$ o $f'(c)$ no existe.</p>
-            
-            <h4>Prueba de la Primera Derivada</h4>
+                    <h4>Prueba de la Primera Derivada</h4>
             <p>Sea $c$ un punto crítico de $f$:</p>
             <ul>
                 <li>Si $f'$ cambia de positiva a negativa en $c$, entonces $f$ tiene un máximo local en $c$</li>
                 <li>Si $f'$ cambia de negativa a positiva en $c$, entonces $f$ tiene un mínimo local en $c$</li>
                 <li>Si $f'$ no cambia de signo en $c$, entonces $c$ es un punto de inflexión</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 3: Análisis de extremos</h5>
                 <p>Para $f(x) = x^3 - 6x^2 + 9x + 1$:</p>
                 <p>1. Calculamos $f'(x) = 3x^2 - 12x + 9$</p>
@@ -317,24 +300,20 @@
                 </ul>
                 <p>Por tanto, en $x=1$ hay un máximo local y en $x=3$ un mínimo local.</p>
             </div>
-            
-            <h3>12.4 Funciones Monótonas</h3>
+                    <h3>12.4 Funciones Monótonas</h3>
             <p>Una función es <strong>monótona</strong> si es siempre creciente o siempre decreciente en su dominio.</p>
-            
-            <h4>Tipos de Monotonía</h4>
+                    <h4>Tipos de Monotonía</h4>
             <ul>
                 <li><strong>Estrictamente creciente</strong>: $x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$</li>
                 <li><strong>Creciente</strong> (no decreciente): $x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2)$</li>
                 <li><strong>Estrictamente decreciente</strong>: $x_1 < x_2 \Rightarrow f(x_1) > f(x_2)$</li>
                 <li><strong>Decreciente</strong> (no creciente): $x_1 < x_2 \Rightarrow f(x_1) \geq f(x_2)$</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 4: Función exponencial</h5>
                 <p>La función $f(x) = e^x$ es estrictamente creciente en todo su dominio $\mathbb{R}$ porque su derivada $f'(x) = e^x$ es siempre positiva.</p>
             </div>
-            
-            <h3>12.5 Análisis de Funciones Comunes</h3>
+                    <h3>12.5 Análisis de Funciones Comunes</h3>
             <table class="table">
                 <tr>
                     <th>Función</th>
@@ -367,8 +346,7 @@
                     <td>$(2k\pi + \frac{\pi}{2}, 2k\pi + \frac{3\pi}{2})$, $k \in \mathbb{Z}$</td>
                 </tr>
             </table>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1: Análisis de función racional</h3>
                 <p>Para la función $f(x) = \frac{x^2 - 1}{x}$:</p>
                 <ol>
@@ -377,8 +355,7 @@
                     <li>Determina si tiene extremos locales</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2: Aplicación práctica</h3>
                 <p>El ingreso $I$ (en miles de pesos) de una empresa está modelado por $I(t) = -t^3 + 9t^2 + 15t + 20$ donde $t$ es el tiempo en meses.</p>
                 <ol>
@@ -387,11 +364,9 @@
                     <li>¿Qué sucede con el ingreso a largo plazo?</li>
                 </ol>
             </div>
-            
-            <h3>12.6 Comportamiento en el Infinito</h3>
+                    <h3>12.6 Comportamiento en el Infinito</h3>
             <p>El estudio del crecimiento de funciones cuando $x \to \pm\infty$ es crucial para entender su comportamiento asintótico.</p>
-            
-            <h4>Crecimiento Comparativo</h4>
+                    <h4>Crecimiento Comparativo</h4>
             <p>Para $x \to \infty$, las funciones crecen en el siguiente orden (de más lento a más rápido):</p>
             <ol>
                 <li>Funciones logarítmicas: $\ln x$, $\log x$</li>
@@ -399,8 +374,7 @@
                 <li>Funciones exponenciales: $a^x$ ($a > 1$)</li>
                 <li>Funciones factoriales: $x!$</li>
             </ol>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 5: Límites al infinito</h5>
                 <p>$$
                 \lim_{x \to \infty} \frac{e^x}{x^2} = \infty \quad \text{(la exponencial crece más rápido que cualquier potencia)}
@@ -410,10 +384,8 @@
                 $$</p>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass11.html" class="nav-btn">← Anterior</a>
                 <a href="actividades.html" class="nav-btn">Siguiente →</a>
             </div>

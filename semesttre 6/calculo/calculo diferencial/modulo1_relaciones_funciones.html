@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -209,12 +208,10 @@
             .hero-section {
                 padding: 2rem 0;
             }
-            
-            .module-body {
+                    .module-body {
                 padding: 1rem;
             }
-            
-            .chart-container {
+                    .chart-container {
                 height: 300px;
             }
         }
@@ -309,8 +306,7 @@
 
         <!-- Contenido de las Pestañas -->
         <div class="tab-content" id="moduleTabsContent">
-            
-            <!-- SECCIÓN 1: CONCEPTOS BÁSICOS -->
+                    <!-- SECCIÓN 1: CONCEPTOS BÁSICOS -->
             <div class="tab-pane fade show active" id="conceptos" role="tabpanel">
                 <div class="module-card">
                     <div class="module-header">
@@ -318,8 +314,7 @@
                         <p class="mb-0">Definición de relación y función, dominio y rango, notación funcional</p>
                     </div>
                     <div class="module-body">
-                        
-                        <!-- Definición de Relación -->
+                                            <!-- Definición de Relación -->
                         <div class="definition">
                             <h4><i class="fas fa-book"></i> Definición de Relación</h4>
                             <p>Una <strong>relación</strong> es un conjunto de pares ordenados $(x, y)$ donde $x$ pertenece a un conjunto $A$ e $y$ pertenece a un conjunto $B$.</p>
@@ -416,8 +411,7 @@
                         <div class="interactive-container">
                             <h4><i class="fas fa-play-circle"></i> Actividad Interactiva: Identificar Dominio y Rango</h4>
                             <p>Practica identificando el dominio y rango de diferentes funciones:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <label for="functionInput" class="form-label">Ingresa una función:</label>
                                     <input type="text" class="form-control function-input" id="functionInput" placeholder="Ej: x^2 + 1" value="x^2 + 1">
@@ -427,8 +421,7 @@
                                     <input type="text" class="form-control" id="domainInput" placeholder="Ej: (-∞, +∞)" value="(-∞, +∞)">
                                 </div>
                             </div>
-                            
-                            <div class="row mt-3">
+                                                    <div class="row mt-3">
                                 <div class="col-md-6">
                                     <button class="btn btn-module w-100" onclick="analyzeFunction()">
                                         <i class="fas fa-search"></i> Analizar Función
@@ -440,8 +433,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div id="analysisResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="analysisResult" class="result-display mt-3" style="display: none;">
                                 <h5>Análisis de la Función:</h5>
                                 <div id="analysisContent"></div>
                             </div>
@@ -468,8 +460,7 @@
                         <p class="mb-0">Funciones inyectivas, sobreyectivas, biyectivas, función inversa y composición</p>
                     </div>
                     <div class="module-body">
-                        
-                        <!-- Funciones Inyectivas -->
+                                            <!-- Funciones Inyectivas -->
                         <div class="definition">
                             <h4><i class="fas fa-book"></i> Función Inyectiva (1-1)</h4>
                             <p>Una función $f: A \rightarrow B$ es <strong>inyectiva</strong> si elementos diferentes del dominio tienen imágenes diferentes.</p>
@@ -551,8 +542,7 @@
                         <div class="interactive-container">
                             <h4><i class="fas fa-play-circle"></i> Actividad: Clasificar Funciones</h4>
                             <p>Analiza las siguientes funciones y determina sus propiedades:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Función 1:</label>
@@ -594,12 +584,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-module" onclick="checkAnswers()">
+                                                    <button class="btn btn-module" onclick="checkAnswers()">
                                 <i class="fas fa-check"></i> Verificar Respuestas
                             </button>
-                            
-                            <div id="answerResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="answerResult" class="result-display mt-3" style="display: none;">
                                 <h5>Resultado:</h5>
                                 <div id="answerContent"></div>
                             </div>
@@ -617,15 +605,13 @@
                         <p class="mb-0">Funciones polinomiales, racionales, exponenciales, logarítmicas y trigonométricas</p>
                     </div>
                     <div class="module-body">
-                        
-                        <!-- Funciones Polinomiales -->
+                                            <!-- Funciones Polinomiales -->
                         <div class="definition">
                             <h4><i class="fas fa-book"></i> Funciones Polinomiales</h4>
                             <p>Una función polinomial de grado $n$ tiene la forma:</p>
                             <p>$f(x) = a_n x^n + a_{n-1} x^{n-1} + ... + a_1 x + a_0$</p>
                             <p>donde $a_n \neq 0$ y $n$ es un entero no negativo.</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-4">
                                     <h5>Grado 0: Constante</h5>
                                     <p>$f(x) = c$</p>
@@ -736,8 +722,7 @@
                         <div class="interactive-container">
                             <h4><i class="fas fa-play-circle"></i> Explorador de Funciones Elementales</h4>
                             <p>Explora diferentes tipos de funciones elementales:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-4">
                                     <label class="form-label">Tipo de Función:</label>
                                     <select class="form-select" id="functionType" onchange="updateFunctionExample()">
@@ -759,8 +744,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="chart-container mt-3">
+                                                    <div class="chart-container mt-3">
                                 <canvas id="elementaryChart"></canvas>
                             </div>
                         </div>
@@ -777,8 +761,7 @@
                         <p class="mb-0">Traslaciones, reflexiones, estiramientos y compresiones</p>
                     </div>
                     <div class="module-body">
-                        
-                        <!-- Traslaciones -->
+                                            <!-- Traslaciones -->
                         <div class="definition">
                             <h4><i class="fas fa-book"></i> Traslaciones</h4>
                             <div class="row">
@@ -899,8 +882,7 @@
                         <div class="interactive-container">
                             <h4><i class="fas fa-play-circle"></i> Laboratorio de Transformaciones</h4>
                             <p>Aplica diferentes transformaciones a la función base y observa los cambios:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-label">Función Base:</label>
                                     <select class="form-select" id="baseFunction">
@@ -928,8 +910,7 @@
                                     <input type="number" class="form-control" id="paramK" value="0" step="0.1">
                                 </div>
                             </div>
-                            
-                            <div class="row mt-3">
+                                                    <div class="row mt-3">
                                 <div class="col-md-6">
                                     <button class="btn btn-module w-100" onclick="applyTransformation()">
                                         <i class="fas fa-magic"></i> Aplicar Transformación
@@ -941,12 +922,10 @@
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="chart-container mt-3">
+                                                    <div class="chart-container mt-3">
                                 <canvas id="transformationChart"></canvas>
                             </div>
-                            
-                            <div class="result-display mt-3">
+                                                    <div class="result-display mt-3">
                                 <h5>Función Transformada:</h5>
                                 <div id="transformedFunction"></div>
                             </div>
@@ -964,13 +943,11 @@
                         <p class="mb-0">Ejercicios interactivos y problemas para reforzar el aprendizaje</p>
                     </div>
                     <div class="module-body">
-                        
-                        <!-- Actividad 1 -->
+                                            <!-- Actividad 1 -->
                         <div class="exercise-box">
                             <h4><i class="fas fa-pencil-alt"></i> Actividad 1: Identificar Dominio y Rango</h4>
                             <p>Para cada función, determina el dominio y rango:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <h5>a) $f(x) = \sqrt{x + 3}$</h5>
                                     <div class="mb-2">
@@ -994,12 +971,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-module mt-3" onclick="checkDomainRange()">
+                                                    <button class="btn btn-module mt-3" onclick="checkDomainRange()">
                                 <i class="fas fa-check"></i> Verificar Respuestas
                             </button>
-                            
-                            <div id="domainRangeResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="domainRangeResult" class="result-display mt-3" style="display: none;">
                                 <div id="domainRangeContent"></div>
                             </div>
                         </div>
@@ -1008,8 +983,7 @@
                         <div class="exercise-box">
                             <h4><i class="fas fa-pencil-alt"></i> Actividad 2: Composición de Funciones</h4>
                             <p>Dadas las funciones $f(x) = x^2 + 1$ y $g(x) = 2x - 3$, encuentra:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <h5>a) $(f \circ g)(x)$</h5>
                                     <input type="text" class="form-control" id="composition1" placeholder="Escribe tu respuesta">
@@ -1019,12 +993,10 @@
                                     <input type="text" class="form-control" id="composition2" placeholder="Escribe tu respuesta">
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-module mt-3" onclick="checkComposition()">
+                                                    <button class="btn btn-module mt-3" onclick="checkComposition()">
                                 <i class="fas fa-check"></i> Verificar Respuestas
                             </button>
-                            
-                            <div id="compositionResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="compositionResult" class="result-display mt-3" style="display: none;">
                                 <div id="compositionContent"></div>
                             </div>
                         </div>
@@ -1033,8 +1005,7 @@
                         <div class="exercise-box">
                             <h4><i class="fas fa-pencil-alt"></i> Actividad 3: Función Inversa</h4>
                             <p>Encuentra la función inversa de $f(x) = 3x - 2$:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label">$f^{-1}(x) = $</label>
                                     <input type="text" class="form-control" id="inverseFunction" placeholder="Escribe tu respuesta">
@@ -1045,8 +1016,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div id="inverseResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="inverseResult" class="result-display mt-3" style="display: none;">
                                 <div id="inverseContent"></div>
                             </div>
                         </div>
@@ -1055,8 +1025,7 @@
                         <div class="exercise-box">
                             <h4><i class="fas fa-pencil-alt"></i> Actividad 4: Transformaciones</h4>
                             <p>Describe las transformaciones aplicadas a $f(x) = x^2$ para obtener $g(x) = 2(x-1)^2 + 3$:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="transform1">
@@ -1078,12 +1047,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <button class="btn btn-module mt-3" onclick="checkTransformations()">
+                                                    <button class="btn btn-module mt-3" onclick="checkTransformations()">
                                 <i class="fas fa-check"></i> Verificar Respuestas
                             </button>
-                            
-                            <div id="transformationResult" class="result-display mt-3" style="display: none;">
+                                                    <div id="transformationResult" class="result-display mt-3" style="display: none;">
                                 <div id="transformationContent"></div>
                             </div>
                         </div>
@@ -1092,8 +1059,7 @@
                         <div class="interactive-container">
                             <h4><i class="fas fa-trophy"></i> Evaluación Final del Módulo</h4>
                             <p>Completa esta evaluación para verificar tu comprensión del módulo:</p>
-                            
-                            <div class="row">
+                                                    <div class="row">
                                 <div class="col-md-6">
                                     <div class="progress-section">
                                         <h5>Progreso General</h5>
@@ -1140,7 +1106,6 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/function-plot@1.22.8/dist/function-plot.js"></script>
-    
     <script>
         // Variables globales
         let currentChart = null;
@@ -1166,13 +1131,11 @@
             const domainInput = document.getElementById('domainInput').value;
             const resultDiv = document.getElementById('analysisResult');
             const contentDiv = document.getElementById('analysisContent');
-            
-            if (!functionInput) {
+                    if (!functionInput) {
                 alert('Por favor ingresa una función');
                 return;
             }
-            
-            let analysis = `
+                    let analysis = `
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Función analizada:</h6>
@@ -1191,12 +1154,10 @@
                     </div>
                 </div>
             `;
-            
-            contentDiv.innerHTML = analysis;
+                    contentDiv.innerHTML = analysis;
             resultDiv.style.display = 'block';
             markSectionComplete('conceptos');
-            
-            // Actualizar MathJax
+                    // Actualizar MathJax
             if (window.MathJax) {
                 MathJax.typesetPromise([contentDiv]);
             }
@@ -1213,34 +1174,28 @@
             const func1_injective = document.getElementById('func1_injective').checked;
             const func1_surjective = document.getElementById('func1_surjective').checked;
             const func1_bijective = document.getElementById('func1_bijective').checked;
-            
-            const func2_injective = document.getElementById('func2_injective').checked;
+                    const func2_injective = document.getElementById('func2_injective').checked;
             const func2_surjective = document.getElementById('func2_surjective').checked;
             const func2_bijective = document.getElementById('func2_bijective').checked;
-            
-            let score = 0;
+                    let score = 0;
             let feedback = '<h6>Respuestas:</h6>';
-            
-            // Función 1: f(x) = x^2
+                    // Función 1: f(x) = x^2
             if (!func1_injective && !func1_surjective && !func1_bijective) {
                 feedback += '<p>✅ Función 1 (x²): Correcto - No es inyectiva, sobreyectiva ni biyectiva</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ Función 1 (x²): Incorrecto - x² no es inyectiva porque f(-2) = f(2)</p>';
             }
-            
-            // Función 2: f(x) = x^3
+                    // Función 2: f(x) = x^3
             if (func2_injective && func2_surjective && func2_bijective) {
                 feedback += '<p>✅ Función 2 (x³): Correcto - Es inyectiva, sobreyectiva y biyectiva</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ Función 2 (x³): Incorrecto - x³ es biyectiva sobre ℝ</p>';
             }
-            
-            document.getElementById('answerContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
+                    document.getElementById('answerContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
             document.getElementById('answerResult').style.display = 'block';
-            
-            if (score === 2) {
+                    if (score === 2) {
                 markSectionComplete('propiedades');
             }
         }
@@ -1262,21 +1217,17 @@
         function plotFunction() {
             const functionExpr = document.getElementById('exampleFunction').value;
             const canvas = document.getElementById('elementaryChart');
-            
-            if (!canvas) {
+                    if (!canvas) {
                 alert('Error: No se encontró el canvas');
                 return;
             }
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Destruir el gráfico anterior si existe
+                    const ctx = canvas.getContext('2d');
+                    // Destruir el gráfico anterior si existe
             if (elementaryChart) {
                 elementaryChart.destroy();
                 elementaryChart = null;
             }
-            
-            try {
+                    try {
                 // Crear datos para la gráfica
                 const data = [];
                 for (let x = -10; x <= 10; x += 0.1) {
@@ -1296,16 +1247,14 @@
                         } else {
                             y = Math.pow(x, 2) + 2*x + 1; // default
                         }
-                        
-                        if (y !== null && !isNaN(y) && isFinite(y)) {
+                                            if (y !== null && !isNaN(y) && isFinite(y)) {
                             data.push({x: x, y: y});
                         }
                     } catch (e) {
                         // Ignorar errores de evaluación
                     }
                 }
-                
-                elementaryChart = new Chart(ctx, {
+                            elementaryChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         datasets: [{
@@ -1364,8 +1313,7 @@
                         }
                     }
                 });
-                
-                markSectionComplete('elementales');
+                            markSectionComplete('elementales');
             } catch (error) {
                 alert('Error al graficar la función. Verifica que la expresión sea válida.');
                 console.error(error);
@@ -1379,11 +1327,9 @@
             const b = parseFloat(document.getElementById('paramB').value);
             const h = parseFloat(document.getElementById('paramH').value);
             const k = parseFloat(document.getElementById('paramK').value);
-            
-            // Generar la función transformada
+                    // Generar la función transformada
             let transformed = `${a} * ${baseFunc.replace('x', `(${b} * (x - ${h}))`)} + ${k}`;
-            
-            document.getElementById('transformedFunction').innerHTML = `
+                    document.getElementById('transformedFunction').innerHTML = `
                 <p><strong>f(x) = ${transformed}</strong></p>
                 <p>Donde:</p>
                 <ul>
@@ -1393,8 +1339,7 @@
                     <li>k = ${k} (desplazamiento vertical)</li>
                 </ul>
             `;
-            
-            markSectionComplete('transformaciones');
+                    markSectionComplete('transformaciones');
         }
 
         function resetTransformation() {
@@ -1411,44 +1356,37 @@
             const range1 = document.getElementById('range1').value.toLowerCase();
             const domain2 = document.getElementById('domain2').value.toLowerCase();
             const range2 = document.getElementById('range2').value.toLowerCase();
-            
-            let score = 0;
+                    let score = 0;
             let feedback = '<h6>Resultados:</h6>';
-            
-            // Verificar función a)
+                    // Verificar función a)
             if (domain1.includes('[-3,') || domain1.includes('[3,') || domain1.includes('(-3,')) {
                 feedback += '<p>✅ a) Dominio correcto: [-3, +∞)</p>';
                 score += 0.5;
             } else {
                 feedback += '<p>❌ a) Dominio incorrecto. Correcto: [-3, +∞)</p>';
             }
-            
-            if (range1.includes('[0,') || range1.includes('(0,')) {
+                    if (range1.includes('[0,') || range1.includes('(0,')) {
                 feedback += '<p>✅ a) Rango correcto: [0, +∞)</p>';
                 score += 0.5;
             } else {
                 feedback += '<p>❌ a) Rango incorrecto. Correcto: [0, +∞)</p>';
             }
-            
-            // Verificar función b)
+                    // Verificar función b)
             if (domain2.includes('(-∞, 2)') || domain2.includes('(-inf, 2)')) {
                 feedback += '<p>✅ b) Dominio correcto: (-∞, 2) ∪ (2, +∞)</p>';
                 score += 0.5;
             } else {
                 feedback += '<p>❌ b) Dominio incorrecto. Correcto: (-∞, 2) ∪ (2, +∞)</p>';
             }
-            
-            if (range2.includes('(-∞, 0)') || range2.includes('(-inf, 0)')) {
+                    if (range2.includes('(-∞, 0)') || range2.includes('(-inf, 0)')) {
                 feedback += '<p>✅ b) Rango correcto: (-∞, 0) ∪ (0, +∞)</p>';
                 score += 0.5;
             } else {
                 feedback += '<p>❌ b) Rango incorrecto. Correcto: (-∞, 0) ∪ (0, +∞)</p>';
             }
-            
-            document.getElementById('domainRangeContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
+                    document.getElementById('domainRangeContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
             document.getElementById('domainRangeResult').style.display = 'block';
-            
-            if (score >= 1.5) {
+                    if (score >= 1.5) {
                 markSectionComplete('actividades');
             }
         }
@@ -1457,42 +1395,35 @@
         function checkComposition() {
             const comp1 = document.getElementById('composition1').value.toLowerCase();
             const comp2 = document.getElementById('composition2').value.toLowerCase();
-            
-            let score = 0;
+                    let score = 0;
             let feedback = '<h6>Resultados:</h6>';
-            
-            if (comp1.includes('4x^2') && comp1.includes('-12x') && comp1.includes('+10')) {
+                    if (comp1.includes('4x^2') && comp1.includes('-12x') && comp1.includes('+10')) {
                 feedback += '<p>✅ a) (f∘g)(x) correcto: 4x² - 12x + 10</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ a) (f∘g)(x) incorrecto. Correcto: 4x² - 12x + 10</p>';
             }
-            
-            if (comp2.includes('2x^2') && comp2.includes('-1')) {
+                    if (comp2.includes('2x^2') && comp2.includes('-1')) {
                 feedback += '<p>✅ b) (g∘f)(x) correcto: 2x² - 1</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ b) (g∘f)(x) incorrecto. Correcto: 2x² - 1</p>';
             }
-            
-            document.getElementById('compositionContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
+                    document.getElementById('compositionContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/2</strong></p>`;
             document.getElementById('compositionResult').style.display = 'block';
         }
 
         // Verificar función inversa
         function checkInverse() {
             const inverse = document.getElementById('inverseFunction').value.toLowerCase();
-            
-            let feedback = '<h6>Resultado:</h6>';
-            
-            if (inverse.includes('(x+2)/3') || inverse.includes('(x + 2) / 3')) {
+                    let feedback = '<h6>Resultado:</h6>';
+                    if (inverse.includes('(x+2)/3') || inverse.includes('(x + 2) / 3')) {
                 feedback += '<p>✅ Correcto: f⁻¹(x) = (x + 2)/3</p>';
                 feedback += '<p>Verificación: f(f⁻¹(x)) = 3((x+2)/3) - 2 = x + 2 - 2 = x ✓</p>';
             } else {
                 feedback += '<p>❌ Incorrecto. La respuesta correcta es: f⁻¹(x) = (x + 2)/3</p>';
             }
-            
-            document.getElementById('inverseContent').innerHTML = feedback;
+                    document.getElementById('inverseContent').innerHTML = feedback;
             document.getElementById('inverseResult').style.display = 'block';
         }
 
@@ -1502,39 +1433,33 @@
             const transform2 = document.getElementById('transform2').checked;
             const transform3 = document.getElementById('transform3').checked;
             const transform4 = document.getElementById('transform4').checked;
-            
-            let score = 0;
+                    let score = 0;
             let feedback = '<h6>Resultados:</h6>';
-            
-            if (transform1) {
+                    if (transform1) {
                 feedback += '<p>✅ Desplazamiento 1 unidad a la derecha: Correcto</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ Desplazamiento 1 unidad a la derecha: Debería estar marcado</p>';
             }
-            
-            if (transform2) {
+                    if (transform2) {
                 feedback += '<p>✅ Desplazamiento 3 unidades hacia arriba: Correcto</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ Desplazamiento 3 unidades hacia arriba: Debería estar marcado</p>';
             }
-            
-            if (transform3) {
+                    if (transform3) {
                 feedback += '<p>✅ Estiramiento vertical por factor 2: Correcto</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ Estiramiento vertical por factor 2: Debería estar marcado</p>';
             }
-            
-            if (!transform4) {
+                    if (!transform4) {
                 feedback += '<p>✅ No hay reflexión sobre el eje x: Correcto</p>';
                 score += 1;
             } else {
                 feedback += '<p>❌ No hay reflexión sobre el eje x: No debería estar marcado</p>';
             }
-            
-            document.getElementById('transformationContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/4</strong></p>`;
+                    document.getElementById('transformationContent').innerHTML = feedback + `<p><strong>Puntuación: ${score}/4</strong></p>`;
             document.getElementById('transformationResult').style.display = 'block';
         }
 
@@ -1543,11 +1468,9 @@
             const totalSections = 5;
             const completed = completedSections.size;
             const percentage = (completed / totalSections) * 100;
-            
-            document.getElementById('finalProgress').style.width = percentage + '%';
+                    document.getElementById('finalProgress').style.width = percentage + '%';
             document.getElementById('progressText').textContent = Math.round(percentage) + '%';
-            
-            let message = '';
+                    let message = '';
             if (percentage === 100) {
                 message = '<div class="alert alert-success"><h5><i class="fas fa-trophy"></i> ¡Felicitaciones!</h5><p>Has completado exitosamente el Módulo 1: Relaciones y Funciones.</p></div>';
             } else if (percentage >= 80) {
@@ -1557,8 +1480,7 @@
             } else {
                 message = '<div class="alert alert-danger"><h5><i class="fas fa-arrow-up"></i> Continúa estudiando</h5><p>Completa más actividades para reforzar tu aprendizaje.</p></div>';
             }
-            
-            alert(message);
+                    alert(message);
         }
 
         // Inicializar gráfica de función
@@ -1568,19 +1490,15 @@
                 currentChart.destroy();
                 currentChart = null;
             }
-            
-            const canvas = document.getElementById('functionChart');
+                    const canvas = document.getElementById('functionChart');
             if (!canvas) return; // Salir si el canvas no existe
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Crear datos para f(x) = x² + 1
+                    const ctx = canvas.getContext('2d');
+                    // Crear datos para f(x) = x² + 1
             const data = [];
             for (let x = -5; x <= 5; x += 0.1) {
                 data.push({x: x, y: x*x + 1});
             }
-            
-            currentChart = new Chart(ctx, {
+                    currentChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     datasets: [{
@@ -1650,19 +1568,15 @@
                 transformationChart.destroy();
                 transformationChart = null;
             }
-            
-            const canvas = document.getElementById('transformationChart');
+                    const canvas = document.getElementById('transformationChart');
             if (!canvas) return; // Salir si el canvas no existe
-            
-            const ctx = canvas.getContext('2d');
-            
-            // Crear datos para función base
+                    const ctx = canvas.getContext('2d');
+                    // Crear datos para función base
             const baseData = [];
             for (let x = -3; x <= 3; x += 0.1) {
                 baseData.push({x: x, y: x*x});
             }
-            
-            transformationChart = new Chart(ctx, {
+                    transformationChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     datasets: [{
@@ -1732,8 +1646,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             if (!initialized) {
                 initialized = true;
-                
-                // Inicializar gráficos con un pequeño delay para asegurar que el DOM esté listo
+                            // Inicializar gráficos con un pequeño delay para asegurar que el DOM esté listo
                 setTimeout(() => {
                     initializeFunctionChart();
                     initializeTransformationChart();

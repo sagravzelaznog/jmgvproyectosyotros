@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS07_05 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -247,8 +241,7 @@
 <h2>7.5 Funciones Potencia: $f(x) = x^n$</h2>
 <h3>7.5 Funciones Potencia: $f(x) = x^n$</h3>
             <p>Las funciones potencia son de la forma $f(x) = x^n$, donde $n$ es un número real constante. Estas funciones son fundamentales en el estudio del cálculo y tienen propiedades interesantes que varían según el valor del exponente $n$.</p>
-            
-            <h4>Características generales:</h4>
+                    <h4>Características generales:</h4>
             <ul>
                 <li><strong>Dominio:</strong> Depende del valor de $n$ (generalmente $\mathbb{R}$ para $n$ entero positivo)</li>
                 <li><strong>Continuidad:</strong> Continuas en todo su dominio</li>
@@ -256,8 +249,7 @@
             </ul>
 
             <h4>Casos según el exponente $n$:</h4>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>1. Exponente entero positivo ($n \in \mathbb{Z}^+$)</h4>
                 <p><strong>Características:</strong></p>
                 <ul>
@@ -266,16 +258,14 @@
                     <li>Si $n$ es par: función par ($f(-x) = f(x)$)</li>
                     <li>Si $n$ es impar: función impar ($f(-x) = -f(x)$)</li>
                 </ul>
-                
-                <p><strong>Ejemplos:</strong></p>
+                            <p><strong>Ejemplos:</strong></p>
                 <ul>
                     <li>$f(x) = x^2$ (parabólica, abre hacia arriba)</li>
                     <li>$f(x) = x^3$ (cúbica, crece más rápido que la cuadrática)</li>
                     <li>$f(x) = x^4$ (forma de "W" más pronunciada)</li>
                 </ul>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>2. Exponente entero negativo ($n \in \mathbb{Z}^-$)</h4>
                 <p><strong>Características:</strong></p>
                 <ul>
@@ -283,15 +273,13 @@
                     <li>Dominio: $\mathbb{R} - \{0\}$</li>
                     <li>Asíntotas vertical en $x=0$ y horizontal en $y=0$</li>
                 </ul>
-                
-                <p><strong>Ejemplos:</strong></p>
+                            <p><strong>Ejemplos:</strong></p>
                 <ul>
                     <li>$f(x) = x^{-1} = \frac{1}{x}$ (hipérbola rectangular)</li>
                     <li>$f(x) = x^{-2} = \frac{1}{x^2}$ (siempre positiva, dos ramas)</li>
                 </ul>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>3. Exponente fraccionario ($n \in \mathbb{Q}$)</h4>
                 <p><strong>Características:</strong></p>
                 <ul>
@@ -300,15 +288,13 @@
                     <li>Para $q$ impar: dominio es $\mathbb{R}$</li>
                     <li>Para $q$ par: dominio es $[0, \infty)$</li>
                 </ul>
-                
-                <p><strong>Ejemplos:</strong></p>
+                            <p><strong>Ejemplos:</strong></p>
                 <ul>
                     <li>$f(x) = x^{1/2} = \sqrt{x}$ (raíz cuadrada)</li>
                     <li>$f(x) = x^{2/3} = \sqrt[3]{x^2}$ (raíz cúbica de $x^2$)</li>
                 </ul>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>4. Exponente irracional ($n \in \mathbb{R} - \mathbb{Q}$)</h4>
                 <p><strong>Características:</strong></p>
                 <ul>
@@ -316,15 +302,13 @@
                     <li>Dominio: $x > 0$ (generalmente)</li>
                     <li>Comportamiento similar a las exponenciales</li>
                 </ul>
-                
-                <p><strong>Ejemplos:</strong></p>
+                            <p><strong>Ejemplos:</strong></p>
                 <ul>
                     <li>$f(x) = x^{\sqrt{2}}$</li>
                     <li>$f(x) = x^{\pi}$</li>
                 </ul>
             </div>
-            
-            <h4>Propiedades importantes:</h4>
+                    <h4>Propiedades importantes:</h4>
             <ol>
                 <li><strong>Derivada:</strong> $\frac{d}{dx}x^n = nx^{n-1}$</li>
                 <li><strong>Integral indefinida:</strong> $\int x^n dx = \frac{x^{n+1}}{n+1} + C$ (para $n \neq -1$)</li>
@@ -335,8 +319,7 @@
                     </ul>
                 </li>
             </ol>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Para cada función, determina su dominio, simetrías y comportamiento en los extremos:</p>
                 <ol>
@@ -345,8 +328,7 @@
                     <li>$h(x) = x^{3/2}$</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Demuestra que la derivada de $f(x) = x^n$ es $f'(x) = nx^{n-1}$ para $n$ entero positivo usando la definición de derivada:</p>
                 <p>$$
@@ -354,16 +336,13 @@
                 $$</p>
                 <p><em>Sugerencia:</em> Usa el binomio de Newton para desarrollar $(x+h)^n$.</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>Grafica en un mismo sistema de coordenadas las funciones $f(x) = x$, $g(x) = x^2$, $h(x) = x^3$ y $k(x) = x^4$ para $x \in [-2, 2]$. Describe las diferencias en su comportamiento.</p>
             </div>
 
-            
-</div>
-            
-            <div class="nav-buttons">
+        </div>
+                    <div class="nav-buttons">
                 <a href="masterclass07_04.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass07_06.html" class="nav-btn">Siguiente →</a>
             </div>

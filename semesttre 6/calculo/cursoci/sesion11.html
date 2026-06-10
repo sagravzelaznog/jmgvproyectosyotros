@@ -4,20 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sesión 11: Constante de Integración y Fórmulas Inmediatas | Cálculo Integral</title>
-    
     <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
-    
     <!-- Estilos -->
     <link rel="stylesheet" href="styles.css">
-    
     <!-- MathJax -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∫</text></svg>">
-    
     <style>
         .formula-card {
             background: #f8fafc;
@@ -27,45 +21,39 @@
             border-radius: 0 8px 8px 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
-        .constant-highlight {
+            .constant-highlight {
             background: #fef9c3;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             border-left: 3px solid #f59e0b;
         }
-        
-        .derivation {
+            .derivation {
             background: #f0fdf4;
             border-left: 4px solid var(--primary-emerald);
             padding: 1rem;
             margin: 1rem 0;
             border-radius: 0 8px 8px 0;
         }
-        
-        .interactive-tool {
+            .interactive-tool {
             background: #eff6ff;
             padding: 1.5rem;
             border-radius: 8px;
             margin: 1.5rem 0;
         }
-        
-        .formula-grid {
+            .formula-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin: 1.5rem 0;
         }
-        
-        .formula-item {
+            .formula-item {
             background: white;
             padding: 1.25rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
         }
-        
-        .special-case {
+            .special-case {
             background: #fef2f2;
             border-left: 4px solid #ef4444;
         }
@@ -79,8 +67,7 @@
                 <h3>📚 Cálculo Integral</h3>
                 <p>Módulo 1: Fundamentos</p>
             </div>
-            
-            <ul class="nav-menu">
+                    <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="sesion1.html" class="nav-link">Sesión 1: Introducción a la Suma</a>
                 </li>
@@ -98,8 +85,7 @@
                     <a href="#" class="nav-link disabled">Sesión 12: Fórmulas Exponenciales</a>
                 </li>
             </ul>
-            
-            <div class="sidebar-footer">
+                    <div class="sidebar-footer">
                 <p>Progreso del Módulo 1</p>
                 <div class="progress-bar">
                     <div class="progress progress-100"></div>
@@ -120,8 +106,7 @@
             <div class="content-section">
                 <h2>📌 Introducción</h2>
                 <p>En la sesión anterior descubrimos el concepto de antiderivada. Hoy profundizaremos en la constante de integración y aprenderemos las fórmulas fundamentales para integrar funciones potencia, que son la base para integrales más complejas.</p>
-                
-                <div class="note">
+                            <div class="note">
                     <p>💡 <strong>Recordatorio:</strong> La integral indefinida de una función representa una familia de funciones que difieren en una constante.</p>
                 </div>
             </div>
@@ -129,32 +114,27 @@
             <!-- La Constante de Integración -->
             <div class="content-section">
                 <h2>🔍 La Constante de Integración</h2>
-                
-                <div class="formula-card">
+                            <div class="formula-card">
                     <h3>¿Por qué necesitamos la constante de integración?</h3>
                     <p>Cuando derivamos una función, las constantes desaparecen. Por ejemplo:</p>
                     <p>Si $$F(x) = x^2 + 5$$, entonces $$F'(x) = 2x$$</p>
                     <p>Si $$G(x) = x^2 - 3$$, entonces $$G'(x) = 2x$$</p>
                     <p>Ambas funciones tienen la misma derivada ($$2x$$), por lo que al integrar $$2x$$, debemos incluir una constante de integración $$C$$:</p>
                     <p class="math-formula">$$\int 2x \, dx = x^2 + C$$</p>
-                    
-                    <div class="constant-highlight">
+                                    <div class="constant-highlight">
                         <p>📌 <strong>La constante de integración $$C$$ representa todas las posibles constantes que podrían haber estado en la función original.</strong></p>
                     </div>
                 </div>
-                
-                <div class="derivation">
+                            <div class="derivation">
                     <h3>Interpretación geométrica</h3>
                     <p>La constante de integración representa un desplazamiento vertical de la gráfica de la función. Todas las curvas de la forma $F(x) = x^2 + C$ son parábolas idénticas desplazadas verticalmente.</p>
                     <p>Cuando resolvemos un problema con condiciones iniciales, podemos determinar el valor específico de $C$.</p>
                 </div>
             </div>
-            
-            <!-- Fórmulas Inmediatas para Potencias -->
+                    <!-- Fórmulas Inmediatas para Potencias -->
             <div class="content-section">
                 <h2>📚 Fórmulas Inmediatas (Potencias)</h2>
-                
-                <div class="formula-grid">
+                            <div class="formula-grid">
                     <!-- Fórmula 1 -->
                     <div class="formula-item">
                         <h3>1. Integral de una constante</h3>
@@ -162,24 +142,21 @@
                         <p><strong>Ejemplo:</strong></p>
                         <p>$$\int 4 \, dx = 4x + C$$</p>
                     </div>
-                    
-                    <!-- Fórmula 2 -->
+                                    <!-- Fórmula 2 -->
                     <div class="formula-item">
                         <h3>2. Regla de la potencia</h3>
                         <p class="math-formula">$$\int x^n \, dx = \frac{x^{n+1}}{n+1} + C \quad (n \neq -1)$$</p>
                         <p><strong>Ejemplo:</strong></p>
                         <p>$$\int x^3 \, dx = \frac{x^4}{4} + C$$</p>
                     </div>
-                    
-                    <!-- Fórmula 3 -->
+                                    <!-- Fórmula 3 -->
                     <div class="formula-item">
                         <h3>3. Múltiplo constante</h3>
                         <p class="math-formula">$$\int k \cdot f(x) \, dx = k \int f(x) \, dx$$</p>
                         <p><strong>Ejemplo:</strong></p>
                         <p>$$\int 5x^2 \, dx = 5 \int x^2 \, dx = 5 \cdot \frac{x^3}{3} + C$$</p>
                     </div>
-                    
-                    <!-- Fórmula 4 -->
+                                    <!-- Fórmula 4 -->
                     <div class="formula-item">
                         <h3>4. Suma de funciones</h3>
                         <p class="math-formula">$$\int [f(x) + g(x)] \, dx = \int f(x) \, dx + \int g(x) \, dx$$</p>
@@ -187,8 +164,7 @@
                         <p>$$\int (x^2 + 3x) \, dx = \int x^2 \, dx + \int 3x \, dx = \frac{x^3}{3} + \frac{3x^2}{2} + C$$</p>
                     </div>
                 </div>
-                
-                <!-- Caso especial n = -1 -->
+                            <!-- Caso especial n = -1 -->
                 <div class="formula-item special-case">
                     <h3>⚠️ Caso especial: n = -1</h3>
                     <p>La regla de la potencia no aplica cuando n = -1. En este caso:</p>
@@ -198,12 +174,10 @@
                     <p class="note">📝 Este es un caso especial importante que veremos con más detalle en la próxima sesión.</p>
                 </div>
             </div>
-            
-            <!-- Ejemplos Resueltos -->
+                    <!-- Ejemplos Resueltos -->
             <div class="content-section">
                 <h2>📝 Ejemplos Resueltos</h2>
-                
-                <div class="example">
+                            <div class="example">
                     <h3>Ejemplo 1: Integral simple</h3>
                     <p>Calcula $$\int (3x^2 - 4x + 2) \, dx$$</p>
                     <div class="solution">
@@ -213,8 +187,7 @@
                         <p>$$= x^3 - 2x^2 + 2x + C$$</p>
                     </div>
                 </div>
-                
-                <div class="example">
+                            <div class="example">
                     <h3>Ejemplo 2: Con exponentes fraccionarios</h3>
                     <p>Calcula $$\int (\sqrt{x} + \sqrt[3]{x}) \, dx$$</p>
                     <div class="solution">
@@ -227,32 +200,26 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Herramienta Interactiva -->
+                    <!-- Herramienta Interactiva -->
             <div class="content-section interactive-tool">
                 <h2>🔄 Calculadora de Integrales de Potencias</h2>
                 <div class="control-group">
                     <label for="integral-input">Ingresa la integral (ej: $$3x^2 + 2x - 1$$):</label>
                     <input type="text" id="integral-input" class="function-input" value="3x^2 + 2x - 1">
                 </div>
-                
-                <button class="btn" onclick="calculateIntegral()">Calcular Integral</button>
-                
-                <div class="result-box" style="margin-top: 1rem;">
+                            <button class="btn" onclick="calculateIntegral()">Calcular Integral</button>
+                            <div class="result-box" style="margin-top: 1rem;">
                     <h3>Resultado:</h3>
                     <p id="integral-result">$$\int (3x^2 + 2x - 1) \, dx = x^3 + x^2 - x + C$$</p>
                 </div>
-                
-                <div class="note" style="margin-top: 1rem;">
+                            <div class="note" style="margin-top: 1rem;">
                     <p>💡 Intenta con: <code>$x^3 + 4x - 2$</code>, <code>2x^(1/2) + 3x^4</code>, <code>5 - 2x + x^2</code></p>
                 </div>
             </div>
-            
-            <!-- Ejercicios Prácticos -->
+                    <!-- Ejercicios Prácticos -->
             <div class="content-section">
                 <h2>📝 Ejercicios Prácticos</h2>
-                
-                <div class="exercise">
+                            <div class="exercise">
                     <h3>Ejercicio 1: Integrales básicas</h3>
                     <p>Calcula las siguientes integrales indefinidas:</p>
                     <ol>
@@ -260,8 +227,7 @@
                         <li>$$\int (\sqrt{x} - \frac{1}{x^2}) \, dx$$</li>
                         <li>$$\int (2x + 1)(x - 3) \, dx$$</li>
                     </ol>
-                    
-                    <div class="exercise-solution">
+                                    <div class="exercise-solution">
                         <button class="btn btn-solution" onclick="toggleSolution('solution1')">Mostrar Soluciones</button>
                         <div id="solution1" class="solution">
                             <ol>
@@ -272,29 +238,24 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="exercise">
+                            <div class="exercise">
                     <h3>Ejercicio 2: Problema con condición inicial</h3>
                     <p>Encuentra la función $$f(x)$$ tal que $$f'(x) = 3x^2 - 4x + 2$$ y $$f(1) = 5$$.</p>
-                    
-                    <div class="exercise-solution">
+                                    <div class="exercise-solution">
                         <button class="btn btn-solution" onclick="toggleSolution('solution2')">Mostrar Solución</button>
                         <div id="solution2" class="solution">
                             <p><strong>Paso 1:</strong> Integrar $$f'(x)$$ para encontrar $$f(x)$$:</p>
                             <p>$$f(x) = \int (3x^2 - 4x + 2) \, dx = x^3 - 2x^2 + 2x + C$$</p>
-                            
-                            <p><strong>Paso 2:</strong> Usar la condición inicial $$f(1) = 5$$ para encontrar $$C$$:</p>
+                                                    <p><strong>Paso 2:</strong> Usar la condición inicial $$f(1) = 5$$ para encontrar $$C$$:</p>
                             <p>$$5 = (1)^3 - 2(1)^2 + 2(1) + C$$</p>
                             <p>$$5 = 1 - 2 + 2 + C$$</p>
                             <p>$$C = 4$$</p>
-                            
-                            <p><strong>Solución:</strong> $$f(x) = x^3 - 2x^2 + 2x + 4$$</p>
+                                                    <p><strong>Solución:</strong> $$f(x) = x^3 - 2x^2 + 2x + 4$$</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Resumen -->
+                    <!-- Resumen -->
             <div class="content-section summary">
                 <h2>📋 Resumen de la Sesión</h2>
                 <ul>
@@ -303,15 +264,13 @@
                     <li>Las propiedades de linealidad nos permiten separar integrales de sumas y sacar constantes.</li>
                     <li>Las condiciones iniciales nos permiten encontrar el valor específico de la constante de integración.</li>
                 </ul>
-                
-                <div class="next-steps">
+                            <div class="next-steps">
                     <h3>Próximos pasos:</h3>
                     <p>En la siguiente sesión exploraremos las fórmulas de integración para funciones exponenciales y logarítmicas, incluyendo el caso especial cuando el exponente es -1.</p>
                 </div>
             </div>
         </main>
     </div>
-    
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -341,13 +300,11 @@
             solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
             MathJax.typeset(); // Vuelve a renderizar las fórmulas
         }
-        
-        // Función para calcular integrales de polinomios (versión simplificada)
+            // Función para calcular integrales de polinomios (versión simplificada)
         function calculateIntegral() {
             const input = document.getElementById('integral-input').value.trim();
             let result = '';
-            
-            try {
+                    try {
                 // Procesamiento simple de polinomios (ejemplo simplificado)
                 if (input.includes('x^2')) {
                     result = '\\frac{' + (input.split('x^2')[0] || '1') + 'x^3}{3}';
@@ -359,8 +316,7 @@
                 } else {
                     result = 'No se pudo calcular';
                 }
-                
-                // Manejo básico de sumas (muy simplificado para este ejemplo)
+                            // Manejo básico de sumas (muy simplificado para este ejemplo)
                 if (input.includes('+')) {
                     const terms = input.split('+');
                     result = terms.map(term => {
@@ -371,25 +327,21 @@
                         return term;
                     }).join(' + ');
                 }
-                
-                document.getElementById('integral-result').innerHTML = 
+                            document.getElementById('integral-result').innerHTML = 
                     `$$\\int (${input}) \\, dx = ${result} + C$$`;
             } catch (e) {
                 document.getElementById('integral-result').innerHTML = 
                     'Error al procesar la entrada. Intenta con un formato como: 3x^2 + 2x - 1';
             }
-            
-            MathJax.typeset(); // Vuelve a renderizar las fórmulas
+                    MathJax.typeset(); // Vuelve a renderizar las fórmulas
         }
-        
-        // Inicialización
+            // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             // Ocultar todas las soluciones al cargar
             document.querySelectorAll('.solution').forEach(sol => {
                 sol.style.display = 'none';
             });
-            
-            // Inicializar la calculadora
+                    // Inicializar la calculadora
             calculateIntegral();
         });
     </script>

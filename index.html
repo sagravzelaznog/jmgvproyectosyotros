@@ -115,12 +115,30 @@
 </head>
 <body>
 
-    <header>
-        <h1>Directorio de Proyectos</h1>
-        <p class="subtitle">Repositorio central de aplicaciones web, cursos y planeaciones didácticas.</p>
-    </header>
+    <div id="login-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; width: 100%;">
+        <div class="card" style="width: 100%; max-width: 400px; padding: 40px; text-align: center;">
+            <h2 style="margin-top: 0; color: var(--accent); margin-bottom: 25px;">Iniciar Sesión</h2>
+            <form id="login-form" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="email" id="email" placeholder="Correo Electrónico" required style="padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: inherit;">
+                <input type="password" id="password" placeholder="Contraseña" required style="padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: inherit;">
+                <div id="error-message" class="hidden" style="color: #ef4444; font-size: 0.9em; text-align: left;"></div>
+                <button type="submit" style="padding: 12px; border-radius: 8px; border: none; background: var(--accent); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;">Ingresar</button>
+                <button type="button" id="btn-register" style="padding: 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-weight: bold; cursor: pointer; transition: 0.3s;">Registrarse</button>
+            </form>
+        </div>
+    </div>
 
-    <div class="container">
+    <div id="dashboard-screen" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+        <header style="position: relative;">
+            <div style="position: absolute; top: 20px; right: 20px; display: flex; align-items: center;">
+                <span id="user-email-display" style="color: var(--text-sub); margin-right: 15px; font-size: 0.9em;"></span>
+                <button id="logout-btn" style="padding: 8px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; cursor: pointer; font-family: inherit; transition: 0.3s;">Cerrar Sesión</button>
+            </div>
+            <h1>Directorio de Proyectos</h1>
+            <p class="subtitle">Repositorio central de aplicaciones web, cursos y planeaciones didácticas.</p>
+        </header>
+
+        <div class="container">
         
         <!-- Semestre 5 -->
         <h2 class="category-title">Semestre 5</h2>
@@ -187,7 +205,15 @@
             </a>
         </div>
 
+        </div>
     </div>
 
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
+    <script src="env.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

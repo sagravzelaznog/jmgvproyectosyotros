@@ -6,7 +6,6 @@
     <title>Ejercicios Interactivos - Módulo 4: Aplicaciones de la Integral</title>
     <link rel="stylesheet" href="styles-main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -59,8 +58,7 @@
 
             <div class="solution-steps">
                 <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
-                
-                <div class="step">
+                            <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Identificar la función y los límites</div>
@@ -107,8 +105,7 @@
             <div class="interactive-calculator">
                 <h4><i class="fas fa-calculator"></i> Calculadora Interactiva</h4>
                 <p>Prueba con diferentes valores para la función $y = ax^2 + bx + c$:</p>
-                
-                <div class="calculator-input">
+                            <div class="calculator-input">
                     <div class="input-group">
                         <label for="a1">a (coeficiente de x²):</label>
                         <input type="number" id="a1" value="1" step="0.1">
@@ -130,12 +127,10 @@
                         <input type="number" id="upper1" value="3" step="0.1">
                     </div>
                 </div>
-                
-                <button class="calculate-btn" onclick="calculateArea()">
+                            <button class="calculate-btn" onclick="calculateArea()">
                     <i class="fas fa-calculator"></i> Calcular Área
                 </button>
-                
-                <div class="result-display" id="result1">
+                            <div class="result-display" id="result1">
                     <i class="fas fa-check-circle"></i> Resultado: <span id="areaResult"></span>
                 </div>
             </div>
@@ -166,8 +161,7 @@
 
             <div class="solution-steps">
                 <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
-                
-                <div class="step">
+                            <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Encontrar los puntos de intersección</div>
@@ -208,8 +202,7 @@
             <div class="interactive-calculator">
                 <h4><i class="fas fa-calculator"></i> Calculadora Interactiva</h4>
                 <p>Calcula el área entre dos funciones cuadráticas:</p>
-                
-                <div class="calculator-input">
+                            <div class="calculator-input">
                     <div class="input-group">
                         <label for="function1">f(x) = ax² + bx + c</label>
                         <input type="text" id="function1" value="x²" readonly>
@@ -219,12 +212,10 @@
                         <input type="text" id="function2" value="2x - x²" readonly>
                     </div>
                 </div>
-                
-                <button class="calculate-btn" onclick="calculateAreaBetween()">
+                            <button class="calculate-btn" onclick="calculateAreaBetween()">
                     <i class="fas fa-calculator"></i> Calcular Área Entre Curvas
                 </button>
-                
-                <div class="result-display" id="result2">
+                            <div class="result-display" id="result2">
                     <i class="fas fa-check-circle"></i> Resultado: <span id="areaBetweenResult"></span>
                 </div>
             </div>
@@ -247,8 +238,7 @@
 
             <div class="solution-steps">
                 <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
-                
-                <div class="step">
+                            <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Identificar la función y límites</div>
@@ -310,8 +300,7 @@
 
             <div class="solution-steps">
                 <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
-                
-                <div class="step">
+                            <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Encontrar los puntos de intersección</div>
@@ -366,8 +355,7 @@
 
             <div class="solution-steps">
                 <h4><i class="fas fa-clipboard-list"></i> Solución Paso a Paso</h4>
-                
-                <div class="step">
+                            <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">Identificar los datos</div>
@@ -405,8 +393,7 @@
             <div class="interactive-calculator">
                 <h4><i class="fas fa-calculator"></i> Calculadora de Trabajo en Resortes</h4>
                 <p>Calcula el trabajo para diferentes constantes de resorte y estiramientos:</p>
-                
-                <div class="calculator-input">
+                            <div class="calculator-input">
                     <div class="input-group">
                         <label for="springK">Constante k (N/m):</label>
                         <input type="number" id="springK" value="150" step="1">
@@ -416,12 +403,10 @@
                         <input type="number" id="stretch" value="0.4" step="0.1">
                     </div>
                 </div>
-                
-                <button class="calculate-btn" onclick="calculateSpringWork()">
+                            <button class="calculate-btn" onclick="calculateSpringWork()">
                     <i class="fas fa-calculator"></i> Calcular Trabajo
                 </button>
-                
-                <div class="result-display" id="result5">
+                            <div class="result-display" id="result5">
                     <i class="fas fa-check-circle"></i> Resultado: <span id="springWorkResult"></span>
                 </div>
             </div>
@@ -456,23 +441,18 @@
             for (let i = 1; i <= totalExercises; i++) {
                 document.getElementById(`exercise${i}`).style.display = 'none';
             }
-            
-            // Mostrar el ejercicio actual
+                    // Mostrar el ejercicio actual
             document.getElementById(`exercise${currentExercise}`).style.display = 'block';
-            
-            // Actualizar indicadores
+                    // Actualizar indicadores
             document.getElementById('currentExercise').textContent = currentExercise;
             document.getElementById('totalExercises').textContent = totalExercises;
-            
-            // Actualizar barra de progreso
+                    // Actualizar barra de progreso
             const progress = (currentExercise / totalExercises) * 100;
             document.getElementById('progressFill').style.width = `${progress}%`;
-            
-            // Actualizar botones de navegación
+                    // Actualizar botones de navegación
             document.getElementById('prevBtn').disabled = currentExercise === 1;
             document.getElementById('nextBtn').disabled = currentExercise === totalExercises;
-            
-            if (currentExercise === totalExercises) {
+                    if (currentExercise === totalExercises) {
                 document.getElementById('nextBtn').innerHTML = '<i class="fas fa-check"></i> Completar';
             } else {
                 document.getElementById('nextBtn').innerHTML = 'Siguiente <i class="fas fa-arrow-right"></i>';
@@ -506,13 +486,11 @@
             const c = parseFloat(document.getElementById('c1').value);
             const lower = parseFloat(document.getElementById('lower1').value);
             const upper = parseFloat(document.getElementById('upper1').value);
-            
-            // Calcular la integral de ax² + bx + c
+                    // Calcular la integral de ax² + bx + c
             const area = (a * (upper**3 - lower**3) / 3) + 
                         (b * (upper**2 - lower**2) / 2) + 
                         (c * (upper - lower));
-            
-            document.getElementById('areaResult').textContent = `${area.toFixed(2)} unidades cuadradas`;
+                    document.getElementById('areaResult').textContent = `${area.toFixed(2)} unidades cuadradas`;
             document.getElementById('result1').style.display = 'block';
         }
 
@@ -526,18 +504,15 @@
         function calculateSpringWork() {
             const k = parseFloat(document.getElementById('springK').value);
             const stretch = parseFloat(document.getElementById('stretch').value);
-            
-            const work = (k * stretch**2) / 2;
-            
-            document.getElementById('springWorkResult').textContent = `${work.toFixed(2)} julios`;
+                    const work = (k * stretch**2) / 2;
+                    document.getElementById('springWorkResult').textContent = `${work.toFixed(2)} julios`;
             document.getElementById('result5').style.display = 'block';
         }
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             updateExerciseDisplay();
-            
-            // Configurar MathJax
+                    // Configurar MathJax
             if (window.MathJax) {
                 MathJax.typesetPromise();
             }

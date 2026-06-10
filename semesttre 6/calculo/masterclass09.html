@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS09 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,15 +237,12 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="desplazamientos">
+                    <div class="section" id="desplazamientos">
             <h2>Masterclass 9: Desplazamientos de Funciones</h2>
             <p>Los desplazamientos son transformaciones que mueven la gráfica de una función en el plano cartesiano sin cambiar su forma. Son fundamentales para entender cómo se relacionan diferentes funciones entre sí.</p>
-            
-            <h3>9.1 Desplazamientos Verticales</h3>
+                    <h3>9.1 Desplazamientos Verticales</h3>
             <p>Un desplazamiento vertical mueve la gráfica hacia arriba o hacia abajo en el plano cartesiano.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = f(x) + k
             $$
@@ -261,8 +252,7 @@
                 <li>Si $k < 0$: La gráfica se desplaza $|k|$ unidades hacia abajo</li>
             </ul>
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 1: Desplazamiento vertical de una parábola</h5>
                 <p>Sea $f(x) = x^2$, entonces:</p>
                 <ul>
@@ -271,11 +261,9 @@
                 </ul>
                 <p>El vértice de la parábola se mueve de $(0,0)$ a $(0,3)$ y $(0,-2)$ respectivamente.</p>
             </div>
-            
-            <h3>9.2 Desplazamientos Horizontales</h3>
+                    <h3>9.2 Desplazamientos Horizontales</h3>
             <p>Un desplazamiento horizontal mueve la gráfica hacia la izquierda o derecha en el plano cartesiano.</p>
-            
-            <h4>Forma general:</h4>
+                    <h4>Forma general:</h4>
             <p>$$
             y = f(x - h)
             $$
@@ -286,8 +274,7 @@
             </ul>
             <strong>¡Precaución!</strong> El signo dentro del paréntesis es contrario a la dirección del desplazamiento.
             </p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 2: Desplazamiento horizontal de una función valor absoluto</h5>
                 <p>Sea $f(x) = |x|$, entonces:</p>
                 <ul>
@@ -296,15 +283,13 @@
                 </ul>
                 <p>El vértice de la función valor absoluto se mueve de $(0,0)$ a $(4,0)$ y $(-1,0)$ respectivamente.</p>
             </div>
-            
-            <h3>9.3 Desplazamientos Combinados</h3>
+                    <h3>9.3 Desplazamientos Combinados</h3>
             <p>Podemos combinar desplazamientos verticales y horizontales en una misma función:</p>
             <p>$$
             y = f(x - h) + k
             $$
             donde $(h, k)$ representa el desplazamiento total del punto de referencia de la función original.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 3: Desplazamiento combinado de una función raíz cuadrada</h5>
                 <p>Sea $f(x) = \sqrt{x}$, entonces:</p>
                 <p>$$
@@ -318,16 +303,14 @@
                 </ul>
                 </p>
             </div>
-            
-            <h3>9.4 Desplazamientos en Funciones Periódicas</h3>
+                    <h3>9.4 Desplazamientos en Funciones Periódicas</h3>
             <p>En funciones como seno y coseno, los desplazamientos horizontales se conocen como <strong>desfases</strong> o <strong>cambios de fase</strong>.</p>
             <p>Para $y = \sin(x - c) + d$ o $y = \cos(x - c) + d$:</p>
             <ul>
                 <li>$c$ es el desfase (desplazamiento horizontal)</li>
                 <li>$d$ es el desplazamiento vertical</li>
             </ul>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Dada la función $f(x) = x^3$, determina la ecuación resultante después de aplicar:</p>
                 <ol>
@@ -336,8 +319,7 @@
                     <li>Ambos desplazamientos juntos</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Para la función $f(x) = \frac{1}{x}$:</p>
                 <ol>
@@ -346,16 +328,14 @@
                     <li>Grafica $f(x)$, $f(x) + 2$ y $f(x - 3)$ en el mismo plano.</li>
                 </ol>
             </div>
-            
-            <h3>9.5 Aplicaciones de los Desplazamientos</h3>
+                    <h3>9.5 Aplicaciones de los Desplazamientos</h3>
             <p>Los desplazamientos tienen numerosas aplicaciones en física, ingeniería y economía. Por ejemplo:</p>
             <ul>
                 <li>En movimiento armónico simple, para modelar oscilaciones desplazadas del origen</li>
                 <li>En economía, para ajustar curvas de oferta y demanda</li>
                 <li>En procesamiento de señales, para desplazar señales en el tiempo</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h5>Ejemplo 4: Aplicación en física</h5>
                 <p>La posición de un resorte en función del tiempo viene dada por:</p>
                 <p>$$
@@ -371,10 +351,8 @@
                 </p>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass08.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass10.html" class="nav-btn">Siguiente →</a>
             </div>

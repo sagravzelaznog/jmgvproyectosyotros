@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 2: Sumas de Riemann y la Integral Definida | Cálculo Integral</title>
-    
     <!-- MathJax para renderizado de fórmulas matemáticas -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -21,17 +19,13 @@
             }
         };
     </script>
-    
     <!-- GeoGebra para visualizaciones interactivas -->
     <script src="https://www.geogebra.org/apps/deployggb.js"></script>
-    
     <!-- Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="modulo2-styles.css">
-    
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
@@ -80,8 +74,7 @@
                 <div class="intro-card">
                     <h2>🎯 Objetivo del Módulo</h2>
                     <p>Comprender el concepto de integral definida como límite de sumas de Riemann y aplicar el Teorema Fundamental del Cálculo para evaluar integrales.</p>
-                    
-                    <div class="learning-outcomes">
+                                    <div class="learning-outcomes">
                         <h3>📋 Competencias que desarrollarás:</h3>
                         <ul>
                             <li>✅ Calcular sumas de Riemann para aproximar áreas</li>
@@ -464,8 +457,7 @@
                 <div class="tfc-introduction">
                     <h3>🌉 El Puente Fundamental</h3>
                     <p>El Teorema Fundamental del Cálculo establece la conexión profunda entre la derivación y la integración. Es considerado uno de los teoremas más importantes en matemáticas.</p>
-                    
-                    <div class="bridge-visualization">
+                                    <div class="bridge-visualization">
                         <div class="bridge-section">
                             <h4>Derivación</h4>
                             <p>Dada una función $f(x)$, encontramos su derivada $f'(x)$</p>
@@ -498,8 +490,7 @@
                     <div class="tfc-example">
                         <h4>📝 Ejemplo:</h4>
                         <p>Si $F(x) = \int_0^x t^2 \, dt$, entonces $F'(x) = x^2$</p>
-                        
-                        <div class="verification">
+                                            <div class="verification">
                             <h5>Verificación:</h5>
                             <p>$$F(x) = \int_0^x t^2 \, dt = \left[\frac{t^3}{3}\right]_0^x = \frac{x^3}{3}$$</p>
                             <p>$$F'(x) = \frac{d}{dx}\left(\frac{x^3}{3}\right) = x^2$$</p>
@@ -522,8 +513,7 @@
                     <div class="tfc-example">
                         <h4>📝 Ejemplo:</h4>
                         <p>Calcular $\int_1^3 x^2 \, dx$</p>
-                        
-                        <div class="solution-steps">
+                                            <div class="solution-steps">
                             <div class="step">
                                 <div class="step-number">1</div>
                                 <div class="step-content">
@@ -558,8 +548,7 @@
                     <div class="formula-box large">
                         $$\int_a^b f(x) \, dx = [F(x)]_a^b = F(b) - F(a)$$
                     </div>
-                    
-                    <div class="notation-example">
+                                    <div class="notation-example">
                         <h4>Ejemplo:</h4>
                         <p>$$\int_0^2 (3x^2 + 2x) \, dx = [x^3 + x^2]_0^2 = (8 + 4) - (0 + 0) = 12$$</p>
                     </div>
@@ -670,17 +659,13 @@
                         <div class="calculator-input">
                             <label for="integralFunction">Función:</label>
                             <input type="text" id="integralFunction" placeholder="x^2" value="x^2">
-                            
-                            <label for="integralLower">Límite inferior:</label>
+                                                    <label for="integralLower">Límite inferior:</label>
                             <input type="number" id="integralLower" value="0" step="0.1">
-                            
-                            <label for="integralUpper">Límite superior:</label>
+                                                    <label for="integralUpper">Límite superior:</label>
                             <input type="number" id="integralUpper" value="2" step="0.1">
-                            
-                            <button onclick="calculateIntegral()">Calcular</button>
+                                                    <button onclick="calculateIntegral()">Calcular</button>
                         </div>
-                        
-                        <div class="calculator-output">
+                                            <div class="calculator-output">
                             <div class="result-display">
                                 <span class="result-label">Resultado:</span>
                                 <span class="result-value" id="integralResult">-</span>
@@ -708,8 +693,7 @@
                                 <li>✅ Podemos evaluar integrales usando antiderivadas</li>
                             </ul>
                         </div>
-                        
-                        <div class="summary-section">
+                                            <div class="summary-section">
                             <h3>🔧 Fórmulas Importantes</h3>
                             <div class="formula-list">
                                 <div class="formula-item">
@@ -726,8 +710,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="summary-section">
+                                            <div class="summary-section">
                             <h3>📈 Próximos Pasos</h3>
                             <p>En el Módulo 3 aprenderás técnicas avanzadas de integración para resolver integrales que no son inmediatas.</p>
                             <a href="modulo3_interactivo.html" class="next-module-btn">Continuar al Módulo 3 →</a>

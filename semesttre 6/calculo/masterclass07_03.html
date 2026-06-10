@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS07_03 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -251,8 +245,7 @@
             I(x) = x
             $$
             </p>
-            
-            <h4>Características principales:</h4>
+                    <h4>Características principales:</h4>
             <ul>
                 <li><strong>Forma general:</strong> $f(x) = x$</li>
                 <li><strong>Grafía:</strong> Una línea recta que pasa por el origen (0,0) con pendiente 1</li>
@@ -263,8 +256,7 @@
                 <li><strong>Es una función impar:</strong> $I(-x) = -I(x)$</li>
                 <li><strong>Es biyectiva:</strong> Es tanto inyectiva como suprayectiva</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 1: Evaluación de la función identidad</h4>
                 <p>Para $I(x) = x$:</p>
                 <ul>
@@ -273,8 +265,7 @@
                     <li>$I(0) = 0$</li>
                     <li>$I(a) = a$ para cualquier $a \in \mathbb{R}$</li>
                 </ul>
-                
-                <h4>Tabla de valores:</h4>
+                            <h4>Tabla de valores:</h4>
                 <table class="function-table">
                     <tr>
                         <th>$x$</th>
@@ -308,8 +299,7 @@
                     </tr>
                 </table>
             </div>
-            
-            <div class="example">
+                    <div class="example">
                 <h4>Ejemplo 2: Propiedad de identidad en composición de funciones</h4>
                 <p>Para cualquier función $f: \mathbb{R} \rightarrow \mathbb{R}$:</p>
                 <ul>
@@ -318,13 +308,11 @@
                 </ul>
                 <p>Es decir, $f \circ I = I \circ f = f$</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Demuestra que la función identidad es su propia función inversa. Es decir, muestra que $I^{-1}(x) = I(x)$.</p>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Sea $f(x) = 3x - 2$. Verifica que:</p>
                 <ol>
@@ -332,16 +320,13 @@
                     <li>$(I \circ f)(x) = f(x)$</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 3:</h3>
                 <p>¿Qué relación existe entre la gráfica de la función identidad y la recta $y = x$? Explica por qué son la misma gráfica.</p>
             </div>
 
-            
-</div>
-            
-            <div class="nav-buttons">
+        </div>
+                    <div class="nav-buttons">
                 <a href="masterclass07_02.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass07_04.html" class="nav-btn">Siguiente →</a>
             </div>

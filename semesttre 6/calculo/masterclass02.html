@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASTERCLASS02 - Cálculo Diferencial</title>
     <link rel="icon" href="data:;base64,=">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     </script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
-        
-        :root {
+            :root {
             --bg-color: #f4f7f6;
             --text-color: #2c3e50;
             --card-bg: #ffffff;
@@ -43,10 +40,8 @@
         }
 
         * { box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
+            html { scroll-behavior: smooth; }
+            body {
             font-family: 'Outfit', sans-serif;
             line-height: 1.7;
             margin: 0;
@@ -55,8 +50,7 @@
             background-color: var(--bg-color);
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        .layout {
+            .layout {
             display: flex;
             min-height: 100vh;
         }
@@ -243,23 +237,19 @@
 
         </aside>
         <main class="main-content">
-            
-            <div class="section" id="funciones">
+                    <div class="section" id="funciones">
             <h2>Masterclass 2: Funciones</h2>
             <p>Una función es una relación especial entre dos conjuntos, llamados dominio y codominio, donde cada elemento del dominio se relaciona con exactamente un elemento del codominio.</p>
-            
-            <h3>2.1 Definición formal</h3>
+                    <h3>2.1 Definición formal</h3>
             <p>Dados dos conjuntos no vacíos A y B, una función f de A en B (denotada f: A → B) es una relación que asigna a cada elemento x ∈ A un único elemento y ∈ B, llamado imagen de x mediante f.</p>
-            
-            <div class="example">
+                    <div class="example">
                 <h3>Ejemplo 1:</h3>
                 <p>Sean A = {1, 2, 3} y B = {a, b, c, d}</p>
                 <p>f = {(1,b), (2,a), (3,c)} es una función</p>
                 <p>g = {(1,a), (1,b), (2,c)} NO es función (el 1 tiene dos imágenes)</p>
                 <p>h = {(1,a), (2,b)} NO es función de A en B (falta el 3)</p>
             </div>
-            
-            <h3>2.2 Notación y terminología</h3>
+                    <h3>2.2 Notación y terminología</h3>
             <ul>
                 <li>f: A → B (función f de A en B)</li>
                 <li>y = f(x) (y es la imagen de x mediante f)</li>
@@ -269,8 +259,7 @@
                 <li>Imagen de un elemento: f(a) es la imagen de a</li>
                 <li>Preimagen: Si f(a) = b, entonces a es preimagen de b</li>
             </ul>
-            
-            <div class="example">
+                    <div class="example">
                 <h3>Ejemplo 2:</h3>
                 <p>Sea f: ℝ → ℝ definida por f(x) = x² + 1</p>
                 <p>• f(2) = 2² + 1 = 5</p>
@@ -278,8 +267,7 @@
                 <p>• Dom f = ℝ</p>
                 <p>• Rango = [1, ∞)</p>
             </div>
-            
-            <h3>2.3 Representación de funciones</h3>
+                    <h3>2.3 Representación de funciones</h3>
             <p>Las funciones se pueden representar de varias formas:</p>
             <ol>
                 <li><strong>Diagrama de flechas:</strong> Muestra la relación entre elementos de los conjuntos</li>
@@ -287,8 +275,7 @@
                 <li><strong>Gráfica cartesiana:</strong> Representación en el plano xy</li>
                 <li><strong>Fórmula o ecuación:</strong> Expresión algebraica que relaciona x con f(x)</li>
             </ol>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 1:</h3>
                 <p>Dada la función f(x) = 2x - 3, calcula:</p>
                 <ol>
@@ -298,8 +285,7 @@
                     <li>El valor de x tal que f(x) = 5</li>
                 </ol>
             </div>
-            
-            <div class="exercise">
+                    <div class="exercise">
                 <h3>Ejercicio 2:</h3>
                 <p>Determina cuáles de las siguientes relaciones son funciones:</p>
                 <ol>
@@ -310,10 +296,8 @@
                 </ol>
             </div>
         </div>
-            
-
-            
-            <div class="nav-buttons">
+        
+                    <div class="nav-buttons">
                 <a href="masterclass01.html" class="nav-btn">← Anterior</a>
                 <a href="masterclass03.html" class="nav-btn">Siguiente →</a>
             </div>

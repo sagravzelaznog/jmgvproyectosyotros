@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulo 3: Técnicas de Integración - Cálculo Integral</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -307,17 +306,14 @@
                 margin: 10px;
                 padding: 15px;
             }
-            
-            .header h1 {
+                    .header h1 {
                 font-size: 2em;
             }
-            
-            .nav-tabs {
+                    .nav-tabs {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .nav-tab {
+                    .nav-tab {
                 width: 100%;
                 max-width: 300px;
             }
@@ -342,8 +338,7 @@
         <!-- Sección de Integración por Sustitución -->
         <div id="sustitucion" class="content-section active">
             <h2 class="section-title">🔄 Integración por Sustitución</h2>
-            
-            <div class="subsection">
+                    <div class="subsection">
                 <h3>📖 Concepto Fundamental</h3>
                 <p>La integración por sustitución es el equivalente de la regla de la cadena para la integración. Si tenemos:</p>
                 <div class="formula">
@@ -370,28 +365,23 @@
             <div class="example-box">
                 <div class="example-title">Ejemplo 1: Sustitución Básica</div>
                 <p><strong>Problema:</strong> $\int (2x + 3)^4 \cdot 2 \, dx$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 1:</span> Identificar la función interna
                     <br>Función interna: $g(x) = 2x + 3$, Derivada: $g'(x) = 2$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 2:</span> Hacer la sustitución
                     <br>Sea $u = 2x + 3$, entonces $du = 2 \, dx$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 3:</span> Reescribir la integral
                     <br>$\int (2x + 3)^4 \cdot 2 \, dx = \int u^4 \, du$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 4:</span> Integrar
                     <br>$\int u^4 \, du = \frac{u^5}{5} + C$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 5:</span> Sustituir de vuelta
                     <br>$\frac{u^5}{5} + C = \frac{(2x + 3)^5}{5} + C$
                 </div>
@@ -424,8 +414,7 @@
         <!-- Sección de Funciones Trigonométricas -->
         <div id="trigonometricas" class="content-section">
             <h2 class="section-title">📐 Integración de Funciones Trigonométricas</h2>
-            
-            <div class="subsection">
+                    <div class="subsection">
                 <h3>📖 Identidades Esenciales</h3>
                 <div class="formula">
                     <strong>Pitagóricas:</strong><br>
@@ -443,23 +432,19 @@
             <div class="example-box">
                 <div class="example-title">Ejemplo: Potencias Impares</div>
                 <p><strong>Problema:</strong> $\int \sin^3(x) \, dx$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 1:</span> Separar una potencia impar
                     <br>$\sin^3(x) = \sin^2(x) \cdot \sin(x)$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 2:</span> Usar identidad pitagórica
                     <br>$\sin^2(x) = 1 - \cos^2(x)$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 3:</span> Sustituir y hacer cambio de variable
                     <br>$\int (1 - \cos^2(x)) \sin(x) \, dx$ con $u = \cos(x)$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 4:</span> Resultado final
                     <br>$-\cos(x) + \frac{\cos^3(x)}{3} + C$
                 </div>
@@ -492,8 +477,7 @@
         <!-- Sección de Integración por Partes -->
         <div id="partes" class="content-section">
             <h2 class="section-title">🔧 Integración por Partes</h2>
-            
-            <div class="subsection">
+                    <div class="subsection">
                 <h3>📖 Fórmula Fundamental</h3>
                 <div class="formula">
                     $$\int u \, dv = uv - \int v \, du$$
@@ -519,24 +503,20 @@
             <div class="example-box">
                 <div class="example-title">Ejemplo: Producto de Polinomio y Exponencial</div>
                 <p><strong>Problema:</strong> $\int x e^x \, dx$</p>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 1:</span> Identificar u y dv usando ILATE
                     <br>Algebraica: $x$ (A), Exponencial: $e^x$ (E) → $u = x$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 2:</span> Definir u y dv
                     <br>$u = x$ → $du = dx$<br>
                     $dv = e^x \, dx$ → $v = e^x$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 3:</span> Aplicar la fórmula
                     <br>$\int x e^x \, dx = x \cdot e^x - \int e^x \, dx$
                 </div>
-                
-                <div class="step">
+                            <div class="step">
                     <span class="step-number">Paso 4:</span> Resultado final
                     <br>$x e^x - e^x + C = e^x(x - 1) + C$
                 </div>
@@ -569,26 +549,21 @@
         <!-- Sección de Métodos Especiales -->
         <div id="especiales" class="content-section">
             <h2 class="section-title">⭐ Métodos Especiales de Integración</h2>
-            
-            <div class="subsection">
+                    <div class="subsection">
                 <h3>🔢 Fracciones Parciales</h3>
                 <p>Descomponer funciones racionales complejas en fracciones más simples.</p>
-                
-                <div class="example-box">
+                            <div class="example-box">
                     <div class="example-title">Ejemplo: Factores Lineales</div>
                     <p><strong>Problema:</strong> $\int \frac{x + 1}{(x - 1)(x + 2)} \, dx$</p>
-                    
-                    <div class="step">
+                                    <div class="step">
                         <span class="step-number">Paso 1:</span> Descomponer en fracciones parciales
                         <br>$\frac{x + 1}{(x - 1)(x + 2)} = \frac{A}{x - 1} + \frac{B}{x + 2}$
                     </div>
-                    
-                    <div class="step">
+                                    <div class="step">
                         <span class="step-number">Paso 2:</span> Resolver para A y B
                         <br>$A = \frac{2}{3}$, $B = \frac{1}{3}$
                     </div>
-                    
-                    <div class="step">
+                                    <div class="step">
                         <span class="step-number">Paso 3:</span> Resultado final
                         <br>$\frac{2}{3} \ln|x - 1| + \frac{1}{3} \ln|x + 2| + C$
                     </div>
@@ -634,19 +609,15 @@
         <!-- Sección de Calculadora -->
         <div id="calculadora" class="content-section">
             <h2 class="section-title">🧮 Calculadora de Integrales</h2>
-            
-            <div class="calculator-section">
+                    <div class="calculator-section">
                 <h3>Calculadora Interactiva</h3>
                 <p>Ingresa una función para calcular su integral (usa sintaxis matemática estándar)</p>
-                
-                <input type="text" id="integralInput" class="calculator-input" placeholder="Ejemplo: x^2 + 3*x + 1">
-                
-                <div>
+                            <input type="text" id="integralInput" class="calculator-input" placeholder="Ejemplo: x^2 + 3*x + 1">
+                            <div>
                     <button class="calculator-button" onclick="calculateIntegral()">Calcular Integral</button>
                     <button class="calculator-button" onclick="clearCalculator()">Limpiar</button>
                 </div>
-                
-                <div id="resultBox" class="result-box">
+                            <div id="resultBox" class="result-box">
                     <h4>Resultado:</h4>
                     <div id="integralResult"></div>
                 </div>
@@ -685,19 +656,15 @@
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Remover clase active de todas las pestañas
+                    // Remover clase active de todas las pestañas
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
-            // Mostrar la sección seleccionada
+                    // Mostrar la sección seleccionada
             document.getElementById(sectionName).classList.add('active');
-            
-            // Activar la pestaña correspondiente
+                    // Activar la pestaña correspondiente
             event.target.classList.add('active');
-            
-            currentSection = sectionName;
+                    currentSection = sectionName;
             updateProgress();
         }
 
@@ -705,8 +672,7 @@
             const sections = ['sustitucion', 'trigonometricas', 'partes', 'especiales', 'calculadora'];
             const currentIndex = sections.indexOf(currentSection);
             progress = ((currentIndex + 1) / sections.length) * 100;
-            
-            document.getElementById('progressFill').style.width = progress + '%';
+                    document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = Math.round(progress) + '%';
         }
 
@@ -714,13 +680,11 @@
             const input = document.getElementById('integralInput').value;
             const resultBox = document.getElementById('resultBox');
             const resultDiv = document.getElementById('integralResult');
-            
-            if (!input.trim()) {
+                    if (!input.trim()) {
                 alert('Por favor ingresa una función para integrar');
                 return;
             }
-            
-            // Simulación de cálculo (en una implementación real usarías una librería como math.js)
+                    // Simulación de cálculo (en una implementación real usarías una librería como math.js)
             try {
                 // Aquí iría la lógica real de cálculo de integrales
                 const result = simulateIntegralCalculation(input);
@@ -747,14 +711,12 @@
                 'exp(x)': 'exp(x) + C',
                 '1/x': 'ln|x| + C'
             };
-            
-            for (const [pattern, result] of Object.entries(patterns)) {
+                    for (const [pattern, result] of Object.entries(patterns)) {
                 if (func.includes(pattern)) {
                     return result;
                 }
             }
-            
-            return 'Integral no reconocida. Intenta con funciones más simples.';
+                    return 'Integral no reconocida. Intenta con funciones más simples.';
         }
 
         function clearCalculator() {
@@ -775,22 +737,17 @@
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Remover clase active de todas las pestañas
+                    // Remover clase active de todas las pestañas
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
-            // Mostrar la sección seleccionada
+                    // Mostrar la sección seleccionada
             document.getElementById(sectionName).classList.add('active');
-            
-            // Activar la pestaña correspondiente
+                    // Activar la pestaña correspondiente
             event.target.classList.add('active');
-            
-            currentSection = sectionName;
+                    currentSection = sectionName;
             updateProgress();
-            
-            // Actualizar MathJax
+                    // Actualizar MathJax
             if (window.MathJax) {
                 MathJax.typesetPromise();
             }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head>\n    <link rel="icon" href="data:;base64,=">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cálculo Diferencial - Hub</title>
-    <link rel="icon" href="data:;base64,=">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
         
@@ -116,135 +115,86 @@
             background: var(--text-color);
             color: var(--bg-color);
         }
-
+    
         .m7-card {
-            grid-column: 1 / -1; 
+            grid-column: 1 / -1; /* Make it full width */
             display: block;
             cursor: default;
         }
         .m7-card:hover {
-            transform: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border-color: transparent;
-        }
-        .sub-pill-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .sub-pill {
-            background-color: var(--bg-color);
-            color: var(--primary);
-            padding: 8px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: 600;
-            border: 1px solid var(--primary);
-            transition: all 0.2s;
-        }
-        .sub-pill:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Cálculo Diferencial</h1>
-        <p>Aprende a tu propio ritmo. Selecciona tu clase para comenzar.</p>
-    </div>
-    
-    <div class="grid">
-        <a href="masterclass01.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 1: Relaciones</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass02.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 2: Funciones</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass03.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 3: Notación</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass04.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 4: Clasificación</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass05.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 5: Valor</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass06.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 6: Dominio y Rango</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        
-        <div class="hub-card m7-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 7: Tipos de Funciones</h3>
-            <div class="sub-pill-container">
-                <a href="masterclass07_01.html" class="sub-pill">1. Función Constante</a>
-                <a href="masterclass07_02.html" class="sub-pill">2. Funciones Lineales</a>
-                <a href="masterclass07_03.html" class="sub-pill">3. Función Identidad</a>
-                <a href="masterclass07_04.html" class="sub-pill">4. Funciones Cuadráticas</a>
-                <a href="masterclass07_05.html" class="sub-pill">5. Funciones Potencia</a>
-                <a href="masterclass07_06.html" class="sub-pill">6. Funciones Racionales</a>
-                <a href="masterclass07_07.html" class="sub-pill">7. Función Raíz Cuadrada</a>
-                <a href="masterclass07_08.html" class="sub-pill">8. Función Valor Absoluto</a>
-                <a href="masterclass07_09.html" class="sub-pill">9. Función Mayor Entero</a>
-                <a href="masterclass07_10.html" class="sub-pill">10. Función Característica</a>
+            t<div class="grid">\n        
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <div class="hub-card m7-card">
+                <div class="card-icon">📚</div>
+                <h3>Masterclass 7: Tipos de Funciones</h3>
+                <div class="sub-pill-container">
+                    ${subPills}
+                </div>
             </div>
-        </div>
-
-        <a href="masterclass08.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 8: Gráficas y Transform.</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass09.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 9: Desplazamientos</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass10.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 10: Alargamientos</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass11.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 11: Reflexiones</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="masterclass12.html" class="hub-card">
-            <div class="card-icon">📚</div>
-            <h3>Masterclass 12: Crecientes</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="actividades.html" class="hub-card">
-            <div class="card-icon">✍️</div>
-            <h3>Recursos Prácticos</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-        <a href="tarea.html" class="hub-card">
-            <div class="card-icon">🏆</div>
-            <h3>Evaluación Final</h3>
-            <span class="btn-enter">Entrar →</span>
-        </a>
-    </div>
-    
-    <div class="back-root">
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>
+            <a href="${item.file}" class="hub-card">
+                <div class="card-icon">${icon}</div>
+                <h3>${item.title.replace('M', 'Masterclass ').replace(':', ': ')}</h3>
+                <span class="btn-enter">Entrar →</span>
+            </a>\n    </div>\n    <div class="back-root">
         <a href="../../index.html">← Volver al Menú Principal</a>
     </div>
 </body>

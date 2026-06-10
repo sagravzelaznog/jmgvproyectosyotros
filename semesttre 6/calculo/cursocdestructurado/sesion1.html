@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1: Relaciones y Funciones</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons-grid { grid-template-columns: 1fr; }
+        }
+
+        .pros-card {
+            background: #f0fdf4;
+            border-left: 5px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cons-card {
+            background: #fdf2f8;
+            border-left: 5px solid #9b59b6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Interactive Diagram */
+        .solar-diagram {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .svg-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .component-btn {
+            position: absolute;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+            transition: transform 0.3s;
+            animation: pulseBtn 2s infinite;
+        }
+
+        .component-btn:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+
+        /* Positions */
+        #btn-relacion { top: 40%; left: 20%; }
+        #btn-funcion { top: 40%; right: 20%; }
+
+        .info-panel {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 100px;
+            border-top: 3px solid var(--primary-color);
+            text-align: left;
+        }
+
+        .info-panel h3 { color: var(--primary-color); margin-top: 0; }
+    </style>
+</head>
+<body>
+
+<main class="page-container">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+
+    <div class="sesion-header">
+        <h1 class="sesion-title">Relaciones y Funciones</h1>
+        <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Básicos</p>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
+        <p style="margin-bottom: 0; margin-top: 0.5rem;">Diferenciar claramente entre una relación matemática y una función, comprendiendo la regla de asignación única a través de diagramas sagitales y pares ordenados.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>¿Cuál es la diferencia?</h2>
+        <p>En matemáticas, a menudo conectamos elementos de un conjunto de entrada con elementos de un conjunto de salida. Pero hay reglas estrictas sobre cómo se pueden hacer estas conexiones.</p>
+
+        <div class="pros-cons-grid">
+            <div class="pros-card">
+                <h3 style="color:#27ae60; margin-top:0;"><i class="fas fa-project-diagram"></i> Relación</h3>
+                <p>Es una <strong>regla de correspondencia</strong> entre los elementos de dos conjuntos.</p>
+                <ul>
+                    <li>Un elemento del primer conjunto puede tener <strong>más de un</strong> elemento asignado en el segundo.</li>
+                    <li>No hay restricciones de exclusividad.</li>
+                    <li><em>Ejemplo: Un padre (conjunto A) puede tener varios hijos (conjunto B).</em></li>
+                </ul>
+            </div>
+            
+            <div class="cons-card">
+                <h3 style="color:#9b59b6; margin-top:0;"><i class="fas fa-function"></i> Función</h3>
+                <p>Es una regla de correspondencia <strong>estricta</strong>.</p>
+                <ul>
+                    <li>A cada elemento del primer conjunto (dominio) le asocia un <strong>único y solo un</strong> elemento del segundo conjunto (contradominio).</li>
+                    <li>Si <em>x</em> se mapea a <em>y1</em> y <em>y2</em>, entonces <strong>NO</strong> es función.</li>
+                    <li><em>Ejemplo: Cada persona (conjunto A) tiene una sola huella dactilar (conjunto B).</em></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2>Diagramas Sagitales Interactivos</h2>
+        <p>Toca (o haz clic) en los botones para analizar si el diagrama representa una Relación o una Función.</p>
+
+        <div class="solar-diagram">
+            <div class="svg-container">
+                <svg viewBox="0 0 800 400" width="100%" height="100%" style="background:#0f172a; border-radius:10px;">
+                    <!-- Conjuntos Izquierda (Relacion) -->
+                    <ellipse cx="150" cy="200" rx="60" ry="120" fill="transparent" stroke="#3498db" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="150" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">A</text>
+                    <ellipse cx="300" cy="200" rx="60" ry="120" fill="transparent" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="300" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">B</text>
+                    
+                    <!-- Puntos A1 -->
+                    <circle cx="150" cy="130" r="5" fill="white"/>
+                    <text x="130" y="135" fill="white" font-family="sans-serif">x1</text>
+                    <circle cx="150" cy="200" r="5" fill="white"/>
+                    <text x="130" y="205" fill="white" font-family="sans-serif">x2</text>
+                    <circle cx="150" cy="270" r="5" fill="white"/>
+                    <text x="130" y="275" fill="white" font-family="sans-serif">x3</text>
+
+                    <!-- Puntos B1 -->
+                    <circle cx="300" cy="130" r="5" fill="white"/>
+                    <text x="320" y="135" fill="white" font-family="sans-serif">y1</text>
+                    <circle cx="300" cy="200" r="5" fill="white"/>
+                    <text x="320" y="205" fill="white" font-family="sans-serif">y2</text>
+                    <circle cx="300" cy="270" r="5" fill="white"/>
+                    <text x="320" y="275" fill="white" font-family="sans-serif">y3</text>
+
+                    <!-- Flechas Relacion (x2 va a y1 y y3) -->
+                    <path d="M 155 130 L 290 130" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                    <path d="M 155 200 L 290 135" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                    <path d="M 155 200 L 290 265" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                    <path d="M 155 270 L 290 270" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Conjuntos Derecha (Funcion) -->
+                    <ellipse cx="500" cy="200" rx="60" ry="120" fill="transparent" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="500" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">X</text>
+                    <ellipse cx="650" cy="200" rx="60" ry="120" fill="transparent" stroke="#f39c12" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="650" y="60" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle">Y</text>
+
+                    <!-- Puntos X2 -->
+                    <circle cx="500" cy="130" r="5" fill="white"/>
+                    <text x="480" y="135" fill="white" font-family="sans-serif">1</text>
+                    <circle cx="500" cy="200" r="5" fill="white"/>
+                    <text x="480" y="205" fill="white" font-family="sans-serif">2</text>
+                    <circle cx="500" cy="270" r="5" fill="white"/>
+                    <text x="480" y="275" fill="white" font-family="sans-serif">3</text>
+
+                    <!-- Puntos Y2 -->
+                    <circle cx="650" cy="165" r="5" fill="white"/>
+                    <text x="670" y="170" fill="white" font-family="sans-serif">a</text>
+                    <circle cx="650" cy="235" r="5" fill="white"/>
+                    <text x="670" y="240" fill="white" font-family="sans-serif">b</text>
+
+                    <!-- Flechas Funcion (Varias x van a una misma y, ES VALIDO) -->
+                    <path d="M 505 130 L 640 160" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                    <path d="M 505 200 L 640 170" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                    <path d="M 505 270 L 640 240" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                          <path d="M0,0 L0,6 L9,3 z" fill="white" />
+                        </marker>
+                    </defs>
+                </svg>
+
+                <button class="component-btn" id="btn-relacion" onclick="showInfo('relacion')"><i class="fas fa-search"></i></button>
+                <button class="component-btn" id="btn-funcion" onclick="showInfo('funcion')"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="info-panel" id="desc-box">
+                <h3 style="color:#bdc3c7;"><i class="fas fa-hand-pointer"></i> Selecciona una lupa</h3>
+                <p>Haz clic en los botones sobre los diagramas para revelar su análisis.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ INTERACTIVO -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {
+                "question": "En un diagrama, el elemento x=4 del primer conjunto se enlaza con y=10 y y=15 del segundo conjunto. ¿Qué representa este diagrama?",
+                "options": [
+                    "Una Función.",
+                    "Una Relación.",
+                    "Un Conjunto Vacío."
+                ],
+                "correctIndex": 1,
+                "explanation": "Es una relación. Para que sea función, el elemento x=4 solo podría enlazarse con un único valor en el contradominio. Al tener dos salidas (10 y 15), rompe la regla de unicidad."
+            },
+            {
+                "question": "Si definimos la regla: 'A cada estudiante se le asigna su número de identificación estudiantil único'. ¿Esto modela una función?",
+                "options": [
+                    "Sí, porque a cada entrada le corresponde exactamente una salida.",
+                    "No, porque muchos estudiantes tienen el mismo número.",
+                    "No, es solo una relación de bases de datos."
+                ],
+                "correctIndex": 0,
+                "explanation": "Correcto. Dado que ningún estudiante puede tener dos o más identificaciones simultáneas en el sistema principal, cumple perfectamente la regla estricta de una función."
+            },
+            {
+                "question": "Observa los pares ordenados: {(1, 5), (2, 5), (3, 5)}. ¿Representan una función?",
+                "options": [
+                    "No, porque todos tienen el número 5.",
+                    "Sí, porque cada elemento de entrada (1, 2, 3) tiene una única asignación.",
+                    "No se puede saber sin una gráfica."
+                ],
+                "correctIndex": 1,
+                "explanation": "Es VÁLIDO en una función que múltiples valores de 'x' apunten a un mismo valor de 'y' (en este caso el 5). Lo que NO es válido es que un mismo valor de 'x' apunte a múltiples 'y'."
+            }
+        ]
+        </script>
+    </div>
+
+    <!-- Navegación Inferior -->
+    <div class="sesion-navigation">
+        <a href="index.html" class="nav-btn"><i class="fas fa-map"></i> Volver al Mapa</a>
+        <a href="sesion2.html" class="nav-btn next">Siguiente Sesión (Dominio y Rango) <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<footer class="footer" style="text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border-color);">
+    <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial</em>. TODOS LOS DERECHOS RESERVADOS.</p>
+</footer>
+
+<script>
+    const infos = {
+        'relacion': {
+            title: "Es Solo una Relación",
+            text: "Observa el punto <strong>x2</strong> en el conjunto A. De él salen DOS flechas (hacia y1 y y3). Por culpa de esta doble asignación, este diagrama <strong>no es una función</strong>, se queda en la categoría de relación general."
+        },
+        'funcion': {
+            title: "Es una Función Válida",
+            text: "Aunque los elementos <strong>1</strong> y <strong>2</strong> del conjunto X apunten al mismo elemento <strong>a</strong> en el conjunto Y, esto es perfectamente válido. Lo importante es que de cada elemento de X sale <strong>exactamente una sola flecha</strong>."
+        }
+    };
+
+    function showInfo(id) {
+        const box = document.getElementById('desc-box');
+        box.innerHTML = `<h3>${infos[id].title}</h3><p>${infos[id].text}</p>`;
+        
+        document.querySelectorAll('.component-btn').forEach(b => {
+            b.style.background = "var(--primary-color)";
+            b.style.transform = "scale(1)";
+        });
+        
+        const btn = document.getElementById('btn-' + id);
+        btn.style.background = "#9b59b6";
+        btn.style.transform = "scale(1.1)";
+    }
+</script>
+
+<!-- Firebase, Progress Tracker y Quiz Engine Inyectados Automáticamente -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="../../../../env.js"></script>
+<script src="../../../../progress-tracker.js"></script>
+<script src="../../../../quiz-engine.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      if (window.markLessonCompleted) {
+          window.markLessonCompleted('calculo_dif_relaciones', 'sesion1');
+      }
+  });
+</script>
+</body>
+</html>

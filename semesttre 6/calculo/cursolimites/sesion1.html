@@ -10,136 +10,209 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
     <style>
-        body { background-color: #1a1a2e; color: #e0e0e0; font-family: 'Inter', sans-serif; }
-        .page-container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
-        .nav-btn { display: inline-block; padding: 10px 20px; background: #0f3460; color: #e94560; text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid #e94560; transition: all 0.3s; }
-        .nav-btn:hover { background: #e94560; color: #fff; box-shadow: 3px 3px 0px #f9a826; transform: translate(-2px, -2px); }
-        .sesion-header { text-align: center; margin: 2rem 0; }
-        .sesion-title { color: #f9a826; font-size: 2.5rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .sesion-subtitle { color: #a2a2a2; font-size: 1.2rem; }
-        
-        .info-box { background: rgba(233, 69, 96, 0.1); border-left: 5px solid #e94560; padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; }
-        
-        .teoria-section h2, .practica-section h2 { color: #3498db; border-bottom: 2px solid #0f3460; padding-bottom: 10px; margin-top: 2rem; }
-        
-        .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 2rem 0; }
-        .grid-card { background: #16213e; border: 2px solid #0f3460; padding: 1.5rem; border-radius: 12px; }
-        .grid-card.left { border-color: #3498db; box-shadow: 5px 5px 0px #3498db; }
-        .grid-card.right { border-color: #9b59b6; box-shadow: 5px 5px 0px #9b59b6; }
-        .grid-card h4 { margin-top: 0; color: #fff; }
-        
-        .interactive-container { background: #16213e; border: 2px solid #e94560; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin: 2rem 0; }
-        .interactive-container h3 { color: #f9a826; margin-top: 0; }
-        .controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0; }
-        .btn-ctrl { background: #1a1a2e; color: #fff; border: 2px solid #3498db; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s; }
-        .btn-ctrl:hover { background: #3498db; color: #111; box-shadow: 3px 3px 0px #f9a826; transform: translateY(-2px); }
-        .btn-ctrl.active { background: #e94560; border-color: #e94560; color: #fff; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5); transform: translateY(0); }
-        
-        .dynamic-desc { background: #0f3460; padding: 15px; border-radius: 8px; border-left: 4px solid #f9a826; min-height: 80px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-top: 15px; }
-        
-        .quiz-container { margin: 4rem 0; padding: 2rem; background: #16213e; border-radius: 15px; border: 2px solid #1abc9c; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        
-        .qr-container { text-align: center; margin: 3rem 0; padding: 2rem; background: #16213e; border-radius: 12px; }
-        .qr-container img { border: 5px solid #fff; border-radius: 8px; margin-top: 1rem; }
-        
-        .sesion-navigation { display: flex; justify-content: space-between; margin-top: 3rem; border-top: 2px solid #0f3460; padding-top: 2rem; }
-        
-        @media (max-width: 768px) {
-            .pros-cons-grid { grid-template-columns: 1fr; }
-            .sesion-navigation { flex-direction: column; gap: 1rem; }
-            .nav-btn { text-align: center; }
+        :root {
+            --bg-main: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #f5f6fa;
+            --border-color: #2d3436;
+            --dark-outline: #000000;
+            --pastel-green: #a8e6cf;
+            --pastel-blue: #a1c9f1;
+            --pastel-purple: #c5a3ff;
+            --pastel-gold: #f4d03f;
+            --pastel-red: #ff9a9e;
         }
+        body { background: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        
+        .sesion-header { text-align: center; padding: 2rem; border-bottom: 2px dashed var(--border-color); margin-bottom: 2rem; }
+        .sesion-title { color: var(--pastel-green); font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 0px var(--dark-outline); }
+        .sesion-subtitle { color: var(--pastel-purple); font-size: 1.2rem; margin-top: 0.5rem; }
+        
+        .info-box { background: rgba(168, 230, 207, 0.1); border-left: 5px solid var(--pastel-green); padding: 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem; }
+        .teoria-section, .practica-section { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 2px solid var(--dark-outline); box-shadow: 5px 5px 0px rgba(0,0,0,0.5); margin-bottom: 2rem; }
+        
+        h2 { color: var(--pastel-gold); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 0; }
+        
+        .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 1.5rem 0; }
+        .concept-card { background: var(--bg-main); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--dark-outline); }
+        .concept-card.left { box-shadow: 4px 4px 0px var(--pastel-blue); }
+        .concept-card.right { box-shadow: 4px 4px 0px var(--pastel-red); }
+        
+        .interactive-container { text-align: center; margin: 2rem 0; }
+        .interactive-svg { background: #000; border: 2px solid var(--dark-outline); border-radius: 10px; box-shadow: inset 0 0 10px rgba(255,255,255,0.1); max-width: 100%; height: auto; }
+        .btn-controls { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .action-btn { background: var(--bg-card); color: var(--text-main); border: 2px solid var(--dark-outline); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: transform 0.2s; box-shadow: 3px 3px 0px var(--dark-outline); }
+        .action-btn:hover { transform: translate(-2px, -2px); }
+        .action-btn.btn-left { background: var(--pastel-blue); color: #000; }
+        .action-btn.btn-right { background: var(--pastel-red); color: #000; }
+        .action-btn.btn-reset { background: var(--pastel-purple); color: #000; }
+        
+        .dynamic-desc { min-height: 60px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 20px; font-weight: bold; font-size: 1.1rem; color: var(--pastel-gold); border: 1px dashed var(--pastel-gold); }
+        
+        .table-container { overflow-x: auto; margin: 1.5rem 0; }
+        table { width: 100%; border-collapse: collapse; text-align: center; }
+        th { background: var(--pastel-purple); color: #000; padding: 10px; border: 1px solid var(--dark-outline); }
+        td { padding: 10px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); }
+
+        .qr-container { text-align: center; margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 2px dashed var(--pastel-blue); }
+        .qr-container img { border: 5px solid white; border-radius: 10px; margin-top: 1rem; }
+        
+        .sesion-navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .nav-btn { background: var(--bg-card); color: var(--text-main); border: 2px solid var(--dark-outline); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; box-shadow: 3px 3px 0px var(--dark-outline); transition: transform 0.2s; }
+        .nav-btn:hover { transform: translate(-2px, -2px); }
+        .nav-btn.next { background: var(--pastel-green); color: #000; }
     </style>
 </head>
 <body>
 
-<main class="page-container">
-    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+<main class="page-container" style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Límites</a>
 
     <div class="sesion-header">
         <h1 class="sesion-title">Definición Intuitiva de Límite</h1>
-        <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Básicos</p>
+        <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Fundamentales</p>
     </div>
 
     <div class="info-box">
-        <strong><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje:</strong>
-        <p style="margin-bottom: 0; margin-top: 0.5rem;">Comprender el concepto de límite mediante la aproximación a un punto por la izquierda y por la derecha, e identificar gráficamente si un límite existe o no.</p>
+        <strong><i class="fas fa-lightbulb"></i> Objetivo de Aprendizaje:</strong>
+        <p>Comprender el concepto de límite de una función acercándonos numéricamente y gráficamente a un valor específico, tanto por la izquierda como por la derecha, e identificar cuándo existe o no dicho límite.</p>
     </div>
 
     <div class="teoria-section">
         <h2>¿Qué es un límite?</h2>
-        <p>En el cálculo, muchas veces nos interesa saber qué le ocurre a una función $f(x)$ cuando la variable $x$ se acerca "muchísimo" a un valor específico $a$, sin que nos importe lo que pasa exactamente <strong>en</strong> ese punto $a$.</p>
+        <p>Imagina que caminas hacia una pared pero cada paso que das es la mitad del anterior. Te acercas infinitamente a la pared, pero en teoría, nunca la tocas. En cálculo, estamos interesados en descubrir hacia dónde se dirige el valor de una función $f(x)$ cuando la variable $x$ se acerca extremadamente a un número particular $a$.</p>
+        <p>A este valor destino (si existe) lo llamamos <strong>Límite ($L$)</strong>, y se escribe como:</p>
+        <p style="text-align: center; font-size: 1.5rem;">$$ \lim_{x \to a} f(x) = L $$</p>
+
+        <h3>Límites Laterales</h3>
+        <p>Para estar seguros de cuál es el límite, debemos asegurarnos de que la función se dirige al mismo lugar sin importar por qué lado del eje X nos acerquemos al valor $a$.</p>
         
-        <p>Si al aproximar $x$ al número $a$ (sin llegar a ser $a$), la función $f(x)$ se aproxima a un número $L$, decimos que:</p>
-        <div style="text-align:center; font-size:1.5rem; margin:1.5rem 0; padding:10px; background:#0f3460; border-radius:8px;">
-            $$ \lim_{x \to a} f(x) = L $$
-        </div>
-
-        <div class="pros-cons-grid">
-            <div class="grid-card left">
-                <h4 style="color: #3498db;"><i class="fas fa-arrow-right"></i> Límite por la Izquierda</h4>
-                <p>Nos acercamos al valor $a$ tomando valores un poquito <strong>menores</strong> que $a$.</p>
-                <p>Se denota como: $x \to a^-$</p>
-                <p>Ejemplo: Si $a = 3$, usamos $x = 2.9, 2.99, 2.999$</p>
+        <div class="concept-grid">
+            <div class="concept-card left">
+                <h4 style="color: var(--pastel-blue); margin-top: 0;"><i class="fas fa-arrow-right"></i> Por la Izquierda</h4>
+                <p>Nos acercamos a $a$ tomando valores menores que él (ej. si $a=3$, probamos con $2.9, 2.99, 2.999$).</p>
+                <p>$$ \lim_{x \to a^-} f(x) $$</p>
             </div>
-            <div class="grid-card right">
-                <h4 style="color: #9b59b6;"><i class="fas fa-arrow-left"></i> Límite por la Derecha</h4>
-                <p>Nos acercamos al valor $a$ tomando valores un poquito <strong>mayores</strong> que $a$.</p>
-                <p>Se denota como: $x \to a^+$</p>
-                <p>Ejemplo: Si $a = 3$, usamos $x = 3.1, 3.01, 3.001$</p>
+            <div class="concept-card right">
+                <h4 style="color: var(--pastel-red); margin-top: 0;"><i class="fas fa-arrow-left"></i> Por la Derecha</h4>
+                <p>Nos acercamos a $a$ tomando valores mayores que él (ej. si $a=3$, probamos con $3.1, 3.01, 3.001$).</p>
+                <p>$$ \lim_{x \to a^+} f(x) $$</p>
             </div>
         </div>
-
-        <div class="info-box" style="border-color: #f9a826; background: rgba(249, 168, 38, 0.1);">
-            <strong><i class="fas fa-exclamation-triangle"></i> Regla de Oro:</strong>
-            <p style="margin-bottom: 0; margin-top: 0.5rem;">Para que el límite exista globalmente, <strong>ambos límites laterales deben ser iguales</strong>. Es decir, los dos caminos (izquierda y derecha) deben llevar al mismo destino $L$.</p>
+        
+        <div style="background: rgba(244, 208, 63, 0.1); border-left: 4px solid var(--pastel-gold); padding: 15px;">
+            <strong>Regla de Oro:</strong> Para que el límite global exista, los dos límites laterales <strong>deben ser iguales</strong>. <br>
+            Si $\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L$, entonces $\lim_{x \to a} f(x) = L$.
         </div>
     </div>
 
     <div class="practica-section">
-        <h2><i class="fas fa-gamepad"></i> Simulador de Aproximación</h2>
-        <p>Investiguemos el límite de la función $f(x) = \frac{x^2 - 9}{x - 3}$ cuando $x \to 3$. Observa que si evaluamos directamente en $x=3$, obtenemos $\frac{0}{0}$ (un "hueco" en la gráfica).</p>
+        <h2><i class="fas fa-mouse-pointer"></i> Acercamiento Interactivo</h2>
+        <p>Vamos a analizar la función $f(x) = \frac{x^2 - 9}{x - 3}$ cuando $x$ se acerca a $3$. Sabemos que si $x=3$ exactamente, el denominador se hace cero y hay un "hueco". Pero... ¿hacia dónde apunta la gráfica?</p>
 
         <div class="interactive-container">
-            <h3>Visualizador de Límites Laterales</h3>
-            
-            <svg id="limitSvg" viewBox="0 0 400 300" width="100%" style="max-width: 500px; background: #0d1117; border-radius: 10px; border: 2px solid #3498db;">
+            <svg class="interactive-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <g stroke="#333" stroke-width="1">
+                    <line x1="0" y1="100" x2="600" y2="100" />
+                    <line x1="0" y1="200" x2="600" y2="200" />
+                    <line x1="0" y1="300" x2="600" y2="300" />
+                    <line x1="100" y1="0" x2="100" y2="400" />
+                    <line x1="200" y1="0" x2="200" y2="400" />
+                    <line x1="300" y1="0" x2="300" y2="400" />
+                    <line x1="400" y1="0" x2="400" y2="400" />
+                    <line x1="500" y1="0" x2="500" y2="400" />
+                </g>
                 <!-- Ejes -->
-                <line x1="50" y1="250" x2="350" y2="250" stroke="#7f8c8d" stroke-width="2"/>
-                <line x1="100" y1="50" x2="100" y2="280" stroke="#7f8c8d" stroke-width="2"/>
-                <text x="340" y="240" fill="#a2a2a2" font-size="12">x</text>
-                <text x="85" y="60" fill="#a2a2a2" font-size="12">y</text>
-                
-                <!-- Marcas en ejes (x=3 es en 250, y=6 es en 100) -->
-                <line x1="250" y1="245" x2="250" y2="255" stroke="#7f8c8d" stroke-width="2"/>
-                <text x="245" y="270" fill="#a2a2a2" font-size="14">3</text>
-                
-                <line x1="95" y1="100" x2="105" y2="100" stroke="#7f8c8d" stroke-width="2"/>
-                <text x="75" y="105" fill="#a2a2a2" font-size="14">6</text>
+                <g stroke="#888" stroke-width="3">
+                    <!-- Eje X en y=300 (y=0 real) -->
+                    <line x1="0" y1="300" x2="600" y2="300" />
+                    <!-- Eje Y en x=100 (x=0 real) -->
+                    <line x1="100" y1="0" x2="100" y2="400" />
+                </g>
+                <text x="580" y="320" fill="#fff">x</text>
+                <text x="110" y="20" fill="#fff">y=f(x)</text>
+                <text x="290" y="320" fill="#fff">3</text>
+                <text x="80" y="105" fill="#fff">6</text>
 
-                <!-- Gráfica de y = x + 3 -->
-                <line x1="100" y1="250" x2="300" y2="50" stroke="#9b59b6" stroke-width="3"/>
-                
-                <!-- Hueco en (3,6) -->
-                <circle cx="250" cy="100" r="5" fill="#0d1117" stroke="#e94560" stroke-width="2"/>
-                
-                <!-- Líneas punteadas al hueco -->
-                <line x1="250" y1="250" x2="250" y2="105" stroke="#a2a2a2" stroke-width="1" stroke-dasharray="4,4"/>
-                <line x1="100" y1="100" x2="245" y2="100" stroke="#a2a2a2" stroke-width="1" stroke-dasharray="4,4"/>
+                <!-- Función y = x + 3 (simplificada de (x^2-9)/(x-3)) -->
+                <!-- x=0 -> y=3 (x=100, y=200) -->
+                <!-- x=3 -> y=6 (x=300, y=100) (Hueco) -->
+                <!-- x=5 -> y=8 (x=433, y=33) -->
+                <line x1="0" y1="233" x2="600" y2="33" stroke="var(--pastel-purple)" stroke-width="4" />
+                <circle cx="300" cy="100" r="6" fill="#000" stroke="#fff" stroke-width="3" /> <!-- Hueco -->
 
-                <!-- Animación del punto -->
-                <circle id="animatedPoint" cx="100" cy="250" r="6" fill="#f9a826" opacity="0"/>
+                <!-- Animador Izquierda -->
+                <g id="anim-left" opacity="0">
+                    <circle cx="200" cy="133" r="8" fill="var(--pastel-blue)" />
+                    <line x1="200" y1="133" x2="200" y2="300" stroke="var(--pastel-blue)" stroke-width="2" stroke-dasharray="5,5" />
+                    <line x1="200" y1="133" x2="100" y2="133" stroke="var(--pastel-blue)" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="180" y="320" fill="var(--pastel-blue)">2.9</text>
+                    <text x="50" y="138" fill="var(--pastel-blue)">5.9</text>
+                </g>
+
+                <!-- Animador Derecha -->
+                <g id="anim-right" opacity="0">
+                    <circle cx="400" cy="66" r="8" fill="var(--pastel-red)" />
+                    <line x1="400" y1="66" x2="400" y2="300" stroke="var(--pastel-red)" stroke-width="2" stroke-dasharray="5,5" />
+                    <line x1="400" y1="66" x2="100" y2="66" stroke="var(--pastel-red)" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="390" y="320" fill="var(--pastel-red)">3.1</text>
+                    <text x="50" y="70" fill="var(--pastel-red)">6.1</text>
+                </g>
             </svg>
-
-            <div class="controls">
-                <button class="btn-ctrl" onclick="animateLimit('left')"><i class="fas fa-arrow-right"></i> Límite Izquierdo ($x \to 3^-$)</button>
-                <button class="btn-ctrl" onclick="animateLimit('right')"><i class="fas fa-arrow-left"></i> Límite Derecho ($x \to 3^+$)</button>
-                <button class="btn-ctrl" onclick="resetAnimation()"><i class="fas fa-undo"></i> Reiniciar</button>
+            
+            <div class="btn-controls">
+                <button class="action-btn btn-left" onclick="showLeft()">Acercarse por la Izquierda</button>
+                <button class="action-btn btn-right" onclick="showRight()">Acercarse por la Derecha</button>
+                <button class="action-btn btn-reset" onclick="resetGraph()">Limpiar Gráfica</button>
             </div>
-
-            <div id="dynamicText" class="dynamic-desc">
-                Presiona los botones para ver la aproximación.
+            
+            <div id="dynamic-text" class="dynamic-desc">
+                Haz clic en los botones para simular la evaluación numérica del límite.
             </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2" style="background:var(--pastel-blue);">Por la Izquierda $x \to 3^-$</th>
+                        <th colspan="2" style="background:var(--pastel-red);">Por la Derecha $x \to 3^+$</th>
+                    </tr>
+                    <tr>
+                        <th>$x$</th>
+                        <th>$f(x)$</th>
+                        <th>$x$</th>
+                        <th>$f(x)$</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2.9</td>
+                        <td>5.9</td>
+                        <td>3.1</td>
+                        <td>6.1</td>
+                    </tr>
+                    <tr>
+                        <td>2.99</td>
+                        <td>5.99</td>
+                        <td>3.01</td>
+                        <td>6.01</td>
+                    </tr>
+                    <tr>
+                        <td>2.999</td>
+                        <td>5.999</td>
+                        <td>3.001</td>
+                        <td>6.001</td>
+                    </tr>
+                    <tr style="background: rgba(244, 208, 63, 0.2); font-weight: bold; color: var(--pastel-gold);">
+                        <td>Tiende a 3</td>
+                        <td>Tiende a 6</td>
+                        <td>Tiende a 3</td>
+                        <td>Tiende a 6</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -148,121 +221,153 @@
         <script type="application/json">
         [
             {
-                "question": "🎯 ¿Qué es un límite de una función?",
-                "options": ["El valor exacto de la función en el punto x=a", "El valor al que se aproxima y cuando x se acerca a un punto 'a'", "El punto más alto de una gráfica", "El cruce de la función con el eje X"],
+                "question": "🎯 ¿Qué significa evaluar un límite por la izquierda?",
+                "options": [
+                    "Sustituir números negativos en la función.",
+                    "Acercarnos al valor 'a' usando números ligeramente más pequeños que él.",
+                    "Acercarnos al valor 'a' usando números ligeramente más grandes que él."
+                ],
                 "correctIndex": 1,
-                "explanation": "El límite estudia el comportamiento de la función *cerca* del punto, no necesariamente en el punto mismo."
+                "explanation": "El símbolo de menos como superíndice (ej. a⁻) indica que nos aproximamos por el lado izquierdo en la recta numérica, usando valores menores."
             },
             {
-                "question": "⬅️ ¿Qué significa la notación x → a⁻?",
-                "options": ["x se acerca a 'a' por valores menores (por la izquierda)", "x se acerca a un número negativo", "El límite no existe", "x se acerca a 'a' por valores mayores"],
-                "correctIndex": 0,
-                "explanation": "El superíndice '-' indica aproximación por la izquierda (valores ligeramente menores que a)."
-            },
-            {
-                "question": "⚖️ Para que el límite global exista en x=a, ¿qué condición se debe cumplir?",
-                "options": ["La función debe dar cero en x=a", "El límite izquierdo y derecho deben dar diferentes valores", "El límite izquierdo y el límite derecho deben ser iguales", "La gráfica no debe tener curvas"],
+                "question": "🧐 Si el límite por la izquierda da 4 y el límite por la derecha da 7, ¿cuál es el límite global?",
+                "options": [
+                    "5.5 (el promedio)",
+                    "El límite global es 4.",
+                    "El límite no existe."
+                ],
                 "correctIndex": 2,
-                "explanation": "Si ambos caminos (izquierda y derecha) llevan al mismo número L, entonces el límite existe."
+                "explanation": "Para que un límite exista, ambos límites laterales deben existir y apuntar exactamente al mismo valor."
             },
             {
-                "question": "🕳️ Si f(3) no está definida (hay un hueco), ¿puede existir el límite cuando x→3?",
-                "options": ["No, el límite y el valor de la función son lo mismo", "Sí, el límite solo depende de lo que pasa CERCA de x=3, no en x=3", "Sí, pero el límite siempre será cero", "No, la función debe ser una línea continua sin cortes"],
+                "question": "🕳️ ¿Puede existir el límite en un punto donde la función tiene un 'hueco' (es indefinida)?",
+                "options": [
+                    "No, si no hay punto, no hay límite.",
+                    "Sí, el límite analiza hacia dónde 'tiende' la gráfica, sin importar si el punto exacto existe o no.",
+                    "Solo si el hueco está en x=0."
+                ],
                 "correctIndex": 1,
-                "explanation": "El límite no se preocupa por lo que pasa exactamente en x=3. Si por ambos lados nos acercamos a y=6 (como en el simulador), el límite es 6 aunque haya un hueco."
+                "explanation": "El límite se trata del comportamiento 'cerca' de a, no 'en' a. Por lo tanto, el límite puede existir perfectamente aunque la función no esté definida en ese punto exacto."
             }
         ]
         </script>
     </div>
 
     <div class="qr-container">
-        <h3><i class="fas fa-qrcode"></i> Acceso Rápido</h3>
-        <p>Escanea este código para ver el menú principal en tu celular.</p>
+        <h3><i class="fas fa-qrcode"></i> Escanea para continuar en el móvil</h3>
+        <p>Lleva el Hub del curso de Límites a cualquier dispositivo.</p>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jmgvproyectosyotros.netlify.app/semesttre%206/calculo/cursolimites/index.html" alt="QR Code">
     </div>
 
     <div class="sesion-navigation">
-        <a href="index.html" class="nav-btn"><i class="fas fa-map"></i> Menú de Límites</a>
-        <a href="sesion2.html" class="nav-btn">Siguiente: Sesión 2 <i class="fas fa-arrow-right"></i></a>
+        <div></div> <!-- Espacio para alinear el botón de siguiente a la derecha -->
+        <a href="sesion2.html" class="nav-btn next">Siguiente Sesión: Definición Formal <i class="fas fa-arrow-right"></i></a>
     </div>
+
 </main>
 
-<footer class="footer">
-    <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
-</footer>
-
-<script>
-    let animationInterval;
-
-    function resetAnimation() {
-        clearInterval(animationInterval);
-        const pt = document.getElementById('animatedPoint');
-        pt.setAttribute('opacity', '0');
-        document.getElementById('dynamicText').innerHTML = "Presiona los botones para ver la aproximación.";
-    }
-
-    function animateLimit(side) {
-        clearInterval(animationInterval);
-        const pt = document.getElementById('animatedPoint');
-        pt.setAttribute('opacity', '1');
-        
-        let startX, startY, endX, endY, currX, currY;
-        const textEl = document.getElementById('dynamicText');
-
-        if (side === 'left') {
-            startX = 100; startY = 250; // x=0, y=3
-            endX = 245; endY = 105;     // x->3-, y->6-
-            currX = startX; currY = startY;
-            
-            let xVal = 0.0;
-            
-            animationInterval = setInterval(() => {
-                currX += (endX - currX) * 0.1;
-                currY += (endY - currY) * 0.1;
-                xVal += (2.99 - xVal) * 0.1;
-                
-                pt.setAttribute('cx', currX);
-                pt.setAttribute('cy', currY);
-                
-                textEl.innerHTML = `<span style="color:#3498db">Por la izquierda:</span> Conforme x = ${xVal.toFixed(3)} se acerca a 3, y = ${(xVal + 3).toFixed(3)} se acerca a 6.`;
-                
-                if (Math.abs(currX - endX) < 1) clearInterval(animationInterval);
-            }, 50);
-        } else {
-            startX = 350; startY = 0;   // x=5, y=8
-            endX = 255; endY = 95;      // x->3+, y->6+
-            currX = startX; currY = startY;
-            
-            let xVal = 5.0;
-
-            animationInterval = setInterval(() => {
-                currX += (endX - currX) * 0.1;
-                currY += (endY - currY) * 0.1;
-                xVal += (3.01 - xVal) * 0.1;
-                
-                pt.setAttribute('cx', currX);
-                pt.setAttribute('cy', currY);
-                
-                textEl.innerHTML = `<span style="color:#9b59b6">Por la derecha:</span> Conforme x = ${xVal.toFixed(3)} se acerca a 3, y = ${(xVal + 3).toFixed(3)} se acerca a 6.`;
-                
-                if (Math.abs(currX - endX) < 1) clearInterval(animationInterval);
-            }, 50);
-        }
-    }
-</script>
-
+<!-- Firebase y Lógica de Progreso -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="../../env.js"></script>
 <script src="../../progress-tracker.js"></script>
 <script src="../../quiz-engine.js"></script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      if (window.markLessonCompleted) {
-          window.markLessonCompleted('calculo_limites', 'sesion1');
-      }
-  });
+    // Lógica para las animaciones SVG
+    let animLeft = document.getElementById('anim-left');
+    let animRight = document.getElementById('anim-right');
+    let dynText = document.getElementById('dynamic-text');
+    let intervalLeft, intervalRight;
+
+    function resetGraph() {
+        clearInterval(intervalLeft);
+        clearInterval(intervalRight);
+        animLeft.setAttribute('opacity', '0');
+        animRight.setAttribute('opacity', '0');
+        dynText.innerHTML = "Haz clic en los botones para simular la evaluación numérica del límite.";
+    }
+
+    function animatePoint(elementId, startX, startY, endX, endY, color, textMsg) {
+        clearInterval(intervalLeft);
+        clearInterval(intervalRight);
+        animLeft.setAttribute('opacity', '0');
+        animRight.setAttribute('opacity', '0');
+        
+        let el = document.getElementById(elementId);
+        el.setAttribute('opacity', '1');
+        
+        let cx = startX;
+        let cy = startY;
+        let steps = 40;
+        let dx = (endX - startX) / steps;
+        let dy = (endY - startY) / steps;
+        let currentStep = 0;
+        
+        // Elementos dentro del grupo
+        let circle = el.querySelector('circle');
+        let lineX = el.querySelectorAll('line')[0];
+        let lineY = el.querySelectorAll('line')[1];
+        let textX = el.querySelectorAll('text')[0];
+        let textY = el.querySelectorAll('text')[1];
+
+        let interval = setInterval(() => {
+            cx += dx;
+            cy += dy;
+            
+            circle.setAttribute('cx', cx);
+            circle.setAttribute('cy', cy);
+            
+            lineX.setAttribute('x1', cx);
+            lineX.setAttribute('y1', cy);
+            lineX.setAttribute('x2', cx);
+            
+            lineY.setAttribute('x1', cx);
+            lineY.setAttribute('y1', cy);
+            lineY.setAttribute('y2', cy);
+            
+            // Simular cambio numérico
+            let mapX = 3 + ((cx - 300) / 100);
+            let mapY = 6 + ((cy - 100) / -33.3);
+            textX.setAttribute('x', cx - 20);
+            textX.textContent = mapX.toFixed(3);
+            textY.setAttribute('y', cy + 5);
+            textY.textContent = mapY.toFixed(3);
+            
+            currentStep++;
+            if (currentStep >= steps) {
+                clearInterval(interval);
+                dynText.innerHTML = textMsg;
+            }
+        }, 50);
+
+        if (elementId === 'anim-left') intervalLeft = interval;
+        else intervalRight = interval;
+    }
+
+    function showLeft() {
+        dynText.innerHTML = "Evaluando por la izquierda: <span style='color:var(--pastel-blue)'>Calculando...</span>";
+        // start (200, 133) -> end (290, 103)
+        animatePoint('anim-left', 150, 150, 290, 103, 'var(--pastel-blue)', 
+            "Al acercarnos por la izquierda ($x \\to 3^-$), el valor de la función se acerca claramente a <span style='color:white'>$y = 6$</span>.");
+    }
+
+    function showRight() {
+        dynText.innerHTML = "Evaluando por la derecha: <span style='color:var(--pastel-red)'>Calculando...</span>";
+        // start (400, 66) -> end (310, 96)
+        animatePoint('anim-right', 450, 50, 310, 96, 'var(--pastel-red)', 
+            "Al acercarnos por la derecha ($x \\to 3^+$), el valor de la función también se acerca a <span style='color:white'>$y = 6$</span>. ¡El límite existe y es 6!");
+    }
+
+    // Marcar lección como completada
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.markLessonCompleted) {
+            window.markLessonCompleted('calculo_limites', 'sesion1');
+        }
+    });
 </script>
+
 </body>
 </html>

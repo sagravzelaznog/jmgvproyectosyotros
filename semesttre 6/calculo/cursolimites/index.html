@@ -8,40 +8,218 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="curso-styles.css">
     <style>
-        .roadmap-page { background-color: #1a1a2e; color: #e0e0e0; font-family: 'Inter', sans-serif; }
-        .roadmap-header { text-align: center; padding: 3rem 1rem; background: #16213e; border-bottom: 1px solid #0f3460; }
-        .roadmap-header h1 { font-size: 2.5rem; color: #e94560; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .roadmap-header p { font-size: 1.2rem; color: #a2a2a2; max-width: 600px; margin: 0 auto 2rem; }
+        :root {
+            /* Adolescent Dark Mode Theme - Pastel Colors with Dark Outlines */
+            --bg-main: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #f5f6fa;
+            --text-muted: #b2bec3;
+            --border-color: #2d3436;
+            --dark-outline: #000000;
+            --shadow-soft: 5px 5px 0px rgba(0,0,0,0.5);
+            
+            --pastel-purple: #c5a3ff;
+            --pastel-green: #a8e6cf;
+            --pastel-blue: #a1c9f1;
+            --pastel-orange: #ffcb9a;
+            --pastel-red: #ff9a9e;
+            --pastel-gold: #f4d03f;
+            --pastel-turquoise: #88d8b0;
+        }
+
+        body.roadmap-page { 
+            background-color: var(--bg-main); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+        }
         
-        .course-progress-container { max-width: 600px; margin: 0 auto; background: #0f3460; padding: 1.5rem; border-radius: 12px; border: 2px solid #e94560; box-shadow: 0 4px 15px rgba(233, 69, 96, 0.2); }
-        .progress-bar-bg { width: 100%; height: 12px; background: #1a1a2e; border-radius: 6px; overflow: hidden; margin-bottom: 1rem; border: 1px solid #16213e; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #e94560, #f9a826); transition: width 0.5s ease; }
-        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; color: #e0e0e0; }
+        .roadmap-header { 
+            text-align: center; 
+            padding: 3rem 1rem; 
+            background: var(--bg-card); 
+            border-bottom: 2px solid var(--border-color); 
+        }
         
-        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
+        .roadmap-header h1 { 
+            font-size: 2.8rem; 
+            color: var(--pastel-purple); 
+            margin-bottom: 1rem; 
+            text-shadow: 2px 2px 0px var(--dark-outline);
+        }
         
-        .module-group { margin-bottom: 3rem; background: #16213e; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 2px solid #0f3460; }
-        .module-title { font-size: 1.5rem; font-weight: 700; color: #f9a826; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid #0f3460; padding-bottom: 0.5rem; }
+        .roadmap-header p { 
+            font-size: 1.2rem; 
+            color: var(--text-muted); 
+            max-width: 600px; 
+            margin: 0 auto 2rem; 
+        }
         
-        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: #1a1a2e; border: 2px solid #0f3460; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.3s; margin-bottom: 1rem; }
-        .session-card:hover { transform: translateX(5px) translateY(-2px); border-color: #e94560; box-shadow: 5px 5px 0px #e94560; }
-        .session-card.completed { border-left: 6px solid #2ecc71; background: rgba(46, 204, 113, 0.1); border-color: #2ecc71; }
-        .session-card.completed .status-icon { color: #2ecc71; }
+        .course-progress-container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: var(--bg-main); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            border: 2px solid var(--border-color); 
+            box-shadow: var(--shadow-soft);
+        }
         
-        .session-status { width: 45px; height: 45px; border-radius: 50%; background: #0f3460; border: 2px solid #16213e; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .status-icon { color: #a2a2a2; font-size: 1.2rem; }
+        .progress-bar-bg { 
+            width: 100%; 
+            height: 14px; 
+            background: var(--border-color); 
+            border-radius: 7px; 
+            overflow: hidden; 
+            margin-bottom: 1rem; 
+            border: 1px solid var(--dark-outline);
+        }
         
-        .session-info { flex-grow: 1; }
-        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: #e94560; color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #e0e0e0; }
-        .session-desc { margin: 0; font-size: 0.95rem; color: #a2a2a2; }
+        .progress-bar-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, var(--pastel-purple), var(--pastel-blue)); 
+            transition: width 0.8s ease; 
+        }
+        
+        .progress-stats { 
+            display: flex; 
+            justify-content: space-between; 
+            font-weight: bold; 
+            font-size: 1rem; 
+            color: var(--pastel-gold);
+        }
+        
+        .roadmap-container { 
+            max-width: 900px; 
+            margin: 3rem auto; 
+            padding: 0 1rem; 
+        }
+        
+        .module-group { 
+            margin-bottom: 3.5rem; 
+            background: var(--bg-card); 
+            padding: 2rem; 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-soft); 
+            border: 2px solid var(--dark-outline); 
+        }
+        
+        .module-title { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--pastel-green); 
+            margin-bottom: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            border-bottom: 2px dashed var(--border-color); 
+            padding-bottom: 0.8rem; 
+            text-shadow: 1px 1px 0px var(--dark-outline);
+        }
+        
+        .session-card { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.5rem; 
+            padding: 1.5rem; 
+            background: var(--bg-main); 
+            border: 2px solid var(--dark-outline); 
+            border-radius: 10px; 
+            text-decoration: none; 
+            color: inherit; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            margin-bottom: 1.2rem; 
+        }
+        
+        .session-card:hover { 
+            transform: translate(-4px, -4px); 
+            border-color: var(--pastel-turquoise); 
+            box-shadow: 6px 6px 0px var(--pastel-turquoise); 
+        }
+        
+        .session-card.completed { 
+            border-left: 6px solid var(--pastel-green); 
+            background: rgba(168, 230, 207, 0.05); 
+        }
+        
+        .session-card.completed .status-icon { 
+            color: var(--pastel-green); 
+        }
+        
+        .session-status { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            background: var(--bg-card); 
+            border: 2px solid var(--dark-outline); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0; 
+        }
+        
+        .status-icon { 
+            color: var(--border-color); 
+            font-size: 1.3rem; 
+        }
+        
+        .session-info { 
+            flex-grow: 1; 
+        }
+        
+        .session-badge { 
+            display: inline-block; 
+            padding: 0.3rem 0.8rem; 
+            background: var(--pastel-blue); 
+            color: var(--dark-outline); 
+            border-radius: 6px; 
+            font-size: 0.85rem; 
+            font-weight: 800; 
+            margin-bottom: 0.6rem; 
+            border: 1px solid var(--dark-outline);
+        }
+        
+        .session-name { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            margin: 0 0 0.5rem 0; 
+            color: var(--text-main); 
+        }
+        
+        .session-desc { 
+            margin: 0; 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            line-height: 1.4;
+        }
+
+        /* Module Colors */
+        .mod-1 .module-title { color: var(--pastel-green); }
+        .mod-1 .session-badge { background: var(--pastel-green); }
+        .mod-1 .session-card:hover { border-color: var(--pastel-green); box-shadow: 6px 6px 0px var(--pastel-green); }
+
+        .mod-2 .module-title { color: var(--pastel-orange); }
+        .mod-2 .session-badge { background: var(--pastel-orange); }
+        .mod-2 .session-card:hover { border-color: var(--pastel-orange); box-shadow: 6px 6px 0px var(--pastel-orange); }
+
+        .mod-3 .module-title { color: var(--pastel-red); }
+        .mod-3 .session-badge { background: var(--pastel-red); }
+        .mod-3 .session-card:hover { border-color: var(--pastel-red); box-shadow: 6px 6px 0px var(--pastel-red); }
+
+        .mod-4 .module-title { color: var(--pastel-blue); }
+        .mod-4 .session-badge { background: var(--pastel-blue); }
+        .mod-4 .session-card:hover { border-color: var(--pastel-blue); box-shadow: 6px 6px 0px var(--pastel-blue); }
+
+        @media (max-width: 768px) {
+            .roadmap-header h1 { font-size: 2rem; }
+            .session-card { flex-direction: column; text-align: center; gap: 1rem; }
+        }
     </style>
 </head>
 <body class="roadmap-page">
 
     <div class="roadmap-header">
-        <h1><i class="fas fa-bullseye"></i> Curso Interactivo de Límites</h1>
-        <p>Aprende el concepto fundamental del cálculo diferencial: desde la intuición gráfica hasta los límites al infinito.</p>
+        <h1><i class="fas fa-arrow-right-to-bracket"></i> Límites de Funciones</h1>
+        <p>Aprende a analizar el comportamiento de las funciones al acercarse a valores críticos y al infinito.</p>
         
         <div class="course-progress-container">
             <div class="progress-bar-bg">
@@ -49,7 +227,7 @@
             </div>
             <div class="progress-stats">
                 <span>Progreso del Curso: <strong id="course-progress-text">0%</strong></span>
-                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/4</span>
+                <span><i class="fas fa-trophy"></i> Completado: <strong id="course-completed-count">0</strong>/11</span>
             </div>
         </div>
     </div>
@@ -57,61 +235,120 @@
     <div class="roadmap-container">
         
         <!-- MÓDULO 1 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-search"></i> Módulo 1: Conceptos Básicos de Límites</div>
+        <div class="module-group mod-1">
+            <div class="module-title"><i class="fas fa-search-location"></i> Módulo 1: Conceptos Fundamentales</div>
             
             <a href="sesion1.html" class="session-card" data-lesson="sesion1">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:#3498db">Sesión 1</span>
+                    <span class="session-badge">Sesión 1</span>
                     <h3 class="session-name">Definición Intuitiva y Límites Laterales</h3>
-                    <p class="session-desc">Aproximaciones por izquierda y derecha, y la existencia del límite.</p>
+                    <p class="session-desc">Aproximación gráfica y numérica por la izquierda y la derecha.</p>
                 </div>
             </a>
 
             <a href="sesion2.html" class="session-card" data-lesson="sesion2">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:#9b59b6">Sesión 2</span>
+                    <span class="session-badge">Sesión 2</span>
                     <h3 class="session-name">Definición Formal (Épsilon-Delta)</h3>
-                    <p class="session-desc">El rigor matemático detrás del concepto de límite.</p>
+                    <p class="session-desc">Demostración matemática estricta de la existencia de un límite.</p>
+                </div>
+            </a>
+
+            <a href="sesion3.html" class="session-card" data-lesson="sesion3">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 3</span>
+                    <h3 class="session-name">Teoremas y Evaluación Directa</h3>
+                    <p class="session-desc">Leyes de los límites y cómo resolverlos por sustitución directa.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 2 -->
-        <div class="module-group">
+        <div class="module-group mod-2">
             <div class="module-title"><i class="fas fa-magic"></i> Módulo 2: Límites Indeterminados</div>
             
-            <a href="sesion3.html" class="session-card" data-lesson="sesion3">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+            <a href="sesion4.html" class="session-card" data-lesson="sesion4">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:#e67e22">Sesión 3</span>
-                    <h3 class="session-name">Límites por Evaluación y Factorización</h3>
-                    <p class="session-desc">Cómo resolver indeterminaciones 0/0 aplicando álgebra.</p>
+                    <span class="session-badge">Sesión 4</span>
+                    <h3 class="session-name">Indeterminación 0/0: Factorización</h3>
+                    <p class="session-desc">Rescate algebraico usando diferencias de cuadrados y cubos.</p>
                 </div>
             </a>
 
-            <a href="sesion4.html" class="session-card" data-lesson="sesion4">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+            <a href="sesion5.html" class="session-card" data-lesson="sesion5">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:#1abc9c">Sesión 4</span>
-                    <h3 class="session-name">Racionalización de Límites</h3>
-                    <p class="session-desc">Técnicas algebraicas con raíces cuadradas y conjugados.</p>
+                    <span class="session-badge">Sesión 5</span>
+                    <h3 class="session-name">Indeterminación 0/0: Racionalización</h3>
+                    <p class="session-desc">Uso de conjugados para eliminar raíces problemáticas del denominador.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 3 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-infinity"></i> Módulo 3: Infinito y Asíntotas</div>
-            
-            <a href="sesion5.html" class="session-card" data-lesson="sesion5">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+        <div class="module-group mod-3">
+            <div class="module-title"><i class="fas fa-infinity"></i> Módulo 3: El Infinito y las Asíntotas</div>
+
+            <a href="sesion6.html" class="session-card" data-lesson="sesion6">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:#e74c3c">Sesión 5</span>
-                    <h3 class="session-name">Límites al Infinito</h3>
-                    <p class="session-desc">Comportamiento de las funciones cuando x crece indefinidamente.</p>
+                    <span class="session-badge">Sesión 6</span>
+                    <h3 class="session-name">Límites cuando x tiende al infinito</h3>
+                    <p class="session-desc">Comportamiento a largo plazo dividiendo por la mayor potencia.</p>
+                </div>
+            </a>
+
+            <a href="sesion7.html" class="session-card" data-lesson="sesion7">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 7</span>
+                    <h3 class="session-name">Asíntotas Horizontales y Oblicuas</h3>
+                    <p class="session-desc">Determinando las líneas fronterizas de las funciones racionales.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- MÓDULO 4 -->
+        <div class="module-group mod-4">
+            <div class="module-title"><i class="fas fa-wave-square"></i> Módulo 4: Límites Trigonométricos</div>
+
+            <a href="sesion8.html" class="session-card" data-lesson="sesion8">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 8</span>
+                    <h3 class="session-name">Límites Trigonométricos Básicos</h3>
+                    <p class="session-desc">Evaluación de funciones seno, coseno y tangente en radianes.</p>
+                </div>
+            </a>
+
+            <a href="sesion9.html" class="session-card" data-lesson="sesion9">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 9</span>
+                    <h3 class="session-name">Límites Trigonométricos Especiales</h3>
+                    <p class="session-desc">Resolución usando identidades trigonométricas fundamentales.</p>
+                </div>
+            </a>
+            
+            <a href="sesion10.html" class="session-card" data-lesson="sesion10">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 10</span>
+                    <h3 class="session-name">Límites Trigonométricos Indeterminados</h3>
+                    <p class="session-desc">Uso de los teoremas límite de sin(x)/x = 1 y (1-cos(x))/x = 0.</p>
+                </div>
+            </a>
+
+            <a href="ejerciciosmodulo4.html" class="session-card" data-lesson="ejerciciosmodulo4">
+                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background:var(--pastel-purple); color:#111;">Práctica Avanzada</span>
+                    <h3 class="session-name">Resolución Paso a Paso: Ejercicio 24</h3>
+                    <p class="session-desc">20 problemas resueltos paso a paso sobre límites trigonométricos.</p>
                 </div>
             </a>
         </div>
@@ -119,8 +356,12 @@
     </div>
 
     <div style="text-align: center; margin-bottom: 40px;">
-        <a href="../index.html" style="color: #a2a2a2; font-weight: bold; text-decoration: none; padding: 10px 20px; border: 2px solid #0f3460; border-radius: 8px;">← Volver al Hub General de Cálculo</a>
+        <a href="../../index.html" style="color: var(--pastel-blue); font-weight: bold; text-decoration: none; font-size: 1.1rem;"><i class="fas fa-home"></i> Volver al Menú General de Matemáticas</a>
     </div>
+
+    <footer class="footer" style="text-align:center; padding: 20px; color: var(--text-muted); border-top: 1px solid var(--border-color);">
+        <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
+    </footer>
 
     <!-- Firebase y Lógica de Progreso -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -132,9 +373,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             if (typeof window.getUserProgress === 'function') {
-                // ID DEL CURSO: calculo_limites
+                // Fetch progress for this specific course ID
                 const progress = await window.getUserProgress('calculo_limites');
-                const totalLessons = 5; 
+                const totalLessons = 11;
                 let completedCount = 0;
 
                 const cards = document.querySelectorAll('.session-card');

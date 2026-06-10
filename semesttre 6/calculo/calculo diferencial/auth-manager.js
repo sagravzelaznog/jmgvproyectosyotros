@@ -166,22 +166,30 @@ class AuthManager {
     return errorMessages[errorCode] || 'Error desconocido';
   }
 
+  sanitizeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
   updateUI() {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const userInfo = document.getElementById('userInfo');
     const logoutBtn = document.getElementById('logoutBtn');
     const adminPanel = document.getElementById('adminPanel');
+    const tabContainer = document.querySelector('.tab-container');
 
     if (this.currentUser) {
       // Usuario autenticado
       if (loginForm) loginForm.style.display = 'none';
       if (registerForm) registerForm.style.display = 'none';
+      if (tabContainer) tabContainer.style.display = 'none';
       if (userInfo) {
         userInfo.style.display = 'block';
         userInfo.innerHTML = `
           <div class="user-welcome">
-            <h3>¡Bienvenido, ${this.currentUser.email}!</h3>
+            <h3>¡Bienvenido, ${this.sanitizeHTML(this.currentUser.email)}!</h3>
             <p>Rol: ${this.isAdmin ? 'Administrador' : 'Estudiante'}</p>
           </div>
         `;
@@ -194,6 +202,8 @@ class AuthManager {
     } else {
       // Usuario no autenticado
       if (loginForm) loginForm.style.display = 'block';
+      if (registerForm) registerForm.style.display = 'block';
+      if (tabContainer) tabContainer.style.display = 'block';
       if (userInfo) userInfo.style.display = 'none';
       if (logoutBtn) logoutBtn.style.display = 'none';
       if (adminPanel) adminPanel.style.display = 'none';

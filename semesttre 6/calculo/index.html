@@ -1,0 +1,1050 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de Cálculo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e293b 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, #1e293b 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2), 0 10px 10px -5px rgba(0,0,0,0.04);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .folder-name {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .file-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            word-break: break-all;
+            transition: color 0.2s;
+        }
+        .file-link:hover {
+            color: var(--accent);
+        }
+        .file-type {
+            margin-top: auto;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            align-self: flex-start;
+        }
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            color: white;
+            font-size: 1.1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Índice de Contenidos - Cálculo</h1>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar archivos o carpetas...">
+    </div>
+
+    <div class="container" id="cardsContainer">        <div class="card" data-name=".env.local" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/.env.local" class="file-link" target="_blank">.env.local</a>
+            <div class="file-type">LOCAL</div>
+        </div>        <div class="card" data-name=".gitattributes" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/.gitattributes" class="file-link" target="_blank">.gitattributes</a>
+            <div class="file-type">GITATTRIBUTES</div>
+        </div>        <div class="card" data-name=".gitignore" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/.gitignore" class="file-link" target="_blank">.gitignore</a>
+            <div class="file-type">GITIGNORE</div>
+        </div>        <div class="card" data-name="01 relaciones y funciones calculo diferencial.pdf" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/01 relaciones y funciones calculo diferencial.pdf" class="file-link" target="_blank">01 relaciones y funciones calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="02 limites calculo diferencial.pdf" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/02 limites calculo diferencial.pdf" class="file-link" target="_blank">02 limites calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="03 continuidad calculo diferencial.pdf" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/03 continuidad calculo diferencial.pdf" class="file-link" target="_blank">03 continuidad calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="04 la derivada calculo diferencial.pdf" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/04 la derivada calculo diferencial.pdf" class="file-link" target="_blank">04 la derivada calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="05 aplicaciones de la derivada calculo diferencial.pdf" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/05 aplicaciones de la derivada calculo diferencial.pdf" class="file-link" target="_blank">05 aplicaciones de la derivada calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="auth-manager.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/auth-manager.js" class="file-link" target="_blank">auth-manager.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="changelog.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/CHANGELOG.md" class="file-link" target="_blank">CHANGELOG.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="check_dependencies.py" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/check_dependencies.py" class="file-link" target="_blank">check_dependencies.py</a>
+            <div class="file-type">PY</div>
+        </div>        <div class="card" data-name="config.env" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/config.env" class="file-link" target="_blank">config.env</a>
+            <div class="file-type">ENV</div>
+        </div>        <div class="card" data-name="config.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/config.js" class="file-link" target="_blank">config.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="contributing.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/CONTRIBUTING.md" class="file-link" target="_blank">CONTRIBUTING.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="contributors.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/CONTRIBUTORS.md" class="file-link" target="_blank">CONTRIBUTORS.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="demostracion_modulo2.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/DEMOSTRACION_MODULO2.md" class="file-link" target="_blank">DEMOSTRACION_MODULO2.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="dependencies.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/DEPENDENCIES.md" class="file-link" target="_blank">DEPENDENCIES.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="derivadas.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/derivadas.js" class="file-link" target="_blank">derivadas.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="ejercicios_derivadas.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/ejercicios_derivadas.html" class="file-link" target="_blank">ejercicios_derivadas.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios_modulo1.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/ejercicios_modulo1.html" class="file-link" target="_blank">ejercicios_modulo1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="firebase-config.example.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/firebase-config.example.js" class="file-link" target="_blank">firebase-config.example.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="firebase-config.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/firebase-config.js" class="file-link" target="_blank">firebase-config.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="firestore-rules.txt" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/firestore-rules.txt" class="file-link" target="_blank">firestore-rules.txt</a>
+            <div class="file-type">TXT</div>
+        </div>        <div class="card" data-name="github_config.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/GITHUB_CONFIG.md" class="file-link" target="_blank">GITHUB_CONFIG.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="github_pages.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/GITHUB_PAGES.md" class="file-link" target="_blank">GITHUB_PAGES.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="inicio_rapido.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/INICIO_RAPIDO.md" class="file-link" target="_blank">INICIO_RAPIDO.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="instalacion.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/INSTALACION.md" class="file-link" target="_blank">INSTALACION.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="license" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/LICENSE" class="file-link" target="_blank">LICENSE</a>
+            <div class="file-type">ARCHIVO</div>
+        </div>        <div class="card" data-name="module-navigation.js" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/module-navigation.js" class="file-link" target="_blank">module-navigation.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="modulo1_relaciones_funciones.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo1_relaciones_funciones.html" class="file-link" target="_blank">modulo1_relaciones_funciones.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo2_limites.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo2_limites.html" class="file-link" target="_blank">modulo2_limites.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo3_continuidad.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo3_continuidad.html" class="file-link" target="_blank">modulo3_continuidad.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo4-styles.css" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo4-styles.css" class="file-link" target="_blank">modulo4-styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="modulo4_la_derivada.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo4_la_derivada.html" class="file-link" target="_blank">modulo4_la_derivada.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo5_aplicaciones_derivada.html" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/modulo5_aplicaciones_derivada.html" class="file-link" target="_blank">modulo5_aplicaciones_derivada.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="package.json" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/package.json" class="file-link" target="_blank">package.json</a>
+            <div class="file-type">JSON</div>
+        </div>        <div class="card" data-name="planeacioncd.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/planeacionCD.MD" class="file-link" target="_blank">planeacionCD.MD</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/README.md" class="file-link" target="_blank">README.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo1.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/README_MODULO1.md" class="file-link" target="_blank">README_MODULO1.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo2_limites.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/README_MODULO2_LIMITES.md" class="file-link" target="_blank">README_MODULO2_LIMITES.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo4.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/README_MODULO4.md" class="file-link" target="_blank">README_MODULO4.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="security.md" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/SECURITY.md" class="file-link" target="_blank">SECURITY.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="server.py" data-folder="calculo diferencial">
+            <div class="folder-name">📁 calculo diferencial</div>
+            <a href="calculo diferencial/server.py" class="file-link" target="_blank">server.py</a>
+            <div class="file-type">PY</div>
+        </div>        <div class="card" data-name="pull_request_template.md" data-folder="calculo diferencial/.github">
+            <div class="folder-name">📁 calculo diferencial/.github</div>
+            <a href="calculo diferencial/.github/pull_request_template.md" class="file-link" target="_blank">pull_request_template.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="bug_report.md" data-folder="calculo diferencial/.github/issue_template">
+            <div class="folder-name">📁 calculo diferencial/.github/ISSUE_TEMPLATE</div>
+            <a href="calculo diferencial/.github/ISSUE_TEMPLATE/bug_report.md" class="file-link" target="_blank">bug_report.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="content_improvement.md" data-folder="calculo diferencial/.github/issue_template">
+            <div class="folder-name">📁 calculo diferencial/.github/ISSUE_TEMPLATE</div>
+            <a href="calculo diferencial/.github/ISSUE_TEMPLATE/content_improvement.md" class="file-link" target="_blank">content_improvement.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="feature_request.md" data-folder="calculo diferencial/.github/issue_template">
+            <div class="folder-name">📁 calculo diferencial/.github/ISSUE_TEMPLATE</div>
+            <a href="calculo diferencial/.github/ISSUE_TEMPLATE/feature_request.md" class="file-link" target="_blank">feature_request.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="verify.yml" data-folder="calculo diferencial/.github/workflows">
+            <div class="folder-name">📁 calculo diferencial/.github/workflows</div>
+            <a href="calculo diferencial/.github/workflows/verify.yml" class="file-link" target="_blank">verify.yml</a>
+            <div class="file-type">YML</div>
+        </div>        <div class="card" data-name=".gitattributes" data-folder="calculo diferencial/curso_ia_manuel-">
+            <div class="folder-name">📁 calculo diferencial/curso_IA_Manuel-</div>
+            <a href="calculo diferencial/curso_IA_Manuel-/.gitattributes" class="file-link" target="_blank">.gitattributes</a>
+            <div class="file-type">GITATTRIBUTES</div>
+        </div>        <div class="card" data-name=".gitattributes" data-folder="calculo diferencial/electricidad-5-sistemas-fotovoltaicos">
+            <div class="folder-name">📁 calculo diferencial/electricidad-5-sistemas-fotovoltaicos</div>
+            <a href="calculo diferencial/electricidad-5-sistemas-fotovoltaicos/.gitattributes" class="file-link" target="_blank">.gitattributes</a>
+            <div class="file-type">GITATTRIBUTES</div>
+        </div>        <div class="card" data-name=".gitattributes" data-folder="calculo diferencial/macrosexcel">
+            <div class="folder-name">📁 calculo diferencial/macrosexcel</div>
+            <a href="calculo diferencial/macrosexcel/.gitattributes" class="file-link" target="_blank">.gitattributes</a>
+            <div class="file-type">GITATTRIBUTES</div>
+        </div>        <div class="card" data-name=".gitignore" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/.gitignore" class="file-link" target="_blank">.gitignore</a>
+            <div class="file-type">GITIGNORE</div>
+        </div>        <div class="card" data-name="06 sumas calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/06 sumas calculo integral.pdf" class="file-link" target="_blank">06 sumas calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="07 integrales inmediatas calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/07 integrales inmediatas calculo integral.pdf" class="file-link" target="_blank">07 integrales inmediatas calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="08 itegrales diferenciales trigonometricas calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/08 itegrales diferenciales trigonometricas calculo integral.pdf" class="file-link" target="_blank">08 itegrales diferenciales trigonometricas calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="09 metodos de integracion calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/09 metodos de integracion calculo integral.pdf" class="file-link" target="_blank">09 metodos de integracion calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="10 aplicaciones de la integral calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/10 aplicaciones de la integral calculo integral.pdf" class="file-link" target="_blank">10 aplicaciones de la integral calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="11 ecuaciones diferenciales calculo integral.pdf" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/11 ecuaciones diferenciales calculo integral.pdf" class="file-link" target="_blank">11 ecuaciones diferenciales calculo integral.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="auth-manager.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/auth-manager.js" class="file-link" target="_blank">auth-manager.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="demo_modulo4.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/demo_modulo4.html" class="file-link" target="_blank">demo_modulo4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios-modulo1-script.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios-modulo1-script.js" class="file-link" target="_blank">ejercicios-modulo1-script.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="ejercicios-styles.css" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios-styles.css" class="file-link" target="_blank">ejercicios-styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="ejercicios_modulo1.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios_modulo1.html" class="file-link" target="_blank">ejercicios_modulo1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios_modulo2.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios_modulo2.html" class="file-link" target="_blank">ejercicios_modulo2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios_modulo3.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/EJERCICIOS_MODULO3.md" class="file-link" target="_blank">EJERCICIOS_MODULO3.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="ejercicios_modulo4.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios_modulo4.html" class="file-link" target="_blank">ejercicios_modulo4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios_modulo5.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/ejercicios_modulo5.html" class="file-link" target="_blank">ejercicios_modulo5.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examenaplicaru3.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/examenaplicaru3.html" class="file-link" target="_blank">examenaplicaru3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examencalculou1 copy.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/EXAMENCALCULOU1 copy.HTML" class="file-link" target="_blank">EXAMENCALCULOU1 copy.HTML</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="firebase-config.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/firebase-config.js" class="file-link" target="_blank">firebase-config.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="firebase.config.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/firebase.config.js" class="file-link" target="_blank">firebase.config.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="index_modulo4.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/index_modulo4.html" class="file-link" target="_blank">index_modulo4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="indice_documentacion.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/INDICE_DOCUMENTACION.md" class="file-link" target="_blank">INDICE_DOCUMENTACION.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="indice_documentacion_backup_20251104_072336.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/INDICE_DOCUMENTACION_backup_20251104_072336.md" class="file-link" target="_blank">INDICE_DOCUMENTACION_backup_20251104_072336.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="login.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/login.html" class="file-link" target="_blank">login.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="module-navigation.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/module-navigation.js" class="file-link" target="_blank">module-navigation.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="module4-interactive.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/module4-interactive.js" class="file-link" target="_blank">module4-interactive.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="modulo1-script.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo1-script.js" class="file-link" target="_blank">modulo1-script.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="modulo1_antiderivadas.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo1_antiderivadas.html" class="file-link" target="_blank">modulo1_antiderivadas.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo2-script.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo2-script.js" class="file-link" target="_blank">modulo2-script.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="modulo2-styles.css" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo2-styles.css" class="file-link" target="_blank">modulo2-styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="modulo2_integral_definida.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo2_integral_definida.html" class="file-link" target="_blank">modulo2_integral_definida.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo3_interactivo.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo3_interactivo.html" class="file-link" target="_blank">modulo3_interactivo.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo3_tecnicas_integracion_detallado.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/MODULO3_TECNICAS_INTEGRACION_DETALLADO.md" class="file-link" target="_blank">MODULO3_TECNICAS_INTEGRACION_DETALLADO.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="modulo4_aplicaciones.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo4_aplicaciones.html" class="file-link" target="_blank">modulo4_aplicaciones.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo5_ecuaciones_diferenciales.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo5_ecuaciones_diferenciales.html" class="file-link" target="_blank">modulo5_ecuaciones_diferenciales.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="modulo5_interactive.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/modulo5_interactive.js" class="file-link" target="_blank">modulo5_interactive.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="navigation.js" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/navigation.js" class="file-link" target="_blank">navigation.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="package-lock.json" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/package-lock.json" class="file-link" target="_blank">package-lock.json</a>
+            <div class="file-type">JSON</div>
+        </div>        <div class="card" data-name="package.json" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/package.json" class="file-link" target="_blank">package.json</a>
+            <div class="file-type">JSON</div>
+        </div>        <div class="card" data-name="parciales.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/parciales.html" class="file-link" target="_blank">parciales.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="pasos_crear_firebase.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/PASOS_CREAR_FIREBASE.md" class="file-link" target="_blank">PASOS_CREAR_FIREBASE.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="planeacionci.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/planeacionCI.MD" class="file-link" target="_blank">planeacionCI.MD</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="quizz_riemman.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/quizz_riemman.html" class="file-link" target="_blank">quizz_riemman.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="readme.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README.md" class="file-link" target="_blank">README.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_firebase.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README_FIREBASE.md" class="file-link" target="_blank">README_FIREBASE.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo2.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README_MODULO2.md" class="file-link" target="_blank">README_MODULO2.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo4.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README_MODULO4.md" class="file-link" target="_blank">README_MODULO4.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_modulo5.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README_MODULO5.md" class="file-link" target="_blank">README_MODULO5.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="readme_sistema_conectado.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/README_SISTEMA_CONECTADO.md" class="file-link" target="_blank">README_SISTEMA_CONECTADO.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="referencia_rapida.md" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/REFERENCIA_RAPIDA.md" class="file-link" target="_blank">REFERENCIA_RAPIDA.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="repo.txt" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/repo.txt" class="file-link" target="_blank">repo.txt</a>
+            <div class="file-type">TXT</div>
+        </div>        <div class="card" data-name="styles-main.css" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/styles-main.css" class="file-link" target="_blank">styles-main.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="styles.css" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/styles.css" class="file-link" target="_blank">styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="subir-a-github.ps1" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/subir-a-github.ps1" class="file-link" target="_blank">subir-a-github.ps1</a>
+            <div class="file-type">PS1</div>
+        </div>        <div class="card" data-name="tutorinteligente.html" data-folder="calculo integral">
+            <div class="folder-name">📁 calculo integral</div>
+            <a href="calculo integral/tutorinteligente.html" class="file-link" target="_blank">tutorinteligente.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints01.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints01.html" class="file-link" target="_blank">calints01.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints02.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints02.html" class="file-link" target="_blank">calints02.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints03.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints03.html" class="file-link" target="_blank">calints03.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints04.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints04.html" class="file-link" target="_blank">calints04.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints05.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints05.html" class="file-link" target="_blank">calints05.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints06.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints06.html" class="file-link" target="_blank">calints06.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints07.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints07.html" class="file-link" target="_blank">calints07.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calints08.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/calints08.html" class="file-link" target="_blank">calints08.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="index2.html" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/index2.html" class="file-link" target="_blank">index2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="readme.md" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/README.md" class="file-link" target="_blank">README.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="repo.txt" data-folder="calculo integral/cigemini">
+            <div class="folder-name">📁 calculo integral/cigemini</div>
+            <a href="calculo integral/cigemini/repo.txt" class="file-link" target="_blank">repo.txt</a>
+            <div class="file-type">TXT</div>
+        </div>        <div class="card" data-name="style.css" data-folder="calculo integral/css">
+            <div class="folder-name">📁 calculo integral/css</div>
+            <a href="calculo integral/css/style.css" class="file-link" target="_blank">style.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="ejercicio20.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/ejercicio20.html" class="file-link" target="_blank">ejercicio20.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="exaenu3.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/exaenu3.html" class="file-link" target="_blank">exaenu3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examen3u.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/examen3u.html" class="file-link" target="_blank">examen3u.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examenparciales.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/examenparciales.html" class="file-link" target="_blank">examenparciales.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examenu3.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/examenu3.html" class="file-link" target="_blank">examenu3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="examuen u3.html" data-folder="calculo integral/ejercicio 20">
+            <div class="folder-name">📁 calculo integral/ejercicio 20</div>
+            <a href="calculo integral/ejercicio 20/examuen u3.html" class="file-link" target="_blank">examuen u3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="calculo integral ejercicio 3.pdf" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/calculo integral ejercicio 3.pdf" class="file-link" target="_blank">calculo integral ejercicio 3.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="ejercicios de calculo.html" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/ejercicios de calculo.html" class="file-link" target="_blank">ejercicios de calculo.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="ejercicios_calculo_nuevo.html" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/ejercicios_calculo_nuevo.html" class="file-link" target="_blank">ejercicios_calculo_nuevo.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="generate_tutor.js" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/generate_tutor.js" class="file-link" target="_blank">generate_tutor.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="integrales.js" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/integrales.js" class="file-link" target="_blank">integrales.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="soluciones.js" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/soluciones.js" class="file-link" target="_blank">soluciones.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="tutor.js" data-folder="calculo integral/ejercicio3">
+            <div class="folder-name">📁 calculo integral/ejercicio3</div>
+            <a href="calculo integral/ejercicio3/tutor.js" class="file-link" target="_blank">tutor.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="style.css" data-folder="calculo integral/ejercicio3/css">
+            <div class="folder-name">📁 calculo integral/ejercicio3/css</div>
+            <a href="calculo integral/ejercicio3/css/style.css" class="file-link" target="_blank">style.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="app.js" data-folder="calculo integral/ejercicio3/js">
+            <div class="folder-name">📁 calculo integral/ejercicio3/js</div>
+            <a href="calculo integral/ejercicio3/js/app.js" class="file-link" target="_blank">app.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="app.js" data-folder="calculo integral/ejercicio5calculointegral">
+            <div class="folder-name">📁 calculo integral/ejercicio5calculointegral</div>
+            <a href="calculo integral/ejercicio5calculointegral/app.js" class="file-link" target="_blank">app.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="eje5calculointegral.html" data-folder="calculo integral/ejercicio5calculointegral">
+            <div class="folder-name">📁 calculo integral/ejercicio5calculointegral</div>
+            <a href="calculo integral/ejercicio5calculointegral/eje5calculointegral.html" class="file-link" target="_blank">eje5calculointegral.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="script.js" data-folder="calculo integral/ejercicio5calculointegral">
+            <div class="folder-name">📁 calculo integral/ejercicio5calculointegral</div>
+            <a href="calculo integral/ejercicio5calculointegral/script.js" class="file-link" target="_blank">script.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="style.css" data-folder="calculo integral/ejercicio5calculointegral">
+            <div class="folder-name">📁 calculo integral/ejercicio5calculointegral</div>
+            <a href="calculo integral/ejercicio5calculointegral/style.css" class="file-link" target="_blank">style.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="planeacion calculointegral.html" data-folder="calculo integral/planeacion calculo integral">
+            <div class="folder-name">📁 calculo integral/planeacion calculo integral</div>
+            <a href="calculo integral/planeacion calculo integral/planeacion calculointegral.html" class="file-link" target="_blank">planeacion calculointegral.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="scipt.js" data-folder="calculo integral/planeacion calculo integral">
+            <div class="folder-name">📁 calculo integral/planeacion calculo integral</div>
+            <a href="calculo integral/planeacion calculo integral/scipt.js" class="file-link" target="_blank">scipt.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="style.css" data-folder="calculo integral/planeacion calculo integral">
+            <div class="folder-name">📁 calculo integral/planeacion calculo integral</div>
+            <a href="calculo integral/planeacion calculo integral/style.css" class="file-link" target="_blank">style.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="01 relaciones y funciones calculo diferencial.pdf" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/01 relaciones y funciones calculo diferencial.pdf" class="file-link" target="_blank">01 relaciones y funciones calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="02 limites calculo diferencial.pdf" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/02 limites calculo diferencial.pdf" class="file-link" target="_blank">02 limites calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="03 continuidad calculo diferencial.pdf" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/03 continuidad calculo diferencial.pdf" class="file-link" target="_blank">03 continuidad calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="04 la derivada calculo diferencial.pdf" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/04 la derivada calculo diferencial.pdf" class="file-link" target="_blank">04 la derivada calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="05 aplicaciones de la derivada calculo diferencial.pdf" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/05 aplicaciones de la derivada calculo diferencial.pdf" class="file-link" target="_blank">05 aplicaciones de la derivada calculo diferencial.pdf</a>
+            <div class="file-type">PDF</div>
+        </div>        <div class="card" data-name="curso-styles.css" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/curso-styles.css" class="file-link" target="_blank">curso-styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="ejerciciosmofulo1.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/ejerciciosmofulo1.html" class="file-link" target="_blank">ejerciciosmofulo1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="env.js" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/env.js" class="file-link" target="_blank">env.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="global-lesson.css" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/global-lesson.css" class="file-link" target="_blank">global-lesson.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="progress-tracker.js" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/progress-tracker.js" class="file-link" target="_blank">progress-tracker.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="qrcode.png" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/qrcode.png" class="file-link" target="_blank">qrcode.png</a>
+            <div class="file-type">PNG</div>
+        </div>        <div class="card" data-name="quiz-engine.js" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/quiz-engine.js" class="file-link" target="_blank">quiz-engine.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="sesion1.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion1.html" class="file-link" target="_blank">sesion1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion10.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion10.html" class="file-link" target="_blank">sesion10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion2.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion2.html" class="file-link" target="_blank">sesion2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion3.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion3.html" class="file-link" target="_blank">sesion3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion4.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion4.html" class="file-link" target="_blank">sesion4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion5.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion5.html" class="file-link" target="_blank">sesion5.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion6.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion6.html" class="file-link" target="_blank">sesion6.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion7.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion7.html" class="file-link" target="_blank">sesion7.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion8.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion8.html" class="file-link" target="_blank">sesion8.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion9.html" data-folder="cursocdestructurado">
+            <div class="folder-name">📁 cursocdestructurado</div>
+            <a href="cursocdestructurado/sesion9.html" class="file-link" target="_blank">sesion9.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name=".env.example" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/.env.example" class="file-link" target="_blank">.env.example</a>
+            <div class="file-type">EXAMPLE</div>
+        </div>        <div class="card" data-name="01 a persona.md" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/01 a persona.md" class="file-link" target="_blank">01 a persona.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="02 a creahtml.md" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/02 a creahtml.md" class="file-link" target="_blank">02 a creahtml.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="03 curso.md" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/03 curso.md" class="file-link" target="_blank">03 curso.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="04 caracteristicas del curso.md" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/04 caracteristicas del curso.md" class="file-link" target="_blank">04 caracteristicas del curso.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="interactividad.js" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/interactividad.js" class="file-link" target="_blank">interactividad.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="readme.md" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/README.md" class="file-link" target="_blank">README.md</a>
+            <div class="file-type">MD</div>
+        </div>        <div class="card" data-name="script.js" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/script.js" class="file-link" target="_blank">script.js</a>
+            <div class="file-type">JS</div>
+        </div>        <div class="card" data-name="sesion1.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion1.html" class="file-link" target="_blank">sesion1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion10.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion10.html" class="file-link" target="_blank">sesion10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion11.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion11.html" class="file-link" target="_blank">sesion11.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion2.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion2.html" class="file-link" target="_blank">sesion2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion3.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion3.html" class="file-link" target="_blank">sesion3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion4.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion4.html" class="file-link" target="_blank">sesion4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion5.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion5.html" class="file-link" target="_blank">sesion5.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion6.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion6.html" class="file-link" target="_blank">sesion6.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion7.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion7.html" class="file-link" target="_blank">sesion7.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion8.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion8.html" class="file-link" target="_blank">sesion8.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion9.html" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/sesion9.html" class="file-link" target="_blank">sesion9.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="styles.css" data-folder="cursoci">
+            <div class="folder-name">📁 cursoci</div>
+            <a href="cursoci/styles.css" class="file-link" target="_blank">styles.css</a>
+            <div class="file-type">CSS</div>
+        </div>        <div class="card" data-name="actividades.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/actividades.html" class="file-link" target="_blank">actividades.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass01.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass01.html" class="file-link" target="_blank">masterclass01.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass02.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass02.html" class="file-link" target="_blank">masterclass02.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass03.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass03.html" class="file-link" target="_blank">masterclass03.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass04.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass04.html" class="file-link" target="_blank">masterclass04.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass05.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass05.html" class="file-link" target="_blank">masterclass05.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass06.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass06.html" class="file-link" target="_blank">masterclass06.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_01.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_01.html" class="file-link" target="_blank">masterclass07_01.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_02.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_02.html" class="file-link" target="_blank">masterclass07_02.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_03.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_03.html" class="file-link" target="_blank">masterclass07_03.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_04.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_04.html" class="file-link" target="_blank">masterclass07_04.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_05.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_05.html" class="file-link" target="_blank">masterclass07_05.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_06.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_06.html" class="file-link" target="_blank">masterclass07_06.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_07.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_07.html" class="file-link" target="_blank">masterclass07_07.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_08.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_08.html" class="file-link" target="_blank">masterclass07_08.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_09.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_09.html" class="file-link" target="_blank">masterclass07_09.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass07_10.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass07_10.html" class="file-link" target="_blank">masterclass07_10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass08.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass08.html" class="file-link" target="_blank">masterclass08.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass09.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass09.html" class="file-link" target="_blank">masterclass09.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass10.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass10.html" class="file-link" target="_blank">masterclass10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass11.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass11.html" class="file-link" target="_blank">masterclass11.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="masterclass12.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/masterclass12.html" class="file-link" target="_blank">masterclass12.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="relaciones_y_funciones.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/relaciones_y_funciones.html" class="file-link" target="_blank">relaciones_y_funciones.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="tarea.html" data-folder="cursoci1">
+            <div class="folder-name">📁 cursoci1</div>
+            <a href="cursoci1/tarea.html" class="file-link" target="_blank">tarea.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion1.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion1.html" class="file-link" target="_blank">sesion1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion10.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion10.html" class="file-link" target="_blank">sesion10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion2.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion2.html" class="file-link" target="_blank">sesion2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion3.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion3.html" class="file-link" target="_blank">sesion3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion4.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion4.html" class="file-link" target="_blank">sesion4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion5.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion5.html" class="file-link" target="_blank">sesion5.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion6.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion6.html" class="file-link" target="_blank">sesion6.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion7.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion7.html" class="file-link" target="_blank">sesion7.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion8.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion8.html" class="file-link" target="_blank">sesion8.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion9.html" data-folder="cursoderivadas">
+            <div class="folder-name">📁 cursoderivadas</div>
+            <a href="cursoderivadas/sesion9.html" class="file-link" target="_blank">sesion9.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion1.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion1.html" class="file-link" target="_blank">sesion1.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion10.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion10.html" class="file-link" target="_blank">sesion10.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion2.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion2.html" class="file-link" target="_blank">sesion2.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion3.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion3.html" class="file-link" target="_blank">sesion3.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion4.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion4.html" class="file-link" target="_blank">sesion4.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion5.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion5.html" class="file-link" target="_blank">sesion5.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion6.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion6.html" class="file-link" target="_blank">sesion6.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion7.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion7.html" class="file-link" target="_blank">sesion7.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion8.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion8.html" class="file-link" target="_blank">sesion8.html</a>
+            <div class="file-type">HTML</div>
+        </div>        <div class="card" data-name="sesion9.html" data-folder="cursolimites">
+            <div class="folder-name">📁 cursolimites</div>
+            <a href="cursolimites/sesion9.html" class="file-link" target="_blank">sesion9.html</a>
+            <div class="file-type">HTML</div>
+        </div>    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const folder = card.getAttribute('data-folder');
+                
+                if (name.includes(searchTerm) || folder.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

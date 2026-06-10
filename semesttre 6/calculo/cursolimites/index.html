@@ -6,220 +6,46 @@
     <title>Cálculo Diferencial: Límites | Mapa de Conocimiento</title>
     <link rel="stylesheet" href="../../global-lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="curso-styles.css">
     <style>
-        :root {
-            /* Adolescent Dark Mode Theme - Pastel Colors with Dark Outlines */
-            --bg-main: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #f5f6fa;
-            --text-muted: #b2bec3;
-            --border-color: #2d3436;
-            --dark-outline: #000000;
-            --shadow-soft: 5px 5px 0px rgba(0,0,0,0.5);
-            
-            --pastel-purple: #c5a3ff;
-            --pastel-green: #a8e6cf;
-            --pastel-blue: #a1c9f1;
-            --pastel-orange: #ffcb9a;
-            --pastel-red: #ff9a9e;
-            --pastel-gold: #f4d03f;
-            --pastel-turquoise: #88d8b0;
-        }
-
-        body.roadmap-page { 
-            background-color: var(--bg-main); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-        }
+        .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Outfit', sans-serif; }
+        .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(10px); }
+        .roadmap-header h1 { font-size: 2.5rem; color: #6366f1; margin-bottom: 1rem; }
+        .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
         
-        .roadmap-header { 
-            text-align: center; 
-            padding: 3rem 1rem; 
-            background: var(--bg-card); 
-            border-bottom: 2px solid var(--border-color); 
-        }
+        .course-progress-container { max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1); backdrop-filter: blur(8px); }
+        .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #a855f7); transition: width 0.5s ease; }
+        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; }
         
-        .roadmap-header h1 { 
-            font-size: 2.8rem; 
-            color: var(--pastel-purple); 
-            margin-bottom: 1rem; 
-            text-shadow: 2px 2px 0px var(--dark-outline);
-        }
+        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
         
-        .roadmap-header p { 
-            font-size: 1.2rem; 
-            color: var(--text-muted); 
-            max-width: 600px; 
-            margin: 0 auto 2rem; 
-        }
+        .module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid var(--border-color); backdrop-filter: blur(10px); }
+        .module-title { font-size: 1.5rem; font-weight: 700; color: #a855f7; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
         
-        .course-progress-container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            background: var(--bg-main); 
-            padding: 1.5rem; 
-            border-radius: 12px; 
-            border: 2px solid var(--border-color); 
-            box-shadow: var(--shadow-soft);
-        }
+        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.3s ease; margin-bottom: 1rem; position: relative; overflow: hidden; }
+        .session-card:hover { transform: translateY(-5px); border-color: #6366f1; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); background: rgba(255, 255, 255, 0.08); }
+        .session-card:hover .status-icon { transform: rotate(360deg); transition: transform 0.6s ease; color: #6366f1; }
         
-        .progress-bar-bg { 
-            width: 100%; 
-            height: 14px; 
-            background: var(--border-color); 
-            border-radius: 7px; 
-            overflow: hidden; 
-            margin-bottom: 1rem; 
-            border: 1px solid var(--dark-outline);
-        }
+        .session-card.completed { border-left: 5px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
+        .session-card.completed .status-icon { color: #2ecc71; }
         
-        .progress-bar-fill { 
-            height: 100%; 
-            background: linear-gradient(90deg, var(--pastel-purple), var(--pastel-blue)); 
-            transition: width 0.8s ease; 
-        }
+        .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 2; }
+        .status-icon { color: var(--border-color); font-size: 1.2rem; transition: transform 0.3s ease; }
         
-        .progress-stats { 
-            display: flex; 
-            justify-content: space-between; 
-            font-weight: bold; 
-            font-size: 1rem; 
-            color: var(--pastel-gold);
-        }
+        .session-info { flex-grow: 1; z-index: 2; }
+        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: #6366f1; color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #f8fafc; }
+        .session-desc { margin: 0; font-size: 0.95rem; color: #94a3b8; }
         
-        .roadmap-container { 
-            max-width: 900px; 
-            margin: 3rem auto; 
-            padding: 0 1rem; 
-        }
-        
-        .module-group { 
-            margin-bottom: 3.5rem; 
-            background: var(--bg-card); 
-            padding: 2rem; 
-            border-radius: 16px; 
-            box-shadow: var(--shadow-soft); 
-            border: 2px solid var(--dark-outline); 
-        }
-        
-        .module-title { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            color: var(--pastel-green); 
-            margin-bottom: 1.5rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.8rem; 
-            border-bottom: 2px dashed var(--border-color); 
-            padding-bottom: 0.8rem; 
-            text-shadow: 1px 1px 0px var(--dark-outline);
-        }
-        
-        .session-card { 
-            display: flex; 
-            align-items: center; 
-            gap: 1.5rem; 
-            padding: 1.5rem; 
-            background: var(--bg-main); 
-            border: 2px solid var(--dark-outline); 
-            border-radius: 10px; 
-            text-decoration: none; 
-            color: inherit; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            margin-bottom: 1.2rem; 
-        }
-        
-        .session-card:hover { 
-            transform: translate(-4px, -4px); 
-            border-color: var(--pastel-turquoise); 
-            box-shadow: 6px 6px 0px var(--pastel-turquoise); 
-        }
-        
-        .session-card.completed { 
-            border-left: 6px solid var(--pastel-green); 
-            background: rgba(168, 230, 207, 0.05); 
-        }
-        
-        .session-card.completed .status-icon { 
-            color: var(--pastel-green); 
-        }
-        
-        .session-status { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            background: var(--bg-card); 
-            border: 2px solid var(--dark-outline); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            flex-shrink: 0; 
-        }
-        
-        .status-icon { 
-            color: var(--border-color); 
-            font-size: 1.3rem; 
-        }
-        
-        .session-info { 
-            flex-grow: 1; 
-        }
-        
-        .session-badge { 
-            display: inline-block; 
-            padding: 0.3rem 0.8rem; 
-            background: var(--pastel-blue); 
-            color: var(--dark-outline); 
-            border-radius: 6px; 
-            font-size: 0.85rem; 
-            font-weight: 800; 
-            margin-bottom: 0.6rem; 
-            border: 1px solid var(--dark-outline);
-        }
-        
-        .session-name { 
-            font-size: 1.3rem; 
-            font-weight: 700; 
-            margin: 0 0 0.5rem 0; 
-            color: var(--text-main); 
-        }
-        
-        .session-desc { 
-            margin: 0; 
-            font-size: 0.95rem; 
-            color: var(--text-muted); 
-            line-height: 1.4;
-        }
-
-        /* Module Colors */
-        .mod-1 .module-title { color: var(--pastel-green); }
-        .mod-1 .session-badge { background: var(--pastel-green); }
-        .mod-1 .session-card:hover { border-color: var(--pastel-green); box-shadow: 6px 6px 0px var(--pastel-green); }
-
-        .mod-2 .module-title { color: var(--pastel-orange); }
-        .mod-2 .session-badge { background: var(--pastel-orange); }
-        .mod-2 .session-card:hover { border-color: var(--pastel-orange); box-shadow: 6px 6px 0px var(--pastel-orange); }
-
-        .mod-3 .module-title { color: var(--pastel-red); }
-        .mod-3 .session-badge { background: var(--pastel-red); }
-        .mod-3 .session-card:hover { border-color: var(--pastel-red); box-shadow: 6px 6px 0px var(--pastel-red); }
-
-        .mod-4 .module-title { color: var(--pastel-blue); }
-        .mod-4 .session-badge { background: var(--pastel-blue); }
-        .mod-4 .session-card:hover { border-color: var(--pastel-blue); box-shadow: 6px 6px 0px var(--pastel-blue); }
-
-        @media (max-width: 768px) {
-            .roadmap-header h1 { font-size: 2rem; }
-            .session-card { flex-direction: column; text-align: center; gap: 1rem; }
-        }
+        .kahoot-card { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1)); border: 2px dashed #a855f7; }
+        .kahoot-card:hover { background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2)); border-style: solid; }
     </style>
 </head>
 <body class="roadmap-page">
 
     <div class="roadmap-header">
-        <h1><i class="fas fa-arrow-right-to-bracket"></i> Límites de Funciones</h1>
-        <p>Aprende a analizar el comportamiento de las funciones al acercarse a valores críticos y al infinito.</p>
+        <h1><i class="fas fa-bullseye"></i> Límites en Cálculo Diferencial</h1>
+        <p>Domina el concepto de límite, las técnicas de resolución de indeterminaciones y el análisis de asíntotas.</p>
         
         <div class="course-progress-container">
             <div class="progress-bar-bg">
@@ -227,7 +53,7 @@
             </div>
             <div class="progress-stats">
                 <span>Progreso del Curso: <strong id="course-progress-text">0%</strong></span>
-                <span><i class="fas fa-trophy"></i> Completado: <strong id="course-completed-count">0</strong>/11</span>
+                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/10</span>
             </div>
         </div>
     </div>
@@ -235,120 +61,116 @@
     <div class="roadmap-container">
         
         <!-- MÓDULO 1 -->
-        <div class="module-group mod-1">
-            <div class="module-title"><i class="fas fa-search-location"></i> Módulo 1: Conceptos Fundamentales</div>
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-brain"></i> Módulo 1: Fundamentos de Límites</div>
             
             <a href="sesion1.html" class="session-card" data-lesson="sesion1">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 1</span>
                     <h3 class="session-name">Definición Intuitiva y Límites Laterales</h3>
-                    <p class="session-desc">Aproximación gráfica y numérica por la izquierda y la derecha.</p>
+                    <p class="session-desc">Aproximación por izquierda y derecha, y el concepto intuitivo de límite.</p>
                 </div>
             </a>
 
             <a href="sesion2.html" class="session-card" data-lesson="sesion2">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 2</span>
                     <h3 class="session-name">Definición Formal (Épsilon-Delta)</h3>
-                    <p class="session-desc">Demostración matemática estricta de la existencia de un límite.</p>
+                    <p class="session-desc">La definición matemática rigurosa del límite y su demostración.</p>
                 </div>
             </a>
 
             <a href="sesion3.html" class="session-card" data-lesson="sesion3">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 3</span>
-                    <h3 class="session-name">Teoremas y Evaluación Directa</h3>
-                    <p class="session-desc">Leyes de los límites y cómo resolverlos por sustitución directa.</p>
+                    <h3 class="session-name">Teoremas Básicos y Evaluación</h3>
+                    <p class="session-desc">Propiedades de los límites y resolución por evaluación directa.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 2 -->
-        <div class="module-group mod-2">
-            <div class="module-title"><i class="fas fa-magic"></i> Módulo 2: Límites Indeterminados</div>
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-tools"></i> Módulo 2: Técnicas de Resolución</div>
             
             <a href="sesion4.html" class="session-card" data-lesson="sesion4">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 4</span>
-                    <h3 class="session-name">Indeterminación 0/0: Factorización</h3>
-                    <p class="session-desc">Rescate algebraico usando diferencias de cuadrados y cubos.</p>
+                    <h3 class="session-name">Límites Indeterminados (0/0)</h3>
+                    <p class="session-desc">Identificación de indeterminaciones y sus causas.</p>
                 </div>
             </a>
 
             <a href="sesion5.html" class="session-card" data-lesson="sesion5">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 5</span>
-                    <h3 class="session-name">Indeterminación 0/0: Racionalización</h3>
-                    <p class="session-desc">Uso de conjugados para eliminar raíces problemáticas del denominador.</p>
+                    <h3 class="session-name">Eliminación por Factorización</h3>
+                    <p class="session-desc">Uso de álgebra para resolver indeterminaciones polinomiales.</p>
+                </div>
+            </a>
+
+            <a href="sesion6.html" class="session-card" data-lesson="sesion6">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 6</span>
+                    <h3 class="session-name">Eliminación por Racionalización</h3>
+                    <p class="session-desc">Técnicas con conjugados para límites que involucran raíces.</p>
+                </div>
+            </a>
+
+            <a href="sesion7.html" class="session-card" data-lesson="sesion7">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 7</span>
+                    <h3 class="session-name">Límites al Infinito</h3>
+                    <p class="session-desc">Comportamiento asintótico cuando la variable crece indefinidamente.</p>
                 </div>
             </a>
         </div>
 
         <!-- MÓDULO 3 -->
-        <div class="module-group mod-3">
-            <div class="module-title"><i class="fas fa-infinity"></i> Módulo 3: El Infinito y las Asíntotas</div>
-
-            <a href="sesion6.html" class="session-card" data-lesson="sesion6">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 6</span>
-                    <h3 class="session-name">Límites cuando x tiende al infinito</h3>
-                    <p class="session-desc">Comportamiento a largo plazo dividiendo por la mayor potencia.</p>
-                </div>
-            </a>
-
-            <a href="sesion7.html" class="session-card" data-lesson="sesion7">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 7</span>
-                    <h3 class="session-name">Asíntotas Horizontales y Oblicuas</h3>
-                    <p class="session-desc">Determinando las líneas fronterizas de las funciones racionales.</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- MÓDULO 4 -->
-        <div class="module-group mod-4">
-            <div class="module-title"><i class="fas fa-wave-square"></i> Módulo 4: Límites Trigonométricos</div>
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-chart-line"></i> Módulo 3: Asíntotas y Funciones Trigonométricas</div>
 
             <a href="sesion8.html" class="session-card" data-lesson="sesion8">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 8</span>
-                    <h3 class="session-name">Límites Trigonométricos Básicos</h3>
-                    <p class="session-desc">Evaluación de funciones seno, coseno y tangente en radianes.</p>
+                    <h3 class="session-name">Asíntotas Horizontales y Verticales</h3>
+                    <p class="session-desc">Cálculo de ecuaciones de asíntotas a través de límites.</p>
                 </div>
             </a>
 
             <a href="sesion9.html" class="session-card" data-lesson="sesion9">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
                     <span class="session-badge">Sesión 9</span>
-                    <h3 class="session-name">Límites Trigonométricos Especiales</h3>
-                    <p class="session-desc">Resolución usando identidades trigonométricas fundamentales.</p>
-                </div>
-            </a>
-            
-            <a href="sesion10.html" class="session-card" data-lesson="sesion10">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 10</span>
-                    <h3 class="session-name">Límites Trigonométricos Indeterminados</h3>
-                    <p class="session-desc">Uso de los teoremas límite de sin(x)/x = 1 y (1-cos(x))/x = 0.</p>
+                    <h3 class="session-name">Asíntotas Oblicuas</h3>
+                    <p class="session-desc">Determinación de asíntotas diagonales en funciones racionales.</p>
                 </div>
             </a>
 
-            <a href="ejerciciosmodulo4.html" class="session-card" data-lesson="ejerciciosmodulo4">
-                <div class="session-status"><i class="fas fa-check status-icon"></i></div>
+            <a href="sesion10.html" class="session-card" data-lesson="sesion10">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
                 <div class="session-info">
-                    <span class="session-badge" style="background:var(--pastel-purple); color:#111;">Práctica Avanzada</span>
-                    <h3 class="session-name">Resolución Paso a Paso: Ejercicio 24</h3>
-                    <p class="session-desc">20 problemas resueltos paso a paso sobre límites trigonométricos.</p>
+                    <span class="session-badge">Sesión 10</span>
+                    <h3 class="session-name">Límites Trigonométricos</h3>
+                    <p class="session-desc">Límites especiales e indeterminados con funciones trigonométricas.</p>
+                </div>
+            </a>
+            
+            <!-- MÓDULO GAMIFICADO -->
+            <a href="quiz-kahoot/index.html" class="session-card kahoot-card" data-lesson="quiz-kahoot">
+                <div class="session-status"><i class="fas fa-gamepad status-icon" style="color: #a855f7;"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background: #a855f7;">Reto Final</span>
+                    <h3 class="session-name">Kahoot! Challenge: Límites</h3>
+                    <p class="session-desc">Demuestra lo que has aprendido en esta arena gamificada de opción múltiple.</p>
                 </div>
             </a>
         </div>
@@ -356,14 +178,10 @@
     </div>
 
     <div style="text-align: center; margin-bottom: 40px;">
-        <a href="../../index.html" style="color: var(--pastel-blue); font-weight: bold; text-decoration: none; font-size: 1.1rem;"><i class="fas fa-home"></i> Volver al Menú General de Matemáticas</a>
+        <a href="../../index.html" style="color: #94a3b8; font-weight: bold; text-decoration: none; padding: 10px 20px; border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.3s;">← Volver al Menú Principal</a>
     </div>
 
-    <footer class="footer" style="text-align:center; padding: 20px; color: var(--text-muted); border-top: 1px solid var(--border-color);">
-        <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
-    </footer>
-
-    <!-- Firebase y Lógica de Progreso -->
+    <!-- Scripts Base Requeridos -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -373,15 +191,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             if (typeof window.getUserProgress === 'function') {
-                // Fetch progress for this specific course ID
+                // Obtenemos progreso especificando el ID de este curso
                 const progress = await window.getUserProgress('calculo_limites');
-                const totalLessons = 11;
+                const totalLessons = 10;
                 let completedCount = 0;
 
-                const cards = document.querySelectorAll('.session-card');
+                const cards = document.querySelectorAll('.session-card[data-lesson^="sesion"]');
                 cards.forEach(card => {
                     const lessonId = card.getAttribute('data-lesson');
-                    if (progress && progress[lessonId] === true) {
+                    if (progress[lessonId] === true) {
                         card.classList.add('completed');
                         completedCount++;
                     }

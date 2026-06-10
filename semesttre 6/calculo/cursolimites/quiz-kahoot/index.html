@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahoot Challenge: Límites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --red: #e21b3c;
+            --blue: #1368ce;
+            --yellow: #d89e00;
+            --green: #26890c;
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --border-glass: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        /* Views */
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        /* Login View */
+        .login-title { font-size: 3rem; font-weight: 800; margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .nickname-input { width: 100%; max-width: 300px; padding: 15px 20px; font-size: 1.2rem; font-family: 'Outfit', sans-serif; font-weight: bold; border-radius: 8px; border: none; text-align: center; margin-bottom: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        .enter-btn { background: #333; color: white; border: none; padding: 15px 30px; font-size: 1.2rem; font-weight: bold; font-family: 'Outfit', sans-serif; border-radius: 8px; cursor: pointer; transition: transform 0.1s, background 0.2s; width: 100%; max-width: 340px; box-shadow: 0 4px 0 #111; }
+        .enter-btn:hover { background: #444; }
+        .enter-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #111; }
+
+        /* Teacher Mode Indicator */
+        #teacher-badge { display: none; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-top: 1rem; color: #f1c40f; border: 1px solid #f1c40f; }
+
+        /* Game View */
+        .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .timer-circle { width: 60px; height: 60px; border-radius: 50%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; font-weight: bold; border: 4px solid white; transition: border-color 0.3s; }
+        .timer-circle.warning { border-color: #e74c3c; color: #e74c3c; animation: beat 1s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        
+        .score-display { font-size: 1.2rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 10px 20px; border-radius: 20px; }
+
+        .question-text { font-size: 2rem; font-weight: 600; margin-bottom: 2rem; background: white; color: #333; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; height: 300px; }
+        .answer-btn { border: none; border-radius: 8px; color: white; font-size: 1.5rem; font-weight: bold; font-family: 'Outfit', sans-serif; cursor: pointer; transition: transform 0.1s, opacity 0.2s; box-shadow: 0 6px 0 rgba(0,0,0,0.2); display: flex; align-items: center; padding: 0 1rem; position: relative; overflow: hidden; }
+        .answer-btn:hover { opacity: 0.9; }
+        .answer-btn:active { transform: translateY(6px); box-shadow: 0 0 0 rgba(0,0,0,0.2); }
+        .answer-btn.disabled { pointer-events: none; opacity: 0.5; }
+        
+        .ans-red { background-color: var(--red); }
+        .ans-blue { background-color: var(--blue); }
+        .ans-yellow { background-color: var(--yellow); }
+        .ans-green { background-color: var(--green); }
+
+        .shape-icon { width: 40px; height: 40px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.8rem; margin-right: 15px; }
+
+        /* Teacher Mode Hints */
+        .teacher-hint { display: none; position: absolute; top: 10px; right: 10px; font-size: 2rem; color: rgba(255,255,255,0.8); }
+
+        /* Results View */
+        .results-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; color: #f1c40f; }
+        .final-score { font-size: 5rem; font-weight: 800; margin-bottom: 2rem; text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        .restart-btn { background: white; color: #4f46e5; border: none; padding: 15px 40px; font-size: 1.5rem; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.2s; }
+        .restart-btn:hover { background: #f8fafc; transform: scale(1.05); }
+
+        /* Confetti Canvas */
+        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; display: none; }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti"></canvas>
+
+    <!-- LOGIN VIEW -->
+    <div id="view-login" class="view active glass-panel">
+        <h1 class="login-title">Límites<br>Kahoot Challenge</h1>
+        <input type="text" id="nickname" class="nickname-input" placeholder="Ingresa tu Nickname" maxlength="15" autocomplete="off">
+        <br>
+        <button class="enter-btn" onclick="startGame()">Entrar</button>
+        <div id="teacher-badge"><i class="fas fa-user-shield"></i> Modo Docente Activado</div>
+    </div>
+
+    <!-- GAME VIEW -->
+    <div id="view-game" class="view" style="width: 100%; max-width: 1000px; padding: 2rem;">
+        <div class="game-header">
+            <div class="timer-circle" id="timer">15</div>
+            <div class="score-display"><i class="fas fa-star" style="color:#f1c40f"></i> Puntos: <span id="score">0</span></div>
+        </div>
+
+        <div class="question-text" id="question-text">
+            Cargando pregunta...
+        </div>
+
+        <div class="answers-grid">
+            <button class="answer-btn ans-red" onclick="checkAnswer(0)">
+                <span class="shape-icon"><i class="fas fa-play" style="transform: rotate(-90deg);"></i></span>
+                <span id="opt-0">Opción 1</span>
+                <i class="fas fa-check-circle teacher-hint" id="hint-0"></i>
+            </button>
+            <button class="answer-btn ans-blue" onclick="checkAnswer(1)">
+                <span class="shape-icon"><i class="fas fa-square"></i></span>
+                <span id="opt-1">Opción 2</span>
+                <i class="fas fa-check-circle teacher-hint" id="hint-1"></i>
+            </button>
+            <button class="answer-btn ans-yellow" onclick="checkAnswer(2)">
+                <span class="shape-icon"><i class="fas fa-circle"></i></span>
+                <span id="opt-2">Opción 3</span>
+                <i class="fas fa-check-circle teacher-hint" id="hint-2"></i>
+            </button>
+            <button class="answer-btn ans-green" onclick="checkAnswer(3)">
+                <span class="shape-icon"><i class="fas fa-square" style="transform: rotate(45deg);"></i></span>
+                <span id="opt-3">Opción 4</span>
+                <i class="fas fa-check-circle teacher-hint" id="hint-3"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- RESULTS VIEW -->
+    <div id="view-results" class="view glass-panel">
+        <h1 class="results-title" id="result-msg">¡Excelente!</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 0;">Puntaje Final</p>
+        <div class="final-score" id="final-score">0</div>
+        <button class="restart-btn" onclick="location.reload()">Jugar de Nuevo</button>
+        <br><br>
+        <a href="../index.html" style="color: white; text-decoration: none; border-bottom: 1px solid white;">Volver al Temario</a>
+    </div>
+
+<script>
+    // --- QUIZ DATA ---
+    const quizData = [
+        {
+            q: "El límite de una constante c cuando x tiende a 'a' es:",
+            opts: ["0", "a", "c", "Infinito"],
+            ans: 2
+        },
+        {
+            q: "Si al evaluar un límite obtenemos 0/0, significa que:",
+            opts: ["El límite no existe", "El resultado es 0", "El resultado es infinito", "Es una indeterminación, hay que factorizar"],
+            ans: 3
+        },
+        {
+            q: "¿Cómo se elimina una raíz en un límite indeterminado?",
+            opts: ["Elevando al cuadrado la función", "Multiplicando por el conjugado", "Derivando la función", "Borrando la raíz"],
+            ans: 1
+        },
+        {
+            q: "Si el grado del numerador es MENOR que el grado del denominador, el límite al infinito es:",
+            opts: ["Infinito", "1", "0", "Los coeficientes principales"],
+            ans: 2
+        },
+        {
+            q: "Para que una función tenga asíntota oblicua, el grado del numerador debe ser:",
+            opts: ["Igual al denominador", "Un grado mayor que el denominador", "Menor que el denominador", "Cero"],
+            ans: 1
+        }
+    ];
+
+    // --- GAME STATE ---
+    let currentQ = 0;
+    let score = 0;
+    let timerInterval;
+    let timeLeft = 15;
+    let isTeacherMode = false;
+    let acceptingAnswers = false;
+
+    // --- SOUND EFFECTS (Using browser speech synth as beep placeholder or HTMLAudio if provided, keeping it simple without assets) ---
+    function playSound(type) {
+        // Optional: Implement audio objects here if needed.
+    }
+
+    // --- LOGIC ---
+    function startGame() {
+        const nick = document.getElementById('nickname').value.trim();
+        if (nick === '') {
+            alert('Por favor ingresa un nickname');
+            return;
+        }
+
+        // Secret Teacher Code Check
+        if (nick === '1983') {
+            isTeacherMode = true;
+            document.getElementById('teacher-badge').style.display = 'inline-block';
+            document.getElementById('nickname').value = '';
+            document.getElementById('nickname').placeholder = 'Código aceptado. Ingresa Nick.';
+            return; // Wait for real nickname
+        }
+
+        switchView('view-game');
+        loadQuestion();
+    }
+
+    function switchView(viewId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
+    }
+
+    function loadQuestion() {
+        if (currentQ >= quizData.length) {
+            endGame();
+            return;
+        }
+
+        const q = quizData[currentQ];
+        document.getElementById('question-text').innerText = q.q;
+        
+        // Reset buttons and hints
+        document.querySelectorAll('.answer-btn').forEach(btn => {
+            btn.classList.remove('disabled');
+            btn.style.opacity = '1';
+        });
+        document.querySelectorAll('.teacher-hint').forEach(hint => hint.style.display = 'none');
+
+        for (let i=0; i<4; i++) {
+            document.getElementById('opt-'+i).innerText = q.opts[i];
+            
+            // Show teacher hint
+            if (isTeacherMode && i === q.ans) {
+                document.getElementById('hint-'+i).style.display = 'block';
+            }
+        }
+
+        acceptingAnswers = true;
+        timeLeft = 15;
+        document.getElementById('timer').innerText = timeLeft;
+        document.getElementById('timer').classList.remove('warning');
+        
+        clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+        timeLeft--;
+        const timerEl = document.getElementById('timer');
+        timerEl.innerText = timeLeft;
+
+        if (timeLeft <= 5) {
+            timerEl.classList.add('warning');
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            handleTimeOut();
+        }
+    }
+
+    function handleTimeOut() {
+        acceptingAnswers = false;
+        disableButtons();
+        setTimeout(() => {
+            currentQ++;
+            loadQuestion();
+        }, 2000);
+    }
+
+    function checkAnswer(optIndex) {
+        if (!acceptingAnswers) return;
+        acceptingAnswers = false;
+        clearInterval(timerInterval);
+
+        const q = quizData[currentQ];
+        disableButtons();
+
+        if (optIndex === q.ans) {
+            // Correct
+            const timeBonus = timeLeft * 10;
+            const points = 500 + timeBonus;
+            score += points;
+            document.getElementById('score').innerText = score;
+            
+            // Visual feedback on button
+            document.querySelectorAll('.answer-btn')[optIndex].style.transform = 'scale(1.05)';
+        } else {
+            // Incorrect - dim the wrong button
+            document.querySelectorAll('.answer-btn')[optIndex].style.opacity = '0.3';
+        }
+
+        // Always highlight correct
+        document.querySelectorAll('.answer-btn')[q.ans].style.boxShadow = '0 0 20px white';
+
+        setTimeout(() => {
+            // Reset styles
+            document.querySelectorAll('.answer-btn').forEach(b => {
+                b.style.transform = 'none';
+                b.style.boxShadow = '0 6px 0 rgba(0,0,0,0.2)';
+            });
+            currentQ++;
+            loadQuestion();
+        }, 2000);
+    }
+
+    function disableButtons() {
+        document.querySelectorAll('.answer-btn').forEach(btn => btn.classList.add('disabled'));
+    }
+
+    function endGame() {
+        switchView('view-results');
+        document.getElementById('final-score').innerText = score;
+        
+        const msg = document.getElementById('result-msg');
+        if (score > 3500) msg.innerText = '¡Genio del Cálculo!';
+        else if (score > 2000) msg.innerText = '¡Muy Buen Trabajo!';
+        else msg.innerText = '¡Sigue Practicando!';
+
+        startConfetti();
+    }
+
+    // --- SIMPLE CONFETTI SYSTEM ---
+    function startConfetti() {
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.style.display = 'block';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const pieces = [];
+        const colors = ['#e21b3c', '#1368ce', '#d89e00', '#26890c', '#ffffff'];
+
+        for (let i = 0; i < 100; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                w: Math.random() * 10 + 5,
+                h: Math.random() * 10 + 5,
+                c: colors[Math.floor(Math.random() * colors.length)],
+                dy: Math.random() * 3 + 2,
+                dx: Math.random() * 2 - 1,
+                rot: Math.random() * 360,
+                drot: Math.random() * 5 - 2.5
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach(p => {
+                ctx.save();
+                ctx.translate(p.x + p.w/2, p.y + p.h/2);
+                ctx.rotate(p.rot * Math.PI / 180);
+                ctx.fillStyle = p.c;
+                ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+                ctx.restore();
+
+                p.y += p.dy;
+                p.x += p.dx;
+                p.rot += p.drot;
+
+                if (p.y > canvas.height) {
+                    p.y = -20;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    }
+</script>
+</body>
+</html>

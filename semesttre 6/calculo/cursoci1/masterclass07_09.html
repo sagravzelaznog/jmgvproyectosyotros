@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASTERCLASS07_09 - Cálculo Diferencial</title>
+    <link rel="icon" href="data:;base64,=">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap');
+            :root {
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #e74c3c;
+            --sidebar-bg: #ffffff;
+            --border-color: #e1e8ed;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+            --math-color: #1a252f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f1f5f9;
+                --card-bg: #1e293b;
+                --primary: #38bdf8;
+                --secondary: #c084fc;
+                --accent: #fb7185;
+                --sidebar-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 0 10px 25px rgba(0,0,0,0.5);
+                --math-color: #e2e8f0;
+            }
+        }
+
+        * { box-sizing: border-box; }
+            html { scroll-behavior: smooth; }
+            body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+            .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 900;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-top: 2rem;
+        }
+
+        p, li {
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-left: 4px solid #2ecc71;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+
+        .math-block {
+            background-color: rgba(0,0,0,0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .math-block { background-color: rgba(255,255,255,0.03); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Módulos</h2>
+            <a href="index.html">🏠 Volver al Hub</a>
+<a href="masterclass01.html" >M1: Relaciones</a>
+<a href="masterclass02.html" >M2: Funciones</a>
+<a href="masterclass03.html" >M3: Notación</a>
+<a href="masterclass04.html" >M4: Clasificación</a>
+<a href="masterclass05.html" >M5: Valor</a>
+<a href="masterclass06.html" >M6: Dominio y Rango</a>
+<a href="masterclass07_01.html" >M7.1: 7.1 Función Constante</a>
+<a href="masterclass07_02.html" >M7.2: 7.2 Funciones Lineales</a>
+<a href="masterclass07_03.html" >M7.3: 7.3 Función Identidad</a>
+<a href="masterclass07_04.html" >M7.4: 7.4 Funciones Cuadráticas</a>
+<a href="masterclass07_05.html" >M7.5: 7.5 Funciones Potencia: $f(x) = x^n$</a>
+<a href="masterclass07_06.html" >M7.6: 7.6 Funciones Racionales</a>
+<a href="masterclass07_07.html" >M7.7: 7.7 Función Raíz Cuadrada</a>
+<a href="masterclass07_08.html" >M7.8: 7.8 Función Valor Absoluto</a>
+<a href="masterclass07_09.html" class="active">M7.9: 7.9 Función Mayor Entero (Función Escalonada)</a>
+<a href="masterclass07_10.html" >M7.10: 7.10 Función Característica (Función Indicadora)</a>
+<a href="masterclass08.html" >M8: Gráficas y Transform.</a>
+<a href="masterclass09.html" >M9: Desplazamientos</a>
+<a href="masterclass10.html" >M10: Alargamientos</a>
+<a href="masterclass11.html" >M11: Reflexiones</a>
+<a href="masterclass12.html" >M12: Crecientes</a>
+<a href="actividades.html" >Recursos Prácticos</a>
+<a href="tarea.html" >Evaluación Final</a>
+
+        </aside>
+        <main class="main-content">
+            <div class="section">
+<h2>7.9 Función Mayor Entero (Función Escalonada)</h2>
+<h3>7.9 Función Mayor Entero (Función Escalonada)</h3>
+            <p>La función mayor entero, también conocida como función piso o función escalonada, se denota por $\lfloor x \rfloor$ y se define como el mayor entero que es menor o igual a $x$.</p>
+                    <h4>Definición formal:</h4>
+            <p>$$
+            \lfloor x \rfloor = n \quad \text{donde} \quad n \leq x < n+1, \quad n \in \mathbb{Z}
+            $$</p>
+                    <h4>Características principales:</h4>
+            <ul>
+                <li><strong>Dominio:</strong> $\mathbb{R}$ (todos los números reales)</li>
+                <li><strong>Rango:</strong> $\mathbb{Z}$ (todos los enteros)</li>
+                <li><strong>Discontinuidades:</strong> Tiene una discontinuidad de salto en cada valor entero</li>
+                <li><strong>Monotonía:</strong> No decreciente (es constante en los intervalos $[n, n+1)$ para cada $n \in \mathbb{Z}$)</li>
+                <li><strong>Notación alternativa:</strong> $[x]$ o $\text{int}(x)$ en algunos contextos</li>
+            </ul>
+                    <h4>Ejemplos de evaluación:</h4>
+            <table class="table">
+                <tr>
+                    <th>Expresión</th>
+                    <th>Valor</th>
+                    <th>Explicación</th>
+                </tr>
+                <tr>
+                    <td>$\lfloor 3.7 \rfloor$</td>
+                    <td>$3$</td>
+                    <td>El mayor entero $\leq 3.7$</td>
+                </tr>
+                <tr>
+                    <td>$\lfloor -1.2 \rfloor$</td>
+                    <td>$-2$</td>
+                    <td>El mayor entero $\leq -1.2$</td>
+                </tr>
+                <tr>
+                    <td>$\lfloor 5 \rfloor$</td>
+                    <td>$5$</td>
+                    <td>Para enteros, el valor es el mismo</td>
+                </tr>
+                <tr>
+                    <td>$\lfloor \pi \rfloor$</td>
+                    <td>$3$</td>
+                    <td>Ya que $3 \leq \pi < 4$</td>
+                </tr>
+                <tr>
+                    <td>$\lfloor -\sqrt{2} \rfloor$</td>
+                    <td>$-2$</td>
+                    <td>Ya que $-2 \leq -1.414... < -1$</td>
+                </tr>
+            </table>
+                    <h4>Gráfica de la función:</h4>
+            <p>La gráfica de $f(x) = \lfloor x \rfloor$ consiste en una serie de segmentos horizontales (escalones) que son cerrados en el extremo izquierdo y abiertos en el derecho.</p>
+                    <div class="example">
+                <h4>Ejemplo 1: Análisis de $f(x) = \lfloor x \rfloor + 1$</h4>
+                            <h5>Paso 1: Comportamiento general</h5>
+                <p>Esta función es una traslación vertical hacia arriba de 1 unidad de la función mayor entero básica.</p>
+                            <h5>Paso 2: Tabla de valores</h5>
+                <table class="table">
+                    <tr>
+                        <th>Intervalo</th>
+                        <th>$f(x)$</th>
+                        <th>Comportamiento</th>
+                    </tr>
+                    <tr>
+                        <td>$0 \leq x < 1$</td>
+                        <td>$1$</td>
+                        <td>$\lfloor x \rfloor = 0$, entonces $f(x) = 1$</td>
+                    </tr>
+                    <tr>
+                        <td>$1 \leq x < 2$</td>
+                        <td>$2$</td>
+                        <td>$\lfloor x \rfloor = 1$, entonces $f(x) = 2$</td>
+                    </tr>
+                    <tr>
+                        <td>$-1 \leq x < 0$</td>
+                        <td>$0$</td>
+                        <td>$\lfloor x \rfloor = -1$, entonces $f(x) = 0$</td>
+                    </tr>
+                </table>
+                            <h5>Paso 3: Discontinuidades</h5>
+                <p>La función es discontinua en todos los valores enteros de $x$.</p>
+            </div>
+                    <h4>Aplicaciones prácticas:</h4>
+            <div class="example">
+                <h5>Ejemplo 2: Tarifas por hora</h5>
+                <p>Un estacionamiento cobra $15 por hora o fracción. La función de costo $C(t)$ para $t$ horas está dada por:</p>
+                <p>$$
+                C(t) = 15 \lceil t \rceil
+                $$
+                donde $\lceil t \rceil$ es la función techo (mínimo entero mayor o igual a $t$).</p>
+                            <p><strong>a) ¿Cuánto se paga por 2.3 horas?</strong></p>
+                <p>$\lceil 2.3 \rceil = 3$ horas \\
+                $C(2.3) = 15 \times 3 = 45$ pesos</p>
+                            <p><strong>b) ¿Y por 4.9 horas?</strong></p>
+                <p>$\lceil 4.9 \rceil = 5$ horas \\
+                $C(4.9) = 15 \times 5 = 75$ pesos</p>
+            </div>
+                    <h4>Propiedades importantes:</h4>
+            <ol>
+                <li>$\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1$</li>
+                <li>$\lfloor x + n \rfloor = \lfloor x \rfloor + n$ para $n \in \mathbb{Z}$</li>
+                <li>$\lfloor x \rfloor + \lfloor y \rfloor \leq \lfloor x + y \rfloor \leq \lfloor x \rfloor + \lfloor y \rfloor + 1$</li>
+                <li>Para $n \in \mathbb{Z}^+$, $\left\lfloor \frac{x}{n} \right\rfloor = \left\lfloor \frac{\lfloor x \rfloor}{n} \right\rfloor$</li>
+            </ol>
+                    <div class="exercise">
+                <h3>Ejercicio 1:</h3>
+                <p>Evalúa las siguientes expresiones:</p>
+                <p>a) $\lfloor 4.9 \rfloor$</p>
+                <p>b) $\lfloor -3.2 \rfloor$</p>
+                <p>c) $\lfloor \sqrt{10} \rfloor$</p>
+                <p>d) $\lfloor \pi^2 \rfloor$</p>
+                <p>e) $\lfloor -e \rfloor$ donde $e$ es el número de Euler</p>
+            </div>
+                    <div class="exercise">
+                <h3>Ejercicio 2:</h3>
+                <p>Grafica las siguientes funciones en el intervalo $[-3, 3]$:</p>
+                <p>a) $f(x) = \lfloor x \rfloor$</p>
+                <p>b) $g(x) = \lfloor x + 0.5 \rfloor$ (función redondeo al entero más cercano)</p>
+                <p>c) $h(x) = \lfloor x \rfloor + \lfloor -x \rfloor$</p>
+            </div>
+                    <div class="exercise">
+                <h3>Ejercicio 3:</h3>
+                <p>Una compañía de telefonía celular cobra $1.50 por minuto o fracción de minuto de llamada. La función de costo $C(t)$ en pesos para $t$ minutos está dada por:</p>
+                <p>$$
+                C(t) = 1.50 \lceil t \rceil
+                $$</p>
+                <ol>
+                    <li>¿Cuánto cuesta una llamada de 5.2 minutos?</li>
+                    <li>Si una persona pagó $12.00, ¿cuál es la duración máxima que pudo haber tenido su llamada?</li>
+                    <li>¿Es posible que una llamada de exactamente 8 minutos cueste $11.00? Explica.</li>
+                </ol>
+            </div>
+
+        </div>
+                    <div class="nav-buttons">
+                <a href="masterclass07_08.html" class="nav-btn">← Anterior</a>
+                <a href="masterclass07_10.html" class="nav-btn">Siguiente →</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

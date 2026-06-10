@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 5: Eliminación por Factorización</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        :root { --primary: #6366f1; --secondary: #a855f7; --accent: #2ecc71; --bg-dark: #0f172a; --card-bg: rgba(30, 41, 59, 0.7); }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: #f8fafc; }
+        
+        .page-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .sesion-header { text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 2rem; }
+        .sesion-title { color: var(--primary); font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .info-box { background: rgba(99, 102, 241, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        
+        .teoria-section, .practica-section { background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem; }
+        .teoria-section h2, .practica-section h2 { color: var(--secondary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        
+        .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        .pro-card { background: rgba(46, 204, 113, 0.1); border: 1px solid rgba(46, 204, 113, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .con-card { background: rgba(231, 76, 60, 0.1); border: 1px solid rgba(231, 76, 60, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .pro-card h4 { color: #2ecc71; margin-top: 0; }
+        .con-card h4 { color: #e74c3c; margin-top: 0; }
+        
+        .svg-container { display: flex; justify-content: center; margin: 2rem 0; }
+        .math-block { fill: #1e293b; stroke: #6366f1; stroke-width: 2; transition: opacity 0.5s, transform 0.5s; cursor: pointer; }
+        .math-text { fill: white; font-weight: bold; font-size: 18px; pointer-events: none; }
+        .slash { stroke: #e74c3c; stroke-width: 4; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 0.5s; pointer-events: none; }
+        
+        #dynamic-desc { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; min-height: 80px; text-align: center; font-size: 1.1rem; font-weight: bold; color: #cbd5e1; }
+        
+        .nav-btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s; border: none; cursor: pointer; }
+        .nav-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 2rem; }
+
+        .step-box { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--accent); margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+<main class="page-container">
+    <div style="margin-bottom: 20px;">
+        <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa</a>
+    </div>
+
+    <div class="sesion-header">
+        <h1 class="sesion-title">Eliminación por Factorización</h1>
+        <p>Sesión 5 - Módulo 2: Técnicas de Resolución</p>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivos de Aprendizaje:</strong>
+        <p style="margin-top: 0.5rem; margin-bottom: 0;">Aplicar técnicas de factorización (diferencia de cuadrados, trinomios, factor común) para eliminar indeterminaciones $0/0$ en límites racionales.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>Quitando la máscara matemática</h2>
+        <p>Cuando la evaluación directa resulta en $\frac{0}{0}$, sabemos que existe un factor oculto $(x - a)$ que está anulando tanto el numerador como el denominador.</p>
+        
+        <div class="step-box">
+            <strong>Paso 1:</strong> Factorizar el numerador y el denominador usando métodos algebraicos comunes.
+        </div>
+        <div class="step-box">
+            <strong>Paso 2:</strong> Cancelar los factores idénticos en numerador y denominador (generalmente $(x-a)$).
+        </div>
+        <div class="step-box">
+            <strong>Paso 3:</strong> Volver a aplicar sustitución directa sobre la función simplificada.
+        </div>
+
+        <h3>Ejemplo: Diferencia de Cuadrados</h3>
+        <p>$$ \lim_{x \to 3} \frac{x^2 - 9}{x - 3} $$</p>
+        <p>Si factorizamos $x^2 - 9$ obtenemos $(x-3)(x+3)$. Al sustituir:</p>
+        <p>$$ \lim_{x \to 3} \frac{(x-3)(x+3)}{x - 3} = \lim_{x \to 3} (x+3) = 3 + 3 = 6 $$</p>
+
+        <div class="pros-cons-grid">
+            <div class="pro-card">
+                <h4><i class="fas fa-thumbs-up"></i> Álgebra Clásica</h4>
+                <p>Es un método exacto y funciona para la inmensa mayoría de las funciones polinomiales. Refuerza tus bases de álgebra.</p>
+            </div>
+            <div class="con-card">
+                <h4><i class="fas fa-thumbs-down"></i> Limitaciones</h4>
+                <p>No funciona con facilidad si la indeterminación es causada por raíces cuadradas complejas o funciones trigonométricas. Ahí requeriremos otros métodos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-magic"></i> Simulador de Cancelación</h2>
+        <p>Haz clic en los binomios idénticos (arriba y abajo) para "cancelarlos" y revelar el límite de $\lim_{x \to 2} \frac{x^2 - 4}{x^2 - 2x}$.</p>
+        
+        <div class="svg-container">
+            <svg viewBox="0 0 500 200" width="100%" height="200">
+                <!-- Numerador -->
+                <rect x="100" y="30" width="100" height="40" rx="5" class="math-block" id="num-1"/>
+                <text x="150" y="55" text-anchor="middle" class="math-text">(x + 2)</text>
+                
+                <rect x="220" y="30" width="100" height="40" rx="5" class="math-block" id="num-2" onclick="cancelFactors()"/>
+                <text x="270" y="55" text-anchor="middle" class="math-text">(x - 2)</text>
+
+                <!-- Línea de división -->
+                <line x1="80" y1="100" x2="350" y2="100" stroke="#f8fafc" stroke-width="3" />
+
+                <!-- Denominador -->
+                <rect x="160" y="130" width="40" height="40" rx="5" class="math-block" id="den-1"/>
+                <text x="180" y="155" text-anchor="middle" class="math-text">x</text>
+
+                <rect x="220" y="130" width="100" height="40" rx="5" class="math-block" id="den-2" onclick="cancelFactors()"/>
+                <text x="270" y="155" text-anchor="middle" class="math-text">(x - 2)</text>
+                
+                <!-- Slashes de cancelación (Ocultos inicialmente) -->
+                <line x1="210" y1="80" x2="330" y2="20" class="slash" id="slash-num" />
+                <line x1="210" y1="180" x2="330" y2="120" class="slash" id="slash-den" />
+
+                <!-- Resultado Final (Oculto) -->
+                <text x="430" y="110" text-anchor="middle" fill="#2ecc71" font-weight="bold" font-size="24" opacity="0" id="final-result" style="transition: opacity 1s;">= 4 / 2 = 2</text>
+            </svg>
+        </div>
+        
+        <div id="dynamic-desc">
+            Identifica el factor común (x - 2) que causa la indeterminación 0/0 y cancélalo haciéndole clic.
+        </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {
+                "question": "✂️ Si evalúas un límite y obtienes 0/0, ¿qué intentas hacer primero con los polinomios?",
+                "options": ["Derivarlos", "Sumarlos", "Factorizarlos para cancelar términos", "Multiplicarlos por cero"],
+                "correctIndex": 2,
+                "explanation": "La factorización nos permite exponer el término que se hace cero y cancelarlo arriba y abajo."
+            },
+            {
+                "question": "🧮 ¿Cómo se factoriza una diferencia de cuadrados como (x^2 - 16)?",
+                "options": ["(x - 4)(x - 4)", "(x - 4)(x + 4)", "(x + 16)(x - 16)", "(x - 2)(x + 8)"],
+                "correctIndex": 1,
+                "explanation": "La regla es a² - b² = (a - b)(a + b). Por lo tanto x² - 16 = (x - 4)(x + 4)."
+            },
+            {
+                "question": "🔍 Si quieres calcular lim_{x→1} (x^2 - x) / (x - 1), ¿cuál es el factor común en el numerador?",
+                "options": ["x - 1", "x", "1", "x^2"],
+                "correctIndex": 1,
+                "explanation": "Factorizando el numerador sacando factor común 'x': x(x - 1). Luego el (x - 1) se cancela con el denominador."
+            },
+            {
+                "question": "🎯 ¿Cuál es el valor del límite lim_{x→1} (x^2 - x) / (x - 1)?",
+                "options": ["0", "1", "0/0", "Infinito"],
+                "correctIndex": 1,
+                "explanation": "Tras factorizar y cancelar el (x-1), queda lim_{x→1} x. Sustituyendo x=1, el resultado es 1."
+            },
+            {
+                "question": "🧩 Factoriza el trinomio x^2 - 5x + 6:",
+                "options": ["(x - 2)(x - 3)", "(x + 2)(x + 3)", "(x - 6)(x + 1)", "(x - 1)(x - 5)"],
+                "correctIndex": 0,
+                "explanation": "Buscamos dos números que sumados den -5 y multiplicados den 6. Esos son -2 y -3."
+            },
+            {
+                "question": "🔑 En un límite cuando x→a que da 0/0, ¿cuál es casi siempre el factor que debes buscar cancelar?",
+                "options": ["x", "(x + a)", "(x - a)", "(x^2 - a^2)"],
+                "correctIndex": 2,
+                "explanation": "Por el teorema del residuo, si un polinomio evaluado en 'a' da 0, entonces (x - a) es forzosamente uno de sus factores."
+            },
+            {
+                "question": "🔄 ¿Qué paso sigue inmediatamente después de cancelar los factores iguales en numerador y denominador?",
+                "options": ["Graficar la función", "Multiplicar por infinito", "Evaluar de nuevo el límite por sustitución directa en lo que queda", "Escribir que el límite no existe"],
+                "correctIndex": 2,
+                "explanation": "Una vez 'quitada la máscara' anulando la división entre cero, volvemos a aplicar la sustitución directa en la expresión simplificada."
+            }
+        ]
+        </script>
+    </div>
+
+    <div class="nav-controls">
+        <a href="sesion4.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Anterior</a>
+        <a href="sesion6.html" class="nav-btn">Siguiente Sesión <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<script>
+    let cancelled = false;
+    function cancelFactors() {
+        if(cancelled) return;
+        cancelled = true;
+        
+        // Dibujar los cortes
+        document.getElementById('slash-num').style.strokeDashoffset = '0';
+        document.getElementById('slash-den').style.strokeDashoffset = '0';
+        
+        // Poner gris los bloques
+        document.getElementById('num-2').style.opacity = '0.3';
+        document.getElementById('den-2').style.opacity = '0.3';
+        
+        // Actualizar descripción y mostrar resultado final
+        document.getElementById('dynamic-desc').innerHTML = '<span style="color: #2ecc71;"><i class="fas fa-check-circle"></i> ¡Indeterminación Eliminada!</span> Al cancelar (x-2) arriba y abajo, la expresión se reduce a (x+2)/x. Ahora evaluamos x=2: (2+2)/2 = 4/2 = 2.';
+        
+        setTimeout(() => {
+            document.getElementById('final-result').style.opacity = '1';
+        }, 1000);
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="../../env.js"></script>
+<script src="../../progress-tracker.js"></script>
+<script src="../../quiz-engine.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.markLessonCompleted) {
+            window.markLessonCompleted('calculo_limites', 'sesion5');
+        }
+    });
+</script>
+</body>
+</html>

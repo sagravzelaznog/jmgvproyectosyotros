@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: Definición Formal de Límite</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #2ecc71;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: #f8fafc; }
+        
+        .page-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        .sesion-header { text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 2rem; }
+        .sesion-title { color: var(--primary); font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .info-box { background: rgba(99, 102, 241, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        
+        .teoria-section, .practica-section { background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem; }
+        .teoria-section h2, .practica-section h2 { color: var(--secondary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        
+        .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        .pro-card { background: rgba(46, 204, 113, 0.1); border: 1px solid rgba(46, 204, 113, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .con-card { background: rgba(231, 76, 60, 0.1); border: 1px solid rgba(231, 76, 60, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .pro-card h4 { color: #2ecc71; margin-top: 0; }
+        .con-card h4 { color: #e74c3c; margin-top: 0; }
+        
+        .svg-container { display: flex; justify-content: center; margin: 2rem 0; }
+        .svg-graph { background: #1e293b; border-radius: 8px; border: 1px solid #475569; }
+        
+        .band-y { fill: rgba(168, 85, 247, 0.2); transition: height 0.3s, y 0.3s; cursor: pointer; }
+        .band-x { fill: rgba(99, 102, 241, 0.2); transition: width 0.3s, x 0.3s; cursor: pointer; }
+        
+        #dynamic-desc { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; min-height: 80px; text-align: center; font-size: 1.1rem; font-weight: bold; color: #cbd5e1; }
+        
+        .nav-btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s; border: none; cursor: pointer; }
+        .nav-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+
+<main class="page-container">
+    <div style="margin-bottom: 20px;">
+        <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa</a>
+    </div>
+
+    <div class="sesion-header">
+        <h1 class="sesion-title">Definición Formal de Límite (Épsilon-Delta)</h1>
+        <p>Sesión 2 - Módulo 1: Fundamentos de Límites</p>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivos de Aprendizaje:</strong>
+        <p style="margin-top: 0.5rem; margin-bottom: 0;">Entender la definición matemática precisa de un límite utilizando bandas de tolerancia $\varepsilon$ (épsilon) y $\delta$ (delta), y realizar demostraciones sencillas.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>¿Por qué una definición formal?</h2>
+        <p>La idea intuitiva de "acercarse mucho" no es suficiente para las demostraciones matemáticas rigorosas. La definición formal de límite es:</p>
+        <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; text-align: center; margin: 1.5rem 0; border: 1px dashed var(--secondary);">
+            $\lim_{x \to a} f(x) = L$ si y solo si, para todo $\varepsilon > 0$, existe un $\delta > 0$ tal que:<br><br>
+            Si $0 < |x - a| < \delta$, entonces $|f(x) - L| < \varepsilon$
+        </div>
+        <ul>
+            <li>$\varepsilon$ (Épsilon): Es una "tolerancia" en el eje Y. Un margen de error alrededor del límite $L$.</li>
+            <li>$\delta$ (Delta): Es una "ventana" de aproximación en el eje X alrededor de $a$.</li>
+        </ul>
+
+        <div class="pros-cons-grid">
+            <div class="pro-card">
+                <h4><i class="fas fa-check-circle"></i> Definición Formal</h4>
+                <p>Proporciona una prueba irrefutable de que un límite existe. Es la base de todo el cálculo avanzado y permite evitar ambigüedades lógicas.</p>
+            </div>
+            <div class="con-card">
+                <h4><i class="fas fa-eye"></i> Definición Intuitiva</h4>
+                <p>Es útil para comprender rápidamente, pero falla al intentar demostrar qué sucede con funciones oscilantes extrañas o al realizar pruebas matemáticas formales.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-sliders-h"></i> El Juego de Épsilon y Delta</h2>
+        <p>Haz clic en las bandas coloreadas. El "Juego" es: sin importar qué tan pequeño hagas $\varepsilon$ (la banda horizontal), siempre debe existir un $\delta$ (banda vertical) tal que la función nunca salga del rectángulo creado.</p>
+        
+        <div class="svg-container">
+            <svg class="svg-graph" viewBox="0 0 500 300" width="100%" height="300">
+                <!-- Ejes -->
+                <line x1="50" y1="250" x2="450" y2="250" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="100" y1="50" x2="100" y2="280" stroke="#94a3b8" stroke-width="2"/>
+                
+                <!-- Bandas (Tolerancia) -->
+                <rect x="50" y="110" width="400" height="80" class="band-y" onclick="showDesc('epsilon')" id="eps-band"/>
+                <rect x="220" y="50" width="60" height="200" class="band-x" onclick="showDesc('delta')" id="del-band"/>
+                
+                <!-- Función Y = 0.5X -->
+                <path d="M 50 250 L 450 50" fill="transparent" stroke="#38bdf8" stroke-width="3" />
+                
+                <!-- Punto central a = 250, L = 150 -->
+                <circle cx="250" cy="150" r="5" fill="#f1c40f" />
+                
+                <!-- Etiquetas -->
+                <text x="245" y="270" fill="#f8fafc">a</text>
+                <text x="75" y="155" fill="#f8fafc">L</text>
+                <text x="55" y="115" fill="#a855f7" font-size="12">L + ε</text>
+                <text x="55" y="185" fill="#a855f7" font-size="12">L - ε</text>
+                <text x="270" y="270" fill="#6366f1" font-size="12">a + δ</text>
+                <text x="180" y="270" fill="#6366f1" font-size="12">a - δ</text>
+                
+                <!-- Interactivo General -->
+                <rect x="150" y="50" width="200" height="200" fill="transparent" cursor="crosshair" onclick="showDesc('game')"/>
+            </svg>
+        </div>
+        
+        <div id="dynamic-desc">
+            Haz clic en la banda morada, la banda azul, o en la cruz central para aprender sobre las tolerancias.
+        </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {
+                "question": "🎯 ¿Qué letra griega se usa comúnmente para representar la tolerancia alrededor del límite L en el eje Y?",
+                "options": ["Delta (δ)", "Épsilon (ε)", "Alfa (α)", "Pi (π)"],
+                "correctIndex": 1,
+                "explanation": "Épsilon (ε) representa la diferencia permitida entre la función f(x) y el límite L."
+            },
+            {
+                "question": "↔️ En la definición formal, ¿qué variable está restringida por la distancia Delta (δ)?",
+                "options": ["La distancia entre f(x) y L", "El valor del límite", "La distancia entre x y a", "El eje Y"],
+                "correctIndex": 2,
+                "explanation": "Delta (δ) determina qué tan cerca debe estar 'x' de 'a' en el eje X."
+            },
+            {
+                "question": "⚖️ ¿Cuál es la lectura correcta de la expresión 0 < |x - a| < δ ?",
+                "options": ["La distancia entre x y a es mayor que cero y menor que delta", "x es igual a a", "La función siempre es positiva", "El límite es infinito"],
+                "correctIndex": 0,
+                "explanation": "Esta inecuación asegura que 'x' se acerque a 'a' dentro de un radio δ, pero el '0 <' garantiza que x no sea exactamente igual a 'a'."
+            },
+            {
+                "question": "🎮 En el 'juego' de los límites, si tu oponente elige un épsilon (ε) extremadamente pequeño, tú debes responder encontrando:",
+                "options": ["Un épsilon aún más pequeño", "Un delta (δ) > 0 que mantenga f(x) dentro de ese épsilon", "El valor exacto de f(a)", "Un delta negativo"],
+                "correctIndex": 1,
+                "explanation": "Para demostrar un límite, sin importar el ε dado (>0), siempre debemos ser capaces de hallar al menos un δ (>0) que funcione."
+            },
+            {
+                "question": "📉 ¿Qué significa la expresión |f(x) - L| < ε ?",
+                "options": ["Que f(x) está entre L-ε y L+ε", "Que el límite no existe", "Que f(x) es menor que ε", "Que L es igual a cero"],
+                "correctIndex": 0,
+                "explanation": "Los valores de la función caerán estrictamente dentro de la franja horizontal limitada por L - ε y L + ε."
+            },
+            {
+                "question": "📐 Si f(x) = 2x, y a = 3, L = 6. Para un ε = 0.2, un δ válido podría ser:",
+                "options": ["δ = 0.1", "δ = 1.0", "δ = 5", "δ = 2"],
+                "correctIndex": 0,
+                "explanation": "Si elegimos δ = 0.1, x estará entre 2.9 y 3.1, por lo que f(x) estará entre 5.8 y 6.2. La distancia a L (6) será máximo 0.2, cumpliendo la condición."
+            },
+            {
+                "question": "🤔 ¿Por qué la definición formal usa desigualdades y valores absolutos?",
+                "options": ["Para confundir", "Para definir distancias y aproximaciones numéricas rigurosamente", "Porque las funciones siempre son positivas", "Para poder usar raíces cuadradas"],
+                "correctIndex": 1,
+                "explanation": "El valor absoluto |x - y| es la distancia matemática exacta entre dos números, perfecta para definir formalmente 'qué tan cerca' está uno del otro."
+            }
+        ]
+        </script>
+    </div>
+
+    <div class="nav-controls">
+        <a href="sesion1.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Anterior</a>
+        <a href="sesion3.html" class="nav-btn">Siguiente Sesión <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<script>
+    function showDesc(zone) {
+        const descBox = document.getElementById('dynamic-desc');
+        const epsBand = document.getElementById('eps-band');
+        const delBand = document.getElementById('del-band');
+        
+        if (zone === 'epsilon') {
+            descBox.innerHTML = '<span style="color: #a855f7;"><i class="fas fa-arrows-alt-v"></i> Banda Épsilon (ε):</span> Este es el margen de error en el Eje Y. Cualquier valor de y dentro de esta banda morada se considera "suficientemente cerca" de L.';
+            epsBand.style.fill = 'rgba(168, 85, 247, 0.4)';
+            setTimeout(() => epsBand.style.fill = 'rgba(168, 85, 247, 0.2)', 1500);
+        } else if (zone === 'delta') {
+            descBox.innerHTML = '<span style="color: #6366f1;"><i class="fas fa-arrows-alt-h"></i> Banda Delta (δ):</span> Esta es la cercanía requerida en el Eje X. Si tomas cualquier x dentro de esta banda azul, su resultado Y caerá garantizadamente en la banda morada.';
+            delBand.style.fill = 'rgba(99, 102, 241, 0.4)';
+            setTimeout(() => delBand.style.fill = 'rgba(99, 102, 241, 0.2)', 1500);
+        } else if (zone === 'game') {
+            descBox.innerHTML = '<span style="color: #f1c40f;"><i class="fas fa-puzzle-piece"></i> El Reto:</span> Si se reduce el grosor de la banda morada, la recta de la función podría "salirse" por arriba o abajo. Para arreglarlo, tendrías que reducir la banda azul δ.';
+        }
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="../../env.js"></script>
+<script src="../../progress-tracker.js"></script>
+<script src="../../quiz-engine.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.markLessonCompleted) {
+            window.markLessonCompleted('calculo_limites', 'sesion2');
+        }
+    });
+</script>
+</body>
+</html>

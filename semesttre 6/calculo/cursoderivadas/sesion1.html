@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1: Definición e Interpretación Geométrica</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: #f8fafc; }
+        
+        .page-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        
+        /* Glassmorphism Components */
+        .sesion-header { text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 2rem; }
+        .sesion-title { color: var(--primary); font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .info-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        
+        .teoria-section, .practica-section { background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem; }
+        .teoria-section h2, .practica-section h2 { color: var(--secondary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        
+        /* Pros-Cons Grid */
+        .pros-cons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        .pro-card { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .con-card { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 1.5rem; border-radius: 8px; }
+        .pro-card h4 { color: #3b82f6; margin-top: 0; }
+        .con-card h4 { color: #f59e0b; margin-top: 0; }
+        @media (max-width: 768px) { .pros-cons-grid { grid-template-columns: 1fr; } }
+        
+        /* SVG Interactive Styling */
+        .svg-container { display: flex; justify-content: center; margin: 2rem 0; flex-direction: column; align-items: center; }
+        .slider-container { width: 80%; margin-top: 20px; }
+        .slider { width: 100%; cursor: pointer; }
+        
+        #dynamic-desc { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; min-height: 80px; text-align: center; font-size: 1.1rem; font-weight: bold; color: #cbd5e1; width: 100%; margin-top: 20px;}
+        
+        .nav-btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s; border: none; cursor: pointer; }
+        .nav-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 2rem; }
+
+        .formula-box { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px dashed #10b981; text-align: center; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+<main class="page-container">
+    <div style="margin-bottom: 20px;">
+        <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa</a>
+    </div>
+
+    <div class="sesion-header">
+        <h1 class="sesion-title">Definición e Interpretación Geométrica</h1>
+        <p>Sesión 1 - Módulo 1: Conceptos Básicos</p>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fas fa-bullseye"></i> Objetivos de Aprendizaje:</strong>
+        <p style="margin-top: 0.5rem; margin-bottom: 0;">Comprender el concepto de la derivada como un límite de la tasa de cambio promedio, y visualizar cómo una recta secante se transforma en una recta tangente.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>La Definición Formal</h2>
+        <p>Sea $f(x)$ una función, se define a su derivada $f'(x)$ como el límite de la razón de cambio cuando el incremento $\Delta x$ tiende a cero:</p>
+        
+        <div class="formula-box">
+            <span style="color: #10b981;">$$ f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} $$</span>
+        </div>
+
+        <p>A esta notación $f'(x)$ (se lee "f prima de x") introducida por Lagrange, también se le unen otras notaciones famosas como la de Leibniz $\frac{dy}{dx}$ y la de Cauchy $D_x y$. Todas significan lo mismo: la tasa de cambio instantánea de la función.</p>
+
+        <h3>Geometría de la Derivada</h3>
+        <p>Visualmente, calcular $\frac{f(x + \Delta x) - f(x)}{\Delta x}$ es simplemente calcular la pendiente ($m = \frac{y_2 - y_1}{x_2 - x_1}$) de una línea recta que corta a la curva en dos puntos. A esta se le llama <strong>Recta Secante</strong>.</p>
+        <p>Cuando hacemos que el segundo punto se acerque infinitamente al primero ($\Delta x \to 0$), la secante toca la curva en un solo punto, convirtiéndose en la <strong>Recta Tangente</strong>. El valor de la derivada evaluada en un punto, es exactamente la pendiente de esta recta tangente.</p>
+
+        <div class="pros-cons-grid">
+            <div class="pro-card">
+                <h4><i class="fas fa-grip-lines"></i> Recta Secante</h4>
+                <p>Cruza la curva en dos puntos separados por una distancia $\Delta x$. Nos da la tasa de cambio "promedio" en ese intervalo (ej. velocidad media en un viaje).</p>
+            </div>
+            <div class="con-card">
+                <h4><i class="fas fa-dot-circle"></i> Recta Tangente</h4>
+                <p>Toca la curva en un solo punto (cuando $\Delta x$ es cero). Nos da la tasa de cambio "instantánea" (ej. lo que marca el velocímetro en un milisegundo exacto). Su pendiente es la Derivada.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-project-diagram"></i> De Secante a Tangente</h2>
+        <p>Desliza el control para reducir la distancia ($\Delta x$) entre los dos puntos. Observa cómo la línea roja (Secante) se alinea hasta convertirse en la línea Tangente.</p>
+        
+        <div class="svg-container">
+            <svg viewBox="0 0 500 400" width="100%" height="400" style="background: #1e293b; border-radius: 8px;">
+                <!-- Ejes -->
+                <line x1="50" y1="350" x2="450" y2="350" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="100" y1="50" x2="100" y2="380" stroke="#94a3b8" stroke-width="2"/>
+                
+                <text x="440" y="370" fill="#94a3b8">x</text>
+                <text x="80" y="60" fill="#94a3b8">y</text>
+
+                <!-- Función curva tipo parábola -->
+                <path d="M 100 300 Q 250 350 450 50" fill="transparent" stroke="#f8fafc" stroke-width="3" />
+                
+                <!-- Punto P (fijo en x=200) -->
+                <!-- x=200, y=~265 -->
+                <circle cx="200" cy="265" r="6" fill="#3b82f6" />
+                <text x="180" y="255" fill="#3b82f6" font-weight="bold">P(x)</text>
+
+                <!-- Punto Q (móvil) -->
+                <circle id="point-q" cx="400" cy="98" r="6" fill="#f59e0b" />
+                <text id="text-q" x="410" y="90" fill="#f59e0b" font-weight="bold">Q(x + Δx)</text>
+
+                <!-- Línea Secante -->
+                <line id="secant-line" x1="0" y1="432" x2="500" y2="15" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 5" />
+                
+                <!-- Línea Tangente Real (Oculta al inicio, se muestra al llegar a 0) -->
+                <line id="tangent-line" x1="50" y1="310" x2="450" y2="190" stroke="#10b981" stroke-width="3" opacity="0" />
+
+                <!-- Guias -->
+                <line x1="200" y1="265" x2="200" y2="350" stroke="#3b82f6" stroke-dasharray="3" />
+                <line id="guide-q" x1="400" y1="98" x2="400" y2="350" stroke="#f59e0b" stroke-dasharray="3" />
+
+                <!-- Etiqueta Δx -->
+                <path id="delta-x-bracket" d="M 200 360 L 200 370 L 400 370 L 400 360" fill="transparent" stroke="#cbd5e1" />
+                <text id="delta-x-text" x="300" y="390" text-anchor="middle" fill="#cbd5e1" font-weight="bold">Δx</text>
+
+            </svg>
+
+            <div class="slider-container">
+                <input type="range" min="0" max="200" value="200" class="slider" id="dx-slider" oninput="updateSimulation()">
+            </div>
+        </div>
+        
+        <div id="dynamic-desc">
+            $\Delta x$ es grande. La recta roja corta la curva en dos puntos separados. Es una tasa de cambio promedio (Secante).
+        </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {
+                "question": "📈 Geométricamente, el valor de la derivada f'(x) en un punto específico representa:",
+                "options": ["El área bajo la curva", "El cruce con el eje Y", "La pendiente de la recta tangente a la curva en ese punto", "La distancia entre dos puntos en la gráfica"],
+                "correctIndex": 2,
+                "explanation": "La derivada calcula la tasa de cambio instantánea, lo cual gráficamente se traduce a la inclinación (pendiente) de la recta que toca a la curva exactamente en ese punto único."
+            },
+            {
+                "question": "📏 Una recta secante a una curva se caracteriza por:",
+                "options": ["Tocar la curva en un solo punto", "No tocar la curva", "Cruzar la curva en al menos dos puntos distintos", "Ser siempre paralela al eje X"],
+                "correctIndex": 2,
+                "explanation": "La palabra secante viene de 'secare' (cortar). Una recta secante corta la gráfica de la función en dos puntos separados por una distancia Δx."
+            },
+            {
+                "question": "🔎 ¿Qué sucede en la fórmula de la derivada cuando el incremento Δx tiende a cero?",
+                "options": ["La división se vuelve infinito y el límite no existe", "El segundo punto (Q) se desliza hacia el primer punto (P), transformando la secante en tangente", "La gráfica de la función se convierte en una línea recta", "El área de la curva se vuelve cero"],
+                "correctIndex": 1,
+                "explanation": "A medida que la distancia horizontal (Δx) se reduce, los puntos se fusionan geométricamente, pasando del promedio a la exactitud instantánea."
+            },
+            {
+                "question": "✍️ ¿Cuál de estas NOTACIONES NO se usa comúnmente para representar la derivada de la función 'y' respecto a 'x'?",
+                "options": ["f'(x)", "dy / dx", "D_x y", "Δy / Δx"],
+                "correctIndex": 3,
+                "explanation": "Δy/Δx representa el incremento promedio (la secante) SIN aplicar el límite. Al aplicar el límite de Δx→0, se convierte en la notación dy/dx."
+            },
+            {
+                "question": "🚗 Si f(t) representa la distancia de un auto en función del tiempo t, la Recta Tangente en t=5 te dará:",
+                "options": ["La distancia total recorrida", "La velocidad promedio en todo el viaje", "La velocidad exacta (instantánea) del auto en el segundo 5", "El tiempo total"],
+                "correctIndex": 2,
+                "explanation": "Como la derivada es la tasa de cambio instantánea, en física esto equivale a leer el velocímetro en ese instante exacto."
+            },
+            {
+                "question": "🧩 En la expresión (f(x + Δx) - f(x)) / Δx , ¿qué representa el numerador f(x + Δx) - f(x)?",
+                "options": ["El incremento en el eje X (Δx)", "El incremento o cambio en el eje Y (Δy)", "La función inversa", "La constante de integración"],
+                "correctIndex": 1,
+                "explanation": "La fórmula es básicamente (y2 - y1) / (x2 - x1). El numerador calcula la diferencia de alturas (Δy) entre los dos puntos evaluados."
+            },
+            {
+                "question": "🛡️ Newton y Leibniz fueron los co-creadores del Cálculo. ¿En qué conceptos basó Newton su aproximación a la derivada?",
+                "options": ["Geometría de triángulos", "Álgebra matricial", "Tasas de cambio y movimiento (método de las fluxiones)", "Estadística y probabilidad"],
+                "correctIndex": 2,
+                "explanation": "Como se menciona en la historia introductoria del libro, Newton vio el cálculo desde el lente del movimiento físico, creando su 'método de las fluxiones' basado en el tiempo."
+            }
+        ]
+        </script>
+    </div>
+
+    <div class="nav-controls">
+        <span></span> <!-- Espaciador -->
+        <a href="sesion2.html" class="nav-btn">Siguiente Sesión <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<script>
+    function updateSimulation() {
+        const slider = document.getElementById('dx-slider');
+        const dx = parseInt(slider.value); // 0 to 200
+        
+        // P(x) está en x=200, y=265
+        // Cuando dx=200, Q está en x=400, y=98
+        // Usamos una ecuación cuadrática simulada para la curva: y = ax^2 + bx + c
+        // P(200) = 265. Q(400) = 98. Vertice alrededor de x=50
+        
+        // Para simplificar, calculamos y_q basado en x_q de la trayectoria trazada:
+        // Trayectoria M 100 300 Q 250 350 450 50. 
+        // Aprox math:
+        let q_x = 200 + dx;
+        
+        // Interpolación visual
+        // Si dx = 200, q_y = 98
+        // Si dx = 0, q_y = 265
+        // Forma aproximada:
+        let t = (q_x - 100) / 350; // De la ruta SVG
+        let p0y = 300, p1y = 350, p2y = 50;
+        let q_y = (1-t)*(1-t)*p0y + 2*(1-t)*t*p1y + t*t*p2y;
+
+        document.getElementById('point-q').setAttribute('cx', q_x);
+        document.getElementById('point-q').setAttribute('cy', q_y);
+        
+        document.getElementById('guide-q').setAttribute('x1', q_x);
+        document.getElementById('guide-q').setAttribute('x2', q_x);
+
+        document.getElementById('text-q').setAttribute('x', q_x + 10);
+        document.getElementById('text-q').setAttribute('y', q_y - 10);
+
+        // Secante math
+        if (dx > 0) {
+            document.getElementById('tangent-line').style.opacity = '0';
+            document.getElementById('secant-line').style.opacity = '1';
+            
+            let m = (q_y - 265) / (q_x - 200);
+            // recta y - 265 = m(x - 200) => y = m(x - 200) + 265
+            let y_left = m * (0 - 200) + 265;
+            let y_right = m * (500 - 200) + 265;
+
+            document.getElementById('secant-line').setAttribute('y1', y_left);
+            document.getElementById('secant-line').setAttribute('y2', y_right);
+
+            document.getElementById('delta-x-bracket').setAttribute('d', `M 200 360 L 200 370 L ${q_x} 370 L ${q_x} 360`);
+            document.getElementById('delta-x-text').setAttribute('x', 200 + dx/2);
+            document.getElementById('delta-x-text').style.opacity = '1';
+        } else {
+            // Llegó a 0 (TANGENTE)
+            document.getElementById('secant-line').style.opacity = '0';
+            document.getElementById('tangent-line').style.opacity = '1';
+            document.getElementById('delta-x-bracket').setAttribute('d', `M 200 360 L 200 360`);
+            document.getElementById('delta-x-text').style.opacity = '0';
+            document.getElementById('text-q').setAttribute('y', -100); // Esconder
+        }
+
+        const desc = document.getElementById('dynamic-desc');
+        if (dx > 100) {
+            desc.innerHTML = '<span style="color: #f59e0b;">$\Delta x$ es grande.</span> La recta roja corta la curva en dos puntos separados. Es una tasa de cambio promedio (Secante).';
+        } else if (dx > 0) {
+            desc.innerHTML = '<span style="color: #f59e0b;">Acercando el punto Q al punto P.</span> Al reducir el $\Delta x$, aplicamos el límite intuitivamente. La secante comienza a pivotar.';
+        } else {
+            desc.innerHTML = '<span style="color: #10b981;"><i class="fas fa-check-circle"></i> ¡El límite alcanzó el CERO!</span> $\Delta x = 0$. Los puntos se fusionaron. La recta secante se ha transformado en la recta Tangente (verde). ¡Su pendiente es la derivada!';
+        }
+    }
+</script>
+
+<!-- Firebase & Analytics scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="../../env.js"></script>
+<script src="../../progress-tracker.js"></script>
+<script src="../../quiz-engine.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.markLessonCompleted) {
+            window.markLessonCompleted('calculo_derivadas', 'sesion1');
+        }
+    });
+</script>
+</body>
+</html>

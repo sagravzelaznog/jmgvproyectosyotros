@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahoot Challenge: Derivadas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    
+    <style>
+        :root {
+            --red: #e21b3c;
+            --blue: #1368ce;
+            --yellow: #d89e00;
+            --green: #26890c;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, rgba(16, 185, 129, 0.1), transparent 400px),
+                              radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.1), transparent 400px);
+            color: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Glassmorphism Container */
+        .glass-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        /* Screens */
+        .screen { display: none; text-align: center; }
+        .screen.active { display: block; animation: fadeIn 0.5s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Login Screen */
+        .logo-title { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: 2px; }
+        .logo-title span:nth-child(1) { color: var(--red); }
+        .logo-title span:nth-child(2) { color: var(--blue); }
+        .logo-title span:nth-child(3) { color: var(--yellow); }
+        .logo-title span:nth-child(4) { color: var(--green); }
+        
+        .input-group { margin: 2rem 0; }
+        .nickname-input {
+            width: 80%; max-width: 300px; padding: 15px; font-size: 1.2rem;
+            border: 2px solid rgba(255,255,255,0.2); border-radius: 8px;
+            background: rgba(0,0,0,0.3); color: white; text-align: center;
+            font-family: 'Outfit', sans-serif; outline: none; transition: 0.3s;
+        }
+        .nickname-input:focus { border-color: #3b82f6; background: rgba(0,0,0,0.5); }
+        
+        .play-btn {
+            background: #3b82f6; color: white; border: none; padding: 15px 40px;
+            font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        .play-btn:hover { background: #2563eb; transform: scale(1.05); }
+
+        /* Teacher Mode UI */
+        #teacher-badge {
+            display: none; position: absolute; top: 15px; right: 15px;
+            background: #f59e0b; color: #000; font-size: 0.8rem; font-weight: bold;
+            padding: 5px 10px; border-radius: 20px; box-shadow: 0 0 10px rgba(245,158,11,0.5);
+        }
+        .teacher-hint {
+            display: none; background: rgba(245,158,11,0.2); border-left: 4px solid #f59e0b;
+            padding: 10px; margin: 10px 0; font-size: 0.9rem; text-align: left;
+        }
+
+        /* Quiz Screen */
+        .timer-circle {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: #1e293b; border: 4px solid #a855f7; display: flex;
+            align-items: center; justify-content: center; font-size: 1.5rem;
+            font-weight: bold; margin: 0 auto 1rem; color: white;
+        }
+        .timer-circle.warning { border-color: var(--red); color: var(--red); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        
+        .question-text { font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; }
+        
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+        
+        .option-btn {
+            padding: 20px; font-size: 1.2rem; font-weight: bold; color: white;
+            border: none; border-radius: 8px; cursor: pointer; display: flex;
+            align-items: center; gap: 15px; transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); position: relative; overflow: hidden;
+            font-family: 'Outfit', sans-serif; text-align: left;
+        }
+        .option-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        .option-btn:active { transform: translateY(1px); }
+        
+        .opt-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        
+        .opt-0 { background: var(--red); }
+        .opt-1 { background: var(--blue); }
+        .opt-2 { background: var(--yellow); }
+        .opt-3 { background: var(--green); }
+
+        /* Results Screen */
+        .score-text { font-size: 4rem; font-weight: 800; color: #10b981; margin: 1rem 0; text-shadow: 0 0 20px rgba(16,185,129,0.5); }
+        .podium-icon { font-size: 5rem; color: #f59e0b; margin-bottom: 1rem; }
+        .action-btn {
+            background: transparent; color: white; border: 2px solid #64748b;
+            padding: 10px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer;
+            margin-top: 2rem; transition: 0.3s;
+        }
+        .action-btn:hover { background: #64748b; }
+
+        /* Confetti Canvas */
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+        
+        /* Teacher Mode Hilight */
+        .option-btn.teacher-correct { border: 4px solid #fff; box-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        .option-btn.teacher-correct::after { content: "★ Correcta"; position: absolute; right: 10px; top: 10px; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="teacher-badge"><i class="fas fa-user-shield"></i> Modo Docente Activo</div>
+    <canvas id="confetti"></canvas>
+
+    <div class="glass-container">
+        
+        <!-- PANTALLA 1: LOGIN -->
+        <div id="screen-login" class="screen active">
+            <h1 class="logo-title">
+                <span>D</span><span>E</span><span>R</span><span>I</span><span>V</span><span>A</span><span>D</span><span>A</span><span>S</span>
+                <div style="font-size: 1rem; color: #cbd5e1; font-weight: 400; margin-top: 5px;">Reto de Velocidad Mental</div>
+            </h1>
+            
+            <div class="input-group">
+                <input type="text" id="nickname" class="nickname-input" placeholder="Ingresa tu Nickname..." autocomplete="off">
+            </div>
+            
+            <button class="play-btn" onclick="startGame()">¡JUGAR!</button>
+            
+            <p style="margin-top: 2rem; font-size: 0.85rem; color: #64748b;">
+                Al hacer clic en Jugar confirmas tu participación. Tienes 15 segundos por pregunta.
+                <br><em>Tip: Docentes, ingresen su código de acceso en el Nickname.</em>
+            </p>
+        </div>
+
+        <!-- PANTALLA 2: PREGUNTA -->
+        <div id="screen-quiz" class="screen">
+            <div class="timer-circle" id="timer">15</div>
+            
+            <div class="question-text" id="question-text">
+                ¿Cargando pregunta...?
+            </div>
+
+            <div class="teacher-hint" id="teacher-hint">
+                <strong><i class="fas fa-lightbulb"></i> Nota del Maestro:</strong> <span id="hint-text"></span>
+            </div>
+
+            <div class="options-grid" id="options-container">
+                <!-- Generado por JS -->
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: RESULTADOS -->
+        <div id="screen-result" class="screen">
+            <i class="fas fa-trophy podium-icon"></i>
+            <h2>¡Completado, <span id="final-name"></span>!</h2>
+            <p>Puntaje Total</p>
+            <div class="score-text" id="final-score">0</div>
+            
+            <p style="font-size: 1.2rem;">Respuestas Correctas: <strong id="final-corrects" style="color: #10b981;">0</strong> / 5</p>
+            
+            <div>
+                <button class="action-btn" onclick="location.reload()"><i class="fas fa-redo"></i> Jugar de Nuevo</button>
+                <a href="../index.html"><button class="action-btn"><i class="fas fa-home"></i> Volver al Curso</button></a>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+    // --- DATOS DEL QUIZ ---
+    const quizData = [
+        {
+            question: "$$ \\frac{d}{dx} (5x^3 - 2x + 1) $$",
+            options: ["15x^2 - 2", "5x^2 - 2", "15x^3 - 2x", "15x^2 - 2x + 1"],
+            correctIndex: 0,
+            hint: "Aplica la regla de la potencia: baja el exponente multiplicando y réstale uno. La derivada de una constante es 0."
+        },
+        {
+            question: "$$ \\frac{d}{dx} (\\sin x) $$",
+            options: ["-\\cos x", "\\cos x", "\\sin^2 x", "\\sec x"],
+            correctIndex: 1,
+            hint: "Regla de memoria: derivada de seno es positiva, derivada de coseno es negativa."
+        },
+        {
+            question: "$$ \\frac{d}{dx} (e^x) $$",
+            options: ["x e^{x-1}", "e^{x+1}", "e^x", "\\ln(x)"],
+            correctIndex: 2,
+            hint: "Es la única función que es su propia derivada. Es la función indestructible."
+        },
+        {
+            question: "La regla de la cadena afirma que $$ \\frac{d}{dx} [f(g(x))] $$ es:",
+            options: ["f'(g(x)) + g'(x)", "f'(g(x)) \\cdot g'(x)", "f'(x) \\cdot g'(x)", "f(g'(x))"],
+            correctIndex: 1,
+            hint: "Deriva la función exterior evaluada en la interior, MULTIPLICADO por la derivada de la interior."
+        },
+        {
+            question: "$$ \\frac{d}{dx} (\\ln x) $$",
+            options: ["e^x", "1/x", "x^2", "1/\\ln x"],
+            correctIndex: 1,
+            hint: "La derivada del logaritmo natural de x es simplemente el inverso de x."
+        }
+    ];
+
+    // --- VARIABLES DE ESTADO ---
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let correctCount = 0;
+    let timerInterval;
+    let timeLeft = 15;
+    let teacherMode = false;
+    let playerName = "";
+    const icons = ['fa-play', 'fa-square', 'fa-circle', 'fa-star'];
+
+    // --- LÓGICA PRINCIPAL ---
+    function startGame() {
+        const nickInput = document.getElementById('nickname').value.trim();
+        
+        if(nickInput === '1983') {
+            teacherMode = true;
+            playerName = "Maestro";
+            document.getElementById('teacher-badge').style.display = 'block';
+            alert("Acceso Docente Concedido. Se mostrarán las respuestas y notas didácticas.");
+        } else if (nickInput === '') {
+            playerName = "Estudiante Anon";
+        } else {
+            playerName = nickInput;
+        }
+
+        document.getElementById('screen-login').classList.remove('active');
+        document.getElementById('screen-quiz').classList.add('active');
+        
+        currentQuestionIndex = 0;
+        score = 0;
+        correctCount = 0;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        clearInterval(timerInterval);
+        
+        const q = quizData[currentQuestionIndex];
+        document.getElementById('question-text').innerHTML = q.question;
+        
+        if(teacherMode) {
+            document.getElementById('teacher-hint').style.display = 'block';
+            document.getElementById('hint-text').innerHTML = q.hint;
+        } else {
+            document.getElementById('teacher-hint').style.display = 'none';
+        }
+
+        const optsContainer = document.getElementById('options-container');
+        optsContainer.innerHTML = '';
+        
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = `option-btn opt-${index}`;
+            if(teacherMode && index === q.correctIndex) {
+                btn.classList.add('teacher-correct');
+            }
+            
+            btn.innerHTML = `<div class="opt-icon"><i class="fas ${icons[index]}"></i></div> <span style="flex-grow:1; text-align:center;">$${opt}$</span>`;
+            btn.onclick = () => checkAnswer(index);
+            optsContainer.appendChild(btn);
+        });
+
+        // Re-render MathJax
+        if (window.MathJax) {
+            MathJax.typesetPromise([document.getElementById('screen-quiz')]).catch((err) => console.log(err.message));
+        }
+
+        timeLeft = 15;
+        document.getElementById('timer').textContent = timeLeft;
+        document.getElementById('timer').classList.remove('warning');
+        
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').textContent = timeLeft;
+            
+            if(timeLeft <= 5) document.getElementById('timer').classList.add('warning');
+            
+            if(timeLeft <= 0) {
+                clearInterval(timerInterval);
+                checkAnswer(-1); // Time out
+            }
+        }, 1000);
+    }
+
+    function checkAnswer(selectedIndex) {
+        clearInterval(timerInterval);
+        const q = quizData[currentQuestionIndex];
+        
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(b => b.disabled = true); // Bloquear clics extra
+
+        // Efectos visuales de respuesta
+        if (selectedIndex === q.correctIndex) {
+            // Acierto
+            const timeBonus = timeLeft * 10;
+            score += 100 + timeBonus;
+            correctCount++;
+            if(selectedIndex >= 0) buttons[selectedIndex].style.filter = 'brightness(1.5)';
+        } else {
+            // Error o Time out
+            if(selectedIndex >= 0) buttons[selectedIndex].style.opacity = '0.5';
+            buttons[q.correctIndex].style.border = '4px solid white';
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }, 1500);
+    }
+
+    function showResults() {
+        document.getElementById('screen-quiz').classList.remove('active');
+        document.getElementById('screen-result').classList.add('active');
+        
+        document.getElementById('final-name').textContent = playerName;
+        
+        // Animación de contador de puntaje
+        let currentDisplayScore = 0;
+        const scoreEl = document.getElementById('final-score');
+        const increment = score / 50;
+        
+        const scoreInterval = setInterval(() => {
+            currentDisplayScore += increment;
+            if(currentDisplayScore >= score) {
+                currentDisplayScore = score;
+                clearInterval(scoreInterval);
+                if(score > 0) launchConfetti(); // Solo si no sacó 0
+            }
+            scoreEl.textContent = Math.floor(currentDisplayScore);
+        }, 30);
+
+        document.getElementById('final-corrects').textContent = correctCount;
+        
+        // Registrar en el tracker general de firebase si existe
+        if (window.markLessonCompleted && !teacherMode && correctCount >= 3) {
+            window.markLessonCompleted('calculo_derivadas', 'quiz-kahoot');
+        }
+    }
+
+    // --- EFECTO CONFETI (Simple Canvas JS) ---
+    function launchConfetti() {
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const pieces = [];
+        const colors = ['#e21b3c', '#1368ce', '#d89e00', '#26890c', '#a855f7', '#10b981'];
+        
+        for(let i=0; i<100; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                w: Math.random() * 10 + 5,
+                h: Math.random() * 10 + 5,
+                c: colors[Math.floor(Math.random() * colors.length)],
+                dy: Math.random() * 3 + 2,
+                dx: Math.random() * 2 - 1,
+                rot: Math.random() * 360,
+                rs: Math.random() * 5 - 2.5
+            });
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+            
+            pieces.forEach(p => {
+                p.y += p.dy;
+                p.x += p.dx;
+                p.rot += p.rs;
+                
+                if(p.y < canvas.height) active = true;
+                
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot * Math.PI / 180);
+                ctx.fillStyle = p.c;
+                ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+                ctx.restore();
+            });
+            
+            if(active) requestAnimationFrame(animate);
+            else ctx.clearRect(0,0,canvas.width, canvas.height);
+        }
+        animate();
+    }
+</script>
+</body>
+</html>

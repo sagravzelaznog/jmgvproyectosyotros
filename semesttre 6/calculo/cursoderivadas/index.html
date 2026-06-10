@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Diferencial: La Derivada | Mapa de Conocimiento</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Outfit', sans-serif; }
+        .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(10px); }
+        .roadmap-header h1 { font-size: 2.5rem; color: #10b981; margin-bottom: 1rem; }
+        .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+        
+        .course-progress-container { max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.1); backdrop-filter: blur(8px); }
+        .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #10b981, #3b82f6); transition: width 0.5s ease; }
+        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; }
+        
+        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
+        
+        .module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid var(--border-color); backdrop-filter: blur(10px); }
+        .module-title { font-size: 1.5rem; font-weight: 700; color: #3b82f6; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        
+        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.3s ease; margin-bottom: 1rem; position: relative; overflow: hidden; }
+        .session-card:hover { transform: translateY(-5px); border-color: #10b981; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); background: rgba(255, 255, 255, 0.08); }
+        .session-card:hover .status-icon { transform: rotate(360deg); transition: transform 0.6s ease; color: #10b981; }
+        
+        .session-card.completed { border-left: 5px solid #10b981; background: rgba(16, 185, 129, 0.05); }
+        .session-card.completed .status-icon { color: #10b981; }
+        
+        .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 2; }
+        .status-icon { color: var(--border-color); font-size: 1.2rem; transition: transform 0.3s ease; }
+        
+        .session-info { flex-grow: 1; z-index: 2; }
+        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: #10b981; color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #f8fafc; }
+        .session-desc { margin: 0; font-size: 0.95rem; color: #94a3b8; }
+        
+        .kahoot-card { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1)); border: 2px dashed #3b82f6; }
+        .kahoot-card:hover { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2)); border-style: solid; }
+    </style>
+</head>
+<body class="roadmap-page">
+
+    <div class="roadmap-header">
+        <h1><i class="fas fa-chart-line"></i> La Derivada</h1>
+        <p>Domina las tasas de cambio, rectas tangentes y todas las reglas de derivación algebraica y trascendente.</p>
+        
+        <div class="course-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="course-progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-stats">
+                <span>Progreso del Curso: <strong id="course-progress-text">0%</strong></span>
+                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="roadmap-container">
+        
+        <!-- MÓDULO 1 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-lightbulb"></i> Módulo 1: Conceptos Básicos</div>
+            
+            <a href="sesion1.html" class="session-card" data-lesson="sesion1">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 1</span>
+                    <h3 class="session-name">Definición e Interpretación Geométrica</h3>
+                    <p class="session-desc">Límites aplicados al incremento y la pendiente de la recta tangente.</p>
+                </div>
+            </a>
+
+            <a href="sesion2.html" class="session-card" data-lesson="sesion2">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 2</span>
+                    <h3 class="session-name">La Regla de los Cuatro Pasos</h3>
+                    <p class="session-desc">El método fundamental para encontrar derivadas desde cero mediante límites.</p>
+                </div>
+            </a>
+
+            <a href="sesion3.html" class="session-card" data-lesson="sesion3">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 3</span>
+                    <h3 class="session-name">Derivadas Algebraicas Simples</h3>
+                    <p class="session-desc">Fórmulas directas: constantes, variables simples y potencias.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- MÓDULO 2 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-tools"></i> Módulo 2: Reglas Operativas</div>
+            
+            <a href="sesion4.html" class="session-card" data-lesson="sesion4">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 4</span>
+                    <h3 class="session-name">Regla del Producto y Cociente</h3>
+                    <p class="session-desc">Derivando multiplicaciones y divisiones de funciones polinomiales.</p>
+                </div>
+            </a>
+
+            <a href="sesion5.html" class="session-card" data-lesson="sesion5">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 5</span>
+                    <h3 class="session-name">La Regla de la Cadena</h3>
+                    <p class="session-desc">Derivación de funciones compuestas complejas.</p>
+                </div>
+            </a>
+
+            <a href="sesion6.html" class="session-card" data-lesson="sesion6">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 6</span>
+                    <h3 class="session-name">Derivadas Trigonométricas</h3>
+                    <p class="session-desc">Derivación directa de senos, cosenos, tangentes y demás identidades.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- MÓDULO 3 -->
+        <div class="module-group">
+            <div class="module-title"><i class="fas fa-rocket"></i> Módulo 3: Funciones Trascendentes</div>
+
+            <a href="sesion7.html" class="session-card" data-lesson="sesion7">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 7</span>
+                    <h3 class="session-name">Trigonométricas Inversas</h3>
+                    <p class="session-desc">Arcoseno, arcocoseno y arcotangente derivadas paso a paso.</p>
+                </div>
+            </a>
+
+            <a href="sesion8.html" class="session-card" data-lesson="sesion8">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 8</span>
+                    <h3 class="session-name">Funciones Logarítmicas</h3>
+                    <p class="session-desc">La derivada del logaritmo natural y logaritmos de base variable.</p>
+                </div>
+            </a>
+
+            <a href="sesion9.html" class="session-card" data-lesson="sesion9">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 9</span>
+                    <h3 class="session-name">Funciones Exponenciales</h3>
+                    <p class="session-desc">El número de Euler 'e' y exponenciales de base 'a'.</p>
+                </div>
+            </a>
+
+            <a href="sesion10.html" class="session-card" data-lesson="sesion10">
+                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
+                <div class="session-info">
+                    <span class="session-badge">Sesión 10</span>
+                    <h3 class="session-name">Derivadas de Orden Superior</h3>
+                    <p class="session-desc">Segunda, tercera derivada y su interpretación física.</p>
+                </div>
+            </a>
+            
+            <!-- MÓDULO GAMIFICADO -->
+            <a href="quiz-kahoot/index.html" class="session-card kahoot-card" data-lesson="quiz-kahoot">
+                <div class="session-status"><i class="fas fa-gamepad status-icon" style="color: #3b82f6;"></i></div>
+                <div class="session-info">
+                    <span class="session-badge" style="background: #3b82f6;">Reto Final</span>
+                    <h3 class="session-name">Kahoot! Challenge: Derivadas</h3>
+                    <p class="session-desc">Pon a prueba tu agilidad mental resolviendo derivadas contra reloj.</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+        <a href="../../index.html" style="color: #94a3b8; font-weight: bold; text-decoration: none; padding: 10px 20px; border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.3s;">← Volver al Menú Principal</a>
+    </div>
+
+    <!-- Scripts Base Requeridos -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../../env.js"></script>
+    <script src="../../progress-tracker.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof window.getUserProgress === 'function') {
+                const progress = await window.getUserProgress('calculo_derivadas');
+                const totalLessons = 10;
+                let completedCount = 0;
+
+                const cards = document.querySelectorAll('.session-card[data-lesson^="sesion"]');
+                cards.forEach(card => {
+                    const lessonId = card.getAttribute('data-lesson');
+                    if (progress[lessonId] === true) {
+                        card.classList.add('completed');
+                        completedCount++;
+                    }
+                });
+
+                const percentage = Math.round((completedCount / totalLessons) * 100);
+                document.getElementById('course-progress-fill').style.width = percentage + '%';
+                document.getElementById('course-progress-text').textContent = percentage + '%';
+                document.getElementById('course-completed-count').textContent = completedCount;
+            }
+        });
+    </script>
+</body>
+</html>

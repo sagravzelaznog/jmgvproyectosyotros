@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahoot-style Quiz</title>
+    <!-- Fuente Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <div class="container">
+        
+        <!-- PANTALLA DE INICIO (Nickname) -->
+        <div id="start-screen" class="glass-panel active-screen">
+            <div class="logo-area">
+                <i class="fa-solid fa-bolt"></i>
+                <h1>QuizMaster</h1>
+            </div>
+            <p>Ingresa tu Nickname para comenzar el desafío.</p>
+            <form id="nickname-form">
+                <input type="text" id="nickname" placeholder="Tu Nickname" required autocomplete="off">
+                <button type="submit" class="btn-start">Ingresar <i class="fa-solid fa-play"></i></button>
+            </form>
+            <a href="../index.html" class="back-link">Volver al Portal Principal</a>
+        </div>
+
+        <!-- PANTALLA DE PREGUNTAS -->
+        <div id="quiz-screen" class="glass-panel hidden-screen quiz-layout">
+            <div class="quiz-header">
+                <div class="question-counter">Pregunta <span id="current-q">1</span> de <span id="total-q">5</span></div>
+                <div class="timer-circle">
+                    <span id="timer">15</span>
+                </div>
+                <div class="score-display">Pts: <span id="score">0</span></div>
+            </div>
+
+            <div class="question-area">
+                <h2 id="question-text">¿Cargando pregunta...?</h2>
+            </div>
+
+            <div class="options-grid" id="options-container">
+                <!-- Botones inyectados dinámicamente -->
+            </div>
+        </div>
+
+        <!-- PANTALLA FINAL (Resultados) -->
+        <div id="result-screen" class="glass-panel hidden-screen text-center">
+            <h2>¡Completado, <span id="final-nickname">Jugador</span>!</h2>
+            <div class="medal-icon">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <p class="final-score">Tu puntaje: <span id="final-score-val">0</span></p>
+            
+            <button id="btn-restart" class="btn-start" style="margin-top: 2rem;">
+                Jugar de Nuevo <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <a href="../index.html" class="back-link" style="display:block; margin-top:1rem;">Volver al Portal</a>
+        </div>
+
+    </div>
+
+    <!-- Script de confeti (Librería Canvas Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -3,208 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo Diferencial: Relaciones y Funciones | Mapa de Conocimiento</title>
-    <link rel="stylesheet" href="global-lesson.css">
+    <title>Portal Educativo de Cursos y Tutoriales</title>
+    <!-- Fuente Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="curso-styles.css">
-    <style>
-        .roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
-        .roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); }
-        .roadmap-header h1 { font-size: 2.5rem; color: #f39c12; margin-bottom: 1rem; }
-        .roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
-        
-        .course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
-        .progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #3498db, #2ecc71); transition: width 0.5s ease; }
-        .progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; }
-        
-        .roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
-        
-        .module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
-        .module-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
-        
-        .session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
-        .session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .session-card.completed { border-left: 5px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
-        .session-card.completed .status-icon { color: #2ecc71; }
-        
-        .session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .status-icon { color: var(--border-color); font-size: 1.2rem; }
-        
-        .session-info { flex-grow: 1; }
-        .session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: white; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
-        .session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: var(--text-heading); }
-        .session-desc { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
-    </style>
-</head>
-<body class="roadmap-page">
+    
+    <!-- Estilos del Portal -->
+    <link rel="stylesheet" href="styles.css">
 
-    <div class="roadmap-header">
-        <h1><i class="fas fa-square-root-variable"></i> Relaciones y Funciones</h1>
-        <p>10 sesiones interactivas para dominar los fundamentos del Cálculo Diferencial y Modelos Matemáticos.</p>
-        
-        <div class="course-progress-container">
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="course-progress-fill" style="width: 0%;"></div>
-            </div>
-            <div class="progress-stats">
-                <span>Progreso del Curso: <strong id="course-progress-text">0%</strong></span>
-                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/10</span>
-            </div>
-        </div>
-    </div>
+    <!-- Configuración Local Firebase -->
+    <script src="env.js"></script>
 
-    <div class="roadmap-container">
-        
-        <!-- MÓDULO 1 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-shapes"></i> Módulo 1: Conceptos Básicos</div>
-            
-            <a href="sesion1.html" class="session-card" data-lesson="sesion1">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 1</span>
-                    <h3 class="session-name">Introducción a Relaciones y Funciones</h3>
-                    <p class="session-desc">Reglas de correspondencia, pares ordenados y diagramas de flechas.</p>
-                </div>
-            </a>
-
-            <a href="sesion2.html" class="session-card" data-lesson="sesion2">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 2</span>
-                    <h3 class="session-name">Notación y Valor de una Función</h3>
-                    <p class="session-desc">Evaluación de funciones en puntos específicos algebraicamente.</p>
-                </div>
-            </a>
-
-            <a href="sesion3.html" class="session-card" data-lesson="sesion3">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 3</span>
-                    <h3 class="session-name">Dominio, Contradominio y Rango</h3>
-                    <p class="session-desc">Determinación del conjunto de valores posibles para X y para Y.</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- MÓDULO 2 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-chart-area"></i> Módulo 2: Clasificación y Tipos de Funciones</div>
-            
-            <a href="sesion4.html" class="session-card" data-lesson="sesion4">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 4</span>
-                    <h3 class="session-name">Funciones Algebraicas Básicas</h3>
-                    <p class="session-desc">Función constante, función lineal y función cuadrática (parábolas).</p>
-                </div>
-            </a>
-
-            <a href="sesion5.html" class="session-card" data-lesson="sesion5">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 5</span>
-                    <h3 class="session-name">Funciones Racionales y Radicales</h3>
-                    <p class="session-desc">División entre cero, asíntotas verticales y restricciones de raíces.</p>
-                </div>
-            </a>
-
-            <a href="sesion6.html" class="session-card" data-lesson="sesion6">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 6</span>
-                    <h3 class="session-name">Funciones Trascendentes</h3>
-                    <p class="session-desc">Funciones exponenciales, logarítmicas y trigonométricas.</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- MÓDULO 3 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-bezier-curve"></i> Módulo 3: Gráficas y Transformaciones</div>
-
-            <a href="sesion7.html" class="session-card" data-lesson="sesion7">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 7</span>
-                    <h3 class="session-name">Transformaciones Gráficas</h3>
-                    <p class="session-desc">Desplazamientos, alargamientos y reflexiones de funciones conocidas.</p>
-                </div>
-            </a>
-
-            <a href="sesion8.html" class="session-card" data-lesson="sesion8">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 8</span>
-                    <h3 class="session-name">Funciones Especiales</h3>
-                    <p class="session-desc">Función valor absoluto, mayor entero (escalonada) y característica.</p>
-                </div>
-            </a>
-
-            <a href="sesion9.html" class="session-card" data-lesson="sesion9">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 9</span>
-                    <h3 class="session-name">Comportamiento e Inversas</h3>
-                    <p class="session-desc">Funciones inyectivas/biyectivas, crecientes/decrecientes y función inversa.</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- MÓDULO 4 -->
-        <div class="module-group">
-            <div class="module-title"><i class="fas fa-layer-group"></i> Módulo 4: Operaciones y Aplicaciones</div>
-
-            <a href="sesion10.html" class="session-card" data-lesson="sesion10">
-                <div class="session-status"><i class="fas fa-star status-icon"></i></div>
-                <div class="session-info">
-                    <span class="session-badge">Sesión 10</span>
-                    <h3 class="session-name">Composición y Modelos Matemáticos</h3>
-                    <p class="session-desc">Operaciones con funciones y aplicación para resolver problemas de la vida real.</p>
-                </div>
-            </a>
-        </div>
-
-    </div>
-
-    <div style="text-align: center; margin-bottom: 40px;">
-        <a href="../../index.html" style="color: var(--text-color); font-weight: bold; text-decoration: none;">← Volver al Hub Principal de Cálculo</a>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p>
-    </footer>
-
-    <!-- Firebase y Lógica de Progreso -->
+    <!-- Firebase SDK (v8.10.1) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="../../../env.js"></script>
-    <script src="progress-tracker.js"></script>
+</head>
+<body>
+    <!-- Fondo Animado (Glassmorphism effect elements) -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            if (typeof window.getUserProgress === 'function') {
-                const progress = await window.getUserProgress('calculo_relaciones_funciones');
-                const totalLessons = 10;
-                let completedCount = 0;
+    <div class="container">
+        
+        <!-- PANTALLA DE LOGIN -->
+        <div id="login-screen" class="glass-panel active-screen">
+            <div class="login-header">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h1>Acceso a Cursos</h1>
+                <p>Ingresa tus credenciales para continuar tu aprendizaje</p>
+            </div>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="off">
+                </div>
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+                
+                <div id="error-message" class="error-msg hidden"></div>
+                
+                <div class="auth-buttons">
+                    <button type="submit" class="btn-primary" id="btn-login">
+                        Iniciar Sesión <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button type="button" class="btn-secondary" id="btn-register">
+                        Crear Cuenta Nueva
+                    </button>
+                </div>
+            </form>
+        </div>
 
-                const cards = document.querySelectorAll('.session-card');
-                cards.forEach(card => {
-                    const lessonId = card.getAttribute('data-lesson');
-                    if (progress[lessonId] === true) {
-                        card.classList.add('completed');
-                        completedCount++;
-                    }
-                });
+        <!-- PANTALLA DE DASHBOARD (Catálogo de cursos) -->
+        <div id="dashboard-screen" class="glass-panel hidden-screen">
+            <header class="dashboard-header">
+                <div class="welcome-text">
+                    <h2>Bienvenido, <span id="user-email-display">Estudiante</span></h2>
+                    <p>Selecciona un módulo o curso para comenzar a aprender</p>
+                </div>
+                <button id="logout-btn" class="btn-secondary logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </header>
+            
+            <!-- Grid Dinámico de Cursos -->
+            <div class="courses-grid" id="courses-container">
+                <!-- Se inyecta con script.js -->
+            </div>
+        </div>
 
-                const percentage = Math.round((completedCount / totalLessons) * 100);
-                document.getElementById('course-progress-fill').style.width = percentage + '%';
-                document.getElementById('course-progress-text').textContent = percentage + '%';
-                document.getElementById('course-completed-count').textContent = completedCount;
-            }
-        });
-    </script>
+    </div>
+
+    <!-- Script de Lógica Principal -->
+    <script src="script.js"></script>
 </body>
 </html>

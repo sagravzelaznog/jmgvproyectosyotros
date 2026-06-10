@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1: Introducción a la Web</title>
+    <!-- Estilo Global de Lecciones -->
+    <link rel="stylesheet" href="../global-lesson.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Estilos específicos para la sesión interactiva */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+
+        .btn-nav {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            background: #6366f1;
+            color: white;
+        }
+
+        .sesion-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .sesion-header h1 {
+            color: #6366f1;
+            font-size: 2.5rem;
+        }
+
+        .info-box {
+            background: rgba(168, 85, 247, 0.1);
+            border-left: 4px solid #a855f7;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 3rem;
+        }
+
+        .teoria-section h2, .practica-section h2 {
+            color: #38bdf8;
+            margin-bottom: 1rem;
+        }
+
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pro-box {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .con-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* Práctica SVG Interactiva */
+        .practica-section {
+            margin-top: 3rem;
+            background: rgba(255,255,255,0.02);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .svg-container {
+            margin: 2rem 0;
+        }
+
+        .svg-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .svg-element:hover {
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.8));
+        }
+
+        #dynamic-description {
+            min-height: 60px;
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #94a3b8;
+        }
+
+        /* Quiz Container y QR */
+        .quiz-container {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--glass-bg, rgba(30, 41, 59, 0.8));
+            border-radius: 12px;
+            border: 1px solid var(--glass-border, rgba(255,255,255,0.1));
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .qr-section img {
+            width: 150px;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="lesson-container">
+        <!-- Navegación Superior -->
+        <div class="nav-buttons">
+            <a href="index.html" class="btn-nav"><i class="fa-solid fa-arrow-left"></i> Hub del Curso</a>
+            <a href="#" class="btn-nav">Siguiente Sesión <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Cabecera -->
+        <div class="sesion-header">
+            <h1>Sesión 1: Arquitectura Web Básica</h1>
+        </div>
+
+        <!-- Objetivo -->
+        <div class="info-box">
+            <h3><i class="fa-solid fa-bullseye"></i> Objetivo de Aprendizaje</h3>
+            <p>Comprender cómo interactúan el Cliente y el Servidor mediante peticiones HTTP y renderizado del navegador.</p>
+        </div>
+
+        <!-- Teoría -->
+        <div class="teoria-section">
+            <h2>El Modelo Cliente-Servidor</h2>
+            <p>La web funciona bajo un modelo donde tu navegador (Cliente) solicita recursos y un computador remoto (Servidor) responde con archivos como HTML, CSS y JavaScript.</p>
+            
+            <div class="pros-cons-grid">
+                <div class="pro-box">
+                    <h4 style="color: #2ecc71;"><i class="fa-solid fa-plus"></i> Frontend (Cliente)</h4>
+                    <p>Se encarga de la interfaz visual, interacciones del usuario y renderizado de gráficos.</p>
+                </div>
+                <div class="con-box">
+                    <h4 style="color: #e74c3c;"><i class="fa-solid fa-server"></i> Backend (Servidor)</h4>
+                    <p>Gestiona la lógica de negocio, base de datos, seguridad y autenticación.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Práctica SVG -->
+        <div class="practica-section">
+            <h2><i class="fa-solid fa-hand-pointer"></i> Interacción: El Flujo Web</h2>
+            <p>Haz clic en los elementos del diagrama para ver su función.</p>
+            
+            <div class="svg-container">
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <!-- Cliente -->
+                    <rect x="20" y="70" width="80" height="60" rx="10" fill="#3498db" class="svg-element" onclick="showDesc('El Cliente: Es tu navegador web. Envía un Request HTTP al servidor.')"/>
+                    <text x="35" y="105" fill="white" font-weight="bold" pointer-events="none">Cliente</text>
+                    
+                    <!-- Flecha Request -->
+                    <path d="M 110 85 L 290 85" stroke="#f1c40f" stroke-width="4" marker-end="url(#arrow)" class="svg-element" onclick="showDesc('Petición (Request): Viaja a través de internet solicitando datos.')"/>
+                    
+                    <!-- Flecha Response -->
+                    <path d="M 290 115 L 110 115" stroke="#2ecc71" stroke-width="4" marker-end="url(#arrow)" class="svg-element" onclick="showDesc('Respuesta (Response): El servidor devuelve código HTML/JS/CSS.')"/>
+                    
+                    <!-- Servidor -->
+                    <rect x="300" y="70" width="80" height="60" rx="10" fill="#9b59b6" class="svg-element" onclick="showDesc('El Servidor: Procesa la petición, consulta la Base de Datos y responde.')"/>
+                    <text x="310" y="105" fill="white" font-weight="bold" pointer-events="none">Servidor</text>
+
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            
+            <div id="dynamic-description">Selecciona un elemento en el diagrama...</div>
+        </div>
+
+        <script>
+            function showDesc(text) {
+                document.getElementById('dynamic-description').innerText = text;
+            }
+        </script>
+
+        <!-- Motor de Cuestionarios -->
+        <div class="quiz-container">
+            <h2><i class="fa-solid fa-list-check"></i> Comprueba tu conocimiento</h2>
+            <div id="quiz-ui"></div>
+            
+            <!-- 7 Preguntas -->
+            <script type="application/json" id="quiz-data">
+                [
+                    {
+                        "question": "¿Qué representa el 'Cliente' en el modelo web?",
+                        "options": ["El servidor de base de datos", "El navegador del usuario", "El protocolo de seguridad", "El cableado de red"],
+                        "correctIndex": 1,
+                        "explanation": "El cliente es el entorno donde interactúa el usuario, como Chrome o Firefox."
+                    },
+                    {
+                        "question": "¿Qué lenguaje se encarga principalmente de los estilos visuales?",
+                        "options": ["HTML", "JavaScript", "CSS", "Python"],
+                        "correctIndex": 2,
+                        "explanation": "CSS (Cascading Style Sheets) es el estándar para el diseño visual."
+                    },
+                    {
+                        "question": "¿Qué tecnología ejecuta la lógica de negocio y seguridad fuerte?",
+                        "options": ["El Frontend", "El Backend", "La etiqueta <style>", "El navegador"],
+                        "correctIndex": 1,
+                        "explanation": "El Backend gestiona los datos de forma segura lejos del alcance directo del usuario."
+                    },
+                    {
+                        "question": "¿Qué significa HTTP?",
+                        "options": ["HyperText Transfer Protocol", "High Tech Transport Program", "Hyperlink Text Test Protocol", "Home Tool Transfer Process"],
+                        "correctIndex": 0,
+                        "explanation": "Es el protocolo base de la World Wide Web para transferencia de datos."
+                    },
+                    {
+                        "question": "¿Qué archivo maneja la interactividad del lado del cliente?",
+                        "options": ["index.html", "styles.css", "script.js", "database.sql"],
+                        "correctIndex": 2,
+                        "explanation": "JavaScript (script.js) añade lógica e interactividad al DOM."
+                    },
+                    {
+                        "question": "¿Qué devuelve típicamente un servidor web a una petición inicial?",
+                        "options": ["Solo la base de datos", "Un documento HTML", "Un archivo ejecutable .exe", "Hardware"],
+                        "correctIndex": 1,
+                        "explanation": "La respuesta inicial suele ser un HTML que estructura la página."
+                    },
+                    {
+                        "question": "En el diagrama interactivo, ¿De qué color es la flecha de 'Respuesta'?",
+                        "options": ["Roja", "Amarilla", "Verde", "Azul"],
+                        "correctIndex": 2,
+                        "explanation": "En el SVG arriba, la flecha de Response es de color verde."
+                    }
+                ]
+            </script>
+        </div>
+
+        <!-- Código QR -->
+        <div class="qr-section">
+            <p>Escanea para ver el menú de sesiones en tu móvil:</p>
+            <img src="../qrcode.png" alt="Código QR al menú">
+        </div>
+
+        <!-- Navegación Inferior -->
+        <div class="nav-buttons" style="margin-top: 4rem;">
+            <a href="index.html" class="btn-nav"><i class="fa-solid fa-arrow-left"></i> Hub del Curso</a>
+            <a href="#" class="btn-nav">Siguiente Sesión <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Scripts Obligatorios de Firebase y Progreso -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="../env.js"></script>
+    
+    <!-- Scripts del motor de quiz y progreso -->
+    <script src="../quiz-engine.js"></script>
+    <script src="../progress-tracker.js"></script>
+
+    <script>
+        // Marcar la lección como completada al cargar o finalizar (usando progress-tracker mock/real)
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof window.markLessonCompleted === 'function') {
+                window.markLessonCompleted('curso_ejemplo', 'sesion1');
+            }
+        });
+    </script>
+</body>
+</html>

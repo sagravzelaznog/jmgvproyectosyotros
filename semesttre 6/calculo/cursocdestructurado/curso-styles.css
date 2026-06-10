@@ -1,0 +1,185 @@
+/* curso-styles.css - Estilos Globales para el Curso Estructurado */
+:root {
+    --primary-color: #00f3ff;
+    --secondary-color: #ff007f;
+    --accent-color: #ccff00;
+    --bg-main: #0b0b13;
+    --bg-card: #151525;
+    --border-color: #2d2d44;
+    --text-heading: #ffffff;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --shadow-soft: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+/* Modificadores globales para asegurar buen contraste */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+}
+
+a {
+    color: var(--primary-color);
+}
+
+/* =========================================
+   Estilos Reutilizables de las Sesiones
+   ========================================= */
+.pros-cons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .pros-cons-grid { grid-template-columns: 1fr; }
+}
+
+.pros-card {
+    background: #112a20;
+    border-left: 5px solid var(--accent-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    color: var(--text-main);
+}
+
+.cons-card {
+    background: #2a1120;
+    border-left: 5px solid var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    color: var(--text-main);
+}
+
+.solar-diagram {
+    background: var(--bg-card);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+    color: var(--text-heading);
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+}
+
+.svg-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.component-btn {
+    position: absolute;
+    background: var(--primary-color);
+    color: #000; /* Letras negras para buen contraste sobre fondos neon */
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+    transition: transform 0.3s;
+    animation: pulseBtn 2s infinite;
+}
+
+.component-btn:hover {
+    transform: scale(1.2);
+}
+
+@keyframes pulseBtn {
+    0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 243, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+}
+
+.info-panel {
+    background: var(--bg-main);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    min-height: 100px;
+    border-top: 3px solid var(--primary-color);
+    text-align: left;
+    color: var(--text-main);
+}
+
+.info-panel h3 { 
+    color: var(--primary-color); 
+    margin-top: 0; 
+}
+
+/* =========================================
+   Estilos del Roadmap / Hub (index.html)
+   ========================================= */
+.roadmap-page { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; }
+.roadmap-header { text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); position: relative;}
+.roadmap-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-shadow: 0 0 15px rgba(0, 243, 255, 0.6); }
+.roadmap-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+
+.qr-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: center;
+}
+.qr-container img {
+    width: 100px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+    .qr-container {
+        position: static;
+        margin-top: 20px;
+    }
+}
+
+.course-progress-container { max-width: 600px; margin: 0 auto; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
+.progress-bar-bg { width: 100%; height: 12px; background: var(--border-color); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 0.5s ease; box-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
+.progress-stats { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; color: var(--text-main); }
+
+.roadmap-container { max-width: 900px; margin: 3rem auto; padding: 0 1rem; }
+
+.module-group { margin-bottom: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-color); }
+.module-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+
+.session-card { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; margin-bottom: 1rem; }
+.session-card:hover { transform: translateX(5px); border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.session-card.completed { border-left: 5px solid var(--accent-color); background: rgba(204, 255, 0, 0.05); box-shadow: 0 0 10px rgba(204, 255, 0, 0.2); }
+.session-card.completed .status-icon { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
+
+.session-status { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.status-icon { color: var(--border-color); font-size: 1.2rem; }
+
+.session-info { flex-grow: 1; }
+.session-badge { display: inline-block; padding: 0.2rem 0.6rem; background: var(--primary-color); color: #000; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+.session-name { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: var(--text-heading); }
+.session-desc { margin: 0; font-size: 0.95rem; color: var(--text-muted); }
+
+.back-nav {
+    margin-bottom: 20px;
+    text-align: left;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 1rem;
+}
+.back-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.back-nav a:hover {
+    text-decoration: underline;
+}

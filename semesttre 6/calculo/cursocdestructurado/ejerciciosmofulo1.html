@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolución de Problemas: Ejercicio 14</title>
+    <link rel="stylesheet" href="global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="curso-styles.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        .problem-card { background: var(--bg-card); border: 2px solid var(--dark-outline); border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; box-shadow: 5px 5px 0px var(--pastel-blue); }
+        .problem-statement { padding: 1.5rem; border-bottom: 2px solid var(--border-color); background: rgba(0,0,0,0.2); }
+        .problem-number { display: inline-block; background: var(--pastel-gold); color: #111; font-weight: bold; width: 30px; height: 30px; text-align: center; line-height: 30px; border-radius: 50%; margin-right: 10px; border: 2px solid var(--dark-outline); }
+        .solution-btn { width: 100%; text-align: left; padding: 1rem 1.5rem; background: var(--pastel-purple); color: #111; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+        .solution-btn:hover { background: var(--pastel-turquoise); }
+        .solution-content { padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: var(--bg-main); }
+        .solution-content.show { padding: 1.5rem; max-height: 1000px; border-top: 2px solid var(--border-color); }
+        .step-list { margin: 0; padding-left: 20px; }
+        .step-list li { margin-bottom: 10px; }
+        .final-answer { margin-top: 15px; padding: 15px; background: rgba(168, 230, 207, 0.1); border-left: 5px solid var(--pastel-green); font-weight: bold; }
+    </style>
+</head>
+<body>
+<main class="page-container">
+    <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa de Conocimiento</a>
+    <div class="sesion-header">
+        <h1 class="sesion-title">Resolución Paso a Paso: Ejercicio 14</h1>
+        <p class="sesion-subtitle">Módulo 4: Funciones como Modelos Matemáticos</p>
+    </div>
+    
+    <div class="info-box">
+        <strong><i class="fas fa-tools"></i> Instrucciones:</strong>
+        <p style="margin-bottom:0;margin-top:.5rem">A continuación se presenta la solución detallada a los 12 problemas del Ejercicio 14 (Modelado Matemático). Intenta plantear el problema por tu cuenta primero y luego haz clic en "Ver Solución Paso a Paso" para comprobar tu procedimiento.</p>
+    </div>
+
+    <div class="teoria-section">
+        
+        <!-- Problem 1 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">1</span> El área de la base de un cilindro es de $40\pi \text{ m}^2$. Expresa el volumen en función de la altura.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol1')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol1">
+                <ol class="step-list">
+                    <li>El volumen de un cilindro se calcula multiplicando el área de su base circular ($A_b$) por su altura ($h$): $$V = A_b \cdot h$$</li>
+                    <li>El problema nos da el dato directo del área de la base: $A_b = 40\pi \text{ m}^2$.</li>
+                    <li>Sustituimos el valor constante del área en la fórmula general del volumen para que solo dependa de $h$: $$V = (40\pi) \cdot h$$</li>
+                </ol>
+                <div class="final-answer">Solución: $V(h) = 40\pi h$</div>
+            </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">2</span> Fluye agua por un tanque cónico de $10\text{ m}$ de radio y $25\text{ m}$ de altura. Cuando el nivel del agua está a una altura de $h$ y radio $r$, expresa el volumen del agua en función de la altura.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol2')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol2">
+                <ol class="step-list">
+                    <li>El volumen de un cono (que representa el agua en el tanque) es: $$V = \frac{1}{3}\pi r^2 h$$</li>
+                    <li>Necesitamos eliminar la variable $r$ para que todo quede en función de $h$. Para esto, usamos <strong>semejanza de triángulos</strong> entre las proporciones del tanque entero y el cono que forma el agua.</li>
+                    <li>Proporción de semejanza (Radio / Altura): $$\frac{r}{h} = \frac{10}{25}$$</li>
+                    <li>Despejamos el radio $r$: $$r = \frac{10}{25}h = \frac{2}{5}h$$</li>
+                    <li>Sustituimos la expresión de $r$ en la fórmula del volumen: $$V(h) = \frac{1}{3}\pi \left(\frac{2}{5}h\right)^2 h$$</li>
+                    <li>Desarrollamos el cuadrado y multiplicamos: $$V(h) = \frac{1}{3}\pi \left(\frac{4}{25}h^2\right) h = \frac{4\pi}{75}h^3$$</li>
+                </ol>
+                <div class="final-answer">Solución: $V(h) = \frac{4\pi}{75}h^3$</div>
+            </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">3</span> Si el ancho de un rectángulo es la quinta parte de su largo, determina el perímetro en función de su área.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol3')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol3">
+                <ol class="step-list">
+                    <li>Sea $x$ el ancho y $y$ el largo del rectángulo. El problema indica que $x = \frac{y}{5}$, lo que significa que el largo es cinco veces el ancho: $y = 5x$.</li>
+                    <li>El área del rectángulo es Base por Altura ($A = x \cdot y$). Sustituyendo $y = 5x$: $$A = x(5x) = 5x^2$$</li>
+                    <li>Despejamos el ancho $x$ en función del Área ($A$): $$x^2 = \frac{A}{5} \implies x = \sqrt{\frac{A}{5}}$$</li>
+                    <li>El perímetro es la suma de todos los lados: $P = 2x + 2y$. Sustituyendo $y = 5x$: $$P = 2x + 2(5x) = 12x$$</li>
+                    <li>Sustituimos la $x$ (que despejamos en el paso 3) dentro de la fórmula del perímetro: $$P(A) = 12\sqrt{\frac{A}{5}}$$</li>
+                    <li>Racionalizando el denominador para mayor elegancia: $$P(A) = \frac{12\sqrt{5A}}{5}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $P(A) = \frac{12\sqrt{5A}}{5}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">4</span> Dada una circunferencia de radio $r$, precisa el área de la circunferencia en función de su diámetro $d$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol4')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol4">
+                <ol class="step-list">
+                    <li>El área tradicional de una circunferencia en función del radio es: $$A = \pi r^2$$</li>
+                    <li>Sabemos que el diámetro es el doble del radio ($d = 2r$), por lo tanto, despejando el radio obtenemos: $$r = \frac{d}{2}$$</li>
+                    <li>Sustituimos esta expresión en la fórmula del área original: $$A(d) = \pi \left(\frac{d}{2}\right)^2$$</li>
+                    <li>Elevamos al cuadrado la fracción, distribuyendo el exponente 2 tanto al numerador como al denominador: $$A(d) = \pi \left(\frac{d^2}{4}\right)$$</li>
+                </ol>
+                <div class="final-answer">Solución: $A(d) = \frac{\pi d^2}{4}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">5</span> Se inscribe un cubo de arista $x$ en una esfera de radio $r$. Expresa el volumen de la esfera en función de la arista del cubo.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol5')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol5">
+                <ol class="step-list">
+                    <li>Al inscribir un cubo perfectamente dentro de una esfera, los vértices del cubo tocan la superficie esférica. Por ello, la <strong>diagonal principal del cubo</strong> cruza por el centro y coincide exactamente con el <strong>diámetro de la esfera</strong> ($2r$).</li>
+                    <li>La diagonal principal $D$ de un cubo de arista $x$ se calcula extendiendo el teorema de Pitágoras a tres dimensiones: $$D = \sqrt{x^2 + x^2 + x^2} = \sqrt{3x^2} = x\sqrt{3}$$</li>
+                    <li>Igualamos el diámetro de la esfera ($2r$) con la diagonal del cubo: $$2r = x\sqrt{3} \implies r = \frac{x\sqrt{3}}{2}$$</li>
+                    <li>El volumen de cualquier esfera es $V = \frac{4}{3}\pi r^3$. Sustituimos el radio $r$ que encontramos: $$V(x) = \frac{4}{3}\pi \left(\frac{x\sqrt{3}}{2}\right)^3$$</li>
+                    <li>Elevamos al cubo cada parte de la fracción: $$\left(\frac{x\sqrt{3}}{2}\right)^3 = \frac{x^3(\sqrt{3})^3}{2^3} = \frac{3\sqrt{3}x^3}{8}$$</li>
+                    <li>Sustituimos y simplificamos la expresión final: $$V(x) = \frac{4}{3}\pi \left(\frac{3\sqrt{3}x^3}{8}\right) = \frac{12\sqrt{3}\pi x^3}{24} = \frac{\sqrt{3}\pi x^3}{2}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $V(x) = \frac{\sqrt{3}\pi}{2} x^3$</div>
+            </div>
+        </div>
+
+        <!-- Problem 6 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">6</span> Al graficar la recta, cuya ecuación es $3x - 2y + 6 = 0$, y trazar una línea vertical paralela al eje Y en cualquier punto sobre el eje X se genera un triángulo rectángulo. Expresa el área de dicho triángulo en función de la abscisa $x$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol6')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol6">
+                <ol class="step-list">
+                    <li>El triángulo rectángulo se forma con el eje X, la recta vertical trazada en $x$, y la propia recta inclinada. El origen de este triángulo es donde la recta corta al eje X.</li>
+                    <li>Encontramos el cruce con el eje X estableciendo $y=0$: $$3x - 2(0) + 6 = 0 \implies 3x = -6 \implies x = -2$$</li>
+                    <li>El vértice del triángulo en el eje X empieza en $x=-2$. La <strong>base</strong> del triángulo será la distancia desde este inicio $-2$ hasta el punto de corte $x$: $$\text{Base} (b) = x - (-2) = x + 2$$</li>
+                    <li>La <strong>altura</strong> del triángulo ($h$) corresponde a la altura que toma la recta en ese punto $x$ (es decir, el valor de $y$). Despejamos $y$ de la ecuación de la recta: $$2y = 3x + 6 \implies y = \frac{3}{2}x + 3 = \frac{3}{2}(x+2)$$</li>
+                    <li>El área de un triángulo es $A = \frac{b \cdot h}{2}$. Sustituimos la base y altura que encontramos: $$A(x) = \frac{(x+2) \cdot \frac{3}{2}(x+2)}{2}$$</li>
+                    <li>Multiplicamos términos: $$A(x) = \frac{\frac{3}{2}(x+2)^2}{2} = \frac{3}{4}(x+2)^2$$</li>
+                </ol>
+                <div class="final-answer">Solución: $A(x) = \frac{3}{4}(x+2)^2$</div>
+            </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">7</span> Se desea construir un tanque de gas en forma de cilindro circular recto de $2.5\text{ m}$ de altura y a cada extremo del cilindro van unidas dos semiesferas de radio $r$. Expresa el volumen del tanque en función de $r$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol7')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol7">
+                <ol class="step-list">
+                    <li>El tanque es compuesto: tiene una sección central cilíndrica y "tapas" semiesféricas.</li>
+                    <li>Si juntamos las dos semiesferas de los extremos, ambas de radio $r$, se forma una <strong>esfera completa</strong> de radio $r$. El volumen total de las tapas es: $$V_{tapas} = \frac{4}{3}\pi r^3$$</li>
+                    <li>El volumen de la sección cilíndrica, que tiene una altura constante $h = 2.5$ y un radio base $r$, es: $$V_{cilindro} = \pi r^2 h = \pi r^2 (2.5) = \frac{5}{2}\pi r^2$$</li>
+                    <li>El volumen total del tanque será simplemente la suma de ambos volúmenes: $$V(r) = V_{cilindro} + V_{tapas} = \frac{5}{2}\pi r^2 + \frac{4}{3}\pi r^3$$</li>
+                    <li>Para presentar un resultado más limpio, podemos factorizar el término común $\pi r^2$: $$V(r) = \pi r^2 \left(\frac{5}{2} + \frac{4}{3}r\right)$$</li>
+                </ol>
+                <div class="final-answer">Solución: $V(r) = \pi r^2 \left(\frac{5}{2} + \frac{4}{3}r\right)$ &nbsp;&nbsp;o&nbsp;&nbsp; $\frac{\pi r^2 (15 + 8r)}{6}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 8 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">8</span> Se inscribe un triángulo equilátero de lado $x$ en una circunferencia de radio $r$. Expresa el área de la circunferencia en función del lado $x$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol8')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol8">
+                <ol class="step-list">
+                    <li>Una propiedad de la geometría nos dice que para un triángulo equilátero inscrito, el centro de la circunferencia circunscrita se encuentra a $2/3$ de la altura ($h$) desde cualquier vértice. Es decir, el radio de la circunferencia es: $$r = \frac{2}{3}h$$</li>
+                    <li>Debemos expresar la altura $h$ en función del lado $x$. Si cortamos el triángulo equilátero por la mitad, se forma un triángulo rectángulo de hipotenusa $x$ y base $x/2$. Por el Teorema de Pitágoras: $$h = \sqrt{x^2 - \left(\frac{x}{2}\right)^2} = \sqrt{x^2 - \frac{x^2}{4}} = \sqrt{\frac{3x^2}{4}} = \frac{x\sqrt{3}}{2}$$</li>
+                    <li>Sustituimos esta expresión de $h$ para encontrar la del radio $r$: $$r = \frac{2}{3}\left(\frac{x\sqrt{3}}{2}\right) = \frac{x\sqrt{3}}{3}$$</li>
+                    <li>Ahora que conocemos el radio en función del lado, lo reemplazamos en la fórmula del área de la circunferencia ($A = \pi r^2$): $$A(x) = \pi \left(\frac{x\sqrt{3}}{3}\right)^2$$</li>
+                    <li>Simplificamos el cuadrado: $$A(x) = \pi \left(\frac{3x^2}{9}\right) = \frac{\pi x^2}{3}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $A(x) = \frac{\pi x^2}{3}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">9</span> Se inscribe un rectángulo en una elipse cuya ecuación es $9x^2 + 16y^2 - 144 = 0$. Precisa el área del rectángulo en función de la abscisa $x$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol9')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol9">
+                <ol class="step-list">
+                    <li>Por simetría, si inscribimos un rectángulo centrado en el origen dentro de la elipse, su vértice en el primer cuadrante será el punto $(x, y)$.</li>
+                    <li>La base completa del rectángulo se extiende desde $-x$ hasta $x$, por lo que mide $2x$. Su altura se extiende de $-y$ a $y$, por lo que mide $2y$. El área total del rectángulo es: $$A = \text{base} \cdot \text{altura} = (2x)(2y) = 4xy$$</li>
+                    <li>Necesitamos deshacernos de $y$, así que la despejamos de la ecuación original de la elipse: $$9x^2 + 16y^2 = 144$$</li>
+                    <li>Pasamos $9x^2$ restando y dividimos entre 16: $$16y^2 = 144 - 9x^2 \implies y^2 = \frac{144 - 9x^2}{16}$$</li>
+                    <li>Aplicamos raíz cuadrada (tomando solo la parte positiva al estar en el primer cuadrante): $$y = \frac{\sqrt{144 - 9x^2}}{4}$$</li>
+                    <li>Sustituimos esta $y$ en la fórmula del área: $$A(x) = 4x \left(\frac{\sqrt{144 - 9x^2}}{4}\right) = x\sqrt{144 - 9x^2}$$</li>
+                    <li>(Opcional) Podemos extraer factor común 9 dentro de la raíz para simplificar aún más: $$A(x) = x\sqrt{9(16 - x^2)} = 3x\sqrt{16 - x^2}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $A(x) = 3x\sqrt{16 - x^2}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">10</span> Un cartel de base $x$ y altura $y$ tiene un área de $540\text{ cm}^2$ con márgenes de $2\text{ cm}$ a los lados y $1.5\text{ cm}$ en las partes superior e inferior. Expresa el área impresa en función de la base del cartel.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol10')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol10">
+                <ol class="step-list">
+                    <li>El área total del cartel rectangular nos da una relación directa entre su base $x$ y su altura $y$: $$A_{total} = x \cdot y = 540 \implies y = \frac{540}{x}$$</li>
+                    <li>El área útil de impresión es más pequeña que el cartel, ya que debemos restar los márgenes especificados.</li>
+                    <li>A la base $x$ le quitamos el margen de $2\text{ cm}$ del lado izquierdo y el de $2\text{ cm}$ del derecho, por lo que la <strong>base impresa</strong> queda como: $$b_i = x - 2(2) = x - 4$$</li>
+                    <li>A la altura $y$ le quitamos $1.5\text{ cm}$ de la parte superior y $1.5\text{ cm}$ de la parte inferior, por lo que la <strong>altura impresa</strong> queda como: $$h_i = y - 2(1.5) = y - 3$$</li>
+                    <li>El Área impresa ($A_i$) será base impresa por altura impresa: $$A_i = b_i \cdot h_i = (x - 4)(y - 3)$$</li>
+                    <li>Sustituimos $y$ por su expresión en términos de $x$ para obtener el modelo final: $$A_i(x) = (x - 4)\left(\frac{540}{x} - 3\right)$$</li>
+                    <li>Si desarrollamos la multiplicación obtenemos la versión polinomial del modelo: $$A_i(x) = x\left(\frac{540}{x}\right) - 3x - 4\left(\frac{540}{x}\right) + 12 = 540 - 3x - \frac{2160}{x} + 12 = 552 - 3x - \frac{2160}{x}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $A_i(x) = (x - 4)\left(\frac{540}{x} - 3\right)$ &nbsp;&nbsp;o&nbsp;&nbsp; $552 - 3x - \frac{2160}{x}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 11 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">11</span> Desde cierto puente de la Ciudad de México un peatón observa un automóvil que viaja a $18\text{ m/s}$ en una avenida perpendicular al puente peatonal. Si $t$ es el tiempo en segundos, determina la distancia entre el peatón y el automóvil en función del tiempo, si la altura del puente es de $4.5\text{ m}$.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol11')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol11">
+                <ol class="step-list">
+                    <li>Este problema modela un <strong>triángulo rectángulo tridimensional</strong>, pero que se resuelve fácilmente usando Pitágoras si imaginamos el instante cero cuando el carro cruza exactamente debajo del puente.</li>
+                    <li>Un cateto es vertical: representa la altura inamovible del peatón parado sobre el puente ($h = 4.5\text{ m}$).</li>
+                    <li>El otro cateto es horizontal sobre el asfalto: representa la distancia que ha recorrido el automóvil alejándose del puente. Dado que avanza a velocidad constante ($v = 18\text{ m/s}$), la distancia horizontal que recorre en $t$ segundos es: $$d_{auto} = v \cdot t = 18t$$</li>
+                    <li>La línea recta visual desde los ojos del peatón hasta el automóvil es la <strong>hipotenusa</strong> ($D$). Aplicamos el Teorema de Pitágoras: $$D^2 = (Altura_{puente})^2 + (Distancia_{auto})^2$$ $$D^2 = (4.5)^2 + (18t)^2$$</li>
+                    <li>Elevando al cuadrado los términos y despejando la distancia $D$ aplicando la raíz cuadrada: $$D(t) = \sqrt{20.25 + 324t^2}$$</li>
+                </ol>
+                <div class="final-answer">Solución: $D(t) = \sqrt{20.25 + 324t^2}$</div>
+            </div>
+        </div>
+
+        <!-- Problem 12 -->
+        <div class="problem-card">
+            <div class="problem-statement">
+                <span class="problem-number">12</span> Una lancha es remolcada con un cable hacia un muelle. El cable es enrollado a razón de $0.5\text{ m/s}$ y la lancha se encuentra a $2\text{ m}$ por debajo del nivel del muelle. Si $t$ es el tiempo en segundos, expresa la distancia que le falta recorrer a la lancha hacia el muelle en función del tiempo.
+            </div>
+            <button class="solution-btn" onclick="toggleSolution('sol12')">Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i></button>
+            <div class="solution-content" id="sol12">
+                <ol class="step-list">
+                    <li>Al igual que el problema anterior, este escenario forma un triángulo rectángulo:
+                        <ul>
+                            <li><strong>Hipotenusa:</strong> la longitud del cable tenso entre el muelle y la lancha ($c$).</li>
+                            <li><strong>Cateto vertical:</strong> la diferencia de altura inamovible entre el muelle y el mar ($h=2\text{ m}$).</li>
+                            <li><strong>Cateto horizontal:</strong> la distancia de la lancha sobre el agua hacia el muro del muelle ($d$), que es precisamente lo que buscamos modelar.</li>
+                        </ul>
+                    </li>
+                    <li>Por el teorema de Pitágoras relacionamos estas tres medidas: $$c^2 = d^2 + 2^2 = d^2 + 4$$</li>
+                    <li>Despejando la distancia horizontal $d$ que le falta recorrer a la lancha: $$d = \sqrt{c^2 - 4}$$</li>
+                    <li>Sabemos que el cable se está jalando, acortando su tamaño a un ritmo de $0.5\text{ m/s}$. Si partimos de una longitud de cable original desconocida $c_0$, su longitud en el tiempo $t$ se modela como: $$c(t) = c_0 - 0.5t$$</li>
+                    <li>Sustituimos el cable cambiante $c(t)$ en nuestra fórmula de la distancia: $$d(t) = \sqrt{(c_0 - 0.5t)^2 - 4}$$</li>
+                    <li><em>Nota al estudiante: El problema original es una formulación general. Dependiendo de los datos específicos (ej: "cuando empieza el reloj había $20m$ de cuerda"), se reemplazaría $c_0$.</em></li>
+                </ol>
+                <div class="final-answer">Solución: $d(t) = \sqrt{(c_0 - 0.5t)^2 - 4}$</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sesion-navigation" style="justify-content:center; margin-top: 3rem;">
+        <a href="index.html" class="nav-btn" style="background:var(--pastel-blue)"><i class="fas fa-map"></i> Volver al Menú Principal</a>
+    </div>
+
+</main>
+<footer class="footer"><p>&copy; JMGV-PTEL 2026 <em>Curso Cálculo Diferencial Interactivo</em>. TODOS LOS DERECHOS RESERVADOS.</p></footer>
+
+<script>
+function toggleSolution(id) {
+    const el = document.getElementById(id);
+    const btn = el.previousElementSibling;
+    if (el.classList.contains('show')) {
+        el.classList.remove('show');
+        btn.innerHTML = 'Ver Solución Paso a Paso <i class="fas fa-chevron-down"></i>';
+    } else {
+        el.classList.add('show');
+        btn.innerHTML = 'Ocultar Solución <i class="fas fa-chevron-up"></i>';
+    }
+}
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="env.js"></script><script src="progress-tracker.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{if(window.markLessonCompleted)window.markLessonCompleted('calculo_relaciones_funciones','ejerciciosmofulo1')});</script>
+</body>
+</html>

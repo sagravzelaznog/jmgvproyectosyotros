@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 5: La Regla de la Cadena</title>
+    <link rel="stylesheet" href="../../global-lesson.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true}};</script>
+    <style>
+        :root { --primary: #10b981; --secondary: #3b82f6; --accent: #14b8a6; --bg-dark: #0f172a; --card-bg: rgba(30, 41, 59, 0.7); }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-dark); color: #f8fafc; }
+        
+        .page-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .sesion-header { text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 2rem; }
+        .sesion-title { color: var(--primary); font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .info-box { background: rgba(20, 184, 166, 0.1); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; }
+        
+        .teoria-section, .practica-section { background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem; }
+        .teoria-section h2, .practica-section h2 { color: var(--secondary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        
+        .svg-container { display: flex; justify-content: center; margin: 2rem 0; flex-direction: column; align-items: center; }
+        #dynamic-desc { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; min-height: 80px; text-align: center; font-size: 1.1rem; font-weight: bold; color: #cbd5e1; width: 100%; margin-top: 20px;}
+        
+        .nav-btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s; border: none; cursor: pointer; }
+        .nav-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 2rem; }
+
+        .onion-box { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px dashed #14b8a6; text-align: center; font-size: 1.4rem; }
+    </style>
+</head>
+<body>
+
+<main class="page-container">
+    <div style="margin-bottom: 20px;">
+        <a href="index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Volver al Mapa</a>
+    </div>
+
+    <div class="sesion-header">
+        <h1 class="sesion-title">La Regla de la Cadena</h1>
+        <p>Sesión 5 - Módulo 2: Reglas Operativas</p>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fas fa-link"></i> Objetivos de Aprendizaje:</strong>
+        <p style="margin-top: 0.5rem; margin-bottom: 0;">Entender y aplicar la regla de la cadena para derivar funciones compuestas (funciones dentro de otras funciones), pelando sus capas desde afuera hacia adentro.</p>
+    </div>
+
+    <div class="teoria-section">
+        <h2>Funciones como una Cebolla</h2>
+        <p>A menudo encontramos funciones "anidadas". Por ejemplo, $y = (3x^2 + 1)^5$. Tenemos un polinomio interno $(3x^2 + 1)$ encerrado en una potencia externa $(\dots)^5$.</p>
+        <p>Para derivar esto, NO puedes solo derivar la potencia o solo el polinomio. Debes usar la <strong>Regla de la Cadena</strong>:</p>
+
+        <div class="onion-box">
+            <span style="color: #14b8a6;">$$ \frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x) $$</span>
+        </div>
+
+        <p>En lenguaje sencillo:</p>
+        <ol>
+            <li>Deriva la función EXTERIOR (la cáscara), dejando lo de adentro exactamente igual.</li>
+            <li>Multiplica el resultado por la derivada de la función INTERIOR.</li>
+        </ol>
+
+        <p><strong>Ejemplo de $(3x^2 + 1)^5$:</strong></p>
+        <ul>
+            <li><strong>Exterior:</strong> La potencia 5. Su derivada es $5(\dots)^4$.</li>
+            <li><strong>Interior intacto:</strong> $5(3x^2 + 1)^4$.</li>
+            <li><strong>Derivada de la interior:</strong> $\frac{d}{dx}(3x^2 + 1) = 6x$.</li>
+            <li><strong>Cadena completa:</strong> $5(3x^2 + 1)^4 \cdot (6x) = 30x(3x^2 + 1)^4$.</li>
+        </ul>
+    </div>
+
+    <div class="practica-section">
+        <h2><i class="fas fa-layer-group"></i> Simulador de Desollado (Peeling)</h2>
+        <p>Observa la función compuesta $\sqrt{x^3 + 5x}$. Haz clic para ir derivando por capas (de afuera hacia adentro).</p>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button class="nav-btn" onclick="peelLayer(1)" style="background: #3b82f6;">1. Derivar Exterior (Raíz)</button>
+            <button class="nav-btn" onclick="peelLayer(2)" style="background: #f59e0b;">2. Derivar Interior</button>
+        </div>
+
+        <div class="svg-container">
+            <svg viewBox="0 0 600 200" width="100%" height="200" style="background: #1e293b; border-radius: 8px;">
+                
+                <!-- Función Base -->
+                <text x="300" y="60" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="bold">
+                    y = <tspan id="base-outer" fill="#3b82f6">( ... )<tspan dy="-10" font-size="16">1/2</tspan></tspan> 
+                </text>
+                <!-- Texto interno centrado -->
+                <text x="300" y="60" text-anchor="middle" fill="#f59e0b" font-size="24" font-weight="bold" id="base-inner">
+                    x³ + 5x
+                </text>
+
+                <!-- Flecha de derivación -->
+                <line x1="300" y1="80" x2="300" y2="120" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)" />
+                <defs>
+                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#94a3b8" />
+                    </marker>
+                </defs>
+
+                <!-- Resultado -->
+                <g id="res-group" opacity="0" style="transition: opacity 0.5s;">
+                    <text x="300" y="160" text-anchor="middle" font-size="22" font-weight="bold">
+                        <tspan id="res-out" fill="#3b82f6" opacity="0">½( x³ + 5x )<tspan dy="-10" font-size="14">-½</tspan></tspan>
+                        <tspan id="res-mult" fill="white" opacity="0" dy="10">  ·  </tspan>
+                        <tspan id="res-in" fill="#f59e0b" opacity="0">( 3x² + 5 )</tspan>
+                    </text>
+                </g>
+                
+            </svg>
+        </div>
+        
+        <div id="dynamic-desc">
+            Reescribimos la raíz como una potencia a la $(1/2)$ para que sea más fácil aplicar la regla de la cadena.
+        </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-container">
+        <script type="application/json">
+        [
+            {
+                "question": "🧅 ¿Para qué tipo de funciones se utiliza obligatoriamente la Regla de la Cadena?",
+                "options": ["Funciones simples sumadas", "Funciones polinomiales de grado 1", "Funciones compuestas (una función dentro de otra)", "Constantes"],
+                "correctIndex": 2,
+                "explanation": "La regla de la cadena es el método analítico diseñado específicamente para desanidar funciones compuestas f(g(x))."
+            },
+            {
+                "question": "🔢 En la expresión y = (2x + 3)^4, ¿cuál es la función exterior?",
+                "options": ["2x + 3", "(...)^4", "x", "La suma"],
+                "correctIndex": 1,
+                "explanation": "La función que envuelve a todo es la potencia a la 4. Es lo primero que debes derivar bajando el 4 y restando 1."
+            },
+            {
+                "question": "🧠 Si f(x) = (x^2 + 1)^10. Al aplicar la regla de la cadena, el primer paso correcto es:",
+                "options": ["Derivar la x^2", "10(x^2 + 1)^9", "10(2x)^9", "0"],
+                "correctIndex": 1,
+                "explanation": "Primero derivamos la cáscara exterior (potencia 10) dejando todo el interior INTACTO. Nos da 10(x^2 + 1)^9."
+            },
+            {
+                "question": "🎯 Continuando el ejercicio anterior, el resultado final de derivar (x^2 + 1)^10 es:",
+                "options": ["10(x^2 + 1)^9", "20x(x^2 + 1)^9", "10(2x)", "2x(x^2 + 1)^10"],
+                "correctIndex": 1,
+                "explanation": "Multiplicas el paso anterior (10(x^2+1)^9) por la derivada de lo de adentro (2x). Entonces, 10 * 2x = 20x. Resultado: 20x(x^2+1)^9."
+            },
+            {
+                "question": "⚠️ ¿Cuál es el error más común de los estudiantes al aplicar la Regla de la Cadena?",
+                "options": ["Sumar en lugar de multiplicar", "Derivar lo de adentro y lo de afuera al MISMO TIEMPO dentro del mismo paréntesis", "Olvidar derivar la constante", "Usar fracciones"],
+                "correctIndex": 1,
+                "explanation": "Muchos escriben 10(2x)^9. Esto es incorrecto. Debes dejar el interior original en el primer paréntesis y multiplicar la derivada interna por fuera."
+            },
+            {
+                "question": "🔗 ¿Se puede aplicar la Regla de la Cadena varias veces seguidas en un mismo problema?",
+                "options": ["No, solo una vez por ejercicio", "Sí, si hay funciones anidadas dentro de funciones anidadas (ej. 3 capas), la cadena se sigue multiplicando", "Solo en integrales", "Solo si son funciones trigonométricas"],
+                "correctIndex": 1,
+                "explanation": "Por eso se llama regla de la 'Cadena'. Puedes derivar h(g(f(x))) multiplicando las tres derivadas respectivas de afuera hacia adentro."
+            },
+            {
+                "question": "🧪 Para derivar la raíz cuadrada de (x+5), es mejor reescribirla primero como:",
+                "options": ["x + 5 / 2", "(x+5)^{-1}", "(x+5)^{1/2}", "1 / (x+5)"],
+                "correctIndex": 2,
+                "explanation": "Convertir raíces a exponentes fraccionarios (1/2, 1/3) hace que derivarlas usando la regla de la potencia y de la cadena sea muy directo."
+            }
+        ]
+        </script>
+    </div>
+
+    <div class="nav-controls">
+        <a href="sesion4.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Anterior</a>
+        <a href="sesion6.html" class="nav-btn">Siguiente Sesión <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<script>
+    function peelLayer(step) {
+        const descBox = document.getElementById('dynamic-desc');
+        document.getElementById('res-group').style.opacity = '1';
+
+        if(step === 1) {
+            document.getElementById('res-out').style.opacity = '1';
+            descBox.innerHTML = '<span style="color: #3b82f6;">Capa Exterior (Cáscara):</span> Derivamos la potencia $1/2$. Baja multiplicando, y le restamos 1 ($1/2 - 1 = -1/2$). Lo de adentro se queda EXACTAMENTE IGUAL.';
+        } else {
+            document.getElementById('res-mult').style.opacity = '1';
+            document.getElementById('res-in').style.opacity = '1';
+            descBox.innerHTML = '<span style="color: #f59e0b;">Capa Interior (Núcleo):</span> Ahora multiplicamos todo eso por la derivada del núcleo. $\\frac{d}{dx}(x^3 + 5x)$ es igual a $(3x^2 + 5)$. ¡Cadena completada!';
+        }
+    }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="../../env.js"></script>
+<script src="../../progress-tracker.js"></script>
+<script src="../../quiz-engine.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.markLessonCompleted) {
+            window.markLessonCompleted('calculo_derivadas', 'sesion5');
+        }
+    });
+</script>
+</body>
+</html>

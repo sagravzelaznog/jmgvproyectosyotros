@@ -107,6 +107,16 @@
     <div class="sesion-header">
         <h1 class="sesion-title">Introducción a Relaciones y Funciones</h1>
         <p class="sesion-subtitle">Sesión 1 - Módulo 1: Conceptos Básicos</p>
+        
+        <div class="course-progress-container" style="margin-top: 20px;">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="course-progress-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-stats">
+                <span>Tu Progreso en el Curso: <strong id="course-progress-text">0%</strong></span>
+                <span><i class="fas fa-award"></i> Completado: <strong id="course-completed-count">0</strong>/10</span>
+            </div>
+        </div>
     </div>
 
     <div class="info-box">
@@ -223,6 +233,46 @@
                 ],
                 "correctIndex": 0,
                 "explanation": "El primer conjunto se llama Dominio (las 'x'). El segundo conjunto al que llegan las flechas es el Contradominio (las 'y')."
+            },
+            {
+                "question": "En una gráfica en el plano cartesiano, ¿qué prueba se utiliza visualmente para determinar si la curva representa una función o solo una relación?",
+                "options": [
+                    "La prueba de la recta horizontal.",
+                    "La prueba de la recta vertical.",
+                    "La prueba del origen."
+                ],
+                "correctIndex": 1,
+                "explanation": "La prueba de la recta vertical consiste en trazar líneas verticales. Si alguna línea toca la gráfica en MÁS de un punto, significa que un mismo valor de 'x' tiene varios valores de 'y', por lo que es una relación y no una función."
+            },
+            {
+                "question": "Si definimos una función f: A → B, ¿qué es el 'Rango' o Imagen?",
+                "options": [
+                    "Todos los elementos posibles del conjunto A.",
+                    "Todos los elementos posibles del conjunto B.",
+                    "Únicamente los elementos del conjunto B que efectivamente están asociados a algún elemento de A."
+                ],
+                "correctIndex": 2,
+                "explanation": "El Contradominio (o Codominio) es todo el conjunto B. Pero el Rango son solo los 'y' que sí reciben flecha. No todos los valores posibles de B terminan siendo el resultado de la función."
+            },
+            {
+                "question": "¿Cuál es la 'Regla de Oro' sobre las relaciones y funciones?",
+                "options": [
+                    "Todas las relaciones son funciones, pero no todas las funciones son relaciones.",
+                    "Todas las funciones son relaciones, pero NO todas las relaciones son funciones.",
+                    "Una relación nunca puede ser una función."
+                ],
+                "correctIndex": 1,
+                "explanation": "Una función es un subconjunto más estricto de las relaciones. Cualquier asociación es una relación, pero para ganarse el título de 'función', debe cumplir la regla de unicidad."
+            },
+            {
+                "question": "Al matemático e inventor del cálculo Leibniz (1646-1716) y a Newton se les asocia con:",
+                "options": [
+                    "La invención del álgebra lineal.",
+                    "La invención independiente del cálculo diferencial y el análisis infinitesimal.",
+                    "La primera definición de matriz."
+                ],
+                "correctIndex": 1,
+                "explanation": "El cálculo diferencial surgió casi simultáneamente bajo la forma de teoría de fluxiones de Newton y la forma del cálculo de diferenciales de G. W. Leibniz."
             }
         ]
         </script>
@@ -286,9 +336,28 @@
 <script src="../../../../Ciencias%20y%20Especialidades/progress-tracker.js"></script>
 <script src="../../../../Ciencias%20y%20Especialidades/quiz-engine.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Marcar como completada la lección actual
       if (window.markLessonCompleted) {
-          window.markLessonCompleted('calculo_relaciones_funciones', 'sesion1');
+          await window.markLessonCompleted('calculo_relaciones_funciones', 'sesion1');
+      }
+      
+      // 2. Actualizar barra de progreso del curso
+      if (typeof window.getUserProgress === 'function') {
+          const progress = await window.getUserProgress('calculo_relaciones_funciones');
+          const totalLessons = 10;
+          let completedCount = 0;
+          
+          for (let i = 1; i <= totalLessons; i++) {
+              if (progress[`sesion${i}`] === true) {
+                  completedCount++;
+              }
+          }
+
+          const percentage = Math.round((completedCount / totalLessons) * 100);
+          document.getElementById('course-progress-fill').style.width = percentage + '%';
+          document.getElementById('course-progress-text').textContent = percentage + '%';
+          document.getElementById('course-completed-count').textContent = completedCount;
       }
   });
 </script>

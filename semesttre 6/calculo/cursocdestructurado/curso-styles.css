@@ -170,3 +170,13 @@ body {
     font-size: 0.9rem;
     color: var(--text-muted);
 }
+
+/* Quiz Overrides */
+.quiz-container { background-color: var(--bg-card) !important; border: 2px solid var(--dark-outline) !important; box-shadow: 6px 6px 0px var(--pastel-blue) !important; color: var(--text-main); }
+.quiz-header { border-bottom: 2px dashed var(--border-color) !important; }
+.quiz-progress { background-color: var(--bg-main) !important; border: 1px solid var(--dark-outline) !important; }
+.quiz-progress-bar { background: linear-gradient(90deg, var(--pastel-green), var(--pastel-turquoise)) !important; }
+.quiz-option { background-color: var(--bg-main) !important; color: var(--text-main) !important; border: 2px solid var(--border-color) !important; }
+.quiz-option:hover { border-color: var(--pastel-gold) !important; background-color: rgba(244, 208, 63, 0.1) !important; }
+.quiz-option.correct { background-color: rgba(168, 230, 207, 0.2) !important; border-color: var(--pastel-green) !important; color: var(--pastel-green) !important; }
+.quiz-option.wrong { background-color: rgba(255, 154, 158, 0.2) !important; border-color: var(--pastel-red) !important; color: var(--pastel-red) !important; }

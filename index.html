@@ -3,226 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMGV - Hub de Proyectos y Cursos</title>
-    <link rel="icon" href="data:,">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --accent: #3b82f6;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            width: 100%;
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.2) 0%, rgba(15, 23, 42, 1) 100%);
-        }
-
-        h1 {
-            font-size: 3em;
-            margin: 0 0 10px 0;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p.subtitle {
-            color: var(--text-sub);
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            padding: 20px 0 60px;
-        }
-
-        .category-title {
-            font-size: 1.5em;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-            margin: 40px 0 20px;
-            color: #e2e8f0;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.3em;
-            color: var(--text-main);
-        }
-
-        .card p {
-            margin: 0;
-            color: var(--text-sub);
-            font-size: 0.95em;
-            flex-grow: 1;
-        }
-
-        .card-tag {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.2);
-            color: #93c5fd;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            align-self: flex-start;
-        }
-    </style>
+    <title>Portal Unificado de Proyectos y Cursos</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
 
-    <div id="login-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; width: 100%;">
-        <div class="card" style="width: 100%; max-width: 400px; padding: 40px; text-align: center;">
-            <h2 style="margin-top: 0; color: var(--accent); margin-bottom: 25px;">Iniciar Sesión</h2>
-            <form id="login-form" style="display: flex; flex-direction: column; gap: 15px;">
-                <input type="email" id="email" placeholder="Correo Electrónico" required style="padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: inherit;">
-                <input type="password" id="password" placeholder="Contraseña" required style="padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; outline: none; font-family: inherit;">
-                <div id="error-message" class="hidden" style="color: #ef4444; font-size: 0.9em; text-align: left;"></div>
-                <button type="submit" style="padding: 12px; border-radius: 8px; border: none; background: var(--accent); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;">Ingresar</button>
-                <button type="button" id="btn-register" style="padding: 12px; border-radius: 8px; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-weight: bold; cursor: pointer; transition: 0.3s;">Registrarse</button>
+    <div class="container">
+        <!-- Pantalla de Login -->
+        <div id="login-screen" class="glass-panel active-screen">
+            <div class="login-header">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h1>Portal Unificado</h1>
+                <p>Ingresa para acceder a todos los proyectos y cursos</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+                <div id="error-message" class="error-msg hidden-screen"></div>
+                <div class="auth-buttons" style="display: flex; gap: 1rem; flex-direction: column;">
+                    <button type="submit" class="btn-primary" id="btn-login">
+                        Iniciar Sesión <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button type="button" class="btn-secondary" id="btn-register">
+                        Crear Cuenta Nueva
+                    </button>
+                </div>
             </form>
         </div>
-    </div>
 
-    <div id="dashboard-screen" style="display: none; width: 100%; flex-direction: column; align-items: center;">
-        <header style="position: relative;">
-            <div style="position: absolute; top: 20px; right: 20px; display: flex; align-items: center;">
-                <span id="user-email-display" style="color: var(--text-sub); margin-right: 15px; font-size: 0.9em;"></span>
-                <button id="logout-btn" style="padding: 8px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; cursor: pointer; font-family: inherit; transition: 0.3s;">Cerrar Sesión</button>
+        <!-- Pantalla de Panel/Dashboard -->
+        <div id="dashboard-screen" class="glass-panel hidden-screen">
+            <header class="dashboard-header">
+                <div>
+                    <h2>Directorio de Proyectos</h2>
+                    <p>Repositorio central de aplicaciones web, cursos y planeaciones didácticas.</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span id="user-email-display" style="color: var(--text-muted); font-size: 0.9rem;"></span>
+                    <button id="logout-btn" class="btn-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Salir
+                    </button>
+                </div>
+            </header>
+            
+            <div id="dynamic-dashboard-content">
+                <!-- Se inyectarán dinámicamente las categorías y tarjetas desde script.js -->
             </div>
-            <h1>Directorio de Proyectos</h1>
-            <p class="subtitle">Repositorio central de aplicaciones web, cursos y planeaciones didácticas.</p>
-        </header>
-
-        <div class="container">
-        
-        <!-- Semestre 5 -->
-        <h2 class="category-title">Semestre 5</h2>
-        <div class="grid">
-            <a href="semestre 5/pensamiento variacional/index.html" class="card">
-                <span class="card-tag">AppWeb (PWA)</span>
-                <h3>Pensamiento Variacional</h3>
-                <p>Curso gamificado con Firebase, quizzes interactivos y diseño móvil.</p>
-            </a>
-        </div>
-
-        <!-- Semestre 6 -->
-        <h2 class="category-title">Semestre 6</h2>
-        <div class="grid">
-            <a href="semesttre 6/calculo/index.html" class="card">
-                <span class="card-tag">Curso</span>
-                <h3>Cálculo</h3>
-                <p>Portal principal del curso de cálculo diferencial e integral.</p>
-            </a>
-            <a href="semesttre 6/calculo/cursoci/index.html" class="card">
-                <span class="card-tag">Módulo</span>
-                <h3>Curso CI (Interactividad)</h3>
-                <p>Sesiones de cálculo con interactividad web.</p>
-            </a>
-            <a href="semesttre 6/calculo/cursocdestructurado/index.html" class="card">
-                <span class="card-tag">Plataforma</span>
-                <h3>Portal Educativo Interactivo</h3>
-                <p>Portal completo con Dashboard, Quiz estilo Kahoot y Lecciones interactivas.</p>
-            </a>
-            <a href="semesttre 6/calculo/cursoci1/index.html" class="card">
-                <span class="card-tag">Módulo</span>
-                <h3>Cálculo (Curso CI 1)</h3>
-                <p>Hub secundario del curso de cálculo diferencial.</p>
-            </a>
-            <a href="semesttre 6/electricidad/index.html" class="card">
-                <span class="card-tag">Especialidad</span>
-                <h3>Electricidad</h3>
-                <p>Módulo de electricidad para Semestre 6.</p>
-            </a>
-            <a href="semesttre 6/calculadora.html" class="card">
-                <span class="card-tag">Herramienta</span>
-                <h3>Calculadora Web</h3>
-                <p>Herramienta interactiva para resolución de problemas.</p>
-            </a>
-            <a href="semesttre 6/masterclass04/masterclass_sesion04.html" class="card">
-                <span class="card-tag">Masterclass</span>
-                <h3>Sesión 04</h3>
-                <p>Presentación de Masterclass especial.</p>
-            </a>
-        </div>
-
-        <!-- Trabajos Externos & Otros -->
-        <h2 class="category-title">Trabajos Externos y Otros Proyectos</h2>
-        <div class="grid">
-            <a href="trabajosexternos/APLICACION PARA CONVERTIR IMAGENES A DXF/INDEX.HTML" class="card">
-                <span class="card-tag">App de Utilidad</span>
-                <h3>Conversor de Imágenes a DXF</h3>
-                <p>Aplicación web para convertir imágenes al formato vectorial DXF.</p>
-            </a>
-            <a href="trabajosexternos/CHECK LIS PLANOS/CHECLISTPLANOS.HTML" class="card">
-                <span class="card-tag">Herramienta</span>
-                <h3>Checklist de Planos</h3>
-                <p>Sistema de revisión y validación de planos.</p>
-            </a>
-            <a href="trabajosexternos/dialux/index.html" class="card">
-                <span class="card-tag">Curso</span>
-                <h3>Curso DIALux</h3>
-                <p>Sesiones de aprendizaje para software de iluminación DIALux.</p>
-            </a>
-            <a href="market/templates/index.html" class="card">
-                <span class="card-tag">Proyecto</span>
-                <h3>Market / Trading</h3>
-                <p>Análisis y gráficas de mercado financiero.</p>
-            </a>
-        </div>
-
         </div>
     </div>
 
-    <!-- Firebase App (the core Firebase SDK) -->
+    <!-- Firebase App y Auth (Versión 8.10.1 según requerimiento) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <!-- Firebase Auth -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     
+    <!-- Configuración y Lógica -->
     <script src="env.js"></script>
     <script src="script.js"></script>
 </body>

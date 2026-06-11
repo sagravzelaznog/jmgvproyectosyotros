@@ -7,7 +7,156 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const logoutBtn = document.getElementById('logout-btn');
     const btnRegister = document.getElementById('btn-register');
+    const userEmailDisplay = document.getElementById('user-email-display');
+    const dynamicDashboardContent = document.getElementById('dynamic-dashboard-content');
 
+    // Datos estructurados de los proyectos (simulando una BD o API)
+    const projectCategories = [
+        {
+            title: "Semestre 5",
+            projects: [
+                {
+                    link: "semestre 5/pensamiento variacional/index.html",
+                    tag: "AppWeb (PWA)",
+                    title: "Pensamiento Variacional",
+                    description: "Curso gamificado con Firebase, quizzes interactivos y diseño móvil.",
+                    icon: "fa-mobile-screen-button"
+                }
+            ]
+        },
+        {
+            title: "Semestre 6",
+            projects: [
+                {
+                    link: "semesttre 6/calculo/index.html",
+                    tag: "Curso",
+                    title: "Cálculo",
+                    description: "Portal principal del curso de cálculo diferencial e integral.",
+                    icon: "fa-calculator"
+                },
+                {
+                    link: "semesttre 6/calculo/cursoci/index.html",
+                    tag: "Módulo",
+                    title: "Curso CI (Interactividad)",
+                    description: "Sesiones de cálculo con interactividad web.",
+                    icon: "fa-laptop-code"
+                },
+                {
+                    link: "semesttre 6/calculo/cursoci1/index.html",
+                    tag: "Módulo",
+                    title: "Cálculo (Curso CI 1)",
+                    description: "Hub secundario del curso de cálculo diferencial.",
+                    icon: "fa-cubes"
+                },
+                {
+                    link: "semesttre 6/electricidad/index.html",
+                    tag: "Especialidad",
+                    title: "Electricidad",
+                    description: "Módulo de electricidad para Semestre 6.",
+                    icon: "fa-bolt"
+                },
+                {
+                    link: "semesttre 6/calculadora.html",
+                    tag: "Herramienta",
+                    title: "Calculadora Web",
+                    description: "Herramienta interactiva para resolución de problemas.",
+                    icon: "fa-square-root-variable"
+                },
+                {
+                    link: "semesttre 6/masterclass04/masterclass_sesion04.html",
+                    tag: "Masterclass",
+                    title: "Sesión 04",
+                    description: "Presentación de Masterclass especial.",
+                    icon: "fa-chalkboard-user"
+                }
+            ]
+        },
+        {
+            title: "Trabajos Externos y Otros Proyectos",
+            projects: [
+                {
+                    link: "trabajosexternos/APLICACION PARA CONVERTIR IMAGENES A DXF/INDEX.HTML",
+                    tag: "App de Utilidad",
+                    title: "Conversor a DXF",
+                    description: "Aplicación web para convertir imágenes al formato vectorial DXF.",
+                    icon: "fa-vector-square"
+                },
+                {
+                    link: "trabajosexternos/CHECK LIS PLANOS/CHECLISTPLANOS.HTML",
+                    tag: "Herramienta",
+                    title: "Checklist de Planos",
+                    description: "Sistema de revisión y validación de planos.",
+                    icon: "fa-list-check"
+                },
+                {
+                    link: "trabajosexternos/dialux/index.html",
+                    tag: "Curso",
+                    title: "Curso DIALux",
+                    description: "Sesiones de aprendizaje para software de iluminación DIALux.",
+                    icon: "fa-lightbulb"
+                },
+                {
+                    link: "market/templates/index.html",
+                    tag: "Proyecto",
+                    title: "Market / Trading",
+                    description: "Análisis y gráficas de mercado financiero.",
+                    icon: "fa-chart-line"
+                },
+                {
+                    link: "quiz-kahoot/index.html",
+                    tag: "Gamificación",
+                    title: "Módulo Quiz Kahoot",
+                    description: "Evaluación interactiva y dinámica estilo Kahoot.",
+                    icon: "fa-gamepad"
+                }
+            ]
+        }
+    ];
+
+    // Renderizar dinámicamente el contenido del Dashboard
+    function renderDashboard() {
+        dynamicDashboardContent.innerHTML = '';
+        
+        projectCategories.forEach((category, catIndex) => {
+            // Título de la categoría
+            const catTitle = document.createElement('h2');
+            catTitle.className = 'category-title';
+            catTitle.textContent = category.title;
+            dynamicDashboardContent.appendChild(catTitle);
+            
+            // Contenedor Grid
+            const grid = document.createElement('div');
+            grid.className = 'courses-grid';
+            
+            category.projects.forEach((proj, projIndex) => {
+                const card = document.createElement('a');
+                card.href = proj.link;
+                card.className = 'course-card';
+                
+                // Efecto escalonado de aparición
+                card.style.animation = `fadeUp 0.5s ease-out ${(projIndex + catIndex) * 0.1}s forwards`;
+                card.style.opacity = '0';
+                
+                card.innerHTML = `
+                    <span class="card-tag">${proj.tag}</span>
+                    <div class="course-icon">
+                        <i class="fa-solid ${proj.icon || 'fa-folder'}"></i>
+                    </div>
+                    <h3>${proj.title}</h3>
+                    <p>${proj.description}</p>
+                    <div class="course-action">
+                        Abrir Proyecto <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            dynamicDashboardContent.appendChild(grid);
+        });
+    }
+
+    // Configuración Firebase
     const firebaseConfig = {
         apiKey: window.ENV ? window.ENV.FIREBASE_API_KEY : "",
         authDomain: "acceso-a-cursos-4a314.firebaseapp.com",
@@ -21,18 +170,17 @@ document.addEventListener('DOMContentLoaded', () => {
         firebase.initializeApp(firebaseConfig);
     }
 
+    // Auth State
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             showDashboard();
-            const userEmailDisplay = document.getElementById('user-email-display');
-            if (userEmailDisplay) {
-                userEmailDisplay.textContent = user.email;
-            }
+            if (userEmailDisplay) userEmailDisplay.textContent = user.email;
         } else {
             showLogin();
         }
     });
 
+    // Login Form Submit
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -40,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = passwordInput.value.trim();
 
             try {
-                errorMessage.classList.add('hidden');
+                errorMessage.classList.add('hidden-screen');
                 await firebase.auth().signInWithEmailAndPassword(email, password);
                 emailInput.value = '';
                 passwordInput.value = '';
@@ -50,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Register Button
     if (btnRegister) {
         btnRegister.addEventListener('click', async () => {
             const email = emailInput.value.trim();
@@ -61,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                errorMessage.classList.add('hidden');
+                errorMessage.classList.add('hidden-screen');
                 await firebase.auth().createUserWithEmailAndPassword(email, password);
                 emailInput.value = '';
                 passwordInput.value = '';
@@ -71,12 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Logout
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             firebase.auth().signOut();
         });
     }
 
+    // Manejo de errores Firebase
     function handleAuthError(error) {
         let msg = "Error de autenticación.";
         if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
@@ -95,35 +246,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showError(msg) {
         errorMessage.textContent = msg;
-        errorMessage.classList.remove('hidden');
+        errorMessage.classList.remove('hidden-screen');
         loginForm.classList.add('shake');
         setTimeout(() => loginForm.classList.remove('shake'), 500);
     }
 
     function showDashboard() {
-        if(loginScreen) loginScreen.style.display = 'none';
-        if(dashboardScreen) dashboardScreen.style.display = 'block';
+        if(loginScreen) {
+            loginScreen.classList.remove('active-screen');
+            loginScreen.classList.add('hidden-screen');
+        }
+        if(dashboardScreen) {
+            dashboardScreen.classList.remove('hidden-screen');
+            dashboardScreen.classList.add('active-screen');
+            renderDashboard(); // Renderizar dinámicamente cuando entramos al panel
+        }
     }
 
     function showLogin() {
-        if(dashboardScreen) dashboardScreen.style.display = 'none';
-        if(loginScreen) loginScreen.style.display = 'flex';
+        if(dashboardScreen) {
+            dashboardScreen.classList.remove('active-screen');
+            dashboardScreen.classList.add('hidden-screen');
+        }
+        if(loginScreen) {
+            loginScreen.classList.remove('hidden-screen');
+            loginScreen.classList.add('active-screen');
+        }
     }
 });
-
-// Estilo para la animación de shake
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
-    }
-    .shake {
-        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-    }
-    .hidden {
-        display: none !important;
-    }
-`;
-document.head.appendChild(style);

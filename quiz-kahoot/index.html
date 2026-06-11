@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactivo Gamificado</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <div class="container">
+        
+        <!-- Pantalla de Inicio -->
+        <div id="start-screen" class="glass-panel active-screen">
+            <h1>¡Bienvenido al Quiz!</h1>
+            <p>Demuestra lo que sabes en este reto rápido.</p>
+            <form id="start-form">
+                <input type="text" id="nickname" placeholder="Ingresa tu Nickname" required autocomplete="off">
+                <button type="submit" class="btn-start">Comenzar Juego</button>
+            </form>
+            <a href="../index.html" class="btn-back">Volver al Directorio</a>
+        </div>
+
+        <!-- Pantalla del Quiz -->
+        <div id="quiz-screen" class="glass-panel hidden-screen">
+            <div class="quiz-header">
+                <span id="question-counter">Pregunta 1/5</span>
+                <div class="timer-container">
+                    <div id="timer-circle">
+                        <span id="timer-text">15</span>
+                    </div>
+                </div>
+                <span id="score-display">Puntos: 0</span>
+            </div>
+            
+            <h2 id="question-text">¿Cargando pregunta...?</h2>
+            
+            <div class="options-grid" id="options-container">
+                <!-- Se inyectan dinámicamente:
+                <button class="option-btn red">Opción A</button>
+                <button class="option-btn blue">Opción B</button>
+                <button class="option-btn yellow">Opción C</button>
+                <button class="option-btn green">Opción D</button>
+                -->
+            </div>
+        </div>
+
+        <!-- Pantalla de Resultados -->
+        <div id="result-screen" class="glass-panel hidden-screen">
+            <h1>¡Felicidades, <span id="final-nickname"></span>!</h1>
+            <p>Has completado el Quiz.</p>
+            <div class="final-score">
+                <span id="final-score-text">0</span> Puntos
+            </div>
+            <button id="btn-restart" class="btn-start">Volver a Jugar</button>
+            <a href="../index.html" class="btn-back">Volver al Directorio</a>
+        </div>
+    </div>
+
+    <!-- Contenedor para Confeti -->
+    <div id="confetti-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

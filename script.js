@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Semestre 5",
             projects: [
                 {
-                    link: "semestre 5/pensamiento variacional/variacional/plataforma-cursos/out/index.html",
-                    tag: "AppWeb (Next.js)",
+                    link: "semestre 5/pensamiento variacional/index.html",
+                    tag: "AppWeb (PWA)",
                     title: "Pensamiento Variacional",
                     description: "Curso gamificado con Firebase, quizzes interactivos y diseño móvil.",
                     icon: "fa-mobile-screen-button"

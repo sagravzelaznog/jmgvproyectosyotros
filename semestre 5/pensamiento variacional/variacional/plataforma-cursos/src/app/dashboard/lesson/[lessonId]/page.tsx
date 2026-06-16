@@ -8,7 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
-import "katex/dist/katex.min.css"; 
+import "katex/dist/katex.min.css"; // Importar CSS de KaTeX
 
 export default function LessonPage() {
   const { lessonId } = useParams();

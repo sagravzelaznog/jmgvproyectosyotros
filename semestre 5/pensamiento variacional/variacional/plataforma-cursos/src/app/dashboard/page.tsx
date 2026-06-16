@@ -4,23 +4,28 @@ import { useEffect, useState } from "react";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 import { useAuth } from "@/components/providers/AuthProvider";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const { user, isAdmin } = useAuth();
   const [modules, setModules] = useState<any[]>([]);
+  const [lessons, setLessons] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
+        // Cargar Módulos
         const modulesRef = collection(db, "Modules");
-        const q = query(modulesRef, orderBy("order", "asc"));
-        const snapshot = await getDocs(q);
+        const modSnap = await getDocs(query(modulesRef, orderBy("order", "asc")));
+        setModules(modSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
         
-        const fetchedModules = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setModules(fetchedModules);
+        // Cargar Sesiones
+        const lessonsRef = collection(db, "Lessons");
+        const lesSnap = await getDocs(query(lessonsRef, orderBy("order", "asc")));
+        setLessons(lesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       } catch (error) {
-        console.error("Error cargando módulos", error);
+        console.error("Error cargando contenido", error);
       } finally {
         setLoading(false);
       }
@@ -41,25 +46,62 @@ export default function DashboardPage() {
         )}
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-        <h2 className="text-xl font-bold mb-6 text-white">Pensamiento Variacional I</h2>
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+          <svg className="w-6 h-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Pensamiento Variacional I
+        </h2>
         
         {loading ? (
           <div className="animate-pulse space-y-4">
-            <div className="h-12 bg-slate-800 rounded-lg"></div>
-            <div className="h-12 bg-slate-800 rounded-lg"></div>
-            <div className="h-12 bg-slate-800 rounded-lg"></div>
+            <div className="h-16 bg-slate-800 rounded-lg"></div>
+            <div className="h-16 bg-slate-800 rounded-lg"></div>
+            <div className="h-16 bg-slate-800 rounded-lg"></div>
           </div>
         ) : modules.length > 0 ? (
-          <div className="space-y-4">
-            {modules.map((mod: any) => (
-              <div key={mod.id} className="border border-slate-700 rounded-lg p-5 hover:border-indigo-500/50 hover:bg-slate-800/50 transition-all cursor-pointer group">
-                <h3 className="font-semibold text-lg text-slate-200 group-hover:text-white transition-colors">
-                  {mod.title}
-                </h3>
-                <p className="text-sm text-slate-500 mt-1">Haz clic para ver las sesiones</p>
-              </div>
-            ))}
+          <div className="space-y-6">
+            {modules.map((mod: any) => {
+              // Filtrar las lecciones que pertenecen a este módulo específico
+              const modLessons = lessons.filter(l => l.moduleId === mod.id);
+              
+              return (
+                <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
+                  <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
+                    <h3 className="font-bold text-lg text-white">{mod.title}</h3>
+                    <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
+                      {modLessons.length} Sesiones
+                    </span>
+                  </div>
+                  
+                  <div className="divide-y divide-slate-800">
+                    {modLessons.map((lesson: any) => (
+                      <Link 
+                        key={lesson.id} 
+                        href={`/dashboard/lesson/${lesson.id}`} 
+                        className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-sm">
+                            {lesson.order}
+                          </div>
+                          <span className="text-slate-300 group-hover:text-indigo-300 transition-colors font-medium">
+                            {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
+                          </span>
+                        </div>
+                        <svg className="w-5 h-5 text-slate-600 group-hover:text-indigo-400 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    ))}
+                    {modLessons.length === 0 && (
+                      <div className="p-4 text-sm text-slate-500 text-center">No hay sesiones en este módulo.</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-12 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50">

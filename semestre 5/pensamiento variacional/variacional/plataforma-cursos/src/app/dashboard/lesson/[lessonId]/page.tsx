@@ -120,7 +120,7 @@ export default function LessonPage() {
                     <button
                       key={index}
                       onClick={() => handleAnswer(index, quiz[currentQuiz].answer)}
-                      className={\`\${colors[index % 4]} text-white font-bold p-6 rounded-xl transition-all flex items-center justify-center text-center h-full min-h-[120px] text-lg\`}
+                      className={`${colors[index % 4]} text-white font-bold p-6 rounded-xl transition-all flex items-center justify-center text-center h-full min-h-[120px] text-lg`}
                     >
                       {opt}
                     </button>

@@ -1,0 +1,811 @@
+================================================================================
+BLOQUE 2: MODELANDO EL ENTORNO (Sesiones 11 - 20)
+Enfoque: Funciones reales, notación, dominio/rango y modelos de comportamiento.
+================================================================================
+
+SESIÓN 11: La Máquina Matemática (El Concepto de Función)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá el concepto de función como una regla de correspondencia única, visualizándola como una "máquina" que transforma entradas en salidas.
+
+Enfoque Psico-Andragógico: 
+Desmitificación de la abstracción. A los 16 años, la palabra "función" asusta. Al compararla con una máquina expendedora o un filtro de Instagram (metáforas que dominan), reducimos la ansiedad matemática. Se empodera al alumno mostrándole que él puede crear sus propias "máquinas" para resolver problemas.
+
+Actividad Didáctica Principal: 
+"La Máquina Humana". Se forman equipos. Un alumno es la "Entrada" (X), otro es la "Máquina" (con una regla secreta, ej. multiplicar por 2 y sumar 1), y otro es la "Salida" (Y). La "Entrada" dice un número, la "Máquina" lo procesa mentalmente y le susurra el resultado a la "Salida". El resto del grupo debe adivinar cuál es la regla de la función observando los pares ordenados.
+
+Definiciones:
+- Función: 
+  * Lenguaje Formal: Relación entre un conjunto dado X (dominio) y otro conjunto de elementos Y (codominio), de forma que a cada elemento de X le corresponde un único elemento de Y.
+  * Lenguaje Cotidiano: Una máquina procesadora donde metes un dato, aplica una regla exacta, y te escupe un solo resultado nuevo. No puede darte dos resultados distintos para lo mismo.
+- Regla de Correspondencia:
+  * Lenguaje Formal: La expresión algebraica que define las operaciones que deben aplicarse a la variable independiente.
+  * Lenguaje Cotidiano: Las instrucciones precisas (sumar, restar, multiplicar) que usa la máquina para transformar el número.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. La máquina de cobro del estacionamiento de Galerías Laguna (Entrada: Horas, Salida: Pesos a pagar).
+2. Un filtro en TikTok (Entrada: Tu rostro original, Salida: Tu rostro con el filtro).
+3. La conversión de dólares a pesos en una casa de cambio del centro (Entrada: Dólares, Salida: Pesos).
+
+Actividades de Refuerzo:
+1. Diagramas de Flechas: Dibujar óvalos en el pizarrón conectando nombres de alumnos con su mes de nacimiento, debatiendo si es o no una función válida (sí, porque nadie nace en dos meses a la vez).
+2. Creadores de Máquinas: En tarjetas, escribir 3 "reglas de correspondencia" cotidianas y pasarlas al compañero para que las resuelva con datos inventados.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Una función matemática se puede imaginar fácilmente como:
+   - (Texto Neón Rosa) Un cuadrado con medidas fijas.
+   - (Texto Neón Lima) Una máquina que procesa datos. (CORRECTA)
+   - (Texto Neón Cian) Una lista de números al azar.
+   - (Texto Neón Naranja) Un error en tu calculadora.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Para que una relación sea función, cada entrada (X) debe tener:
+   - (Texto Neón Rosa) Al menos tres salidas iguales.
+   - (Texto Neón Lima) Solo una salida (Y) específica. (CORRECTA)
+   - (Texto Neón Cian) Dos salidas muy diferentes.
+   - (Texto Neón Naranja) Ninguna salida en absoluto.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si a la máquina "Multiplicar por 2" le metes un 5, sale un:
+   - (Texto Neón Rosa) Tres.
+   - (Texto Neón Lima) Siete.
+   - (Texto Neón Cian) Diez. (CORRECTA)
+   - (Texto Neón Naranja) Cero.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La "Regla de correspondencia" son básicamente:
+   - (Texto Neón Rosa) Las instrucciones matemáticas. (CORRECTA)
+   - (Texto Neón Lima) Las normas de la preparatoria.
+   - (Texto Neón Cian) Los errores que comete el profe.
+   - (Texto Neón Naranja) Las letras que adornan el libro.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si metes $10 pesos a la máquina de refrescos y caen 2 distintos:
+   - (Texto Neón Rosa) Tuviste suerte, pero no es función. (CORRECTA)
+   - (Texto Neón Lima) Es un ejemplo perfecto de función.
+   - (Texto Neón Cian) Es una variable muy independiente.
+   - (Texto Neón Naranja) Es un modelo matemático lineal.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. ¿Qué elemento representa a la "Entrada" de la máquina?
+   - (Texto Neón Rosa) El resultado final.
+   - (Texto Neón Lima) La variable en "X". (CORRECTA)
+   - (Texto Neón Cian) La variable en "Y".
+   - (Texto Neón Naranja) El número de ceros.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender funciones nos permite en el mundo real:
+   - (Texto Neón Rosa) Modelar cómo reacciona el entorno. (CORRECTA)
+   - (Texto Neón Lima) Sumar y restar de forma muy lenta.
+   - (Texto Neón Cian) Evitar usar números con decimales.
+   - (Texto Neón Naranja) Aprobar el examen de ortografía.
+
+&copy; JMGV 2026 MasterClass 11 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 12: Traduciendo el Mundo (Notación Funcional f(x))
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá y aplicará la notación $f(x)$ para evaluar funciones matemáticas sustituyendo variables por valores numéricos.
+
+Enfoque Psico-Andragógico: 
+Identidad profesional. La notación $f(x)$ suele ser el punto donde muchos jóvenes se rinden ("¿Por qué metieron letras a los números?"). Se les explica que $f(x)$ es simplemente "código de programación" para humanos. Aprender a leerlo los eleva al nivel de ingenieros y programadores, apelando a su deseo de dominar lenguajes de adultos.
+
+Actividad Didáctica Principal: 
+El Simulador de Hackeo. Se divide al grupo. Cada equipo es una "terminal". El profesor proyecta funciones codificadas, ej: $f(x) = 3x - 5$. Para "hackear" el sistema, los equipos deben evaluar rápido $f(2), f(4), f(10)$ y gritar la contraseña numérica final. 
+
+Definiciones:
+- Notación Funcional $f(x)$:
+  * Lenguaje Formal: Representación simbólica introducida por Euler, donde 'f' es el nombre de la función y 'x' es el argumento o variable independiente.
+  * Lenguaje Cotidiano: Es el "Gafete de Identidad" de la máquina. Se lee "efe de equis" y significa "El resultado de la máquina F cuando le metes el valor X".
+- Evaluar una Función:
+  * Lenguaje Formal: Proceso de sustituir la variable independiente de una función por un valor numérico específico y simplificar la expresión.
+  * Lenguaje Cotidiano: Cambiar la letra 'X' por un número real y hacer las cuentas.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. $C(h)$ puede representar el Costo en función de las Horas de renta de una cancha de pádel en Viñedos.
+2. $V(t)$ puede ser la Velocidad en función del Tiempo de un auto acelerando en el Periférico Raúl López Sánchez.
+3. $D(g)$ es el Dinero gastado en función de las Gorditas compradas. Si cada una cuesta $18, $D(g) = 18g$.
+
+Actividades de Refuerzo:
+1. Pizarrón Compartido: Filas de relevos donde pasan al pizarrón a sustituir y resolver un paso de la evaluación de una función compleja (con potencias y fracciones).
+2. Nombra tu Función: Los alumnos deben crear su propia función, ponerle la inicial de su nombre, ej. $R(x)$ de Roberto, y explicar qué procesa.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La notación matemática $f(x)$ se lee correctamente como:
+   - (Texto Neón Rosa) La letra efe por la equis.
+   - (Texto Neón Lima) Función efe de la equis. (CORRECTA)
+   - (Texto Neón Cian) Factor de multiplicación x.
+   - (Texto Neón Naranja) Fracción de un dato en x.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En la expresión $f(x)$, la letra "f" representa:
+   - (Texto Neón Rosa) El nombre de nuestra máquina. (CORRECTA)
+   - (Texto Neón Lima) Una variable secreta y rara.
+   - (Texto Neón Cian) El número diez en álgebra.
+   - (Texto Neón Naranja) El resultado de una resta.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. "Evaluar una función" significa simplemente que debes:
+   - (Texto Neón Rosa) Borrar la equis del cuaderno.
+   - (Texto Neón Lima) Cambiar la equis por números. (CORRECTA)
+   - (Texto Neón Cian) Sumar todo y ponerle un cero.
+   - (Texto Neón Naranja) Juzgar si la máquina es buena.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si $f(x) = 2x + 1$, entonces evaluar $f(3)$ da como resultado:
+   - (Texto Neón Rosa) El número siete en total. (CORRECTA)
+   - (Texto Neón Lima) El número seis en total.
+   - (Texto Neón Cian) El número cinco cerrado.
+   - (Texto Neón Naranja) El número nueve exacto.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si el costo de los lonches es $C(x) = 45x$, $C(2)$ significa:
+   - (Texto Neón Rosa) Que dos lonches cuestan noventa. (CORRECTA)
+   - (Texto Neón Lima) Que cuarenta cuestan dos pesos.
+   - (Texto Neón Cian) Que compras dos lonches a la vez.
+   - (Texto Neón Naranja) Que debes sumar dos a cuarenta.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Podemos usar otras letras además de $f(x)$, como $v(t)$, para:
+   - (Texto Neón Rosa) Confundir mucho a los alumnos.
+   - (Texto Neón Lima) Darle sentido real al problema. (CORRECTA)
+   - (Texto Neón Cian) Escribir códigos de computadora.
+   - (Texto Neón Naranja) Que se vea más bonito el libro.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Escribir $y = 3x$ y escribir $f(x) = 3x$ es matemáticamente:
+   - (Texto Neón Rosa) Completamente diferente hoy.
+   - (Texto Neón Lima) Básicamente la misma cosa. (CORRECTA)
+   - (Texto Neón Cian) Un error que reprueba cursos.
+   - (Texto Neón Naranja) Una paradoja sin resolución.
+
+&copy; JMGV 2026 MasterClass 12 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 13: El Terreno de Juego (Dominio y Rango)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno determinará analítica y gráficamente el dominio y rango de una función, comprendiendo las restricciones de los modelos matemáticos en la vida real.
+
+Enfoque Psico-Andragógico: 
+Límites y realidad. Los adolescentes están en una etapa de probar límites. Se utiliza esto para enseñarles que incluso las matemáticas tienen reglas estrictas (no puedes dividir entre cero, no existen tiempos negativos en la física real). Se conecta el "Dominio" con las reglas del juego de su propia vida.
+
+Actividad Didáctica Principal: 
+El Escáner de Restricciones. Se proyectan gráficas y modelos algebraicos (ej. $f(x) = 1/x$). Los alumnos usan hojas de acetato de colores (Rojo para restricciones, Verde para áreas permitidas) colocándolas sobre gráficas impresas para "tapar" visualmente los valores prohibidos (ej. donde el denominador se hace cero).
+
+Definiciones:
+- Dominio:
+  * Lenguaje Formal: El conjunto de todos los valores posibles de la variable independiente (x) para los cuales la función está definida.
+  * Lenguaje Cotidiano: Todos los números permitidos que le puedes meter a la máquina sin que esta explote o marque error.
+- Rango (o Contradominio/Imagen):
+  * Lenguaje Formal: El conjunto de todos los valores resultantes de la variable dependiente (y) tras evaluar el dominio en la función.
+  * Lenguaje Cotidiano: Todos los posibles resultados que la máquina te puede devolver; los límites de lo que puede producir.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El Dominio de los grados de secundaria de un alumno es [1, 2, 3]. No puedes inscribirte al grado -1.
+2. El Rango de temperatura de un minisplit típico en una casa de La Laguna va de 16°C a 30°C. Fuera de ahí, no enfría ni calienta.
+3. El Dominio de horario del Metrobús (cuando opere) de 5:00 AM a 11:00 PM. No hay función a las 3:00 AM.
+
+Actividades de Refuerzo:
+1. Detectives de Ceros: Dadas 5 funciones racionales, competir en equipos para ver quién encuentra más rápido el valor de $X$ que hace que el denominador sea cero (el valor prohibido del dominio).
+2. Debate de Realidad: Presentar el modelo matemático de caída de un objeto $f(t) = -9.8t^2$. Matemáticamente la parábola sigue, pero debaten por qué en la vida real el dominio de tiempo se detiene (el objeto choca con el suelo).
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El "Dominio" de una función se refiere exclusivamente a:
+   - (Texto Neón Rosa) Todos los valores posibles de Y.
+   - (Texto Neón Lima) Todos los valores posibles de X. (CORRECTA)
+   - (Texto Neón Cian) El resultado final de una cuenta.
+   - (Texto Neón Naranja) Las líneas rectas de la gráfica.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El "Rango" o imagen de una función agrupa a todos los:
+   - (Texto Neón Rosa) Resultados que la máquina saca. (CORRECTA)
+   - (Texto Neón Lima) Números que metes a la máquina.
+   - (Texto Neón Cian) Valores negativos de la ecuación.
+   - (Texto Neón Naranja) Puntos que cortan el eje central.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En matemáticas, la operación principal que "rompe" el dominio es:
+   - (Texto Neón Rosa) Sumar un número muy grande hoy.
+   - (Texto Neón Lima) Dividir una cantidad entre cero. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar por un dato negativo.
+   - (Texto Neón Naranja) Elevar un número al cuadrado.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si analizas el crecimiento de tu altura, el dominio (tiempo) no puede ser:
+   - (Texto Neón Rosa) Un número par muy elevado.
+   - (Texto Neón Lima) Un número menor que cero. (CORRECTA)
+   - (Texto Neón Cian) Un número impar o con punto.
+   - (Texto Neón Naranja) Un número mayor que noventa.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Gráficamente, el Dominio se lee analizando el plano de:
+   - (Texto Neón Rosa) Izquierda a derecha (Eje X). (CORRECTA)
+   - (Texto Neón Lima) Abajo hacia arriba (Eje Y).
+   - (Texto Neón Cian) Arriba hacia abajo (Eje Z).
+   - (Texto Neón Naranja) Derecha a izquierda (Eje Y).
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Gráficamente, el Rango se lee analizando el plano de:
+   - (Texto Neón Rosa) Izquierda a derecha (Eje X).
+   - (Texto Neón Lima) Abajo hacia arriba (Eje Y). (CORRECTA)
+   - (Texto Neón Cian) El centro hacia las orillas.
+   - (Texto Neón Naranja) Arriba hacia el infinito.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Comprender dominio y rango te sirve para no hacer proyecciones:
+   - (Texto Neón Rosa) Demasiado complejas y difíciles.
+   - (Texto Neón Lima) Imposibles o falsas en lo real. (CORRECTA)
+   - (Texto Neón Cian) Muy fáciles para tus compañeros.
+   - (Texto Neón Naranja) Que terminen en números pares.
+
+&copy; JMGV 2026 MasterClass 13 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 14: Modelos de Línea Recta (Función Lineal)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno modelará fenómenos de variación constante utilizando la función lineal $f(x) = mx + b$, interpretando físicamente la pendiente ($m$) y la ordenada al origen ($b$).
+
+Enfoque Psico-Andragógico: 
+Visión emprendedora y educación financiera. Los modelos lineales son la base de los costos y los negocios. Al enseñarles que "m" es el costo variable y "b" el costo fijo, las matemáticas se convierten en su primera herramienta para calcular ganancias y presupuestos de proyectos reales.
+
+Actividad Didáctica Principal: 
+El Modelo de Negocio "Food Truck". En equipos, simulan abrir un Food Truck en la Plaza Mayor de Torreón. Deben crear un modelo $f(x) = mx + b$, donde 'b' es el permiso del municipio (costo fijo) y 'm' es lo que cuesta hacer cada hamburguesa (costo variable). Grafican en papel milimétrico e identifican su punto de equilibrio.
+
+Definiciones:
+- Función Lineal:
+  * Lenguaje Formal: Función polinómica de primer grado cuya representación gráfica en el plano cartesiano es una línea recta.
+  * Lenguaje Cotidiano: Una gráfica recta y perfecta donde siempre que avanzas un paso, subes (o bajas) exactamente la misma cantidad que el paso anterior.
+- Pendiente (m) y Ordenada al origen (b):
+  * Lenguaje Formal: "m" indica la razón de cambio (inclinación) y "b" indica la intersección de la recta con el eje de las ordenadas (Y).
+  * Lenguaje Cotidiano: "m" es el ritmo constante del cambio (la velocidad) y "b" es tu punto de partida (con lo que inicias).
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El recibo del agua de SIMAS: Una cuota fija mensual ($b$) más un cobro por cada metro cúbico consumido ($m$).
+2. Un chofer de Didi: Su tarifa base por subirte ($b$) más lo que te cobra por cada minuto de viaje ($m$).
+3. Llenar un tinaco: El agua que ya tenía al iniciar ($b$) más los litros que caen cada minuto de la bomba ($m$).
+
+Actividades de Refuerzo:
+1. El baile de las Pendientes: El profesor grita "¡M Positiva!", "¡M Negativa!", "¡M Cero!". Los alumnos usan sus brazos para imitar la inclinación de la gráfica de inmediato.
+2. Descifrando a 'b': Muestran tres gráficas lineales. Los alumnos solo deben ubicar visualmente dónde choca la línea con el eje Y vertical y gritar el valor de 'b'.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La fórmula mágica de una función lineal siempre será:
+   - (Texto Neón Rosa) Efe de equis es equis al cubo.
+   - (Texto Neón Lima) Efe de equis es eme equis más be. (CORRECTA)
+   - (Texto Neón Cian) Efe de equis es a por equis pura.
+   - (Texto Neón Naranja) Efe de equis es equis entre y.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En la fórmula $f(x) = mx + b$, la letra "m" representa:
+   - (Texto Neón Rosa) El inicio del plano cartesiano.
+   - (Texto Neón Lima) La pendiente o razón de cambio. (CORRECTA)
+   - (Texto Neón Cian) Una constante de pura fricción.
+   - (Texto Neón Naranja) El error de margen del negocio.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la vida real y financiera, la letra "b" suele representar:
+   - (Texto Neón Rosa) El interés de bancos muy altos.
+   - (Texto Neón Lima) El costo o valor fijo inicial. (CORRECTA)
+   - (Texto Neón Cian) Las ganancias totales del mes.
+   - (Texto Neón Naranja) El dinero que pierdes siempre.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si la pendiente (m) de una gráfica es negativa, la línea irá:
+   - (Texto Neón Rosa) Hacia abajo como resbaladilla. (CORRECTA)
+   - (Texto Neón Lima) Hacia arriba como una montaña.
+   - (Texto Neón Cian) Totalmente plana sin inclinarse.
+   - (Texto Neón Naranja) Haciendo un círculo muy grande.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si tomas un Didi, la tarifa base (el banderazo) matemáticamente es:
+   - (Texto Neón Rosa) La misteriosa variable en X.
+   - (Texto Neón Lima) La ordenada al origen o la "b". (CORRECTA)
+   - (Texto Neón Cian) La pendiente acelerada o la "m".
+   - (Texto Neón Naranja) La variable dependiente o "Y".
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Una función lineal asume que las cosas cambian a un ritmo:
+   - (Texto Neón Rosa) Loco e impredecible a diario.
+   - (Texto Neón Lima) Perfectamente constante. (CORRECTA)
+   - (Texto Neón Cian) Que se acelera con el tiempo.
+   - (Texto Neón Naranja) Que se frena drásticamente.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Gráficamente, ubicar "b" es tan sencillo como ver dónde la recta cruza:
+   - (Texto Neón Rosa) La línea horizontal del eje X.
+   - (Texto Neón Lima) La línea vertical del eje Y. (CORRECTA)
+   - (Texto Neón Cian) El origen céntrico del plano.
+   - (Texto Neón Naranja) El cuadrante tres del mapa.
+
+&copy; JMGV 2026 MasterClass 14 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 15: La Curva del Salto (Función Cuadrática)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá el comportamiento de una función cuadrática $f(x) = ax^2 + bx + c$, identificando su gráfica como una parábola y el vértice como punto máximo o mínimo del fenómeno.
+
+Enfoque Psico-Andragógico: 
+Física del deporte y emociones. Las parábolas están en los saltos de basquetbol, los tiros libres en el TSM y la patineta. Conectar la abstracción del exponente '2' con la gravedad de la Tierra y la optimización de trayectorias ancla el conocimiento de forma cinestésica.
+
+Actividad Didáctica Principal: 
+El Laboratorio Balístico. Se usan ligas y gomas de borrar para lanzar proyectiles inofensivos hacia un blanco en el pizarrón. Graban el salto en cámara lenta con sus celulares. Analizan la curva generada (Parábola) y ubican visualmente el "Vértice" (punto máximo de altura antes de caer).
+
+Definiciones:
+- Función Cuadrática:
+  * Lenguaje Formal: Función polinómica de grado 2, cuya gráfica bidimensional es una curva simétrica llamada parábola.
+  * Lenguaje Cotidiano: Una gráfica en forma de "U" o de arco de puente. Todo lo que sube, tiene que bajar exactamente igual.
+- Vértice:
+  * Lenguaje Formal: El punto donde una parábola cruza su eje de simetría; representa el valor extremo absoluto (máximo o mínimo) de la función.
+  * Lenguaje Cotidiano: La "cima de la montaña" o el "fondo del pozo" de la curva. El punto de quiebre donde la historia cambia de subir a bajar.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. La trayectoria del balón cuando el portero de Santos Laguna despeja desde su área.
+2. La forma del cable principal que sostiene el Puente Plateado que une a Torreón con Gómez Palacio.
+3. El área de un terreno cuadrado en el centro; si duplicas el lado, el área no se duplica, crece al cuadrado (cuatro veces más).
+
+Actividades de Refuerzo:
+1. Sonrisas y Ceños: Mostrar gráficas de parábolas. Si abren hacia arriba (forma de U), gritan "¡A Positiva! (Sonrisa)". Si abren hacia abajo (forma de n), gritan "¡A Negativa! (Tristeza)".
+2. Buscando el Vértice: Se da una función sencilla $f(x) = x^2$. Los alumnos tabulan valores de -3 a 3 para ver cómo los números simétricos dan el mismo resultado en Y.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La gráfica de una función cuadrática siempre forma una figura llamada:
+   - (Texto Neón Rosa) Línea completamente recta y lisa.
+   - (Texto Neón Lima) Curva asimétrica y extraña.
+   - (Texto Neón Cian) Parábola bonita y simétrica. (CORRECTA)
+   - (Texto Neón Naranja) Círculo cerrado y perfecto.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Qué detalle en la ecuación $f(x) = ax^2 + bx + c$ delata que es cuadrática?
+   - (Texto Neón Rosa) La letra "c" suelta al final.
+   - (Texto Neón Lima) El número dos como exponente. (CORRECTA)
+   - (Texto Neón Cian) Los signos de suma positivos.
+   - (Texto Neón Naranja) Que utiliza letras minúsculas.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. El punto más alto (o más bajo) de la parábola recibe el nombre de:
+   - (Texto Neón Rosa) Centro de masa inestable.
+   - (Texto Neón Lima) Vértice o punto de quiebre. (CORRECTA)
+   - (Texto Neón Cian) Pendiente nula y muerta.
+   - (Texto Neón Naranja) Ordenada al origen total.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si lanzas un balón hacia la canasta de basquetbol, su trayectoria es:
+   - (Texto Neón Rosa) Un ejemplo de función lineal.
+   - (Texto Neón Lima) Una parábola que abre abajo. (CORRECTA)
+   - (Texto Neón Cian) Una recta de pendiente cero.
+   - (Texto Neón Naranja) Una curva exponencial loca.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si en $ax^2$, la letra "a" es positiva, la parábola parece:
+   - (Texto Neón Rosa) Una carita feliz o una "U". (CORRECTA)
+   - (Texto Neón Lima) Una cara triste o una "n".
+   - (Texto Neón Cian) Una S alargada y delgada.
+   - (Texto Neón Naranja) Una línea plana y aburrida.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Las parábolas tienen una característica geométrica genial llamada:
+   - (Texto Neón Rosa) Transparencia a la luz del sol.
+   - (Texto Neón Lima) Simetría de espejo perfecta. (CORRECTA)
+   - (Texto Neón Cian) Fricción de aire constante.
+   - (Texto Neón Naranja) Rectitud inquebrantable siempre.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En optimización, el vértice nos sirve en la vida real para:
+   - (Texto Neón Rosa) Encontrar máximos o mínimos. (CORRECTA)
+   - (Texto Neón Lima) Buscar pretextos matemáticos.
+   - (Texto Neón Cian) Evitar hacer multiplicaciones.
+   - (Texto Neón Naranja) Dibujar puentes más feos.
+
+&copy; JMGV 2026 MasterClass 15 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 16: Crecimiento Explosivo (Función Exponencial)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno identificará el crecimiento acelerado de la función exponencial $f(x) = a^x$, relacionándola con fenómenos sociales, virales y biológicos de la actualidad.
+
+Enfoque Psico-Andragógico: 
+Conexión con la hiper-realidad digital. La palabra "viral" domina su generación. Al demostrarles matemáticamente por qué una pandemia o un meme de TikTok se expanden como lo hacen, conectan el álgebra dura con su cultura digital. Se genera asombro al ver cómo los números pequeños se vuelven monstruosos en pocos pasos.
+
+Actividad Didáctica Principal: 
+El Simulador Zombi (El Poder de Base 3). Se plantea un escenario en el aula: Un alumno es el "Paciente Cero". Cada minuto, "muerde" a 3 personas nuevas (Base 3). A los 3 minutos, ¿cuántos hay? Tabulan hasta el minuto 6 y grafican. Se dan cuenta que la curva sube casi verticalmente y que en menos de 10 pasos toda la prepa estaría infectada.
+
+Definiciones:
+- Función Exponencial:
+  * Lenguaje Formal: Función de la forma $f(x) = a^x$, donde la base constante "a" es mayor que cero y diferente de uno, y la variable "x" está en el exponente.
+  * Lenguaje Cotidiano: Una gráfica que parece despegar como un cohete. Empieza creciendo lentito, pero de repente explota hacia arriba a velocidades incontrolables.
+- Base (a):
+  * Lenguaje Formal: El número constante que será multiplicado por sí mismo la cantidad de veces que dicte el exponente variable.
+  * Lenguaje Cotidiano: El "factor de contagio". A cuántas personas le pasa el chisme una sola persona.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El interés compuesto (deudas) si sacas un celular a pagos chiquitos eternos en una tienda departamental local.
+2. Un chisme viral de la escuela publicado en redes sociales; cada persona que lo lee, lo comparte a varios de sus amigos.
+3. El crecimiento de bacterias en un trozo de melón dejado al sol en un mercado; se dividen y duplican cada pocos minutos.
+
+Actividades de Refuerzo:
+1. El Reto del Ajedrez y los Granos de Arroz: Breve narración del mito indio sobre pedir granos de arroz duplicados por cada casilla del tablero. Los alumnos intentan calcular la casilla 10 para ver la magnitud.
+2. Doblado de Papel: Tomar una hoja y doblarla por la mitad repetidas veces. Comprender por qué después de 7 pliegues es casi imposible doblarla (crecimiento exponencial del grosor).
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En una función exponencial como $f(x) = 2^x$, la letra X está en:
+   - (Texto Neón Rosa) La base solida y constante.
+   - (Texto Neón Lima) El exponente volador arriba. (CORRECTA)
+   - (Texto Neón Cian) El denominador de la fracción.
+   - (Texto Neón Naranja) Escondida dentro de una raíz.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Visualmente, el crecimiento de una función exponencial se ve:
+   - (Texto Neón Rosa) Como una resbaladilla plana.
+   - (Texto Neón Lima) Casi vertical y muy explosivo. (CORRECTA)
+   - (Texto Neón Cian) Como un triángulo rectángulo.
+   - (Texto Neón Naranja) Formando un puente colgante.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la vida digital, el término "hacerse viral" matemáticamente es:
+   - (Texto Neón Rosa) Un ejemplo de resta negativa.
+   - (Texto Neón Lima) Un crecimiento exponencial puro. (CORRECTA)
+   - (Texto Neón Cian) Una parábola perfecta triste.
+   - (Texto Neón Naranja) Una línea recta constante.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si la base de contagio es 2 ($2^x$), al paso 5 el valor es:
+   - (Texto Neón Rosa) Sumar diez unidades en total.
+   - (Texto Neón Lima) Treinta y dos infecciones ya. (CORRECTA)
+   - (Texto Neón Cian) Siete infecciones peligrosas.
+   - (Texto Neón Naranja) Cero infecciones reportadas.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Financieramente, las tarjetas de crédito mal usadas crecen de forma:
+   - (Texto Neón Rosa) Amigable para tu bolsillo hoy.
+   - (Texto Neón Lima) Exponencial, generando gran deuda. (CORRECTA)
+   - (Texto Neón Cian) Lineal, subiendo poquito a poco.
+   - (Texto Neón Naranja) Cuadrática perfecta y bonita.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. A diferencia de la cuadrática ($x^2$), la exponencial ($2^x$) crece:
+   - (Texto Neón Rosa) Extremadamente más despacio.
+   - (Texto Neón Lima) Muchísimo más rápido siempre. (CORRECTA)
+   - (Texto Neón Cian) A la misma velocidad constante.
+   - (Texto Neón Naranja) Hacia números muy negativos.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¿Cuál es un ejemplo biológico de este fenómeno matemático?
+   - (Texto Neón Rosa) La caída libre de una manzana.
+   - (Texto Neón Lima) La reproducción de las bacterias. (CORRECTA)
+   - (Texto Neón Cian) La temperatura de una alberca.
+   - (Texto Neón Naranja) La fuerza de gravedad solar.
+
+&copy; JMGV 2026 MasterClass 16 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 17: Operaciones con Máquinas (Suma y Resta de Funciones)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá la superposición de fenómenos al realizar operaciones algebraicas básicas (suma y resta) entre dos funciones distintas, formando nuevos modelos.
+
+Enfoque Psico-Andragógico: 
+Trabajo en equipo y sinergia. Los problemas reales rara vez tienen una sola variable. Los adolescentes entienden de ingresos y gastos. Al juntar la máquina del "Dinero que gano" (Suma) y la de "Dinero que gasto" (Resta), creamos la máquina de la "Ganancia". Se aterriza la abstracción del álgebra.
+
+Actividad Didáctica Principal: 
+El Emprendedor Financiero. Se forman "empresas" en el aula. Diseñan pulseras. Establecen una función de Ingresos $I(x)$ y una de Costos $C(x)$. Se les pide hallar matemáticamente la función de Utilidad $U(x) = I(x) - C(x)$. Tabulan y grafican las tres rectas para ver dónde cruzan el umbral de ganar dinero.
+
+Definiciones:
+- Suma de Funciones $(f+g)(x)$:
+  * Lenguaje Formal: Operación que genera una nueva función cuyo valor en "x" es igual a la suma de los valores $f(x)$ y $g(x)$.
+  * Lenguaje Cotidiano: Juntar los resultados de dos máquinas en una sola bolsa para ver el total acumulado.
+- Resta de Funciones $(f-g)(x)$:
+  * Lenguaje Formal: Operación que genera una nueva función restando el valor $g(x)$ al valor $f(x)$.
+  * Lenguaje Cotidiano: Quitarle a la primera máquina lo que produce o gasta la segunda. Ideal para sacar ganancias limpias.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Calcular el sueldo neto de un trabajador de Peñoles: Función de Ingreso Base menos la Función de Impuestos y Deducciones.
+2. Calcular el caudal total de agua en una acequia si se abren dos compuertas al mismo tiempo (Suma de flujos).
+3. Calcular la energía disponible de paneles solares en una casa (Función de Captación Solar) menos el consumo interno de los minisplits (Función de Gasto).
+
+Actividades de Refuerzo:
+1. Algebra en Pizarrón: Práctica de reducción de términos semejantes. Sumar $f(x) = 3x + 5$ y $g(x) = 2x - 1$ de manera analítica.
+2. Visualización Gráfica: Usar GeoGebra para graficar $f(x)$, $g(x)$ y $h(x)=f(x)+g(x)$ y notar cómo las alturas en Y se suman físicamente en el plano.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Si sumas dos funciones polinomiales, lo que haces algebraicamente es:
+   - (Texto Neón Rosa) Multiplicar todos sus exponentes.
+   - (Texto Neón Lima) Juntar los términos semejantes. (CORRECTA)
+   - (Texto Neón Cian) Eliminar todas las letras equis.
+   - (Texto Neón Naranja) Restar siempre los números.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. La función de Utilidad o Ganancia de un negocio se calcula:
+   - (Texto Neón Rosa) Sumando los ingresos y los costos.
+   - (Texto Neón Lima) Restando los costos a los ingresos. (CORRECTA)
+   - (Texto Neón Cian) Multiplicando ventas por pérdidas.
+   - (Texto Neón Naranja) Ignorando la función de costos.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si $f(x) = 2x$ y $g(x) = 3x$, entonces $(f+g)(x)$ resulta en:
+   - (Texto Neón Rosa) Menos una equis solitaria hoy.
+   - (Texto Neón Lima) Exactamente cinco equis total. (CORRECTA)
+   - (Texto Neón Cian) Seis equis cuadradas enormes.
+   - (Texto Neón Naranja) Un número cinco sin la equis.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La expresión $(f-g)(x)$ se lee matemáticamente como:
+   - (Texto Neón Rosa) La suma cruzada de f y de g.
+   - (Texto Neón Lima) La resta de la función f y g. (CORRECTA)
+   - (Texto Neón Cian) El producto notable complejo.
+   - (Texto Neón Naranja) El error funcional de ambos.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si juntas el caudal de dos tuberías de SIMAS, debes usar:
+   - (Texto Neón Rosa) Una resta matemática simple.
+   - (Texto Neón Lima) La suma de las dos funciones. (CORRECTA)
+   - (Texto Neón Cian) La división de los fluidos ahí.
+   - (Texto Neón Naranja) Una raíz cuadrada del agua.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. En álgebra, para restar correctamente una función entera debes:
+   - (Texto Neón Rosa) Solo cambiar el primer número.
+   - (Texto Neón Lima) Cambiar los signos de toda "g". (CORRECTA)
+   - (Texto Neón Cian) Sumar todo y ponerle un menos.
+   - (Texto Neón Naranja) Borrar los números negativos.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Operar con funciones nos demuestra que en la vida real:
+   - (Texto Neón Rosa) Los problemas son independientes.
+   - (Texto Neón Lima) Varios fenómenos actúan unidos. (CORRECTA)
+   - (Texto Neón Cian) Las matemáticas no sirven nada.
+   - (Texto Neón Naranja) Todo funciona por pura magia.
+
+&copy; JMGV 2026 MasterClass 17 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 18: Funciones Anidadas (Composición de Funciones)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá y evaluará la composición de funciones $f(g(x))$, entendiendo cómo la salida de un proceso se convierte en la entrada del siguiente.
+
+Enfoque Psico-Andragógico: 
+Cadena de suministro y lógica secuencial. En el mundo real (fábricas, software, vida adulta), los procesos no ocurren aislados. El producto de un área es la materia prima de otra. Se enseña pensamiento algorítmico, crítico para programar y pensar estructuralmente.
+
+Actividad Didáctica Principal: 
+La Línea de Ensamblaje. Dinámica de clase. Tres alumnos al frente. Alumno 1 escoge un número (Materia prima). Alumno 2 es la máquina 'g' (lo multiplica por 3). Alumno 3 es la máquina 'f' (le suma 10). Tienen que pasar el número físico escrito en un papel de uno a otro. Comprenden que $f(g(x))$ es un proceso anidado.
+
+Definiciones:
+- Composición de Funciones $f(g(x))$ o $(f \circ g)(x)$:
+  * Lenguaje Formal: Operación donde el codominio (imagen) de la función $g$ se convierte en el dominio (argumento) de la función $f$.
+  * Lenguaje Cotidiano: Una máquina metida dentro de otra máquina. Lo que escupe la primera, te sirve de entrada inmediata para la segunda.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Industria Lechera: Función de vacas $\to$ litros de leche (Máquina g). Función de litros de leche $\to$ quesos producidos (Máquina f). $f(g(vacas))$ da quesos.
+2. Descuentos Anidados en Galerías: Primero aplica un 20% general (Máquina g), y al total resultante le aplicas el descuento de tu tarjeta departamental (Máquina f).
+3. Conversión de divisas doble: Comprar algo en Yenes pasando por Dólares y luego a Pesos Mexicanos.
+
+Actividades de Refuerzo:
+1. Las Matrioskas Matemáticas: Sustituir algebraicamente toda una función $g(x) = x + 1$ adentro de las letras "X" de otra función $f(x) = x^2$.
+2. Orden Importa: Calcular analíticamente $f(g(x))$ y luego $g(f(x))$ con números para que descubran que el orden altera drásticamente el resultado.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La notación $(f \circ g)(x)$ significa exactamente lo mismo que:
+   - (Texto Neón Rosa) La suma algebraica muy larga.
+   - (Texto Neón Lima) Escribir con corchetes $f(g(x))$. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar las dos funciones.
+   - (Texto Neón Naranja) Dividir f entre el valor de g.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Al evaluar $f(g(x))$, ¿cuál máquina trabaja primero?
+   - (Texto Neón Rosa) Trabajan al mismo tiempo hoy.
+   - (Texto Neón Lima) La función "g" (la de adentro). (CORRECTA)
+   - (Texto Neón Cian) La función "f" (la de afuera).
+   - (Texto Neón Naranja) Se decide tirando una moneda.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la vida diaria, la composición de funciones se parece mucho a:
+   - (Texto Neón Rosa) Un choque de dos autos de frente.
+   - (Texto Neón Lima) Una línea de ensamble de autos. (CORRECTA)
+   - (Texto Neón Cian) Una persona caminando en paz.
+   - (Texto Neón Naranja) Un reloj detenido a las doce.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si calculas $f(g(x))$ y luego $g(f(x))$, por regla general los resultados:
+   - (Texto Neón Rosa) Serán diferentes en todo caso. (CORRECTA)
+   - (Texto Neón Lima) Serán siempre exactamente iguales.
+   - (Texto Neón Cian) Darán siempre cero al final.
+   - (Texto Neón Naranja) Sumarán un número negativo.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Aplicar un 20% de descuento y a eso sumarle el IVA, es un modelo:
+   - (Texto Neón Rosa) De sumas y restas sin chiste.
+   - (Texto Neón Lima) De funciones que están anidadas. (CORRECTA)
+   - (Texto Neón Cian) Matemáticamente incalculable.
+   - (Texto Neón Naranja) De trigonometría espacial.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si $g(x) = 2x$ y $f(x) = x+3$, evaluar $f(g(5))$ da como resultado:
+   - (Texto Neón Rosa) El número diez en total.
+   - (Texto Neón Lima) El número trece como tope. (CORRECTA)
+   - (Texto Neón Cian) El número ocho exacto.
+   - (Texto Neón Naranja) El número cincuenta mil.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Algebraicamente, hacer la composición significa que en la "X" debes:
+   - (Texto Neón Rosa) Borrarla con corrector de cinta.
+   - (Texto Neón Lima) Meter la otra ecuación completa. (CORRECTA)
+   - (Texto Neón Cian) Cambiarla por un número primo.
+   - (Texto Neón Naranja) Ponerle un signo negativo a la par.
+
+&copy; JMGV 2026 MasterClass 18 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 19: Leyendo el Paisaje (Intervalos de Crecimiento y Decrecimiento)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno analizará gráficas de funciones complejas para identificar visual y analíticamente los intervalos donde la función es creciente, decreciente o constante.
+
+Enfoque Psico-Andragógico: 
+Lectura de tendencias y empoderamiento de datos. Saber leer una gráfica no es un tema escolar, es lo que hacen los brokers de bolsa, los analistas deportivos y los epidemiólogos. Se les enseña a "leer el paisaje" de izquierda a derecha para interpretar el comportamiento de la realidad.
+
+Actividad Didáctica Principal: 
+El "Broker" Lagunero. Se proyectan en el pizarrón 3 gráficas que asemejan el mercado de acciones o fluctuaciones de Criptomonedas (muy populares entre los jóvenes). Los estudiantes deben, usando colores (Verde y Rojo), sombrear los intervalos del Eje X donde la acción sube (Creciente) y donde cae en picada (Decreciente), argumentando cuándo comprar y vender.
+
+Definiciones:
+- Función Creciente:
+  * Lenguaje Formal: Función $f(x)$ tal que para todo $x_1 < x_2$ en el dominio, se cumple que $f(x_1) < f(x_2)$.
+  * Lenguaje Cotidiano: Cuando caminas por la gráfica de izquierda a derecha y sientes que vas "de subidita" escalando una montaña.
+- Función Decreciente:
+  * Lenguaje Formal: Función $f(x)$ tal que para todo $x_1 < x_2$ en el dominio, se cumple que $f(x_1) > f(x_2)$.
+  * Lenguaje Cotidiano: Cuando miras la gráfica de izquierda a derecha y la línea va "de bajadita" como resbaladilla.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Gráfica Creciente: La temperatura en la Comarca Lagunera desde el amanecer hasta las 3:00 PM.
+2. Gráfica Decreciente: El nivel del tanque de gasolina de un auto mientras viajas a Saltillo.
+3. Mixta: La demanda de luz de CFE en 24 horas; decrece en la madrugada, crece al mediodía y noche.
+
+Actividades de Refuerzo:
+1. Montaña Rusa de Dedos: Con la mano alzada, los alumnos siguen el trazo de una gráfica del profesor, cerrando el puño cuando decrece y abriéndolo como explosión cuando crece.
+2. Nomenclatura de Intervalos: Aprender a escribir formalmente los intervalos en X usando corchetes y paréntesis, ej. Creciente en $(2, 5)$.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Para saber si una gráfica crece o decrece, debes leerla siempre de:
+   - (Texto Neón Rosa) Derecha hacia el lado izquierdo.
+   - (Texto Neón Lima) Izquierda hacia el lado derecho. (CORRECTA)
+   - (Texto Neón Cian) Abajo hacia la parte de arriba.
+   - (Texto Neón Naranja) Arriba hacia el centro mismo.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Una función es "creciente" en un intervalo cuando su gráfica va:
+   - (Texto Neón Rosa) Completamente recta y plana.
+   - (Texto Neón Lima) Subiendo de valor en el eje Y. (CORRECTA)
+   - (Texto Neón Cian) Bajando en picada hacia cero.
+   - (Texto Neón Naranja) Formando un círculo completo.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Cuando lees que la gasolina baja a medida que manejas, es un fenómeno:
+   - (Texto Neón Rosa) Totalmente lineal y constante.
+   - (Texto Neón Lima) Notoriamente decreciente. (CORRECTA)
+   - (Texto Neón Cian) Inimaginable en esta época.
+   - (Texto Neón Naranja) Exponencial pero positivo.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿En qué eje se escriben las respuestas sobre los intervalos?
+   - (Texto Neón Rosa) Siempre usando el eje Y vertical.
+   - (Texto Neón Lima) Siempre usando el eje X base. (CORRECTA)
+   - (Texto Neón Cian) Escribiendo la recta diagonal.
+   - (Texto Neón Naranja) Usando ambos ejes cruzados.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si una gráfica sube y luego baja, el punto de en medio es:
+   - (Texto Neón Rosa) Un error de quien la dibujó.
+   - (Texto Neón Lima) Un vértice o punto de cambio. (CORRECTA)
+   - (Texto Neón Cian) La base logarítmica oscura.
+   - (Texto Neón Naranja) La pendiente infinita recta.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Los analistas de bolsa y economía usan este conocimiento para:
+   - (Texto Neón Rosa) Aprender a sumar fracciones.
+   - (Texto Neón Lima) Predecir tendencias y dinero. (CORRECTA)
+   - (Texto Neón Cian) Saber cómo construir un muro.
+   - (Texto Neón Naranja) Volar en naves espaciales.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En el intervalo donde tu gráfica de temperatura baja en Torreón, tú:
+   - (Texto Neón Rosa) Te pones ropa muy ligera hoy.
+   - (Texto Neón Lima) Puedes apagar el minisplit ya. (CORRECTA)
+   - (Texto Neón Cian) Bebes muchísima agua fría.
+   - (Texto Neón Naranja) Vas a nadar a las albercas.
+
+&copy; JMGV 2026 MasterClass 19 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 20: Reto Integrador (El Simulador de la Ciudad)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno sintetizará los conceptos de funciones (lineal, cuadrática, exponencial, lectura de intervalos y operaciones) resolviendo un problema de planificación urbana transversal de su región.
+
+Enfoque Psico-Andragógico: 
+Relevancia cívica y rol de expertos. Culminación del Bloque 2 a través de ABP (Aprendizaje Basado en Proyectos). Al tratar a los alumnos como "Consultores Urbanos" del Ayuntamiento, se valida su capacidad intelectual. Las matemáticas de la pizarra saltan a las decisiones que afectan su propia calidad de vida.
+
+Actividad Didáctica Principal: 
+"Alcaldes por un Día". Se forman equipos de planeación municipal. Reciben un dossier con 3 problemas críticos:
+1. El consumo de agua de la presa está decreciendo de forma *lineal*.
+2. El calor en el centro se comporta de forma *cuadrática* entre las 12 PM y 6 PM.
+3. El tráfico por los nuevos fraccionamientos sube de forma *exponencial*.
+Deben armar un tríptico de soluciones, mostrando tabulaciones, las gráficas correctas para cada caso y una justificación matemática de dónde poner los recursos.
+
+Definiciones:
+- Modelado Computacional (Conceptual):
+  * Lenguaje Formal: Construcción de representaciones funcionales del mundo físico o social para simular escenarios sin riesgos reales.
+  * Lenguaje Cotidiano: Usar la matemática para "jugar a ser Dios" y probar qué pasa si cambias algo en la ciudad, antes de gastar millones de pesos en la vida real.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Usar $f(x)=ax^2+bx+c$ para diseñar el flujo inteligente de los semáforos en la Calzada Colón.
+2. Usar $f(x)=a^x$ para proyectar cuántos tinacos gigantes necesitarán las nuevas colonias del Oriente en 10 años.
+3. Sumar el tráfico de Gómez y Lerdo al de Torreón $(f+g)(x)$ para decidir si es viable el paso a desnivel de Cuatro Caminos.
+
+Actividades de Refuerzo:
+1. Presentación de Consultoría: Exposición oral (Pitch) de 4 minutos defendiendo sus gráficas y propuestas al resto del aula (habilidades blandas de oratoria).
+2. Autoevaluación del Bloque: Llenan una diana de evaluación personal marcando qué función (Lineal, Cuadrática, Exponencial) sienten que dominan y cuál les causa inseguridad para retroalimentar al profesor.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Sintetizando: Si quieres modelar un pago mensual fijo de gimnasio usas:
+   - (Texto Neón Rosa) Una función cuadrática U.
+   - (Texto Neón Lima) Una función lineal directa. (CORRECTA)
+   - (Texto Neón Cian) Una función asintótica loca.
+   - (Texto Neón Naranja) Una exponencial explosiva.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si un problema habla de trayectorias en el aire (puentes, balones), es:
+   - (Texto Neón Rosa) Probablemente una ecuación cero.
+   - (Texto Neón Lima) Seguramente función cuadrática. (CORRECTA)
+   - (Texto Neón Cian) Siempre una línea matemática.
+   - (Texto Neón Naranja) Un modelo financiero falso.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Una infección en las calles de la ciudad se modela mejor utilizando:
+   - (Texto Neón Rosa) Rectas completamente paralelas.
+   - (Texto Neón Lima) Un crecimiento exponencial. (CORRECTA)
+   - (Texto Neón Cian) El teorema antiguo de Pitágoras.
+   - (Texto Neón Naranja) Una división de fracciones.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Usar funciones para planear una ciudad evita que:
+   - (Texto Neón Rosa) Salgan baches en el pavimento.
+   - (Texto Neón Lima) Se gaste dinero sin lógica. (CORRECTA)
+   - (Texto Neón Cian) Llueva más en tiempos secos.
+   - (Texto Neón Naranja) Haya demasiados autos viejos.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si combinas la gráfica de dos fenómenos de la ciudad, hiciste una:
+   - (Texto Neón Rosa) Trampa en tu examen final hoy.
+   - (Texto Neón Lima) Suma o resta de funciones (f+g). (CORRECTA)
+   - (Texto Neón Cian) Gráfica totalmente equivocada.
+   - (Texto Neón Naranja) Simplificación mal hecha.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. La notación $f(x)$ resultó ser finalmente:
+   - (Texto Neón Rosa) Un invento para reprobar.
+   - (Texto Neón Lima) Un nombre elegante de máquina. (CORRECTA)
+   - (Texto Neón Cian) Un error de cálculo gigante.
+   - (Texto Neón Naranja) Un número con muchos ceros.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¡Bloque 2 Completado! El principal objetivo de estas 10 sesiones fue:
+   - (Texto Neón Rosa) Pintar curvas muy estéticas.
+   - (Texto Neón Lima) Aprender a modelar el entorno. (CORRECTA)
+   - (Texto Neón Cian) Repasar aritmética de primaria.
+   - (Texto Neón Naranja) Sumar números positivos.
+
+&copy; JMGV 2026 MasterClass 20 Pensamiento Variacional PTEL. todos los derechos reservados.

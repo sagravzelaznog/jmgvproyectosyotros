@@ -1,0 +1,822 @@
+================================================================================
+BLOQUE 4: LA TASA INSTANTÁNEA (Sesiones 31 - 40)
+Enfoque: De la recta secante a la tangente. Derivada intuitiva, regla de los cuatro pasos y reglas básicas de derivación.
+================================================================================
+
+SESIÓN 31: El Instante Preciso (Variación Promedio vs Instantánea)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno diferenciará entre una tasa de variación promedio (en un intervalo de tiempo) y una tasa de variación instantánea (en un momento exacto).
+
+Enfoque Psico-Andragógico: 
+Relevancia inmediata y justicia. A los adolescentes les molesta la injusticia. Se les plantea un escenario: "Si viajas de Torreón a Saltillo en 3 horas, tu promedio es 80 km/h. ¿Es justo que te multen si en un tramo aceleraste a 140 km/h?". Entienden que el "promedio" miente y oculta el "instante". Así nace la necesidad del cálculo diferencial.
+
+Actividad Didáctica Principal: 
+El Juicio del Velocímetro. Se divide el aula en "Policías de Tránsito" y "Conductores". Se proyecta un viaje con una velocidad promedio legal, pero con picos de velocidad. Debaten por qué el radar (que mide el instante) es más preciso que el reloj del viaje total (que mide el promedio).
+
+Definiciones:
+- Tasa de Variación Promedio:
+  * Lenguaje Formal: El cociente de diferencias $\Delta y / \Delta x$ evaluado sobre un intervalo $[x_1, x_2]$.
+  * Lenguaje Cotidiano: Un resumen engañoso de lo que pasó en todo el viaje, ignorando si fuiste rápido o lento en el camino.
+- Tasa de Variación Instantánea:
+  * Lenguaje Formal: El límite de la tasa de variación promedio cuando el intervalo de tiempo $\Delta x$ tiende a cero.
+  * Lenguaje Cotidiano: La velocidad exacta que marca la aguja de tu carro en un microsegundo, como si le tomaras una foto al tiempo.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El consumo instantáneo de watts en el momento exacto en que enciendes el minisplit, vs el promedio del mes en el recibo.
+2. La velocidad de un balón del Santos en el milisegundo exacto en que el pie del delantero lo golpea.
+3. El ritmo instantáneo al que cae el agua de la presa cuando abren las compuertas al 100%.
+
+Actividades de Refuerzo:
+1. Cronometrando el Pizarrón: Un alumno dibuja una línea lentamente y de repente acelera. Los demás deben gritar "¡Promedio!" al inicio y "¡Instantáneo!" en el pico de velocidad.
+2. Cálculo Intuitivo: Reducir intervalos en una tabla. Calcular $\Delta y / \Delta x$ para 1 hora, luego 1 minuto, luego 1 segundo, observando a qué número se acerca.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La velocidad que marca el tablero de tu auto mientras manejas es:
+   - (Texto Neón Rosa) Una medida promedio general.
+   - (Texto Neón Lima) La variación instantánea hoy. (CORRECTA)
+   - (Texto Neón Cian) Un cálculo del viaje total.
+   - (Texto Neón Naranja) Una constante que no cambia.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si un viaje duró 2 horas y recorriste 100 km, los 50 km/h son:
+   - (Texto Neón Rosa) Tu velocidad instantánea real.
+   - (Texto Neón Lima) Un promedio de todo el viaje. (CORRECTA)
+   - (Texto Neón Cian) La velocidad en el semáforo.
+   - (Texto Neón Naranja) Una medición equivocada hoy.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Para pasar de un promedio a un instante, el intervalo de tiempo debe:
+   - (Texto Neón Rosa) Crecer hasta ser un infinito.
+   - (Texto Neón Lima) Reducirse hasta casi un cero. (CORRECTA)
+   - (Texto Neón Cian) Quedarse exactamente igual.
+   - (Texto Neón Naranja) Multiplicarse por cien mil.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué nos oculta la tasa de variación promedio en la vida real?
+   - (Texto Neón Rosa) Los picos o cambios bruscos. (CORRECTA)
+   - (Texto Neón Lima) El destino final del viajero.
+   - (Texto Neón Cian) El color del auto que usas.
+   - (Texto Neón Naranja) El precio total de la luz.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El cálculo diferencial nace exactamente de la necesidad de:
+   - (Texto Neón Rosa) Sumar números con decimales.
+   - (Texto Neón Lima) Medir los cambios al instante. (CORRECTA)
+   - (Texto Neón Cian) Construir pirámides gigantes.
+   - (Texto Neón Naranja) Hacer las matemáticas feas.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si tomas una fotografía con flash a un corredor, estás capturando:
+   - (Texto Neón Rosa) El promedio de toda su vida.
+   - (Texto Neón Lima) Su estado exacto instantáneo. (CORRECTA)
+   - (Texto Neón Cian) Una variable independiente.
+   - (Texto Neón Naranja) Una constante sin movimiento.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En el análisis del clima de Torreón, la temperatura a las 2:00 PM es:
+   - (Texto Neón Rosa) Un promedio de todo el año.
+   - (Texto Neón Lima) Un valor instantáneo exacto. (CORRECTA)
+   - (Texto Neón Cian) Un error de medición común.
+   - (Texto Neón Naranja) Un límite que va al infinito.
+
+&copy; JMGV 2026 MasterClass 31 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 32: El Roce Perfecto (De la Secante a la Tangente)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá la interpretación geométrica de la derivada visualizando cómo una recta secante se transforma en una recta tangente al reducir la distancia entre dos puntos.
+
+Enfoque Psico-Andragógico: 
+Transición de lo físico a lo abstracto. El adolescente entiende un "roce" o un "choque". Transformamos la geometría en una película de acción: la recta secante "atraviesa y corta" la curva violentamente, mientras que la recta tangente solo le da "un beso perfecto" en el borde. El lenguaje visual ancla la memoria a largo plazo.
+
+Actividad Didáctica Principal: 
+El Simulador de Roces. Usando GeoGebra (M-Learning), los estudiantes controlan un deslizador que mueve el punto B hacia el punto A en una curva. Ven en tiempo real cómo la recta que corta dos puntos (secante) se inclina hasta tocar solo un punto (tangente), asimilando que el $\Delta x$ se hizo cero.
+
+Definiciones:
+- Recta Secante:
+  * Lenguaje Formal: Una recta que interseca a una curva en dos o más puntos distintos. Representa la tasa de variación promedio.
+  * Lenguaje Cotidiano: Una flecha que atraviesa la figura rompiendo el borde por dos lados diferentes.
+- Recta Tangente:
+  * Lenguaje Formal: Recta que toca a la curva en un único punto local sin cruzarla, cuya pendiente es igual a la derivada de la función en ese punto.
+  * Lenguaje Cotidiano: Una línea que pasa raspando o "dando un beso" a la curva en un solo punto, mostrando hacia dónde saldrías volando si te soltaras.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Secante: Un puente peatonal que corta por encima de una rotonda.
+2. Tangente: Una piedra que sale disparada de la llanta de un camión en el Periférico (sale volando en línea recta tocando un solo punto de la llanta).
+3. Tangente: El ángulo en el que los rayos del sol al atardecer tocan apenas la punta del Cerro de las Noas.
+
+Actividades de Refuerzo:
+1. Trazado a Mano: Se entregan hojas con curvas impresas. Con una regla de plástico duro, deben intentar dibujar la tangente perfecta a simple vista en el punto indicado.
+2. El Vuelo de la Tangente: Amarrar un borrador a un hilo, girarlo y soltarlo. Observar la trayectoria recta (tangente) que toma al escapar del movimiento circular.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Una recta SECANTE se distingue geométricamente porque:
+   - (Texto Neón Rosa) No toca la figura en absoluto.
+   - (Texto Neón Lima) Corta a la curva en dos puntos. (CORRECTA)
+   - (Texto Neón Cian) Toca un solo punto y se aleja.
+   - (Texto Neón Naranja) Es un círculo muy aplastado.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Una recta TANGENTE se distingue geométricamente porque:
+   - (Texto Neón Rosa) Corta a la figura por la mitad.
+   - (Texto Neón Lima) Toca a la curva en un puntito. (CORRECTA)
+   - (Texto Neón Cian) Cruza los dos ejes del plano.
+   - (Texto Neón Naranja) Forma un ángulo de 90 grados.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si vas en un carrusel y de pronto sales disparado, tu vuelo será:
+   - (Texto Neón Rosa) En una línea recta secante hoy.
+   - (Texto Neón Lima) En una línea recta tangente. (CORRECTA)
+   - (Texto Neón Cian) En una parábola hacia el sol.
+   - (Texto Neón Naranja) En un zigzag muy peligroso.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Para convertir una secante en tangente, la distancia entre los dos puntos:
+   - (Texto Neón Rosa) Debe aumentar hacia el infinito.
+   - (Texto Neón Lima) Debe reducirse a casi un cero. (CORRECTA)
+   - (Texto Neón Cian) Debe sumar exactamente cien.
+   - (Texto Neón Naranja) Debe multiplicarse por pi ya.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. En el mundo de las tasas de variación, la recta TANGENTE representa:
+   - (Texto Neón Rosa) El promedio de todo tu viaje.
+   - (Texto Neón Lima) La velocidad en ese instante. (CORRECTA)
+   - (Texto Neón Cian) El error de la computadora.
+   - (Texto Neón Naranja) La distancia total recorrida.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si intentas trazar una tangente, tu regla debe:
+   - (Texto Neón Rosa) Apoyarse en dos lados lejanos.
+   - (Texto Neón Lima) Rozar la curva sin atravesarla. (CORRECTA)
+   - (Texto Neón Cian) Dibujar un cuadrado perfecto.
+   - (Texto Neón Naranja) Romper la hoja por la mitad.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender la tangente nos prepara para comprender por fin:
+   - (Texto Neón Rosa) Qué es verdaderamente derivar. (CORRECTA)
+   - (Texto Neón Lima) Cómo sumar grandes fracciones.
+   - (Texto Neón Cian) Las vocales del idioma griego.
+   - (Texto Neón Naranja) La historia de Torreón viejo.
+
+&copy; JMGV 2026 MasterClass 32 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 33: El Límite del Cambio (Concepto Formal de Derivada)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá el concepto formal de la Derivada como el límite del cociente de incrementos cuando $\Delta x$ tiende a cero, uniendo el Bloque 3 con el Bloque 4.
+
+Enfoque Psico-Andragógico: 
+La pieza del rompecabezas. A los 17 años, necesitan coherencia. Han visto "Límites", "Incrementos" y "Tangentes" como cosas separadas. Hoy ocurre el "Momento Ajá": se dan cuenta de que todas las clases anteriores eran piezas de un solo rompecabezas llamado "Derivada". Este sentido de completitud genera profunda satisfacción intelectual.
+
+Actividad Didáctica Principal: 
+El Frankenstein Matemático. En el pizarrón, el profesor dibuja la fórmula de la pendiente ($m = \Delta y / \Delta x$). Luego, pide a los alumnos que la "muten" agregándole el límite del Bloque 3 ($Lim \Delta x \to 0$). El resultado es la fórmula maestra de la derivada. Lo escriben en una ficha dorada como "El Código Fuente".
+
+Definiciones:
+- La Derivada $f'(x)$ o $dy/dx$:
+  * Lenguaje Formal: El límite de la razón de cambio promedio de una función cuando el incremento de la variable independiente tiende a cero.
+  * Lenguaje Cotidiano: El detector de movimiento matemático. Una fórmula que te dice exactamente qué tan rápido está cambiando una situación en cualquier instante.
+- Notación de Leibniz ($dy/dx$):
+  * Lenguaje Formal: Representación de la derivada como un cociente de diferenciales, indicando la derivada de $y$ respecto a $x$.
+  * Lenguaje Cotidiano: Una forma muy profesional de escribir "el mini-cambio en Y dividido por el mini-cambio en X".
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Derivada del volumen de la Presa = A qué ritmo exacto entra o sale el agua hoy a las 12:00 PM.
+2. Derivada del costo de vida = Qué tan rápido se están encareciendo las rentas en Viñedos este mes.
+3. Derivada de la temperatura = Los grados que sube el calor por cada minuto que pasa entre la 1:00 y 2:00 PM.
+
+Actividades de Refuerzo:
+1. Traductor de Derivadas: Se dan frases cotidianas ("El tráfico empeora rápido") y el alumno las escribe en notación $dy/dt$ ("La derivada del tráfico respecto al tiempo es alta").
+2. Lotería de Símbolos: Aprender a reconocer las diferentes formas en que los libros escriben derivada: $f'(x)$, $y'$, $dy/dx$, $D_x$.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La Derivada nace exactamente cuando juntamos dos conceptos previos:
+   - (Texto Neón Rosa) Sumas cruzadas y las restas.
+   - (Texto Neón Lima) Razón de cambio y el límite. (CORRECTA)
+   - (Texto Neón Cian) Raíz cuadrada y exponentes.
+   - (Texto Neón Naranja) Seno de equis y el coseno.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En lenguaje cotidiano, la derivada es la mejor herramienta para:
+   - (Texto Neón Rosa) Medir la rapidez de un cambio. (CORRECTA)
+   - (Texto Neón Lima) Dibujar un círculo perfecto.
+   - (Texto Neón Cian) Calcular el área de un cubo.
+   - (Texto Neón Naranja) Sumar fracciones complejas.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la fórmula de la derivada, el incremento $\Delta x$ siempre debe:
+   - (Texto Neón Rosa) Tender a un infinito enorme.
+   - (Texto Neón Lima) Tender a un cero pequeñito. (CORRECTA)
+   - (Texto Neón Cian) Ser igual a un millón exacto.
+   - (Texto Neón Naranja) Desaparecer sin dejar rastro.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué significa la notación $dy/dx$ inventada por Leibniz?
+   - (Texto Neón Rosa) Días por cada noche vivida.
+   - (Texto Neón Lima) Derivada de y con respecto a x. (CORRECTA)
+   - (Texto Neón Cian) Dividir y por la variable x.
+   - (Texto Neón Naranja) Dos ye dividido por diez equis.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si $f'(x)$ (la derivada) es muy alta en un punto, significa que:
+   - (Texto Neón Rosa) El fenómeno cambia poquitito.
+   - (Texto Neón Lima) El fenómeno cambia rapidísimo. (CORRECTA)
+   - (Texto Neón Cian) El fenómeno está muy dormido.
+   - (Texto Neón Naranja) Hubo un error al calcularla.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si $f'(x)$ es exactamente cero, significa que en ese instante:
+   - (Texto Neón Rosa) Nada está cambiando para ti. (CORRECTA)
+   - (Texto Neón Lima) El mundo va a la velocidad luz.
+   - (Texto Neón Cian) La curva tiene una asíntota.
+   - (Texto Neón Naranja) La gráfica es un círculo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. El apóstrofe en la función $f'(x)$ se lee matemáticamente como:
+   - (Texto Neón Rosa) Efe de equis con un palito.
+   - (Texto Neón Lima) Efe prima de la variable equis. (CORRECTA)
+   - (Texto Neón Cian) Efe uno de la letra equis.
+   - (Texto Neón Naranja) Efe superior de los datos.
+
+&copy; JMGV 2026 MasterClass 33 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 34: El Rito de Iniciación (Regla de los 4 Pasos I - Lineales)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno calculará la derivada de funciones lineales por definición utilizando el algoritmo algebraico de la Regla de los Cuatro Pasos.
+
+Enfoque Psico-Andragógico: 
+Construcción de carácter y disciplina. Se les explica que este es su "entrenamiento de resistencia mental". La Regla de los 4 Pasos es larga y tediosa, pero dominarla demuestra que entienden la maquinaria profunda de las matemáticas antes de usar los botones fáciles. Se fomenta el compañerismo para superar la frustración del álgebra larga.
+
+Actividad Didáctica Principal: 
+El Pizarrón de Relevos. En grupos de 4. Se les da la función $f(x) = 3x - 2$. 
+Alumno 1 aplica el Paso 1: Sumar $\Delta x$ a las variables. 
+Alumno 2 aplica el Paso 2: Restar la función original. 
+Alumno 3 aplica el Paso 3: Dividir todo entre $\Delta x$. 
+Alumno 4 aplica el Paso 4: Evaluar el límite cuando $\Delta x \to 0$.
+
+Definiciones:
+- Derivación por Definición:
+  * Lenguaje Formal: Obtención de la función derivada $f'(x)$ aplicando rigurosamente el límite del cociente de diferencias original.
+  * Lenguaje Cotidiano: Obtener la respuesta "a la antigua", escribiendo todo el proceso completo sin usar fórmulas cortas.
+- Regla de los Cuatro Pasos:
+  * Lenguaje Formal: Algoritmo heurístico estructurado en cuatro fases (Incremento, Diferencia, Cociente, Límite) para hallar la derivada.
+  * Lenguaje Cotidiano: La receta de cocina de 4 ingredientes que siempre funciona para encontrar la derivada de cualquier máquina.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Derivar el costo del pasaje lineal ($15x$) te dará siempre $15. No importa la hora, el ritmo de cambio es $15 por persona.
+2. Derivar la renta de un local en el centro ($f(x) = 5000x + 2000$). La derivada es $5000 (el ritmo al que sangra tu cartera cada mes).
+3. Derivar la temperatura en una mañana suave ($2x + 15$). El calor sube a razón de 2 grados por hora.
+
+Actividades de Refuerzo:
+1. Memorama de Pasos: Ordenar tarjetas desordenadas con los nombres y fórmulas de los 4 pasos hasta dominarlos de memoria.
+2. Comprobación Visual: Graficar la recta y ver que la pendiente que sacaron en la ecuación es el mismo número que les dio en los 4 pasos.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El Paso 1 de la famosa Regla de los Cuatro Pasos es:
+   - (Texto Neón Rosa) Dividir todo entre la equis.
+   - (Texto Neón Lima) Incrementar la X sumando $\Delta x$. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar por un gran cero.
+   - (Texto Neón Naranja) Borrar el término principal.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El Paso 2 consiste en "quitar el inicio", es decir:
+   - (Texto Neón Rosa) Sumar un número muy grande.
+   - (Texto Neón Lima) Restar la función original. (CORRECTA)
+   - (Texto Neón Cian) Poner raíces en los lados.
+   - (Texto Neón Naranja) Escribir el final del texto.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. El Paso 3 nos pide formar un cociente. ¿Qué debemos hacer?
+   - (Texto Neón Rosa) Dividir todo entre $\Delta x$. (CORRECTA)
+   - (Texto Neón Lima) Multiplicar por la letra pi.
+   - (Texto Neón Cian) Restar el denominador suave.
+   - (Texto Neón Naranja) Tacharlo con color violeta.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. El Paso 4, el último y más poderoso, nos obliga a:
+   - (Texto Neón Rosa) Pintar la gráfica muy linda.
+   - (Texto Neón Lima) Aplicar el límite a cero. (CORRECTA)
+   - (Texto Neón Cian) Ignorar el resto del problema.
+   - (Texto Neón Naranja) Evaluar con número infinito.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si derivas la función lineal $f(x) = 5x$ con los 4 pasos, el resultado:
+   - (Texto Neón Rosa) Será un número con letras.
+   - (Texto Neón Lima) Será simplemente el cinco. (CORRECTA)
+   - (Texto Neón Cian) Será una curva de parábola.
+   - (Texto Neón Naranja) Será un cero gigantesco.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Aprender la regla de los 4 pasos es útil porque te enseña:
+   - (Texto Neón Rosa) Cómo perder tiempo en clase.
+   - (Texto Neón Lima) De dónde salen las fórmulas. (CORRECTA)
+   - (Texto Neón Cian) Geometría del espacio puro.
+   - (Texto Neón Naranja) A sumar con calculadoras.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. La derivada de cualquier función que sea una línea recta siempre será:
+   - (Texto Neón Rosa) Una variable que cambia mucho.
+   - (Texto Neón Lima) Una constante sin variable. (CORRECTA)
+   - (Texto Neón Cian) Una fracción con exponentes.
+   - (Texto Neón Naranja) Un error de sistema fatal.
+
+&copy; JMGV 2026 MasterClass 34 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 35: Rompiendo Cuadrados (Regla de los 4 Pasos II - Cuadráticas)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno desarrollará binomios al cuadrado perfectos para resolver la derivada de funciones cuadráticas ($ax^2$) mediante la Regla de los 4 Pasos.
+
+Enfoque Psico-Andragógico: 
+Gestión del error y resiliencia algebraica. Aquí el álgebra se pone ruda porque deben desarrollar $(x + \Delta x)^2$. Es común equivocarse en un signo. Fomentamos la mentalidad científica: "El error no es torpeza, es un bug en tu código". Se premia la revisión meticulosa, desarrollando tolerancia a la frustración.
+
+Actividad Didáctica Principal: 
+Cacería de Bugs Algebraicos. El profesor hace a propósito una demostración en el pizarrón de $f(x) = x^2$ usando los 4 pasos, pero comete dos errores sutiles de signos o de desarrollo de binomios. Los estudiantes actúan como "Ingenieros de Control de Calidad", debatiendo hasta encontrar el error, tacharlo en rojo y salvar la operación.
+
+Definiciones:
+- Binomio al Cuadrado:
+  * Lenguaje Formal: Producto notable de la forma $(a+b)^2 = a^2 + 2ab + b^2$.
+  * Lenguaje Cotidiano: El dolor de cabeza del estudiante. El cuadrado del primero, MÁS el doble del primero por el segundo, MÁS el cuadrado del segundo. ¡Nunca es solo $a^2 + b^2$!
+- Cancelación de Términos:
+  * Lenguaje Formal: Eliminación algebraica de términos semejantes con signos opuestos durante la simplificación.
+  * Lenguaje Cotidiano: El alivio de poder tachar partes de la ecuación porque se restaron y se volvieron polvo, haciendo el problema más chiquito.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Expansión térmica del pavimento en verano ($x^2$). El ritmo al que se agrieta requiere desarrollar binomios para predecirlo.
+2. La aceleración de un balón cayendo desde el Cristo de las Noas. El cuadrado del tiempo exige un proceso de 4 pasos más robusto.
+3. El área de un terreno en el centro. Si crece de lado y lado $(x + \Delta x)^2$, calcular su derivada nos da el ritmo de plusvalía urbana.
+
+Actividades de Refuerzo:
+1. Drill de Binomios: Calentamiento de 5 minutos donde solo expanden en sus cuadernos $(a+b)^2$ usando distintas letras para aceitar el cerebro antes de derivar.
+2. El Tacho Mágico: Tras aplicar el Paso 2, usar marcatextos para encontrar a los "gemelos malvados" (los que son iguales pero con signos opuestos) y cancelarlos con júbilo.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Al derivar $x^2$ con el paso 1, se forma el binomio:
+   - (Texto Neón Rosa) Equis más delta equis libre.
+   - (Texto Neón Lima) Equis más delta equis al cuadrado. (CORRECTA)
+   - (Texto Neón Cian) Equis cuadrada y nada más hoy.
+   - (Texto Neón Naranja) Delta equis menos equis total.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El desarrollo correcto de un binomio al cuadrado perfecto lleva:
+   - (Texto Neón Rosa) Solo dos piezas pequeñas.
+   - (Texto Neón Lima) Exactamente tres términos. (CORRECTA)
+   - (Texto Neón Cian) Cuatro o más fragmentos.
+   - (Texto Neón Naranja) Ninguna letra, solo números.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En el paso 2 (restar original), la $x^2$ del principio y la del final se:
+   - (Texto Neón Rosa) Suman y se vuelven muy grandes.
+   - (Texto Neón Lima) Cancelan y desaparecen. (CORRECTA)
+   - (Texto Neón Cian) Multiplican dando equis cuarta.
+   - (Texto Neón Naranja) Ignoran por ser irrelevantes.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En el paso 3 (dividir), ¿qué pasa con los $\Delta x$ sobrevivientes arriba?
+   - (Texto Neón Rosa) Explotan porque es incorrecto.
+   - (Texto Neón Lima) Pierden un grado o desaparecen. (CORRECTA)
+   - (Texto Neón Cian) Se vuelven números infinitos.
+   - (Texto Neón Naranja) Se duplican en tamaño real.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. En el paso 4, todo lo que aún tenga pegado un $\Delta x$ se convierte en:
+   - (Texto Neón Rosa) Un número cien de la nada.
+   - (Texto Neón Lima) Un bonito y redondo cero. (CORRECTA)
+   - (Texto Neón Cian) Una variable independiente.
+   - (Texto Neón Naranja) Un problema sin resolver.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si aplicas los 4 pasos con maestría a $x^2$, el resultado final es:
+   - (Texto Neón Rosa) Tres equis al cuadrado.
+   - (Texto Neón Lima) Dos equis simples ($2x$). (CORRECTA)
+   - (Texto Neón Cian) Un número cuatro pelón.
+   - (Texto Neón Naranja) Equis dividida entre dos.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Manejar álgebra frustrante sin rendirte demuestra que tienes:
+   - (Texto Neón Rosa) Calculadora mental rápida.
+   - (Texto Neón Lima) Resiliencia de un ingeniero. (CORRECTA)
+   - (Texto Neón Cian) Suerte al tirar los dados.
+   - (Texto Neón Naranja) Muy mala memoria de base.
+
+&copy; JMGV 2026 MasterClass 35 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 36: Los Códigos de Trampa (Reglas Básicas de Derivación)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno aplicará las fórmulas directas para la derivada de una constante y de la variable identidad ($f(x)=c$ y $f(x)=x$), abandonando la regla de los cuatro pasos.
+
+Enfoque Psico-Andragógico: 
+Recompensa y alivio cognitivo. Los estudiantes han sufrido con páginas enteras de álgebra. Hoy se les regala "el atajo". Psicológicamente, valorarán estas reglas porque saben el infierno que les ahorran. Se empoderan al sentir que subieron de nivel en el "juego" y ahora tienen los códigos para ir más rápido.
+
+Actividad Didáctica Principal: 
+Torneo "Flash". Ya no hay procedimientos largos. El profesor proyecta funciones simples como $f(x) = 8$, $f(x) = x$, $f(x) = -45$. Los estudiantes tienen pizarrones blancos individuales (o cuadernos). En cuanto sale el problema, deben escribir el resultado en 3 segundos y levantar su pizarra. Experimentan la pura velocidad de la fórmula.
+
+Definiciones:
+- Regla de la Constante:
+  * Lenguaje Formal: La derivada de cualquier función constante f(x) = C es siempre igual a cero. (d/dx [C] = 0).
+  * Lenguaje Cotidiano: Si algo es fijo (no cambia), su ritmo de cambio es un absoluto CERO. Lógica pura.
+- Regla de la Variable Identidad:
+  * Lenguaje Formal: La derivada de la función identidad f(x) = x respecto a sí misma es la unidad. (d/dx [x] = 1).
+  * Lenguaje Cotidiano: Si avanzas un paso, el tiempo avanza un paso. El ritmo es 1 a 1.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Constante: La altura del Cristo de las Noas. Derivada = 0 (No crece con el tiempo).
+2. Identidad: Caminar 1 metro por cada segundo que pasa ($f(x) = x$). Derivada = 1.
+3. Constante: El precio del autobús ($15 pesos hoy y mañana). Derivada = 0.
+
+Actividades de Refuerzo:
+1. Trampas Comunes: Mostrar $f(x) = 1,000,000$. Los alumnos se asustan por el número, pero deben gritar "¡Es constante, es cero!". Les quita el miedo a los números grandes.
+2. Fichas Mnemotécnicas: Empiezan a armar su "Formulario VIP", escribiendo en tarjetas gruesas la fórmula formal por un lado y la explicación con sus palabras por el otro.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La derivada de CUALQUIER número que no tenga la letra X es siempre:
+   - (Texto Neón Rosa) El mismo número otra vez.
+   - (Texto Neón Lima) Exactamente un gran cero. (CORRECTA)
+   - (Texto Neón Cian) El número uno como base.
+   - (Texto Neón Naranja) Un error matemático serio.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Por qué la derivada de un número fijo (constante) es cero?
+   - (Texto Neón Rosa) Porque no nos gustan mucho.
+   - (Texto Neón Lima) Porque su ritmo de cambio no existe. (CORRECTA)
+   - (Texto Neón Cian) Porque las calculadoras fallan.
+   - (Texto Neón Naranja) Porque es un número negativo.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si te pido derivar $f(x) = 8,456,231$, el resultado rápido es:
+   - (Texto Neón Rosa) Imposible sin los 4 pasos.
+   - (Texto Neón Lima) Cero, ¡no te asustes por el tamaño! (CORRECTA)
+   - (Texto Neón Cian) El mismo número pero negativo.
+   - (Texto Neón Naranja) Un número con más decimales.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La derivada de la variable identidad simple, $f(x) = x$, es:
+   - (Texto Neón Rosa) Equis al cuadrado hoy.
+   - (Texto Neón Lima) El número uno (1). (CORRECTA)
+   - (Texto Neón Cian) El número cero (0).
+   - (Texto Neón Naranja) Un infinito positivo.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Tener estas fórmulas directas nos ayuda principalmente a:
+   - (Texto Neón Rosa) Usar más hojas del cuaderno.
+   - (Texto Neón Lima) Ahorrar muchísimo tiempo y dolor. (CORRECTA)
+   - (Texto Neón Cian) Olvidar cómo multiplicar bien.
+   - (Texto Neón Naranja) Pintar las gráficas bonitas.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si $f(x) = \pi$ (pi es 3.14159...), entonces su derivada $f'(x)$ es:
+   - (Texto Neón Rosa) Pi multiplicado por dos.
+   - (Texto Neón Lima) Cero, porque Pi es una constante. (CORRECTA)
+   - (Texto Neón Cian) Uno, porque es una variable oculta.
+   - (Texto Neón Naranja) Infinito porque no se acaba.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En tu formulario VIP de derivadas, este es tu nivel:
+   - (Texto Neón Rosa) Principiante sufriendo con álgebra.
+   - (Texto Neón Lima) Novato ascendiendo con atajos. (CORRECTA)
+   - (Texto Neón Cian) Experto mundial en astrofísica.
+   - (Texto Neón Naranja) Reprobado esperando milagros.
+
+&copy; JMGV 2026 MasterClass 36 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 37: Bajando del Pedestal (Regla de la Potencia)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno derivará funciones polinomiales de grado n aplicando la regla general de la potencia ($d/dx [x^n] = nx^{n-1}$).
+
+Enfoque Psico-Andragógico: 
+Fluidez y maestría. Esta es la regla más satisfactoria de todo el cálculo. Se explica con una metáfora visual ("Baja al exponente a trabajar y quítale un año de vida"). Al volver las matemáticas en imágenes de acción, los adolescentes retienen mejor la información y se divierten haciendo docenas de ejercicios porque los resuelven en 2 segundos.
+
+Actividad Didáctica Principal: 
+El Cajero Ágil. Se proyectan funciones con exponentes ($x^3, x^5, x^10$). El estudiante debe hacer un movimiento físico con el brazo simulando "bajar el exponente al frente" y luego un chasquido indicando que "se le restó uno". Resuelven 20 derivadas visuales en 10 minutos.
+
+Definiciones:
+- Regla de la Potencia:
+  * Lenguaje Formal: La derivada de una variable x elevada a una potencia constante n es n veces x elevada a la potencia n menos uno.
+  * Lenguaje Cotidiano: Tira el exponente pequeño enfrente para que multiplique, y arriba descuéntale un uno al número original.
+- Exponente:
+  * Lenguaje Formal: Número que indica la cantidad de veces que la base debe ser multiplicada por sí misma.
+  * Lenguaje Cotidiano: El numerito que flota arriba de la X dándole superpoderes.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Derivar el volumen de un tinaco cúbico ($x^3$). Su derivada de crecimiento es $3x^2$.
+2. Derivar la disipación térmica del sol en el asfalto ($x^4 \to 4x^3$).
+3. Derivar la posición de un auto en aceleración ($x^2 \to 2x$).
+
+Actividades de Refuerzo:
+1. Competencia de Polinomios Altos: Evaluar derivadas locas como $x^{100}$. El alumno nota que $100x^{99}$ es facilísimo de calcular con la regla (hacer esto con los 4 pasos hubiera tomado meses).
+2. Taller de Formulario: Añadir la Regla de la Potencia a su tarjeta de "Códigos de Trampa".
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La regla secreta para derivar cualquier $x^n$ (equis a la ene) es:
+   - (Texto Neón Rosa) Dividir la equis entre la ene.
+   - (Texto Neón Lima) Bajar la ene y restarle un uno. (CORRECTA)
+   - (Texto Neón Cian) Sumarle un uno al número ene.
+   - (Texto Neón Naranja) Borrar la equis y dejar la ene.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si tienes la función $f(x) = x^4$, su derivada rapidísima es:
+   - (Texto Neón Rosa) Cuatro equis a la quinta potencia.
+   - (Texto Neón Lima) Cuatro equis a la tercera potencia. (CORRECTA)
+   - (Texto Neón Cian) Un cuatro sin nada de equis hoy.
+   - (Texto Neón Naranja) Tres equis a la cuarta elevada.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. ¿Qué pasaría si intentaras derivar $x^{10}$ con los 4 pasos antiguos?
+   - (Texto Neón Rosa) Sería muy fácil y rápido de hacer.
+   - (Texto Neón Lima) Te tomaría horas de álgebra cruel. (CORRECTA)
+   - (Texto Neón Cian) Daría error matemático seguro.
+   - (Texto Neón Naranja) Sería igual que usar el atajo.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si tienes $5x^3$, al bajar el 3, este número debe:
+   - (Texto Neón Rosa) Quedarse ahí sin hacerle nada.
+   - (Texto Neón Lima) Multiplicarse por el 5 existente. (CORRECTA)
+   - (Texto Neón Cian) Restarse del número 5 inicial.
+   - (Texto Neón Naranja) Dividir al número 5 original.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si derivas $f(x) = 5x^3$, el resultado final pulido será:
+   - (Texto Neón Rosa) Ocho equis al cuadrado bonito.
+   - (Texto Neón Lima) Quince equis al cuadrado neto. (CORRECTA)
+   - (Texto Neón Cian) Quince equis al cubo siempre.
+   - (Texto Neón Naranja) Dos equis a la quinceava.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. La regla de la potencia funciona como si el exponente:
+   - (Texto Neón Rosa) Tomara un elevador hacia arriba.
+   - (Texto Neón Lima) Bajara a trabajar perdiendo edad. (CORRECTA)
+   - (Texto Neón Cian) Se borrara mágicamente de ahí.
+   - (Texto Neón Naranja) Se volviera una letra constante.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Gracias a esta regla, las matemáticas del movimiento físico se volvieron:
+   - (Texto Neón Rosa) Imposibles de entender sin lupa.
+   - (Texto Neón Lima) Fáciles de predecir por todos. (CORRECTA)
+   - (Texto Neón Cian) Exclusivas para viejos sabios.
+   - (Texto Neón Naranja) Erróneas y muy equivocadas.
+
+&copy; JMGV 2026 MasterClass 37 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 38: Divide y Vencerás (Derivada de Sumas y Restas)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá la propiedad de linealidad de la derivada, derivando funciones polinomiales largas término a término.
+
+Enfoque Psico-Andragógico: 
+Organización y reducción de estrés. Cuando un joven ve un polinomio largo ($f(x) = 4x^3 - 2x^2 + 7x - 5$), su cerebro se bloquea por la cantidad de información. Enseñamos el principio de "Divide y Vencerás": un monstruo grande no es más que 4 monstruos pequeños y débiles. Esta habilidad de "seccionar problemas" es vital para su vida adulta y manejo de la ansiedad.
+
+Actividad Didáctica Principal: 
+El Escuadrón Quirúrgico. Se proyecta un polinomio inmenso. El grupo se divide en equipos. A cada equipo se le asigna solo un término del polinomio (un "paciente"). Operan (derivan) solo su término en segundos. Luego juntan las partes en el pizarrón. Descubren que pueden derivar cosas enormes sin estresarse.
+
+Definiciones:
+- Linealidad de la Derivada (Suma/Resta):
+  * Lenguaje Formal: La derivada de una suma o diferencia de funciones es igual a la suma o diferencia de las derivadas de esas funciones. d/dx [f(x) ± g(x)] = f'(x) ± g'(x).
+  * Lenguaje Cotidiano: Corta el problema grande por los signos de MÁS y MENOS. Deriva cada pedacito por separado como si no existieran los demás, y al final vuelve a juntarlos.
+- Término Independiente:
+  * Lenguaje Formal: Término de un polinomio que no contiene variables.
+  * Lenguaje Cotidiano: El número soltero que no tiene letra (la constante), que al derivar siempre se hace cero.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El recibo mixto: Cobro base (constante $\to$ 0) + tarifa de agua ($x \to$ constante) + tarifa de drenaje ($x^2 \to$ lineal).
+2. Fuerza neta de un auto: La aceleración del motor empuja para adelante (positivo), la fricción del viento frena (negativo). Se derivan ambas fuerzas por separado y se restan.
+3. Ingreso total de una tiendita: Venta de elotes ($20x$) + venta de refrescos ($15x$).
+
+Actividades de Refuerzo:
+1. El Cazador de Ceros: Dado un polinomio largo, el alumno solo debe usar un plumón rojo para "cazar" y tachar el término independiente al final, porque sabe que su derivada será cero antes de empezar.
+2. Derivación Musical: El profesor dicta un polinomio al ritmo de una palmada. Cada palmada el alumno debe decir la derivada del siguiente término. Fomenta fluidez mental.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Si ves una ecuación con muchos términos sumándose, tu estrategia es:
+   - (Texto Neón Rosa) Renunciar, es demasiado difícil.
+   - (Texto Neón Lima) Derivar cada parte por separado. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar todos los exponentes.
+   - (Texto Neón Naranja) Sumar los números de las bases.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Qué pasa con los signos (+) y (-) originales al derivar el polinomio?
+   - (Texto Neón Rosa) Se cambian todos por el contrario.
+   - (Texto Neón Lima) Se quedan exactamente donde están. (CORRECTA)
+   - (Texto Neón Cian) Se vuelven divisiones cruzadas.
+   - (Texto Neón Naranja) Se borran para que sea un solo bloque.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si el último término de tu ecuación es un simple "- 8", al derivar tú:
+   - (Texto Neón Rosa) Le pones una letra equis al final.
+   - (Texto Neón Lima) Lo tachas porque se vuelve cero. (CORRECTA)
+   - (Texto Neón Cian) Lo multiplicas por ocho otra vez.
+   - (Texto Neón Naranja) Lo dejas intacto sin tocarlo hoy.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Deriva mentalmente la función $f(x) = 3x^2 + 4x - 5$. Resultado:
+   - (Texto Neón Rosa) Doce equis a la tercera potencia.
+   - (Texto Neón Lima) Seis equis más cuatro exacto. (CORRECTA)
+   - (Texto Neón Cian) Seis equis menos cinco final.
+   - (Texto Neón Naranja) Tres equis al cuadrado limpio.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El principio de "Divide y Vencerás" te ayuda psicológicamente a:
+   - (Texto Neón Rosa) Perder amigos en discusiones.
+   - (Texto Neón Lima) No abrumarte con cosas grandes. (CORRECTA)
+   - (Texto Neón Cian) Odiar las matemáticas oscuras.
+   - (Texto Neón Naranja) Olvidar sumar cosas sencillas.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si juntas la regla de la constante, identidad, potencia y sumas, tienes:
+   - (Texto Neón Rosa) Una crisis existencial gigante.
+   - (Texto Neón Lima) El 80% del cálculo operativo. (CORRECTA)
+   - (Texto Neón Cian) Un error en el sistema solar.
+   - (Texto Neón Naranja) Un nivel de prescolar básico.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Si el polinomio es muy, pero muy largo, el nivel de dificultad:
+   - (Texto Neón Rosa) Sube hasta volverse inalcanzable.
+   - (Texto Neón Lima) Es el mismo, solo tomas más tiempo. (CORRECTA)
+   - (Texto Neón Cian) Desafía a los grandes maestros.
+   - (Texto Neón Naranja) Exige calculadoras cuánticas.
+
+&copy; JMGV 2026 MasterClass 38 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 39: El Cambio del Cambio (Física de la Derivada)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno relacionará las derivadas de primero y segundo orden con los conceptos físicos de posición, velocidad y aceleración.
+
+Enfoque Psico-Andragógico: 
+Concreción del conocimiento. Se responde al eterno "Y esto para qué me sirve?". Los jóvenes que manejan auto, moto o que corren, viven la física a diario. Al unir la matemática pura (letras) con sensaciones viscerales (el empuje hacia atrás del asiento al acelerar el carro), el cálculo cobra vida. Sienten que han descifrado el "Matrix" del universo físico.
+
+Actividad Didáctica Principal: 
+El Laboratorio Cinemático. Proyección de un auto de "Rápidos y Furiosos" o F1. Se da una ecuación de Posición $P(t) = 5t^3$.
+Paso 1: Derivan $P(t)$ para encontrar la Velocidad $V(t) = 15t^2$ (Lo que marca el velocímetro).
+Paso 2: Derivan de nuevo (Segunda Derivada) para encontrar la Aceleración $A(t) = 30t$ (La fuerza G que los aplasta al asiento). Evaluando en el segundo 2, sienten el impacto de los números.
+
+Definiciones:
+- Velocidad (Primera Derivada):
+  * Lenguaje Formal: Razón de cambio instantánea de la posición con respecto al tiempo ($s'(t) = v(t)$).
+  * Lenguaje Cotidiano: Qué tan rápido estás cambiando de ubicación. Lo que te permite rebasar a otro en el Periférico.
+- Aceleración (Segunda Derivada):
+  * Lenguaje Formal: Razón de cambio instantánea de la velocidad con respecto al tiempo ($v'(t) = s''(t) = a(t)$).
+  * Lenguaje Cotidiano: Qué tan rápido estás cambiando de velocidad. El jalón en el estómago cuando pisas el acelerador a fondo. Es "el cambio del cambio".
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Posición: El km exacto donde estás en la carretera Torreón-Matamoros.
+2. Velocidad: Pasar a 80 km/h frente a Galerías.
+3. Aceleración: Frenar en seco (aceleración negativa masiva) porque el semáforo del Fresno se puso en rojo.
+
+Actividades de Refuerzo:
+1. Gráficas Apiladas: M-Learning en GeoGebra. Grafican la curva de posición, y abajo la de velocidad. Observan cómo cuando la curva de arriba tiene pico (vértice), la de abajo cruza por cero.
+2. Nomenclatura del Orden: Ejercitar la escritura $f(x)$, $f'(x)$ y $f''(x)$ (doble apóstrofe) hasta tres niveles, interiorizando que derivar es un proceso repetible.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En el mundo de la física, la Primera Derivada de la Posición nos da:
+   - (Texto Neón Rosa) La fuerza gravitacional lunar.
+   - (Texto Neón Lima) La velocidad exacta del móvil. (CORRECTA)
+   - (Texto Neón Cian) El peso del auto en toneladas.
+   - (Texto Neón Naranja) El error de freno del sistema.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Para encontrar la Aceleración de un objeto, debes calcular su:
+   - (Texto Neón Rosa) Temperatura base de inicio.
+   - (Texto Neón Lima) Segunda derivada de posición. (CORRECTA)
+   - (Texto Neón Cian) Límite al infinito negativo.
+   - (Texto Neón Naranja) Integral cuadrada perfecta.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si un carro viaja a velocidad constante, su aceleración (cambio de velocidad) es:
+   - (Texto Neón Rosa) Una suma muy grande siempre.
+   - (Texto Neón Lima) Cero absoluto, porque no cambia. (CORRECTA)
+   - (Texto Neón Cian) Negativa, porque va frenando.
+   - (Texto Neón Naranja) Positiva, porque va al máximo.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué experimentas físicamente cuando sientes la Segunda Derivada?
+   - (Texto Neón Rosa) Mucho frío si es de madrugada.
+   - (Texto Neón Lima) Un jalón o empuje en el cuerpo. (CORRECTA)
+   - (Texto Neón Cian) Aburrimiento por la carretera.
+   - (Texto Neón Naranja) Ganas de comer algo dulce.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El símbolo $f''(x)$ con dos comitas significa que has:
+   - (Texto Neón Rosa) Puesto comillas de decoración.
+   - (Texto Neón Lima) Derivado dos veces seguidas. (CORRECTA)
+   - (Texto Neón Cian) Multiplicado por dos final.
+   - (Texto Neón Naranja) Cometido dos errores fatales.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si frenas brusco en el Blvd. Revolución, matemáticamente tienes:
+   - (Texto Neón Rosa) Aceleración nula y pacífica.
+   - (Texto Neón Lima) Una aceleración muy negativa. (CORRECTA)
+   - (Texto Neón Cian) Velocidad infinita hacia atrás.
+   - (Texto Neón Naranja) Una posición que no existe ya.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender posición, velocidad y aceleración hace que el cálculo sea:
+   - (Texto Neón Rosa) Imposible de relacionar ya.
+   - (Texto Neón Lima) El idioma en que habla el universo. (CORRECTA)
+   - (Texto Neón Cian) Un simple pasatiempo numérico.
+   - (Texto Neón Naranja) Letras sin ningún significado.
+
+&copy; JMGV 2026 MasterClass 39 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 40: Reto Integrador (Ingeniería de Tránsito Lagunero)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno sintetizará los conceptos y reglas de derivación para evaluar la seguridad vial de una intersección local, calculando velocidades y aceleraciones a partir de modelos matemáticos.
+
+Enfoque Psico-Andragógico: 
+ABP (Aprendizaje Basado en Proyectos) y rol social. Culminación del Bloque 4. Los jóvenes dejan de ser estudiantes y actúan como Peritos de Vialidad para el Ayuntamiento de Torreón. Tomar decisiones de seguridad vial (evitar choques calculando si un auto puede frenar a tiempo con la 2da derivada) valida sus capacidades lógicas frente al mundo adulto.
+
+Actividad Didáctica Principal: 
+El Peritaje del Nudo Mixteco. Se forman "Firmas de Ingeniería". Reciben un informe técnico simulado con la ecuación de movimiento de un auto $P(t) = 2t^3 - 4t^2 + 10t$ que se acerca a un semáforo. Su misión: 
+1) Derivar para hallar la función de velocidad. 
+2) Evaluar a los 3 segundos para ver si rebasó el límite legal (80 km/h). 
+3) Derivar para hallar la aceleración y determinar si el conductor intentaba frenar o le aceleró más. Generar un "Dictamen Técnico".
+
+Definiciones:
+- Peritaje Técnico:
+  * Lenguaje Formal: Informe sustentado en modelación y análisis matemático que valida o refuta las condiciones físicas de un evento empírico.
+  * Lenguaje Cotidiano: Usar la ciencia para demostrar sin lugar a dudas quién tuvo la culpa o cómo se comportaban las cosas.
+- Modelo Cinemático:
+  * Lenguaje Formal: Conjunto de funciones (posición, velocidad, aceleración) derivadas sucesivamente en el tiempo que describen un movimiento mecánico.
+  * Lenguaje Cotidiano: Las tres fórmulas (las tres hermanas) que te dicen dónde estás, qué tan rápido vas y qué tanto empujas el motor.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Calcular a qué velocidad real iban los autos en la autopista San Pedro tras medir las huellas de derrape (frenado / aceleración negativa).
+2. Evaluar el diseño de una rampa en un paso a desnivel nuevo para que la aceleración de bajada no cause accidentes en camiones de carga.
+3. Determinar el tiempo correcto que debe durar la luz amarilla en la Calzada Colón basados en la tasa de frenado de un auto promedio.
+
+Actividades de Refuerzo:
+1. Defensa del Dictamen: Un portavoz de cada "Firma" se pone de pie y presenta su veredicto (multa o no multa) frente al resto de la clase, usando su hoja de derivadas como prueba irrefutable.
+2. Autoevaluación del Bloque: Los estudiantes escriben en una tarjeta: "¿Qué regla me salvó la vida en este bloque?" (potencia, sumas, etc.) y la pegan en el muro de "Los Códigos de Trampa".
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En nuestro peritaje, para saber si el auto rebasó el límite, evaluamos:
+   - (Texto Neón Rosa) La función original de posición.
+   - (Texto Neón Lima) La primera derivada (Velocidad). (CORRECTA)
+   - (Texto Neón Cian) La segunda derivada profunda.
+   - (Texto Neón Naranja) El límite asintótico global.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Para saber si el conductor pisó el freno, calculamos y miramos el signo de:
+   - (Texto Neón Rosa) El coeficiente de fricción gris.
+   - (Texto Neón Lima) La segunda derivada (Aceleración). (CORRECTA)
+   - (Texto Neón Cian) La tangente a la curva en cero.
+   - (Texto Neón Naranja) El punto de origen del mapa.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si la segunda derivada dio NEGATIVA, comprobamos que el auto:
+   - (Texto Neón Rosa) Estaba dando reversa ciego.
+   - (Texto Neón Lima) Estaba frenando su velocidad. (CORRECTA)
+   - (Texto Neón Cian) Estaba metiendo el acelerador.
+   - (Texto Neón Naranja) Estaba flotando en el espacio.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Usar reglas directas (potencias) en vez de los 4 pasos nos permitió:
+   - (Texto Neón Rosa) Terminar el peritaje muy tarde.
+   - (Texto Neón Lima) Resolver el caso en unos minutos. (CORRECTA)
+   - (Texto Neón Cian) Llenar 10 hojas de puro error.
+   - (Texto Neón Naranja) Confundir al juez de tránsito.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si un auto tiene una velocidad de cero, pero aceleración positiva:
+   - (Texto Neón Rosa) El conductor se durmió al volante.
+   - (Texto Neón Lima) Apenas está arrancando su viaje. (CORRECTA)
+   - (Texto Neón Cian) Acaba de chocar contra un muro.
+   - (Texto Neón Naranja) El motor se rompió por siempre.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Ser peritos viales en clase demuestra que las matemáticas:
+   - (Texto Neón Rosa) Solo sirven si estás loco.
+   - (Texto Neón Lima) Deciden juicios y salvan vidas. (CORRECTA)
+   - (Texto Neón Cian) Sirven para reprobar alumnos.
+   - (Texto Neón Naranja) Complican el diseño de calles.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¡Bloque 4 Completado! Lograste pasar de la larga Regla de los 4 pasos a:
+   - (Texto Neón Rosa) Llorar por la aritmética triste.
+   - (Texto Neón Lima) Dominar la Tasa Instantánea. (CORRECTA)
+   - (Texto Neón Cian) Olvidar cómo multiplicar dos.
+   - (Texto Neón Naranja) Dibujar círculos incompletos.
+
+&copy; JMGV 2026 MasterClass 40 Pensamiento Variacional PTEL. todos los derechos reservados.

@@ -1,0 +1,820 @@
+================================================================================
+BLOQUE 5: OPTIMIZACIÓN Y ACUMULACIÓN (Sesiones 41 - 50)
+Enfoque: Máximos, mínimos, optimización de recursos y la introducción a la integral definida como área bajo la curva.
+================================================================================
+
+SESIÓN 41: En la Cima del Éxito (Criterio de la Primera Derivada)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno utilizará el criterio de la primera derivada para encontrar los puntos críticos de una función y determinar si representan máximos o mínimos relativos.
+
+Enfoque Psico-Andragógico: 
+Ambición y eficiencia. A los 17 años, los jóvenes quieren el máximo resultado con el mínimo esfuerzo (ley de vida). Se les plantea la derivada como un "radar de tesoros": la única herramienta capaz de decirte el punto exacto donde ganarás más dinero o gastarás menos energía. El álgebra se convierte en una herramienta de ventaja competitiva.
+
+Actividad Didáctica Principal: 
+El Radar de Ganancias. Se da a los equipos una ecuación de ganancias de un negocio de fundas para celular. Tienen que derivar, igualar a cero y encontrar la "X" (cantidad de fundas) exacta que les da el mayor ingreso antes de que el mercado se sature. Gana el equipo que encuentre el "Máximo" primero.
+
+Definiciones:
+- Puntos Críticos:
+  * Lenguaje Formal: Valores de la variable independiente 'c' en el dominio de f donde f'(c) = 0 o donde f'(c) no está definida.
+  * Lenguaje Cotidiano: El punto exacto en la montaña donde dejas de subir y empiezas a bajar, o el fondo del pozo donde dejas de caer y empiezas a subir.
+- Máximo y Mínimo Relativo:
+  * Lenguaje Formal: Puntos donde la función cambia su comportamiento de creciente a decreciente (máximo) o de decreciente a creciente (mínimo).
+  * Lenguaje Cotidiano: La cima más alta o el sótano más profundo en una parte específica de la gráfica.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Máximo: La hora del día (ej. 3:00 PM) donde la temperatura alcanza su pico más alto antes de empezar a refrescar en el centro de Torreón.
+2. Mínimo: La velocidad más baja a la que fluye el tráfico en el Blvd. Independencia durante la hora pico escolar.
+3. Máximo: El ángulo exacto al que deben inclinarse los paneles solares de una casa para captar la mayor radiación posible.
+
+Actividades de Refuerzo:
+1. Montaña de Signos: Trazan una recta numérica. A la izquierda del punto crítico ponen un valor de prueba en f'(x). Si da +, dibujan flecha arriba. Si da -, flecha abajo. Si hace / \ es máximo, si hace \ / es mínimo.
+2. Caza de Ceros: Dada la gráfica de una derivada f'(x), el alumno solo debe circular dónde cruza el eje X para predecir dónde estarán los máximos de la gráfica original.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Un "punto crítico" en una función ocurre cuando la derivada f'(x) es:
+   - (Texto Neón Rosa) Un número gigantesco siempre.
+   - (Texto Neón Lima) Exactamente igual a cero. (CORRECTA)
+   - (Texto Neón Cian) Un número impar negativo.
+   - (Texto Neón Naranja) Una fracción con decimales.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Físicamente, en un máximo relativo, la recta tangente es:
+   - (Texto Neón Rosa) Totalmente plana y horizontal. (CORRECTA)
+   - (Texto Neón Lima) Una línea vertical infinita.
+   - (Texto Neón Cian) Una curva en forma de ese.
+   - (Texto Neón Naranja) Un puente con mucha subida.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si la derivada cambia de signo POSITIVO a NEGATIVO, encontramos un:
+   - (Texto Neón Rosa) Agujero negro matemático.
+   - (Texto Neón Lima) Máximo, pues subió y bajó. (CORRECTA)
+   - (Texto Neón Cian) Mínimo, pues bajó y subió.
+   - (Texto Neón Naranja) Límite hacia el infinito ya.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si la derivada cambia de signo NEGATIVO a POSITIVO, encontramos un:
+   - (Texto Neón Rosa) Máximo local e inestable.
+   - (Texto Neón Lima) Mínimo en el fondo del pozo. (CORRECTA)
+   - (Texto Neón Cian) Asíntota vertical quebrada.
+   - (Texto Neón Naranja) Error en el cálculo previo.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Igualar la derivada a cero (f'(x) = 0) significa buscar el momento donde:
+   - (Texto Neón Rosa) Las cosas cambian de dirección. (CORRECTA)
+   - (Texto Neón Lima) La máquina se rompe del todo.
+   - (Texto Neón Cian) El dinero se pierde por siempre.
+   - (Texto Neón Naranja) La gráfica es un círculo raro.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. En los negocios en Torreón, calcular un máximo te permite saber:
+   - (Texto Neón Rosa) Cómo perder todos tus clientes.
+   - (Texto Neón Lima) El precio para ganar más dinero. (CORRECTA)
+   - (Texto Neón Cian) La fecha de cierre de la tienda.
+   - (Texto Neón Naranja) El nombre de tus empleados.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. El criterio de la primera derivada es básicamente un radar para:
+   - (Texto Neón Rosa) Sumar números con fracciones.
+   - (Texto Neón Lima) Encontrar puntos de interés. (CORRECTA)
+   - (Texto Neón Cian) Derivar funciones de letras.
+   - (Texto Neón Naranja) Complicar un examen final.
+
+&copy; JMGV 2026 MasterClass 41 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 42: Cambios de Humor (Concavidad y Puntos de Inflexión)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno utilizará el criterio de la segunda derivada para analizar la concavidad de una curva y localizar sus puntos de inflexión.
+
+Enfoque Psico-Andragógico: 
+Reconocimiento de patrones ocultos. En la vida (como en el ánimo de un adolescente), a veces parece que sigues cayendo, pero en realidad ya empezaste a "frenar la caída". A esto se le llama punto de inflexión. Enseñarles la 2da derivada es darles "visión de rayos X" para notar que la tendencia interna ya cambió, aunque por fuera siga pareciendo igual.
+
+Actividad Didáctica Principal: 
+La Pista de Skate (Halfpipe). Se traza en el pizarrón el perfil de una rampa de patineta en forma de S. Se discute: "¿En qué punto exacto tu cuerpo deja de sentir que se recarga hacia la derecha y empieza a recargarse hacia la izquierda?". Calculan la segunda derivada, la igualan a cero y hallan la coordenada exacta del cambio de curvatura.
+
+Definiciones:
+- Concavidad:
+  * Lenguaje Formal: Propiedad geométrica de una curva que indica si esta se abre hacia arriba (f''(x) > 0) o hacia abajo (f''(x) < 0).
+  * Lenguaje Cotidiano: Si la gráfica parece una taza que retiene agua (cóncava hacia arriba) o un paraguas que deja caer el agua (cóncava hacia abajo).
+- Punto de Inflexión:
+  * Lenguaje Formal: El punto en la gráfica donde la función cambia de concavidad; matemáticamente ocurre donde f''(x) = 0 o no está definida.
+  * Lenguaje Cotidiano: El punto donde el volante del carro tiene que enderezarse para pasar de una curva a la izquierda a una curva a la derecha.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Punto de Inflexión: El momento exacto en la curva del Distribuidor Vial Revolución donde dejas de girar a la derecha y enderezas el volante.
+2. Epidemia: El día en que los contagios de Dengue siguen subiendo, pero el *ritmo* al que suben empieza a frenarse (ya pasó lo peor de la curva).
+3. Economía: El momento en que la inflación sigue siendo alta, pero la velocidad a la que suben los precios de la canasta básica empieza a desacelerar.
+
+Actividades de Refuerzo:
+1. Sonrisas y Ceños Fruncidos: Analizar f''(x). Si da positivo, dibujan una sonrisa en su cuaderno (cóncava hacia arriba). Si da negativo, un ceño fruncido (cóncava hacia abajo).
+2. Dibuja la Historia: Se les da una tabla con los signos de f'(x) y f''(x). Deben dibujar a mano alzada cómo se vería la gráfica resultante basándose solo en esos signos.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La SEGUNDA derivada de una función se utiliza para encontrar:
+   - (Texto Neón Rosa) Los cruces perfectos del eje Y.
+   - (Texto Neón Lima) La concavidad y la inflexión. (CORRECTA)
+   - (Texto Neón Cian) El área total bajo una curva.
+   - (Texto Neón Naranja) Una línea de pendiente cero.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si f''(x) es POSITIVA, la gráfica tiene forma de:
+   - (Texto Neón Rosa) Paraguas o montaña sombría.
+   - (Texto Neón Lima) Una taza que retiene el agua. (CORRECTA)
+   - (Texto Neón Cian) Una recta horizontal plana.
+   - (Texto Neón Naranja) Una secante intermitente.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Un punto de Inflexión es el lugar exacto donde la curva:
+   - (Texto Neón Rosa) Cambia de subir a solo bajar.
+   - (Texto Neón Lima) Cambia su tipo de concavidad. (CORRECTA)
+   - (Texto Neón Cian) Choca con una fuerte asíntota.
+   - (Texto Neón Naranja) Termina bruscamente hoy.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En un punto de inflexión, ¿qué le pasa al volante de un auto?
+   - (Texto Neón Rosa) Se gira completamente al ras.
+   - (Texto Neón Lima) Queda completamente derecho. (CORRECTA)
+   - (Texto Neón Cian) Se traba sin poder moverse.
+   - (Texto Neón Naranja) Gira en círculos sin parar.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si los contagios de un virus llegan al punto de inflexión, significa:
+   - (Texto Neón Rosa) Que todo empeorará mañana.
+   - (Texto Neón Lima) Que el ritmo al fin se frenó. (CORRECTA)
+   - (Texto Neón Cian) Que todos están ya curados.
+   - (Texto Neón Naranja) Que el límite no existe ya.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Para hallar el punto de inflexión matemáticamente, debes:
+   - (Texto Neón Rosa) Igualar f'(x) a cero siempre.
+   - (Texto Neón Lima) Igualar f''(x) a cero exacto. (CORRECTA)
+   - (Texto Neón Cian) Sumar f(x) y f''(x) al final.
+   - (Texto Neón Naranja) Borrar todas las derivadas.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender la concavidad nos ayuda a ver "tendencias ocultas", o sea:
+   - (Texto Neón Rosa) Mentiras que cuentan los profes.
+   - (Texto Neón Lima) Ver cómo cambiará el futuro. (CORRECTA)
+   - (Texto Neón Cian) Magia negra de las fracciones.
+   - (Texto Neón Naranja) Los colores de las gráficas.
+
+&copy; JMGV 2026 MasterClass 42 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 43: Matemáticas de Bolsillo (Optimización I - Construcción)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno resolverá problemas prácticos de optimización estableciendo una función objetivo y una función restricción, aplicando la derivada para maximizar volumen o minimizar material.
+
+Enfoque Psico-Andragógico: 
+El ingeniero interno. Los adolescentes valoran el conocimiento que ahorra dinero físico o mejora diseños reales. Al convertirlos en "Diseñadores Industriales", las letras $x$ y $y$ dejan de ser números abstractos para convertirse en hojas de cartón, metal y dólares. Aprenden que el diseño perfecto no es suerte, es cálculo diferencial.
+
+Actividad Didáctica Principal: 
+El Desafío de la Caja. Se le entrega a cada equipo una lámina de cartulina exacta (ej. 20x30 cm). El reto es: "Diseñen y corten una caja sin tapa que contenga el MAYOR volumen de palomitas posible". Al principio intentan al tanteo. Luego, el profesor les guía para plantear la función de Volumen $V(x) = (20-2x)(30-2x)x$. Derivan, hallan la x óptima, la arman y comprueban quién ganó.
+
+Definiciones:
+- Optimización:
+  * Lenguaje Formal: Proceso de encontrar el valor máximo o mínimo de una función objetivo sujeta a ciertas restricciones.
+  * Lenguaje Cotidiano: Hacer magia con las matemáticas para sacar el mayor provecho usando la menor cantidad de recursos posible.
+- Función Restricción:
+  * Lenguaje Formal: Ecuación que define los límites de los recursos disponibles (perímetro, área, presupuesto) en un modelo a optimizar.
+  * Lenguaje Cotidiano: Las reglas del juego. "Solo tienes 100 pesos" o "Solo tienes 20 metros de malla". Lo que te impide hacer una caja infinita.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Diseñar el empaque de leche Lala rectangular gastando el mínimo de cartón encerado, pero manteniendo exactamente 1 litro de capacidad.
+2. Cercar un terreno ejidal junto al río Nazas con la menor cantidad de alambre de púas para encerrar la mayor área posible para las vacas.
+3. Hacer la ruta más corta para un repartidor de Mercado Libre en el centro para minimizar el gasto de gasolina.
+
+Actividades de Refuerzo:
+1. Traducción del Lenguaje: Ejercicios rápidos de traducir texto a álgebra. "El área máxima de un rectángulo con 40m de perímetro" -> $A = x*y$; $2x+2y=40$.
+2. Despeje Salvaje: Usar la ecuación restricción para despejar la "Y", sustituirla en la función objetivo y dejar todo en términos de una sola variable ("X") antes de derivar.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En un problema de optimización, tu "Función Objetivo" representa:
+   - (Texto Neón Rosa) El problema que no puedes ver.
+   - (Texto Neón Lima) Lo que quieres hacer máximo o mínimo. (CORRECTA)
+   - (Texto Neón Cian) El dinero que vas a perder hoy.
+   - (Texto Neón Naranja) Una barrera que no se cruza.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. La "Función Restricción" en la vida real se refiere a:
+   - (Texto Neón Rosa) Las ganas de terminar de trabajar.
+   - (Texto Neón Lima) Los límites de material o dinero. (CORRECTA)
+   - (Texto Neón Cian) La ganancia total del proyecto.
+   - (Texto Neón Naranja) El diseño final del producto.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En el reto de la caja de cartón, la X óptima salió calculando:
+   - (Texto Neón Rosa) La raíz cuadrada de la cartulina.
+   - (Texto Neón Lima) La primera derivada del volumen. (CORRECTA)
+   - (Texto Neón Cian) El peso exacto de las palomitas.
+   - (Texto Neón Naranja) La pendiente de una secante.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Para poder derivar fácil la función objetivo, antes debemos:
+   - (Texto Neón Rosa) Sumar un diez a todos los lados.
+   - (Texto Neón Lima) Dejarla con solo una variable (X). (CORRECTA)
+   - (Texto Neón Cian) Borrar la letra Y de tu mente.
+   - (Texto Neón Naranja) Multiplicar por un gran cero.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Minimizar costos en envases de empresas locales (como lecheras) ahorra:
+   - (Texto Neón Rosa) Apenas unos cuantos centavos.
+   - (Texto Neón Lima) Millones de pesos anualmente. (CORRECTA)
+   - (Texto Neón Cian) Tiempo de diseño en la oficina.
+   - (Texto Neón Naranja) Errores de impresión digital.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si la primera derivada te dio el máximo de volumen, usarías la segunda derivada para:
+   - (Texto Neón Rosa) Perder más el tiempo en el aula.
+   - (Texto Neón Lima) Comprobar matemáticamente el máximo. (CORRECTA)
+   - (Texto Neón Cian) Sacar la pintura de la caja.
+   - (Texto Neón Naranja) Cambiar la forma a un círculo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Usar optimización cambia el enfoque de las matemáticas hacia:
+   - (Texto Neón Rosa) Dibujar triángulos coloridos.
+   - (Texto Neón Lima) Resolver problemas reales y útiles. (CORRECTA)
+   - (Texto Neón Cian) Aprender reglas sin un sentido.
+   - (Texto Neón Naranja) Repetir fórmulas memorizadas.
+
+&copy; JMGV 2026 MasterClass 43 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 44: Optimización II (Impacto Urbano en Torreón)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno diseñará soluciones de infraestructura local aplicando la derivada para minimizar costos de cableado o entubamiento en proyectos urbanísticos.
+
+Enfoque Psico-Andragógico: 
+Responsabilidad Cívica e impacto ambiental. El adolescente se concibe como agente de cambio de su ciudad. Reducir material no es solo ahorrar dinero, es ecología. Resolver un problema sobre el cableado de un fraccionamiento real les da perspectiva sobre la complejidad de planear una ciudad.
+
+Actividad Didáctica Principal: 
+El Proyecto "Nuevos Fraccionamientos". Se proyecta un mapa satelital (Google Maps) del norte de Torreón. Hay que conectar una planta generadora de CFE al punto A y luego a un nuevo fraccionamiento en el punto B, cruzando un terreno agreste. Se plantea la función de Costo Total (cable por aire vs cable subterráneo). Calculan el punto X exacto en el río donde el cable debe cruzar para minimizar el gasto en cobre.
+
+Definiciones:
+- Modelo de Costos:
+  * Lenguaje Formal: Representación matemática $C(x) = c_1 \cdot d_1(x) + c_2 \cdot d_2(x)$ que pondera distancias por sus costos unitarios respectivos.
+  * Lenguaje Cotidiano: Una fórmula que calcula exactamente cuántos billetes vas a gastar midiendo los metros de cable y lo que cuesta cada metro.
+- Punto de Optimización:
+  * Lenguaje Formal: Valor crítico del modelo donde $C'(x) = 0$ y $C''(x) > 0$.
+  * Lenguaje Cotidiano: La coordenada de GPS perfecta donde debes plantar el poste de luz para que todo salga lo más barato posible.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Encontrar la ruta más corta para un ducto del proyecto "Agua Saludable para La Laguna" que una la potabilizadora con los tanques de Torreón.
+2. Minimizar el asfalto al trazar una nueva carretera diagonal que conecte la Ciudad Industrial con el Periférico.
+3. Dimensiones óptimas (radio y altura) de un tanque de almacenamiento cilíndrico de acero para gas en la zona industrial.
+
+Actividades de Refuerzo:
+1. Debate de Costos: Comparar sus resultados de optimización del cable CFE y debatir por qué la "línea recta" no siempre es la más barata si un terreno (ej. roca) cuesta el doble excavar.
+2. Taller de Rúbricas: Los equipos intercambian sus procedimientos matemáticos y revisan si la derivada y el despeje del equipo contrario están correctos.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En proyectos de la ciudad, minimizar material significa directamente:
+   - (Texto Neón Rosa) Contratar a más trabajadores.
+   - (Texto Neón Lima) Ahorrar dinero y daño ambiental. (CORRECTA)
+   - (Texto Neón Cian) Gastar menos pintura amarilla.
+   - (Texto Neón Naranja) Cobrar más por el metro cuadrado.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Por qué la línea más corta (recta) NO siempre es la más barata?
+   - (Texto Neón Rosa) Porque las curvas son más lindas.
+   - (Texto Neón Lima) Porque hay zonas más caras de cavar. (CORRECTA)
+   - (Texto Neón Cian) Porque los cables se rompen ahí.
+   - (Texto Neón Naranja) Porque el teorema de Pitágoras falla.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la función $C(x)$ del cable, si la derivas y buscas $C'(x)=0$, hallas:
+   - (Texto Neón Rosa) El punto donde el cable se quema.
+   - (Texto Neón Lima) El punto de instalación más barato. (CORRECTA)
+   - (Texto Neón Cian) La distancia total del horizonte.
+   - (Texto Neón Naranja) Un error eléctrico en la matriz.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Matemáticamente, usamos el Teorema de Pitágoras en optimización para:
+   - (Texto Neón Rosa) Pintar colores en el pavimento.
+   - (Texto Neón Lima) Calcular distancias en diagonales. (CORRECTA)
+   - (Texto Neón Cian) Sumar los impuestos totales.
+   - (Texto Neón Naranja) Borrar las funciones a trozos.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si C''(x) (segunda derivada) del costo da POSITIVO, hemos hallado:
+   - (Texto Neón Rosa) Una máxima tragedia económica.
+   - (Texto Neón Lima) Un mínimo perfecto de gastos. (CORRECTA)
+   - (Texto Neón Cian) Un error grave del contratista.
+   - (Texto Neón Naranja) Una pendiente plana horizontal.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Ser "Agentes de Cambio" significa que ustedes pueden usar el cálculo para:
+   - (Texto Neón Rosa) Confundir a los que no saben.
+   - (Texto Neón Lima) Mejorar el diseño de su región. (CORRECTA)
+   - (Texto Neón Cian) Aprobar matemáticas a penas.
+   - (Texto Neón Naranja) Vender dulces en el recreo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En el mundo del diseño y construcción, esta técnica matemática es:
+   - (Texto Neón Rosa) Un adorno de los libros viejos.
+   - (Texto Neón Lima) Obligatoria para un ingeniero real. (CORRECTA)
+   - (Texto Neón Cian) Solo un chiste del profe de clase.
+   - (Texto Neón Naranja) Ilegal en todo el continente.
+
+&copy; JMGV 2026 MasterClass 44 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 45: El Margen de Error (Diferenciales)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá el concepto de diferencial ($dy \approx f'(x)dx$) como una aproximación lineal, utilizándolo para calcular tolerancias de error en mediciones físicas.
+
+Enfoque Psico-Andragógico: 
+Tolerancia al fracaso y perfección relativa. Los jóvenes suelen ser paralizados por el perfeccionismo o desanimados por el error. Aquí la matemática les da una lección de vida: el error ($dx$) siempre existe, pero si sabes medir su impacto ($dy$), puedes controlarlo. En ingeniería nada es 100% perfecto, existe una "tolerancia". 
+
+Actividad Didáctica Principal: 
+El Control de Calidad. Se reparten rodamientos de metal o figuras esféricas impresas en 3D. Se les pide calcular el volumen. Luego, el profe revela que la regla con la que midieron el radio tiene un error de ±1 mm ($dr$). Los alumnos calculan el error propagado en el volumen final ($dV = 4\pi r^2 dr$) usando diferenciales sin tener que recalcular toda la fórmula.
+
+Definiciones:
+- Diferencial ($dy$):
+  * Lenguaje Formal: El producto de la derivada de la función $f'(x)$ por el incremento de la variable independiente $dx$. Representa el incremento sobre la recta tangente.
+  * Lenguaje Cotidiano: El "pequeño impacto". Si me equivoco un poquitito en medir (dx), el diferencial (dy) me dice qué tan catastrófico será ese error en el resultado final.
+- Aproximación Lineal:
+  * Lenguaje Formal: Uso de la recta tangente para estimar valores de una función en la cercanía de un punto conocido.
+  * Lenguaje Cotidiano: Usar la derivada como "lupa" para adivinar el valor de un número feo (como $\sqrt{17}$) basándonos en uno que sí conocemos bien (como $\sqrt{16}$).
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Margen de error en la fabricación de tubos PVC en Peñoles: Si el radio del tubo varía 2 milímetros, ¿cuánto cambia la cantidad de agua que fluye?
+2. Expansión térmica de los cables de CFE en julio: Si la temperatura sube un poco ($dT$), el diferencial calcula cuánto se colgará el cable ($dL$).
+3. Estimación mental de raíces: Si sabes que la raíz de 25 es 5, puedes usar diferenciales para adivinar rapidísimo que la raíz de 26 es aprox 5.1 sin calculadora.
+
+Actividades de Refuerzo:
+1. Calculadora de Trucos: Estimación rápida de $\sqrt{101}$, $10.1^2$, etc., usando el formato de aproximación lineal $f(x+dx) \approx f(x) + dy$.
+2. Auditoría de Tolerancia: Revisar planos donde se permite un error de 0.5 cm en vigas; determinar si el error volumétrico pasa el estándar de seguridad usando diferenciales.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Matemáticamente, un Diferencial "dy" se calcula multiplicando:
+   - (Texto Neón Rosa) La equis por la ye constante.
+   - (Texto Neón Lima) La derivada f'(x) por "dx". (CORRECTA)
+   - (Texto Neón Cian) El límite de cero infinito.
+   - (Texto Neón Naranja) El error por dos y sumar.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En la vida de un ingeniero, el "dx" representa comúnmente:
+   - (Texto Neón Rosa) La pieza más grande del auto.
+   - (Texto Neón Lima) Un margen de error al medir. (CORRECTA)
+   - (Texto Neón Cian) El sueldo de los trabajadores.
+   - (Texto Neón Naranja) El color de la máquina usada.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si un pequeño error "dx" causa un inmenso error "dy", entonces:
+   - (Texto Neón Rosa) Tu diseño está excelentemente.
+   - (Texto Neón Lima) El sistema es muy sensible. (CORRECTA)
+   - (Texto Neón Cian) La derivada era siempre cero.
+   - (Texto Neón Naranja) No importa, nadie lo nota.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La aproximación lineal te permite adivinar valores complejos porque:
+   - (Texto Neón Rosa) Las curvas nunca cambian hoy.
+   - (Texto Neón Lima) La tangente se pega a la curva. (CORRECTA)
+   - (Texto Neón Cian) Inventa números aleatorios.
+   - (Texto Neón Naranja) Divide la gráfica en dos.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si sabes la raíz de 16, calcular la raíz de 16.5 con diferenciales:
+   - (Texto Neón Rosa) Requiere una computadora cuántica.
+   - (Texto Neón Lima) Es un cálculo mental rapidísimo. (CORRECTA)
+   - (Texto Neón Cian) Produce un error matemático.
+   - (Texto Neón Naranja) Tarda tres horas en lograrse.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Las matemáticas de diferenciales nos enseñan que el perfeccionismo:
+   - (Texto Neón Rosa) Es la única forma de ser feliz.
+   - (Texto Neón Lima) No existe; hay que manejar el error. (CORRECTA)
+   - (Texto Neón Cian) Se logra llorando en silencio.
+   - (Texto Neón Naranja) Es un invento de las calculadoras.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Calcular el error de expansión térmica en cables de Torreón evita:
+   - (Texto Neón Rosa) Que el cielo se ponga nublado.
+   - (Texto Neón Lima) Que los cables se rompan o caigan. (CORRECTA)
+   - (Texto Neón Cian) Que los pájaros se sienten ahí.
+   - (Texto Neón Naranja) Que las luces sean amarillas.
+
+&copy; JMGV 2026 MasterClass 45 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 46: El Viaje en Reversa (Antiderivadas)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá el proceso inverso de la derivación (la antiderivada), entendiendo que la "C" constante representa un valor inicial perdido en el proceso.
+
+Enfoque Psico-Andragógico: 
+Lógica inversa y deducción forense. Al joven le gusta jugar al detective. Si derivar era destruir una máquina para ver su ritmo, antiderivar es reconstruir la escena del crimen a partir de los escombros. Trabajaremos el pensamiento deductivo inverso, crucial para recuperar información perdida.
+
+Actividad Didáctica Principal: 
+El Jeopardy Inverso. Gamificación pura. Se forman 4 equipos. En lugar de darles una función original para derivar, el profe les da la respuesta de una derivada (ej. $f'(x) = 2x$). Deben gritar cuál era la función original ($x^2$). Descubren que pudo ser $x^2 + 5$ o $x^2 - 100$. Así nace la constante "+ C" (El valor perdido).
+
+Definiciones:
+- Antiderivada (Integral Indefinida):
+  * Lenguaje Formal: Función $F(x)$ cuya derivada es $f(x)$, es decir, $F'(x) = f(x)$. Se denota con el símbolo de la integral $\int f(x) dx$.
+  * Lenguaje Cotidiano: El botón de "Deshacer" (Ctrl+Z) de las matemáticas. Reconstruir la máquina original a partir del ritmo de cambio que medimos.
+- Constante de Integración (+ C):
+  * Lenguaje Formal: Valor arbitrario constante que se añade al resultado de una integral indefinida, representando a una familia de funciones.
+  * Lenguaje Cotidiano: El "fantasma numérico" que murió al derivar (porque la derivada de un número es cero). Como no sabemos cuál era, le ponemos "+ C" por si acaso.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Forense Vial: Tienes las huellas de frenado (Aceleración/Desaceleración), antiderivas para reconstruir la Velocidad, y antiderivas de nuevo para hallar la Posición exacta del choque.
+2. Contabilidad: Tienes el Costo Marginal (lo que cuesta el último producto). Antiderivas para conocer el Costo Total de la empresa más los Costos Fijos (+ C).
+3. Física: Conoces el ritmo de llenado de un tinaco (litros/min), antiderivas para saber el volumen total en cualquier minuto más el agua inicial que ya tenía (+ C).
+
+Actividades de Refuerzo:
+1. El Torneo de la "C": Resolver 10 derivadas simples al revés y, al que se le olvide escribir el "+ C" al final, su equipo debe hacer 5 lagartijas. Memoria muscular gamificada.
+2. Descubriendo 'C': Se les da una "Pista Inicial" (Ej. Cuando x=0, el valor era 10). Tienen que sustituir para descubrir qué número exacto era la "C" fantasma.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La operación contraria y exacta a derivar se conoce como:
+   - (Texto Neón Rosa) Multiplicación polinomial alta.
+   - (Texto Neón Lima) Antiderivación o integrar. (CORRECTA)
+   - (Texto Neón Cian) Sacar la raíz cuadrada oscura.
+   - (Texto Neón Naranja) Borrar todo y volver a sumar.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si te dicen que la derivada es $2x$, tu deducción forense dicta que el original era:
+   - (Texto Neón Rosa) Equis a la cuarta potencia.
+   - (Texto Neón Lima) Equis cuadrada perfecta. (CORRECTA)
+   - (Texto Neón Cian) El número diez y seis oculto.
+   - (Texto Neón Naranja) Menos dos equis cuadradas.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En todas las antiderivadas, debemos añadir un "+ C" porque:
+   - (Texto Neón Rosa) Nos gusta poner letras extra.
+   - (Texto Neón Lima) Hubo una constante que se hizo 0. (CORRECTA)
+   - (Texto Neón Cian) Representa al "Cálculo" superior.
+   - (Texto Neón Naranja) Es un error de la matriz.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En problemas físicos, la "+ C" muchas veces representa:
+   - (Texto Neón Rosa) Un error sin significado alguno.
+   - (Texto Neón Lima) La cantidad o posición inicial. (CORRECTA)
+   - (Texto Neón Cian) El color del carro que chocó.
+   - (Texto Neón Naranja) Una variable independiente.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Antiderivar la Aceleración te permite retroceder a encontrar:
+   - (Texto Neón Rosa) La velocidad de ese instante. (CORRECTA)
+   - (Texto Neón Lima) El número de llantas rotas.
+   - (Texto Neón Cian) El nivel del mar del puerto.
+   - (Texto Neón Naranja) La masa de un hoyo negro.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Ser capaz de calcular "en reversa" desarrolla en ti:
+   - (Texto Neón Rosa) Un severo caso de sueño hondo.
+   - (Texto Neón Lima) Lógica de resolución de problemas. (CORRECTA)
+   - (Texto Neón Cian) Habilidad para tocar el violín.
+   - (Texto Neón Naranja) Pasión por la literatura pura.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. El símbolo universal inventado para indicar antiderivada (Integral) es:
+   - (Texto Neón Rosa) Una crucecita con dos puntos.
+   - (Texto Neón Lima) Una letra S muy alargada ($\int$). (CORRECTA)
+   - (Texto Neón Cian) Un triángulo delta gigante.
+   - (Texto Neón Naranja) Un corchete con números.
+
+&copy; JMGV 2026 MasterClass 46 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 47: El Problema de Arquímedes Renace (Área y Sumas de Riemann)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá que calcular el área bajo una curva irregular se puede aproximar sumando el área de múltiples rectángulos pequeños (Sumas de Riemann).
+
+Enfoque Psico-Andragógico: 
+Progreso tecnológico y circularidad. Volvemos al origen (Sesión 2 y 4 con Arquímedes), pero ahora los adolescentes están armados con tecnología. Les mostramos que la humanidad tardó siglos en pasar de los polígonos a los rectángulos infinitos. Usamos el M-Learning (Simulador) para que en 10 minutos hagan lo que a Newton le tomó años, empoderando su uso de herramientas digitales.
+
+Actividad Didáctica Principal: 
+El Simulador de Riemann. En sus celulares, acceden al Applet diseñado en clase. Tienen una curva del perfil eléctrico diario. Mueven un "slider" (deslizador) para cambiar el número de rectángulos bajo la curva desde n=4 hasta n=1000. Ven cómo, a mayor cantidad de rectángulos súper delgados, el cálculo del área se vuelve casi perfecto sin dejar huecos en blanco.
+
+Definiciones:
+- Suma de Riemann:
+  * Lenguaje Formal: Aproximación del área bajo una curva dividiendo la región en formas rectangulares y sumando sus áreas ($A = \sum f(x_i)\Delta x$).
+  * Lenguaje Cotidiano: Rellenar un dibujo curvo con cuadritos como en Minecraft. Entre más pequeños los bloques, mejor te queda la figura.
+- Área Bajo la Curva:
+  * Lenguaje Formal: Magnitud de la región bidimensional delimitada por la gráfica de una función f(x), el eje x y las rectas verticales x=a y x=b.
+  * Lenguaje Cotidiano: Todo el espacio pintado que queda atrapado entre la línea que dibujaste y el suelo del plano cartesiano.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Calcular la energía total consumida (kWh) estimando el área bajo la curva de la gráfica de demanda de CFE en un día infernal de 42°C.
+2. Calcular los metros cuadrados exactos de la Velaria de la Expo Feria de Torreón para saber cuánta lona lona tensada comprar.
+3. El área bajo la curva de la velocidad de un auto: Sumar los rectángulos de "velocidad x tiempo" te da la distancia total que recorrió el carro.
+
+Actividades de Refuerzo:
+1. Corte y Confección: Imprimir una curva en papel cuadriculado. Colorear los rectángulos completos de verde y los incompletos de rojo. Contarlos para estimar el área.
+2. Debate Infinito: Reflexión socrática de 5 minutos. "¿Qué pasa con el ancho del rectángulo ($\Delta x$) si el número de rectángulos (n) tiende a infinito?". Concluyen que el grosor se vuelve casi cero.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Para estimar el área de una figura curva sin fórmula, tú puedes:
+   - (Texto Neón Rosa) Adivinar cerrando los dos ojos.
+   - (Texto Neón Lima) Rellenarla con muchos rectángulos. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar su largo por mil.
+   - (Texto Neón Naranja) Trazar una línea recta fuera.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. A esta técnica de sumar pequeños cuadritos se le llama históricamente:
+   - (Texto Neón Rosa) Suma de Gauss o de Pascal.
+   - (Texto Neón Lima) La famosa Suma de Riemann. (CORRECTA)
+   - (Texto Neón Cian) Teorema de los catetos duros.
+   - (Texto Neón Naranja) Resta de polinomios mixtos.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si el simulador pasa de 4 a 1,000 rectángulos bajo la curva, el área:
+   - (Texto Neón Rosa) Se hace totalmente equivocada.
+   - (Texto Neón Lima) Se vuelve súper precisa y real. (CORRECTA)
+   - (Texto Neón Cian) Desaparece dejando todo blanco.
+   - (Texto Neón Naranja) Sale negativa porque se cortó.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si calculas el área bajo una gráfica de "Velocidad" (Y) y "Tiempo" (X):
+   - (Texto Neón Rosa) Encontrarás el color del carro.
+   - (Texto Neón Lima) Obtendrás la distancia recorrida. (CORRECTA)
+   - (Texto Neón Cian) Hallarás la aceleración bruta.
+   - (Texto Neón Naranja) Perderás tu examen de física.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si el número de rectángulos (n) tiende a infinito, su grosor (dx) tiende a:
+   - (Texto Neón Rosa) Volverse inmenso y muy grueso.
+   - (Texto Neón Lima) Volverse súper delgado (cero). (CORRECTA)
+   - (Texto Neón Cian) Sumar un número par siempre.
+   - (Texto Neón Naranja) Congelarse en el número diez.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. La idea de sumar infinitos pedazos microscópicos es la base de:
+   - (Texto Neón Rosa) La aritmética de sumar enteros.
+   - (Texto Neón Lima) La maravillosa Integral Definida. (CORRECTA)
+   - (Texto Neón Cian) La geometría del cubo clásico.
+   - (Texto Neón Naranja) La magia y brujería arcana.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En Torreón, calcular esta área en gráficas de CFE nos revela:
+   - (Texto Neón Rosa) A qué hora abren las oficinas.
+   - (Texto Neón Lima) La energía total (kWh) gastada. (CORRECTA)
+   - (Texto Neón Cian) El salario del director general.
+   - (Texto Neón Naranja) Cuántos postes son de madera.
+
+&copy; JMGV 2026 MasterClass 47 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 48: Acumulando el Cambio (La Integral Definida)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá que la integral definida evalúa el cambio acumulado de una cantidad sobre un intervalo específico [a, b].
+
+Enfoque Psico-Andragógico: 
+Consecuencias a largo plazo y acumulación. Los jóvenes a veces minimizan las pequeñas acciones. La Integral es la mejor metáfora de los hábitos: ahorrar 10 pesos diarios (tasa de cambio pequeña) suma un dineral en 3 años (acumulación bajo la curva). Se fomenta una reflexión psicológica sobre sus hábitos de estudio o ahorro, respaldada por la belleza de las matemáticas.
+
+Actividad Didáctica Principal: 
+El Acumulador de Riqueza. Se da una función de flujo de ingresos constante $f(x) = 500$ (ahorro mensual). Escriben la Integral de 1 a 12 meses: $\int_1^{12} 500 dx$. Al resolverla multiplicando la base por la altura, visualizan los $6000 pesos de área. Luego lo hacen con un ahorro que crece ($f(x) = 100x$), dándose cuenta de que la integral es la máquina perfecta de calcular acumulaciones complejas.
+
+Definiciones:
+- Integral Definida ($\int_a^b$):
+  * Lenguaje Formal: Límite de las sumas de Riemann cuando el número de particiones tiende a infinito, evaluado entre un límite inferior 'a' y uno superior 'b'. Da como resultado un valor numérico escalar.
+  * Lenguaje Cotidiano: Calcular exactamente cuánto suma el cambio total que pasó desde el momento A hasta el momento B. Te da un número cerrado, no una fórmula.
+- Cambio Acumulado:
+  * Lenguaje Formal: La suma integral neta de las razones de variación instantánea sobre un intervalo dado.
+  * Lenguaje Cotidiano: Juntar todos los "poquitos" que fuiste ganando, gastando o cambiando durante todo el periodo.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Lluvia Acumulada: Una gráfica que muestra cuántos milímetros llueven por hora. La integral de las 8:00 PM a las 11:00 PM te da el total de agua que inundó las calles.
+2. Kilowatts Mensuales: Integrar la gráfica de consumo instantáneo de tu casa desde el día 1 hasta el día 30 para predecir de cuánto llegará el recibo.
+3. Producción Lechera: Acumular la tasa de ordeña de vacas de una finca desde el alba hasta el atardecer para saber la producción neta del día.
+
+Actividades de Refuerzo:
+1. Pinta el Intervalo: Reciben 5 gráficas. El profesor dicta "Integra de x=2 a x=5". Deben dibujar líneas verticales en 2 y 5 y sombrear el área atrapada con plumón amarillo.
+2. Signos del Área: Comprender que si la gráfica baja del eje X (pasa a negativos), el área se "resta" del acumulado (ej. gastar tus ahorros).
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La Integral Definida nos da como resultado final:
+   - (Texto Neón Rosa) Una fórmula gigante con letras.
+   - (Texto Neón Lima) Un número exacto o cantidad. (CORRECTA)
+   - (Texto Neón Cian) Un error de división por cero.
+   - (Texto Neón Naranja) Una línea secante que cruza.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Matemáticamente, la integral representa de forma visual:
+   - (Texto Neón Rosa) La punta de la curva de calor.
+   - (Texto Neón Lima) El área neta bajo la curva. (CORRECTA)
+   - (Texto Neón Cian) El punto de inflexión del carro.
+   - (Texto Neón Naranja) Un límite lateral por derecha.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Los números "a" y "b" arriba y abajo de la S alargada ($\int$) indican:
+   - (Texto Neón Rosa) Las letras que adornan el papel.
+   - (Texto Neón Lima) Desde dónde hasta dónde mides. (CORRECTA)
+   - (Texto Neón Cian) El error de margen del puente.
+   - (Texto Neón Naranja) Las asíntotas que te aplastan.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En términos de vida diaria, integrar es lo mismo que:
+   - (Texto Neón Rosa) Dividir tu dinero en mil partes.
+   - (Texto Neón Lima) Acumular todos los cambios. (CORRECTA)
+   - (Texto Neón Cian) Acelerar el carro bruscamente.
+   - (Texto Neón Naranja) Cortar una caja para medirla.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si una parte de la curva cae por DEBAJO del eje X (negativo), esa área:
+   - (Texto Neón Rosa) Se suma al doble de su valor.
+   - (Texto Neón Lima) Se resta de la cantidad total. (CORRECTA)
+   - (Texto Neón Cian) Se ignora totalmente por fea.
+   - (Texto Neón Naranja) Se vuelve infinita de pronto.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Integrar una gráfica de la lluvia (mm/h) de 4 PM a 6 PM en Torreón da:
+   - (Texto Neón Rosa) La velocidad del viento norte.
+   - (Texto Neón Lima) El agua total que nos inundó. (CORRECTA)
+   - (Texto Neón Cian) El calor acumulado del asfalto.
+   - (Texto Neón Naranja) Un número con letras delta.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender la acumulación de cambios pequeños te demuestra que:
+   - (Texto Neón Rosa) Ningún esfuerzo vale la pena.
+   - (Texto Neón Lima) Los hábitos diarios suman mucho. (CORRECTA)
+   - (Texto Neón Cian) Las deudas nunca se acumulan.
+   - (Texto Neón Naranja) Las fracciones son muy locas.
+
+&copy; JMGV 2026 MasterClass 48 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 49: El Círculo se Cierra (Teorema Fundamental del Cálculo)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno unirá los conceptos de derivación e integración mediante el Teorema Fundamental del Cálculo, comprendiendo que son procesos analíticos inversos (Regla de Barrow).
+
+Enfoque Psico-Andragógico: 
+Epifanía y conexión estructural. Durante 48 sesiones, han subido la montaña. Hoy llegan a la cima y ven todo el paisaje conectado. Mostrarles que "cortar en pedazos microscópicos" (derivar) y "pegar pedazos infinitos" (integrar) se anulan mutuamente es una de las revelaciones más hermosas del intelecto humano. Es un "mind-blown" garantizado que sella su respeto por la materia.
+
+Actividad Didáctica Principal: 
+La Revelación Socrática (El Gran Pizarrón). El profe escribe en el centro: Posición -> Velocidad -> Aceleración. Pide a un alumno que dibuje flechas de ida diciendo "Derivar". Pide a otro dibujar flechas de regreso diciendo "Integrar". Usan la Regla de Barrow $\int_a^b f(x)dx = F(b) - F(a)$ para calcular el área de un terreno curvo no tabulando 1000 cuadritos (Sesión 47), sino antiderivando en 1 minuto. El salón nota el inmenso poder ahorrado.
+
+Definiciones:
+- Teorema Fundamental del Cálculo (Parte 1 y 2):
+  * Lenguaje Formal: Establece que la derivación y la integración son operaciones inversas. Además, la integral definida de una función sobre [a,b] puede calcularse usando su antiderivada evaluada en los extremos: $F(b) - F(a)$.
+  * Lenguaje Cotidiano: El "Hack" supremo de la historia de las matemáticas. No necesitas sumar infinitos rectángulos para sacar un área; solo debes antiderivar la fórmula y restar el valor final menos el inicial.
+- Regla de Barrow:
+  * Lenguaje Formal: Método de evaluación analítica de una integral definida mediante la diferencia de la función primitiva evaluada en sus límites.
+  * Lenguaje Cotidiano: Restar "la máquina del final" menos "la máquina del inicio" para sacar tu área libre limpia y perfecta.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Ingeniería en Met-Mex Peñoles: En vez de sumar manual el calor disipado cada segundo por las chimeneas, usan Barrow para calcular el calor total disipado entre las 8:00 AM y las 4:00 PM con una sola resta.
+2. Topografía: Calcular el área de un lote en curvas de Viñedos para sacar el predial exacto, antiderivando la curva de la barda y evaluando sus coordenadas.
+3. Epidemiología Local: Área total de contagios de COVID en invierno. Antiderivas el pico máximo y le restas el inicio; te da el conteo de población inmune.
+
+Actividades de Refuerzo:
+1. El Sandwich de Barrow: Resolver una integral polinomial sencilla $\int_0^2 3x^2 dx$, hacer la antiderivada ($x^3$) y sustituir ($2^3 - 0^3 = 8$). Celebran haber resuelto un área sin cuadritos en 3 renglones.
+2. Analogía del Odómetro: Discusión: "Si el velocímetro deriva la distancia para darte velocidad, el odómetro (que suma los km recorridos) INTEGRA tu velocidad para darte la distancia total".
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El Teorema Fundamental del Cálculo demuestra como hecho central que:
+   - (Texto Neón Rosa) Las fracciones y potencias chocan.
+   - (Texto Neón Lima) Derivar e Integrar son INVERSOS. (CORRECTA)
+   - (Texto Neón Cian) El cero elevado al cero da uno.
+   - (Texto Neón Naranja) Pitágoras odiaba a Arquímedes.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Gracias a la "Regla de Barrow", para sacar un área bajo la curva solo debes:
+   - (Texto Neón Rosa) Pintar cuadritos toda la noche.
+   - (Texto Neón Lima) Antiderivar y restar F(b) - F(a). (CORRECTA)
+   - (Texto Neón Cian) Sumar f(a) + f(b) multiplicados.
+   - (Texto Neón Naranja) Adorar a la calculadora grande.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si el "Velocímetro" de tu carro DERIVA tu posición para darte velocidad, el "Odómetro":
+   - (Texto Neón Rosa) Divide las llantas por la mitad.
+   - (Texto Neón Lima) INTEGRA tu viaje dando distancias. (CORRECTA)
+   - (Texto Neón Cian) Deriva de nuevo dando la fricción.
+   - (Texto Neón Naranja) Resta la gasolina del tanque ya.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En Barrow, F(b) - F(a) significa que debes sustituir en la antiderivada:
+   - (Texto Neón Rosa) El límite inferior menos el superior.
+   - (Texto Neón Lima) El límite superior menos el inferior. (CORRECTA)
+   - (Texto Neón Cian) Todos los números pares centrales.
+   - (Texto Neón Naranja) Los ceros de la indeterminación.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Saber esto hace que sumar los "infinitos cuadritos" de Riemann se vuelva:
+   - (Texto Neón Rosa) Más aburrido y tedioso de dibujar.
+   - (Texto Neón Lima) Un proceso de un par de renglones. (CORRECTA)
+   - (Texto Neón Cian) Un misterio incalculable y oscuro.
+   - (Texto Neón Naranja) Requisito para armar rompecabezas.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Históricamente, este teorema es considerado:
+   - (Texto Neón Rosa) Una pintura renacentista francesa.
+   - (Texto Neón Lima) Uno de los logros cumbres humanos. (CORRECTA)
+   - (Texto Neón Cian) Un error borrado de la historia.
+   - (Texto Neón Naranja) Una nota a pie de página menor.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Cuando entiendes que el Universo está conectado por estas leyes, tú:
+   - (Texto Neón Rosa) Lloras y rompes el libro rápido.
+   - (Texto Neón Lima) Tienes "visión de Matrix" real. (CORRECTA)
+   - (Texto Neón Cian) Repruebas por pura distracción.
+   - (Texto Neón Naranja) Ignoras todo y te vas a dormir.
+
+&copy; JMGV 2026 MasterClass 49 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 50: El Simposio Final (Reto Integrador de Curso)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno expondrá la resolución de un problema comunitario complejo de la Comarca Lagunera justificando sus conclusiones técnicas mediante modelado de funciones, optimización con derivadas y acumulación con integrales.
+
+Enfoque Psico-Andragógico: 
+Reconocimiento público y transición. Se abandona la figura del maestro calificador para dar paso al maestro como "Mentor/Colega". Defender un proyecto ante un público refuerza la autoestima del adolescente y consolida la auto-eficacia matemática ("Yo puedo resolver problemas de adultos con herramientas complejas"). Los deja psicológicamente listos y empoderados para el curso de "Probabilidad y Estadística II".
+
+Actividad Didáctica Principal: 
+El "Shark Tank" Municipal. Los equipos tienen 8 minutos para "vender" su proyecto al ayuntamiento.
+*Escenario*: Trazar la nueva ruta sustentable del "Metrobús Ecológico".
+*Requisitos del Pitch*: 
+1. Tabular y graficar las proyecciones de demanda (Bloque 2).
+2. Justificar las asíntotas y límites de flujo peatonal (Bloque 3).
+3. Mostrar la 1ra derivada para demostrar que hallaron la ruta de MÍNIMO costo (Bloque 4 y 5).
+4. Usar la integral para probar cuánto CO2 total *acumulado* le ahorrarán a Torreón en un año.
+Se evalúa la oratoria, la precisión matemática y el impacto social.
+
+Definiciones:
+- Presentación Ejecutiva (Pitch):
+  * Lenguaje Formal: Exposición estructurada, sintética y persuasiva que defiende la viabilidad técnica y financiera de un proyecto usando datos cuantitativos.
+  * Lenguaje Cotidiano: Defender tu idea frente a los "jefes" mostrando gráficas y cuentas tan bien hechas que no tengan más remedio que decirte que "Sí".
+- Pensamiento Variacional Sistémico (Cierre de Curso):
+  * Lenguaje Formal: Capacidad cognitiva para analizar, modelar y optimizar sistemas del mundo real donde el cambio, la acumulación y las restricciones conviven simultáneamente.
+  * Lenguaje Cotidiano: Haber convertido tu cerebro en un motor analítico que ya no le teme a las letras "X", porque sabe que son la llave para predecir y mejorar la realidad de nuestra región.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Defensa Integral del Proyecto del Metrobús Laguna (Costos, Flujo y Tiempos de parada minimizados).
+2. Proyecto Estructural en Ciudad Industrial (Optimización de áreas y materiales de bodegas, con impacto asintótico de viabilidad).
+3. Ecotecnologías en La Laguna (Cálculo integral de radiación solar capturada acumulada en el año para vender energía al gobierno).
+
+Actividades de Refuerzo:
+1. Co-evaluación con Rúbrica 360°: Los alumnos tienen una "chequera falsa" con la que deben "invertir" su capital en el mejor proyecto de sus compañeros según la solidez de sus gráficas de derivadas.
+2. Círculo de Cierre: Sentados en círculo, el profesor agradece la resiliencia del grupo, vincula cómo este análisis de curvas será vital cuando vean "Campana de Gauss y Regresión Lineal" en el semestre 6. Despedida andragógica.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Resolver un problema real combinando derivadas e integrales demuestra que:
+   - (Texto Neón Rosa) La escuela es solo un gran castigo.
+   - (Texto Neón Lima) Dominaste el Pensamiento Variacional. (CORRECTA)
+   - (Texto Neón Cian) Las fórmulas de memoria no sirven.
+   - (Texto Neón Naranja) Los exámenes de opción son únicos.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Al "vender" o justificar un proyecto técnico (Pitch), la derivada sirve para:
+   - (Texto Neón Rosa) Decorar las diapositivas libres.
+   - (Texto Neón Lima) Probar la optimización y mínimos. (CORRECTA)
+   - (Texto Neón Cian) Sumar los costos fijos anuales.
+   - (Texto Neón Naranja) Adivinar quién asiste a tu junta.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la exposición, la "Integral Definida" fue su arma para demostrar:
+   - (Texto Neón Rosa) Errores de los otros equipos.
+   - (Texto Neón Lima) La cantidad neta total acumulada. (CORRECTA)
+   - (Texto Neón Cian) La velocidad de los autobuses.
+   - (Texto Neón Naranja) Los límites de los compañeros.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Este curso inició con el límite, pasó por la derivada y cerró con la integral. Es:
+   - (Texto Neón Rosa) Un revoltijo sin pies ni cabeza.
+   - (Texto Neón Lima) El ciclo perfecto del gran Cálculo. (CORRECTA)
+   - (Texto Neón Cian) Geometría básica de prescolar.
+   - (Texto Neón Naranja) Álgebra de primer año apenas.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Evaluar proyectos locales (agua, tráfico, ecología) en Torreón confirma el valor:
+   - (Texto Neón Rosa) Triste e inútil de la preparatoria.
+   - (Texto Neón Lima) Andragógico, práctico y ciudadano. (CORRECTA)
+   - (Texto Neón Cian) Comercial y de venta de apuntes.
+   - (Texto Neón Naranja) Histórico de las pirámides solares.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Lo que sigue en su futuro (Semestre 6) es el mundo de Probabilidad, donde:
+   - (Texto Neón Rosa) Olvidarán todo lo visto este año.
+   - (Texto Neón Lima) Usarán áreas de curvas (Gauss). (CORRECTA)
+   - (Texto Neón Cian) Cantarán canciones y poemas.
+   - (Texto Neón Naranja) Jugarán dados sin matemáticas.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¡Felicidades! Han sobrevivido a las 50 misiones del curso. Son unos genios de:
+   - (Texto Neón Rosa) Faltar a clases repetidamente.
+   - (Texto Neón Lima) La Matemática del Cambio Constante. (CORRECTA)
+   - (Texto Neón Cian) Las artes plásticas puras.
+   - (Texto Neón Naranja) Memorizar libros de geografía.
+
+&copy; JMGV 2026 MasterClass 50 Pensamiento Variacional PTEL. todos los derechos reservados.

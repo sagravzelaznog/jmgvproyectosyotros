@@ -1,0 +1,188 @@
+================================================================================
+CURSO: PENSAMIENTO VARIACIONAL I (50 SESIONES)
+DIRIGIDO A: Jóvenes de 16 a 18 años.
+METODOLOGÍA: Constructivismo, Andragogía, M-Learning, Aprendizaje Basado en Retos.
+================================================================================
+
+ESTRUCTURA MACRO DEL CURSO (5 BLOQUES DE 10 SESIONES)
+
+BLOQUE 1: De lo Constante a lo Variable (Sesiones 1 - 10)
+Enfoque: Transición del pensamiento aritmético al variacional. Identificación de variables y razón de cambio promedio.
+
+BLOQUE 2: Modelando el Entorno (Sesiones 11 - 20)
+Enfoque: Funciones reales, tabulación, graficación y comprensión de comportamientos (crecimiento, decrecimiento).
+
+BLOQUE 3: El Límite de la Intuición (Sesiones 21 - 30)
+Enfoque: Aproximación sucesiva, noción intuitiva de límite, asíntotas y continuidad. 
+
+BLOQUE 4: La Tasa Instantánea (Sesiones 31 - 40)
+Enfoque: De la recta secante a la tangente. Derivada intuitiva, regla de los cuatro pasos y reglas básicas.
+
+BLOQUE 5: Optimización y Acumulación (Sesiones 41 - 50)
+Enfoque: Máximos y mínimos aplicados a la vida real, e introducción intuitiva a la integral como área bajo la curva (Teorema Fundamental).
+
+================================================================================
+DESARROLLO DE SESIONES
+================================================================================
+
+SESIÓN 01: El Cambio está en Todas Partes (Introducción a la Variación)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno identificará magnitudes constantes y variables en su entorno, comprendiendo que el cambio es la regla natural del universo y la base del pensamiento variacional.
+
+Enfoque Psico-Andragógico: 
+Se aborda el "Para qué" (Autonomía andragógica). Al adolescente no le importan las letras "x" o "y" hasta que entiende que representan su propia realidad. Se busca una "pequeña victoria" cognitiva inmediata: darse cuenta de que ya saben instintivamente qué es una variable. El error al clasificar no se penaliza; se debate.
+
+Actividad Didáctica Principal: 
+Debate Socrático y Cacería de Datos. Se muestran fotografías históricas y actuales de Torreón. Los alumnos debaten qué cambió (variables) y qué permaneció igual (constantes). Luego, salen 5 minutos del aula para "cazar" 3 fenómenos que estén cambiando en tiempo real.
+
+Definiciones:
+- Variable: 
+  * Lenguaje Formal: Símbolo constituyente de un predicado, fórmula o algoritmo que puede adquirir distintos valores de un conjunto definido.
+  * Lenguaje Cotidiano: Algo que cambia de valor o estado dependiendo del tiempo o la situación.
+- Constante:
+  * Lenguaje Formal: Valor fijo que no se modifica dentro del contexto de un problema o modelo matemático.
+  * Lenguaje Cotidiano: Algo que se mantiene igual, pase lo que pase.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. La temperatura en Torreón a lo largo del mes de mayo (Variable).
+2. El costo fijo de un pasaje de camión "Ruta Norte" durante este año (Constante).
+3. El nivel de agua de la Presa Francisco Zarco antes y después de septiembre (Variable).
+
+Actividades de Refuerzo:
+1. "El Semáforo Variacional": El docente dice frases al azar ("edad de tu perro", "días de la semana", "tráfico en el Blvd. Independencia") y los alumnos levantan tarjeta verde si es variable, roja si es constante.
+2. Construcción de Diario: Escribir un mini-relato de su mañana usando al menos 5 variables implícitas y 3 constantes.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. ¿Qué es una variable matemática?
+   - (Texto Neón Rosa) Un valor que cambia siempre. (CORRECTA)
+   - (Texto Neón Lima) Un número que jamás cambia.
+   - (Texto Neón Cian) Una regla para no equivocarse.
+   - (Texto Neón Naranja) Una forma de sumar fracciones.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Ejemplo de una constante en tu día:
+   - (Texto Neón Rosa) El nivel de carga del celular.
+   - (Texto Neón Lima) La cantidad de horas del día. (CORRECTA)
+   - (Texto Neón Cian) El hambre que sientes a diario.
+   - (Texto Neón Naranja) Los mensajes en el WhatsApp.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si viajas en un camión por el Blvd. Revolución, ¿qué es variable?
+   - (Texto Neón Rosa) La ruta que sigue el camión.
+   - (Texto Neón Lima) El pago que haces al subirte.
+   - (Texto Neón Cian) La velocidad durante el viaje. (CORRECTA)
+   - (Texto Neón Naranja) El número de llantas del bus.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Para qué nos sirve entender la variación?
+   - (Texto Neón Rosa) Para predecir lo que va a pasar. (CORRECTA)
+   - (Texto Neón Lima) Para memorizar muchos números.
+   - (Texto Neón Cian) Para aprobar la clase de física.
+   - (Texto Neón Naranja) Para dibujar gráficas estéticas.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. ¿Qué fenómeno físico en Torreón es altamente variable en verano?
+   - (Texto Neón Rosa) La ubicación de la Plaza Mayor.
+   - (Texto Neón Lima) La cantidad de tolvaneras hoy. (CORRECTA)
+   - (Texto Neón Cian) El nombre de nuestra gran ciudad.
+   - (Texto Neón Naranja) La altura del Cerro de las Noas.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si x = "litros de agua en un tinaco", entonces "x" es:
+   - (Texto Neón Rosa) Un valor que es fijo siempre.
+   - (Texto Neón Lima) Un dato que no sirve de mucho.
+   - (Texto Neón Cian) Una variable que puede cambiar. (CORRECTA)
+   - (Texto Neón Naranja) Una letra de adorno algebraico.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. El pensamiento variacional trata sobre:
+   - (Texto Neón Rosa) Contar números del uno al cien.
+   - (Texto Neón Lima) Analizar cómo cambian las cosas. (CORRECTA)
+   - (Texto Neón Cian) Hacer multiplicaciones rápidas.
+   - (Texto Neón Naranja) Buscar el área de un cuadrado.
+
+&copy; JMGV 2026 MasterClass 01 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+
+SESIÓN 02: Relaciones de Dependencia (¿Quién manda a quién?)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá los conceptos de variable independiente y variable dependiente, modelando relaciones causales de su entorno.
+
+Enfoque Psico-Andragógico: 
+Psicología de control y causa-efecto. A los 16-18 años, el joven busca autonomía y entender qué acciones (independiente) generan qué consecuencias (dependiente). Transformamos un concepto abstracto (x, y) en una herramienta de análisis de su propia vida y toma de decisiones, reduciendo la ansiedad frente al álgebra.
+
+Actividad Didáctica Principal: 
+Dinámica "El Hilo Invisible". Se divide al grupo en pares. Uno recibe una tarjeta con una acción (ej. "Aumentar horas de estudio") y el otro una consecuencia ("Calificación obtenida"). Deben conectarse con un estambre y explicar frente al grupo quién es la causa (Independiente) y quién el efecto (Dependiente), creando una red física en el aula.
+
+Definiciones:
+- Variable Independiente (x):
+  * Lenguaje Formal: Variable cuyo valor no depende de otra y que sirve como entrada o dominio en una función.
+  * Lenguaje Cotidiano: La "causa". Lo que tú puedes controlar o el tiempo que avanza sin que nadie lo detenga.
+- Variable Dependiente (y):
+  * Lenguaje Formal: Variable cuyo valor está determinado por el valor que toma la variable independiente.
+  * Lenguaje Cotidiano: El "efecto". Lo que resulta o reacciona a partir de lo que pasó primero.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El consumo de energía eléctrica en casa (Dependiente) respecto a las horas que se enciende la refrigeración en julio (Independiente).
+2. El costo total a pagar en un puesto de elotes en la Morelos (Dependiente) respecto a la cantidad de elotes comprados (Independiente).
+3. El nivel de sudoración de una persona (Dependiente) frente a los grados centígrados del mediodía en la ciudad (Independiente).
+
+Actividades de Refuerzo:
+1. "Meme Variacional": Los alumnos deben crear un meme divido en dos paneles ("Lo que hago / Lo que pasa"), rotulándolos como Variable Independiente y Dependiente.
+2. Rompecabezas de Ecuaciones: Unir tarjetas de "Y" (Efecto) con su correspondiente ecuación y su "X" (Causa).
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La variable independiente se puede definir como:
+   - (Texto Neón Rosa) La causa de algo que sucederá. (CORRECTA)
+   - (Texto Neón Lima) El resultado final del problema.
+   - (Texto Neón Cian) Un número que jamás cambiará.
+   - (Texto Neón Naranja) El error de cálculo en la hoja.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En la relación "Horas de estudio" y "Calificación", la calificación es:
+   - (Texto Neón Rosa) La causa inicial del proceso.
+   - (Texto Neón Lima) La variable dependiente aquí. (CORRECTA)
+   - (Texto Neón Cian) Un valor constante sin cambio.
+   - (Texto Neón Naranja) Una variable independiente.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si compras gorditas en Torreón, la cantidad de gorditas que pides es:
+   - (Texto Neón Rosa) El resultado de tu gran cuenta.
+   - (Texto Neón Lima) Una variable dependiente total.
+   - (Texto Neón Cian) La variable independiente hoy. (CORRECTA)
+   - (Texto Neón Naranja) Una constante que no se mueve.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿En qué eje de un plano cartesiano va la variable independiente?
+   - (Texto Neón Rosa) Siempre se coloca en el eje X. (CORRECTA)
+   - (Texto Neón Lima) Siempre se coloca en el eje Y.
+   - (Texto Neón Cian) Se coloca en el punto central.
+   - (Texto Neón Naranja) No importa en qué eje se ponga.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El tiempo (segundos, horas, años) es casi siempre una variable:
+   - (Texto Neón Rosa) Totalmente dependiente de ti.
+   - (Texto Neón Lima) Independiente porque no para. (CORRECTA)
+   - (Texto Neón Cian) Constante y nunca avanza más.
+   - (Texto Neón Naranja) Aleatoria y muy impredecible.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si "y" depende de "x", ¿cómo se lee formalmente?
+   - (Texto Neón Rosa) "X" es una constante oculta.
+   - (Texto Neón Lima) "Y" es un error del sistema.
+   - (Texto Neón Cian) "Y" está en función de "X". (CORRECTA)
+   - (Texto Neón Naranja) "X" depende fuertemente de "Y".
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender las variables de causa y efecto te ayuda en la vida a:
+   - (Texto Neón Rosa) Memorizar libros de historia.
+   - (Texto Neón Lima) Tomar decisiones más lógicas. (CORRECTA)
+   - (Texto Neón Cian) Aprobar exámenes de lenguaje.
+   - (Texto Neón Naranja) Dormir más horas diariamente.
+
+&copy; JMGV 2026 MasterClass 02 Pensamiento Variacional PTEL. todos los derechos reservados.

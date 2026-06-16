@@ -40,7 +40,7 @@ export default function PayPalButton() {
             const details = await actions.order.capture();
             // Aquí enviarás el webhook o llamado a tu API de Firebase para
             // otorgar acceso al curso a este usuario.
-            alert("¡Pago exitoso! Bienvenido al curso, " + details.payer.name?.given_name);
+            alert("¡Pago exitoso! Bienvenido al curso, " + details.payer?.name?.given_name);
           } catch (err) {
             setError("Ocurrió un error al procesar el pago.");
           }

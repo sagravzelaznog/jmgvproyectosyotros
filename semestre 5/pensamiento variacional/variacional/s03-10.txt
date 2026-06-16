@@ -1,0 +1,647 @@
+================================================================================
+SESIÓN 03: El Infinito en tus Zapatos (La Paradoja de Zenón)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá la noción intuitiva de sucesión, división infinita y el concepto temprano de límite mediante el análisis de la paradoja de Aquiles y la Tortuga.
+
+Enfoque Psico-Andragógico: 
+Manejo de la frustración y curiosidad intelectual. A los 17 años, la mente está lista para debates filosóficos complejos. Usamos una paradoja irresoluble a simple vista para generar un "conflicto cognitivo" que despierte la motivación intrínseca. Se les demuestra que equivocarse al principio es parte del proceso de los grandes pensadores.
+
+Actividad Didáctica Principal: 
+El Reto de la Mitad. Se coloca una meta física en el aula. Un alumno debe caminar hacia ella, pero en cada paso solo puede avanzar exactamente "la mitad" de la distancia restante. Se debate: ¿Llegará alguna vez matemáticamente? ¿Y en la vida real?
+
+Definiciones:
+- Sucesión (o Secuencia): 
+  * Lenguaje Formal: Función cuyo dominio es el conjunto de los números naturales y su codominio cualquier otro conjunto.
+  * Lenguaje Cotidiano: Una lista ordenada de números o cosas que siguen un patrón lógico y repetitivo.
+- Infinito:
+  * Lenguaje Formal: Concepto que describe una cantidad sin límite o fin, denotado por el símbolo ∞.
+  * Lenguaje Cotidiano: Algo que nunca termina, sin importar cuánto trates de contarlo o alcanzarlo.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Dividir a la mitad indefinidamente un lonche de adobada de la "Barda" (Físicamente imposible tras cierto punto, matemáticamente infinito).
+2. Intentar cruzar el Blvd. Independencia avanzando solo la mitad de la calle a cada paso.
+3. El eco de los gritos de la porra en el Estadio Corona desvaneciéndose a la mitad de volumen cada segundo.
+
+Actividades de Refuerzo:
+1. Corte de papel: Entregar tiras de papel a los alumnos y pedirles que las corten a la mitad repetidamente hasta que ya no puedan, registrando cuántas veces lo lograron.
+2. Debate cruzado: Dividir al grupo en "Defensores de Zenón" (el movimiento es ilusión) y "Físicos Modernos" (el movimiento es real), argumentando con lógica.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Según la paradoja de Zenón, Aquiles nunca alcanza a la tortuga porque:
+   - (Texto Neón Rosa) Aquiles corre muy lento en la arena.
+   - (Texto Neón Lima) Siempre debe recorrer la mitad previa. (CORRECTA)
+   - (Texto Neón Cian) La tortuga usó atajos en el camino.
+   - (Texto Neón Naranja) El infinito se detiene al mediodía.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Una sucesión matemática se entiende mejor como:
+   - (Texto Neón Rosa) Un patrón ordenado de números. (CORRECTA)
+   - (Texto Neón Lima) Un error de cálculo en la hoja.
+   - (Texto Neón Cian) Una figura geométrica redonda.
+   - (Texto Neón Naranja) Una ecuación de difícil solución.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la vida real, si cruzas el Bosque Venustiano Carranza avanzando por mitades:
+   - (Texto Neón Rosa) Nunca llegarás al otro lado.
+   - (Texto Neón Lima) Llegarás por el tamaño de tu pie. (CORRECTA)
+   - (Texto Neón Cian) Te perderás en la primera curva.
+   - (Texto Neón Naranja) Caminarás más rápido al final.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué concepto moderno resuelve la paradoja de Zenón?
+   - (Texto Neón Rosa) La suma del Teorema de Pitágoras.
+   - (Texto Neón Lima) El concepto del Límite matemático. (CORRECTA)
+   - (Texto Neón Cian) La regla de tres simple y directa.
+   - (Texto Neón Naranja) Las fracciones puras y mixtas.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El símbolo del infinito (∞) representa:
+   - (Texto Neón Rosa) Un número que vale un millón.
+   - (Texto Neón Lima) Una cantidad con un final claro.
+   - (Texto Neón Cian) Un concepto que no tiene final. (CORRECTA)
+   - (Texto Neón Naranja) Una constante que siempre es dos.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Cortar un papel por la mitad infinitas veces es un concepto:
+   - (Texto Neón Rosa) Físicamente real en todo momento.
+   - (Texto Neón Lima) Matemáticamente puro y teórico. (CORRECTA)
+   - (Texto Neón Cian) Químicamente inestable y falso.
+   - (Texto Neón Naranja) Geométricamente redondo y liso.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¿Por qué es importante Zenón para el Pensamiento Variacional?
+   - (Texto Neón Rosa) Nos enseñó a sumar muy rápido.
+   - (Texto Neón Lima) Nos hizo pensar en el cambio continuo. (CORRECTA)
+   - (Texto Neón Cian) Inventó la rueda y los engranes.
+   - (Texto Neón Naranja) Descubrió la gravedad terrestre.
+
+&copy; JMGV 2026 MasterClass 03 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 04: Arquímedes y el Rompecabezas del Área (Método de Exhausción)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá cómo calcular áreas de formas irregulares aproximándolas con polígonos conocidos, sentando las bases intuitivas del cálculo integral.
+
+Enfoque Psico-Andragógico: 
+Mentalidad de crecimiento y utilidad espacial. Se les muestra que los grandes problemas no se resuelven con una fórmula mágica instantánea, sino dividiéndolos en partes pequeñas y manejables. Esto reduce la ansiedad matemática al darles permiso para "aproximar" antes de exigir perfección.
+
+Actividad Didáctica Principal: 
+El "Pizza-Polígono". Los alumnos reciben hojas con círculos y curvas impresas. Su reto es llenar el área usando solo triángulos y rectángulos que ellos mismos recortan. Gana el equipo que deje menos "espacio blanco" sin cubrir.
+
+Definiciones:
+- Aproximación:
+  * Lenguaje Formal: Resultado matemático que no es exacto, pero que es suficientemente cercano a un valor verdadero para un propósito específico.
+  * Lenguaje Cotidiano: Acercarse a la respuesta correcta usando la lógica, sin necesidad de que sea perfecta a la primera.
+- Polígono Inscrito:
+  * Lenguaje Formal: Polígono cuyos vértices se encuentran todos sobre una circunferencia o curva dada.
+  * Lenguaje Cotidiano: Una figura de lados rectos dibujada totalmente "por dentro" del borde de un círculo o curva.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Calcular los metros cuadrados de pasto necesarios para el campo del Territorio Santos Modelo (TSM) cubriéndolo con cuadros de un metro.
+2. Estimar el volumen de agua de la Presa Francisco Zarco dividiendo su forma irregular en cajas imaginarias.
+3. Calcular cuánta pintura se necesita para un mural curvo en el Paseo Morelos usando rodillos rectos.
+
+Actividades de Refuerzo:
+1. Cuadrícula Transparente: Colocar papel albanene cuadriculado sobre el mapa de la Comarca Lagunera y contar cuadros enteros vs. cuadros a la mitad para estimar el área.
+2. Applet Digital: Uso de GeoGebra en sus celulares para aumentar los lados de un polígono dentro de un círculo de 4 a 100 lados, viendo cómo se acerca al borde.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El Método de Exhausción de Arquímedes sirve principalmente para:
+   - (Texto Neón Rosa) Medir la velocidad de un auto.
+   - (Texto Neón Lima) Aproximar el área de una curva. (CORRECTA)
+   - (Texto Neón Cian) Calcular el peso de una piedra.
+   - (Texto Neón Naranja) Encontrar la edad del universo.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. A mayor cantidad de triángulos dentro de un círculo, el cálculo del área será:
+   - (Texto Neón Rosa) Mucho más inexacto y lejano.
+   - (Texto Neón Lima) Exactamente el mismo siempre.
+   - (Texto Neón Cian) Más preciso y cercano al real. (CORRECTA)
+   - (Texto Neón Naranja) Completamente cero en el centro.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. ¿Qué significa "Aproximación" en matemáticas?
+   - (Texto Neón Rosa) Un número que está muy cerca. (CORRECTA)
+   - (Texto Neón Lima) Un error gigante y desastroso.
+   - (Texto Neón Cian) Una mentira numérica compleja.
+   - (Texto Neón Naranja) Un cálculo sin ningún sentido.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si quieres medir un terreno irregular en un ejido de La Laguna, puedes:
+   - (Texto Neón Rosa) Dividirlo en triángulos chicos. (CORRECTA)
+   - (Texto Neón Lima) Usar solo círculos concéntricos.
+   - (Texto Neón Cian) Multiplicar su altura por cien.
+   - (Texto Neón Naranja) Pintarlo todo de color blanco.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Un polígono inscrito en una circunferencia está:
+   - (Texto Neón Rosa) Flotando muy lejos de la curva.
+   - (Texto Neón Lima) Dibujado completamente afuera.
+   - (Texto Neón Cian) Dibujado por dentro del borde. (CORRECTA)
+   - (Texto Neón Naranja) Cortando el círculo por mitad.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Para Arquímedes, el círculo perfecto era en realidad:
+   - (Texto Neón Rosa) Un cuadrado con las puntas rotas.
+   - (Texto Neón Lima) Un polígono de infinitos lados. (CORRECTA)
+   - (Texto Neón Cian) Un triángulo que gira muy rápido.
+   - (Texto Neón Naranja) Un punto que no tiene un área.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Este método antiguo es el abuelo directo de:
+   - (Texto Neón Rosa) La geometría de tercer grado.
+   - (Texto Neón Lima) Las sumas y restas con punto.
+   - (Texto Neón Cian) El cálculo integral moderno. (CORRECTA)
+   - (Texto Neón Naranja) Las leyes de la gravedad local.
+
+&copy; JMGV 2026 MasterClass 04 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 05: El Concepto de Incremento (Midamos el salto)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno calculará el incremento absoluto entre dos estados de una variable, introduciendo la notación Delta ($\Delta$) como símbolo de cambio.
+
+Enfoque Psico-Andragógico: 
+Se otorga a los alumnos una herramienta ("superpoder") de análisis financiero y técnico. El concepto de "Incremento" es la base de la economía y la ingeniería adulta. Al usar notación profesional ($\Delta x$), se sienten tratados como universitarios, aumentando su sentido de responsabilidad.
+
+Actividad Didáctica Principal: 
+El Simulador de "Gastar y Ganar". Se proyecta en el pizarrón la cotización en tiempo real del dólar o de Bitcoin. Los alumnos deben calcular el "Delta" (incremento o decremento) cada 5 minutos durante la clase. 
+
+Definiciones:
+- Incremento ($\Delta$):
+  * Lenguaje Formal: La diferencia entre el valor final y el valor inicial de una variable, denotado por $\Delta x = x_f - x_i$.
+  * Lenguaje Cotidiano: Cuánto creció o cuánto se encogió algo. Si es positivo subió, si es negativo bajó.
+- Estado Inicial y Final:
+  * Lenguaje Formal: Valores que toma la variable independiente o dependiente en los límites de un intervalo de observación.
+  * Lenguaje Cotidiano: El "antes" y el "después" de tu historia o medición.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El incremento del calor ($\Delta T$) al pasar de 25°C a las 8:00 AM a 38°C a las 2:00 PM.
+2. El decremento (incremento negativo) del saldo en tu tarjeta de camión pagobús después de tres viajes.
+3. El incremento en el precio de la leche Lala a lo largo del último año.
+
+Actividades de Refuerzo:
+1. Calculadora Humana: El maestro dicta un valor inicial y uno final, los alumnos deben gritar "¡Delta es [número]!".
+2. Tabla de mi Vida: Calcular el $\Delta$ de su propia estatura desde que entraron a la prepa hasta el día de hoy.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El símbolo matemático Delta ($\Delta$) significa:
+   - (Texto Neón Rosa) El final de un problema largo.
+   - (Texto Neón Lima) El cambio o diferencia total. (CORRECTA)
+   - (Texto Neón Cian) Un triángulo para colorear.
+   - (Texto Neón Naranja) La suma de todas las raíces.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Cómo se calcula matemáticamente el incremento $\Delta x$?
+   - (Texto Neón Rosa) Valor inicial menos el final.
+   - (Texto Neón Lima) Valor final más valor inicial.
+   - (Texto Neón Cian) Valor final menos el inicial. (CORRECTA)
+   - (Texto Neón Naranja) Multiplicando ambos valores.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si la temperatura en Torreón pasa de 40°C a 35°C, el Delta es:
+   - (Texto Neón Rosa) Un incremento positivo de cinco.
+   - (Texto Neón Lima) Un decremento negativo de cinco. (CORRECTA)
+   - (Texto Neón Cian) Un valor nulo porque hace calor.
+   - (Texto Neón Naranja) Setenta y cinco grados totales.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si inicias con $50 pesos y terminas con $120, tu $\Delta$ dinero es:
+   - (Texto Neón Rosa) Más setenta pesos a tu favor. (CORRECTA)
+   - (Texto Neón Lima) Menos setenta pesos en tu bolsa.
+   - (Texto Neón Cian) Ciento setenta pesos en total.
+   - (Texto Neón Naranja) Cincuenta pesos de pura ganancia.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Un incremento negativo significa que la variable:
+   - (Texto Neón Rosa) Aumentó muy rápidamente hoy.
+   - (Texto Neón Lima) Disminuyó o perdió su valor. (CORRECTA)
+   - (Texto Neón Cian) Se mantuvo constante siempre.
+   - (Texto Neón Naranja) Explotó y ya no sirve más.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. El "Estado Inicial" de un fenómeno es:
+   - (Texto Neón Rosa) El "después" de que pasó algo.
+   - (Texto Neón Lima) El "antes" o punto de arranque. (CORRECTA)
+   - (Texto Neón Cian) El promedio de toda la historia.
+   - (Texto Neón Naranja) El error que cometió el dueño.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Calcular el incremento es el primer paso para:
+   - (Texto Neón Rosa) Comprender el cálculo diferencial. (CORRECTA)
+   - (Texto Neón Lima) Olvidar cómo funcionan los números.
+   - (Texto Neón Cian) Dibujar círculos en un cuaderno.
+   - (Texto Neón Naranja) Resolver ecuaciones de quinto grado.
+
+&copy; JMGV 2026 MasterClass 05 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 06: La Velocidad de la Vida (Razón de Cambio Promedio I)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno calculará la razón de cambio promedio entendiendo la relación entre el incremento de la variable dependiente y el incremento de la independiente ($\Delta y / \Delta x$).
+
+Enfoque Psico-Andragógico: 
+Conexión directa con la adrenalina y la percepción del tiempo. Los jóvenes entienden intuitivamente la "velocidad" al manejar, correr o descargar un videojuego. Se formaliza esa intuición. Se les empodera mostrando que una fórmula matemática compleja es solo sentido común organizado.
+
+Actividad Didáctica Principal: 
+Rally de Velocidad Escolar. Los alumnos usan el cronómetro del celular para medir cuánto tardan en caminar y luego en correr una distancia fija de 20 metros en la cancha cívica. Regresan al aula y calculan la razón de cambio promedio (Velocidad = $\Delta Distancia / \Delta Tiempo$).
+
+Definiciones:
+- Razón de Cambio Promedio:
+  * Lenguaje Formal: El cociente que resulta de dividir el incremento de la variable dependiente entre el incremento de la variable independiente ($\Delta y / \Delta x$).
+  * Lenguaje Cotidiano: Qué tan rápido cambia una cosa en comparación con el tiempo o esfuerzo que le inviertes.
+- Cociente:
+  * Lenguaje Formal: El resultado matemático de una operación de división.
+  * Lenguaje Cotidiano: El número que te sale después de dividir.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. La velocidad promedio en un viaje por el Periférico de Torreón a Gómez Palacio (km/h).
+2. Los megas por segundo que descarga tu proveedor de internet local al bajar un juego pesado.
+3. El ritmo de crecimiento de los locales comerciales en una nueva plaza en Viñedos (locales/mes).
+
+Actividades de Refuerzo:
+1. Análisis de Facturas: Revisar un recibo de CFE o SIMAS y calcular la razón de consumo promedio diario (KWh / día o Litros / día).
+2. Competencia de Escritura: Escribir "Pensamiento Variacional" repetidas veces en 1 minuto. Calcular la razón de letras por segundo.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La fórmula de la Razón de Cambio Promedio es:
+   - (Texto Neón Rosa) Delta Y multiplicado por Delta X.
+   - (Texto Neón Lima) Delta Y dividido entre Delta X. (CORRECTA)
+   - (Texto Neón Cian) Delta X sumado con el Delta Y.
+   - (Texto Neón Naranja) Delta X menos el enorme Delta Y.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si recorres 100 km en 2 horas, tu razón de cambio promedio es:
+   - (Texto Neón Rosa) Cincuenta kilómetros por hora. (CORRECTA)
+   - (Texto Neón Lima) Doscientos kilómetros en total.
+   - (Texto Neón Cian) Cien kilómetros por cada hora.
+   - (Texto Neón Naranja) Cero kilómetros porque te paras.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. La "velocidad" es el ejemplo más famoso de:
+   - (Texto Neón Rosa) Una variable que nunca cambia.
+   - (Texto Neón Lima) Una constante sumamente aburrida.
+   - (Texto Neón Cian) Una razón de cambio en el tiempo. (CORRECTA)
+   - (Texto Neón Naranja) Una paradoja de la antigua Grecia.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué nos dice la razón de cambio en un recibo de luz?
+   - (Texto Neón Rosa) El nombre del director general.
+   - (Texto Neón Lima) Los KWh gastados por cada día. (CORRECTA)
+   - (Texto Neón Cian) El color del cableado eléctrico.
+   - (Texto Neón Naranja) La distancia de la planta central.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Un cociente es simplemente el resultado de:
+   - (Texto Neón Rosa) Una suma muy grande y difícil.
+   - (Texto Neón Lima) Una resta con números negativos.
+   - (Texto Neón Cian) Una división entre dos valores. (CORRECTA)
+   - (Texto Neón Naranja) Una multiplicación con decimales.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si descargas un archivo de 1000 MB en 10 segundos, la razón es:
+   - (Texto Neón Rosa) Cien megabytes por cada segundo. (CORRECTA)
+   - (Texto Neón Lima) Mil megabytes por cada segundo.
+   - (Texto Neón Cian) Diez megabytes por cada segundo.
+   - (Texto Neón Naranja) Un megabyte por cada milisegundo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Calcular la razón de cambio te sirve en la vida para:
+   - (Texto Neón Rosa) Planear tu tiempo y tu dinero. (CORRECTA)
+   - (Texto Neón Lima) Pintar figuras geométricas raras.
+   - (Texto Neón Cian) Aprobar la clase de educación física.
+   - (Texto Neón Naranja) Aprender a leer más rápidamente.
+
+&copy; JMGV 2026 MasterClass 06 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 07: Reconociendo Patrones (Relaciones Lineales vs No Lineales)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno distinguirá entre cambios que ocurren a un ritmo constante (lineales) y aquellos que se aceleran o frenan (no lineales), identificando patrones en fenómenos reales.
+
+Enfoque Psico-Andragógico: 
+Desarrollo del pensamiento crítico. Se confronta la ilusión de que "todo crece igual". Al analizar cómo se vuelven virales los videos de TikTok vs cómo se ahorra dinero en el banco, el alumno conecta la matemática con el comportamiento social y económico de su generación.
+
+Actividad Didáctica Principal: 
+El Experimento Viral. Se comparan dos escenarios proyectados: El Equipo A gana $10 pesos fijos cada minuto. El Equipo B empieza con $1 peso, pero su dinero se duplica cada minuto. Anotan los resultados tras 10 minutos y descubren el poder de la variación no lineal (exponencial).
+
+Definiciones:
+- Variación Lineal:
+  * Lenguaje Formal: Relación entre dos variables cuya razón de cambio es constante en todo su dominio.
+  * Lenguaje Cotidiano: Un crecimiento aburrido pero seguro; siempre sube la misma cantidad en el mismo tiempo.
+- Variación No Lineal:
+  * Lenguaje Formal: Relación donde la razón de cambio varía dependiendo del intervalo evaluado.
+  * Lenguaje Cotidiano: Un crecimiento explosivo (o caída libre) que cambia de ritmo constantemente.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Lineal: El cobro del pasaje en un taxi que te cobra $10 fijos por cada kilómetro recorrido sin tráfico.
+2. No Lineal: La propagación de un rumor o meme en una prepa local (cada persona le cuenta a tres más).
+3. No Lineal: El enfriamiento de un vaso con agua fría dejado al sol en pleno verano lagunero.
+
+Actividades de Refuerzo:
+1. Clasificador Rápido: Mostrar tarjetas con situaciones (ej. "llenar una alberca con manguera", "contagios de un virus") y deben correr al lado del aula que diga "Lineal" o "No Lineal".
+2. Dibujando el Cambio: En el aire, usando sus manos, trazar la forma de un cambio lineal (recta) y uno no lineal (curva) según dicte el profesor.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Una variación es lineal cuando su ritmo de cambio es:
+   - (Texto Neón Rosa) Diferente a cada minuto que pasa.
+   - (Texto Neón Lima) Siempre constante e invariable. (CORRECTA)
+   - (Texto Neón Cian) Negativo y sumamente confuso.
+   - (Texto Neón Naranja) Aleatorio y sin ningún sentido.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Cuál de estos es un ejemplo de crecimiento no lineal?
+   - (Texto Neón Rosa) Ahorrar diez pesos cada semana.
+   - (Texto Neón Lima) Un video viral en redes sociales. (CORRECTA)
+   - (Texto Neón Cian) Caminar dos metros por segundo.
+   - (Texto Neón Naranja) Pagar renta mensual de la casa.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si un taxi te cobra exactamente igual por cada kilómetro, es:
+   - (Texto Neón Rosa) Un robo a despoblado evidente.
+   - (Texto Neón Lima) Un claro modelo de cambio lineal. (CORRECTA)
+   - (Texto Neón Cian) Una ecuación no lineal compleja.
+   - (Texto Neón Naranja) Un milagro del transporte local.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. El crecimiento exponencial (no lineal) se caracteriza porque:
+   - (Texto Neón Rosa) Empieza lento y luego es explosivo. (CORRECTA)
+   - (Texto Neón Lima) Siempre sube la misma cantidad neta.
+   - (Texto Neón Cian) Baja rápidamente hasta hacerse cero.
+   - (Texto Neón Naranja) Forma una línea perfectamente recta.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Para saber si algo es lineal, debes calcular su razón de cambio y ver si:
+   - (Texto Neón Rosa) El resultado es siempre diferente.
+   - (Texto Neón Lima) El resultado es siempre el mismo. (CORRECTA)
+   - (Texto Neón Cian) El resultado es un número con coma.
+   - (Texto Neón Naranja) El resultado es difícil de hallar.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Los contagios de una epidemia suelen ser, al principio:
+   - (Texto Neón Rosa) Total y completamente lineales.
+   - (Texto Neón Lima) Una variación rápida y no lineal. (CORRECTA)
+   - (Texto Neón Cian) Una constante sin ningún peligro.
+   - (Texto Neón Naranja) Imposibles de graficar o medir.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender la diferencia entre lineal y no lineal evita que:
+   - (Texto Neón Rosa) Te equivoques al sumar fracciones.
+   - (Texto Neón Lima) Te engañen con deudas de tarjetas. (CORRECTA)
+   - (Texto Neón Cian) Saques malas notas en español.
+   - (Texto Neón Naranja) Compres verduras en mal estado.
+
+&copy; JMGV 2026 MasterClass 07 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 08: Tabulando la Realidad (El Arte de Registrar Datos)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno estructurará datos del mundo real en tablas de doble entrada para organizar visualmente pares ordenados de variables independientes y dependientes.
+
+Enfoque Psico-Andragógico: 
+Autonomía y orden mental. Al adolescente le abruma el caos de la información. Se le enseña que tabular no es hacer tarea, es hackear el caos. Ordenar variables es el primer paso para predecir el futuro (la esencia del Big Data).
+
+Actividad Didáctica Principal: 
+El Investigador de Campo. Usando las temperaturas pronosticadas para los próximos 7 días en Torreón (sacadas de sus celulares), crean una tabla impecable en papel kraft. Identifican quién es "X" (Días) y quién es "Y" (Temperatura), y luego calculan los $\Delta Y$ entre días para ver la fluctuación.
+
+Definiciones:
+- Tabulación:
+  * Lenguaje Formal: Disposición de datos en forma de tabla, estructurando pares ordenados $(x, y)$ que reflejan una relación funcional o empírica.
+  * Lenguaje Cotidiano: Organizar información en columnas para que tu cerebro entienda rápido qué está pasando.
+- Par Ordenado:
+  * Lenguaje Formal: Conjunto de dos elementos $(x, y)$ donde el orden es estrictamente necesario para su interpretación.
+  * Lenguaje Cotidiano: Una pareja de datos inseparables; el evento y su consecuencia.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Tabular las horas pico de tráfico en el Blvd. Rodríguez Triana y el número de autos detenidos por minuto.
+2. Registrar en una tabla el peso máximo levantado cada semana por un alumno en el gimnasio local.
+3. Anotar el costo de los garrafones de agua purificada a lo largo de los últimos 5 años en la región.
+
+Actividades de Refuerzo:
+1. Detectives de Tablas: Se entregan tablas con datos incompletos siguiendo un patrón oculto. Los alumnos deben usar la lógica de la razón de cambio para llenarlos.
+2. Excel Básico: En sus celulares o laboratorio, transcriben su tabla de papel a una hoja de cálculo simple para ver cómo el software organiza los pares ordenados.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. ¿Cuál es la principal utilidad de hacer una tabulación?
+   - (Texto Neón Rosa) Pintar celdas de colores bonitos.
+   - (Texto Neón Lima) Organizar pares de datos con orden. (CORRECTA)
+   - (Texto Neón Cian) Calcular raíces cuadradas gigantes.
+   - (Texto Neón Naranja) Perder el tiempo en matemáticas.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En una tabla estándar, la primera columna (izquierda) normalmente es:
+   - (Texto Neón Rosa) El resultado final de la función.
+   - (Texto Neón Lima) La variable dependiente o el "Y".
+   - (Texto Neón Cian) La variable independiente o el "X". (CORRECTA)
+   - (Texto Neón Naranja) El error de medición del cálculo.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Un par ordenado se escribe con la forma matemática:
+   - (Texto Neón Rosa) Un grupo de letras sin paréntesis.
+   - (Texto Neón Lima) Los datos escritos como (x, y). (CORRECTA)
+   - (Texto Neón Cian) Los datos escritos como [y - x].
+   - (Texto Neón Naranja) Una fracción cruzada muy rara.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si quieres analizar cómo gastas tus datos móviles al mes, debes tabular:
+   - (Texto Neón Rosa) Día del mes vs. Megas consumidos. (CORRECTA)
+   - (Texto Neón Lima) Marca del celular vs. Color de funda.
+   - (Texto Neón Cian) Nombre del amigo vs. Número de fotos.
+   - (Texto Neón Naranja) Aplicaciones vs. Batería inicial.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si en una tabla todos los incrementos en "Y" son iguales por cada paso en "X":
+   - (Texto Neón Rosa) Es un patrón desordenado y roto.
+   - (Texto Neón Lima) Es seguro una relación no lineal.
+   - (Texto Neón Cian) Estamos viendo una relación lineal. (CORRECTA)
+   - (Texto Neón Naranja) La tabla está mal estructurada.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Tabular el clima de Torreón te ayuda principalmente a:
+   - (Texto Neón Rosa) Cambiar el calor de nuestra región.
+   - (Texto Neón Lima) Predecir la tendencia y abrigarte. (CORRECTA)
+   - (Texto Neón Cian) Memorizar nombres de las nubes.
+   - (Texto Neón Naranja) Hacer llover en tiempos de sequía.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En el mundo del trabajo profesional, tabular equivale a:
+   - (Texto Neón Rosa) El inicio del análisis de Big Data. (CORRECTA)
+   - (Texto Neón Lima) Un trabajo manual ya obsoleto hoy.
+   - (Texto Neón Cian) Leer libros de texto aburridos.
+   - (Texto Neón Naranja) Hacer presentaciones de ventas.
+
+&copy; JMGV 2026 MasterClass 08 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 09: Fotografiando el Cambio (El Plano Cartesiano)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno trasladará los datos tabulados a una representación gráfica bidimensional, interpretando visualmente la dirección y la rapidez del cambio.
+
+Enfoque Psico-Andragógico: 
+Aprendizaje visual e inteligencias múltiples. Se atiende a los alumnos que aprenden mejor viendo formas que números. Se conecta la gráfica cartesiana con herramientas que ya usan, como los radares de los videojuegos o la interfaz de Google Maps. 
+
+Actividad Didáctica Principal: 
+El Mural Cartesiano. Con cinta canela, se traza un gigantesco plano cartesiano en el piso del aula o patio. Los alumnos actúan como "puntos humanos" basados en tarjetas con pares ordenados $(x,y)$. Luego se unen con una cuerda para formar "la curva del cambio".
+
+Definiciones:
+- Plano Cartesiano:
+  * Lenguaje Formal: Sistema de referencia de dos dimensiones definido por dos ejes ortogonales que se intersecan en el origen.
+  * Lenguaje Cotidiano: Una cuadrícula con un eje horizontal y uno vertical que sirve para ubicar puntos exactos como en un mapa del tesoro.
+- Pendiente de una Gráfica:
+  * Lenguaje Formal: Inclinación de una recta respecto al eje de abscisas, numéricamente igual a la razón de cambio ($\Delta y / \Delta x$).
+  * Lenguaje Cotidiano: Qué tan empinada o "de bajadita" está la línea que dibujas.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Graficar el recorrido desde el Cristo de las Noas hasta la Plaza Mayor.
+2. Visualizar la curva empinada de consumo eléctrico de las casas de Torreón durante julio (aire acondicionado).
+3. Graficar la estatura de un estudiante desde que entra a secundaria hasta que sale de prepa.
+
+Actividades de Refuerzo:
+1. Batalla Naval Cartesiana: Juegan "Batalla Naval" en pares, pero deben hundir barcos dictando coordenadas exactas en los 4 cuadrantes.
+2. Lee la Gráfica: El maestro proyecta gráficas sin números (solo curvas hacia arriba, abajo, constantes). El alumno debe inventar una historia coherente para esa línea.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El eje horizontal de un plano cartesiano se llama:
+   - (Texto Neón Rosa) El eje Y o de las ordenadas.
+   - (Texto Neón Lima) El eje central o punto neutro.
+   - (Texto Neón Cian) El eje X o de las abscisas. (CORRECTA)
+   - (Texto Neón Naranja) La línea diagonal del plano.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Qué representa visualmente la pendiente de una gráfica?
+   - (Texto Neón Rosa) El color de la línea trazada ahí.
+   - (Texto Neón Lima) La rapidez de la razón de cambio. (CORRECTA)
+   - (Texto Neón Cian) El número total de puntos vistos.
+   - (Texto Neón Naranja) Un error de medición en la regla.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si una línea en la gráfica sube hacia la derecha, el cambio es:
+   - (Texto Neón Rosa) Un incremento o cambio positivo. (CORRECTA)
+   - (Texto Neón Lima) Un decremento o cambio negativo.
+   - (Texto Neón Cian) Completamente constante y nulo.
+   - (Texto Neón Naranja) Un error que debemos borrar ya.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Si ves una línea completamente plana y horizontal, significa:
+   - (Texto Neón Rosa) Que la variable está creciendo.
+   - (Texto Neón Lima) Que el fenómeno no está cambiando. (CORRECTA)
+   - (Texto Neón Cian) Que la variable está cayendo hoy.
+   - (Texto Neón Naranja) Que el plano cartesiano falló.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El punto de origen donde se cruzan los ejes tiene la coordenada:
+   - (Texto Neón Rosa) Exactamente la coordenada (1, 1).
+   - (Texto Neón Lima) La letal coordenada (-1, -1).
+   - (Texto Neón Cian) La conocida coordenada (0, 0). (CORRECTA)
+   - (Texto Neón Naranja) Una coordenada que nadie sabe.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. En Google Maps, cuando buscas un destino en Torreón, estás usando:
+   - (Texto Neón Rosa) Un sistema de ecuaciones de radar.
+   - (Texto Neón Lima) Un plano de coordenadas gigantes. (CORRECTA)
+   - (Texto Neón Cian) Una tabla de multiplicaciones pura.
+   - (Texto Neón Naranja) Geometría del espacio profundo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¿Por qué el cerebro entiende mejor las gráficas que las tablas?
+   - (Texto Neón Rosa) Porque tienen colores más bonitos.
+   - (Texto Neón Lima) Porque muestran la forma del cambio. (CORRECTA)
+   - (Texto Neón Cian) Porque ocupan menos hoja de libreta.
+   - (Texto Neón Naranja) Porque no usan números en absoluto.
+
+&copy; JMGV 2026 MasterClass 09 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 10: Reto Integrador (Modelando el Entorno Local)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno sintetizará los conceptos del Bloque 1 identificando variables, tabulando datos empíricos, calculando razones de cambio y graficando la información de un problema real de su comunidad para tomar decisiones informadas.
+
+Enfoque Psico-Andragógico: 
+Aprendizaje Basado en Proyectos (ABP) y empoderamiento. El adolescente se convierte en "consultor". El examen tradicional genera pánico; resolver un problema local genera orgullo. Esta "victoria temprana" cierra el primer bloque demostrándoles que ya saben usar la matemática como herramienta ciudadana.
+
+Actividad Didáctica Principal: 
+El Caso del Nudo Mixteco. En equipos, reciben datos simulados (pero realistas) del tráfico en el crucero del Nudo Mixteco a diferentes horas del día. Deben crear un cartelógrafo que incluya: variables identificadas, tabla de datos, gráfica del comportamiento del tráfico y un cálculo de la razón de cambio en "la hora pico" para recomendar a qué hora el ayuntamiento debería desviar rutas pesadas.
+
+Definiciones:
+- Modelo Matemático:
+  * Lenguaje Formal: Descripción matemática de un sistema o fenómeno del mundo real, utilizada para explicarlo y predecir su comportamiento.
+  * Lenguaje Cotidiano: Una "fotografía con números" de algo que pasa en la vida real, usada para adivinar el futuro.
+- Toma de Decisiones:
+  * Lenguaje Formal: Proceso mediante el cual se realiza una elección entre alternativas o formas de resolver diferentes situaciones basándose en análisis cuantitativo.
+  * Lenguaje Cotidiano: Elegir la mejor opción sin tener que adivinar, porque los números y las gráficas te respaldan.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Usar un modelo matemático para decidir cuántos camiones extra mandar a la ruta Alianza-La Joya a las 7:00 AM.
+2. Graficar la venta de nieves de Chepo en la Alameda para prever cuánto hielo comprar en pleno agosto.
+3. Predecir a qué hora exacta bajarán las compuertas de la presa en base a la razón de cambio del flujo de agua.
+
+Actividades de Refuerzo:
+1. Exposición Ejecutiva: Cada equipo tiene 3 minutos para presentar su gráfica del Nudo Mixteco y su propuesta a los "Alcaldes" (el resto del grupo).
+2. Co-evaluación Positiva: Los estudiantes utilizan notas adhesivas para dejar retroalimentación sobre qué les gustó del análisis gráfico de otros equipos.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Un modelo matemático sirve en la vida real para:
+   - (Texto Neón Rosa) Aprobar exámenes y olvidarlo todo.
+   - (Texto Neón Lima) Explicar y predecir lo que pasará. (CORRECTA)
+   - (Texto Neón Cian) Dibujar planos de casas gigantes.
+   - (Texto Neón Naranja) Confundir a los que no estudian.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En el reto del tráfico, la hora del día funcionó como:
+   - (Texto Neón Rosa) La variable independiente (X). (CORRECTA)
+   - (Texto Neón Lima) La variable dependiente o la (Y).
+   - (Texto Neón Cian) Un error de cálculo en la tabla.
+   - (Texto Neón Naranja) Una constante que jamás cambia.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si la gráfica del tráfico sube casi verticalmente, la razón de cambio es:
+   - (Texto Neón Rosa) Muy lenta y tranquila para todos.
+   - (Texto Neón Lima) Cero, los carros no se mueven ya.
+   - (Texto Neón Cian) Muy alta, hay un caos de vehículos. (CORRECTA)
+   - (Texto Neón Naranja) Negativa, la calle está muy vacía.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué concepto une a Zenón, Arquímedes y el tráfico actual?
+   - (Texto Neón Rosa) La geometría de los triángulos.
+   - (Texto Neón Lima) El análisis constante del cambio. (CORRECTA)
+   - (Texto Neón Cian) La teoría de cuerdas complejas.
+   - (Texto Neón Naranja) El cálculo de sumas con punto.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Tomar decisiones informadas gracias a las tablas y gráficas te da:
+   - (Texto Neón Rosa) Dolor de cabeza y mucha tensión.
+   - (Texto Neón Lima) Ventaja en tu vida profesional. (CORRECTA)
+   - (Texto Neón Cian) Un certificado automático hoy.
+   - (Texto Neón Naranja) Más seguidores en tus redes.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Sintetizar lo aprendido en el Bloque 1 significa que ahora puedes:
+   - (Texto Neón Rosa) Integrar funciones trigonométricas.
+   - (Texto Neón Lima) Derivar polinomios de quinto grado.
+   - (Texto Neón Cian) Identificar, tabular y graficar el cambio. (CORRECTA)
+   - (Texto Neón Naranja) Calcular la masa del sol entero.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¡Felicidades! Has completado el Bloque 1. ¿Cómo se llama nuestra materia?
+   - (Texto Neón Rosa) Álgebra Superior y Trigonometría.
+   - (Texto Neón Lima) Pensamiento Variacional. (CORRECTA)
+   - (Texto Neón Cian) Geometría del Espacio Dinámico.
+   - (Texto Neón Naranja) Cálculo Diferencial Extremo Dos.
+
+&copy; JMGV 2026 MasterClass 10 Pensamiento Variacional PTEL. todos los derechos reservados.

@@ -1,0 +1,813 @@
+================================================================================
+BLOQUE 3: EL LÍMITE DE LA INTUICIÓN (Sesiones 21 - 30)
+Enfoque: Aproximación sucesiva, noción intuitiva de límite, asíntotas y continuidad.
+================================================================================
+
+SESIÓN 21: Acercándose al Borde (Noción Intuitiva de Límite)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá la noción intuitiva del límite de una función, analizando cómo se comporta la variable dependiente (Y) a medida que la variable independiente (X) se acerca a un valor específico sin llegar a tocarlo.
+
+Enfoque Psico-Andragógico: 
+Exploración segura de los límites. Los adolescentes a esta edad están constantemente probando los límites de las reglas (hasta dónde pueden llegar sin romperlas). Usamos esa curiosidad natural para mostrarles que la matemática también estudia el "borde" de las cosas, reduciendo la ansiedad frente a lo desconocido.
+
+Actividad Didáctica Principal: 
+"El Zoom Infinito". En equipos, usan GeoGebra en sus celulares para graficar una curva. Se les pide hacer zoom in a un punto específico de la curva (ej. x=2) tantas veces como puedan. Anotan en una tabla cómo los valores de Y se estabilizan acercándose a un número, aunque jamás logren un pixel de "perfección absoluta".
+
+Definiciones:
+- Límite de una Función:
+  * Lenguaje Formal: Valor L al que se aproxima la función f(x) a medida que la variable independiente 'x' se aproxima a un valor 'a'.
+  * Lenguaje Cotidiano: El lugar hacia donde parece que va el camino. Es adivinar el destino final observando la trayectoria, sin necesidad de llegar ahí.
+- Aproximación Numérica:
+  * Lenguaje Formal: Evaluación de f(x) utilizando secuencias de valores x que tienden a 'a', por valores menores y mayores.
+  * Lenguaje Cotidiano: Probar con números cada vez más pegaditos (1.9, 1.99, 1.999) para ver hacia dónde apunta el resultado.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Frenar en el semáforo del Blvd. Independencia: Tu velocidad tiende a cero a medida que la distancia a la línea peatonal tiende a cero.
+2. El enfriamiento de un café de la Morelos: La temperatura baja acercándose al límite de la temperatura ambiente (jamás se hará hielo por sí solo).
+3. Llenar un garrafón en una purificadora: El nivel del agua se acerca al límite de capacidad del plástico sin derramarse.
+
+Actividades de Refuerzo:
+1. Calculadora Humana Extrema: El profesor dice x=3. Los alumnos deben dictar valores acercándose: "2.9", "2.99", "2.999", y por el otro lado: "3.1", "3.01".
+2. Tiro al Blanco Visual: Proyectar una diana incompleta y pedir a los alumnos que adivinen dónde iba a caer el dardo basándose solo en su trayectoria visual.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En matemáticas, calcular un "límite" significa principalmente:
+   - (Texto Neón Rosa) Ver hacia dónde tiende una curva. (CORRECTA)
+   - (Texto Neón Lima) Encontrar un error de la máquina.
+   - (Texto Neón Cian) Sumar muchos números diferentes.
+   - (Texto Neón Naranja) Medir el centro de un triángulo.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Si probamos con x = 1.9, 1.99, 1.999, nos acercamos al límite de:
+   - (Texto Neón Rosa) El número cero en el eje central.
+   - (Texto Neón Lima) El número dos de manera precisa. (CORRECTA)
+   - (Texto Neón Cian) El número uno como punto final.
+   - (Texto Neón Naranja) Un número tres completamente.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En la vida diaria, el concepto de límite nos sirve mucho para:
+   - (Texto Neón Rosa) Saber qué pasa antes de chocar. (CORRECTA)
+   - (Texto Neón Lima) Ignorar las leyes de la física.
+   - (Texto Neón Cian) Aprender a sumar con decimales.
+   - (Texto Neón Naranja) Volar en naves hacia el espacio.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Para evaluar intuitivamente un límite, no necesitas llegar al punto, solo:
+   - (Texto Neón Rosa) Borrar toda la gráfica del papel.
+   - (Texto Neón Lima) Observar bien su comportamiento. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar los números del eje.
+   - (Texto Neón Naranja) Trazar círculos muy perfectos.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si un café caliente lo dejas en una mesa en Torreón, su temperatura:
+   - (Texto Neón Rosa) Se acerca al límite del ambiente. (CORRECTA)
+   - (Texto Neón Lima) Sube al infinito sin detenerse.
+   - (Texto Neón Cian) Cae bajo cero casi de inmediato.
+   - (Texto Neón Naranja) Se queda hirviendo eternamente.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Hacer una tabla de aproximación significa sustituir valores en:
+   - (Texto Neón Rosa) Constantes que no cambian nunca.
+   - (Texto Neón Lima) Posiciones cada vez más lejanas.
+   - (Texto Neón Cian) Posiciones cada vez más cercanas. (CORRECTA)
+   - (Texto Neón Naranja) Ángulos de noventa grados hoy.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. El pensamiento de límite nace porque a veces en las matemáticas:
+   - (Texto Neón Rosa) Evaluar el punto exacto da error. (CORRECTA)
+   - (Texto Neón Lima) Evaluar el punto exacto es fácil.
+   - (Texto Neón Cian) Los números dejan de ser válidos.
+   - (Texto Neón Naranja) Las calculadoras ya no prenden.
+
+&copy; JMGV 2026 MasterClass 21 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 22: Por la Izquierda y por la Derecha (Límites Laterales)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno comprenderá que para que un límite exista, las aproximaciones desde la izquierda y desde la derecha deben converger al mismo valor.
+
+Enfoque Psico-Andragógico: 
+Empatía y toma de perspectiva. Se les enseña que un mismo evento puede tener dos trayectorias distintas. Si dos personas no llegan a la misma conclusión (no convergen), no hay acuerdo (no hay límite). Se traslada un principio de madurez social a una ley matemática rigurosa.
+
+Actividad Didáctica Principal: 
+El Encuentro a Ciegas. Se marca una línea recta en el piso del salón. Dos alumnos con los ojos vendados caminan desde extremos opuestos guiados por la función que les dictan sus equipos. Si logran tocarse las manos en el punto X, el límite existe. Si uno queda arriba de un escalón y otro abajo, hay un salto y el límite no existe.
+
+Definiciones:
+- Límite por la Izquierda (X → a⁻):
+  * Lenguaje Formal: El valor al que tiende la función cuando nos acercamos a 'a' usando valores menores que 'a'.
+  * Lenguaje Cotidiano: Acercarse al punto crítico caminando desde los números negativos o más pequeños.
+- Límite por la Derecha (X → a⁺):
+  * Lenguaje Formal: El valor al que tiende la función cuando nos acercamos a 'a' usando valores mayores que 'a'.
+  * Lenguaje Cotidiano: Acercarse al punto crítico caminando en reversa desde los números más grandes.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. El precio del estacionamiento: Al minuto 59 pagas $15 (izquierda), al minuto 61 pagas $30 (derecha). En el minuto 60 exacto hay un salto, no hay acuerdo.
+2. Encuentro en la Plaza Mayor: Un amigo viene de Gómez Palacio (izquierda), otro de Matamoros (derecha). Si llegan a la misma banca, el límite existe.
+3. Cambios de Estado Químico: A los 99.9°C el agua es líquida, a los 100.1°C es vapor. Acercarse a 100°C tiene condiciones distintas por cada lado.
+
+Actividades de Refuerzo:
+1. Lectura de Saltos: Proyectar gráficas de funciones escalonadas (como las tarifas del recibo de luz). Los alumnos votan con pulgares arriba o abajo si el límite existe en los cortes de tarifa.
+2. Tabulación Dual: Llenar una tabla dividida en dos colores. Azul para números menores (1.9, 1.99) y Rojo para mayores (2.1, 2.01), comparando resultados.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Para que un límite exista matemáticamente, es un requisito que:
+   - (Texto Neón Rosa) Ambos lados lleguen al mismo fin. (CORRECTA)
+   - (Texto Neón Lima) El lado derecho sea mucho mayor.
+   - (Texto Neón Cian) El lado izquierdo toque el origen.
+   - (Texto Neón Naranja) No existan números con decimales.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El símbolo (X → 2⁻) con el signo menos arriba significa acercarse:
+   - (Texto Neón Rosa) Desde los números más gigantes.
+   - (Texto Neón Lima) Desde los números más pequeños. (CORRECTA)
+   - (Texto Neón Cian) Desde el cero hacia el infinito.
+   - (Texto Neón Naranja) Desde la derecha a la izquierda.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si el límite izquierdo da 5 y el límite derecho da 10, entonces:
+   - (Texto Neón Rosa) El límite general vale el doble.
+   - (Texto Neón Lima) El límite general es quince hoy.
+   - (Texto Neón Cian) El límite general no existe aquí. (CORRECTA)
+   - (Texto Neón Naranja) El límite general es el promedio.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Visualmente, cuando un límite no existe en una gráfica, observamos:
+   - (Texto Neón Rosa) Un salto o ruptura en la línea. (CORRECTA)
+   - (Texto Neón Lima) Una curva muy suave y continua.
+   - (Texto Neón Cian) Un círculo cerrado y sombreado.
+   - (Texto Neón Naranja) Una línea plana y aburridísima.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si un amigo viene de Lerdo y tú de Matamoros a un punto exacto:
+   - (Texto Neón Rosa) Es un ejemplo de límites laterales. (CORRECTA)
+   - (Texto Neón Lima) Es un ejemplo de resta fraccional.
+   - (Texto Neón Cian) Es un error de la función actual.
+   - (Texto Neón Naranja) Es un límite al infinito lejano.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Las tarifas por hora en un estacionamiento son un ejemplo claro de:
+   - (Texto Neón Rosa) Funciones cuadráticas simétricas.
+   - (Texto Neón Lima) Funciones de saltos repentinos. (CORRECTA)
+   - (Texto Neón Cian) Funciones totalmente continuas.
+   - (Texto Neón Naranja) Funciones que nadie comprende.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Evaluar desde dos perspectivas (izquierda y derecha) te ayuda a:
+   - (Texto Neón Rosa) Dibujar gráficas muy coloridas.
+   - (Texto Neón Lima) Tener la certeza de la verdad. (CORRECTA)
+   - (Texto Neón Cian) Confundir a tus amigos de clase.
+   - (Texto Neón Naranja) Gastar tinta de forma eficiente.
+
+&copy; JMGV 2026 MasterClass 22 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 23: Calculando el Futuro (Propiedades de los Límites)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno aplicará las leyes analíticas de los límites (suma, resta, producto y potencia) para calcularlos de forma directa sin necesidad de tabular o graficar.
+
+Enfoque Psico-Andragógico: 
+Eficiencia y recompensa (El "Hack" del sistema). Después de hacerles trabajar duro tabulando decimales, se les presentan las propiedades analíticas como los "trucos" o "atajos" profesionales. Esto premia su esfuerzo previo y les muestra que el álgebra avanzada existe para facilitar el trabajo, no para complicarlo.
+
+Actividad Didáctica Principal: 
+El Rompecabezas Analítico. En lugar de darles funciones largas, se les dan "piezas": Lim f(x) = 4 y Lim g(x) = 2. A modo de competencia, deben calcular mentalmente Lim [f(x) + g(x)^2], sustituyendo piezas como si fueran bloques de Lego.
+
+Definiciones:
+- Propiedad de Sustitución Directa:
+  * Lenguaje Formal: Si f(x) es una función polinomial o racional y 'a' está en su dominio, entonces el límite de f(x) cuando x tiende a 'a' es simplemente f(a).
+  * Lenguaje Cotidiano: El atajo mágico: Si al cambiar la X por el número no te marca error la calculadora, esa es tu respuesta final.
+- Leyes de los Límites:
+  * Lenguaje Formal: Teoremas algebraicos que permiten desglosar el límite de funciones compuestas en operaciones aritméticas de límites simples.
+  * Lenguaje Cotidiano: Las reglas del juego que te permiten separar una ecuación monstruosa en partes chiquitas y fáciles de sumar o multiplicar.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Sustitución Directa: Si sabes que la tarifa del taxi sube $5 por km (función polinomial), para el km 10 simplemente multiplicas, no necesitas una gráfica.
+2. Suma de Límites: Proyectar el gasto de luz de tu casa más el gasto del agua; el límite de la suma es la suma de ambos límites de gastos individuales.
+3. Límite de una Constante: El costo del pasaje de estudiante ($9). Si "x" son los días del mes, el límite cuando x tiende a 30 sigue siendo $9 (no cambia).
+
+Actividades de Refuerzo:
+1. La Carrera del Reemplazo: Carreras en el pizarrón resolviendo límites de polinomios sencillos usando sustitución directa lo más rápido posible.
+2. Caza de Constantes: Identificar en una lista de problemas cuáles son límites de constantes (donde la respuesta es el mismo número inicial) para evitar cálculos innecesarios.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La regla de oro "Sustitución Directa" significa que primero debes:
+   - (Texto Neón Rosa) Graficar la ecuación con detalle.
+   - (Texto Neón Lima) Cambiar la equis por el número. (CORRECTA)
+   - (Texto Neón Cian) Multiplicar por cero totalmente.
+   - (Texto Neón Naranja) Tabular números con decimales.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El límite de una constante (como el precio fijo de un pasaje) es:
+   - (Texto Neón Rosa) Siempre cero por ser constante.
+   - (Texto Neón Lima) La misma constante sin cambio. (CORRECTA)
+   - (Texto Neón Cian) Un valor que tiende a infinito.
+   - (Texto Neón Naranja) Un error de la máquina local.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si el límite de f es 10 y el de g es 5, el límite de (f + g) es:
+   - (Texto Neón Rosa) Exactamente quince en total. (CORRECTA)
+   - (Texto Neón Lima) Cincuenta por ser un producto.
+   - (Texto Neón Cian) Dos porque se deben dividir.
+   - (Texto Neón Naranja) Menos cinco por la diferencia.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Las propiedades de los límites funcionan como:
+   - (Texto Neón Rosa) Muros que bloquean el cálculo.
+   - (Texto Neón Lima) Atajos rápidos del álgebra. (CORRECTA)
+   - (Texto Neón Cian) Problemas sin solución real.
+   - (Texto Neón Naranja) Teorías exclusivas de genios.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si evalúas el límite de x² cuando x tiende a 3, el resultado es:
+   - (Texto Neón Rosa) Seis, sumando ambos valores.
+   - (Texto Neón Lima) Nueve, aplicando la potencia. (CORRECTA)
+   - (Texto Neón Cian) Cero, porque es una variable.
+   - (Texto Neón Naranja) Tres, porque la equis lo dice.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Separar un límite largo en varias partes pequeñas es útil para:
+   - (Texto Neón Rosa) Confundir al maestro de clase.
+   - (Texto Neón Lima) Resolverlo mentalmente fácil. (CORRECTA)
+   - (Texto Neón Cian) Llenar más hojas del cuaderno.
+   - (Texto Neón Naranja) Equivocarse más rápidamente.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¿Qué pasa si al hacer sustitución directa te da una división por cero?
+   - (Texto Neón Rosa) Hemos encontrado un fantasma. (CORRECTA)
+   - (Texto Neón Lima) Terminamos y sacamos un diez.
+   - (Texto Neón Cian) El resultado final siempre es 0.
+   - (Texto Neón Naranja) Se ignora y se pone un cinco.
+
+&copy; JMGV 2026 MasterClass 23 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 24: El Fantasma Matemático (Indeterminaciones 0/0)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno identificará y resolverá las formas indeterminadas del tipo 0/0 mediante técnicas de factorización algebraica y racionalización.
+
+Enfoque Psico-Andragógico: 
+Resiliencia y mentalidad científica. Cuando la calculadora dice "Error", el adolescente promedio se rinde. Aquí aprenden que en matemáticas, "0/0" no es un callejón sin salida, es un muro falso (una ilusión). Fomentamos la persistencia: si la puerta principal está bloqueada, usamos álgebra para encontrar la puerta secreta.
+
+Actividad Didáctica Principal: 
+El Escape Room Algebraico (Desactivando el 0/0). Se proyecta un temporizador. Los equipos reciben un "candado numérico" (un límite que da 0/0). Para desactivarlo y "salvar a Torreón", deben usar binomios conjugados o factorización por factor común, eliminar los factores causantes del cero y re-evaluar para encontrar el código de desactivación real.
+
+Definiciones:
+- Indeterminación 0/0:
+  * Lenguaje Formal: Expresión matemática sin significado definido que resulta de evaluar un límite por sustitución directa, requiriendo un análisis algebraico adicional.
+  * Lenguaje Cotidiano: Un "fantasma numérico". La calculadora se asusta y se rinde, pero en realidad hay un número real escondido detrás de una máscara algebraica.
+- Factorización para Límites:
+  * Lenguaje Formal: Descomposición de un polinomio en el producto de otros de menor grado para cancelar términos homólogos en el numerador y denominador.
+  * Lenguaje Cotidiano: Romper una ecuación grande en piezas de Lego más chicas para tachar las piezas repetidas que nos están estorbando (el cero).
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Velocidad en el instante cero: Si intentas dividir Distancia Cero entre Tiempo Cero al arrancar en un semáforo, necesitas cálculo para hallar la aceleración oculta.
+2. Error de GPS: A veces el celular pierde conexión en el Nudo Mixteco y marca "0/0 de señal", el sistema recalcula (factoriza) para encontrar tu ruta real.
+3. Máscaras engañosas: Un billete falso de 500. A simple vista parece válido, pero si lo pasas por la luz UV (álgebra), descubres su verdadera identidad.
+
+Actividades de Refuerzo:
+1. Batalla de Binomios: Repaso veloz y ruidoso de cómo factorizar diferencias de cuadrados, ej. (x² - 9) = (x-3)(x+3), paso previo vital para la clase.
+2. Tacha el Cero: En hojas de trabajo gigantes, los alumnos identifican visualmente el (x-a) arriba y abajo y lo tachan con un plumón rojo grueso de forma terapéutica.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Cuando al sustituir un límite obtienes 0/0, significa que:
+   - (Texto Neón Rosa) El problema no tiene solución.
+   - (Texto Neón Lima) Hay un número real escondido. (CORRECTA)
+   - (Texto Neón Cian) La respuesta correcta es cero.
+   - (Texto Neón Naranja) Debes multiplicar por diez.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. La herramienta matemática principal para "desenmascarar" el 0/0 es:
+   - (Texto Neón Rosa) Borrar toda la hoja y llorar.
+   - (Texto Neón Lima) Factorizar y cancelar piezas. (CORRECTA)
+   - (Texto Neón Cian) Graficar con una regla larga.
+   - (Texto Neón Naranja) Sumar los ceros con cuidado.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si factorizas (x² - 16), las dos piezas de Lego resultantes son:
+   - (Texto Neón Rosa) Específicamente (x-4) y (x-4).
+   - (Texto Neón Lima) Específicamente (x-4) y (x+4). (CORRECTA)
+   - (Texto Neón Cian) Específicamente (x-8) y (x-2).
+   - (Texto Neón Naranja) Específicamente (x-16) solo.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En el límite, ¿qué haces con los términos idénticos arriba y abajo?
+   - (Texto Neón Rosa) Los sumas para hacerlos grandes.
+   - (Texto Neón Lima) Los tachas porque equivalen a 1. (CORRECTA)
+   - (Texto Neón Cian) Los dejas ahí por si acaso hoy.
+   - (Texto Neón Naranja) Los conviertes en números pi.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si un problema de 0/0 tiene una raíz cuadrada, tu mejor arma es:
+   - (Texto Neón Rosa) Cortar la hoja con una tijera.
+   - (Texto Neón Lima) Racionalizar multiplicando. (CORRECTA)
+   - (Texto Neón Cian) Ignorar la raíz completamente.
+   - (Texto Neón Naranja) Factorizar con trinomio puro.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. La indeterminación 0/0 nos enseña en la vida práctica que:
+   - (Texto Neón Rosa) Los errores bloquean tu camino.
+   - (Texto Neón Lima) Hay que buscar rutas alternas. (CORRECTA)
+   - (Texto Neón Cian) Las matemáticas son inútiles.
+   - (Texto Neón Naranja) Todo se resuelve a la primera.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Después de tachar el término problemático en la ecuación, tú debes:
+   - (Texto Neón Rosa) Volver a evaluar el límite ya. (CORRECTA)
+   - (Texto Neón Lima) Entregar el examen terminado.
+   - (Texto Neón Cian) Multiplicar por cero el final.
+   - (Texto Neón Naranja) Escribir infinito en la hoja.
+
+&copy; JMGV 2026 MasterClass 24 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 25: Mirando al Horizonte (Límites al Infinito)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno analizará el comportamiento de funciones cuando la variable independiente crece o decrece sin límite (tiende a ±∞), comprendiendo la estabilización a largo plazo.
+
+Enfoque Psico-Andragógico: 
+Visión a largo plazo y consecuencias. El cerebro adolescente vive en la inmediatez (el "ahora"). Evaluar "x tendiendo a infinito" es un ejercicio de proyección. Les mostramos que, a largo plazo, el "ruido" inicial no importa, lo único que define el destino de un modelo (o de una vida) es la variable con mayor "grado" (peso o constancia).
+
+Actividad Didáctica Principal: 
+El Simulador de "Largo Plazo". Se plantea un modelo ecológico de la presa Francisco Zarco o de una población de coyotes en el desierto. ¿Qué pasará en 10 años? ¿Y en 1,000? ¿Y en 1,000,000? Calculan f(10), f(100) y f(10,000). Descubren visualmente que el resultado se "estanca" en un número fijo (capacidad de carga del sistema).
+
+Definiciones:
+- Límite al Infinito:
+  * Lenguaje Formal: Valor al que se aproxima f(x) cuando 'x' toma valores arbitrariamente grandes (positivos o negativos).
+  * Lenguaje Cotidiano: ¿Qué pasa al final del tiempo? Mirar hacia adelante miles de años para ver en qué número se estabilizan las cosas.
+- Estabilización:
+  * Lenguaje Formal: Tendencia asintótica de un sistema dinámico hacia un estado de equilibrio estacionario.
+  * Lenguaje Cotidiano: Cuando las cosas dejan de subir y bajar locamente y encuentran su nivel normal y tranquilo para siempre.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Enfriamiento térmico: Si dejas un refresco helado en la Plaza Mayor, a "infinito" tiempo no seguirá subiendo de calor para siempre, se estabilizará a los 38°C de la ciudad.
+2. Contaminación por tolvaneras: El polvo suspendido cae poco a poco. A infinito tiempo, todo el polvo llega al piso estabilizándose.
+3. Tráfico del Periférico: A largo plazo, sin nuevas calles, la velocidad de flujo vehicular tenderá a estancarse en una velocidad mínima de saturación.
+
+Actividades de Refuerzo:
+1. El Truco del Alcalde: Se les enseña el truco algebraico de dividir todos los términos entre la "X de mayor grado". Hacen competencias para ver quién "limpia" la ecuación más rápido.
+2. Discusión Abierta: "¿Un billete de 100 pesos importa si tienes un trillón?". Analogía para explicar por qué se ignoran los términos de menor grado en límites al infinito.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Cuando x tiende al infinito, estamos observando el fenómeno:
+   - (Texto Neón Rosa) Exactamente en el punto inicial.
+   - (Texto Neón Lima) A muy largo plazo en el tiempo. (CORRECTA)
+   - (Texto Neón Cian) En un instante de cero segundos.
+   - (Texto Neón Naranja) Con números negativos oscuros.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. ¿Qué pasa si divides un número cualquiera entre infinito (ej. 5 / ∞)?
+   - (Texto Neón Rosa) Da un número inmensamente alto.
+   - (Texto Neón Lima) El resultado es igual a cero. (CORRECTA)
+   - (Texto Neón Cian) El resultado es cinco también.
+   - (Texto Neón Naranja) Se crea un hoyo negro total.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En límites al infinito de polinomios, el término que manda y domina es:
+   - (Texto Neón Rosa) El que tiene el grado mayor. (CORRECTA)
+   - (Texto Neón Lima) El que no tiene letras equis.
+   - (Texto Neón Cian) El que está en el denominador.
+   - (Texto Neón Naranja) El primer número a la vista.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. En ecología local, calcular un límite al infinito nos dice:
+   - (Texto Neón Rosa) Si lloverá mañana por la tarde.
+   - (Texto Neón Lima) La capacidad tope de un área. (CORRECTA)
+   - (Texto Neón Cian) Cuántos animales nacen al día.
+   - (Texto Neón Naranja) El nombre de las especies ahí.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. El truco algebraico maestro para estos límites es dividir todo entre:
+   - (Texto Neón Rosa) El número diez y sacar la raíz.
+   - (Texto Neón Lima) La variable equis con más poder. (CORRECTA)
+   - (Texto Neón Cian) El denominador completo hoy.
+   - (Texto Neón Naranja) El término independiente final.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si tienes x³ y x² peleando cuando x es 1,000,000, ¿quién gana?
+   - (Texto Neón Rosa) Empatan porque son variables.
+   - (Texto Neón Lima) Gana x³ por abrumadora fuerza. (CORRECTA)
+   - (Texto Neón Cian) Gana x² porque pesa mucho más.
+   - (Texto Neón Naranja) Ninguno, da indeterminación.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender la estabilización te permite planear proyectos que:
+   - (Texto Neón Rosa) Cuesten mucho dinero al inicio.
+   - (Texto Neón Lima) Sean viables a futuro siempre. (CORRECTA)
+   - (Texto Neón Cian) Fracasen el primer año rápido.
+   - (Texto Neón Naranja) Tengan diseños geométricos.
+
+&copy; JMGV 2026 MasterClass 25 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 26: Las Barreras Invisibles (Asíntotas Horizontales y Verticales)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno identificará y calculará las ecuaciones de las asíntotas horizontales y verticales en funciones racionales, comprendiendo su significado como "límites físicos" del sistema.
+
+Enfoque Psico-Andragógico: 
+Reconocimiento de techos de cristal y límites sistémicos. Un adolescente cree que todo puede crecer sin límites. Le introducimos el concepto de "Asíntota" como un muro invisible. Fomentamos la madurez analítica: todo sistema (tu cuerpo, la economía, la ciudad) tiene barreras estructurales.
+
+Actividad Didáctica Principal: 
+Los Campos de Fuerza Cartesianos. Se entregan gráficas grandes en papel. Se les pide que con un marcatextos amarillo tracen líneas rectas en las zonas "donde la curva se estrella pero no puede pasar". Calculan algebraicamente esas barreras (denominador = 0 para verticales, límite al infinito para horizontales).
+
+Definiciones:
+- Asíntota Vertical:
+  * Lenguaje Formal: Recta x=c donde el límite de f(x) tiende a ±∞ cuando x se acerca a 'c'. Representa una discontinuidad infinita.
+  * Lenguaje Cotidiano: Un "Muro eléctrico" vertical en la gráfica. Si la curva lo toca, explota hacia arriba o hacia abajo.
+- Asíntota Horizontal:
+  * Lenguaje Formal: Recta y=L que representa el límite de la función f(x) cuando x tiende a ±∞.
+  * Lenguaje Cotidiano: Un "Techo o Piso de cristal" horizontal. La curva viaja paralela a él a lo largo de los años pero jamás lo cruza.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Asíntota Vertical: La cantidad de autos cruzando el centro histórico. A medida que el tráfico aumenta (x), el tiempo de viaje se dispara al infinito (te quedas atorado).
+2. Asíntota Horizontal: La efectividad del minisplit. Por más potencia que gastes, la temperatura de tu cuarto jamás bajará de 16°C (piso de cristal).
+3. Asíntota Horizontal: Eficiencia de estudio. Estudiar 5 horas es bueno, pero estudiar 24 horas no saca una nota de "200/100", hay un techo máximo humano.
+
+Actividades de Refuerzo:
+1. El Detector de Asíntotas: Dada una hoja con 5 funciones racionales, subrayar rápidamente los denominadores para hallar el Muro Vertical en menos de 2 minutos.
+2. Modelado de GeoGebra: Graficar la función racional del crecimiento bacteriano, observando en sus pantallas cómo la curva es aplastada por la asíntota horizontal (falta de alimento).
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Una asíntota en una gráfica matemática funciona como una especie de:
+   - (Texto Neón Rosa) Camino directo hacia la meta.
+   - (Texto Neón Lima) Muro invisible o campo de fuerza. (CORRECTA)
+   - (Texto Neón Cian) Punto central de un círculo.
+   - (Texto Neón Naranja) Parábola que se abre arriba.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Para calcular algebraicamente la asíntota vertical, igualamos a cero:
+   - (Texto Neón Rosa) El número que multiplica a equis.
+   - (Texto Neón Lima) El denominador de la función. (CORRECTA)
+   - (Texto Neón Cian) El numerador de la función ya.
+   - (Texto Neón Naranja) El resultado final del papel.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Las asíntotas horizontales en la vida real representan comúnmente:
+   - (Texto Neón Rosa) El punto de quiebre absoluto.
+   - (Texto Neón Lima) El límite físico o capacidad. (CORRECTA)
+   - (Texto Neón Cian) El error de la computadora.
+   - (Texto Neón Naranja) Un inicio completamente nuevo.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. ¿Qué concepto matemático usamos para hallar la asíntota horizontal?
+   - (Texto Neón Rosa) Teorema de Pitágoras clásico.
+   - (Texto Neón Lima) Los límites hacia el infinito. (CORRECTA)
+   - (Texto Neón Cian) Las sumas y restas cruzadas.
+   - (Texto Neón Naranja) El dominio en números reales.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si graficamos el tráfico en Torreón y se vuelve un caos infinito, es:
+   - (Texto Neón Rosa) Una asíntota vertical clara. (CORRECTA)
+   - (Texto Neón Lima) Una asíntota horizontal muy fija.
+   - (Texto Neón Cian) Una variable independiente hoy.
+   - (Texto Neón Naranja) Una pendiente plana y estable.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si la curva de enfriamiento se frena a los 30 grados ambientales, es:
+   - (Texto Neón Rosa) Una barrera vertical letal.
+   - (Texto Neón Lima) Una asíntota horizontal base. (CORRECTA)
+   - (Texto Neón Cian) Una derivada muy acelerada.
+   - (Texto Neón Naranja) Un límite lateral izquierdo.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Entender que los sistemas tienen barreras (asíntotas) te hace un:
+   - (Texto Neón Rosa) Pesimista que ya no hace nada.
+   - (Texto Neón Lima) Pensador y planificador realista. (CORRECTA)
+   - (Texto Neón Cian) Soñador que ignora reglas.
+   - (Texto Neón Naranja) Estudiante de artes ocultas.
+
+&copy; JMGV 2026 MasterClass 26 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 27: Sin Soltar el Lápiz (Continuidad de una Función)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno definirá la continuidad de una función en un punto específico evaluando las tres condiciones matemáticas fundamentales requeridas.
+
+Enfoque Psico-Andragógico: 
+Criterios de validación y rigor analítico. El cerebro adora "romper" sistemas. Les damos el rol de "Auditores de Calidad". Su tarea no es calcular por calcular, es inspeccionar si la matemática (la infraestructura) está rota. Se apela al pensamiento forense.
+
+Actividad Didáctica Principal: 
+El Detector de Fraudes. Se proyectan planos estructurales (gráficas a trozos simulando puentes vehiculares). El "Ingeniero" afirma que el puente es seguro. Los alumnos deben aplicar las "3 Leyes de la Auditoría Continua" para probar que el puente está roto (discontinuo) y evitar una catástrofe virtual.
+
+Definiciones:
+- Función Continua (Noción Intuitiva):
+  * Lenguaje Formal: Una función f(x) es continua en su dominio si su gráfica no presenta interrupciones, saltos o asíntotas.
+  * Lenguaje Cotidiano: Poder dibujar toda la línea de principio a fin sin tener que despegar tu lápiz del papel ni un solo milímetro.
+- Las 3 Condiciones de Continuidad en x=a:
+  * Lenguaje Formal: 1) f(a) está definida. 2) Lim f(x) cuando x->a existe. 3) Lim f(x) = f(a).
+  * Lenguaje Cotidiano: 1) Existe un pilar físico. 2) El camino izquierdo y derecho se alinean. 3) El camino se conecta perfectamente justo en el pilar.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Flujo de Agua (Continuo): El agua viajando por los canales de riego del Río Nazas sin fugas.
+2. Suministro Eléctrico (Discontinuo): Un "apagón" repentino en verano; la gráfica de voltaje cae a cero abruptamente (ruptura).
+3. Rampas Inclusivas (Continuo): Las banquetas de la Calzada Colón que no tienen escalones abruptos, garantizando el flujo continuo de sillas de ruedas.
+
+Actividades de Refuerzo:
+1. Checklist del Auditor: Tarjetas de revisión impresas. El estudiante inspecciona 3 funciones y marca con un sello verde (Aprobado) o rojo (Rechazado) si falla alguna de las 3 condiciones.
+2. Reparando el Puente: Se les da una función discontinua con un "agujero" removible. Ellos deben encontrar el número exacto que "rellene" ese hueco matemáticamente.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. La forma más intuitiva de definir una función continua es que puedes:
+   - (Texto Neón Rosa) Dibujarla sumando puros puntos.
+   - (Texto Neón Lima) Trazarla sin despegar el lápiz. (CORRECTA)
+   - (Texto Neón Cian) Calcularla usando logaritmos.
+   - (Texto Neón Naranja) Borrarla con facilidad manual.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Para que matemáticamente sea continua en un punto, se deben cumplir:
+   - (Texto Neón Rosa) Solo dos condiciones fáciles.
+   - (Texto Neón Lima) Exactamente tres condiciones. (CORRECTA)
+   - (Texto Neón Cian) Cinco reglas trigonométricas.
+   - (Texto Neón Naranja) Un millón de normas largas.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. La condición 1 para continuidad dice que el punto f(a) debe:
+   - (Texto Neón Rosa) Ser igual a cero al cuadrado.
+   - (Texto Neón Lima) Existir físicamente en plano. (CORRECTA)
+   - (Texto Neón Cian) Ser un número muy negativo.
+   - (Texto Neón Naranja) Borrarse de la gráfica total.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La condición 2 exige que el límite (los caminos de ambos lados):
+   - (Texto Neón Rosa) Se alejen uno del otro pronto.
+   - (Texto Neón Lima) Converjan y exista sin duda. (CORRECTA)
+   - (Texto Neón Cian) Salten hacia el eje principal.
+   - (Texto Neón Naranja) Se ignoren completamente.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si los caminos se alinean, pero hay un "bache" justo en el centro:
+   - (Texto Neón Rosa) La función es continua aún.
+   - (Texto Neón Lima) Falla la condición número tres. (CORRECTA)
+   - (Texto Neón Cian) Falla la regla del exponente.
+   - (Texto Neón Naranja) Es un límite hacia el infinito.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. En infraestructura urbana de Torreón, la continuidad es vital para:
+   - (Texto Neón Rosa) Decorar las paredes del puente.
+   - (Texto Neón Lima) Evitar accidentes vehiculares. (CORRECTA)
+   - (Texto Neón Cian) Pintar las rayas peatonales.
+   - (Texto Neón Naranja) Cobrar impuestos más caros.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Un apagón eléctrico en la ciudad se grafica matemáticamente como:
+   - (Texto Neón Rosa) Una onda sinusoidal perfecta.
+   - (Texto Neón Lima) Una discontinuidad de salto. (CORRECTA)
+   - (Texto Neón Cian) Una recta horizontal plana.
+   - (Texto Neón Naranja) Un límite lateral positivo.
+
+&copy; JMGV 2026 MasterClass 27 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 28: Construyendo Puentes (Funciones Definidas a Trozos)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno modelará fenómenos que cambian de regla usando funciones a trozos, determinando los valores necesarios para hacer que el sistema sea continuo.
+
+Enfoque Psico-Andragógico: 
+Gestión del diseño y síntesis. Los adolescentes sienten que la vida cambia bruscamente. Las "funciones a trozos" modelan reglas que cambian según la situación (ej. tarifa de menores vs adultos). Empoderamos al estudiante pidiéndole que actúe como "Diseñador" que une diferentes realidades (trozos) con elegancia para que nadie "se tropiece".
+
+Actividad Didáctica Principal: 
+Ingeniería de Costos. El SIMAS (sistema de agua) quiere implementar una nueva tarifa "justa". Tramo 1: $10 por litro si gastas menos de 50L. Tramo 2: Ecuación con variable oculta "k" si gastas más. Los alumnos deben calcular el valor de "k" forzando la continuidad de la función, asegurando que el recibo no dé un salto ilógico e injusto.
+
+Definiciones:
+- Función a Trozos (o seccionada):
+  * Lenguaje Formal: Función cuya definición cambia dependiendo del subintervalo del dominio en el que se encuentre la variable independiente.
+  * Lenguaje Cotidiano: Una máquina que usa reglas diferentes dependiendo de qué le des de comer. ("Si es menos de 10, haz esto. Si es más, haz lo otro").
+- Empalme (Forzar Continuidad):
+  * Lenguaje Formal: Proceso de igualar los límites laterales de dos ramas de una función a trozos para garantizar que no existan discontinuidades de salto.
+  * Lenguaje Cotidiano: Ajustar las tuercas matemáticas para que el final de la primera regla choque perfectamente con el inicio de la segunda regla.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Tarifas de Taxi: Cobro fijo hasta los 2km (Trozo 1), cobro por metro después de los 2km (Trozo 2).
+2. Tramos de Velocidad: Límite de 40km/h dentro de colonia Viñedos (Trozo 1), y límite de 80km/h al salir al Periférico (Trozo 2).
+3. Impuestos: El pago del ISR a Hacienda depende de diferentes "escalones" según el sueldo mensual del trabajador lagunero.
+
+Actividades de Refuerzo:
+1. Diseñadores Gráficos: Usar colores distintos para graficar en papel cada trozo de la función según el dominio, asegurándose visualmente de que se toquen.
+2. Encuentra la 'k': Competición rápida de igualación de límites. "Trozo 1 = Trozo 2". Despejan algebraicamente una incógnita para forzar el puente perfecto.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. Una función a trozos se caracteriza en la vida real porque:
+   - (Texto Neón Rosa) Siempre usa multiplicaciones.
+   - (Texto Neón Lima) Cambia de regla según el caso. (CORRECTA)
+   - (Texto Neón Cian) Da un resultado de cero siempre.
+   - (Texto Neón Naranja) Funciona solo con decimales.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. Las tarifas de cobro escalonadas de CFE son un ejemplo perfecto de:
+   - (Texto Neón Rosa) Funciones totalmente lineales.
+   - (Texto Neón Lima) Funciones definidas a trozos. (CORRECTA)
+   - (Texto Neón Cian) Funciones trigonométricas puras.
+   - (Texto Neón Naranja) Funciones constantes únicas.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Para asegurar que la gráfica a trozos no se "rompa", debes igualar:
+   - (Texto Neón Rosa) Todos los números al gran cero.
+   - (Texto Neón Lima) Los límites de ambas partes. (CORRECTA)
+   - (Texto Neón Cian) El exponente de cada variable.
+   - (Texto Neón Naranja) El dominio general del eje Y.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Forzar matemáticamente la continuidad se compara en ingeniería con:
+   - (Texto Neón Rosa) Tirar un muro con explosivos.
+   - (Texto Neón Lima) Unir dos puentes exactamente. (CORRECTA)
+   - (Texto Neón Cian) Pintar las rayas de las calles.
+   - (Texto Neón Naranja) Sembrar árboles en la acera.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si el límite izquierdo da 20 y tu ecuación derecha es (x + k), ¿cuánto vale k si x=5?:
+   - (Texto Neón Rosa) Debe valer quince exactamente. (CORRECTA)
+   - (Texto Neón Lima) Debe valer veinticinco total.
+   - (Texto Neón Cian) Debe valer el número cinco ya.
+   - (Texto Neón Naranja) Debe valer cien seguramente.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Si un modelo financiero da un salto injusto y gigante, carece de:
+   - (Texto Neón Rosa) Números pares en la ecuación.
+   - (Texto Neón Lima) Continuidad social y matemática. (CORRECTA)
+   - (Texto Neón Cian) Variables independientes raras.
+   - (Texto Neón Naranja) Constantes geométricas reales.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. Calcular variables ocultas para empalmar funciones te convierte en:
+   - (Texto Neón Rosa) Alguien que copia la tarea.
+   - (Texto Neón Lima) Un diseñador de sistemas sólidos. (CORRECTA)
+   - (Texto Neón Cian) Un artista de gráficas bonitas.
+   - (Texto Neón Naranja) Un estudiante de filosofía.
+
+&copy; JMGV 2026 MasterClass 28 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 29: Aplicaciones Transversales del Límite
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno utilizará el concepto de límite, continuidad y asíntotas para modelar e interpretar fenómenos transversales en las áreas de biología, economía e infraestructura.
+
+Enfoque Psico-Andragógico: 
+Pragmatismo multidisciplinario. El estudiante de 17 años que odia los números puede amar la biología, el dinero o el diseño. Demostramos que el Límite es la "llave maestra" que abre las puertas de todas las disciplinas científicas modernas, justificando el esfuerzo realizado durante las últimas semanas.
+
+Actividad Didáctica Principal: 
+Carrusel de Expertos. Se disponen tres estaciones en el salón: Estación de Bolsa de Valores (Economía), Estación de Epidemias (Biología) y Estación de Urbanismo (Infraestructura). Los equipos rotan cada 15 minutos resolviendo un límite aplicativo en cada estación. Por ejemplo, calcular el límite del costo promedio de manufacturar camisas (que asintóticamente baja a medida que haces más).
+
+Definiciones:
+- Modelado Transversal:
+  * Lenguaje Formal: Aplicación de estructuras matemáticas abstractas a campos disciplinares empíricos para prever comportamientos específicos.
+  * Lenguaje Cotidiano: Agarrar las matemáticas, ponérselas como lentes, y resolver problemas de ciencias naturales y dinero en la vida real.
+- Costo Promedio Asintótico:
+  * Lenguaje Formal: Límite de la función de Costo Total dividida entre el número de unidades, cuando las unidades tienden a infinito.
+  * Lenguaje Cotidiano: Por qué las fábricas grandes (como Lala o Peñoles) hacen las cosas más baratas que tú. Entre más producen, el costo se acerca a un límite de piso bajo.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Economía (Peñoles): Evaluar el límite del costo de refinar una tonelada extra de plata cuando la producción ya es gigantesca (Costo Marginal tiende al mínimo).
+2. Biología (Parque Fundadores): El límite poblacional de las palomas en el parque según los restos de comida disponibles (Asíntota de capacidad de carga).
+3. Infraestructura (Torreón-San Pedro): Evaluar qué pasa si la densidad de fraccionamientos cerrados (x) tiende a saturación; la velocidad del tráfico (y) tiende asintóticamente a 5 km/h.
+
+Actividades de Refuerzo:
+1. Debate de Sustentabilidad: "¿Torreón tiene una asíntota de agua?". Un debate apoyado en gráficas sobre el límite de los mantos acuíferos.
+2. Infografía Transversal: Cada alumno hace un esquema digital (Canva/Piktochart) mostrando un límite matemático aplicado a la carrera universitaria que desean estudiar.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. El concepto matemático de límite es usado globalmente por:
+   - (Texto Neón Rosa) Solo profesores de matemáticas.
+   - (Texto Neón Lima) Ingenieros, biólogos y brokers. (CORRECTA)
+   - (Texto Neón Cian) Historiadores y poetas clásicos.
+   - (Texto Neón Naranja) Ninguna profesión seria de hoy.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. En una fábrica en la Zona Industrial, si produces millones de unidades:
+   - (Texto Neón Rosa) El costo promedio tiende al cielo.
+   - (Texto Neón Lima) El costo promedio tiende a bajar. (CORRECTA)
+   - (Texto Neón Cian) La fábrica dejará de funcionar.
+   - (Texto Neón Naranja) El límite se vuelve cero total.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. En ecología local, el límite de capacidad de carga es análogo a:
+   - (Texto Neón Rosa) Una parábola abriendo muy ancho.
+   - (Texto Neón Lima) Una asíntota horizontal máxima. (CORRECTA)
+   - (Texto Neón Cian) Un límite evaluado desde cero.
+   - (Texto Neón Naranja) Una línea recta hacia abajo ya.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. La transversalidad en la escuela moderna significa que tú:
+   - (Texto Neón Rosa) Cruzas el patio en línea recta.
+   - (Texto Neón Lima) Usas mates en química o física. (CORRECTA)
+   - (Texto Neón Cian) Sumas las notas de tus tareas.
+   - (Texto Neón Naranja) Ignoras todo lo demás siempre.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si evalúas el crecimiento del tráfico y notas que tiende al colapso:
+   - (Texto Neón Rosa) Ignoras los datos de la gráfica.
+   - (Texto Neón Lima) Actúas cambiando las variables. (CORRECTA)
+   - (Texto Neón Cian) Aceleras la construcción ahora.
+   - (Texto Neón Naranja) Vendes todos los carros rápido.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. Aplicar límites a tu carrera universitaria futura prueba que:
+   - (Texto Neón Rosa) Vas a sufrir muchísimo estudiando.
+   - (Texto Neón Lima) El pensamiento analítico es útil. (CORRECTA)
+   - (Texto Neón Cian) Debes ser un experto calculista.
+   - (Texto Neón Naranja) Las matemáticas son un adorno.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. En el diseño urbano, evitar discontinuidades en tuberías garantiza:
+   - (Texto Neón Rosa) Tuberías muy coloridas y feas.
+   - (Texto Neón Lima) Flujo continuo sin fugas caras. (CORRECTA)
+   - (Texto Neón Cian) Menor presión en las viviendas.
+   - (Texto Neón Naranja) Calles con más baches oscuros.
+
+&copy; JMGV 2026 MasterClass 29 Pensamiento Variacional PTEL. todos los derechos reservados.
+
+--------------------------------------------------------------------------------
+SESIÓN 30: Reto Integrador (El Límite del Crecimiento Lagunero)
+--------------------------------------------------------------------------------
+Objetivo de Aprendizaje: 
+El alumno sintetizará y expondrá los conceptos de límites, indeterminaciones, asíntotas y continuidad aplicados en un proyecto de análisis de viabilidad ecológica y urbana para la ciudad.
+
+Enfoque Psico-Andragógico: 
+Responsabilidad comunitaria y metacognición. Cierre triunfal del Bloque 3. Los adolescentes operan como "Consejeros Ciudadanos". Evaluarán si el ecosistema de Torreón (agua/tráfico) soporta matemáticamente el ritmo de vida actual, empoderándolos para tomar decisiones fundamentadas en datos. Sienten que su aprendizaje tiene impacto en el mundo real.
+
+Actividad Didáctica Principal: 
+El Simposio de la Ciudad. En equipos, entregan su "Plan de Acción Municipal". Reciben una función racional que modela la extracción de agua en el Acuífero Principal de la Región Lagunera. Deben resolver: 1) Límites para predecir cuándo el agua se agota (Indeterminación). 2) Hallar la Asíntota Horizontal (límite de recarga natural). 3) Proponer una función a trozos para implementar una nueva tarifa de SIMAS que garantice continuidad y sancione el abuso.
+
+Definiciones:
+- Simulación de Escenarios:
+  * Lenguaje Formal: Experimentación analítica que altera los parámetros de un modelo funcional para proyectar impactos a largo plazo.
+  * Lenguaje Cotidiano: Cambiar los números en nuestra máquina para viajar al futuro y ver qué desastres podemos evitar hoy.
+- Viabilidad Sistémica:
+  * Lenguaje Formal: Cualidad de un modelo que garantiza el flujo continuo (continuidad) y se mantiene bajo límites asintóticos seguros.
+  * Lenguaje Cotidiano: Que las cosas funcionen bien por años sin reventar los cables ni agotar los recursos.
+
+Ejemplos (Vida en Torreón, Coahuila):
+1. Plan de crecimiento urbano hacia Matamoros (evaluar funciones a trozos en la movilidad regional).
+2. Manejo de los recursos hídricos subterráneos (evitar chocar contra la asíntota de capacidad biológica).
+3. Red de transporte público interurbano (asegurar flujo continuo de pasajeros entre ciudades gemelas).
+
+Actividades de Refuerzo:
+1. Panel de Discusión Socrático: Los alumnos defienden sus "Planes de Acción" frente al profesor y compañeros, justificando cada decisión con propiedades de límites.
+2. Bitácora de Retrospectiva: Los alumnos escriben un breve párrafo sobre cómo "El Fantasma 0/0" o las "Asíntotas" cambiaron su forma de ver el crecimiento de la ciudad.
+
+Quizz estilo Kahoot (Fondo Pastel con Texto Neón):
+Contexto Visual: [Fondo Azul Pastel]
+1. En el reto final, predecir cuándo se acaba el agua se calcula con:
+   - (Texto Neón Rosa) Restas simples y divisiones.
+   - (Texto Neón Lima) Límites evaluando tendencias. (CORRECTA)
+   - (Texto Neón Cian) Constantes positivas y claras.
+   - (Texto Neón Naranja) Funciones trigonométricas ya.
+
+Contexto Visual: [Fondo Verde Pastel]
+2. El límite de recarga natural de la lluvia actúa en el modelo como:
+   - (Texto Neón Rosa) Un vértice cuadrático central.
+   - (Texto Neón Lima) Una asíntota horizontal real. (CORRECTA)
+   - (Texto Neón Cian) Un error de indeterminación.
+   - (Texto Neón Naranja) Una línea de caída infinita.
+
+Contexto Visual: [Fondo Amarillo Pastel]
+3. Si diseñas una tarifa justa para SIMAS que no brinque feamente, usas:
+   - (Texto Neón Rosa) Ley de cosenos generalizada.
+   - (Texto Neón Lima) Funciones continuas a trozos. (CORRECTA)
+   - (Texto Neón Cian) Exponenciales de base cuatro.
+   - (Texto Neón Naranja) Logaritmos hiperbólicos hoy.
+
+Contexto Visual: [Fondo Rosa Pastel]
+4. Este proyecto integrador de la ciudad de Torreón demuestra que:
+   - (Texto Neón Rosa) El cálculo es puro aburrimiento.
+   - (Texto Neón Lima) Las mates resuelven crisis reales. (CORRECTA)
+   - (Texto Neón Cian) Todos los límites son fantasmas.
+   - (Texto Neón Naranja) Los números no mienten nunca.
+
+Contexto Visual: [Fondo Lavanda Pastel]
+5. Si un problema nos dio 0/0, recordamos en nuestro proyecto que:
+   - (Texto Neón Rosa) El proyecto no servía para nada.
+   - (Texto Neón Lima) Debíamos factorizar y avanzar. (CORRECTA)
+   - (Texto Neón Cian) Entregábamos el papel en blanco.
+   - (Texto Neón Naranja) Cambiábamos el signo a positivo.
+
+Contexto Visual: [Fondo Durazno Pastel]
+6. La "Viabilidad Sistémica" en el mundo real asegura que las cosas:
+   - (Texto Neón Rosa) Se rompan en dos meses exactos.
+   - (Texto Neón Lima) Funcionen bien a largo plazo. (CORRECTA)
+   - (Texto Neón Cian) Cuesten millones incalculables.
+   - (Texto Neón Naranja) Tengan colores pastel bonitos.
+
+Contexto Visual: [Fondo Menta Pastel]
+7. ¡Felicidades! Completaste el Bloque 3. Ya sabes dominar los límites de:
+   - (Texto Neón Rosa) La velocidad de la luz estelar.
+   - (Texto Neón Lima) La intuición, continuidad y fin. (CORRECTA)
+   - (Texto Neón Cian) La geometría plana de Pitágoras.
+   - (Texto Neón Naranja) Sumas y restas de preescolar.
+
+&copy; JMGV 2026 MasterClass 30 Pensamiento Variacional PTEL. todos los derechos reservados.

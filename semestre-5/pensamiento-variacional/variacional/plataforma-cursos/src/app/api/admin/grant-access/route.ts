@@ -107,7 +107,7 @@ export async function GET(request: Request) {
       .where('grantedByAdmin', '==', true)
       .get();
 
-    const users = usersSnapshot.docs.map(doc => ({
+    const users = usersSnapshot.docs.map((doc: any) => ({
       id: doc.id,
       ...doc.data()
     }));

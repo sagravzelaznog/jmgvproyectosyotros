@@ -4,6 +4,7 @@ import { getAuth } from 'firebase-admin/auth';
 
 let adminDb: FirebaseFirestore.Firestore;
 let adminAuth: import('firebase-admin/auth').Auth;
+let initError: string | null = null;
 
 try {
   if (!getApps().length) {
@@ -19,8 +20,9 @@ try {
   }
   adminDb = getFirestore();
   adminAuth = getAuth();
-} catch (error) {
+} catch (error: any) {
+  initError = error.message || String(error);
   console.error("Firebase Admin Initialization Error:", error);
 }
 
-export { adminDb, adminAuth };
+export { adminDb, adminAuth, initError };

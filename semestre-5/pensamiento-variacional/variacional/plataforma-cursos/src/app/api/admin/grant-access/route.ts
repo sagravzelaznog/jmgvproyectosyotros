@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase/firebase-admin';
+import { adminAuth, adminDb, initError } from '@/lib/firebase/firebase-admin';
 
 // Función para generar contraseña aleatoria
 function generateRandomPassword() {
@@ -8,12 +8,15 @@ function generateRandomPassword() {
   for (let i = 0; i < 10; i++) {
     password += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  // Asegurarnos de que cumpla requisitos mínimos
   return password + "A1!";
 }
 
 export async function POST(request: Request) {
   try {
+    if (initError) {
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 500 });
+    }
+
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
@@ -81,6 +84,10 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    if (initError) {
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 500 });
+    }
+
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });

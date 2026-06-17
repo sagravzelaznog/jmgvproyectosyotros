@@ -35,14 +35,33 @@ export default function PayPalButton() {
           });
         }}
         onApprove={async (data, actions) => {
-          if (!actions.order) return;
           try {
-            const details = await actions.order.capture();
-            // Aquí enviarás el webhook o llamado a tu API de Firebase para
-            // otorgar acceso al curso a este usuario.
-            alert("¡Pago exitoso! Bienvenido al curso, " + (details.payer?.name?.given_name || ""));
+            const response = await fetch("/api/paypal/capture", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orderID: data.orderID,
+              }),
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok && result.success) {
+              if (result.warning) {
+                alert(result.warning);
+              } else {
+                alert("¡Pago exitoso! Se ha habilitado tu acceso completo.");
+                // Refrescar página para que el AuthProvider tome los nuevos permisos
+                window.location.href = "/dashboard";
+              }
+            } else {
+              setError(result.error || "Ocurrió un error en el servidor al capturar el pago.");
+            }
           } catch (err) {
-            setError("Ocurrió un error al procesar el pago.");
+            setError("Error de red al intentar procesar el pago.");
+            console.error(err);
           }
         }}
         onError={(err) => {

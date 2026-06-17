@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc, collection, query, where, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 import { useParams, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -9,10 +9,12 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css"; // Importar CSS de KaTeX
+import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function LessonPage() {
   const { lessonId } = useParams();
   const router = useRouter();
+  const { user } = useAuth();
   const [lesson, setLesson] = useState<any>(null);
   const [quiz, setQuiz] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,14 +66,30 @@ export default function LessonPage() {
     fetchLessonAndQuiz();
   }, [lessonId]);
 
-  const handleAnswer = (optionIndex: number, correctIndex: number) => {
+  const handleAnswer = async (optionIndex: number, correctIndex: number) => {
+    let finalScore = score;
     if (optionIndex === correctIndex) {
-      setScore(score + 1);
+      finalScore = score + 1;
+      setScore(finalScore);
     }
+    
     if (quiz.length > 0 && currentQuiz + 1 < quiz.length) {
       setCurrentQuiz(currentQuiz + 1);
     } else {
       setQuizFinished(true);
+      // Guardar record en Firebase si hay usuario autenticado
+      if (user && lessonId) {
+        try {
+          const progressRef = doc(db, "Users", user.uid, "progress", lessonId as string);
+          await setDoc(progressRef, {
+            score: finalScore,
+            total: quiz.length,
+            completedAt: serverTimestamp()
+          }, { merge: true });
+        } catch (error) {
+          console.error("Error saving quiz progress:", error);
+        }
+      }
     }
   };
 
@@ -143,7 +161,7 @@ export default function LessonPage() {
             {!quizFinished ? (
               <div className="bg-[#12131A] border-2 border-neon-green/50 rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(57,255,20,0.15)]">
                 <div className="p-8 text-center bg-black/40 border-b border-neon-green/20 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-neon-green"></div>
+                  <div className="absolute top-0 left-0 h-1 bg-neon-green transition-all duration-500 shadow-[0_0_10px_#39FF14]" style={{ width: `${(currentQuiz / quiz.length) * 100}%` }}></div>
                   <span className="text-neon-green text-xs font-black tracking-[0.2em] uppercase bg-neon-green/10 px-3 py-1 rounded-full border border-neon-green/30">
                     PREGUNTA {currentQuiz + 1} // {quiz.length}
                   </span>

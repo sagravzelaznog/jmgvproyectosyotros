@@ -1,8 +1,12 @@
 "use client";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { useAuth } from "@/components/providers/AuthProvider";
+import Link from "next/link";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const { isAdmin } = useAuth();
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -12,6 +16,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="flex justify-between h-16 items-center">
               <div className="font-bold text-xl text-indigo-400">Variacional.io</div>
               <div className="flex gap-4 items-center">
+                {isAdmin && (
+                  <Link href="/dashboard/admin" className="text-sm font-bold text-neon-pink border border-neon-pink/50 bg-neon-pink/10 px-3 py-1 rounded hover:bg-neon-pink hover:text-white transition-all">
+                    Panel Admin
+                  </Link>
+                )}
                 <span className="text-sm text-slate-400">Área de Estudiantes</span>
               </div>
             </div>

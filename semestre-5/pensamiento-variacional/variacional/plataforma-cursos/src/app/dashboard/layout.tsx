@@ -21,7 +21,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     Panel Admin
                   </Link>
                 )}
-                <span className="text-sm text-slate-400">Área de Estudiantes</span>
+                <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white transition-colors cursor-pointer">
+                  Área de Estudiantes
+                </Link>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminAuth, adminDb, initError } from '@/lib/firebase/firebase-admin';
+// import { adminAuth, adminDb, initError } from '@/lib/firebase/firebase-admin';
 
 // Función para generar contraseña aleatoria
 function generateRandomPassword() {
@@ -13,9 +13,9 @@ function generateRandomPassword() {
 
 export async function POST(request: Request) {
   try {
-    if (initError) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
-    }
+    // if (initError) {
+    //  return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
+    // }
 
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -40,34 +40,11 @@ export async function POST(request: Request) {
     }
 
     const generatedPassword = generateRandomPassword();
-    let newUid = "";
+    let newUid = "test_uid";
 
-    try {
-      // 1. Crear el usuario en Firebase Auth
-      const userRecord = await adminAuth.createUser({
-        email: email,
-        password: generatedPassword,
-      });
-      newUid = userRecord.uid;
-    } catch (authError: any) {
-      if (authError.code === 'auth/email-already-exists') {
-        // Si el usuario ya existe, tal vez queramos solo darle acceso y generar una nueva contraseña?
-        // O mejor retornamos error para que el admin sepa.
-        return NextResponse.json({ error: 'Este correo ya tiene una cuenta en el sistema.' }, { status: 400 });
-      }
-      throw authError;
-    }
-
-    // 2. Registrar en Firestore
-    await adminDb.collection('Users').doc(newUid).set({
-      email: email,
-      role: 'student',
-      status: 'active',
-      hasAccess: true, // Membresía gratuita
-      temporaryPassword: generatedPassword, // Guardamos la contraseña temporal
-      grantedAt: new Date().toISOString(),
-      grantedByAdmin: true
-    }, { merge: true });
+    // MOCK FOR ISOLATION
+    // const userRecord = await adminAuth.createUser({...})
+    // await adminDb.collection('Users').doc(newUid).set({...})
 
     return NextResponse.json({ 
       success: true, 
@@ -84,9 +61,9 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    if (initError) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
-    }
+    // if (initError) {
+    //  return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
+    // }
 
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -96,28 +73,24 @@ export async function GET(request: Request) {
     const idToken = authHeader.split('Bearer ')[1];
     
     // Verificar token con Firebase Admin
-    const decodedToken = await adminAuth.verifyIdToken(idToken);
+    // const decodedToken = await adminAuth.verifyIdToken(idToken);
     
     // Verificar si es el Admin configurado
-    if (decodedToken.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
-      return NextResponse.json({ error: 'Acceso denegado. No eres administrador.' }, { status: 403 });
-    }
+    // if (decodedToken.uid !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+    //  return NextResponse.json({ error: 'Acceso denegado. No eres administrador.' }, { status: 403 });
+    // }
 
-    const usersSnapshot = await adminDb.collection('Users')
-      .where('grantedByAdmin', '==', true)
-      .get();
+    // const usersSnapshot = await adminDb.collection('Users')
+    //   .where('grantedByAdmin', '==', true)
+    //   .get();
 
-    const users = usersSnapshot.docs.map((doc: any) => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    // const users = usersSnapshot.docs.map((doc: any) => ({
+    //   id: doc.id,
+    //   ...doc.data()
+    // }));
 
-    // Ordenar por fecha descendente
-    users.sort((a: any, b: any) => {
-      const dateA = new Date(a.grantedAt || 0).getTime();
-      const dateB = new Date(b.grantedAt || 0).getTime();
-      return dateB - dateA;
-    });
+    // users.sort(...)
+    const users: any[] = []; // MOCK
 
     return NextResponse.json({ success: true, users });
 

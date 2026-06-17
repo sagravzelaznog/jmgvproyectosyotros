@@ -14,7 +14,7 @@ function generateRandomPassword() {
 export async function POST(request: Request) {
   try {
     if (initError) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 500 });
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
     }
 
     const authHeader = request.headers.get('Authorization');
@@ -78,14 +78,14 @@ export async function POST(request: Request) {
 
   } catch (error: any) {
     console.error('Error granting access:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
 
 export async function GET(request: Request) {
   try {
     if (initError) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 500 });
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
     }
 
     const authHeader = request.headers.get('Authorization');
@@ -123,6 +123,6 @@ export async function GET(request: Request) {
 
   } catch (error: any) {
     console.error('Error fetching granted users:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

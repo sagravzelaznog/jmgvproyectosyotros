@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { adminAuth, adminDb, initError } from '@/lib/firebase/firebase-admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,51 +13,18 @@ function generateRandomPassword() {
   return password + "A1!";
 }
 
-async function getFirebaseAdmin() {
-  try {
-    const app = await import('firebase-admin/app');
-    const auth = await import('firebase-admin/auth');
-    const firestore = await import('firebase-admin/firestore');
-
-    if (!app.getApps().length) {
-      app.initializeApp({
-        credential: app.cert({
-          projectId: process.env.FIREBASE_PROJECT_ID,
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          privateKey: process.env.FIREBASE_PRIVATE_KEY
-            ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/"/g, '')
-            : undefined,
-        }),
-      });
-    }
-
-    return {
-      adminDb: firestore.getFirestore(),
-      adminAuth: auth.getAuth(),
-      initError: null
-    };
-  } catch (error: any) {
-    console.error("DYNAMIC IMPORT ERROR:", error);
-    return {
-      adminDb: null,
-      adminAuth: null,
-      initError: error.message || String(error)
-    };
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
+    if (initError) {
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
+    }
+
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
-    const idToken = authHeader.split('Bearer ')[1];
 
-    const { adminAuth, adminDb, initError } = await getFirebaseAdmin();
-    if (initError || !adminAuth || !adminDb) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}` }, { status: 400 });
-    }
+    const idToken = authHeader.split('Bearer ')[1];
     
     // Verificar token con Firebase Admin
     const decodedToken = await adminAuth.verifyIdToken(idToken);
@@ -108,22 +76,22 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('Error granting access:', error);
-    return NextResponse.json({ error: error.message || String(error) }, { status: 400 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
+    if (initError) {
+      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}. Revisa las variables en Vercel.` }, { status: 400 });
+    }
+
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
-    const idToken = authHeader.split('Bearer ')[1];
 
-    const { adminAuth, adminDb, initError } = await getFirebaseAdmin();
-    if (initError || !adminAuth || !adminDb) {
-      return NextResponse.json({ error: `Fallo Crítico SDK: ${initError}` }, { status: 400 });
-    }
+    const idToken = authHeader.split('Bearer ')[1];
     
     const decodedToken = await adminAuth.verifyIdToken(idToken);
     
@@ -150,6 +118,6 @@ export async function GET(request: NextRequest) {
 
   } catch (error: any) {
     console.error('Error fetching granted users:', error);
-    return NextResponse.json({ error: error.message || String(error) }, { status: 400 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

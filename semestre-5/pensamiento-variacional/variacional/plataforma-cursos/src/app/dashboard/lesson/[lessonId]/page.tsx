@@ -9,6 +9,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css"; // Importar CSS de KaTeX
+import rehypeInlineMath from "@/lib/rehype-inline-math";
 import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function LessonPage() {
@@ -22,6 +23,21 @@ export default function LessonPage() {
   const [score, setScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const utteranceQueue = useRef<SpeechSynthesisUtterance[]>([]);
+
+  // Hook para detener TTS si el usuario sale de la página o recarga
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   // Hook para la barra de progreso
   useEffect(() => {
@@ -93,6 +109,90 @@ export default function LessonPage() {
     }
   };
 
+  const playTTS = (text: string, startFromPhrase?: string) => {
+    if (typeof window === "undefined" || !window.speechSynthesis) {
+      alert("Tu navegador no soporta lectura en voz alta.");
+      return;
+    }
+
+    // Cancelar cualquier cosa trabada en la cola
+    window.speechSynthesis.cancel();
+    utteranceQueue.current = [];
+    
+    // Limpiar HTML y Markdown avanzado
+    let cleanText = text
+      // 1. Describir la gráfica de Geogebra
+      .replace(/<iframe[^>]*geogebra[^>]*>[\\s\\S]*?<\/iframe>/gi, " A continuación se muestra un simulador interactivo de Geogebra en tu pantalla para experimentar con la gráfica. ")
+      // Reemplazos matemáticos básicos para que suene mejor
+      .replace(/\\cdot/g, " por ")
+      .replace(/\\Delta/g, " Delta ")
+      // 2. Eliminar imágenes de Markdown
+      .replace(/!\[.*?\]\(.*?\)/g, " ")
+      // 3. Convertir links de Markdown a texto plano
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      // 4. Eliminar todas las etiquetas HTML restantes
+      .replace(/<[^>]+>/g, " ")
+      // 5. Eliminar símbolos especiales que rompen el motor de voz de Chrome
+      .replace(/[*_#$\\|{}[\]^`~]/g, " ")
+      // 6. Colapsar múltiples espacios
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (startFromPhrase) {
+      const cleanSearchPhrase = startFromPhrase
+        .replace(/[*_#$\\|{}[\]^`~]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      
+      // Buscar los primeros 40 caracteres del bloque para ubicarlo en el texto completo
+      const searchSnippet = cleanSearchPhrase.substring(0, 40);
+      const index = cleanText.indexOf(searchSnippet);
+      
+      if (index !== -1) {
+         cleanText = cleanText.substring(index);
+      } else {
+         // Si no lo encuentra exacto por alguna razón, lee solo el bloque que tocó
+         cleanText = cleanSearchPhrase;
+      }
+    }
+    
+    // Trocear el texto por puntos para evitar el bug de límite de longitud de Chrome
+    const chunks = cleanText.split(/(?<=[.!?])\s+/);
+    
+    const validChunks = chunks.filter((c: string) => c.trim().length > 0);
+    
+    if (validChunks.length === 0) return;
+
+    validChunks.forEach((chunk: string, index: number) => {
+      const utterance = new SpeechSynthesisUtterance(chunk.trim());
+      utterance.lang = 'es-MX';
+      utterance.rate = 1.7; // Lectura muy rápida (1.3 + 0.4)
+      
+      if (index === validChunks.length - 1) {
+        utterance.onend = () => {
+          setIsSpeaking(false);
+          setIsPaused(false);
+          utteranceQueue.current = [];
+        };
+      }
+      
+      utterance.onerror = (e) => {
+        console.error("Speech Synthesis Error en fragmento:", chunk, e);
+        if (index === validChunks.length - 1) {
+          setIsSpeaking(false);
+          setIsPaused(false);
+          utteranceQueue.current = [];
+        }
+      };
+      
+      utteranceQueue.current.push(utterance);
+      window.speechSynthesis.speak(utterance);
+    });
+    
+    setIsSpeaking(true);
+    setIsPaused(false);
+  };
+
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-abismo">
@@ -125,18 +225,71 @@ export default function LessonPage() {
         </button>
 
         {/* Encabezado Principal */}
-        <header className="border-b border-neon-purple/30 pb-8">
+        <header className="border-b border-neon-purple/30 pb-8 relative">
           <div className="inline-block px-4 py-1 bg-neon-purple/10 border border-neon-purple/50 text-neon-purple font-black tracking-widest text-sm mb-4 rounded-full shadow-[0_0_10px_rgba(138,43,226,0.3)]">
             SESIÓN {lesson.order}
           </div>
-          <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-sm leading-tight">
+          <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-sm leading-tight mb-6">
             {lesson.title.replace(/^SESI[OÓ]N\s+\d+:\s*/i, "")}
           </h1>
+              {/* Controles de Lectura en Voz Alta (TTS) */}
+          <div className="flex flex-wrap gap-3 mt-4">
+            <button 
+              onClick={() => {
+                if (!window.speechSynthesis) return alert("Tu navegador no soporta lectura en voz alta.");
+                
+                if (isSpeaking) {
+                  if (isPaused) {
+                    window.speechSynthesis.resume();
+                    setIsPaused(false);
+                  } else {
+                    window.speechSynthesis.pause();
+                    setIsPaused(true);
+                  }
+                } else {
+                  playTTS(lesson.content);
+                }
+              }}
+              className="bg-black/50 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+            >
+              {!isSpeaking ? "▶️ Escuchar Lección completa" : (isPaused ? "▶️ Reanudar" : "⏸️ Pausar")}
+            </button>
+            
+            {isSpeaking && (
+              <button 
+                onClick={() => {
+                  window.speechSynthesis.cancel();
+                  utteranceQueue.current = [];
+                  setIsSpeaking(false);
+                  setIsPaused(false);
+                }}
+                className="bg-black/50 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-white transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(255,0,127,0.2)]"
+              >
+                ⏹️ Detener
+              </button>
+            )}
+          </div>
         </header>
 
+        <div className="text-center bg-neon-cyan/5 border border-neon-cyan/20 p-3 rounded-xl mb-4 shadow-[0_0_10px_rgba(0,255,255,0.05)]">
+           <p className="text-neon-cyan text-sm tracking-wide font-semibold">💡 Tip: Haz clic en cualquier párrafo, lista o título para que la IA lea solo esa sección.</p>
+        </div>
+
         {/* Contenido Teórico (Masterclass Renderizado con Markdown + HTML) */}
-        <article className="prose prose-invert prose-lg md:prose-xl max-w-none text-slate-300
-          prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
+        <article 
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            // Buscar el bloque de texto más cercano al que le dieron click
+            const block = target.closest('p, li, h1, h2, h3, h4, blockquote');
+            if (block && block.textContent) {
+              // Leer el documento COMPLETO empezando desde el bloque seleccionado
+              playTTS(lesson.content, block.textContent);
+            }
+          }}
+          className="prose prose-invert prose-lg md:prose-xl max-w-none text-slate-300 cursor-pointer
+          prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight hover:prose-headings:text-neon-cyan/80
+          prose-p:transition-colors hover:prose-p:text-white
+          prose-li:transition-colors hover:prose-li:text-white
           prose-a:text-neon-cyan prose-a:no-underline hover:prose-a:drop-shadow-[0_0_5px_#00FFFF]
           prose-strong:text-white prose-strong:font-bold
           prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
@@ -144,7 +297,7 @@ export default function LessonPage() {
         >
           <ReactMarkdown 
             remarkPlugins={[remarkMath]} 
-            rehypePlugins={[rehypeKatex, rehypeRaw]}
+            rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
           >
             {lesson.content}
           </ReactMarkdown>
@@ -166,7 +319,13 @@ export default function LessonPage() {
                     PREGUNTA {currentQuiz + 1} // {quiz.length}
                   </span>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mt-6 leading-relaxed">
-                    {quiz[currentQuiz].question}
+                    <ReactMarkdown 
+                      remarkPlugins={[remarkMath]} 
+                      rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
+                      components={{ p: 'span' }}
+                    >
+                      {quiz[currentQuiz].question}
+                    </ReactMarkdown>
                   </h3>
                 </div>
                 
@@ -185,7 +344,13 @@ export default function LessonPage() {
                         onClick={() => handleAnswer(index, quiz[currentQuiz].answer)}
                         className={`border-2 font-bold p-6 rounded-xl transition-all duration-300 flex items-center justify-center text-center min-h-[100px] text-lg md:text-xl transform hover:-translate-y-1 ${colors[index % 4]}`}
                       >
-                        {opt}
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkMath]} 
+                          rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
+                          components={{ p: 'span' }}
+                        >
+                          {opt}
+                        </ReactMarkdown>
                       </button>
                     );
                   })}

@@ -30,6 +30,9 @@ export default function PayPalButton() {
                   currency_code: "MXN",
                   value: coursePrice,
                 },
+                payee: {
+                  email_address: "Primomanuel@hotmail.com"
+                }
               },
             ],
           });

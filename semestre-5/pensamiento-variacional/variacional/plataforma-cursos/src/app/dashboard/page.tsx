@@ -7,10 +7,19 @@ import { useAuth } from "@/components/providers/AuthProvider";
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, hasAccess, expiresAt } = useAuth();
   const [modules, setModules] = useState<any[]>([]);
   const [lessons, setLessons] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const getDaysRemaining = () => {
+    if (!expiresAt) return null;
+    const diffTime = expiresAt.getTime() - new Date().getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 0;
+  };
+
+  const daysRemaining = getDaysRemaining();
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -39,6 +48,21 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-3xl font-bold">Mis Cursos</h1>
         <p className="text-slate-400 mt-2">Prepárate para aprender la matemática del cambio y modelar el entorno.</p>
+        
+        {!isAdmin && hasAccess && daysRemaining !== null && (
+          <div className="mt-6 flex items-center justify-between p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-xl">
+            <div>
+              <p className="text-indigo-300 font-medium text-sm">Suscripción Activa</p>
+              <p className="text-white font-bold text-lg">
+                Te quedan {daysRemaining} {daysRemaining === 1 ? 'día' : 'días'} de acceso
+              </p>
+            </div>
+            <div className="hidden sm:block text-indigo-400 opacity-50">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+          </div>
+        )}
+
         {isAdmin && (
           <div className="mt-4 inline-flex px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm rounded-md font-medium">
             🛡️ Modo Administrador Activo

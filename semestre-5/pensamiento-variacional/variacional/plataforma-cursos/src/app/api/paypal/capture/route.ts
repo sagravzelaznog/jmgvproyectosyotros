@@ -106,9 +106,25 @@ export async function POST(request: NextRequest) {
       // Intentar obtener el UID del cliente que enviamos desde el frontend en custom_id
       const purchaseUnits = captureData.purchase_units || [];
       const customId = purchaseUnits.length > 0 ? purchaseUnits[0].custom_id : null;
+      const description = purchaseUnits.length > 0 ? purchaseUnits[0].description : "";
       
       const payerEmail = captureData.payer?.email_address;
       const payerName = captureData.payer?.name?.given_name || "Alumno";
+
+      // Calcular fecha de expiración
+      const now = new Date();
+      let expiresAt = new Date(now);
+      
+      if (description.includes("Semanal")) {
+        expiresAt.setDate(now.getDate() + 7);
+      } else if (description.includes("Mensual")) {
+        expiresAt.setDate(now.getDate() + 30);
+      } else if (description.includes("Anual")) {
+        expiresAt.setDate(now.getDate() + 365);
+      } else {
+        // Fallback por defecto si no se detecta (ej. 30 días)
+        expiresAt.setDate(now.getDate() + 30);
+      }
 
       // Si tenemos un customId, significa que el usuario estaba logueado
       if (customId && customId !== "guest") {
@@ -120,12 +136,14 @@ export async function POST(request: NextRequest) {
             role: 'student',
             paymentMethod: 'paypal',
             orderID: orderID,
-            paidAt: new Date().toISOString()
+            paidAt: now.toISOString(),
+            expiresAt: expiresAt.toISOString(),
+            plan: description
           }, { merge: true });
           
           return NextResponse.json({ 
             success: true, 
-            message: "Pago capturado y acceso otorgado exitosamente." 
+            message: `Pago capturado. Acceso válido hasta ${expiresAt.toLocaleDateString()}` 
           });
         } catch (dbError) {
           console.error("Error actualizando la BD de Firebase tras un pago exitoso:", dbError);

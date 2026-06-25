@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function ProtectedRoute({ 
@@ -11,8 +11,9 @@ export default function ProtectedRoute({
   children: React.ReactNode,
   requireAdmin?: boolean 
 }) {
-  const { user, loading, isAdmin } = useAuth();
+  const { user, loading, isAdmin, hasAccess, expiresAt } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!loading) {
@@ -22,9 +23,15 @@ export default function ProtectedRoute({
       } else if (requireAdmin && !isAdmin) {
         // Si la ruta requiere ser admin y no lo es, redirigir al inicio
         router.push("/dashboard");
+      } else if (!isAdmin && pathname !== "/dashboard/paywall") {
+        // Revisar caducidad si no es admin
+        const isExpired = expiresAt ? expiresAt < new Date() : false;
+        if (!hasAccess || isExpired) {
+          router.push("/dashboard/paywall");
+        }
       }
     }
-  }, [user, loading, isAdmin, requireAdmin, router]);
+  }, [user, loading, isAdmin, hasAccess, expiresAt, requireAdmin, pathname, router]);
 
   if (loading) {
     return (
@@ -34,8 +41,17 @@ export default function ProtectedRoute({
     );
   }
 
+  // Evita destellos de UI mientras redirige
   if (!user || (requireAdmin && !isAdmin)) {
-    return null; // Evita destellos de UI mientras redirige
+    return null; 
+  }
+
+  // Bloqueo visual si está en proceso de redirección al paywall
+  if (!isAdmin && pathname !== "/dashboard/paywall") {
+    const isExpired = expiresAt ? expiresAt < new Date() : false;
+    if (!hasAccess || isExpired) {
+      return null;
+    }
   }
 
   return <>{children}</>;

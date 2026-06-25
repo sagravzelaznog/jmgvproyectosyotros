@@ -4,10 +4,9 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 
-export default function PayPalButton() {
+export default function PayPalButton({ price = "99.00", plan = "Acceso Anual" }: { price?: string, plan?: string }) {
   const { user } = useAuth();
   const [error, setError] = useState<string | null>(null);
-  const coursePrice = "99.00"; // Precio de ejemplo en MXN
 
   return (
     <div className="w-full relative z-10 flex flex-col items-center">
@@ -24,11 +23,11 @@ export default function PayPalButton() {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: "Curso: Pensamiento Variacional I",
+                description: `Curso: Pensamiento Variacional I - ${plan}`,
                 custom_id: user?.uid || "guest", // Enviamos el UID al webhook
                 amount: {
                   currency_code: "MXN",
-                  value: coursePrice,
+                  value: price,
                 },
                 payee: {
                   email_address: "Primomanuel@hotmail.com"

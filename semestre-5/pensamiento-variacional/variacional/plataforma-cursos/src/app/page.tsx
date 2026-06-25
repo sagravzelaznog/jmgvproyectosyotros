@@ -25,8 +25,8 @@ export default function LandingPage() {
         {/* Elementos decorativos (Glows) */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <div className="space-y-8 flex flex-col items-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-medium">
               <span className="flex h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
               Inscripciones Abiertas - Generación 2026
@@ -52,27 +52,49 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
-          
-          {/* Card Flotante (Glassmorphism) */}
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur opacity-20 animate-pulse"></div>
-            <div className="relative bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl flex flex-col items-center">
-              <div className="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 border border-indigo-500/20">
-                <svg className="w-8 h-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="comprar" className="py-24 bg-slate-950 relative overflow-hidden border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Elige tu plan de estudio</h2>
+            <p className="text-slate-400 text-lg">Acceso a las 50 sesiones intensivas, simuladores de GeoGebra y plataforma interactiva.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Semanal */}
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col items-center shadow-xl">
+              <h3 className="text-xl font-bold text-slate-300 mb-2">Acceso Semanal</h3>
+              <div className="text-4xl font-black text-white mb-6">$20 <span className="text-lg text-slate-500 font-medium">MXN</span></div>
+              <p className="text-slate-400 text-center mb-8 text-sm">Ideal para un repaso rápido antes de tus exámenes.</p>
+              <div className="w-full mt-auto">
+                <PayPalButton price="20.00" plan="Acceso Semanal" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Acceso Anual</h3>
-              <p className="text-slate-400 text-center mb-8">
-                50 Sesiones intensivas, ejercicios interactivos y soporte.
-              </p>
-              
-              <div id="comprar" className="w-full">
-                <PayPalButton />
+            </div>
+
+            {/* Mensual */}
+            <div className="bg-slate-900 border-2 border-indigo-500 rounded-3xl p-8 flex flex-col items-center shadow-[0_0_30px_rgba(79,70,229,0.15)] relative transform md:-translate-y-4">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-500 text-white px-4 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Más Popular
               </div>
-              <p className="text-xs text-slate-500 mt-4 text-center">
-                Pago seguro garantizado por PayPal.
-              </p>
+              <h3 className="text-xl font-bold text-indigo-400 mb-2">Acceso Mensual</h3>
+              <div className="text-5xl font-black text-white mb-6">$30 <span className="text-lg text-slate-500 font-medium">MXN</span></div>
+              <p className="text-slate-400 text-center mb-8 text-sm">El ritmo perfecto para dominar el cálculo paso a paso.</p>
+              <div className="w-full mt-auto">
+                <PayPalButton price="30.00" plan="Acceso Mensual" />
+              </div>
+            </div>
+
+            {/* Anual */}
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col items-center shadow-xl">
+              <h3 className="text-xl font-bold text-slate-300 mb-2">Acceso Anual</h3>
+              <div className="text-4xl font-black text-white mb-6">$99 <span className="text-lg text-slate-500 font-medium">MXN</span></div>
+              <p className="text-slate-400 text-center mb-8 text-sm">50 sesiones intensivas y soporte continuo todo el ciclo.</p>
+              <div className="w-full mt-auto">
+                <PayPalButton price="99.00" plan="Acceso Anual" />
+              </div>
             </div>
           </div>
         </div>

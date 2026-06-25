@@ -377,6 +377,13 @@ export default function LessonPage() {
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      <footer className="w-full text-center py-6 border-t border-slate-800/50">
+        <p className="text-slate-500 text-xs tracking-widest uppercase">
+          &copy; JMGV-PTEL 2026 SESIÓN {lesson.order}. TODOS LOS DERECHOS RESERVADOS.
+        </p>
+      </footer>
     </div>
   );
 }

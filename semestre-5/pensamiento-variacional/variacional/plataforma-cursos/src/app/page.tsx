@@ -62,7 +62,7 @@ export default function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Acceso de por vida</h3>
+              <h3 className="text-2xl font-bold text-white mb-2">Acceso Anual</h3>
               <p className="text-slate-400 text-center mb-8">
                 50 Sesiones intensivas, ejercicios interactivos y soporte.
               </p>

@@ -293,7 +293,8 @@ export default function LessonPage() {
           prose-a:text-neon-cyan prose-a:no-underline hover:prose-a:drop-shadow-[0_0_5px_#00FFFF]
           prose-strong:text-white prose-strong:font-bold
           prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
-          prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
+          prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl
+          [&_iframe]:w-full [&_iframe]:!h-[600px] md:[&_iframe]:!h-[1000px] [&_iframe]:rounded-xl [&_iframe]:shadow-[0_0_20px_rgba(0,255,255,0.2)] [&_iframe]:my-8"
         >
           <ReactMarkdown 
             remarkPlugins={[remarkMath]} 

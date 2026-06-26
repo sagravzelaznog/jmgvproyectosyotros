@@ -31,3 +31,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Forzar tamaño de simuladores (GeoGebra) incrustados en Markdown */
+.prose iframe {
+  width: 100% !important;
+  height: 650px !important;
+  min-height: 650px !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2) !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  background-color: white !important;
+  border: 2px solid rgba(0, 255, 255, 0.5) !important;
+}
+
+@media (min-width: 768px) {
+  .prose iframe {
+    height: 900px !important;
+    min-height: 900px !important;
+  }
+}

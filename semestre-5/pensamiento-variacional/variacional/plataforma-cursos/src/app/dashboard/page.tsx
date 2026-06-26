@@ -74,6 +74,7 @@ export default function DashboardPage() {
       <div className="space-y-6">
         {[
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional I", adminOnly: false },
+          { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: true },
           { id: "pensamiento-matematico-1", title: "Pensamiento Matemático I", adminOnly: true }
         ]
         .filter(course => !course.adminOnly || isAdmin)

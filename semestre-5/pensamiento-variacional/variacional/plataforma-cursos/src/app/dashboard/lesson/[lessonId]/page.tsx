@@ -232,92 +232,76 @@ export default function LessonPage() {
           <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-sm leading-tight mb-6">
             {lesson.title.replace(/^SESI[OÓ]N\s+\d+:\s*/i, "")}
           </h1>
-              {/* Controles de Lectura en Voz Alta (TTS) (Oculto para iframes) */}
-          {lesson.courseId !== 'propiedades' && (
-            <div className="flex flex-wrap gap-3 mt-4">
+              {/* Controles de Lectura en Voz Alta (TTS) */}
+          <div className="flex flex-wrap gap-3 mt-4">
+            <button 
+              onClick={() => {
+                if (!window.speechSynthesis) return alert("Tu navegador no soporta lectura en voz alta.");
+                
+                if (isSpeaking) {
+                  if (isPaused) {
+                    window.speechSynthesis.resume();
+                    setIsPaused(false);
+                  } else {
+                    window.speechSynthesis.pause();
+                    setIsPaused(true);
+                  }
+                } else {
+                  playTTS(lesson.content);
+                }
+              }}
+              className="bg-black/50 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+            >
+              {!isSpeaking ? "▶️ Escuchar Lección completa" : (isPaused ? "▶️ Reanudar" : "⏸️ Pausar")}
+            </button>
+            
+            {isSpeaking && (
               <button 
                 onClick={() => {
-                  if (!window.speechSynthesis) return alert("Tu navegador no soporta lectura en voz alta.");
-                  
-                  if (isSpeaking) {
-                    if (isPaused) {
-                      window.speechSynthesis.resume();
-                      setIsPaused(false);
-                    } else {
-                      window.speechSynthesis.pause();
-                      setIsPaused(true);
-                    }
-                  } else {
-                    playTTS(lesson.content);
-                  }
+                  window.speechSynthesis.cancel();
+                  utteranceQueue.current = [];
+                  setIsSpeaking(false);
+                  setIsPaused(false);
                 }}
-                className="bg-black/50 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-black transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+                className="bg-black/50 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-white transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(255,0,127,0.2)]"
               >
-                {!isSpeaking ? "▶️ Escuchar Lección completa" : (isPaused ? "▶️ Reanudar" : "⏸️ Pausar")}
+                ⏹️ Detener
               </button>
-              
-              {isSpeaking && (
-                <button 
-                  onClick={() => {
-                    window.speechSynthesis.cancel();
-                    utteranceQueue.current = [];
-                    setIsSpeaking(false);
-                    setIsPaused(false);
-                  }}
-                  className="bg-black/50 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-white transition-all px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-[0_0_10px_rgba(255,0,127,0.2)]"
-                >
-                  ⏹️ Detener
-                </button>
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </header>
 
-        {lesson.courseId !== 'propiedades' && (
-          <div className="text-center bg-neon-cyan/5 border border-neon-cyan/20 p-3 rounded-xl mb-4 shadow-[0_0_10px_rgba(0,255,255,0.05)]">
-             <p className="text-neon-cyan text-sm tracking-wide font-semibold">💡 Tip: Haz clic en cualquier párrafo, lista o título para que la IA lea solo esa sección.</p>
-          </div>
-        )}
+        <div className="text-center bg-neon-cyan/5 border border-neon-cyan/20 p-3 rounded-xl mb-4 shadow-[0_0_10px_rgba(0,255,255,0.05)]">
+           <p className="text-neon-cyan text-sm tracking-wide font-semibold">💡 Tip: Haz clic en cualquier párrafo, lista o título para que la IA lea solo esa sección.</p>
+        </div>
 
         {/* Contenido Teórico (Masterclass Renderizado con Markdown + HTML) */}
-        {lesson.courseId === 'propiedades' ? (
-          <div className="w-full relative bg-black/20 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(255,0,127,0.15)] border border-neon-pink/20">
-             <div 
-               dangerouslySetInnerHTML={{ __html: lesson.content }} 
-               className="w-full h-full min-h-[80vh] bg-white rounded-xl"
-             />
-          </div>
-        ) : (
-          <article 
-            onClick={(e) => {
-              const target = e.target as HTMLElement;
-              // Buscar el bloque de texto más cercano al que le dieron click
-              const block = target.closest('p, li, h1, h2, h3, h4, blockquote');
-              if (block && block.textContent) {
-                // Leer el documento COMPLETO empezando desde el bloque seleccionado
-                playTTS(lesson.content, block.textContent);
-              }
-            }}
-            className="prose prose-invert prose-lg md:prose-xl max-w-none text-slate-300 cursor-pointer
-            prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight hover:prose-headings:text-neon-cyan/80
-            prose-p:transition-colors hover:prose-p:text-white
-            prose-li:transition-colors hover:prose-li:text-white
-            prose-a:text-neon-cyan prose-a:no-underline hover:prose-a:drop-shadow-[0_0_5px_#00FFFF]
-            prose-strong:text-white prose-strong:font-bold
-            prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
-            prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
+        <article 
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            // Buscar el bloque de texto más cercano al que le dieron click
+            const block = target.closest('p, li, h1, h2, h3, h4, blockquote');
+            if (block && block.textContent) {
+              // Leer el documento COMPLETO empezando desde el bloque seleccionado
+              playTTS(lesson.content, block.textContent);
+            }
+          }}
+          className="prose prose-invert prose-lg md:prose-xl max-w-none text-slate-300 cursor-pointer
+          prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight hover:prose-headings:text-neon-cyan/80
+          prose-p:transition-colors hover:prose-p:text-white
+          prose-li:transition-colors hover:prose-li:text-white
+          prose-a:text-neon-cyan prose-a:no-underline hover:prose-a:drop-shadow-[0_0_5px_#00FFFF]
+          prose-strong:text-white prose-strong:font-bold
+          prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
+          prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
+        >
+          <ReactMarkdown 
+            remarkPlugins={[remarkMath]} 
+            rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
           >
-            <ReactMarkdown 
-              remarkPlugins={[remarkMath]} 
-              rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
-            >
-              {lesson.content.replace(/"(https:\/\/www\.geogebra\.org\/[^"]+)"/gi, (match, url) => {
-                const sep = url.includes('?') ? '&' : '?';
-                return `"${url}${sep}showKeyboardOnFocus=false&preventFocus=true"`;
-              })}
-            </ReactMarkdown>
-          </article>
-        )}
+            {lesson.content}
+          </ReactMarkdown>
+        </article>
 
         {/* Mini-Quiz Interactivo Estilo Cyberpunk */}
         {quiz && quiz.length > 0 && (

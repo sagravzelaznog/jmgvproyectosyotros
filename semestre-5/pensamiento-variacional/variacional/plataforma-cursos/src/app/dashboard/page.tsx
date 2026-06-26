@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 import { useAuth } from "@/components/providers/AuthProvider";
 import Link from "next/link";
@@ -58,6 +58,20 @@ export default function DashboardPage() {
     }
   };
 
+  const handlePublishCourse = async (e: React.MouseEvent, courseId: string) => {
+    e.stopPropagation();
+    if (confirm("¿Estás seguro de que deseas publicar este curso para todos los estudiantes?")) {
+      try {
+        const courseRef = doc(db, "Courses", courseId);
+        await updateDoc(courseRef, { status: "published" });
+        setCourses(courses.map(c => c.id === courseId ? { ...c, status: "published" } : c));
+      } catch (err) {
+        console.error(err);
+        alert("Error al publicar el curso.");
+      }
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -88,6 +102,9 @@ export default function DashboardPage() {
       {courses.map(course => {
         // Asignar colores basados en el atributo color del curso
         const isPink = course.color === 'pink';
+        const isDraft = course.status === 'draft';
+        const disabled = isDraft && !isAdmin;
+
         const colorClasses = {
           iconText: isPink ? 'text-neon-pink' : 'text-indigo-500',
           bgIcon: isPink ? 'bg-neon-pink/10 text-neon-pink' : 'bg-indigo-500/10 text-indigo-400',
@@ -96,24 +113,57 @@ export default function DashboardPage() {
         };
 
         return (
-          <div key={course.id} className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl mb-6 overflow-hidden transition-all duration-300">
+          <div key={course.id} className={`bg-slate-900 border border-slate-800 rounded-2xl shadow-xl mb-6 overflow-hidden transition-all duration-300 ${disabled ? 'opacity-80 grayscale-[30%]' : ''}`}>
             <button 
-              onClick={() => toggleCourse(course.id)}
-              className="w-full flex justify-between items-center p-6 bg-slate-900 hover:bg-slate-800/80 transition-colors text-left focus:outline-none"
+              onClick={() => {
+                if (!disabled) toggleCourse(course.id);
+              }}
+              className={`w-full flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-slate-900 transition-colors text-left focus:outline-none gap-4 md:gap-0 ${!disabled ? 'hover:bg-slate-800/80 cursor-pointer' : 'cursor-not-allowed'}`}
             >
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <svg className={`w-6 h-6 ${colorClasses.iconText}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {isPink ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  )}
-                </svg>
-                {course.title}
-              </h2>
-              <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === course.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              <div className="flex items-center flex-wrap gap-4">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <svg className={`w-6 h-6 ${colorClasses.iconText}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {isPink ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    )}
+                  </svg>
+                  {course.title}
+                </h2>
+                {isDraft && !isAdmin && (
+                  <span className="text-neon-cyan border border-neon-cyan/50 bg-neon-cyan/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    🚀 Nuevo curso por venir
+                  </span>
+                )}
+                {isDraft && isAdmin && (
+                  <span className="text-yellow-500 border border-yellow-500/50 bg-yellow-500/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+                    <span>🛠️ Borrador (Solo Admin)</span>
+                  </span>
+                )}
+              </div>
+              
+              <div className="flex items-center gap-4 w-full md:w-auto justify-end">
+                {isDraft && isAdmin && (
+                  <div 
+                    onClick={(e) => handlePublishCourse(e, course.id)}
+                    className="bg-green-500/20 hover:bg-green-500/40 border border-green-500 text-green-400 text-sm font-bold py-1.5 px-4 rounded-full transition-colors cursor-pointer text-center"
+                  >
+                    Publicar Curso
+                  </div>
+                )}
+                
+                {!disabled && (
+                  <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === course.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+                {disabled && (
+                  <svg className="w-6 h-6 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                )}
+              </div>
             </button>
             
             {activeCourse === course.id && (

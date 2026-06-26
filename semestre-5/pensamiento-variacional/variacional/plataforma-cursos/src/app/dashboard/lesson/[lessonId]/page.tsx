@@ -166,7 +166,7 @@ export default function LessonPage() {
     validChunks.forEach((chunk: string, index: number) => {
       const utterance = new SpeechSynthesisUtterance(chunk.trim());
       utterance.lang = 'es-MX';
-      utterance.rate = 1.7; // Lectura muy rápida (1.3 + 0.4)
+      utterance.rate = 1.36; // Velocidad reducida al 80% de 1.7
       
       if (index === validChunks.length - 1) {
         utterance.onend = () => {

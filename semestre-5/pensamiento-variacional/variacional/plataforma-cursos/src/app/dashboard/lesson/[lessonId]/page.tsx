@@ -311,7 +311,10 @@ export default function LessonPage() {
               remarkPlugins={[remarkMath]} 
               rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
             >
-              {lesson.content}
+              {lesson.content.replace(/"(https:\/\/www\.geogebra\.org\/[^"]+)"/gi, (match, url) => {
+                const sep = url.includes('?') ? '&' : '?';
+                return `"${url}${sep}showKeyboardOnFocus=false&preventFocus=true"`;
+              })}
             </ReactMarkdown>
           </article>
         )}

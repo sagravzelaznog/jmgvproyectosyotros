@@ -90,8 +90,8 @@ async function migrateCourses() {
 
     for (const lesson of propLessons) {
       const docId = `prop_lesson_${lesson.order}`;
-      // Usar un iframe que apunte a los archivos copiados a public/propiedades/
-      const iframeContent = `<iframe src="/propiedades/${lesson.file}" class="w-full h-[100vh] border-0" allowfullscreen></iframe>`;
+      // Usar un iframe que apunte a los archivos copiados a public/recursos_propiedades/
+      const iframeContent = `<iframe src="/recursos_propiedades/${lesson.file}" class="w-full h-[100vh] border-0" allowfullscreen></iframe>`;
       
       await db.collection('Lessons').doc(docId).set({
         title: `SESIÓN ${lesson.order}: ${lesson.title}`,

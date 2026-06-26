@@ -83,7 +83,7 @@ export default function DashboardPage() {
       {/* Curso 1: Pensamiento Variacional I */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl mb-6 overflow-hidden transition-all duration-300">
         <button 
-          onClick={() => toggleCourse('variacional')}
+          onClick={() => toggleCourse('pensamiento-variacional-1')}
           className="w-full flex justify-between items-center p-6 bg-slate-900 hover:bg-slate-800/80 transition-colors text-left focus:outline-none"
         >
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -92,21 +92,21 @@ export default function DashboardPage() {
             </svg>
             Pensamiento Variacional I
           </h2>
-          <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === 'variacional' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === 'pensamiento-variacional-1' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
         
-        {activeCourse === 'variacional' && (
+        {activeCourse === 'pensamiento-variacional-1' && (
           <div className="px-6 pb-6 border-t border-slate-800/50 pt-4">
             {loading ? (
               <div className="animate-pulse space-y-4">
                 <div className="h-16 bg-slate-800 rounded-lg"></div>
                 <div className="h-16 bg-slate-800 rounded-lg"></div>
               </div>
-            ) : modules.filter(m => m.courseId === 'variacional').length > 0 ? (
+            ) : modules.filter(m => m.courseId === 'pensamiento-variacional-1').length > 0 ? (
               <div className="space-y-6">
-                {modules.filter(m => m.courseId === 'variacional').map((mod: any) => {
+                {modules.filter(m => m.courseId === 'pensamiento-variacional-1').map((mod: any) => {
                   const modLessons = lessons.filter(l => l.moduleId === mod.id);
                   return (
                     <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">

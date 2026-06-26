@@ -21,6 +21,8 @@ export default function DashboardPage() {
 
   const daysRemaining = getDaysRemaining();
 
+  const [activeCourse, setActiveCourse] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchContent = async () => {
       try {
@@ -42,6 +44,14 @@ export default function DashboardPage() {
 
     fetchContent();
   }, []);
+
+  const toggleCourse = (courseId: string) => {
+    if (activeCourse === courseId) {
+      setActiveCourse(null);
+    } else {
+      setActiveCourse(courseId);
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -71,119 +81,143 @@ export default function DashboardPage() {
       </div>
 
       {/* Curso 1: Pensamiento Variacional I */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl mb-8">
-        <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
-          <svg className="w-6 h-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl mb-6 overflow-hidden transition-all duration-300">
+        <button 
+          onClick={() => toggleCourse('variacional')}
+          className="w-full flex justify-between items-center p-6 bg-slate-900 hover:bg-slate-800/80 transition-colors text-left focus:outline-none"
+        >
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <svg className="w-6 h-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Pensamiento Variacional I
+          </h2>
+          <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === 'variacional' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
-          Pensamiento Variacional I
-        </h2>
+        </button>
         
-        {loading ? (
-          <div className="animate-pulse space-y-4">
-            <div className="h-16 bg-slate-800 rounded-lg"></div>
-            <div className="h-16 bg-slate-800 rounded-lg"></div>
-          </div>
-        ) : modules.filter(m => m.courseId === 'variacional').length > 0 ? (
-          <div className="space-y-6">
-            {modules.filter(m => m.courseId === 'variacional').map((mod: any) => {
-              const modLessons = lessons.filter(l => l.moduleId === mod.id);
-              return (
-                <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
-                  <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
-                    <h3 className="font-bold text-lg text-white">{mod.title}</h3>
-                    <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
-                      {modLessons.length} Sesiones
-                    </span>
-                  </div>
-                  
-                  <div className="divide-y divide-slate-800">
-                    {modLessons.map((lesson: any) => (
-                      <Link 
-                        key={lesson.id} 
-                        href={`/dashboard/lesson/${lesson.id}`} 
-                        className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-sm">
-                            {lesson.order}
-                          </div>
-                          <span className="text-slate-300 group-hover:text-indigo-300 transition-colors font-medium">
-                            {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
-                          </span>
-                        </div>
-                        <svg className="w-5 h-5 text-slate-600 group-hover:text-indigo-400 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-center py-6 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50">
-            <p className="text-slate-500">Cargando...</p>
+        {activeCourse === 'variacional' && (
+          <div className="px-6 pb-6 border-t border-slate-800/50 pt-4">
+            {loading ? (
+              <div className="animate-pulse space-y-4">
+                <div className="h-16 bg-slate-800 rounded-lg"></div>
+                <div className="h-16 bg-slate-800 rounded-lg"></div>
+              </div>
+            ) : modules.filter(m => m.courseId === 'variacional').length > 0 ? (
+              <div className="space-y-6">
+                {modules.filter(m => m.courseId === 'variacional').map((mod: any) => {
+                  const modLessons = lessons.filter(l => l.moduleId === mod.id);
+                  return (
+                    <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
+                      <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
+                        <h3 className="font-bold text-lg text-white">{mod.title}</h3>
+                        <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
+                          {modLessons.length} Sesiones
+                        </span>
+                      </div>
+                      
+                      <div className="divide-y divide-slate-800">
+                        {modLessons.map((lesson: any) => (
+                          <Link 
+                            key={lesson.id} 
+                            href={`/dashboard/lesson/${lesson.id}`} 
+                            className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-sm">
+                                {lesson.order}
+                              </div>
+                              <span className="text-slate-300 group-hover:text-indigo-300 transition-colors font-medium">
+                                {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
+                              </span>
+                            </div>
+                            <svg className="w-5 h-5 text-slate-600 group-hover:text-indigo-400 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-6 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50">
+                <p className="text-slate-500">No hay contenido de este curso disponible.</p>
+              </div>
+            )}
           </div>
         )}
       </div>
 
       {/* Curso 2: Propiedades Matemáticas */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-        <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
-          <svg className="w-6 h-6 text-neon-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+        <button 
+          onClick={() => toggleCourse('propiedades')}
+          className="w-full flex justify-between items-center p-6 bg-slate-900 hover:bg-slate-800/80 transition-colors text-left focus:outline-none"
+        >
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <svg className="w-6 h-6 text-neon-pink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+            </svg>
+            Propiedades Matemáticas
+          </h2>
+          <svg className={`w-6 h-6 text-slate-400 transform transition-transform duration-300 ${activeCourse === 'propiedades' ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
-          Propiedades Matemáticas
-        </h2>
+        </button>
         
-        {loading ? (
-          <div className="animate-pulse space-y-4">
-            <div className="h-16 bg-slate-800 rounded-lg"></div>
-            <div className="h-16 bg-slate-800 rounded-lg"></div>
-          </div>
-        ) : modules.filter(m => m.courseId === 'propiedades').length > 0 ? (
-          <div className="space-y-6">
-            {modules.filter(m => m.courseId === 'propiedades').map((mod: any) => {
-              const modLessons = lessons.filter(l => l.moduleId === mod.id);
-              return (
-                <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
-                  <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
-                    <h3 className="font-bold text-lg text-white">{mod.title}</h3>
-                    <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
-                      {modLessons.length} Sesiones
-                    </span>
-                  </div>
-                  
-                  <div className="divide-y divide-slate-800">
-                    {modLessons.map((lesson: any) => (
-                      <Link 
-                        key={lesson.id} 
-                        href={`/dashboard/lesson/${lesson.id}`} 
-                        className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-neon-pink/10 text-neon-pink flex items-center justify-center font-bold text-sm">
-                            {lesson.order}
-                          </div>
-                          <span className="text-slate-300 group-hover:text-neon-pink transition-colors font-medium">
-                            {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
-                          </span>
-                        </div>
-                        <svg className="w-5 h-5 text-slate-600 group-hover:text-neon-pink transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-center py-6 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50">
-            <p className="text-slate-500">No hay contenido de este curso disponible.</p>
+        {activeCourse === 'propiedades' && (
+          <div className="px-6 pb-6 border-t border-slate-800/50 pt-4">
+            {loading ? (
+              <div className="animate-pulse space-y-4">
+                <div className="h-16 bg-slate-800 rounded-lg"></div>
+                <div className="h-16 bg-slate-800 rounded-lg"></div>
+              </div>
+            ) : modules.filter(m => m.courseId === 'propiedades').length > 0 ? (
+              <div className="space-y-6">
+                {modules.filter(m => m.courseId === 'propiedades').map((mod: any) => {
+                  const modLessons = lessons.filter(l => l.moduleId === mod.id);
+                  return (
+                    <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
+                      <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
+                        <h3 className="font-bold text-lg text-white">{mod.title}</h3>
+                        <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
+                          {modLessons.length} Sesiones
+                        </span>
+                      </div>
+                      
+                      <div className="divide-y divide-slate-800">
+                        {modLessons.map((lesson: any) => (
+                          <Link 
+                            key={lesson.id} 
+                            href={`/dashboard/lesson/${lesson.id}`} 
+                            className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-neon-pink/10 text-neon-pink flex items-center justify-center font-bold text-sm">
+                                {lesson.order}
+                              </div>
+                              <span className="text-slate-300 group-hover:text-neon-pink transition-colors font-medium">
+                                {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
+                              </span>
+                            </div>
+                            <svg className="w-5 h-5 text-slate-600 group-hover:text-neon-pink transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-6 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50">
+                <p className="text-slate-500">No hay contenido de este curso disponible.</p>
+              </div>
+            )}
           </div>
         )}
       </div>

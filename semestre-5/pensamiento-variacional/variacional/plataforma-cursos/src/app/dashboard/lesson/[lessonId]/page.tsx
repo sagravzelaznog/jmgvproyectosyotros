@@ -286,14 +286,15 @@ export default function LessonPage() {
               playTTS(lesson.content, block.textContent);
             }
           }}
-          className="prose prose-invert prose-lg md:prose-xl max-w-none text-slate-300 cursor-pointer
-          prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight hover:prose-headings:text-neon-cyan/80
-          prose-p:transition-colors hover:prose-p:text-white
-          prose-li:transition-colors hover:prose-li:text-white
-          prose-a:text-neon-cyan prose-a:no-underline hover:prose-a:drop-shadow-[0_0_5px_#00FFFF]
-          prose-strong:text-white prose-strong:font-bold
-          prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
-          prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
+          className="prose prose-invert max-w-none 
+            prose-headings:text-transparent prose-headings:bg-clip-text prose-headings:bg-gradient-to-r prose-headings:from-neon-cyan prose-headings:to-neon-purple 
+            prose-p:text-slate-300 prose-p:text-lg prose-p:leading-relaxed prose-p:tracking-wide
+            prose-strong:text-white prose-strong:font-black prose-strong:tracking-wider
+            prose-li:text-slate-300 prose-li:text-lg prose-li:marker:text-neon-pink
+            prose-ul:border-l-2 prose-ul:border-slate-800 prose-ul:pl-4
+            prose-a:text-neon-cyan hover:prose-a:text-neon-pink prose-a:transition-colors
+            prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
+            prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
         >
           <ReactMarkdown 
             remarkPlugins={[remarkMath]} 

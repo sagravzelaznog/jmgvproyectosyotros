@@ -22,6 +22,7 @@ export default function DashboardPage() {
   const daysRemaining = getDaysRemaining();
 
   const [courses, setCourses] = useState<any[]>([]);
+  const [activeCourse, setActiveCourse] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchContent = async () => {

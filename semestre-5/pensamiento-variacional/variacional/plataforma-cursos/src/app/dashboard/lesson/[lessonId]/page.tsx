@@ -299,7 +299,7 @@ export default function LessonPage() {
             remarkPlugins={[remarkMath]} 
             rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
           >
-            {lesson.content}
+            {lesson.content.replace(/^[ \t]+/gm, '')}
           </ReactMarkdown>
         </article>
 

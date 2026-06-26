@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Trinomios</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0056b3;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .theorem {
+            background-color: #f0f8ff;
+            border-left: 4px solid #4b86db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .theorem-title {
+            color: #2c5282;
+            font-weight: 600;
+            margin-top: 0;
+        }
+        
+        .proof {
+            background-color: #f8f9fa;
+            border-left: 4px solid #48bb78;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .proof-title {
+            color: #2f855a;
+            font-weight: 600;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+	<div class="sidebar-header">
+					<button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+					<a href="index.html" class="sidebar-title">Matemáticas</a>
+	</div>
+	<nav class="sidebar-nav">
+					<a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+					<a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+					<a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+					<a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+					<a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+					<a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+					<a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+					<a href="prop_teoremas.html" class="active"><i>📚</i> Teoremas Fundamentales</a>
+					<a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+					<a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+					<a href="prop_trinomios.html"><i>+</i> Trinomios</a>
+					<a href="prop_binomios.html"><i>×</i> Binomios</a>					
+
+	</nav>
+</div>
+
+<div class="content-wrapper">
+	<div class="class-container">
+					<header>
+									<h1>Trinomios</h1>
+									<div class="back-to-home">
+													<a href="index.html" class="btn-back">
+																	<span class="material-icons-round">home</span>
+																	Volver al Inicio
+													</a>
+									</div>
+					</header>
+
+        <div class="content-area">
+            <p class="instructions">
+                Un <strong>trinomio</strong> es una expresión algebraica de tres términos ($$ax^2 + bx + c$$). <br>
+                Haz clic en cada tarjeta para aprender a decodificar sus secretos.
+            </p>
+
+            <div class="section-divider">1. El Patrón Perfecto</div>
+
+            <div class="property-card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div>
+                        Trinomio Cuadrado Perfecto (TCP)
+                        <span class="tag tag-easy">Fácil</span>
+                    </div>
+                    <span class="indicator">+</span>
+                </div>
+                <div class="card-content">
+                    <h3>¿Qué es?</h3>
+                    <p>Es el resultado de elevar un binomio al cuadrado. Es el trinomio más simétrico y fácil de factorizar.</p>
+                    
+                    <h3>La Prueba de Identificación</h3>
+                    <div class="key-concept">
+                        <p>Para ser un TCP, debe cumplir 3 reglas:</p>
+                        <ol>
+                            <li>El primer término ($$a^2$$) y el último ($$b^2$$) deben tener <strong>raíz cuadrada exacta</strong> y ser positivos.</li>
+                            <li>El término del medio debe ser exactamente el <strong>doble</strong> de la multiplicación de esas raíces ($$2ab$$).</li>
+                        </ol>
+                    </div>
+
+                    <h3>La Propiedad (Fórmula)</h3>
+                    <div class="formula">
+                        $$ a^2 \pm 2ab + b^2 = (a \pm b)^2 $$
+                    </div>
+                    
+                    <h3>Ejemplo Visual</h3>
+                    <p>Analicemos $$x^2 + 6x + 9$$:</p>
+                    <ul>
+                        <li>Raíz del primero: $$\sqrt{x^2} = x$$</li>
+                        <li>Raíz del último: $$\sqrt{9} = 3$$</li>
+                        <li>Prueba del medio: $$2 \cdot (x) \cdot (3) = 6x$$ (¡Coincide!)</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> $$(x+3)^2$$</p>
+                    
+
+[Image of geometric representation of (a+b)^2]
+
+                </div>
+            </div>
+
+            <div class="section-divider">2. El Patrón Estándar (Mónico)</div>
+
+            <div class="property-card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div>
+                        Trinomio de la forma $$x^2 + bx + c$$
+                        <span class="tag tag-medium">Medio</span>
+                    </div>
+                    <span class="indicator">+</span>
+                </div>
+                <div class="card-content">
+                    <h3>El Juego de Suma y Producto</h3>
+                    <p>Aquí el coeficiente principal es 1 (por eso se llama "mónico"). No es un cuadrado perfecto, pero se puede descomponer en dos binomios diferentes.</p>
+                    
+                    <h3>La Estrategia</h3>
+                    <div class="key-concept">
+                        <p>Buscamos dos números, llamémoslos $$p$$ y $$q$$, que cumplan dos condiciones simultáneamente:</p>
+                        <ol>
+                            <li><strong>Multiplicados</strong> den el tercer término ($$c$$).</li>
+                            <li><strong>Sumados</strong> den el segundo término ($$b$$).</li>
+                        </ol>
+                    </div>
+
+                    <h3>La Propiedad</h3>
+                    <div class="formula">
+                        $$ x^2 + (p+q)x + pq = (x+p)(x+q) $$
+                    </div>
+
+                    <h3>Ejemplo Práctico</h3>
+                    <p>Factorizar $$x^2 - 5x + 6$$:</p>
+                    <ul>
+                        <li>Buscamos dos números que multiplicados den $$+6$$. (Opciones: $$1,6$$ o $$2,3$$).</li>
+                        <li>Sumados deben dar $$-5$$. (Deben ser negativos: $$-2$$ y $$-3$$).</li>
+                        <li>Prueba: $$(-2) \cdot (-3) = 6$$ y $$(-2) + (-3) = -5$$.</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> $$(x-2)(x-3)$$</p>
+                </div>
+            </div>
+
+            <div class="section-divider">3. El Patrón Complejo (No Mónico)</div>
+
+            <div class="property-card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div>
+                        Trinomio de la forma $$ax^2 + bx + c$$
+                        <span class="tag tag-hard">Avanzado</span>
+                    </div>
+                    <span class="indicator">+</span>
+                </div>
+                <div class="card-content">
+                    <h3>El Desafío</h3>
+                    <p>Aquí tenemos un número $$a \neq 1$$ al frente (ej. $$2x^2...$$). El método simple de suma/producto falla. Necesitamos el <strong>Método AC</strong> (o método de agrupación).</p>
+                    
+                    <h3>La Estrategia (Método AC)</h3>
+                    <div class="key-concept">
+                        <ol>
+                            <li>Multiplica el primer coeficiente ($$a$$) por el último ($$c$$). Este es tu "Número Clave".</li>
+                            <li>Busca dos números que multiplicados den el "Número Clave" y sumados den el término del medio ($$b$$).</li>
+                            <li><strong>Reescribe</strong> el término del medio usando esos dos números.</li>
+                            <li>Factoriza por <strong>agrupación</strong>.</li>
+                        </ol>
+                    </div>
+
+                    <h3>Ejemplo Paso a Paso</h3>
+                    <p>Factorizar $$2x^2 + 7x + 3$$:</p>
+                    <p>1. <strong>Multiplicar extremos:</strong> $$2 \cdot 3 = 6$$.</p>
+                    <p>2. <strong>Buscar números:</strong> Multiplicados den 6, sumados den 7. Son $$6$$ y $$1$$.</p>
+                    <p>3. <strong>Reescribir el medio:</strong> $$2x^2 + \mathbf{6x + 1x} + 3$$.</p>
+                    <p>4. <strong>Agrupar:</strong> $$(2x^2 + 6x) + (x + 3)$$.</p>
+                    <p>5. <strong>Factor común:</strong> $$2x(x + 3) + 1(x + 3)$$.</p>
+                    <p><strong>Resultado:</strong> $$(2x+1)(x+3)$$</p>
+                </div>
+            </div>
+
+            <div class="section-divider">4. La Herramienta de Diagnóstico</div>
+
+            <div class="property-card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div>
+                        El Discriminante ($$\Delta$$)
+                        <span class="tag tag-medium">Vital</span>
+                    </div>
+                    <span class="indicator">+</span>
+                </div>
+                <div class="card-content">
+                    <h3>¿Se puede factorizar?</h3>
+                    <p>A veces intentas factorizar un trinomio y no puedes. El <strong>Discriminante</strong> te dice de antemano si tiene solución real y qué tipo de solución es.</p>
+                    
+                    <h3>La Fórmula</h3>
+                    <div class="formula">
+                        $$ \Delta = b^2 - 4ac $$
+                    </div>
+
+                    <h3>Las Propiedades</h3>
+                    <ul>
+                        <li>Si $$\Delta > 0$$: El trinomio es factorizable en números reales (2 soluciones distintas).</li>
+                        <li>Si $$\Delta = 0$$: Es un <strong>Trinomio Cuadrado Perfecto</strong> (1 solución repetida).</li>
+                        <li>Si $$\Delta < 0$$: <strong>No se puede factorizar</strong> en los números reales (requiere números complejos).</li>
+                        <li>Si $$\Delta$$ es un <strong>cuadrado perfecto</strong> (ej. 25, 49): Se factoriza con números racionales (enteros/fracciones).</li>
+                    </ul>
+                    
+
+[Image of discriminant graph parabola types]
+
+                </div>
+            </div>
+            
+             <div class="property-card">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div>
+                        Técnica: Completar el Cuadrado
+                        <span class="tag tag-hard">Cálculo</span>
+                    </div>
+                    <span class="indicator">+</span>
+                </div>
+                <div class="card-content">
+                    <h3>La Transformación</h3>
+                    <p>Esta técnica fuerza a cualquier trinomio a convertirse en un binomio al cuadrado más un ajuste. Es fundamental para encontrar el vértice de una parábola y para integrar en cálculo.</p>
+                    
+                    <h3>La Receta</h3>
+                    <p>Para convertir $$x^2 + bx$$ en un cuadrado:</p>
+                    <ol>
+                        <li>Toma el coeficiente $$b$$.</li>
+                        <li>Divídelo entre 2.</li>
+                        <li>Eleva ese resultado al cuadrado.</li>
+                        <li>Suma y resta ese número.</li>
+                    </ol>
+                    
+                    <h3>La Fórmula Visual</h3>
+                    <div class="formula">
+                        $$ x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2 $$
+                    </div>
+                </div>
+            </div>
+
+        </div>
+								<!-- Botón de Volver al Inicio al final -->
+								<div class="back-to-home bottom">
+									<a href="index.html" class="btn-back">
+													<span class="material-icons-round">home</span>
+													Volver al Inicio
+									</a>
+					</div>
+<footer>
+	<p>© JMGV PTEL 2025 Propiedades de los Trinomios. Todos los derechos reservados.</p>
+</footer>
+    </div>
+
+    <script>
+        function toggleCard(headerElement) {
+            // Encuentra el contenido asociado
+            const content = headerElement.nextElementSibling;
+            // Encuentra el indicador
+            const indicator = headerElement.querySelector('.indicator');
+            
+            // Alterna la clase 'active' en el header
+            headerElement.classList.toggle('active');
+
+            // Alterna la clase 'visible' en el contenido
+            if (content.classList.contains('visible')) {
+                // Si está visible, lo ocultamos
+                content.classList.remove('visible');
+                indicator.textContent = '+';
+            } else {
+                // Si está oculto, lo mostramos
+                content.classList.add('visible');
+                indicator.textContent = '−'; // Usamos un signo 'menos'
+            }
+        }
+    </script>
+
+</body>
+</html>

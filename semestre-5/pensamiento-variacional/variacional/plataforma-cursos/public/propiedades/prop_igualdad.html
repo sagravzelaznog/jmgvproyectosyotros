@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Propiedades de la Igualdad</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0056b3;
+            margin: 15px 0;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html" class="active"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <header>
+                <h1>Clase Interactiva: Propiedades de la Igualdad</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">Haz clic en el título de cada propiedad para revelar su definición, fórmula y ejemplo.</p>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad Reflexiva</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Todo número es igual a sí mismo.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$a = a$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si tenemos el número 5, entonces:</p>
+                        <div class="formula">
+                            $$5 = 5$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad Simétrica</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Si un número es igual a otro, entonces el segundo es igual al primero.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\text{Si } a = b, \text{ entonces } b = a$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si sabemos que 3 + 2 = 5, entonces:</p>
+                        <div class="formula">
+                            $$5 = 3 + 2$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad Transitiva</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Si un número es igual a un segundo número y este es igual a un tercero, entonces el primero es igual al tercero.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\text{Si } a = b \text{ y } b = c, \text{ entonces } a = c$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si 2 + 3 = 5 y 5 = 10/2, entonces:</p>
+                        <div class="formula">
+                            $$2 + 3 = \frac{10}{2}$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad de Sustitución</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Si dos cantidades son iguales, una puede ser reemplazada por la otra en cualquier expresión sin cambiar su valor.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\text{Si } a = b, \text{ entonces } a \text{ puede reemplazar a } b \text{ en cualquier expresión}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si x = 5, entonces en la expresión 2x + 3 podemos sustituir x por 5:</p>
+                        <div class="formula">
+                            $$2(5) + 3 = 10 + 3 = 13$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad Aditiva</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Si sumamos la misma cantidad a ambos lados de una igualdad, la igualdad se mantiene.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\text{Si } a = b, \text{ entonces } a + c = b + c$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si x - 3 = 7, podemos sumar 3 a ambos lados:</p>
+                        <div class="formula">
+                            $$x - 3 + 3 = 7 + 3$$
+                            $$x = 10$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>Propiedad Multiplicativa</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Si multiplicamos ambos lados de una igualdad por la misma cantidad (distinta de cero), la igualdad se mantiene.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\text{Si } a = b \text{ y } c \neq 0, \text{ entonces } a \times c = b \times c$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <p>Si x/2 = 4, podemos multiplicar ambos lados por 2:</p>
+                        <div class="formula">
+                            $$\frac{x}{2} \times 2 = 4 \times 2$$
+                            $$x = 8$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Propiedades de la Igualdad. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'left',
+                displayIndent: '2em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>

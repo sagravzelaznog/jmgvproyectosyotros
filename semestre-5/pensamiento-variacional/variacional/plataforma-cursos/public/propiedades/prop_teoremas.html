@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Teoremas Fundamentales</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0056b3;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .theorem {
+            background-color: #f0f8ff;
+            border-left: 4px solid #4b86db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .theorem-title {
+            color: #2c5282;
+            font-weight: 600;
+            margin-top: 0;
+        }
+        
+        .proof {
+            background-color: #f8f9fa;
+            border-left: 4px solid #48bb78;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .proof-title {
+            color: #2f855a;
+            font-weight: 600;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html" class="active"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Teoremas Fundamentales de la Matemática</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora los teoremas fundamentales que son la base de las matemáticas modernas. 
+                    Haz clic en cada teorema para ver su formulación, demostración y aplicaciones.
+                </p>
+
+                <!-- Teorema de Pitágoras -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Teorema de Pitágoras</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="theorem">
+                            <h3 class="theorem-title">Enunciado</h3>
+                            <p>En un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.</p>
+                            
+                            <h3>Fórmula</h3>
+                            <div class="formula">
+                                $$a^2 + b^2 = c^2$$
+                            </div>
+                            
+                            <div class="proof">
+                                <h3 class="proof-title">Demostración Visual</h3>
+                                <p>La demostración más conocida es la del "método del rompecabezas" que muestra cómo reorganizar cuatro triángulos rectángulos idénticos para formar dos cuadrados más pequeños que, sumados, equivalen al cuadrado de la hipotenusa.</p>
+                                <!-- Aquí iría una imagen de la demostración -->
+                            </div>
+                            
+                            <h3>Aplicaciones</h3>
+                            <ul>
+                                <li>Cálculo de distancias en el plano cartesiano</li>
+                                <li>Resolución de problemas de geometría</li>
+                                <li>Fundamento para la trigonometría</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teorema de Tales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Teorema de Tales</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="theorem">
+                            <h3 class="theorem-title">Enunciado</h3>
+                            <p>Si dos rectas cualesquiera son cortadas por rectas paralelas, los segmentos determinados en una de las rectas son proporcionales a los segmentos correspondientes en la otra.</p>
+                            
+                            <h3>Fórmula</h3>
+                            <div class="formula">
+                                $$\frac{AB}{A'B'} = \frac{BC}{B'C'} = \frac{AC}{A'C'}$$
+                            </div>
+                            
+                            <div class="proof">
+                                <h3 class="proof-title">Demostración</h3>
+                                <p>Se basa en la semejanza de triángulos y en las propiedades de las proporciones entre segmentos determinados por rectas paralelas.</p>
+                            </div>
+                            
+                            <h3>Aplicaciones</h3>
+                            <ul>
+                                <li>División de segmentos en partes proporcionales</li>
+                                <li>Cálculo de alturas inaccesibles</li>
+                                <li>Fundamento de la geometría proyectiva</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teorema Fundamental del Cálculo -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Teorema Fundamental del Cálculo</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="theorem">
+                            <h3 class="theorem-title">Primera Parte</h3>
+                            <p>Si f es una función continua en [a, b] y F es una primitiva de f en [a, b], entonces:</p>
+                            <div class="formula">
+                                $$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$
+                            </div>
+                            
+                            <h3 class="theorem-title">Segunda Parte</h3>
+                            <p>Si f es continua en [a, b] y F se define como:</p>
+                            <div class="formula">
+                                $$F(x) = \int_{a}^{x} f(t) \, dt$$
+                            </div>
+                            <p>Entonces F es derivable en (a, b) y F'(x) = f(x) para todo x en (a, b).</p>
+                            
+                            <h3>Aplicaciones</h3>
+                            <ul>
+                                <li>Cálculo de áreas bajo curvas</li>
+                                <li>Resolución de ecuaciones diferenciales</li>
+                                <li>Fundamento del cálculo integral</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Teoremas Fundamentales. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'left',
+                displayIndent: '2em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>

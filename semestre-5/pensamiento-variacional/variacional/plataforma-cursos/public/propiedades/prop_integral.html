@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Propiedades de la Integral</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #184e77;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #184e77;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #e6f2ff;
+            border-left: 4px solid #4d96ff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fefce8;
+            border-left: 4px solid #facc15;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html" class="active"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Propiedades de la Integral</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora las propiedades fundamentales de las integrales. 
+                    Haz clic en cada propiedad para ver su definición, fórmula y ejemplos.
+                </p>
+
+                <!-- Linealidad de la integral -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Linealidad de la integral</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La integral de una suma es la suma de las integrales, y la integral de una constante por una función es la constante por la integral de la función.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\int [a f(x) + b g(x)] \, dx = a \int f(x) \, dx + b \int g(x) \, dx$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Ejemplo de linealidad:</p>
+                            <div class="formula">
+                                $$\int (3x^2 + 2\sin x) \, dx = 3\int x^2 \, dx + 2\int \sin x \, dx = x^3 - 2\cos x + C$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Descomposición de integrales complejas en partes más simples</li>
+                            <li>Cálculo de áreas compuestas</li>
+                            <li>Resolución de ecuaciones diferenciales lineales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Teorema Fundamental del Cálculo -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Teorema Fundamental del Cálculo</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Establece la relación entre derivación e integración, permitiendo calcular integrales definidas a partir de primitivas.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$
+                            $$\text{donde } F'(x) = f(x)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Cálculo de una integral definida:</p>
+                            <div class="formula">
+                                $$\int_{0}^{\pi} \sin x \, dx = [-\cos x]_{0}^{\pi} = (-\cos \pi) - (-\cos 0) = 1 - (-1) = 2$$
+                            </div>
+                        </div>
+                        
+                        <h3>Importancia</h3>
+                        <ul>
+                            <li>Conecta el cálculo diferencial e integral</li>
+                            <li>Permite calcular áreas bajo curvas</li>
+                            <li>Base para el teorema de cambio neto</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Integración por partes -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Integración por partes</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Técnica para integrar el producto de dos funciones, basada en la regla del producto para derivadas.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\int u \, dv = uv - \int v \, du$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Integración por partes de x·eˣ:</p>
+                            <div class="formula">
+                                $$\text{Sea } u = x, dv = e^x dx \Rightarrow du = dx, v = e^x$$
+                                $$\int x e^x \, dx = x e^x - \int e^x \, dx = x e^x - e^x + C = e^x(x - 1) + C$$
+                            </div>
+                        </div>
+                        
+                        <h3>Regla LIATE</h3>
+                        <p>Orden de preferencia para elegir u (de mayor a menor preferencia):</p>
+                        <ul>
+                            <li>Logarítmicas</li>
+                            <li>Inversas trigonométricas</li>
+                            <li>Algebraicas (polinomios)</li>
+                            <li>Trigonométricas</li>
+                            <li>Exponenciales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sustitución trigonométrica -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Sustitución trigonométrica</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Técnica para integrar funciones que contienen expresiones de la forma √(a² - x²), √(a² + x²) o √(x² - a²).</p>
+                        
+                        <h3>Sustituciones comunes</h3>
+                        <div class="formula">
+                            $$\text{Para } \sqrt{a^2 - x^2} \quad \text{usar} \quad x = a \sin \theta$$
+                            $$\text{Para } \sqrt{a^2 + x^2} \quad \text{usar} \quad x = a \tan \theta$$
+                            $$\text{Para } \sqrt{x^2 - a^2} \quad \text{usar} \quad x = a \sec \theta$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Integral con raíz cuadrada:</p>
+                            <div class="formula">
+                                $$\int \frac{dx}{\sqrt{9 - x^2}} = \arcsin\left(\frac{x}{3}\right) + C$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Consejo:</strong> Dibujar un triángulo rectángulo puede ayudar a visualizar la sustitución y simplificar la expresión final.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integrales impropias -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Integrales impropias</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Integrales con intervalos infinitos o con funciones no acotadas en el intervalo de integración.</p>
+                        
+                        <h3>Tipos</h3>
+                        <div class="formula">
+                            $$\int_{a}^{\infty} f(x) \, dx = \lim_{b \to \infty} \int_{a}^{b} f(x) \, dx$$
+                            $$\int_{-\infty}^{b} f(x) \, dx = \lim_{a \to -\infty} \int_{a}^{b} f(x) \, dx$$
+                            $$\int_{a}^{b} f(x) \, dx \quad \text{donde f tiene una asíntota vertical en } c \in [a,b]$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Integral impropia convergente:</p>
+                            <div class="formula">
+                                $$\int_{1}^{\infty} \frac{1}{x^2} \, dx = \lim_{b \to \infty} \left[-\frac{1}{x}\right]_{1}^{b} = \lim_{b \to \infty} \left(1 - \frac{1}{b}\right) = 1$$
+                            </div>
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>¡Cuidado!</strong> No todas las integrales impropias convergen. Es necesario verificar la convergencia antes de calcular su valor.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones de la integral -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>6. Aplicaciones de la integral</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Áreas entre curvas</h3>
+                        <div class="formula">
+                            $$A = \int_{a}^{b} |f(x) - g(x)| \, dx$$
+                        </div>
+                        
+                        <h3>Volúmenes de revolución</h3>
+                        <p><strong>Método de discos:</strong></p>
+                        <div class="formula">
+                            $$V = \pi \int_{a}^{b} [f(x)]^2 \, dx$$
+                        </div>
+                        
+                        <p><strong>Método de capas cilíndricas:</strong></p>
+                        <div class="formula">
+                            $$V = 2\pi \int_{a}^{b} x \cdot f(x) \, dx$$
+                        </div>
+                        
+                        <h3>Longitud de arco</h3>
+                        <div class="formula">
+                            $$L = \int_{a}^{b} \sqrt{1 + [f'(x)]^2} \, dx$$
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> Estas son solo algunas de las muchas aplicaciones del cálculo integral en física, ingeniería, economía y otras ciencias.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Propiedades de la Integral. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

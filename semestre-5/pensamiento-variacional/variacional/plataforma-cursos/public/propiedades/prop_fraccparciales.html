@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Descomposición en Fracciones Parciales</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #1a5276;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #1a5276;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #eaf2f8;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #ebf5fb;
+            border-left: 4px solid #2980b9;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .case-header {
+            background-color: #f2f7fd;
+            padding: 10px 15px;
+            margin: 15px 0 10px;
+            border-left: 4px solid #5d9cec;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+            <a href="prop_derivadas_parciales.html"><i>∂/∂x</i> Derivadas Parciales</a>
+            <a href="prop_fourier.html"><i>ℱ</i> Series de Fourier</a>
+            <a href="prop_fraccparciales.html" class="active"><i>↦</i> Fracciones Parciales</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Descomposición en Fracciones Parciales</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Aprende a descomponer funciones racionales en fracciones más simples para facilitar su integración. 
+                    Haz clic en cada caso para ver ejemplos y procedimientos detallados.
+                </p>
+
+                <!-- Introducción a las Fracciones Parciales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Introducción a las Fracciones Parciales</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>¿Qué son las fracciones parciales?</h3>
+                        <p>La descomposición en fracciones parciales es una técnica que permite expresar una función racional como la suma de fracciones más simples, facilitando su integración o manipulación algebraica.</p>
+                        
+                        <h3>Forma general</h3>
+                        <div class="formula">
+                            $$\frac{P(x)}{Q(x)} = \text{Suma de fracciones más simples}$$
+                        </div>
+                        
+                        <h3>Condiciones iniciales</h3>
+                        <ul>
+                            <li>El grado del numerador P(x) debe ser menor que el del denominador Q(x). Si no es así, primero se debe realizar la división polinómica.</li>
+                            <li>Q(x) debe poder factorizarse en factores lineales y/o cuadráticos irreducibles.</li>
+                        </ul>
+                        
+                        <div class="note">
+                            <strong>Importante:</strong> Esta técnica es especialmente útil para integrar funciones racionales.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 1: Factores Lineales Distintos -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Caso 1: Factores Lineales Distintos</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Forma general</h3>
+                        <div class="formula">
+                            $$\frac{P(x)}{(x-a_1)(x-a_2)\cdots(x-a_n)} = \frac{A_1}{x-a_1} + \frac{A_2}{x-a_2} + \cdots + \frac{A_n}{x-a_n}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Descomponer: $$\frac{3x+5}{(x-1)(x+2)}$$</p>
+                            <div class="step">Paso 1: Establecer la forma de la descomposición</div>
+                            <div class="formula">
+                                $$\frac{3x+5}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}$$
+                            </div>
+                            <div class="step">Paso 2: Multiplicar ambos lados por el denominador común</div>
+                            <div class="formula">
+                                $$3x + 5 = A(x+2) + B(x-1)$$
+                            </div>
+                            <div class="step">Paso 3: Resolver para A y B (usando valores estratégicos de x)</div>
+                            <div class="formula">
+                                $$\text{Si } x = -2: 3(-2) + 5 = B(-2-1) \Rightarrow -1 = -3B \Rightarrow B = \frac{1}{3}$$
+                                $$\text{Si } x = 1: 3(1) + 5 = A(1+2) \Rightarrow 8 = 3A \Rightarrow A = \frac{8}{3}$$
+                            </div>
+                            <div class="step">Paso 4: Escribir la descomposición final</div>
+                            <div class="formula">
+                                $$\frac{3x+5}{(x-1)(x+2)} = \frac{8/3}{x-1} + \frac{1/3}{x+2}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 2: Factores Lineales Repetidos -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Caso 2: Factores Lineales Repetidos</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Forma general</h3>
+                        <div class="formula">
+                            $$\frac{P(x)}{(x-a)^n} = \frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \cdots + \frac{A_n}{(x-a)^n}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Descomponer: $$\frac{x^2 + 2x - 1}{(x+1)^3}$$</p>
+                            <div class="formula">
+                                $$\frac{x^2 + 2x - 1}{(x+1)^3} = \frac{A}{x+1} + \frac{B}{(x+1)^2} + \frac{C}{(x+1)^3}$$
+                            </div>
+                            <div class="step">Solución: A = 1, B = 0, C = -2</div>
+                            <div class="formula">
+                                $$= \frac{1}{x+1} - \frac{2}{(x+1)^3}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 3: Factores Cuadráticos Irreducibles -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Caso 3: Factores Cuadráticos Irreducibles</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Forma general</h3>
+                        <div class="formula">
+                            $$\frac{P(x)}{(ax^2 + bx + c)Q(x)} = \frac{Ax + B}{ax^2 + bx + c} + \text{otros términos}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Descomponer: $$\frac{2x^2 - x + 4}{(x^2 + 1)(x - 2)}$$</p>
+                            <div class="formula">
+                                $$= \frac{Ax + B}{x^2 + 1} + \frac{C}{x - 2}$$
+                            </div>
+                            <div class="step">Solución: A = -1, B = 0, C = 2</div>
+                            <div class="formula">
+                                $$= \frac{-x}{x^2 + 1} + \frac{2}{x - 2}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones en Integración -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Aplicaciones en Integración</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Integración de funciones racionales</h3>
+                        <p>La descomposición en fracciones parciales simplifica enormemente la integración de funciones racionales.</p>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Calcular: $$\int \frac{3x+5}{(x-1)(x+2)} dx$$</p>
+                            <div class="step">Paso 1: Descomponer en fracciones parciales (visto en el Caso 1)</div>
+                            <div class="formula">
+                                $$= \int \left(\frac{8/3}{x-1} + \frac{1/3}{x+2}\right) dx$$
+                            </div>
+                            <div class="step">Paso 2: Integrar cada término por separado</div>
+                            <div class="formula">
+                                $$= \frac{8}{3} \ln|x-1| + \frac{1}{3} \ln|x+2| + C$$
+                            </div>
+                        </div>
+                        
+                        <h3>Consejos para la integración</h3>
+                        <ul>
+                            <li>Siempre verifica si el grado del numerador es menor que el del denominador.</li>
+                            <li>Para factores cuadráticos en el denominador, completa el cuadrado si es necesario.</li>
+                            <li>Recuerda que $\int \frac{1}{x^2 + a^2} dx = \frac{1}{a} \arctan\left(\frac{x}{a}\right) + C$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Fracciones Parciales. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

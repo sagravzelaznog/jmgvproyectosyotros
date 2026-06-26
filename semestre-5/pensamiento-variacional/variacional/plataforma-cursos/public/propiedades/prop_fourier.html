@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Series de Fourier</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #6a0dad;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #6a0dad;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #f0e6ff;
+            border-left: 4px solid #9d4edd;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #f5f0ff;
+            border-left: 4px solid #7b2cbf;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fefce8;
+            border-left: 4px solid #facc15;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .section-title {
+            color: #4a148c;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0d6ff;
+        }
+        
+        .fourier-visualization {
+            background-color: #f9f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+            <a href="prop_derivadas_parciales.html"><i>∂/∂x</i> Derivadas Parciales</a>
+            <a href="prop_fourier.html" class="active"><i>ℱ</i> Series de Fourier</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Series de Fourier</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora las propiedades y aplicaciones de las Series de Fourier, una herramienta poderosa 
+                    para analizar funciones periódicas y señales. Haz clic en cada sección para ver más detalles.
+                </p>
+
+                <!-- Introducción a las Series de Fourier -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Introducción a las Series de Fourier</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Una serie de Fourier es una forma de representar una función periódica como una suma de funciones seno y coseno con diferentes frecuencias.</p>
+                        
+                        <h3>Fórmula General</h3>
+                        <div class="formula">
+                            $$f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left( a_n \cos\left(\frac{2\pi n x}{T}\right) + b_n \sin\left(\frac{2\pi n x}{T}\right) \right)$$
+                        </div>
+                        
+                        <h3>Coeficientes de Fourier</h3>
+                        <div class="formula">
+                            $$a_0 = \frac{2}{T} \int_{-T/2}^{T/2} f(x) \, dx$$
+                            $$a_n = \frac{2}{T} \int_{-T/2}^{T/2} f(x) \cos\left(\frac{2\pi n x}{T}\right) dx$$
+                            $$b_n = \frac{2}{T} \int_{-T/2}^{T/2} f(x) \sin\left(\frac{2\pi n x}{T}\right) dx$$
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> La serie de Fourier converge a f(x) en los puntos donde f es continua, y al promedio de los límites laterales en los puntos de discontinuidad (Teorema de Dirichlet).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedades de las Series de Fourier -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Propiedades de las Series de Fourier</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Linealidad</h3>
+                        <p>Si f(x) y g(x) tienen series de Fourier, entonces αf(x) + βg(x) tiene como coeficientes αaₙ + βbₙ.</p>
+                        
+                        <h3>Desplazamiento Temporal</h3>
+                        <div class="formula">
+                            $$f(x - x_0) \leftrightarrow a_n e^{-i n \omega_0 x_0} + b_n e^{-i n \omega_0 x_0}$$
+                        </div>
+                        
+                        <h3>Escalamiento Temporal</h3>
+                        <div class="formula">
+                            $$f(\alpha x) \leftrightarrow \text{Los coeficientes se escalan por } 1/|\alpha|$$
+                        </div>
+                        
+                        <h3>Derivación</h3>
+                        <div class="formula">
+                            $$f'(x) \leftrightarrow i n \omega_0 (a_n - i b_n)$$
+                        </div>
+                        
+                        <div class="example">
+                            <p>Ejemplo: Onda cuadrada</p>
+                            <div class="formula">
+                                $$f(x) = \frac{4}{\pi} \sum_{n=1,3,5,\ldots}^{\infty} \frac{1}{n} \sin\left(\frac{2\pi n x}{T}\right)$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forma Exponencial Compleja -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Forma Exponencial Compleja</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Las series de Fourier también pueden expresarse usando exponenciales complejas, lo que simplifica muchos cálculos.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$f(x) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega_0 x}$$
+                            $$c_n = \frac{1}{T} \int_{-T/2}^{T/2} f(x) e^{-i n \omega_0 x} dx$$
+                        </div>
+                        
+                        <h3>Relación con la forma trigonométrica</h3>
+                        <div class="formula">
+                            $$c_0 = \frac{a_0}{2}$$
+                            $$c_n = \frac{a_n - i b_n}{2}, \quad c_{-n} = \frac{a_n + i b_n}{2} \quad \text{para } n > 0$$
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Ventaja:</strong> La forma compleja es más compacta y facilita el manejo de las propiedades de las series de Fourier.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones de las Series de Fourier -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Aplicaciones de las Series de Fourier</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Procesamiento de Señales</h3>
+                        <p>Análisis de frecuencias en señales de audio, imágenes y otros tipos de datos.</p>
+                        
+                        <h3>Ecuaciones Diferenciales</h3>
+                        <p>Solución de ecuaciones en derivadas parciales como la ecuación del calor y la ecuación de ondas.</p>
+                        
+                        <h3>Teoría de la Información</h3>
+                        <p>Análisis espectral de señales y teorema de muestreo de Nyquist-Shannon.</p>
+                        
+                        <h3>Óptica y Electromagnetismo</h3>
+                        <p>Análisis de patrones de difracción y propagación de ondas electromagnéticas.</p>
+                        
+                        <div class="fourier-visualization">
+                            <h3>Visualización de una Aproximación de Fourier</h3>
+                            <p>La siguiente animación muestra cómo se aproxima una onda cuadrada mediante la suma de sus armónicos:</p>
+                            <!-- Aquí iría el código para visualizar la serie de Fourier -->
+                            <div style="text-align: center; padding: 20px; background: #fff; border-radius: 8px; margin: 10px 0;">
+                                <div id="fourier-animation" style="width: 100%; height: 300px; margin: 0 auto;">
+                                    <!-- El contenido de la animación se generaría con JavaScript -->
+                                    <p>Animación interactiva de la serie de Fourier</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Series de Fourier. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+            
+            // Aquí iría el código para inicializar la animación de Fourier
+            // Por ejemplo, usando una biblioteca como D3.js o p5.js
+        });
+    </script>
+</body>
+</html>

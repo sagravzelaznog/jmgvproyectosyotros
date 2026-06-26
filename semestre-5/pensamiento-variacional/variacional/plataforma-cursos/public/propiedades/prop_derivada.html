@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Propiedades de la Derivada</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0056b3;
+            margin: 15px 0;
+            overflow: auto;
+        }
+        
+        .card-content h3 {
+            color: #004a99;
+            margin-top: 0;
+            border-bottom: 1px solid #cce5ff;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html" class="active"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Dominando las Propiedades de la Derivada</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Haz clic en cada regla para revelar su fórmula, su intuición pedagógica y un ejemplo.
+                </p>
+
+                <!-- Contenido existente de las tarjetas de propiedades de derivadas -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. El Fundamento: La Definición (Límite)</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>¿Qué es una Derivada?</h3>
+                        <p>Todas las reglas que siguen son "atajos" elegantes que provienen de esta única idea fundamental. La derivada $f'(x)$ de una función $f(x)$ es la <strong>pendiente de la línea tangente</strong> en el punto $x$.</p>
+                        <div class="formula">
+                            $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Intuición:</strong> Mide la <strong>tasa de cambio instantánea</strong>. Si $f(x)$ es tu posición, $f'(x)$ es tu velocidad exacta en ese instante.</p>
+                        </div>
+                        <h3>Ejemplo Gráfico</h3>
+                        <p>Imagina una curva. La derivada en un punto es la pendiente de la línea recta que "roza" la curva en ese único punto.</p>
+                        <!-- <img src="https://source.unsplash.com/random/600x300/?graph,tangent line" alt="Imagen de una línea tangente en una gráfica" class="property-image"> -->
+                    </div>
+                </div>
+    
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Regla de la Constante</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>La derivada de cualquier función constante $c$ es <strong>cero</strong>.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(c) = 0 $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Intuición Pedagógica:</strong> Una función constante como $f(x)=5$ es una <strong>línea perfectamente horizontal</strong>. Su "tasa de cambio" (pendiente) es cero. No sube ni baja.</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <div class="formula">
+                            $$ f(x) = 17 \implies f'(x) = 0 $$
+                            <br>
+                            $$ \frac{d}{dx}(2\pi) = 0 $$
+                        </div>
+                        <!-- <img src="https://source.unsplash.com/random/600x300/?flat horizon,water level" alt="Imagen de un horizonte plano" class="property-image"> -->
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Regla de la Potencia</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>La "bestia de carga" del cálculo. Para derivar $x^n$, "bajas" el exponente para que sea un coeficiente y le restas 1 al exponente.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(x^n) = n \cdot x^{n-1} $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Intuición:</strong> Esta regla es el motor para derivar todos los polinomios. Funciona para cualquier $n$ (entero, fracción, negativo).</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(x^3) = 3x^{3-1} = 3x^2 $$
+                            <br>
+                            $$ \frac{d}{dx}(\sqrt{x}) <br>    
+                            = \frac{d}{dx}(x^{1/2}) <br> = \frac{1}{2}x^{-1/2} <br> = \frac{1}{2\sqrt{x}} $$
+                        </div>
+                        <!-- <img src="https://source.unsplash.com/random/600x300/?engine,gears" alt="Imagen de engranajes" class="property-image"> -->
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Regla del Múltiplo Constante</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>Las constantes que multiplican a una función "sobreviven" a la derivada. Simplemente se quedan esperando fuera.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(c \cdot f(x)) <br> = c \cdot f'(x) $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Intuición Andragógica:</strong> Si $f(x)$ es una curva, $5f(x)$ es la misma curva "estirada" 5 veces más alta. Por lo tanto, en cada punto, su pendiente también es 5 veces más pronunciada.</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(7x^3) = 7 \cdot \frac{d}{dx}(x^3)$$ <br><br> $$ = 7 \cdot (3x^2) = 21x^2 $$
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Regla de la Suma y Resta</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>La derivada es un operador <strong>lineal</strong>. Esto significa que la derivada de una suma es simplemente la suma de las derivadas.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(f(x) \pm g(x))$$ <br> $$ = f'(x) \pm g'(x) $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Intuición:</strong> Si tu tasa de ingreso total es la suma de dos trabajos ($f(x) + g(x)$), entonces la tasa a la que *cambia* tu ingreso ($ (f+g)' $) es la suma de las tasas de cambio de cada trabajo ($f' + g'$).</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <p>Esta regla, junto con la de la Potencia, nos permite derivar cualquier polinomio.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(x^2 + 5x - 3)$$ <br> $$ = \frac{d}{dx}(x^2) + \frac{d}{dx}(5x) - \frac{d}{dx}(3)$$ <br> $$ = (2x) + (5) - (0) = 2x + 5 $$
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>6. Regla del Producto</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>¡Cuidado! <strong>No</strong> es $f' \cdot g'$. Es "la derivada del primero por el segundo sin derivar, más el primero sin derivar por la derivada del segundo".</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(f(x)g(x)) = f'(x)g(x) + f(x)g'(x) $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Analogía del Rectángulo Creciente:</strong> Imagina un rectángulo con lados $f$ y $g$. Su área es $A = f \cdot g$. Si ambos lados están creciendo, ¿qué tan rápido crece el área?</p>
+                            <ul>
+                                <li>El área crece por $f'$ (el cambio del primer lado) multiplicado por $g$ (el segundo lado).</li>
+                                <li><strong>MÁS</strong> el área que crece por $g'$ (el cambio del segundo lado) multiplicado por $f$ (el primer lado).</li>
+                            </ul>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(x^2 \cdot \sin(x)) = (2x)(\sin(x)) + (x^2)(\cos(x)) $$
+                        </div>
+                        <!-- <img src="https://source.unsplash.com/random/600x300/?rectangle,area,growth" alt="Imagen de un área rectangular" class="property-image"> -->
+                    </div>
+                </div>
+    
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>7. Regla del Cociente</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>Una de las más complejas. La mnemotecnia es: "El de abajo por la derivada del de arriba, MENOS el de arriba por la derivada del de abajo, TODO sobre el de abajo al cuadrado".</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right) = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Dato Clave:</strong> Esta regla es en realidad una combinación de la Regla del Producto y la Regla de la Cadena (derivando $f \cdot g^{-1}$). El signo negativo aparece porque la derivada de $g^{-1}$ introduce un signo menos.</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <div class="formula">
+                            $$ \frac{d}{dx}\left(\frac{x}{\cos(x)}\right) = \frac{(1)(\cos(x)) - (x)(-\sin(x))}{[\cos(x)]^2} $$
+                            $$ = \frac{\cos(x) + x\sin(x)}{\cos^2(x)} $$
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>8. Regla de la Cadena (La Más Importante)</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>La Regla</h3>
+                        <p>Se usa para derivar <strong>funciones compuestas</strong> (una función "dentro" de otra). Es la regla más poderosa de todas.</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(f(g(x))) = f'(g(x)) \cdot g'(x) $$
+                        </div>
+                        <div class="intuition">
+                            <p><strong>Analogía de las Muñecas Rusas (Matryoshka):</strong></p>
+                            <ol>
+                                <li>Derivas la función "de afuera" ( $f'$ ), pero dejas la función "de adentro" ($g(x)$) intacta.</li>
+                                <li>Luego, <strong>multiplicas</strong> todo por la derivada de la función "de adentro" ($g'$).</li>
+                            </ol>
+                            <p>Es como pelar una cebolla, capa por capa, de afuera hacia adentro.</p>
+                        </div>
+                        <h3>Ejemplo</h3>
+                        <p>Para derivar $\sin(x^3)$:</p>
+                        <p>Función de afuera: $\sin(u)$ (cuya derivada es $\cos(u)$)</p>
+                        <p>Función de adentro: $u = x^3$ (cuya derivada es $3x^2$)</p>
+                        <div class="formula">
+                            $$ \frac{d}{dx}(\sin(x^3)) = \underbrace{\cos(x^3)}_{\text{Derivada de la de afuera}} \cdot \underbrace{(3x^2)}_{\text{Derivada de la de adentro}} $$
+                        </div>
+                        <!-- <img src="https://source.unsplash.com/random/600x300/?nested dolls,chain links" alt="Imagen de muñecas rusas anidadas" class="property-image"> -->
+                    </div>
+                </div>
+                <!-- Más tarjetas de propiedades de derivadas... -->
+                
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Propiedades de la Derivada. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'left',
+                displayIndent: '2em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>

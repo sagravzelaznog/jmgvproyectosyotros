@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Transformada de Laplace</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #8e44ad;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #8e44ad;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #f5eef8;
+            border-left: 4px solid #9b59b6;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #f0e6f9;
+            border-left: 4px solid #8e44ad;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #f9ebea;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #8e44ad;
+        }
+        
+        .theorem {
+            background-color: #eaf2f8;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .definition {
+            background-color: #e8f8f5;
+            border-left: 4px solid #1abc9c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+            <a href="prop_derivadas_parciales.html"><i>∂/∂x</i> Derivadas Parciales</a>
+            <a href="prop_fourier.html"><i>ℱ</i> Series de Fourier</a>
+            <a href="prop_fraccparciales.html"><i>↦</i> Fracciones Parciales</a>
+            <a href="prop_identidadestrigono.html"><i>θ</i> Identidades Trigonométricas</a>
+            <a href="prop_integracionporpartes.html"><i>∫u dv</i> Integración por Partes</a>
+            <a href="prop_laplace.html" class="active"><i>ℒ</i> Transformada de Laplace</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Transformada de Laplace</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora las propiedades y aplicaciones de la Transformada de Laplace, una herramienta poderosa para resolver ecuaciones diferenciales y analizar sistemas lineales.
+                </p>
+
+                <!-- Definición y Conceptos Básicos -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Definición y Conceptos Básicos</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La Transformada de Laplace de una función f(t) definida para t ≥ 0 es la función F(s) definida por:</p>
+                        <div class="formula">
+                            $$\mathcal{L}\{f(t)\} = F(s) = \int_{0}^{\infty} e^{-st} f(t) \, dt$$
+                        </div>
+                        
+                        <div class="definition">
+                            <h4>Condiciones de Existencia</h4>
+                            <p>La Transformada de Laplace existe si la integral converge. Condiciones suficientes:</p>
+                            <ol>
+                                <li>f(t) es continua por partes en [0, ∞)</li>
+                                <li>Existen constantes M > 0 y a ≥ 0 tales que |f(t)| ≤ Me^{at} para todo t ≥ 0</li>
+                            </ol>
+                        </div>
+                        
+                        <h3>Ejemplo Básico</h3>
+                        <div class="example">
+                            <p>Calcular la Transformada de Laplace de f(t) = 1:</p>
+                            <div class="formula">
+                                $$\mathcal{L}\{1\} = \int_{0}^{\infty} e^{-st} \cdot 1 \, dt = \left[ -\frac{1}{s} e^{-st} \right]_{0}^{\infty} = \frac{1}{s} \quad \text{para } s > 0$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedades Fundamentales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Propiedades Fundamentales</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Linealidad</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{a f(t) + b g(t)\} = a \mathcal{L}\{f(t)\} + b \mathcal{L}\{g(t)\}$$
+                        </div>
+                        
+                        <h3>Primer Teorema de Traslación</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{e^{at} f(t)\} = F(s - a)$$
+                        </div>
+                        
+                        <h3>Segundo Teorema de Traslación (Función Escalón)</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{u(t-a)f(t-a)\} = e^{-as}F(s)$$
+                            $$\text{donde } u(t-a) = \begin{cases} 0, & t < a \\ 1, & t \geq a \end{cases}$$
+                        </div>
+                        
+                        <h3>Derivada en el Dominio del Tiempo</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{f'(t)\} = sF(s) - f(0)$$
+                            $$\mathcal{L}\{f''(t)\} = s^2F(s) - sf(0) - f'(0)$$
+                        </div>
+                        
+                        <h3>Integral en el Dominio del Tiempo</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\left\{ \int_{0}^{t} f(\tau) \, d\tau \right\} = \frac{F(s)}{s}$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transformadas de Funciones Comunes -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Transformadas de Funciones Comunes</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="transform-table">
+                                <thead>
+                                    <tr>
+                                        <th>f(t)</th>
+                                        <th>F(s) = ℒ{f(t)}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1/s</td>
+                                    </tr>
+                                    <tr>
+                                        <td>t^n (n entero positivo)</td>
+                                        <td>n!/s^(n+1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>e^(at)</td>
+                                        <td>1/(s-a)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sin(at)</td>
+                                        <td>a/(s² + a²)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>cos(at)</td>
+                                        <td>s/(s² + a²)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>sinh(at)</td>
+                                        <td>a/(s² - a²)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>cosh(at)</td>
+                                        <td>s/(s² - a²)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>t^n e^(at)</td>
+                                        <td>n!/(s-a)^(n+1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>e^(at) sin(bt)</td>
+                                        <td>b/((s-a)² + b²)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>e^(at) cos(bt)</td>
+                                        <td>(s-a)/((s-a)² + b²)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teoremas Adicionales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Teoremas Adicionales</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Teorema de la Convolución</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{f * g\} = \mathcal{L}\{f(t)\} \cdot \mathcal{L}\{g(t)\} = F(s) \cdot G(s)$$
+                            $$\text{donde } (f * g)(t) = \int_{0}^{t} f(\tau)g(t-\tau) \, d\tau$$
+                        </div>
+                        
+                        <h3>Teorema del Valor Inicial</h3>
+                        <div class="formula">
+                            $$\lim_{t \to 0^+} f(t) = \lim_{s \to \infty} sF(s)$$
+                        </div>
+                        
+                        <h3>Teorema del Valor Final</h3>
+                        <div class="formula">
+                            $$\lim_{t \to \infty} f(t) = \lim_{s \to 0^+} sF(s)$$
+                            <p>Válido si todos los polos de sF(s) están en el semiplano izquierdo del plano complejo.</p>
+                        </div>
+                        
+                        <h3>Derivada en el Dominio de s</h3>
+                        <div class="formula">
+                            $$\mathcal{L}\{t^n f(t)\} = (-1)^n \frac{d^n}{ds^n} F(s)$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Aplicaciones Prácticas</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Solución de Ecuaciones Diferenciales</h3>
+                        <p>La Transformada de Laplace convierte ecuaciones diferenciales en ecuaciones algebraicas, que son más fáciles de resolver.</p>
+                        
+                        <div class="example">
+                            <p>Resolver la ecuación diferencial: y'' + 3y' + 2y = 0, con y(0) = 1, y'(0) = 0</p>
+                            <div class="step">Aplicamos la Transformada de Laplace a ambos lados:</div>
+                            <div class="formula">
+                                $$s^2Y(s) - sy(0) - y'(0) + 3[sY(s) - y(0)] + 2Y(s) = 0$$
+                                $$(s^2 + 3s + 2)Y(s) - s - 3 = 0$$
+                                $$Y(s) = \frac{s + 3}{s^2 + 3s + 2} = \frac{s + 3}{(s + 1)(s + 2)}$$
+                            </div>
+                            <div class="step">Aplicamos fracciones parciales:</div>
+                            <div class="formula">
+                                $$Y(s) = \frac{2}{s + 1} - \frac{1}{s + 2}$$
+                            </div>
+                            <div class="step">Aplicamos la Transformada Inversa de Laplace:</div>
+                            <div class="formula">
+                                $$y(t) = 2e^{-t} - e^{-2t}$$
+                            </div>
+                        </div>
+                        
+                        <h3>Análisis de Circuitos Eléctricos</h3>
+                        <p>La Transformada de Laplace se utiliza para analizar circuitos RLC y sistemas de control.</p>
+                        
+                        <h3>Mecánica y Vibraciones</h3>
+                        <p>Análisis de sistemas masa-resorte-amortiguador y otros sistemas mecánicos.</p>
+                        
+                        <div class="note">
+                            <strong>Consejo:</strong> Para dominar la Transformada de Laplace, es fundamental practicar con diversos ejemplos y aplicaciones. Comienza con funciones simples y avanza gradualmente a problemas más complejos.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transformada Inversa de Laplace -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>6. Transformada Inversa de Laplace</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Dada F(s), la Transformada Inversa de Laplace f(t) se define como:</p>
+                        <div class="formula">
+                            $$\mathcal{L}^{-1}\{F(s)\} = f(t) = \frac{1}{2\pi i} \lim_{T \to \infty} \int_{\gamma - iT}^{\gamma + iT} e^{st} F(s) \, ds$$
+                        </div>
+                        <p>Donde γ es un número real mayor que la parte real de todas las singularidades de F(s).</p>
+                        
+                        <h3>Métodos para Calcular la Inversa</h3>
+                        <ol>
+                            <li><strong>Uso de Tablas:</strong> Identificar F(s) en tablas de transformadas conocidas.</li>
+                            <li><strong>Fracciones Parciales:</strong> Descomponer F(s) en fracciones más simples.</li>
+                            <li><strong>Teorema de Convolución:</strong> Para productos de transformadas.</li>
+                            <li><strong>Teorema de los Residuos:</strong> Para funciones con polos aislados.</li>
+                        </ol>
+                        
+                        <h3>Ejemplo de Cálculo</h3>
+                        <div class="example">
+                            <p>Calcular la transformada inversa de: $$F(s) = \frac{2s + 5}{s^2 + 5s + 6}$$</p>
+                            <div class="step">Factorizamos el denominador:</div>
+                            <div class="formula">
+                                $$F(s) = \frac{2s + 5}{(s + 2)(s + 3)}$$
+                            </div>
+                            <div class="step">Aplicamos fracciones parciales:</div>
+                            <div class="formula">
+                                $$\frac{2s + 5}{(s + 2)(s + 3)} = \frac{A}{s + 2} + \frac{B}{s + 3}$$
+                                $$2s + 5 = A(s + 3) + B(s + 2)$$
+                                $$\text{Resolviendo: } A = 1, B = 1$$
+                                $$F(s) = \frac{1}{s + 2} + \frac{1}{s + 3}$$
+                            </div>
+                            <div class="step">Aplicamos la transformada inversa:</div>
+                            <div class="formula">
+                                $$f(t) = \mathcal{L}^{-1}\left\{\frac{1}{s + 2}\right\} + \mathcal{L}^{-1}\left\{\frac{1}{s + 3}\right\} = e^{-2t} + e^{-3t}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© JMGV PTEL 2025 Transformada de Laplace. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

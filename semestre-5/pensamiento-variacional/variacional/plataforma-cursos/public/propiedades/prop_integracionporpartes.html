@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Integración por Partes</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #e67e22;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #e67e22;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #fdf2e9;
+            border-left: 4px solid #d35400;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+        }
+        
+        .mnemonic {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+            <a href="prop_derivadas_parciales.html"><i>∂/∂x</i> Derivadas Parciales</a>
+            <a href="prop_fourier.html"><i>ℱ</i> Series de Fourier</a>
+            <a href="prop_fraccparciales.html"><i>↦</i> Fracciones Parciales</a>
+            <a href="prop_identidadestrigono.html"><i>θ</i> Identidades Trigonométricas</a>
+            <a href="prop_integracionporpartes.html" class="active"><i>∫u dv</i> Integración por Partes</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Integración por Partes</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Aprende la técnica de integración por partes, una herramienta poderosa para integrar productos de funciones.
+                    Haz clic en cada sección para ver ejemplos y estrategias detalladas.
+                </p>
+
+                <!-- Fórmula Básica -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Fórmula de Integración por Partes</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Fórmula Fundamental</h3>
+                        <div class="formula">
+                            $$\int u \, dv = uv - \int v \, du$$
+                        </div>
+                        
+                        <h3>Demostración</h3>
+                        <p>La fórmula se deriva de la regla del producto para derivadas:</p>
+                        <div class="formula">
+                            $$\frac{d}{dx}(uv) = u \frac{dv}{dx} + v \frac{du}{dx}$$
+                            $$d(uv) = u \, dv + v \, du$$
+                            $$u \, dv = d(uv) - v \, du$$
+                            $$\int u \, dv = uv - \int v \, du$$
+                        </div>
+                        
+                        <div class="mnemonic">
+                            <strong>Regla mnemotécnica:</strong> "Un Día Vi Una Vaca Vestida De Uniforme"
+                            <div>u = u</div>
+                            <div>dv = dv</div>
+                            <div>v = ∫dv</div>
+                            <div>du = du</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estrategia LIATE -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Estrategia LIATE para Elegir u y dv</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Regla LIATE</h3>
+                        <p>Orden de preferencia para elegir u (de mayor a menor preferencia):</p>
+                        <ol>
+                            <li><strong>L</strong>ogarítmicas (ln x, log x)</li>
+                            <li><strong>I</strong>nversas trigonométricas (arcsin x, arctan x, etc.)</li>
+                            <li><strong>A</strong>lgebraicas (polinomios, potencias de x)</li>
+                            <li><strong>T</strong>rigonométricas (sin x, cos x, etc.)</li>
+                            <li><strong>E</strong>xponenciales (eˣ, aˣ)</li>
+                        </ol>
+                        
+                        <h3>Ejemplo 1</h3>
+                        <div class="example">
+                            <p>Calcular: $$\int x e^x \, dx$$</p>
+                            <div class="step">Según LIATE: u = x (algebraica) y dv = eˣ dx (exponencial)</div>
+                            <div class="formula">
+                                $$u = x \quad \Rightarrow \quad du = dx$$
+                                $$dv = e^x dx \quad \Rightarrow \quad v = e^x$$
+                                $$\int x e^x \, dx = x e^x - \int e^x \, dx = x e^x - e^x + C = e^x(x - 1) + C$$
+                            </div>
+                        </div>
+                        
+                        <h3>Ejemplo 2</h3>
+                        <div class="example">
+                            <p>Calcular: $$\int x^2 \ln x \, dx$$</p>
+                            <div class="step">Según LIATE: u = ln x (logarítmica) y dv = x² dx (algebraica)</div>
+                            <div class="formula">
+                                $$u = \ln x \quad \Rightarrow \quad du = \frac{1}{x} dx$$
+                                $$dv = x^2 dx \quad \Rightarrow \quad v = \frac{x^3}{3}$$
+                                $$\int x^2 \ln x \, dx = \frac{x^3}{3} \ln x - \int \frac{x^3}{3} \cdot \frac{1}{x} dx = \frac{x^3}{3} \ln x - \frac{1}{3} \int x^2 \, dx$$
+                                $$= \frac{x^3}{3} \ln x - \frac{x^3}{9} + C = \frac{x^3}{9} (3 \ln x - 1) + C$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integración por Partes Múltiple -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Integración por Partes Múltiple</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Cuando aplicar múltiples veces</h3>
+                        <p>Algunas integrales requieren aplicar integración por partes varias veces, especialmente cuando el integrando contiene potencias de x multiplicadas por funciones trigonométricas o exponenciales.</p>
+                        
+                        <h3>Ejemplo: Integral con x²</h3>
+                        <div class="example">
+                            <p>Calcular: $$\int x^2 e^x \, dx$$</p>
+                            <div class="step">Primera aplicación (u = x², dv = eˣ dx):</div>
+                            <div class="formula">
+                                $$u = x^2 \quad \Rightarrow \quad du = 2x \, dx$$
+                                $$dv = e^x dx \quad \Rightarrow \quad v = e^x$$
+                                $$\int x^2 e^x \, dx = x^2 e^x - \int 2x e^x \, dx$$
+                            </div>
+                            <div class="step">Segunda aplicación para la nueva integral (u = 2x, dv = eˣ dx):</div>
+                            <div class="formula">
+                                $$u = 2x \quad \Rightarrow \quad du = 2 \, dx$$
+                                $$dv = e^x dx \quad \Rightarrow \quad v = e^x$$
+                                $$\int 2x e^x \, dx = 2x e^x - \int 2 e^x \, dx = 2x e^x - 2e^x + C$$
+                            </div>
+                            <div class="step">Combinando resultados:</div>
+                            <div class="formula">
+                                $$\int x^2 e^x \, dx = x^2 e^x - (2x e^x - 2e^x) + C = e^x(x^2 - 2x + 2) + C$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casos Especiales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Casos Especiales y Trucos</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Integrales Cíclicas</h3>
+                        <p>Algunas integrales, como ∫ eˣ sin x dx, requieren integración por partes dos veces y luego resolver para la integral original.</p>
+                        
+                        <div class="example">
+                            <p>Calcular: $$\int e^x \sin x \, dx$$</p>
+                            <div class="formula">
+                                $$\text{Sea } I = \int e^x \sin x \, dx$$
+                                $$u = \sin x \quad \Rightarrow \quad du = \cos x \, dx$$
+                                $$dv = e^x dx \quad \Rightarrow \quad v = e^x$$
+                                $$I = e^x \sin x - \int e^x \cos x \, dx$$
+                            </div>
+                            <div class="step">Aplicar integración por partes nuevamente a la nueva integral:</div>
+                            <div class="formula">
+                                $$u = \cos x \quad \Rightarrow \quad du = -\sin x \, dx$$
+                                $$dv = e^x dx \quad \Rightarrow \quad v = e^x$$
+                                $$I = e^x \sin x - \left( e^x \cos x + \int e^x \sin x \, dx \right)$$
+                                $$I = e^x (\sin x - \cos x) - I$$
+                                $$2I = e^x (\sin x - \cos x)$$
+                                $$I = \frac{e^x (\sin x - \cos x)}{2} + C$$
+                            </div>
+                        </div>
+                        
+                        <h3>Integrales con ln x</h3>
+                        <div class="example">
+                            <p>Calcular: $$\int \ln x \, dx$$</p>
+                            <div class="formula">
+                                $$u = \ln x \quad \Rightarrow \quad du = \frac{1}{x} dx$$
+                                $$dv = dx \quad \Rightarrow \quad v = x$$
+                                $$\int \ln x \, dx = x \ln x - \int x \cdot \frac{1}{x} dx = x \ln x - x + C = x(\ln x - 1) + C$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Aplicaciones Prácticas</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>En Física</h3>
+                        <p>La integración por partes se utiliza en:</p>
+                        <ul>
+                            <li>Cálculo de centros de masa</li>
+                            <li>Momentos de inercia</li>
+                            <li>Solución de ecuaciones diferenciales en mecánica cuántica</li>
+                        </ul>
+                        
+                        <h3>En Probabilidad y Estadística</h3>
+                        <p>Cálculo de valores esperados y momentos de distribuciones de probabilidad.</p>
+                        
+                        <h3>En Ingeniería</h3>
+                        <p>Análisis de señales y sistemas, procesamiento de imágenes, y más.</p>
+                        
+                        <div class="note">
+                            <strong>Consejo:</strong> La práctica constante es clave para dominar la integración por partes. Intenta resolver diversos ejercicios aplicando la regla LIATE y los trucos aprendidos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botón de Volver al Inicio al final -->
+            <div class="back-to-home bottom">
+                <a href="index.html" class="btn-back">
+                    <span class="material-icons-round">home</span>
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© JMGV PTEL 2025 Integración por Partes. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

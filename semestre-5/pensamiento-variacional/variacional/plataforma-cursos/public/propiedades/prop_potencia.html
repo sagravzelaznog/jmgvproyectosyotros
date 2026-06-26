@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Propiedades de las Potencias</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #fee;
+            border-left: 4px solid #dc3545;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #e7f5ff;
+            border-left: 4px solid #228be6;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fff3bf;
+            border-left: 4px solid #ffd43b;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html" class="active"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Propiedades de las Potencias</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora las propiedades fundamentales de las potencias. 
+                    Haz clic en cada propiedad para ver su definición, fórmula y ejemplos.
+                </p>
+
+                <!-- Multiplicación de potencias de igual base -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Multiplicación de potencias de igual base</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Al multiplicar potencias de la misma base, se suman los exponentes.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$a^m \times a^n = a^{m+n}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Multiplicar potencias con la misma base:</p>
+                            <div class="formula">
+                                $$2^3 \times 2^4 = 2^{3+4} = 2^7 = 128$$
+                                $$5^2 \times 5^3 = 5^{2+3} = 5^5 = 3125$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Simplificación de expresiones algebraicas</li>
+                            <li>Cálculo de intereses compuestos</li>
+                            <li>Notación científica</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- División de potencias de igual base -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. División de potencias de igual base</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Al dividir potencias de la misma base, se restan los exponentes.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\frac{a^m}{a^n} = a^{m-n} \quad (a \neq 0)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Dividir potencias con la misma base:</p>
+                            <div class="formula">
+                                $$\frac{3^5}{3^2} = 3^{5-2} = 3^3 = 27$$
+                                $$\frac{10^7}{10^4} = 10^{7-4} = 10^3 = 1000$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> Si el exponente del numerador es menor que el del denominador, 
+                            el resultado tendrá exponente negativo, que equivale a 1 sobre la potencia con exponente positivo.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Potencia de una potencia -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Potencia de una potencia</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Al elevar una potencia a otra potencia, se multiplican los exponentes.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$(a^m)^n = a^{m \times n}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Elevar una potencia a otra potencia:</p>
+                            <div class="formula">
+                                $$(2^3)^4 = 2^{3 \times 4} = 2^{12} = 4096$$
+                                $$(5^2)^3 = 5^{2 \times 3} = 5^6 = 15625$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Simplificación de expresiones con exponentes múltiples</li>
+                            <li>Cálculo de crecimiento exponencial compuesto</li>
+                            <li>Álgebra de funciones exponenciales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Potencia de un producto -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Potencia de un producto</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La potencia de un producto es igual al producto de las potencias de los factores.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$(a \times b)^n = a^n \times b^n$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Elevar un producto a una potencia:</p>
+                            <div class="formula">
+                                $$(2 \times 3)^4 = 2^4 \times 3^4 = 16 \times 81 = 1296$$
+                                $$(5x)^2 = 5^2 \times x^2 = 25x^2$$
+                            </div>
+                        </div>
+                        
+                        <h3>Importancia</h3>
+                        <ul>
+                            <li>Fundamental para la factorización de expresiones algebraicas</li>
+                            <li>Útil en cálculos con notación científica</li>
+                            <li>Base para entender raíces de productos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Potencia de un cociente -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Potencia de un cociente</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La potencia de un cociente es igual al cociente de la potencia del numerador entre la potencia del denominador.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n} \quad (b \neq 0)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Elevar un cociente a una potencia:</p>
+                            <div class="formula">
+                                $$\left(\frac{3}{4}\right)^2 = \frac{3^2}{4^2} = \frac{9}{16}$$
+                                $$\left(\frac{2x}{5}\right)^3 = \frac{(2x)^3}{5^3} = \frac{8x^3}{125}$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Simplificación de fracciones complejas</li>
+                            <li>Resolución de ecuaciones racionales</li>
+                            <li>Cálculo de probabilidades</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exponente cero -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>6. Exponente cero</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Cualquier número distinto de cero elevado a la potencia cero es igual a uno.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$a^0 = 1 \quad (a \neq 0)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Ejemplos de exponente cero:</p>
+                            <div class="formula">
+                                $$5^0 = 1$$
+                                $$(-3)^0 = 1$$
+                                $$(\pi)^0 = 1$$
+                            </div>
+                        </div>
+                        
+                        <div class="warning">
+                            <strong>¡Cuidado!</strong> La expresión $0^0$ es una forma indeterminada en matemáticas.
+                        </div>
+                        
+                        <h3>Demostración</h3>
+                        <p>Usando la propiedad de división de potencias:</p>
+                        <div class="formula">
+                            $$a^0 = a^{n-n} = \frac{a^n}{a^n} = 1$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exponente negativo -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>7. Exponente negativo</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Un exponente negativo indica el recíproco de la base elevada al valor absoluto del exponente.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$a^{-n} = \frac{1}{a^n} \quad (a \neq 0)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Convertir exponentes negativos a positivos:</p>
+                            <div class="formula">
+                                $$2^{-3} = \frac{1}{2^3} = \frac{1}{8}$$
+                                $$\left(\frac{3}{4}\right)^{-2} = \left(\frac{4}{3}\right)^2 = \frac{16}{9}$$
+                            </div>
+                        </div>
+                        
+                        <h3>Importancia</h3>
+                        <ul>
+                            <li>Permite trabajar con cantidades muy pequeñas</li>
+                            <li>Fundamental en notación científica</li>
+                            <li>Base para funciones exponenciales decrecientes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exponente fraccionario -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>8. Exponente fraccionario (Raíces)</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Un exponente fraccionario representa una raíz. El denominador de la fracción indica el índice de la raíz.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$a^{\frac{m}{n}} = \sqrt[n]{a^m} = (\sqrt[n]{a})^m$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Convertir exponentes fraccionarios a radicales:</p>
+                            <div class="formula">
+                                $$8^{\frac{2}{3}} = (\sqrt[3]{8})^2 = 2^2 = 4$$
+                                $$x^{\frac{1}{2}} = \sqrt{x}$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> Cuando el exponente es 1/2, se puede escribir simplemente como raíz cuadrada.
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Conversión entre notación de exponentes y radicales</li>
+                            <li>Simplificación de expresiones con raíces</li>
+                            <li>Resolución de ecuaciones exponenciales y radicales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Propiedades de las Potencias. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

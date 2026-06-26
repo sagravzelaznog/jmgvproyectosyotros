@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álgebra: La Matriz de los 100 Conceptos</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --accent: #3b82f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Header Hero */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        p.subtitle { opacity: 0.8; font-size: 1.2rem; margin-top: 10px; }
+
+        /* Buscador */
+        .search-container {
+            max-width: 600px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        input#searchBar {
+            width: 100%;
+            padding: 20px 25px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            outline: none;
+            transition: transform 0.3s ease;
+        }
+
+        input#searchBar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Grid de Módulos */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjetas de Módulos */
+        .module-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .module-header {
+            background-color: #f1f5f9;
+            padding: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-body {
+            padding: 0;
+        }
+
+        /* Items de Conceptos */
+        .concept-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.2s;
+        }
+
+        .concept-item:last-child { border-bottom: none; }
+        .concept-item:hover { background-color: #f8fafc; }
+
+        .concept-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .concept-desc {
+            font-size: 0.95em;
+            color: #64748b;
+        }
+
+        .concept-formula {
+            margin-top: 8px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        
+        .image-placeholder {
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Highlight para búsqueda */
+        .highlight {
+            background-color: #fef08a;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .container {
+                grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+                padding: 15px;
+                gap: 20px;
+            }
+            .search-container {
+                padding: 0 15px;
+                margin-bottom: 30px;
+            }
+            .concept-item {
+                padding: 12px 15px;
+            }
+            .concept-title {
+                font-size: 1rem;
+            }
+            .concept-desc {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fas fa-cube"></i> Álgebra 100</h1>
+        <p class="subtitle">La Matriz Interactiva de Conocimiento Algebraico</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="🔍 Busca un concepto (ej: 'Pendiente', 'Logaritmo', 'Pitágoras')...">
+    </div>
+
+    <div class="container" id="modulesContainer">
+        </div>
+
+								<div class="back-to-home bottom">
+									<a href="index.html" class="btn-back">
+													<span class="material-icons-round">home</span>
+													Volver al Inicio
+									</a>
+					</div>
+					<footer>
+									<p>© JMGV PTEL 2025 Conceptos de la Aritmética. Todos los derechos reservados.</p>
+					</footer>
+
+    <script>
+        // ==========================================
+        // BASE DE DATOS DE LOS 100 CONCEPTOS
+        // ==========================================
+        const algebraData = [
+            {
+                category: "1. Aritmética Real (Fundamentos)",
+                icon: "fa-shapes",
+                concepts: [
+                    { t: "Números Reales", d: "Conjunto de todos los racionales e irracionales.", f: "$$\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{I}$$" },
+                    { t: "Propiedad Conmutativa", d: "El orden no altera el resultado.", f: "$$a + b = b + a$$" },
+                    { t: "Propiedad Asociativa", d: "El agrupamiento no altera el resultado.", f: "$$(a+b)+c = a+(b+c)$$" },
+                    { t: "Propiedad Distributiva", d: "Multiplicación sobre suma.", f: "$$a(b+c) = ab + ac$$" },
+                    { t: "Elemento Neutro (Identidad)", d: "No cambia el valor.", f: "$$a+0=a, \\quad a \\cdot 1 = a$$" },
+                    { t: "Inverso Aditivo/Multiplicativo", d: "Para cancelar valores.", f: "$$a + (-a) = 0, \\quad a \\cdot (1/a) = 1$$" },
+                    { t: "Valor Absoluto", d: "Distancia al cero.", f: "$$|x| = x \\text{ si } x \\ge 0$$" },
+                    { t: "Jerarquía de Operaciones", d: "PEMDAS: Paréntesis, Exponentes, Multi/Div, Suma/Resta.", f: "" },
+                    { t: "MCD (Máximo Común Divisor)", d: "El factor más grande compartido.", f: "" },
+                    { t: "MCM (Mínimo Común Múltiplo)", d: "El múltiplo más pequeño compartido.", f: "" }
+                ]
+            },
+            {
+                category: "2. Exponentes y Radicales",
+                icon: "fa-bolt",
+                concepts: [
+                    { t: "Regla del Producto (Potencias)", d: "Misma base, se suman exponentes.", f: "$$x^a \\cdot x^b = x^{a+b}$$" },
+                    { t: "Regla del Cociente (Potencias)", d: "Misma base, se restan exponentes.", f: "$$\\frac{x^a}{x^b} = x^{a-b}$$" },
+                    { t: "Potencia de una Potencia", d: "Se multiplican exponentes.", f: "$$(x^a)^b = x^{a \\cdot b}$$" },
+                    { t: "Exponente Cero", d: "Cualquier número (no 0) a la 0 es 1.", f: "$$x^0 = 1$$" },
+                    { t: "Exponente Negativo", d: "Inverso multiplicativo.", f: "$$x^{-n} = \\frac{1}{x^n}$$" },
+                    { t: "Exponente Fraccionario", d: "Raíces como potencias.", f: "$$x^{m/n} = \\sqrt[n]{x^m}$$" },
+                    { t: "Producto de Raíces", d: "Unir o separar raíces.", f: "$$\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$$" },
+                    { t: "Racionalización", d: "Eliminar raíces del denominador.", f: "$$\\frac{1}{\\sqrt{a}} \\cdot \\frac{\\sqrt{a}}{\\sqrt{a}} = \\frac{\\sqrt{a}}{a}$$" },
+                    { t: "Notación Científica", d: "Para números muy grandes o pequeños.", f: "$$a \\times 10^n$$" },
+                    { t: "Simplificación de Radicales", d: "Extraer factores cuadrados.", f: "$$\\sqrt{75} = \\sqrt{25 \\cdot 3} = 5\\sqrt{3}$$" }
+                ]
+            },
+            {
+                category: "3. Polinomios",
+                icon: "fa-cubes",
+                concepts: [
+                    { t: "Monomio vs Polinomio", d: "Un término vs Muchos términos.", f: "$$3x^2 \\text{ vs } x^2+2x+1$$" },
+                    { t: "Grado del Polinomio", d: "El exponente más alto.", f: "$$P(x) = 2x^5 - x \\to \\text{Grado } 5$$" },
+                    { t: "Suma/Resta de Polinomios", d: "Agrupar términos semejantes.", f: "" },
+                    { t: "Multiplicación (FOIL)", d: "Distributiva extendida.", f: "$$(a+b)(c+d) = ac+ad+bc+bd$$" },
+                    { t: "División Sintética", d: "Método rápido para dividir por (x-c).", f: "" },
+                    { t: "Teorema del Residuo", d: "El residuo es P(c).", f: "$$P(c) = \\text{Residuo}$$" },
+                    { t: "Teorema del Factor", d: "Si P(c)=0, (x-c) es factor.", f: "" },
+                    { t: "Raíces/Ceros", d: "Valores donde P(x) = 0.", f: "" },
+                    { t: "Teorema Fundamental del Álgebra", d: "Todo polinomio de grado n tiene n raíces.", f: "" },
+                    { t: "Multiplicidad", d: "Cuántas veces se repite una raíz.", f: "" }
+                ]
+            },
+            {
+                category: "4. Factorización (Ingeniería Inversa)",
+                icon: "fa-tools",
+                concepts: [
+                    { t: "Factor Común", d: "Lo primero que debes buscar.", f: "$$ax + ay = a(x+y)$$", img: "[Image of factorization tree diagram]" },
+                    { t: "Diferencia de Cuadrados", d: "Resta de dos cuadrados perfectos.", f: "$$a^2 - b^2 = (a+b)(a-b)$$" },
+                    { t: "Trinomio Cuadrado Perfecto", d: "El cuadrado de un binomio.", f: "$$x^2 + 2xy + y^2 = (x+y)^2$$" },
+                    { t: "Trinomio forma x²+bx+c", d: "Dos números que sumen b y multipliquen c.", f: "" },
+                    { t: "Trinomio forma ax²+bx+c", d: "Método AC o agrupación.", f: "" },
+                    { t: "Suma de Cubos", d: "Patrón específico para suma.", f: "$$a^3+b^3=(a+b)(a^2-ab+b^2)$$" },
+                    { t: "Diferencia de Cubos", d: "Patrón específico para resta.", f: "$$a^3-b^3=(a-b)(a^2+ab+b^2)$$" },
+                    { t: "Agrupación", d: "Para 4 términos.", f: "$$ax+ay+bx+by = (a+b)(x+y)$$" },
+                    { t: "Completar el Cuadrado", d: "Forzar un TCP.", f: "$$x^2+bx+(b/2)^2$$" },
+                    { t: "Fórmula Cuadrática", d: "La herramienta universal.", f: "$$x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$$" }
+                ]
+            },
+            {
+                category: "5. Ecuaciones y Desigualdades",
+                icon: "fa-balance-scale",
+                concepts: [
+                    { t: "Ecuación Lineal", d: "Grado 1. Una solución.", f: "$$mx + b = 0$$" },
+                    { t: "Ecuación Cuadrática", d: "Grado 2. Dos soluciones.", f: "$$ax^2 + bx + c = 0$$" },
+                    { t: "Discriminante", d: "Define el tipo de raíces.", f: "$$\\Delta = b^2 - 4ac$$" },
+                    { t: "Valor Absoluto (Ec)", d: "Dos casos (positivo y negativo).", f: "$$|x|=a \\to x=a, x=-a$$" },
+                    { t: "Desigualdad Lineal", d: "Invierte el signo si multiplicas por negativo.", f: "$$-2x < 4 \\to x > -2$$", img: "[Image of inequality number line]" },
+                    { t: "Inecuación Compuesta", d: "AND (intersección) / OR (unión).", f: "" },
+                    { t: "Intervalos", d: "Abierto (), Cerrado [].", f: "$$[a, b) \\to a \\le x < b$$" },
+                    { t: "Ecuación Racional", d: "Cuidado con soluciones extrañas.", f: "" },
+                    { t: "Ecuación Radical", d: "Elevar ambos lados a la potencia.", f: "" },
+                    { t: "Sistemas de Ecuaciones", d: "Sustitución, Eliminación, Gráfico.", f: "" }
+                ]
+            },
+            {
+                category: "6. Plano Cartesiano y Rectas",
+                icon: "fa-chart-line",
+                concepts: [
+                    { t: "Plano Cartesiano", d: "Ejes X (abscisa) y Y (ordenada).", f: "", img: "[Image of cartesian coordinate system]" },
+                    { t: "Pendiente (m)", d: "Tasa de cambio (Rise over Run).", f: "$$m = \\frac{y_2 - y_1}{x_2 - x_1}$$", img: "[Image of slope of a line]" },
+                    { t: "Forma Pendiente-Intersección", d: "La más común.", f: "$$y = mx + b$$" },
+                    { t: "Forma Punto-Pendiente", d: "Para construir la ecuación.", f: "$$y - y_1 = m(x - x_1)$$" },
+                    { t: "Forma General", d: "Igualada a cero.", f: "$$Ax + By + C = 0$$" },
+                    { t: "Rectas Paralelas", d: "Mismas pendientes.", f: "$$m_1 = m_2$$" },
+                    { t: "Rectas Perpendiculares", d: "Pendientes recíprocas negativas.", f: "$$m_1 \\cdot m_2 = -1$$" },
+                    { t: "Distancia entre puntos", d: "Derivado de Pitágoras.", f: "$$d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$$" },
+                    { t: "Punto Medio", d: "Promedio de coordenadas.", f: "$$M = (\\frac{x_1+x_2}{2}, \\frac{y_1+y_2}{2})$$" },
+                    { t: "Intersecciones", d: "Donde cruza los ejes (x=0 o y=0).", f: "" }
+                ]
+            },
+            {
+                category: "7. Funciones",
+                icon: "fa-wave-square",
+                concepts: [
+                    { t: "Definición de Función", d: "Cada entrada tiene exactamente una salida.", f: "$$f(x)$$", img: "[Image of function mapping diagram]" },
+                    { t: "Prueba de la Recta Vertical", d: "Visualizar si es función.", f: "" },
+                    { t: "Dominio", d: "Todos los valores posibles de x.", f: "" },
+                    { t: "Rango", d: "Todos los valores resultantes de y.", f: "" },
+                    { t: "Función Inversa", d: "Deshace la función (reflejo en y=x).", f: "$$f^{-1}(x)$$" },
+                    { t: "Composición", d: "Una función dentro de otra.", f: "$$(f \\circ g)(x) = f(g(x))$$" },
+                    { t: "Transformaciones (Desplazamiento)", d: "Mover f(x) + c (arriba).", f: "" },
+                    { t: "Transformaciones (Reflexión)", d: "-f(x) o f(-x).", f: "" },
+                    { t: "Función Par/Impar", d: "Simetría Y o Simetría Origen.", f: "$$f(-x)=f(x) \\text{ o } -f(x)$$" },
+                    { t: "Funciones a Trozos", d: "Diferentes reglas en diferentes dominios.", f: "" }
+                ]
+            },
+            {
+                category: "8. Logaritmos y Exponenciales",
+                icon: "fa-chart-area",
+                concepts: [
+                    { t: "Función Exponencial", d: "Crecimiento rápido.", f: "$$f(x) = a^x$$" },
+                    { t: "Definición de Logaritmo", d: "El exponente al que hay que elevar.", f: "$$\\log_b(x)=y \\iff b^y=x$$" },
+                    { t: "Logaritmo Natural (ln)", d: "Base e.", f: "$$\\ln(x) = \\log_e(x)$$" },
+                    { t: "Número e", d: "Constante de Euler (aprox 2.718).", f: "" },
+                    { t: "Propiedad del Producto (Log)", d: "Suma de logs.", f: "$$\\log(ab) = \\log a + \\log b$$" },
+                    { t: "Propiedad del Cociente (Log)", d: "Resta de logs.", f: "$$\\log(a/b) = \\log a - \\log b$$" },
+                    { t: "Propiedad de la Potencia (Log)", d: "El exponente baja.", f: "$$\\log(a^n) = n \\log a$$" },
+                    { t: "Cambio de Base", d: "Para calculadoras.", f: "$$\\log_b a = \\frac{\\ln a}{\\ln b}$$" },
+                    { t: "Interés Compuesto", d: "Aplicación financiera.", f: "$$A = P(1 + r/n)^{nt}$$" },
+                    { t: "Crecimiento/Decaimiento", d: "Modelado poblacional.", f: "$$N = N_0 e^{kt}$$" }
+                ]
+            },
+            {
+                category: "9. Cónicas",
+                icon: "fa-circle-notch",
+                concepts: [
+                    { t: "Circunferencia", d: "Puntos equidistantes del centro.", f: "$$(x-h)^2 + (y-k)^2 = r^2$$", img: "[Image of circle conic section]" },
+                    { t: "Parábola", d: "Lugar geométrico foco-directriz.", f: "$$y = a(x-h)^2 + k$$", img: "[Image of parabola conic section]" },
+                    { t: "Elipse", d: "Suma de distancias constante.", f: "$$\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$$", img: "[Image of ellipse conic section]" },
+                    { t: "Hipérbola", d: "Resta de distancias constante.", f: "$$\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$$", img: "[Image of hyperbola conic section]" },
+                    { t: "Centro (h,k)", d: "Desplazamiento desde el origen.", f: "" },
+                    { t: "Vértice", d: "Punto extremo de la curva.", f: "" },
+                    { t: "Foco", d: "Punto clave para la definición.", f: "" },
+                    { t: "Eje Mayor/Menor", d: "Dimensiones de la elipse.", f: "" },
+                    { t: "Asíntotas", d: "Líneas guía de la hipérbola.", f: "" },
+                    { t: "Excentricidad", d: "Qué tan 'redonda' o 'abierta' es.", f: "$$e = c/a$$" }
+                ]
+            },
+            {
+                category: "10. Sucesiones y Matrices",
+                icon: "fa-list-ol",
+                concepts: [
+                    { t: "Sucesión Aritmética", d: "Suma constante (diferencia).", f: "$$a_n = a_1 + (n-1)d$$" },
+                    { t: "Sucesión Geométrica", d: "Multiplicación constante (razón).", f: "$$a_n = a_1 \\cdot r^{n-1}$$" },
+                    { t: "Notación Sigma", d: "Suma de una serie.", f: "$$\\sum_{i=1}^{n} a_i$$" },
+                    { t: "Factorial", d: "Producto descendente.", f: "$$n! = n(n-1)\\dots 1$$" },
+                    { t: "Teorema del Binomio", d: "Expandir potencias.", f: "$$(x+y)^n = \\sum \\binom{n}{k} x^{n-k}y^k$$" },
+                    { t: "Matriz", d: "Arreglo rectangular de números.", f: "" },
+                    { t: "Determinante", d: "Valor escalar de matriz cuadrada.", f: "$$|A|$$" },
+                    { t: "Multiplicación de Matrices", d: "Fila por Columna.", f: "" },
+                    { t: "Matriz Identidad", d: "Diagonal de 1s.", f: "$$I$$" },
+                    { t: "Regla de Cramer", d: "Resolver sistemas con determinantes.", f: "" }
+                ]
+            }
+        ];
+
+        // ==========================================
+        // LÓGICA DE RENDERIZADO
+        // ==========================================
+        const container = document.getElementById('modulesContainer');
+        const searchBar = document.getElementById('searchBar');
+
+        function renderModules(filter = "") {
+            container.innerHTML = "";
+            
+            algebraData.forEach(module => {
+                // Filtrar conceptos
+                const filteredConcepts = module.concepts.filter(c => 
+                    c.t.toLowerCase().includes(filter.toLowerCase()) || 
+                    c.d.toLowerCase().includes(filter.toLowerCase())
+                );
+
+                // Si hay filtro activo y el módulo no tiene coincidencias, no mostrarlo
+                if (filter !== "" && filteredConcepts.length === 0) return;
+
+                const conceptsToShow = filter === "" ? module.concepts : filteredConcepts;
+
+                // Crear tarjeta del módulo
+                const moduleDiv = document.createElement('div');
+                moduleDiv.className = 'module-card';
+
+                let conceptsHTML = "";
+                conceptsToShow.forEach(c => {
+                    let highlightedTitle = c.t;
+                    if (filter) {
+                        const regex = new RegExp(`(${filter})`, 'gi');
+                        highlightedTitle = c.t.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                    
+                    let imgHTML = "";
+                    if (c.img) {
+                         // Normalmente aquí se procesaría el tag, pero para el demo lo mostramos como comentario o placeholder
+                         // imgHTML = `<div class="image-placeholder">${c.img}</div>`; 
+                         // En producción real, esto se sustituye por la imagen real.
+                    }
+
+                    conceptsHTML += `
+                        <div class="concept-item">
+                            <span class="concept-title">${highlightedTitle}</span>
+                            <div class="concept-desc">${c.d}</div>
+                            ${c.f ? `<div class="concept-formula">${c.f}</div>` : ''}
+                            ${imgHTML}
+                        </div>
+                    `;
+                });
+
+                moduleDiv.innerHTML = `
+                    <div class="module-header">
+                        <span><i class="fas ${module.icon}"></i> ${module.category}</span>
+                    </div>
+                    <div class="module-body">
+                        ${conceptsHTML}
+                    </div>
+                `;
+
+                container.appendChild(moduleDiv);
+            });
+
+            // Re-renderizar matemáticas
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        }
+
+        // Event Listener para búsqueda
+        searchBar.addEventListener('input', (e) => {
+            renderModules(e.target.value);
+        });
+
+        // Renderizado inicial
+        renderModules();
+
+    </script>
+</body>
+</html>

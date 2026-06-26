@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Derivadas Parciales e Implícitas</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #2c3e50;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #e6f2ff;
+            border-left: 4px solid #4d96ff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fefce8;
+            border-left: 4px solid #facc15;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+            <a href="prop_derivadas_parciales.html" class="active"><i>∂/∂x</i> Derivadas Parciales</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Derivadas Parciales e Implícitas</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora el fascinante mundo de las derivadas parciales y la derivación implícita. 
+                    Haz clic en cada sección para descubrir conceptos, fórmulas y ejemplos prácticos.
+                </p>
+
+                <h2 class="section-title">Derivadas Parciales</h2>
+
+                <!-- Definición de Derivadas Parciales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Concepto de Derivada Parcial</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La derivada parcial de una función de varias variables es la derivada con respecto a una de esas variables, manteniendo las demás como constantes.</p>
+                        
+                        <h3>Notación</h3>
+                        <div class="formula">
+                            $$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h,y) - f(x,y)}{h}$$
+                            $$\frac{\partial f}{\partial y} = \lim_{h \to 0} \frac{f(x,y+h) - f(x,y)}{h}$$
+                        </div>
+                        
+                        <h3>Interpretación Geométrica</h3>
+                        <p>La derivada parcial con respecto a x representa la pendiente de la recta tangente a la curva de intersección de la superficie z = f(x,y) con el plano y = constante.</p>
+                        
+                        <div class="example">
+                            <p>Ejemplo: Para f(x,y) = x²y + sin(y)</p>
+                            <div class="formula">
+                                $$\frac{\partial f}{\partial x} = 2xy$$
+                                $$\frac{\partial f}{\partial y} = x² + \cos(y)$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Derivadas Parciales de Orden Superior -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Derivadas Parciales de Orden Superior</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Las derivadas parciales de segundo orden se obtienen derivando las derivadas parciales de primer orden.</p>
+                        
+                        <h3>Notación</h3>
+                        <div class="formula">
+                            $$\frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)$$
+                            $$\frac{\partial^2 f}{\partial y \partial x} = \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right)$$
+                            $$\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right)$$
+                            $$\frac{\partial^2 f}{\partial y^2} = \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right)$$
+                        </div>
+                        
+                        <h3>Teorema de Schwarz</h3>
+                        <p>Si las derivadas parciales mixtas son continuas en un punto, entonces son iguales en ese punto:</p>
+                        <div class="formula">
+                            $$\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}$$
+                        </div>
+                        
+                        <div class="example">
+                            <p>Para f(x,y) = x³y² + eˣʸ</p>
+                            <div class="formula">
+                                $$\frac{\partial^2 f}{\partial x^2} = 6xy² + y²e^{xy}$$
+                                $$\frac{\partial^2 f}{\partial y \partial x} = 6x²y + e^{xy} + xye^{xy}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Derivación Implícita</h2>
+
+                <!-- Concepto de Derivación Implícita -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Derivación Implícita</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Técnica para encontrar la derivada de una función definida implícitamente por una ecuación.</p>
+                        
+                        <h3>Procedimiento</h3>
+                        <ol>
+                            <li>Derivar ambos lados de la ecuación con respecto a x</li>
+                            <li>Agrupar los términos que contienen dy/dx</li>
+                            <li>Despejar dy/dx</li>
+                        </ol>
+                        
+                        <div class="example">
+                            <p>Ejemplo: Encontrar dy/dx para x² + y² = 25</p>
+                            <div class="formula">
+                                $$\frac{d}{dx}(x² + y²) = \frac{d}{dx}(25)$$
+                                $$2x + 2y\frac{dy}{dx} = 0$$
+                                $$\frac{dy}{dx} = -\frac{x}{y}$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> La derivación implícita es especialmente útil cuando es difícil o imposible despejar y en términos de x.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones de las Derivadas Parciales -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Aplicaciones de las Derivadas Parciales</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Gradiente</h3>
+                        <p>El gradiente de una función f(x,y) es el vector de sus derivadas parciales:</p>
+                        <div class="formula">
+                            $$\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)$$
+                        </div>
+                        
+                        <h3>Plano Tangente</h3>
+                        <p>Ecuación del plano tangente a z = f(x,y) en (a,b):</p>
+                        <div class="formula">
+                            $$z = f(a,b) + f_x(a,b)(x-a) + f_y(a,b)(y-b)$$
+                        </div>
+                        
+                        <h3>Regla de la Cadena</h3>
+                        <p>Para z = f(x,y) donde x = x(t), y = y(t):</p>
+                        <div class="formula">
+                            $$\frac{dz}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}$$
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Aplicaciones en física:</strong> Cálculo de tasas de cambio, optimización, termodinámica, electromagnetismo, y más.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Derivadas Parciales e Implícitas. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva: Propiedades de las Raíces</title>
+    
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Estilos específicos para esta página -->
+    <style>
+        /* Estilos específicos para esta página */
+        .formula {
+            font-size: 1.3em;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #6f42c1;
+            margin: 15px 0;
+            overflow-x: auto;
+            text-align: center;
+        }
+        
+        .property-card {
+            margin-bottom: 25px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example {
+            background-color: #f5f0ff;
+            border-left: 4px solid #6f42c1;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #e7f5ff;
+            border-left: 4px solid #228be6;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fff3bf;
+            border-left: 4px solid #ffd43b;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <a href="index.html" class="sidebar-title">Matemáticas</a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="prop_suma.html"><i>+</i> Propiedad de la Suma</a>
+            <a href="prop_resta.html"><i>-</i> Propiedad de la Resta</a>
+            <a href="prop_multiplicacion.html"><i>×</i> Propiedad Multiplicativa</a>
+            <a href="prop_division.html"><i>÷</i> Propiedad de la División</a>
+            <a href="prop_potencia.html"><i>x²</i> Propiedad de la Potencia</a>
+            <a href="prop_raices.html" class="active"><i>√</i> Propiedad de la Raíz</a>
+            <a href="prop_igualdad.html"><i>=</i> Propiedad de la Igualdad</a>
+            <a href="prop_teoremas.html"><i>📚</i> Teoremas Fundamentales</a>
+            <a href="prop_derivada.html"><i>d/dx</i> Propiedades de la Derivada</a>
+            <a href="prop_integral.html"><i>∫</i> Propiedades de la Integral</a>
+        </nav>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="class-container">
+            <header>
+                <h1>Propiedades de las Raíces (Radicales)</h1>
+                <div class="back-to-home">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <p class="instructions">
+                    Explora las propiedades fundamentales de las raíces. 
+                    <strong>Recuerda:</strong> Las raíces son solo exponentes disfrazados.
+                </p>
+
+                <!-- Definición de raíz -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>1. Definición de raíz n-ésima</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La raíz n-ésima de un número a es un número b tal que b elevado a n es igual a a.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[n]{a} = b \quad \text{si y solo si} \quad b^n = a$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Ejemplos de raíces:</p>
+                            <div class="formula">
+                                $$\sqrt[3]{8} = 2 \quad \text{porque} \quad 2^3 = 8$$
+                                $$\sqrt{16} = 4 \quad \text{porque} \quad 4^2 = 16$$
+                            </div>
+                        </div>
+                        
+                        <h3>Notación</h3>
+                        <ul>
+                            <li>Cuando n=2, se llama raíz cuadrada y se omite el índice: $$\sqrt{a} = \sqrt[2]{a}$$</li>
+                            <li>Cuando n=3, se llama raíz cúbica</li>
+                            <li>Para n≥4, se lee "raíz n-ésima"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Raíz de un producto -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>2. Raíz de un producto</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La raíz n-ésima de un producto es igual al producto de las raíces n-ésimas de los factores.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[n]{a \times b} = \sqrt[n]{a} \times \sqrt[n]{b}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Raíz de un producto:</p>
+                            <div class="formula">
+                                $$\sqrt{9 \times 4} = \sqrt{9} \times \sqrt{4} = 3 \times 2 = 6$$
+                                $$\sqrt[3]{8 \times 27} = \sqrt[3]{8} \times \sqrt[3]{27} = 2 \times 3 = 6$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Simplificación de expresiones con raíces</li>
+                            <li>Factorización de radicales</li>
+                            <li>Cálculo mental de raíces</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Raíz de un cociente -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>3. Raíz de un cociente</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La raíz n-ésima de un cociente es igual al cociente de las raíces n-ésimas del numerador y el denominador.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}} \quad (b \neq 0)$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Raíz de un cociente:</p>
+                            <div class="formula">
+                                $$\sqrt{\frac{25}{4}} = \frac{\sqrt{25}}{\sqrt{4}} = \frac{5}{2}$$
+                                $$\sqrt[3]{\frac{64}{8}} = \frac{\sqrt[3]{64}}{\sqrt[3]{8}} = \frac{4}{2} = 2$$
+                            </div>
+                        </div>
+                        
+                        <h3>Importancia</h3>
+                        <ul>
+                            <li>Simplificación de fracciones con raíces</li>
+                            <li>Racionalización de denominadores</li>
+                            <li>Resolución de ecuaciones con radicales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Raíz de una raíz -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>4. Raíz de una raíz</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>La raíz m-ésima de una raíz n-ésima es igual a la raíz (m×n)-ésima del radicando.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \times n]{a}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Raíz de una raíz:</p>
+                            <div class="formula">
+                                $$\sqrt{\sqrt{16}} = \sqrt[4]{16} = 2$$
+                                $$\sqrt[3]{\sqrt[4]{x^{12}}} = \sqrt[12]{x^{12}} = x$$
+                            </div>
+                        </div>
+                        
+                        <h3>Aplicaciones</h3>
+                        <ul>
+                            <li>Simplificación de expresiones con raíces anidadas</li>
+                            <li>Conversión entre diferentes índices de raíces</li>
+                            <li>Resolución de ecuaciones con radicales múltiples</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Potencia de una raíz -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>5. Potencia de una raíz</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Una potencia dentro de una raíz puede expresarse como una raíz con el exponente del radicando.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[n]{a^m} = a^{\frac{m}{n}} = (\sqrt[n]{a})^m$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Potencia de una raíz:</p>
+                            <div class="formula">
+                                $$\sqrt[3]{8^2} = 8^{\frac{2}{3}} = (\sqrt[3]{8})^2 = 2^2 = 4$$
+                                $$\sqrt{x^6} = x^{\frac{6}{2}} = x^3$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Nota:</strong> Esta propiedad muestra la relación fundamental entre raíces y exponentes fraccionarios.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simplificación de raíces -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>6. Simplificación de raíces</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Las raíces pueden simplificarse extrayendo factores del radicando que sean potencias perfectas según el índice.</p>
+                        
+                        <h3>Fórmula</h3>
+                        <div class="formula">
+                            $$\sqrt[n]{a^{n} \times b} = a \times \sqrt[n]{b}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Simplificación de raíces:</p>
+                            <div class="formula">
+                                $$\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$$
+                                $$\sqrt[3]{54} = \sqrt[3]{27 \times 2} = 3\sqrt[3]{2}$$
+                            </div>
+                        </div>
+                        
+                        <h3>Pasos para simplificar</h3>
+                        <ol>
+                            <li>Factorizar el radicando en potencias perfectas</li>
+                            <li>Extraer las raíces exactas</li>
+                            <li>Multiplicar los factores fuera de la raíz</li>
+                            <li>Dejar los factores que no son potencias perfectas dentro de la raíz</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Racionalización -->
+                <div class="property-card">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>7. Racionalización de denominadores</span>
+                        <span class="indicator">+</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Definición</h3>
+                        <p>Proceso para eliminar raíces del denominador multiplicando numerador y denominador por una expresión adecuada.</p>
+                        
+                        <h3>Casos principales</h3>
+                        
+                        <h4>Caso 1: Denominador con un solo término</h4>
+                        <div class="formula">
+                            $$\frac{a}{\sqrt{b}} = \frac{a \times \sqrt{b}}{\sqrt{b} \times \sqrt{b}} = \frac{a\sqrt{b}}{b}$$
+                        </div>
+                        
+                        <h4>Caso 2: Denominador con binomio</h4>
+                        <div class="formula">
+                            $$\frac{a}{\sqrt{b} + \sqrt{c}} = \frac{a(\sqrt{b} - \sqrt{c})}{(\sqrt{b} + \sqrt{c})(\sqrt{b} - \sqrt{c})} = \frac{a(\sqrt{b} - \sqrt{c})}{b - c}$$
+                        </div>
+                        
+                        <h3>Ejemplo</h3>
+                        <div class="example">
+                            <p>Racionalizar denominadores:</p>
+                            <div class="formula">
+                                $$\frac{3}{\sqrt{5}} = \frac{3\sqrt{5}}{5}$$
+                                $$\frac{2}{\sqrt{3} - 1} = \frac{2(\sqrt{3} + 1)}{(\sqrt{3} - 1)(\sqrt{3} + 1)} = \frac{2\sqrt{3} + 2}{3 - 1} = \sqrt{3} + 1$$
+                            </div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>Importante:</strong> La racionalización es útil para simplificar expresiones y facilitar cálculos posteriores.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <!-- Botón de Volver al Inicio al final -->
+                <div class="back-to-home bottom">
+                    <a href="index.html" class="btn-back">
+                        <span class="material-icons-round">home</span>
+                        Volver al Inicio
+                    </a>
+                </div>
+<footer>
+            <p>© JMGV PTEL 2025 Propiedades de las Raíces. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Scripts específicos para esta página -->
+    <script>
+        // Configuración específica de MathJax para esta página
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 0.9,
+                displayAlign: 'center',
+                displayIndent: '1em'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // Función para manejar la impresión
+        function handlePrint() {
+            window.print();
+        }
+        
+        // Asegurar que MathJax se renderice correctamente después de cargar el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forzar actualización de MathJax después de que se muestre el contenido
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+            
+            // Expandir la primera tarjeta por defecto
+            const firstCard = document.querySelector('.property-card:first-child .card-header');
+            if (firstCard) {
+                firstCard.click();
+            }
+        });
+    </script>
+</body>
+</html>

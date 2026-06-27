@@ -216,13 +216,30 @@ export default function LessonPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-12 pb-32">
-        {/* Botón Volver Neón */}
-        <button 
-          onClick={() => router.push('/dashboard')}
-          className="text-neon-cyan hover:text-white hover:drop-shadow-[0_0_8px_#00FFFF] transition-all flex items-center gap-2 font-bold tracking-wide"
-        >
-          <span className="text-xl">&larr;</span> ESCAPE TO DASHBOARD
-        </button>
+        {/* Navegación Superior */}
+        <div className="flex justify-between items-center w-full">
+          <button 
+            onClick={() => router.push('/dashboard')}
+            className="text-neon-cyan hover:text-white hover:drop-shadow-[0_0_8px_#00FFFF] transition-all flex items-center gap-2 font-bold tracking-wide"
+          >
+            <span className="text-xl">&larr;</span> ESCAPE TO DASHBOARD
+          </button>
+          
+          {lesson?.order < 64 && (
+            <button 
+              onClick={() => {
+                const match = (lessonId as string).match(/lesson_(\d+)_pm1/);
+                if (match) {
+                  const nextNumber = parseInt(match[1], 10) + 1;
+                  router.push(`/dashboard/lesson/lesson_${nextNumber}_pm1`);
+                }
+              }}
+              className="text-neon-pink hover:text-white hover:drop-shadow-[0_0_8px_#FF007F] transition-all flex items-center gap-2 font-bold tracking-wide text-sm md:text-base"
+            >
+              SIGUIENTE LECCIÓN <span className="text-xl">&rarr;</span>
+            </button>
+          )}
+        </div>
 
         {/* Encabezado Principal */}
         <header className="border-b border-neon-purple/30 pb-8 relative">

@@ -367,12 +367,28 @@ export default function LessonPage() {
                 <p className="text-slate-300 text-xl font-medium mb-8">
                   Precisión: <span className="text-neon-green font-black">{Math.round((score / quiz.length) * 100)}%</span> ({score}/{quiz.length})
                 </p>
-                <button 
-                  onClick={() => router.push('/dashboard')}
-                  className="bg-neon-cyan text-black font-black py-4 px-10 rounded-full hover:bg-white hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"
-                >
-                  VOLVER AL HUB CENTRAL
-                </button>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                  <button 
+                    onClick={() => router.push('/dashboard')}
+                    className="bg-transparent border border-neon-cyan text-neon-cyan font-black py-4 px-8 rounded-full hover:bg-neon-cyan hover:text-black hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"
+                  >
+                    VOLVER AL HUB
+                  </button>
+                  {lesson?.order < 64 && (
+                    <button 
+                      onClick={() => {
+                        const match = (lessonId as string).match(/lesson_(\d+)_pm1/);
+                        if (match) {
+                          const nextNumber = parseInt(match[1], 10) + 1;
+                          router.push(`/dashboard/lesson/lesson_${nextNumber}_pm1`);
+                        }
+                      }}
+                      className="bg-neon-cyan text-black font-black py-4 px-10 rounded-full hover:bg-white hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"
+                    >
+                      SIGUIENTE LECCIÓN &rarr;
+                    </button>
+                  )}
+                </div>
               </div>
             )}
           </div>

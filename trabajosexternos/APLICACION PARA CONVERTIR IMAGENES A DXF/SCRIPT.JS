@@ -66,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					const edgeData = ctxEdge.createImageData(width, height);
 					const edgePixels = edgeData.data;
 
-					// Iniciar estructura DXF
-					dxfData = "0\nSECTION\n2\nENTITIES\n";
+					const edgeMap = new Uint8Array(width * height);
 
 					// Filtro de detección de bordes simplificado (Kernel básico)
 					for (let y = 1; y < height - 1; y++) {
@@ -89,13 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 													if (gradient > threshold) {
 																	// Píxel de borde: dibujar en negro en el canvas
+																	edgeMap[y * width + x] = 1;
 																	edgePixels[i] = 0;     // R
 																	edgePixels[i+1] = 0;   // G
 																	edgePixels[i+2] = 0;   // B
 																	edgePixels[i+3] = 255; // Alpha
-
-																	// Añadir punto al DXF (Invertimos Y para sistemas CAD)
-																	addDxfPoint(x, height - y);
 													} else {
 																	// Fondo blanco
 																	edgePixels[i] = 255;
@@ -107,14 +104,88 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 					
 					ctxEdge.putImageData(edgeData, 0, 0);
+
+					// Iniciar estructura DXF
+					dxfData = "0\nSECTION\n2\nENTITIES\n";
+
+					// Extraer polilíneas continuas
+					const visited = new Uint8Array(width * height);
+					const dirs = [
+									{dx: 1, dy: 0}, {dx: 1, dy: 1}, {dx: 0, dy: 1}, {dx: -1, dy: 1},
+									{dx: -1, dy: 0}, {dx: -1, dy: -1}, {dx: 0, dy: -1}, {dx: 1, dy: -1}
+					];
+
+					for (let y = 1; y < height - 1; y++) {
+									for (let x = 1; x < width - 1; x++) {
+													let idx = y * width + x;
+													if (edgeMap[idx] === 1 && visited[idx] === 0) {
+																	let polyline = [{x: x, y: y}];
+																	visited[idx] = 1;
+																	
+																	// Trazado hacia adelante
+																	let currX = x;
+																	let currY = y;
+																	while (true) {
+																					let foundNext = false;
+																					for (let d = 0; d < 8; d++) {
+																									let nx = currX + dirs[d].dx;
+																									let ny = currY + dirs[d].dy;
+																									let nIdx = ny * width + nx;
+																									if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+																													if (edgeMap[nIdx] === 1 && visited[nIdx] === 0) {
+																																	currX = nx;
+																																	currY = ny;
+																																	polyline.push({x: currX, y: currY});
+																																	visited[nIdx] = 1;
+																																	foundNext = true;
+																																	break;
+																													}
+																									}
+																					}
+																					if (!foundNext) break;
+																	}
+
+																	// Trazado hacia atrás desde el punto de inicio
+																	currX = x;
+																	currY = y;
+																	while (true) {
+																					let foundNext = false;
+																					for (let d = 0; d < 8; d++) {
+																									let nx = currX + dirs[d].dx;
+																									let ny = currY + dirs[d].dy;
+																									let nIdx = ny * width + nx;
+																									if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+																													if (edgeMap[nIdx] === 1 && visited[nIdx] === 0) {
+																																	currX = nx;
+																																	currY = ny;
+																																	polyline.unshift({x: currX, y: currY});
+																																	visited[nIdx] = 1;
+																																	foundNext = true;
+																																	break;
+																													}
+																									}
+																					}
+																					if (!foundNext) break;
+																	}
+																	
+																	// Añadir la polilínea al DXF si tiene más de 1 punto
+																	if (polyline.length > 1) {
+																					addDxfPolyline(polyline, height);
+																	}
+													}
+									}
+					}
 					
 					// Cerrar estructura DXF
 					dxfData += "0\nENDSEC\n0\nEOF\n";
 	}
 
-	function addDxfPoint(x, y) {
-					// Genera una entidad POINT en formato DXF
-					dxfData += "0\nPOINT\n8\nContornos\n10\n" + x + "\n20\n" + y + "\n30\n0.0\n";
+	function addDxfPolyline(polyline, height) {
+					// Genera una entidad LWPOLYLINE en formato DXF (Línea continua)
+					dxfData += "0\nLWPOLYLINE\n8\nContornos\n90\n" + polyline.length + "\n70\n0\n";
+					for (let i = 0; i < polyline.length; i++) {
+									dxfData += "10\n" + polyline[i].x + "\n20\n" + (height - polyline[i].y) + "\n";
+					}
 	}
 
 	downloadBtn.addEventListener('click', () => {

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Semestre 5",
             projects: [
                 {
-                    link: "semestre 5/pensamiento variacional/index.html",
+                    link: "https://jmgvproyectosyotros-sagravzelaznogs-projects.vercel.app/dashboard",
                     tag: "AppWeb (PWA)",
                     title: "Pensamiento Variacional",
                     description: "Curso gamificado con Firebase, quizzes interactivos y diseño móvil.",

@@ -66,35 +66,72 @@ document.addEventListener('DOMContentLoaded', () => {
 					const edgeData = ctxEdge.createImageData(width, height);
 					const edgePixels = edgeData.data;
 
-					const edgeMap = new Uint8Array(width * height);
+					let currentMap = new Uint8Array(width * height);
 
-					// Filtro de detección de bordes simplificado (Kernel básico)
-					for (let y = 1; y < height - 1; y++) {
-									for (let x = 1; x < width - 1; x++) {
+					// 1. Binarización (umbral de oscuridad en lugar de gradiente)
+					for (let y = 0; y < height; y++) {
+									for (let x = 0; x < width; x++) {
 													const i = (y * width + x) * 4;
+													const gray = (pixels[i] + pixels[i+1] + pixels[i+2]) / 3;
 													
-													// Convertir a escala de grises
-													const right = ((y * width + (x + 1)) * 4);
-													const bottom = (((y + 1) * width + x) * 4);
+													// Si es más oscuro que el umbral, es un trazo (1)
+													if (gray < threshold) {
+																	currentMap[y * width + x] = 1;
+													}
+									}
+					}
 
-													const currentGray = (pixels[i] + pixels[i+1] + pixels[i+2]) / 3;
-													const rightGray = (pixels[right] + pixels[right+1] + pixels[right+2]) / 3;
-													const bottomGray = (pixels[bottom] + pixels[bottom+1] + pixels[bottom+2]) / 3;
+					// 2. Análisis Estadístico de Puntos Cercanos (Mean Shift / Promedio Móvil)
+					const radius = 3; // Ventana de búsqueda de 7x7 píxeles
+					const iterations = 2; // Número de veces que aplicamos la gravedad hacia el centro
 
-													// Gradiente espacial
-													const diffX = Math.abs(currentGray - rightGray);
-													const diffY = Math.abs(currentGray - bottomGray);
-													const gradient = diffX + diffY;
+					for (let iter = 0; iter < iterations; iter++) {
+									const nextMap = new Uint8Array(width * height);
+									for (let y = 0; y < height; y++) {
+													for (let x = 0; x < width; x++) {
+																	if (currentMap[y * width + x] === 1) {
+																					let sumX = 0;
+																					let sumY = 0;
+																					let count = 0;
 
-													if (gradient > threshold) {
-																	// Píxel de borde: dibujar en negro en el canvas
-																	edgeMap[y * width + x] = 1;
+																					const minX = Math.max(0, x - radius);
+																					const maxX = Math.min(width - 1, x + radius);
+																					const minY = Math.max(0, y - radius);
+																					const maxY = Math.min(height - 1, y + radius);
+
+																					for (let ny = minY; ny <= maxY; ny++) {
+																									for (let nx = minX; nx <= maxX; nx++) {
+																													if (currentMap[ny * width + nx] === 1) {
+																																	sumX += nx;
+																																	sumY += ny;
+																																	count++;
+																													}
+																									}
+																					}
+
+																					if (count > 0) {
+																									const avgX = Math.round(sumX / count);
+																									const avgY = Math.round(sumY / count);
+																									nextMap[avgY * width + avgX] = 1;
+																					}
+																	}
+													}
+									}
+									currentMap = nextMap;
+					}
+
+					const edgeMap = currentMap;
+
+					// 3. Dibujar mapa colapsado al canvas
+					for (let y = 0; y < height; y++) {
+									for (let x = 0; x < width; x++) {
+													const i = (y * width + x) * 4;
+													if (edgeMap[y * width + x] === 1) {
 																	edgePixels[i] = 0;     // R
 																	edgePixels[i+1] = 0;   // G
 																	edgePixels[i+2] = 0;   // B
 																	edgePixels[i+3] = 255; // Alpha
 													} else {
-																	// Fondo blanco
 																	edgePixels[i] = 255;
 																	edgePixels[i+1] = 255;
 																	edgePixels[i+2] = 255;

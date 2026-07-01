@@ -181,10 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function addDxfPolyline(polyline, height) {
-					// Genera una entidad LWPOLYLINE en formato DXF (Línea continua)
-					dxfData += "0\nLWPOLYLINE\n8\nContornos\n90\n" + polyline.length + "\n70\n0\n";
-					for (let i = 0; i < polyline.length; i++) {
-									dxfData += "10\n" + polyline[i].x + "\n20\n" + (height - polyline[i].y) + "\n";
+					// Genera entidades LINE en formato DXF para cada segmento de la línea
+					for (let i = 0; i < polyline.length - 1; i++) {
+									dxfData += "0\nLINE\n8\nContornos\n";
+									dxfData += "10\n" + polyline[i].x + "\n20\n" + (height - polyline[i].y) + "\n30\n0.0\n";
+									dxfData += "11\n" + polyline[i+1].x + "\n21\n" + (height - polyline[i+1].y) + "\n31\n0.0\n";
 					}
 	}
 

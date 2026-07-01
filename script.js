@@ -116,27 +116,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderizar dinámicamente el contenido del Dashboard
     function renderDashboard() {
         dynamicDashboardContent.innerHTML = '';
-        
+
         projectCategories.forEach((category, catIndex) => {
             // Título de la categoría
             const catTitle = document.createElement('h2');
             catTitle.className = 'category-title';
             catTitle.textContent = category.title;
             dynamicDashboardContent.appendChild(catTitle);
-            
+
             // Contenedor Grid
             const grid = document.createElement('div');
             grid.className = 'courses-grid';
-            
+
             category.projects.forEach((proj, projIndex) => {
                 const card = document.createElement('a');
                 card.href = proj.link;
                 card.className = 'course-card';
-                
+
                 // Efecto escalonado de aparición
                 card.style.animation = `fadeUp 0.5s ease-out ${(projIndex + catIndex) * 0.1}s forwards`;
                 card.style.opacity = '0';
-                
+
                 card.innerHTML = `
                     <span class="card-tag">${proj.tag}</span>
                     <div class="course-icon">
@@ -148,10 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         Abrir Proyecto <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 `;
-                
+
                 grid.appendChild(card);
             });
-            
+
             dynamicDashboardContent.appendChild(grid);
         });
     }
@@ -252,11 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showDashboard() {
-        if(loginScreen) {
+        if (loginScreen) {
             loginScreen.classList.remove('active-screen');
             loginScreen.classList.add('hidden-screen');
         }
-        if(dashboardScreen) {
+        if (dashboardScreen) {
             dashboardScreen.classList.remove('hidden-screen');
             dashboardScreen.classList.add('active-screen');
             renderDashboard(); // Renderizar dinámicamente cuando entramos al panel
@@ -264,11 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showLogin() {
-        if(dashboardScreen) {
+        if (dashboardScreen) {
             dashboardScreen.classList.remove('active-screen');
             dashboardScreen.classList.add('hidden-screen');
         }
-        if(loginScreen) {
+        if (loginScreen) {
             loginScreen.classList.remove('hidden-screen');
             loginScreen.classList.add('active-screen');
         }

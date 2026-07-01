@@ -114,6 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
 									{dx: 1, dy: 0}, {dx: 1, dy: 1}, {dx: 0, dy: 1}, {dx: -1, dy: 1},
 									{dx: -1, dy: 0}, {dx: -1, dy: -1}, {dx: 0, dy: -1}, {dx: 1, dy: -1}
 					];
+					const dirs2 = [ // Radio 2 para unir puntos cercanos
+									{dx: 2, dy: 0}, {dx: 2, dy: 1}, {dx: 2, dy: 2}, {dx: 1, dy: 2},
+									{dx: 0, dy: 2}, {dx: -1, dy: 2}, {dx: -2, dy: 2}, {dx: -2, dy: 1},
+									{dx: -2, dy: 0}, {dx: -2, dy: -1}, {dx: -2, dy: -2}, {dx: -1, dy: -2},
+									{dx: 0, dy: -2}, {dx: 1, dy: -2}, {dx: 2, dy: -2}, {dx: 2, dy: -1}
+					];
 
 					for (let y = 1; y < height - 1; y++) {
 									for (let x = 1; x < width - 1; x++) {
@@ -127,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 																	let currY = y;
 																	while (true) {
 																					let foundNext = false;
-																					for (let d = 0; d < 8; d++) {
+																					for (let d = 0; d < dirs.length; d++) {
 																									let nx = currX + dirs[d].dx;
 																									let ny = currY + dirs[d].dy;
 																									let nIdx = ny * width + nx;
@@ -142,6 +148,24 @@ document.addEventListener('DOMContentLoaded', () => {
 																													}
 																									}
 																					}
+																					// Si no encuentra adyacente inmediato, busca a distancia 2
+																					if (!foundNext) {
+																									for (let d = 0; d < dirs2.length; d++) {
+																													let nx = currX + dirs2[d].dx;
+																													let ny = currY + dirs2[d].dy;
+																													let nIdx = ny * width + nx;
+																													if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+																																	if (edgeMap[nIdx] === 1 && visited[nIdx] === 0) {
+																																					currX = nx;
+																																					currY = ny;
+																																					polyline.push({x: currX, y: currY});
+																																					visited[nIdx] = 1;
+																																					foundNext = true;
+																																					break;
+																																	}
+																													}
+																									}
+																					}
 																					if (!foundNext) break;
 																	}
 
@@ -150,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 																	currY = y;
 																	while (true) {
 																					let foundNext = false;
-																					for (let d = 0; d < 8; d++) {
+																					for (let d = 0; d < dirs.length; d++) {
 																									let nx = currX + dirs[d].dx;
 																									let ny = currY + dirs[d].dy;
 																									let nIdx = ny * width + nx;
@@ -162,6 +186,24 @@ document.addEventListener('DOMContentLoaded', () => {
 																																	visited[nIdx] = 1;
 																																	foundNext = true;
 																																	break;
+																													}
+																									}
+																					}
+																					// Si no encuentra adyacente inmediato, busca a distancia 2
+																					if (!foundNext) {
+																									for (let d = 0; d < dirs2.length; d++) {
+																													let nx = currX + dirs2[d].dx;
+																													let ny = currY + dirs2[d].dy;
+																													let nIdx = ny * width + nx;
+																													if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+																																	if (edgeMap[nIdx] === 1 && visited[nIdx] === 0) {
+																																					currX = nx;
+																																					currY = ny;
+																																					polyline.unshift({x: currX, y: currY});
+																																					visited[nIdx] = 1;
+																																					foundNext = true;
+																																					break;
+																																	}
 																													}
 																									}
 																					}
@@ -181,12 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function addDxfPolyline(polyline, height) {
-					// Genera entidades LINE en formato DXF para cada segmento de la línea
-					for (let i = 0; i < polyline.length - 1; i++) {
-									dxfData += "0\nLINE\n8\nContornos\n";
+					// Genera una entidad POLYLINE clásica compatible con todos los CAD
+					dxfData += "0\nPOLYLINE\n8\nContornos\n66\n1\n";
+					dxfData += "10\n0.0\n20\n0.0\n30\n0.0\n";
+					
+					for (let i = 0; i < polyline.length; i++) {
+									dxfData += "0\nVERTEX\n8\nContornos\n";
 									dxfData += "10\n" + polyline[i].x + "\n20\n" + (height - polyline[i].y) + "\n30\n0.0\n";
-									dxfData += "11\n" + polyline[i+1].x + "\n21\n" + (height - polyline[i+1].y) + "\n31\n0.0\n";
 					}
+					
+					dxfData += "0\nSEQEND\n";
 	}
 
 	downloadBtn.addEventListener('click', () => {

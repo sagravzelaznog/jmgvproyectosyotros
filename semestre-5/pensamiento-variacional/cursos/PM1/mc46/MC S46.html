@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 46: El Opuesto Matemático</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 46: Resolución de restas de números enteros como la suma con el opuesto de otro</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Gran Ilusión de la Resta</h3>
+            <p>¿Qué pensarías como estudiante de ingeniería si te dijera firmemente que la famosa "resta" como tal no existe realmente en el álgebra avanzada? En las grandes ligas de las matemáticas puras, la resta es simplemente un "disfraz barato" que se pone la Suma para engañarnos en la vida diaria.</p>
+            <p>Absolutamente CUALQUIER problema de resta en el mundo puede transformarse en una operación de suma directa. Para lograr este truco de magia, usamos un concepto vital llamado <strong>"El Número Opuesto" (o su nombre técnico: Inverso Aditivo)</strong>. El opuesto de un número es simplemente él mismo clonado, pero cruzando el espejo mágico hacia el lado contrario de la recta numérica. El opuesto de \(5\) es \(-5\). Y el opuesto oscuro de \(-10\) es \(10\).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Regla Absoluta de la Suma Oculta</h3>
+            <p>La regla maestra y alquímica de los matemáticos dice: <strong>"Restarle algo a un número, es exactamente idéntico a SUMARLE su Opuesto"</strong>.</p>
+            <ul>
+                <li><strong>El ejemplo clásico y aburrido:</strong> \(10 - 4\). Según nuestra nueva y avanzada regla de álgebra, cambiamos la maldita resta a una suma hermosa, y el 4 cambia a su opuesto natural: \(10 + (-4)\). Analízalo: Tienes 10 pesos, y te <em>suman</em> a tu cuenta una deuda de 4. El resultado final del saldo: \(6\).</li>
+                <li><strong>El Brutal Choque de Negativos:</strong> ¿Qué pasa extrañamente si te piden restar un número que ya era negativo? Ejemplo: \(5 - (-3)\). Aplicamos el protocolo: Cambiamos la resta por suma, y el \(-3\) cambia cruzando el espejo a su opuesto (positivo). Queda mágicamente: \(5 + (+3)\). ¡Por eso te enseñaron que "menos por menos da más"! El resultado explosivo: \(8\).</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Transmutador de Operaciones</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador (El Laboratorio):</h4>
+                <ol>
+                    <li><strong>Comprobando la igualdad irrefutable:</strong> En el potente CAS de GeoGebra, usa la doble igualdad para preguntarle al procesador lógico si esta regla es una verdad absoluta. Escribe sin miedo <code>10 - 4 == 10 + (-4)</code>. GeoGebra jurará lealtad a la regla y dirá en pantalla <code>true</code> (verdadero).</li>
+                    <li><strong>La trampa mortal del choque negativo:</strong> Escribe ahora <code>7 - (-2) == 7 + 2</code>. La máquina volverá a arrojarte un orgulloso <code>true</code>. Acabas de demostrar lógica y computacionalmente por qué dos signos negativos chocando de frente se transforman en una suma expansiva.</li>
+                    <li><strong>Ingeniería dinámica en acción real:</strong> En la ciencia de la física, si un coche potente va hacia adelante impulsando (+50 km/h) y mágicamente le "restas" una velocidad negativa porque un viento huracanado que iba en contra desaparece... en realidad el empuje liberado se <em>suma</em> a tu sistema total de fuerzas catapultando el auto.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Transmutador Algebraico</h3>
+            <div id="quiz-setup">
+                <p>Destruye la ilusión visual de la resta y transforma velozmente los números en sus opuestos perfectos para dominar el álgebra.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Transmutador!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Superado! Destruiste la Ilusión.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Intentar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc45/MC S45.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc47/MC S47.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 46. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

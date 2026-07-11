@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 42: Rampas y Desniveles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 42: Topografía Urbana (Rampas y Desniveles Reales)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Fraude del Terreno Plano</h3>
+            <p>Ya sabes calcular hipotenusas (sumando) y catetos (restando). Pero en los exámenes del corporativo y en las obras reales, nadie te va a dibujar el triángulo bonito en una hoja blanca. Te van a entregar un plano lateral de un fraccionamiento donde la calle A está a $20m$ sobre el nivel del mar, y la calle B está a $35m$ sobre el nivel del mar. La distancia horizontal entre ellas es de $36m$. El CEO exige: <em>"Hazme el presupuesto del cable telefónico diagonal para conectarlas"</em>. El triángulo está escondido. Tú debes sacarlo a la luz.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Forja de la Altura Real (La Resta de Cotas)</h3>
+            <p>El error más estúpido y costoso que puedes cometer es usar los números en bruto. Si tomas la calle A ($20m$) como tu cateto vertical, arruinas el diseño. ¡El cable telefónico no empieza desde el nivel del mar! Empieza desde la calle A y sube a la B. Para encontrar el VERDADERO cateto vertical del triángulo (el desnivel), debes <strong>Restar las Alturas (Cotas)</strong>. $35m - 20m = 15m$. ¡El cateto vertical real de tu triángulo es solo de $15m$! Esa es la verdadera ingeniería de campo.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Trazado y Ejecución Subterránea</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Presupuesto del Cable Telefónico:</h4>
+                <ol>
+                    <li><strong>Aislamiento de Catetos:</strong> El cateto horizontal (la distancia en el mapa) te la dieron directa: $36m$. El cateto vertical (el desnivel) lo forjaste restando: $35 - 20 = 15m$.</li>
+                    <li><strong>Identificación del Objetivo:</strong> Buscamos el cable diagonal de conexión. Eso es una Hipotenusa. Protocolo exigido: <strong>SUMA</strong>.</li>
+                    <li><strong>La Trituradora Pitagórica:</strong> $36^2 = 1296$. Y el $15^2 = 225$.</li>
+                    <li><strong>Fusión de Costos:</strong> Sumamos los bloques de poder: $1296 + 225 = 1521$.</li>
+                    <li><strong>El Corte Final (Raíz):</strong> $\sqrt{1521} = 39$.</li>
+                    <li><strong>El Reporte al CEO:</strong> <em>"Señor, se requieren exactamente 39 metros lineales de cableado principal de alta tensión. El contrato está validado."</em> Te conviertes en el héroe del fraccionamiento.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Urbanista Creador</h3>
+            <div id="quiz-setup">
+                <p>Extrae el triángulo escondido en los desniveles de la ciudad y calcula sus materiales.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Iniciar Trazado Urbano!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tienes visión de rayos X para ver triángulos en montañas y desniveles.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a la Mesa de Planos</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc41/MC S41.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc43/MC S43.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

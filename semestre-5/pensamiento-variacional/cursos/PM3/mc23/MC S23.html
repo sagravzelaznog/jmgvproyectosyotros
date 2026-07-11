@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 23: Trinomio Cuadrado Perfecto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 23: La Matriz de Élite (Trinomio Cuadrado Perfecto - TCP)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Diamante de la Geometría</h3>
+            <p>El factor común sirve para terrenos incompletos. Pero cuando te enfrentas a una cuadrática completa con sus 3 términos armados hasta los dientes ($ax^2 + bx + c = 0$), no hay factor que se repita en los tres. Tienes un <strong>Trinomio</strong>. Sin embargo, en el desarrollo inmobiliario existe una estructura de élite llamada <strong>Trinomio Cuadrado Perfecto (TCP)</strong>. Es la joya de la corona geométrica: representa un terreno cuadrado absolutamente simétrico, donde todos sus lados miden exactamente lo mismo. Descifrar su ADN es un trabajo de segundos.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Prueba de ADN Corporativa (Detectando un TCP)</h3>
+            <p>¿Cómo sabes si el trinomio $x^2 + 10x + 25 = 0$ es un maldito Diamante o solo una ecuación ordinaria? Le aplicas la prueba de ADN militar de 3 pasos:</p>
+            <ul>
+                <li><strong>Prueba 1:</strong> ¿El primer término ($x^2$) tiene raíz cuadrada exacta? Sí, es $x$.</li>
+                <li><strong>Prueba 2:</strong> ¿El último término (el dinero, $25$) es positivo y tiene raíz cuadrada exacta? Sí, la raíz de $25$ es $5$.</li>
+                <li><strong>Prueba 3 (La Validación del Centro):</strong> ¿Si tomas la $x$, la multiplicas por el $5$ y le aplicas el DOBLE (regla de seguridad), el resultado cuadra perfectamente con el término del medio? ($2 \cdot x \cdot 5 = 10x$). ¡Boom! Coincide con el $10x$. Es un TCP certificado.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Factorización TCP Instantánea</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Diamante: $x^2 - 12x + 36 = 0$</h4>
+                <ol>
+                    <li><strong>Validación Rápida:</strong> Raíz de $x^2$ es $x$. Raíz de $36$ es $6$. El doble del choque ($2 \cdot x \cdot 6$) da $12x$. Coincide con el centro. ¡Es un TCP!</li>
+                    <li><strong>La Compresión:</strong> Como es un terreno cuadrado perfecto, no necesitas dos piezas diferentes. Es la MISMA pieza multiplicada por sí misma. Abres un solo paréntesis y lo elevas al cuadrado corporativo: $( \dots )^2 = 0$.</li>
+                    <li><strong>El Llenado:</strong> Adentro metes las raíces que sacaste ($x$ y $6$). El signo que los separa es el que dictamine el término central original (en este caso, un negativo).</li>
+                    <li><strong>Resultado Final:</strong> $(x - 6)^2 = 0$. Has comprimido un trinomio masivo en un solo paquete blindado de alto valor.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Joyero Matemático</h3>
+            <div id="quiz-setup">
+                <p>Detecta y comprime los Diamantes geométricos (TCP) antes de que la competencia lo haga.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Compresión!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Identificas la perfección geométrica con un solo vistazo.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Caja Fuerte</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc22/MC S22.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc24/MC S24.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

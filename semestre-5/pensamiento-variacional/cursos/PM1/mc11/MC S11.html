@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 11: El Ábaco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 11: Taller de cálculo: Concepto y uso interactivo del ábaco para operaciones rápidas</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Primera Computadora de la Historia</h3>
+            <p>Antes de las calculadoras digitales y las computadoras modernas, existía un instrumento mecánico capaz de realizar cálculos a velocidades impresionantes: <strong>el ábaco</strong>. Utilizado en China, Japón (Soroban), Roma y Rusia, es el ejemplo perfecto de cómo aplicar la lógica posicional de manera física.</p>
+            <p>Un ábaco consta de columnas con cuentas. Cada columna representa una magnitud matemática estricta: unidades, decenas, centenas, etc. Mover una cuenta hacia la barra de lectura significa sumarla al total; alejarla significa restarla.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Lógica Aritmética del Ábaco</h3>
+            <p>El secreto del ábaco radica en la optimización mental. En lugar de memorizar números gigantescos, tu cerebro solo procesa agrupaciones del 1 al 9. Cuando una columna llega a 10 unidades, simplemente bajas todas esas cuentas y subes una sola cuenta en la columna inmediata de la izquierda.</p>
+            <p>Esta regla física es la definición viva del sistema posicional: \(10 \times 10^0 = 1 \times 10^1\).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando las Columnas</h3>
+            <p>En lugar de usar un ábaco físico, vamos a usar variables algebraicas en GeoGebra para simular los movimientos (sumas) en distintas columnas posicionales.</p>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Define las columnas:</strong> En la barra de entrada, asigna variables en minúscula: <code>u = 0</code> (unidades), <code>d = 0</code> (decenas) y <code>c = 0</code> (centenas).</li>
+                    <li><strong>Añade 14 unidades:</strong> Obviamente no podemos tener 14 cuentas en la columna de unidades. Así que mentalmente lo convertimos: suma 4 a las unidades (<code>u = 4</code>) y 1 a las decenas (<code>d = 1</code>).</li>
+                    <li><strong>Añade 90:</strong> Deberías sumar 9 a las decenas (9+1 = 10). Como llegamos a 10 en las decenas, resetea la columna (<code>d = 0</code>) y suma 1 a la centena (<code>c = 1</code>).</li>
+                    <li><strong>Resultado:</strong> Comprueba el valor total tecleando <code>c*100 + d*10 + u</code>. Debería dar 104. ¡Acabas de simular mecánicamente el funcionamiento lógico de un ábaco!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Taller de Cálculo</h3>
+            <div id="quiz-setup">
+                <p>Evalúa tus conocimientos sobre este antiguo pero poderoso instrumento matemático.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc10/MC S10.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc12/MC S12.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 11. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

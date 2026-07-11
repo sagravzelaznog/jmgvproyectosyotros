@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 01: El Taller del Futuro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Lenguaje Algebraico y Monomios en el Taller</h1>
+        <h2>Masterclass 01: Introducción al ABP: De la aritmética al diseño de piezas en MDF</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Bienvenido al Taller de Ingeniería y Fabricación</h3>
+            <p>Se acabó el juego escolar de prepa. Ya no estamos en la escuela básica contando canicas y manzanas. Estás a punto de entrar al mundo real de los negocios y la manufactura. Tu misión corporativa (Proyecto ABP) de este semestre es diseñar y construir <strong>Ensambles Mecánicos reales en madera MDF usando tecnología de corte láser</strong>. Pero hay un grave problema: La máquina láser no entiende dibujos feos a lápiz, y tu jefe en la fábrica te despedirá inmediatamente si calculas mal los presupuestos y compras madera de más (mermas). Para sobrevivir aquí, tienes que evolucionar tu cerebro de la simple y limitada "Aritmética" al poderoso lenguaje destructor de los ingenieros: <strong>El Álgebra</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. ¿Por qué la Aritmética ya no sirve en la industria?</h3>
+            <p>La aritmética es solo para cosas fijas, infantiles y estáticas. Ejemplo: Tienes una tabla que mide $5$ cm por $10$ cm. Su área es $5 \times 10 = 50$ cm². ¡Fácil! Pero, ¿qué pasa si el cliente aún no se decide de qué tamaño será la caja final y cambia de opinión todos los días? La aritmética se rompe y te quedas congelado. Aquí entra el rescate del Álgebra: Usamos <strong>letras gigantes (Variables o Incógnitas)</strong> para representar "Cantidades que aún no conocemos o que pueden cambiar libremente". Si la base va a cambiar, le llamamos $b$. Si la altura cambia a gusto del cliente, le llamamos $h$. Área general = $b \times h$. ¡Has creado una fórmula maestra (molde) que nunca se rompe sin importar lo que pida el cliente!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Nacimiento del Plano Computacional</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Sistema del Láser:</h4>
+                <ol>
+                    <li>El cliente millonario pide una caja de MDF, pero no sabe el tamaño final. Está indeciso.</li>
+                    <li>Tú, como ingeniero brillante, no te quedas de brazos cruzados. Dibujas el plano digital y le asignas la poderosa letra <strong>$x$</strong> a la medida del lado que aún falta por decidir.</li>
+                    <li>Le dices al software del láser: "Corta un lado de tamaño $x$ y el otro de tamaño $x + 2$ (dos centímetros más largo, por diseño de encastre)".</li>
+                    <li>¡El láser ahora está programado! Cuando el cliente por fin se decida en tres meses y diga "Quiero que $x$ valga 10 cm", el láser cortará automáticamente lados de $10$ y de $12$. ¡Ese es el poder industrial del álgebra, la automatización pura!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Aprendiz del Taller Láser</h3>
+            <div id="quiz-setup">
+                <p>Mide rigurosamente si tienes el cerebro listo para abandonar los números básicos estáticos y entrar al nivel gerencial donde tú pones las reglas.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Comenzar el Desafío Corporativo!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tu mente ha evolucionado al siguiente nivel gerencial y estás listo para programar máquinas láser.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Taller y Limpiar la Mesa</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../index.html" class="btn-secondary" style="text-decoration: none;">&larr; Índice</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc02/MC S02.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

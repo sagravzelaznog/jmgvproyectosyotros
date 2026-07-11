@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 50: Depreciación de Activos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ecf0f1; padding: 10px; border-radius: 10px; color: #2c3e50; display: inline-block;">Unidad VI: Sucesiones, Progresiones y Series</h1>
+        <h2>Masterclass 50: Depreciación de Activos (Cuando Todo Pierde su Valor)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Enemigo Invisible: La Depreciación</h3>
+            <p>El interés compuesto multiplica el dinero a tu favor (si eres el banco). Pero la vida real es cruel con las cosas físicas. Cuando compras un celular nuevo, un coche, o una máquina industrial, su valor nunca sube; se desploma. A esta caída libre de valor (desgaste y obsolescencia) se le llama <strong>Depreciación</strong>. Matemáticamente, es el reverso oscuro del Interés Compuesto. También es una <strong>Progresión Geométrica</strong>, pero de colapso continuo.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Fórmula del Colapso ($V_f$)</h3>
+            <p>La fórmula es casi idéntica a la del Interés Compuesto, pero con un detalle asqueroso y letal que lo cambia todo: en lugar de sumar el porcentaje, se lo tienes que <strong>RESTAR</strong> al sagrado número 1.</p>
+            <div style="font-size: 2rem; text-align: center; margin: 20px 0; background-color: var(--card-bg); padding: 20px; border-radius: 10px; border: 2px solid #8b5cf6;">
+                $$ V_f = V_i (1 - d)^n $$
+            </div>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #8b5cf6; padding-left: 10px; margin: 10px 0;"><strong>$V_f$ (Valor Final):</strong> El precio de chatarra que tendrá tu máquina o coche en el futuro.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>$V_i$ (Valor Inicial):</strong> Lo que te costó nuevo en la tienda.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>El Signo de Resta $(1 - d)$:</strong> ¡La trampa mortal! El "$1$" sigue representando tu $100\%$. Pero la "$d$" minúscula es la "Tasa de Depreciación" (el porcentaje que PIERDES cada año, convertido a decimal). Al RESTARLO de uno, obtienes el porcentaje que realmente <strong>CONSERVAS</strong>.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>$n$ (El Tiempo Destructor):</strong> Los años de uso que desgastan tu máquina, funcionando nuevamente como un Exponente.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h3>3. La Táctica de lo que Conservas</h3>
+            <p>Si la máquina pierde $20\%$ ($0.20$) de valor anual, haces la resta en el paréntesis: $1 - 0.20 = 0.80$.<br>Esto significa lógicamente que cada año, la máquina solo CONSERVA el $80\%$ de su valor del año anterior. Tu Razón ($r$) es menor a uno ($0.80$), lo que activa el colapso geométrico y obliga a los números a caer.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>4. Taller Analítico: El Desplome del Coche</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Compra: Coche de 300,000 pesos. Tasa de depreciación: 15% anual. ¿Cuánto valdrá en 5 años?</h4>
+                <ol>
+                    <li><strong>Identificar Variables:</strong> $V_i = 300,000$. Tasa $d = 0.15$ ($15/100$). Tiempo $n = 5$.</li>
+                    <li><strong>Armar el Misil de Caída:</strong>
+                        <br>$V_f = 300000 (1 - 0.15)^5$
+                    </li>
+                    <li><strong>Ejecutar la Resta Vital:</strong>
+                        <br>$V_f = 300000 (0.85)^5$  <em>(Conserva el 85% anual)</em>
+                    </li>
+                    <li><strong>Detonar el Exponente de Desgaste:</strong>
+                        <br>$(0.85)^5 = 0.4437$ <em>(En 5 años, solo conservará el 44.37% de su valor original)</em>.
+                    </li>
+                    <li><strong>El Golpe Final de la Realidad:</strong>
+                        <br>$300000 \times 0.4437 = 133,110$ pesos.
+                    </li>
+                    <li><strong>Resultado Corporativo:</strong> En solo 5 años de uso, tu hermoso coche de $300,000$ pesos se devaluó y ahora es una simple chatarra usada que vale un máximo de $133,110$ pesos. La geometría nunca perdona, ya sea subiendo o cayendo. Has dominado el programa completo.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Liquidador de Activos Final</h3>
+            <div id="quiz-setup">
+                <p>La última prueba. Demuestra que puedes calcular la implacable caída de valor de los activos usando la geometría de la depreciación.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Ejecutar Liquidación Final!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡RETO MAGISTRAL FINAL SUPERADO! Eres el amo absoluto de la Matemática Corporativa y las Sucesiones. FIN DEL CURSO.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver Triunfante a la Terminal</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc49/MC S49.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Índice General (Fin del Curso)</a>
+            <a href="#" class="btn-secondary" style="text-decoration: none; visibility: hidden;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

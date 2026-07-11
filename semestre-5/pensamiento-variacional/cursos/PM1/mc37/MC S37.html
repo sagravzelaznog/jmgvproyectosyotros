@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 37: Exponentes Negativos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 37: Explicación analítica de los exponentes negativos como inversos multiplicativos de la base</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Gran Misterio del Exponente Negativo</h3>
+            <p>Si un exponente positivo (ej. \(2^3\)) significa lógicamente multiplicar el número por sí mismo, ¿qué diablos significa en la vida real tener un exponente negativo (ej. \(2^{-3}\))? ¿Significa acaso que el resultado va a ser un número negativo?</p>
+            <p><strong>¡TOTALMENTE FALSO!</strong> Un exponente negativo NO hace que el resultado sea un número negativo bajo ninguna circunstancia. En las matemáticas puras, el signo menos colocado en las alturas de un exponente es simplemente una instrucción secreta que le grita a la base: <em>"¡Vuélvete una fracción inmediatamente!"</em>. A este fenómeno se le conoce formalmente como calcular el <strong>inverso multiplicativo</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Mágica Regla del Ascensor</h3>
+            <p>Para resolver analíticamente algo como \(3^{-2}\), no podemos calcularlo directamente porque nuestro cerebro no sabe "multiplicar menos dos veces". Tenemos que usar la <strong>"Regla del Ascensor"</strong> para quitarle el virus de lo negativo al exponente:</p>
+            <ol>
+                <li>Coloca un número 1 arriba (creando un piso en el numerador).</li>
+                <li>Manda toda tu potencia original al sótano (al denominador de la fracción), ¡y por arte de magia matemática el exponente se vuelve positivo al bajar!</li>
+                <li>Es decir, la conversión queda así: \(3^{-2} = \frac{1}{3^2}\).</li>
+                <li>Ahora sí, en territorio positivo, lo puedes resolver fácilmente: \(\frac{1}{3^2} = \frac{1}{9}\).</li>
+            </ol>
+            <p>¡El resultado real de \(3^{-2}\) es una fracción altamente positiva pero muy diminuta (\(\frac{1}{9}\))! Los exponentes negativos se usan constantemente en física y química para representar cosas ridículamente pequeñas de la naturaleza, como el tamaño microscópico de un átomo o un virus (\(10^{-10}\) metros).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Viaje al Mundo Microscópico</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Comprueba el Ascensor Matemático:</strong> En la vista CAS de GeoGebra, escribe valientemente la expresión original: <code>3^-2</code>. Presiona la tecla Enter.</li>
+                    <li><strong>El Resultado Analítico:</strong> GeoGebra te arrojará instantáneamente y sin dudar la fracción irreducible <code>1/9</code>. ¡El software aplicó la regla de oro del inverso multiplicativo por ti!</li>
+                    <li><strong>Ciencia Extrema Aplicada:</strong> Escribe ahora <code>10^-6</code>. GeoGebra te mostrará <code>1/1000000</code>. Acabas de calcular un "micrómetro" (la millonésima parte de un metro), que es exactamente el tamaño promedio de una bacteria celular que te puede enfermar.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Científico Cuántico</h3>
+            <div id="quiz-setup">
+                <p>Demuestra contundentemente que dominas el secreto oculto de los exponentes negativos y el mundo de lo diminuto.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Científico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado con Honores!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Experimentar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc36/MC S36.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc38/MC S38.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 37. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

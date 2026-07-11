@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 21: El Corte Perfecto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #8b5cf6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Optimización y Estandarización de Recursos</h1>
+        <h2>Masterclass 21: Binomio al Cuadrado (El Atajo Corporativo)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Atajo Corporativo (Productos Notables)</h3>
+            <p>La multiplicación avanzada de polinomios (El temido Ataque en Cadena Distributivo) es brutalmente efectiva, pero es un proceso muy largo y tedioso. En la alta industria, el tiempo es mucho dinero. Los llamados <strong>Productos Notables</strong> son simples atajos matemáticos: son fórmulas gerenciales pre-aprobadas que te permiten calcular el resultado final de ciertas multiplicaciones famosas con solo mirarlas, sin tener que hacer todo el proceso paso a paso.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Binomio al Cuadrado: La Regla de los 3 Cortes Rápidos</h3>
+            <p>Cuando un cliente excéntrico pide multiplicar un diseño exactamente por sí mismo $(x+3)^2$, NO pierdas tiempo ni dinero de la empresa haciendo el ataque $(x+3)(x+3)$. Aplica de memoria la Regla de los 3 Cortes para generar instantáneamente un molde valiosísimo llamado <strong>Trinomio Cuadrado Perfecto (TCP)</strong>:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Corte 1: El Cuadrado del Primero.</strong> Toma a tu primer soldado y elévalo implacablemente al cuadrado. (Es decir, multiplícalo por sí mismo). Ejemplo: $(x) \cdot (x) = x^2$. Este es el muro izquierdo.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>Corte 2 (¡El Peligro!): El Doble del Producto.</strong> Multiplica de frente al primer soldado por el segundo, y a ese resultado aplícale obligatoriamente el DOBLE (multiplica por 2 a la fuerza). Ejemplo: $(x)(3) = 3x$. El doble exigido es $+6x$. Este es el pilar central del edificio. Si lo olvidas, el edificio colapsa.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>Corte 3: El Cuadrado del Segundo.</strong> Toma a tu segundo soldado y elévalo al cuadrado de forma normal. Ejemplo: $(3) \cdot (3) = +9$. ¡Por las leyes de la física, este último término SIEMPRE, sin excepción, resultará positivo!</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Fabricando el Trinomio Perfecto a Nivel Industrial</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando la velocidad del Binomio al Cuadrado:</h4>
+                <ol>
+                    <li><strong>Orden Ejecutiva:</strong> Expandir el diseño $(2x - 5)^2$ en menos de 3 segundos para el cliente.</li>
+                    <li><strong>Corte 1 (Extremo Izquierdo):</strong> $(2x)^2 \rightarrow$ Multiplicamos $2x \cdot 2x = 4x^2$. Tenemos el primer muro.</li>
+                    <li><strong>Corte 2 (Pilar Central Vital):</strong> Multiplicamos brutalmente las dos piezas: $(2x)(-5) = -10x$. Le aplicamos la ley del DOBLE (multiplicar por 2) $\rightarrow -20x$.</li>
+                    <li><strong>Corte 3 (Extremo Derecho):</strong> $(-5)^2 \rightarrow$ Multiplicamos $(-5)(-5) = +25$. Siempre positivo.</li>
+                    <li><strong>Ensamblaje Instantáneo (La Factura TCP): $4x^2 - 20x + 25$</strong>. ¡Diseñado y facturado sin hacer el tedioso y sucio Ataque en Cadena! Eres un dios de la eficiencia.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Cortador Veloz de la Empresa</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que puedes usar el atajo corporativo del Binomio al Cuadrado con precisión láser sin fallar en el peligroso y traicionero Corte del Medio.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Iniciar Cortes Rápidos!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Eres un experto absoluto en optimización de tiempo industrial. Tus enormes presupuestos se calculan a la velocidad de la luz y sin errores estructurales.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Escritorio del Director</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc20/MC S20.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc22/MC S22.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

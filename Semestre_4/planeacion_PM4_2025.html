@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeación EC0366 - Pensamiento Matemático IV</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+        };
+    </script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #8e44ad;
+            --accent-color: #f39c12;
+            --bg-color: #fdfefe;
+            --text-color: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: #f5eef8;
+            padding: 12px 20px;
+            border-left: 5px solid var(--secondary-color);
+            margin-top: 35px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f6f7;
+        }
+
+        .modular-note {
+            background: #fef5e7;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .mc-row td {
+            padding: 8px 12px;
+        }
+
+        .mc-header {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        ul {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Planeación de Curso: Pensamiento Matemático IV</h1>
+
+        <div class="modular-note">
+            <strong>Nota de Integración:</strong> El documento adjunto corresponde a <strong>Pensamiento Matemático IV
+                (Trigonometría y geometría analítica)</strong>[cite: 7]. La planificación de las 50 Masterclasses se ha
+            alineado estrictamente a este currículum bajo el estándar EC0366, garantizando un enfoque modular centrado
+            en el Aprendizaje Basado en Proyectos (ABP) listo para plataformas HTML5.
+        </div>
+
+        <!-- 1. CRONOGRAMA -->
+        <h2>1. Cronograma para el desarrollo del curso en línea</h2>
+        <table>
+            <tr>
+                <th colspan="4">Título del curso: Pensamiento Matemático IV (Trigonometría y geometría analítica)</th>
+            </tr>
+            <tr>
+                <th colspan="4">Objetivo General: Resolver problemas a partir del planteamiento y análisis de funciones
+                    trigonométricas, ecuaciones de primer y segundo grado, considerando la pertinencia y conocimiento de
+                    las variables y relaciones para explicar una situación o fenómeno[cite: 7].</th>
+            </tr>
+            <tr>
+                <th>No.</th>
+                <th>Actividad a realizar</th>
+                <th>Fecha de Elaboración</th>
+                <th>Tiempo Estimado</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>Elaboración de la estructura temática (Adaptación de los 7 propósitos formativos a 50
+                    masterclasses)[cite: 7].</td>
+                <td>13/07/2026</td>
+                <td>12 horas</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Desarrollo del documento de información general del curso.</td>
+                <td>15/07/2026</td>
+                <td>6 horas</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Elaboración de la guía de actividades de aprendizaje (Diseño del ABP: "Electrificación Subterránea y
+                    Planimetría Urbana").</td>
+                <td>18/07/2026</td>
+                <td>18 horas</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Desarrollo de los materiales del curso (Interactivos HTML5/React, comandos AutoCAD y simuladores de
+                    geometría dinámica).</td>
+                <td>25/07/2026</td>
+                <td>45 horas</td>
+            </tr>
+            <tr>
+                <td>05</td>
+                <td>Desarrollo de los instrumentos de evaluación (Rúbricas automatizadas para geometría analítica y
+                    planos de corte láser).</td>
+                <td>30/07/2026</td>
+                <td>14 horas</td>
+            </tr>
+        </table>
+        <p><strong>Firma de Elaboración:</strong> Desarrollador del Curso &nbsp;&nbsp;&nbsp; <strong>Firma de
+                Autorización:</strong> Coordinación Académica</p>
+
+        <!-- 2. INFORMACIÓN GENERAL -->
+        <h2>2. Documento de información general del curso en línea</h2>
+        <ul>
+            <li><strong>Título del curso:</strong> Pensamiento Matemático IV - Trigonometría y geometría analítica[cite:
+                7].</li>
+            <li><strong>Objetivo General:</strong> Modelar y resolver problemas mediante el análisis de funciones
+                trigonométricas y ecuaciones de primer y segundo grado[cite: 7].</li>
+            <li><strong>Metodología de Trabajo:</strong> Aprendizaje Basado en Proyectos (ABP). Los alumnos
+                desarrollarán el proyecto <em>"Electrificación Subterránea y Planimetría Urbana"</em>. Utilizarán la
+                trigonometría para calcular ángulos de caída de registros, la ecuación de la recta para trazados de
+                cableado, y las propiedades analíticas de las cónicas para diseñar los radios de cobertura de
+                subestaciones eléctricas en Torreón. El proyecto culminará con el ensamblaje mecánico de una maqueta
+                topográfica utilizando corte láser en MDF.</li>
+            <li><strong>Perfil de Ingreso:</strong> Estudiantes de educación media superior inicial (cuarto
+                semestre)[cite: 7], con habilidades previas en álgebra básica y afinidad por el dibujo técnico o diseño
+                digital.</li>
+            <li><strong>Requisitos Tecnológicos y Materiales:</strong> Navegador web para módulos interactivos HTML5/JS.
+                Acceso a software CAD (ej. AutoCAD o equivalentes libres) para planimetría, simuladores GeoGebra y
+                láminas de MDF para el prototipo físico final.</li>
+            <li><strong>Forma de Evaluación:</strong> Evaluación formativa continua orientada al portafolio de
+                evidencias del ABP. Incluye revisiones técnicas de los planos cartesianos y una rúbrica sumativa para la
+                presentación de la red subterránea.</li>
+            <li><strong>Duración:</strong> 50 horas (distribuidas en 50 Masterclasses modulares, 4 horas
+                semanales)[cite: 7].</li>
+        </ul>
+
+        <!-- 3. DESGLOSE TEMÁTICO DE LAS 50 MASTERCLASSES -->
+        <h2>3. Desglose Temático Detallado (50 Masterclasses)</h2>
+        <table>
+            <tr>
+                <th>MC</th>
+                <th>Propósito MCCEMS[cite: 7]</th>
+                <th>Tema Integrado al ABP (Planimetría y Electrificación)</th>
+            </tr>
+            <tr>
+                <td colspan="3" class="mc-header">Unidad I: El Plano Urbano, Rectas y Trigonometría</td>
+            </tr>
+            <tr class="mc-row">
+                <td>01</td>
+                <td>Propósito 1</td>
+                <td>Introducción: Comprende el concepto de recta y de punto para su representación y análisis
+                    algebraico[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>02</td>
+                <td>Propósito 1</td>
+                <td>Concepto de punto[cite: 7] como coordenada de un registro eléctrico.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>03</td>
+                <td>Propósito 1</td>
+                <td>Concepto de recta[cite: 7] para el modelado de tendido de cableado.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>04</td>
+                <td>Propósito 1</td>
+                <td>Tipos de recta (tangente, secante)[cite: 7] en intersecciones viales.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>05</td>
+                <td>Propósito 1</td>
+                <td>Construcción de figuras[cite: 7] topográficas base en CAD.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>06</td>
+                <td>Propósito 1</td>
+                <td>Elementos de la circunferencia[cite: 7] en el diseño urbano.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>07</td>
+                <td>Propósito 4</td>
+                <td>Observa el comportamiento de dos variables en relación de proporcionalidad directa para deducir la
+                    ecuación de la recta[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>08</td>
+                <td>Propósito 4</td>
+                <td>Comportamiento de dos variables[cite: 7] cartesianas.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>09</td>
+                <td>Propósito 4</td>
+                <td>Ecuación de la recta: forma punto-pendiente[cite: 7]. $$y - y_1 = m(x - x_1)$$</td>
+            </tr>
+            <tr class="mc-row">
+                <td>10</td>
+                <td>Propósito 4</td>
+                <td>Ecuación de la recta: forma pendiente-ordenada al origen[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>11</td>
+                <td>Propósito 4</td>
+                <td>Ecuación de la recta: forma simétrica[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>12</td>
+                <td>Propósito 2</td>
+                <td>Analiza la relación entre los lados y los ángulos de un triángulo rectángulo[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>13</td>
+                <td>Propósito 2</td>
+                <td>Razones trigonométricas[cite: 7] aplicadas a desniveles subterráneos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>14</td>
+                <td>Propósito 2</td>
+                <td>Cálculo de pendientes y ángulos de inclinación topográfica.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>15</td>
+                <td>Propósito 2</td>
+                <td>Demostraciones de identidades trigonométricas[cite: 7] fundamentales.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>16</td>
+                <td>Propósito 2</td>
+                <td>Laboratorio interactivo: Ángulos de elevación y depresión.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad II: Polinomios y Propiedades de la Parábola</td>
+            </tr>
+            <tr class="mc-row">
+                <td>17</td>
+                <td>Propósito 3</td>
+                <td>Gráfica en el plano cartesiano polinomios de dos variables con coeficientes reales[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>18</td>
+                <td>Propósito 3</td>
+                <td>Identificación de polinomios de dos variables con coeficientes reales[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>19</td>
+                <td>Propósito 3</td>
+                <td>Deducir las propiedades geométricas de simetría y extensión[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>20</td>
+                <td>Propósito 3</td>
+                <td>Uso de GeoGebra para el modelado polinomial interactivo.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>21</td>
+                <td>Propósito 5</td>
+                <td>Analiza situaciones o fenómenos que involucren en su modelado de funciones cuadráticas[cite: 7].
+                </td>
+            </tr>
+            <tr class="mc-row">
+                <td>22</td>
+                <td>Propósito 5</td>
+                <td>Deducir propiedades analíticas de la parábola[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>23</td>
+                <td>Propósito 5</td>
+                <td>Ecuación ordinaria de parábolas verticales y horizontales, con vértice en el origen[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>24</td>
+                <td>Propósito 5</td>
+                <td>Ecuación ordinaria de parábolas verticales y horizontales, con vértice fuera del origen[cite: 7].
+                </td>
+            </tr>
+            <tr class="mc-row">
+                <td>25</td>
+                <td>Propósito 5</td>
+                <td>Modelado[cite: 7] de catenarias para tendidos de media tensión.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>26</td>
+                <td>Propósito 5</td>
+                <td>Taller de programación: Gráficas cuadráticas dinámicas en HTML5.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad III: Circunferencia, Elipse y Secciones Cónicas</td>
+            </tr>
+            <tr class="mc-row">
+                <td>27</td>
+                <td>Propósito 6</td>
+                <td>Estudia movimientos circulares, de elipse, y coplanaridad[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>28</td>
+                <td>Propósito 6</td>
+                <td>Desarrollo y análisis de la ecuación de la circunferencia[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>29</td>
+                <td>Propósito 6</td>
+                <td>Trazado de zonas de influencia (radios de transformadores).</td>
+            </tr>
+            <tr class="mc-row">
+                <td>30</td>
+                <td>Propósito 6</td>
+                <td>Introducción al pensamiento variacional[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>31</td>
+                <td>Propósito 6</td>
+                <td>Aplicación y entendimiento de las leyes de Kepler[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>32</td>
+                <td>Propósito 6</td>
+                <td>Análisis de la elipse y coplanaridad[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>33</td>
+                <td>Propósito 6</td>
+                <td>Modelado geométrico de elementos orbitales y radiales.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>34</td>
+                <td>Propósito 7</td>
+                <td>Aplica conocimientos sobre ecuaciones con dos variables para realizar estimaciones sencillas[cite:
+                    7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>35</td>
+                <td>Propósito 7</td>
+                <td>Aplicación de las secciones cónicas: elipse[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>36</td>
+                <td>Propósito 7</td>
+                <td>Aplicación de las secciones cónicas: parábola[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>37</td>
+                <td>Propósito 7</td>
+                <td>Aplicación de las secciones cónicas: hipérbola[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>38</td>
+                <td>Propósito 7</td>
+                <td>Aplicación de las secciones cónicas: circunferencia[cite: 7].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>39</td>
+                <td>Propósito 7</td>
+                <td>Modelado y estimación[cite: 7] de costos lineales para infraestructura urbana.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad IV: Integración y Fabricación Digital</td>
+            </tr>
+            <tr class="mc-row">
+                <td>40</td>
+                <td>Transversal</td>
+                <td>Taller CAD 1: Exportación de las ecuaciones de las cónicas a formatos vectoriales.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>41</td>
+                <td>Transversal</td>
+                <td>Taller CAD 2: Planimetría de la red de electrificación subterránea.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>42</td>
+                <td>Transversal</td>
+                <td>Cálculo trigonométrico de profundidad de zanjas normativas (CFE).</td>
+            </tr>
+            <tr class="mc-row">
+                <td>43</td>
+                <td>Transversal</td>
+                <td>Consolidar los aprendizajes[cite: 7] de funciones mediante desarrollo web.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>44</td>
+                <td>Transversal</td>
+                <td>Taller Láser: Preparación de archivos de corte en MDF.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>45</td>
+                <td>Transversal</td>
+                <td>Ensamblaje del modelo topográfico físico.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>46</td>
+                <td>Transversal</td>
+                <td>Coevaluación de las gráficas polinomiales proyectadas en el plano.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>47</td>
+                <td>Transversal</td>
+                <td>Estimación presupuestal del material empleado en pesos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>48</td>
+                <td>Transversal</td>
+                <td>Revisión de la memoria técnica y planos generados.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>49</td>
+                <td>Transversal</td>
+                <td>Ensayos de la presentación técnica del modelo cartesian.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>50</td>
+                <td>Transversal</td>
+                <td>Evaluación Sumativa Final: Defensa del proyecto de electrificación y sustentación de los modelos
+                    trigonométricos y cónicos.</td>
+            </tr>
+        </table>
+
+        <!-- 4. GUÍA DE ACTIVIDADES -->
+        <h2>4. Guía de actividades de aprendizaje por unidad</h2>
+        <table>
+            <tr>
+                <th colspan="5">Unidad I: El Plano Urbano, Rectas y Trigonometría | Objetivo: Modelar infraestructura
+                    mediante rectas y razones trigonométricas[cite: 7].</th>
+            </tr>
+            <tr>
+                <th>Título e Instrucciones</th>
+                <th>Materiales / Recursos</th>
+                <th>Participación</th>
+                <th>Medio de Entrega y Periodo</th>
+                <th>Ponderación y Criterios</th>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 1: Topografía Subterránea (Trigonometría)</strong><br>
+                    <em>Instrucciones:</em> Basándose en la normativa local, analiza la relación entre los lados y los
+                    ángulos de un triángulo rectángulo[cite: 7] para calcular la caída de tensión y el ángulo de
+                    depresión necesario para conectar un transformador a la red principal. Utiliza identidades
+                    trigonométricas[cite: 7] para comprobar los cálculos.
+                </td>
+                <td>Simuladores de trigonometría dinámica, normativas de construcción.</td>
+                <td>Individual.</td>
+                <td>Hoja de cálculo y reporte en la plataforma.<br><em>Periodo:</em> Masterclasses 12 a 16.</td>
+                <td>
+                    <strong>Valor: 50% de la Unidad</strong><br>
+                    <em>Criterios:</em> Empleo riguroso de razones trigonométricas[cite: 7] y demostración matemática
+                    del ángulo.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 2: Red Lineal y Ecuación de la Recta</strong><br>
+                    <em>Instrucciones:</em> Traza en CAD tres rutas viables para el cableado. Deduce la ecuación de la
+                    recta para cada tramo analizando el comportamiento de dos variables[cite: 7]. Presenta las
+                    ecuaciones en su forma punto-pendiente y simétrica[cite: 7].
+                </td>
+                <td>Software CAD, applets HTML5.</td>
+                <td>Colaborativa (Equipos de 3).</td>
+                <td>Planos digitales vectoriales y memoria de cálculo.<br><em>Periodo:</em> Masterclasses 07 a 11.</td>
+                <td>
+                    <strong>Valor: 50% de la Unidad</strong><br>
+                    <em>Criterios:</em> Exactitud topográfica al modelar la recta y el punto para su representación
+                    algebraíca[cite: 7].
+                </td>
+            </tr>
+        </table>
+
+        <!-- 5. ESTRUCTURA DE EVALUACIÓN -->
+        <h2>5. Estructura de un Instrumento de Evaluación del Aprendizaje</h2>
+        <div
+            style="border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; background-color: #ffffff;">
+            <h3 style="margin-top: 0; color: var(--primary-color);">Instrumento: Rúbrica Analítica de Proyecto
+                Integrador (Evaluación Final ABP)</h3>
+            <p><strong>Actividad de aprendizaje a evaluar:</strong> Presentación cartográfica y defensa de la maqueta de
+                electrificación subterránea.</p>
+            <p><strong>Instrucciones específicas:</strong> El equipo expondrá los planos cartesianos y el ensamblaje en
+                MDF de la red. Deberán justificar geométricamente la posición de los registros (coordenadas), las rutas
+                del cableado empleando la ecuación de la recta[cite: 7], las curvaturas del terreno mediante propiedades
+                analíticas de la parábola[cite: 7] y los radios de servicio aplicando la ecuación de la circunferencia y
+                la elipse[cite: 7]. Además, indicarán el presupuesto del prototipo valorado en pesos.</p>
+            <p><strong>Tiempo máximo para su realización:</strong> 60 minutos (Masterclass 50).</p>
+
+            <table style="margin-top: 15px; margin-bottom: 0;">
+                <tr>
+                    <th>Reactivos / Criterios de Evaluación</th>
+                    <th>Ponderación</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Trigonometría y Ángulos:</strong> Analiza correctamente la relación entre lados y
+                        ángulos de un triángulo rectángulo[cite: 7] para el cálculo de los desniveles del sistema
+                        subterráneo.</td>
+                    <td>25% (2.5 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Ecuación de la Recta y Polinomios:</strong> Gráfica polinomios de dos variables[cite:
+                        7] y deduce la ecuación de la recta en sus formas simétrica y punto-pendiente[cite: 7] sin
+                        errores algebraicos.</td>
+                    <td>25% (2.5 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Modelado con Cónicas:</strong> Aplica de forma precisa la ecuación ordinaria de las
+                        parábolas[cite: 7] y la ecuación de la circunferencia[cite: 7] al dimensionar la maqueta en
+                        AutoCAD.</td>
+                    <td>30% (3.0 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Integración del Entorno (Fabricación/CAD):</strong> Ensambla y justifica el proyecto
+                        utilizando estimaciones sencillas con ecuaciones de dos variables[cite: 7] para demostrar la
+                        viabilidad técnica y presupuestal.</td>
+                    <td>20% (2.0 pts)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

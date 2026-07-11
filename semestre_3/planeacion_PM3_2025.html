@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeación EC0366 - Pensamiento Matemático III</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+        };
+    </script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e67e22;
+            --accent-color: #27ae60;
+            --bg-color: #fdfefe;
+            --text-color: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: #fbeee6;
+            padding: 12px 20px;
+            border-left: 5px solid var(--secondary-color);
+            margin-top: 35px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f6f7;
+        }
+
+        .modular-note {
+            background: #eafaf1;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .mc-row td {
+            padding: 8px 12px;
+        }
+
+        .mc-header {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        ul {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Planeación de Curso: Pensamiento Matemático III</h1>
+
+        <div class="modular-note">
+            <strong>Confirmación de Lineamientos:</strong> Entregables estructurados bajo el estándar EC0366. El curso
+            desarrolla el pensamiento algebraico y la introducción a la geometría plana[cite: 6]. Consta de 50
+            Masterclasses modulares con un enfoque estricto en el Aprendizaje Basado en Proyectos (ABP), preparadas para
+            integración HTML5.
+        </div>
+
+        <!-- 1. CRONOGRAMA -->
+        <h2>1. Cronograma para el desarrollo del curso en línea</h2>
+        <table>
+            <tr>
+                <th colspan="4">Título del curso: Pensamiento Matemático III (Pensamiento algebraico e introducción a
+                    geometría plana)</th>
+            </tr>
+            <tr>
+                <th colspan="4">Objetivo General: Aplicar el lenguaje algebraico para describir situaciones de la
+                    realidad y expresar relaciones matemáticas, utilizando la intuición y el razonamiento para resolver
+                    problemas[cite: 6].</th>
+            </tr>
+            <tr>
+                <th>No.</th>
+                <th>Actividad a realizar</th>
+                <th>Fecha de Elaboración</th>
+                <th>Tiempo Estimado</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>Elaboración de la estructura temática (Adaptación de los 6 propósitos formativos a 50
+                    masterclasses)[cite: 6].</td>
+                <td>10/08/2026</td>
+                <td>12 horas</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Desarrollo del documento de información general del curso.</td>
+                <td>12/08/2026</td>
+                <td>6 horas</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Elaboración de la guía de actividades de aprendizaje (Diseño del ABP: "Urbanización y Geometría:
+                    Trazado de un Fraccionamiento Sustentable").</td>
+                <td>15/08/2026</td>
+                <td>18 horas</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Desarrollo de los materiales del curso (Interactivos HTML5, planos vectoriales y guías de corte).
+                </td>
+                <td>22/08/2026</td>
+                <td>45 horas</td>
+            </tr>
+            <tr>
+                <td>05</td>
+                <td>Desarrollo de los instrumentos de evaluación (Rúbricas automatizadas para resolución de ecuaciones y
+                    geometría plana).</td>
+                <td>28/08/2026</td>
+                <td>14 horas</td>
+            </tr>
+        </table>
+        <p><strong>Firma de Elaboración:</strong> Desarrollador del Curso &nbsp;&nbsp;&nbsp; <strong>Firma de
+                Autorización:</strong> Coordinación Académica</p>
+
+        <!-- 2. INFORMACIÓN GENERAL -->
+        <h2>2. Documento de información general del curso en línea</h2>
+        <ul>
+            <li><strong>Título del curso:</strong> Pensamiento Matemático III - Pensamiento algebraico e introducción a
+                geometría plana[cite: 6].</li>
+            <li><strong>Objetivo General:</strong> Aplicar el lenguaje algebraico como herramienta para describir
+                situaciones de la realidad y expresar relaciones matemáticas, y mediante procesos de intuición y
+                razonamiento, lograr explicar y resolver problemas[cite: 6].</li>
+            <li><strong>Metodología de Trabajo:</strong> Aprendizaje Basado en Proyectos (ABP). Los estudiantes
+                desarrollarán el proyecto <em>"Urbanización y Geometría: Trazado de un Fraccionamiento
+                    Sustentable"</em>. Emplearán sistemas de ecuaciones, ecuaciones cuadráticas y principios de
+                geometría plana para diseñar el trazado urbano, calcular materiales arquitectónicos y proyectar la
+                electrificación subterránea de un sector en Torreón. El proyecto culminará con la fabricación de una
+                maqueta a escala utilizando corte láser en MDF.</li>
+            <li><strong>Perfil de Ingreso:</strong> Estudiantes de educación media superior inicial (tercer
+                semestre)[cite: 6], con conocimientos previos en introducción al álgebra y manejo básico de navegadores
+                web.</li>
+            <li><strong>Requisitos Tecnológicos y Materiales:</strong> Navegador web compatible con HTML5 y MathJax.
+                Acceso a software de geometría dinámica y diseño vectorial básico. Hojas de MDF para la fase final del
+                proyecto de ensamble.</li>
+            <li><strong>Forma de Evaluación:</strong> Evaluación formativa orientada a la validación de ecuaciones,
+                coevaluación de planos arquitectónicos en foros y una exposición sumativa del modelo físico y
+                matemático.</li>
+            <li><strong>Duración:</strong> 50 horas (distribuidas en 50 Masterclasses de 1 hora, equivalentes a 4 horas
+                semanales)[cite: 6].</li>
+        </ul>
+
+        <!-- 3. DESGLOSE TEMÁTICO DE LAS 50 MASTERCLASSES -->
+        <h2>3. Desglose Temático Detallado (50 Masterclasses)</h2>
+        <table>
+            <tr>
+                <th>MC</th>
+                <th>Propósito MCCEMS[cite: 6]</th>
+                <th>Tema Integrado al ABP</th>
+            </tr>
+            <tr>
+                <td colspan="3" class="mc-header">Unidad I: Ecuaciones Lineales y Trazado Urbano</td>
+            </tr>
+            <tr class="mc-row">
+                <td>01</td>
+                <td>Propósito 1</td>
+                <td>Introducción al proyecto: El concepto de ecuación y sus partes[cite: 6] en el diseño de un
+                    fraccionamiento.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>02</td>
+                <td>Propósito 1</td>
+                <td>Estructura y forma estándar de las ecuaciones lineales[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>03</td>
+                <td>Propósito 1</td>
+                <td>Modelado de vialidades mediante ecuaciones lineales de primer grado[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>04</td>
+                <td>Propósito 1</td>
+                <td>Procedimiento aritmético para encontrar el valor de una incógnita[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>05</td>
+                <td>Propósito 1</td>
+                <td>Simulador interactivo: Verificación de incógnitas en distancias lineales.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>06</td>
+                <td>Propósito 2</td>
+                <td>Concepto de plano cartesiano: ejes perpendiculares horizontal (X) y vertical (Y)[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>07</td>
+                <td>Propósito 2</td>
+                <td>Ecuaciones lineales con dos incógnitas[cite: 6] aplicadas a coordenadas topográficas.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>08</td>
+                <td>Propósito 2</td>
+                <td>Procedimiento para solucionar ecuaciones lineales con dos incógnitas[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>09</td>
+                <td>Propósito 2</td>
+                <td>Definición y cálculo de la ecuación de la recta[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>10</td>
+                <td>Propósito 2</td>
+                <td>Representación gráfica de la ecuación de la recta[cite: 6] en el plano urbano.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>11</td>
+                <td>Propósito 2</td>
+                <td>Taller de software: Trazado de rectas para la red de electrificación subterránea.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad II: Sistemas de Ecuaciones y Optimización de Recursos</td>
+            </tr>
+            <tr class="mc-row">
+                <td>12</td>
+                <td>Propósito 3</td>
+                <td>Introducción a los sistemas de ecuaciones lineales aplicados a presupuestos[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>13</td>
+                <td>Propósito 3</td>
+                <td>Resolución analítica mediante el método de igualación[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>14</td>
+                <td>Propósito 3</td>
+                <td>Resolución analítica mediante el método de sustitución[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>15</td>
+                <td>Propósito 3</td>
+                <td>Resolución analítica mediante el método de reducción[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>16</td>
+                <td>Propósito 3</td>
+                <td>Aplicación del método gráfico[cite: 6] para hallar puntos de intersección entre redes de servicios.
+                </td>
+            </tr>
+            <tr class="mc-row">
+                <td>17</td>
+                <td>Propósito 3</td>
+                <td>Uso de applets HTML5 para validar el método gráfico.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>18</td>
+                <td>Propósito 3</td>
+                <td>Fundamentos del método por determinantes[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>19</td>
+                <td>Propósito 3</td>
+                <td>Resolución de sistemas complejos usando determinantes[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>20</td>
+                <td>Propósito 3</td>
+                <td>Evaluación formativa Unidad II: Cálculo de cruces de infraestructura.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad III: Ecuaciones Cuadráticas y Crecimiento Poblacional</td>
+            </tr>
+            <tr class="mc-row">
+                <td>21</td>
+                <td>Propósito 4</td>
+                <td>Introducción a las ecuaciones cuadráticas[cite: 6] para calcular áreas de parques.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>22</td>
+                <td>Propósito 4</td>
+                <td>Forma general de la ecuación cuadrática[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>23</td>
+                <td>Propósito 4</td>
+                <td>Resolución por el método de completar cuadrados[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>24</td>
+                <td>Propósito 4</td>
+                <td>Demostración interactiva de la complementación de cuadrados.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>25</td>
+                <td>Propósito 4</td>
+                <td>Aplicación de la fórmula general (Bhaskara) para ecuaciones cuadráticas[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>26</td>
+                <td>Propósito 4</td>
+                <td>Representación gráfica[cite: 6] de parábolas (zonas de cobertura).</td>
+            </tr>
+            <tr class="mc-row">
+                <td>27</td>
+                <td>Propósito 5</td>
+                <td>Aplicación: Determinar medidas o cantidades de material en proyectos de arquitectura[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>28</td>
+                <td>Propósito 5</td>
+                <td>Cálculo de intereses simples y compuestos en finanzas personales[cite: 6] para el financiamiento del
+                    proyecto.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>29</td>
+                <td>Propósito 5</td>
+                <td>Descripción del crecimiento poblacional[cite: 6] para prever demanda de servicios.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>30</td>
+                <td>Propósito 5</td>
+                <td>Análisis de propagación de fenómenos (ej. epidemia)[cite: 6] y densidad urbana.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad IV: Geometría Plana y Fabricación Digital</td>
+            </tr>
+            <tr class="mc-row">
+                <td>31</td>
+                <td>Propósito 6</td>
+                <td>Introducción a la geometría plana[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>32</td>
+                <td>Propósito 6</td>
+                <td>Ángulos, definición, tipos y componentes[cite: 6] en el trazado de lotes.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>33</td>
+                <td>Propósito 6</td>
+                <td>Medición angular utilizando simuladores de transportador web.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>34</td>
+                <td>Propósito 6</td>
+                <td>El Teorema de Pitágoras[cite: 6]: Aplicación en cableado diagonal.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>35</td>
+                <td>Propósito 6</td>
+                <td>Ejercicios prácticos de distancias con Pitágoras[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>36</td>
+                <td>Propósito 6</td>
+                <td>Construcción de triángulos rectángulos[cite: 6] en planos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>37</td>
+                <td>Propósito 6</td>
+                <td>Criterios de congruencia de triángulos[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>38</td>
+                <td>Propósito 6</td>
+                <td>Criterios de semejanza de triángulos[cite: 6] para diseño a escala.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>39</td>
+                <td>Propósito 6</td>
+                <td>Taller vectorial: Escalamiento de polígonos para la maqueta.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>40</td>
+                <td>Propósito 6</td>
+                <td>Revisión del teorema del triángulo de Napoleón[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>41</td>
+                <td>Propósito 6</td>
+                <td>El triángulo de Napoleón considerado como un problema-meta[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>42</td>
+                <td>Propósito 6</td>
+                <td>Aplicar resultados de la geometría euclidiana[cite: 6] al urbanismo.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>43</td>
+                <td>Transversal</td>
+                <td>Taller de Fabricación 1: Exportación de ecuaciones lineales a vectores SVG.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>44</td>
+                <td>Transversal</td>
+                <td>Taller de Fabricación 2: Optimización de cortes en MDF basados en ecuaciones cuadráticas.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>45</td>
+                <td>Transversal</td>
+                <td>Ensamblaje del modelo físico aplicando congruencia y semejanza.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>46</td>
+                <td>Transversal</td>
+                <td>Cálculo final del presupuesto de materiales arquitectónicos[cite: 6].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>47</td>
+                <td>Transversal</td>
+                <td>Revisión de coevaluación de los planos topográficos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>48</td>
+                <td>Transversal</td>
+                <td>Preparación de la memoria técnica del fraccionamiento.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>49</td>
+                <td>Transversal</td>
+                <td>Simulacro de presentación de la plataforma interactiva.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>50</td>
+                <td>Transversal</td>
+                <td>Evaluación Sumativa Final: Defensa del cálculo estructural y presentación de la maqueta a escala.
+                </td>
+            </tr>
+        </table>
+
+        <!-- 4. GUÍA DE ACTIVIDADES -->
+        <h2>4. Guía de actividades de aprendizaje por unidad</h2>
+        <table>
+            <tr>
+                <th colspan="5">Unidad III: Ecuaciones Cuadráticas y Crecimiento Poblacional | Objetivo: Expresar y
+                    resolver situaciones de interés a través de distintos tipos de ecuaciones para comprender su
+                    relevancia[cite: 6].</th>
+            </tr>
+            <tr>
+                <th>Título e Instrucciones</th>
+                <th>Materiales / Recursos</th>
+                <th>Participación</th>
+                <th>Medio de Entrega y Periodo</th>
+                <th>Ponderación y Criterios</th>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 1: Áreas Verdes y Ecuaciones Cuadráticas</strong><br>
+                    <em>Instrucciones:</em> Utilizando la fórmula general de Bhaskara[cite: 6], determina las
+                    dimensiones exactas de un parque rectangular cuya área está descrita por la ecuación cuadrática \(A
+                    = 2x^2 + 8x - 24\). Representa gráficamente la parábola resultante[cite: 6].
+                </td>
+                <td>Simulador web de ecuaciones cuadráticas, graficador interactivo.</td>
+                <td>Individual.</td>
+                <td>Gráfica y resolución en plataforma.<br><em>Periodo:</em> Masterclasses 21 a 26.</td>
+                <td>
+                    <strong>Valor: 50% de la Unidad</strong><br>
+                    <em>Criterios:</em> Correcta aplicación de la fórmula general[cite: 6], exactitud en la
+                    representación gráfica[cite: 6].
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 2: Presupuesto y Proyección de Demanda</strong><br>
+                    <em>Instrucciones:</em> Aplica ecuaciones para determinar cantidades de material en proyectos de
+                    arquitectura[cite: 6] y calcula los intereses simples y compuestos[cite: 6] para el financiamiento
+                    de la obra.
+                </td>
+                <td>Hoja de cálculo, módulo HTML de variables.</td>
+                <td>Colaborativa (Equipos de 3).</td>
+                <td>Reporte técnico financiero en PDF.<br><em>Periodo:</em> Masterclasses 27 a 30.</td>
+                <td>
+                    <strong>Valor: 50% de la Unidad</strong><br>
+                    <em>Criterios:</em> Precisión en el cálculo de intereses[cite: 6] y justificación de las cantidades
+                    de material arquitectónico[cite: 6].
+                </td>
+            </tr>
+        </table>
+
+        <!-- 5. ESTRUCTURA DE EVALUACIÓN -->
+        <h2>5. Estructura de un Instrumento de Evaluación del Aprendizaje</h2>
+        <div
+            style="border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; background-color: #ffffff;">
+            <h3 style="margin-top: 0; color: var(--primary-color);">Instrumento: Rúbrica Analítica de Proyecto
+                Transversal (Evaluación Final ABP)</h3>
+            <p><strong>Actividad de aprendizaje a evaluar:</strong> Memoria técnica y maqueta del Fraccionamiento
+                Sustentable.</p>
+            <p><strong>Instrucciones específicas:</strong> El equipo deberá exponer los planos vectoriales y la maqueta
+                física de su urbanización. Deberán justificar la ubicación de vialidades resolviendo sistemas de
+                ecuaciones lineales[cite: 6], comprobar el cálculo de áreas mediante ecuaciones cuadráticas[cite: 6] y
+                demostrar la correcta aplicación de los criterios de congruencia y semejanza de triángulos[cite: 6] en
+                la construcción a escala. Deben indicar el costo final del material en pesos.</p>
+            <p><strong>Tiempo máximo para su realización:</strong> 60 minutos (Masterclass 50).</p>
+
+            <table style="margin-top: 15px; margin-bottom: 0;">
+                <tr>
+                    <th>Reactivos / Criterios de Evaluación</th>
+                    <th>Ponderación</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Modelado Lineal:</strong> Aplica el método analítico o gráfico para resolver sistemas
+                        de ecuaciones lineales referentes a la intersección de vialidades[cite: 6].</td>
+                    <td>25% (2.5 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Ecuaciones Cuadráticas:</strong> Resuelve correctamente las ecuaciones cuadráticas
+                        mediante el método de completar cuadrados o Bhaskara[cite: 6] para definir áreas de
+                        construcción.</td>
+                    <td>25% (2.5 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Geometría Aplicada:</strong> Utiliza el teorema de Pitágoras, la medición de ángulos
+                        y los criterios de congruencia[cite: 6] para garantizar la exactitud de los planos topográficos.
+                    </td>
+                    <td>30% (3.0 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Finanzas y Materiales:</strong> Determina correctamente las cantidades de material
+                        arquitectónico y calcula los intereses de financiamiento[cite: 6].</td>
+                    <td>20% (2.0 pts)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 49: Taller Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 49: Taller de montaje en entorno web: Preparación del material audiovisual interactivo del proyecto</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Poder Comercial de la Comunicación Digital</h3>
+            <p>Escucha bien: De nada te sirve tener los cálculos matemáticos, físicos y lógicos más hermosos y perfectos del planeta si nadie más allá de ti puede entenderlos. El penúltimo paso innegociable de cualquier gran ingeniero, arquitecto o científico de datos es aprender a comunicar y "vender" sus hallazgos masivos al mundo real.</p>
+            <p>Hoy en día, las carpetas de papel están obsoletas. El estándar global indiscutible para la presentación de proyectos y presupuestos son los <strong>entornos web interactivos</strong> (Páginas HTML, Dashboards de BI, Presentaciones en la Nube), donde el usuario inversionista puede ver la estética de los datos y, lo más importante, jugar con los simuladores en tiempo real sin romper nada.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Estructurando la Presentación Digital Perfecta</h3>
+            <p>Para montar el esqueleto de tu Proyecto ABP en la web, debes seguir obligatoriamente una estructura de diseño implacable y persuasiva:</p>
+            <ul>
+                <li><strong>El Gancho Visual (Hero Section):</strong> El gran título de tu proyecto y el problema real que vas a resolver. (Ej. "Salvando la Red de Agua del Municipio", no "Proyecto Final de Mate").</li>
+                <li><strong>El Motor Oculto (La Metodología Matemática):</strong> Aquí muestras tus fracciones, potencias de notación y fórmulas PEMDAS. Es el lugar donde demuestras con autoridad que tus datos son verídicos, lógicos y están estandarizados (SI).</li>
+                <li><strong>El Juguete (La Simulación):</strong> Un espacio dinámico interactivo (como los iframe de GeoGebra) para que el propio evaluador mueva barras y vea qué pasa con la economía si cambia las variables él mismo.</li>
+                <li><strong>El Remate Lógico:</strong> El veredicto final indiscutible usando tu fría Tabla de Verdad. ¿Es rentable o es quiebra segura?</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Creando Gráficos Finales Integrables</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Montaje Interactivo:</h4>
+                <ol>
+                    <li><strong>Creando Evidencia Visual Contundente:</strong> En el software GeoGebra, usa la hoja de cálculo integrada para tabular ordenadamente los costos de tu proyecto (Inversión Inicial vs. Ahorro Anual). Selecciona todas las columnas y usa el comando "Crear lista de puntos" para graficar la realidad.</li>
+                    <li><strong>El Modelado Web del Futuro:</strong> Ahora, ajusta una línea de tendencia matemática (Regresión Lineal) para proyectarle a los banqueros tus ganancias exactas a 5 años. Usa el poderoso comando de consola: <code>AjusteLineal(Lista1)</code>.</li>
+                    <li><strong>Exportar a la Web Mundial:</strong> En lugar de tomar una captura de pantalla plana, aburrida y de baja resolución, GeoGebra te permite exportar tu trabajo dinámico como una "Applet interactiva de HTML" o incrustarla limpiamente (con la etiqueta <code>iframe</code>) directamente en la página web HTML de tu proyecto ABP final. ¡Eso demuestra un nivel técnico superior!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Arquitecto de Datos Digitales</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que sabes empaquetar, estructurar y presentar lógicas matemáticas crudas en un producto digital irresistible y comercial.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto de Montaje!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Superado! Tu Dashboard está listo.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Diseñar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc48/MC S48.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc50/MC S50.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 49. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

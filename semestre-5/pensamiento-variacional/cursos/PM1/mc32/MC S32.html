@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 32: Fracciones en el Mundo Real (Proyecto)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 32: Aplicación del modelo fraccionario al proyecto: Mapeo de áreas verdes frente a urbanización</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Grave Problema del Mapeo Urbano</h3>
+            <p>Ha llegado el momento espectacular de aplicar absolutamente todo lo aprendido a tu <strong>Proyecto Transversal</strong>. Imagina por un momento que la alcaldía te entrega un plano topográfico de tu colonia. El plano revela, a simple vista, un problema ecológico crítico: la proporción entre el concreto gris (urbanización y calles) y las áreas verdes (parques y reservas) está gravemente desequilibrada.</p>
+            <p>Usaremos el <strong>Modelo Fraccionario</strong> puro para demostrarlo. Si la colonia mide 120 hectáreas en total (este será tu entero absoluto) y los parques sumados apenas ocupan 15 hectáreas aisladas, ¿qué fracción exacta del terreno aún respira?</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Construyendo la Fracción Real y su Diagnóstico</h3>
+            <p>El proceso metódico para modelar matemáticamente este problema del mundo real es directo y no admite excusas:</p>
+            <ol>
+                <li><strong>El Entero (Denominador):</strong> Representa el total del terreno disponible, tu universo absoluto. En este caso, las 120 hectáreas totales (\(120\)).</li>
+                <li><strong>La Parte (Numerador):</strong> Representa la muestra específica que estamos analizando. En este caso, las áreas verdes existentes (\(15\)).</li>
+                <li><strong>La Fracción Bruta de Análisis:</strong> Tienes \(\frac{15}{120}\). Esto significa llanamente que 15 de cada 120 hectáreas son parques.</li>
+                <li><strong>La Simplificación (Uso del MCD):</strong> Expresar \(\frac{15}{120}\) es difícil de imaginar para un político. Si la divides y simplificas arriba y abajo entre 15 (su MCD), obtendrás la brillante y elegante fracción \(\frac{1}{8}\). Esto es un argumento mucho más claro y contundente: <strong>"Apenas una octava parte de nuestra colonia es área verde"</strong>.</li>
+                <li><strong>Porcentaje Final de Impacto:</strong> Para saber si cumplimos la estricta norma de la OMS (que recomienda un gran porcentaje de áreas verdes por habitante), divides velozmente \(1 \div 8 = 0.125\). Mueves el punto decimal dos veces a la derecha y obtienes un preocupante y pobre <strong>12.5%</strong>. ¡La colonia necesita reforestación urgente!</li>
+            </ol>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulador Topográfico de Colonia</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Mapeo y Simplificación Rápida:</strong> En la barra de entrada o CAS de tu software, escribe directamente la fracción original de tu diagnóstico de campo: <code>15/120</code>. GeoGebra la simplificará al instante, revelándote el irreducible <code>1/8</code>.</li>
+                    <li><strong>Proporción Inversa Automática:</strong> Si sabemos con seguridad que el 12.5% del mapa son áreas verdes. ¿Cuánto es un terreno desolado de concreto? El entero total en lenguaje de porcentajes es siempre el 100%. Escribe <code>100 - 12.5</code>. GeoGebra te indicará fríamente <code>87.5</code>. ¡El gigantesco 87.5% de tu colonia es una plasta asfixiante de concreto!</li>
+                    <li><strong>Proyectando Soluciones Ecológicas:</strong> Si quieres diseñar un plan donde el área verde crezca dignamente a ser \(\frac{1}{4}\) (que representa el 25% del mapa ideal), entonces, debes saber a cuánto equivale \(\frac{1}{4}\) de las 120 hectáreas reales: escribe <code>120 * (1/4)</code>. GeoGebra te dirá <code>30</code>. Conclusión: Necesitas sembrar parques y plantar árboles hasta alcanzar la meta de 30 hectáreas totales.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Evaluador Máximo de Proyectos Urbanos</h3>
+            <div id="quiz-setup">
+                <p>Evalúa métricas ambientales críticas de diferentes terrenos urbanos usando fracciones lógicas, simplificación veloz y porcentajes precisos.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Analítico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Analizar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc31/MC S31.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc33/MC S33.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 32. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

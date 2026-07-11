@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 01: Introducción al Proyecto Urbano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Ecuaciones Lineales y Trazado Urbano</h1>
+        <h2>Masterclass 01: El Concepto de Ecuación (Equilibrio Urbano)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Bienvenido a la Firma de Arquitectura</h3>
+            <p>Se acabaron los problemas matemáticos sin sentido. Has sido contratado como analista de planeación urbana para diseñar un Fraccionamiento Sustentable. Tu misión final será entregar planos, cálculos de materiales y una maqueta a escala en corte láser MDF. Y en este nivel, cada centímetro cuenta en pesos. Para lograrlo, tu herramienta principal no será el cemento, sino el <strong>concepto de Ecuación</strong>. En la ingeniería, una ecuación no es un problema escolar, es una <em>balanza perfecta</em> que garantiza que una estructura no se caiga.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. ¿Qué es realmente una Ecuación?</h3>
+            <p>Una ecuación es una afirmación inquebrantable de igualdad. Si te dicen que el peso de un bloque de concreto desconocido más $5$ kilogramos es igual a $20$ kilogramos en total, escribes: $x + 5 = 20$. El signo de igual ($=$) es el poste central de la balanza. Todo lo que está a la izquierda (miembro izquierdo) tiene que pesar exacta y milimétricamente lo mismo que lo que está a la derecha (miembro derecho). Si alteras un lado sin alterar el otro, el edificio corporativo colapsa.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: La Anatomía de la Ecuación</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Diseccionando el Equilibrio: $3x - 4 = 11$</h4>
+                <ol>
+                    <li><strong>La Incógnita ($x$):</strong> Es el recurso que te falta (por ejemplo, los metros de asfalto por calle).</li>
+                    <li><strong>El Coeficiente ($3$):</strong> El multiplicador de tu recurso (necesitas asfaltar $3$ calles).</li>
+                    <li><strong>Término Independiente ($-4$ y $11$):</strong> Valores fijos, presupuestos que ya conoces en pesos o metros.</li>
+                    <li><strong>El Poste de Equilibrio ($=$):</strong> La frontera innegociable. Lo que ocurre a la izquierda, define a la derecha.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Auditor Urbano</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que entiendes la estructura del equilibrio matemático antes de empezar a firmar planos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Iniciar Auditoría!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has entendido la balanza corporativa fundamental.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Taller</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../index.html" class="btn-secondary" style="text-decoration: none;">&larr; Índice</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc02/MC S02.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

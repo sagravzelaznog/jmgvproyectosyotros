@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 48: Análisis de Datos de Mercado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #8b5cf6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad V: Análisis Urbano y Cierre del Proyecto</h1>
+        <h2>Masterclass 48: Inteligencia de Negocios (Media, Mediana y Moda)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Caos de los Presupuestos</h3>
+            <p>El Fraccionamiento está diseñado. Los volúmenes están calculados. Ahora necesitas comprar toneladas de varilla de acero. Envías solicitudes de cotización a 7 proveedores distintos. Cuando regresan los sobres, te encuentras con un caos de números: <em>\$1200, \$1250, \$1200, \$3800, \$1150, \$1200, \$1300</em>. ¿Qué número le pasas al CEO como el "precio representativo" del acero? Si eliges mal, quebrarás a la empresa. Aquí abandonas la geometría y entras a la <strong>Estadística Corporativa (Medidas de Tendencia Central)</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Los Tres Jueces de la Verdad</h3>
+            <p>Para resumir el caos de números en UN solo número ejecutivo, tienes tres armas matemáticas de purificación:</p>
+            <ul>
+                <li><strong>La MODA (El Ganador Popular):</strong> Es el número que MÁS SE REPITE en los datos. El precio que más proveedores están cobrando sin ponerse de acuerdo. En tu lista (\$1200, \$1250, \$1200, \$3800, \$1150, \$1200, \$1300), el \$1200 se repite tres veces. ¡Esa es la Moda del mercado!</li>
+                <li><strong>La MEDIA (El Promedio Clásico):</strong> Sumas todos los dólares y los divides entre los 7 proveedores. La suma da 11,100. Dividido entre 7 es <strong>\$1585</strong>. ¡ALERTA! El promedio fue contaminado y arrastrado hacia arriba por culpa del proveedor usurero que cobró \$3800. La Media es poderosa, pero muy débil ante datos atípicos (mentirosos).</li>
+                <li><strong>La MEDIANA (El Escudo Antimafia):</strong> Ordenas los números de menor a mayor de forma militar (\$1150, \$1200, \$1200, <strong>\$1200</strong>, \$1250, \$1300, \$3800). El número que queda EXACTAMENTE en el maldito centro del batallón es la Mediana. ¡Es el \$1200 central! La Mediana aniquiló al usurero de \$3800 ignorando su valor extremo y salvó tu presupuesto de un dato falso.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Selección del Juez Correcto</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Diagnóstico Financiero de Lotes (Ventas en miles): 50, 52, 55, 55, 58, 60, 450.</h4>
+                <ol>
+                    <li><strong>La Trampa de la Media:</strong> El promedio de esos 7 lotes da <strong>111 mil pesos</strong>. Si publicas que el "precio promedio de tus lotes es 111", los clientes huirán asustados (6 de tus lotes valen casi 50 mil, pero un solo lote de lujo de 450 mil contaminó la estadística).</li>
+                    <li><strong>El Rescate de la Mediana:</strong> Ordenas los precios y tomas al soldado del centro (el cuarto dato). Es el <strong>55</strong>. Le dices al público: "El precio representativo de mis terrenos es 55 mil pesos". Proteges tu campaña de marketing aislando la mansión millonaria.</li>
+                    <li><strong>La Ley del CEO:</strong> Cuando los números son parejos y honestos, usas la <strong>Media (Promedio)</strong>. Cuando hay usureros, fraudes o datos atípicamente gigantes (outliers), usas la <strong>Mediana</strong> para blindar el reporte.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Analista de Riesgos</h3>
+            <div id="quiz-setup">
+                <p>Domina los tres jueces estadísticos para extraer la verdad oculta en el ruido de los mercados.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Iniciar Análisis de Datos!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Ningún dato falso puede corromper tus informes financieros.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Servidor</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc47/MC S47.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc49/MC S49.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 12: El Presupuesto Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Lenguaje Algebraico y Monomios en el Taller</h1>
+        <h2>Masterclass 12: Valor Numérico de una Expresión (El Presupuesto Facturado)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Día de la Verdad en la Oficina</h3>
+            <p>Has pasado todo el mes creando fórmulas inquebrantables con letras y variables ($x, y, z$) para modelar de forma inteligente los costos de la fábrica. Pero al final del día, el cliente millonario no quiere ver letras raras en su factura; el cliente quiere saber exacta y dolorosamente <strong>cuántos pesos te va a pagar</strong>. Cuando el cliente por fin se decide y te da las medidas reales de la madera por teléfono, tú destruyes las letras del software y las reemplazas por esos números físicos. A esto se le llama brutalmente calcular el <strong>Valor Numérico</strong> de la expresión.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Protocolo de Sustitución Militar</h3>
+            <p>Sustituir no es adivinar ni borrar a lo loco, es inyectar valores precisos en el código. Si fallas, la máquina se rompe:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Escudos de Paréntesis Obligatorios:</strong> Cuando quitas una letra para meter un número, SIEMPRE mete el número entre fuertes paréntesis $( )$. Ejemplo crítico: si la fórmula es $3x$, y el cliente dice que $x=5$, entonces se convierte en $3(5)$. Si eres un practicante novato y no usas los paréntesis protectores, escribirás $35$ por error y quebrarás a la empresa de inmediato.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>Jerarquía de Operaciones (PEMDAS):</strong> La calculadora es tonta si no le das una orden jerárquica. Primero calculas obligatoriamente las <strong>P</strong>otencias y Raíces, luego <strong>M</strong>ultiplicas o Divides, y solo hasta el final, como los plebeyos, <strong>S</strong>umas o Restas.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>Resultado Absoluto:</strong> El valor numérico SIEMPRE termina siendo un solo y patético número (dinero, metros cuadrados, horas). Las letras desaparecen por completo de la faz de la tierra.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Facturando al Cliente Corporativo</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando la factura final antes del envío:</h4>
+                <ol>
+                    <li>Tienes la fórmula maestra del proyecto ABP: $Costo = 2x^2 - 4x + 100$.</li>
+                    <li>El cliente llama estresado y dice: "Hagámoslo, la medida $x$ será de $5$ metros exactos".</li>
+                    <li><strong>Sustitución con escudos protectores:</strong> $2(5)^2 - 4(5) + 100$.</li>
+                    <li><strong>¡Cuidado Máximo! Jerarquía en acción:</strong> No multipliques $2 \cdot 5$. ¡Te despedirán! Primero va la majestad de la potencia. $(5)^2 = 25$.</li>
+                    <li>Actualizamos la línea: $2(25) - 4(5) + 100$.</li>
+                    <li>Multiplicamos los jefes: $50 - 20 + 100$.</li>
+                    <li>Sumamos y restamos fríamente de izquierda a derecha: $50 - 20 = 30$. Luego $30 + 100 = 130$.</li>
+                    <li><strong>Factura Final: $130$ pesos.</strong> ¡Acabas de cerrar el negocio millonario usando álgebra real!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Gerente Supremo de Finanzas</h3>
+            <div id="quiz-setup">
+                <p>Demuestra si tienes la frialdad corporativa para sustituir valores sin equivocarte un milímetro y calcular facturas millonarias.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Calcular Factura Ahora!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tus cálculos financieros son perfectos. Estás 100% listo para auditar y cobrar cualquier proyecto corporativo de la fábrica.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Escritorio Financiero</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc11/MC S11.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc13/MC S13.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

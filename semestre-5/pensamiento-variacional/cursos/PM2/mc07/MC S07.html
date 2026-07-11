@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 07: Clasificando Presupuestos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Lenguaje Algebraico y Monomios en el Taller</h1>
+        <h2>Masterclass 07: Clasificación de Expresiones según sus Términos</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Catálogo Financiero de la Fábrica</h3>
+            <p>Ya sabes perfectamente que un Término Algebraico es un "ladrillo indestructible". Pero en la fábrica de la vida real, no todos los muros de diseño son iguales. Algunos proyectos de MDF son baratos y simples (formados por 1 solo ladrillo sólido), y otros son proyectos corporativos millonarios y extremadamente complejos (formados por muchos ladrillos). En el álgebra, clasificamos las expresiones (los muros) dependiendo estrictamente de <strong>cuántos términos tienen</strong>. Recuerda: Los signos de Suma ($+$) y Resta ($-$) son los únicos muros separadores que te dirán cuántas piezas tiene tu presupuesto final.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Familia Corporativa de los Polinomios</h3>
+            <p>Aquí está la clasificación oficial que debes memorizar para catalogar y cobrar tus proyectos en el Proyecto ABP:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Monomio (El Lobo Solitario):</strong> Tiene exactamente <strong>1 solo término</strong>. Es una sola pieza sólida de madera, sin sumas ni restas pegadas. Ejemplo: $5x^2$ o $-3y$.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #2ecc71; padding-left: 10px; margin: 10px 0;"><strong>Binomio (La Pareja Dinámica):</strong> Tiene exactamente <strong>2 términos</strong>, separados por un solo muro ($+$ o $-$). Es como ensamblar dos piezas de MDF completamente distintas. Ejemplo: $3x + 5$ o $y^2 - 4y$.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f1c40f; padding-left: 10px; margin: 10px 0;"><strong>Trinomio (El Trío Corporativo):</strong> Tiene exactamente <strong>3 términos</strong> separados por dos muros. Es un proyecto estructural de tres fases. Ejemplo: $x^2 + 5x - 6$.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>Polinomio (El Monstruo Industrial):</strong> La palabra "Poli" significa "muchos". Técnicamente, cualquier expresión de 2 o más términos ya es un polinomio. Pero en el lenguaje del taller reservamos este nombre épico para los proyectos gigantes de <strong>4 términos o más</strong>. Ejemplo: $2x^3 - 4x^2 + x - 10$.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Etiquetando Planos de Clientes</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el catálogo de producción en tiempo real:</h4>
+                <ol>
+                    <li><strong>Llega una orden:</strong> $Costo = -8x^3y$. (¡Alerta visual! Hay números y letras, pero NO hay sumas ni restas separando nada). Diagnóstico letal: <strong>Monomio</strong>. Proyecto de una sola pieza.</li>
+                    <li><strong>Llega otra orden:</strong> $Área = x^2 - 16$. (Ves inmediatamente el muro separador: el signo $-$). Diagnóstico: <strong>Binomio</strong>. Dos piezas separadas.</li>
+                    <li><strong>Llega el diseño del mueble caro:</strong> $Volumen = 5x^3 - 2x^2 + 8x$. (Cuentas los ladrillos separados por los signos $-$ y $+$). Tienes 3 ladrillos distintos. Diagnóstico: <strong>Trinomio</strong>. Proyecto de complejidad intermedia.</li>
+                    <li><strong>Conclusión:</strong> Si aprendes a contar términos (ladrillos) con rapidez visual, sabrás exactamente cuánto cobrar por la complejidad del diseño de MDF sin que el cliente te estafe.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Clasificador de Inventario Industrial</h3>
+            <div id="quiz-setup">
+                <p>Mide rigurosamente si tu mente es tan rápida y fría como un escáner láser para clasificar proyectos de presupuestos solo con mirarlos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Iniciar Escaneo de Planos!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tienes un escáner infalible en los ojos. Sabes clasificar y cotizar proyectos al instante y sin dudar.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Catálogo de Producción</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc06/MC S06.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc08/MC S08.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

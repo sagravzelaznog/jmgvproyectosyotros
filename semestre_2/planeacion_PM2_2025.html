@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeación EC0366 - Pensamiento Matemático II</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+        };
+    </script>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --border-color: #d1d5db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: #e0f2fe;
+            padding: 12px 20px;
+            border-left: 5px solid var(--secondary-color);
+            margin-top: 35px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .modular-note {
+            background: #d1fae5;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .mc-row td {
+            padding: 8px 12px;
+        }
+
+        .mc-header {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Planeación de Curso: Pensamiento Matemático II</h1>
+
+        <div class="modular-note">
+            <strong>Confirmación de Lineamientos:</strong> Se han estructurado los entregables bajo el estándar EC0366.
+            El curso se enfoca en el desarrollo del pensamiento abstracto mediante el lenguaje algebraico[cite: 5],
+            integrado en un formato modular de 50 Masterclasses con un enfoque estricto en el Aprendizaje Basado en
+            Proyectos (ABP).
+        </div>
+
+        <!-- 1. CRONOGRAMA -->
+        <h2>1. Cronograma para el desarrollo del curso en línea</h2>
+        <table>
+            <tr>
+                <th colspan="4">Título del curso: Pensamiento Matemático II (Introducción al álgebra)</th>
+            </tr>
+            <tr>
+                <th colspan="4">Objetivo General: Que el estudiantado entienda al lenguaje algebraico como un medio de
+                    representación de situaciones cotidianas y escolares para estimular el pensamiento abstracto[cite:
+                    5].</th>
+            </tr>
+            <tr>
+                <th>No.</th>
+                <th>Actividad a realizar</th>
+                <th>Fecha de Elaboración</th>
+                <th>Tiempo Estimado</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td>Elaboración de la estructura temática (Adaptación de los 6 propósitos formativos a 50
+                    masterclasses)[cite: 5].</td>
+                <td>15/07/2026</td>
+                <td>14 horas</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Desarrollo del documento de información general del curso.</td>
+                <td>17/07/2026</td>
+                <td>6 horas</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Elaboración de la guía de actividades de aprendizaje (Diseño del ABP: "Presupuesto y Optimización de
+                    Ensambles Mecánicos en MDF").</td>
+                <td>20/07/2026</td>
+                <td>20 horas</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Desarrollo de los materiales del curso (Interactivos HTML5, simuladores de factorizaciones y
+                    recursos gráficos).</td>
+                <td>28/07/2026</td>
+                <td>45 horas</td>
+            </tr>
+            <tr>
+                <td>05</td>
+                <td>Desarrollo de los instrumentos de evaluación (Rúbricas automatizadas para resolución de polinomios y
+                    ecuaciones).</td>
+                <td>02/08/2026</td>
+                <td>12 horas</td>
+            </tr>
+        </table>
+        <p><strong>Firma de Elaboración:</strong> Desarrollador del Curso &nbsp;&nbsp;&nbsp; <strong>Firma de
+                Autorización:</strong> Coordinación Académica</p>
+
+        <!-- 2. INFORMACIÓN GENERAL -->
+        <h2>2. Documento de información general del curso en línea</h2>
+        <ul>
+            <li><strong>Título del curso:</strong> Pensamiento Matemático II - Introducción al álgebra[cite: 5].</li>
+            <li><strong>Objetivo General:</strong> Entender el lenguaje algebraico como un medio de representación de
+                situaciones cotidianas y escolares para estimular el pensamiento abstracto[cite: 5].</li>
+            <li><strong>Metodología de Trabajo:</strong> Aprendizaje Basado en Proyectos (ABP). Los estudiantes
+                desarrollarán el proyecto <em>"Presupuesto y Optimización de Ensambles Mecánicos en MDF"</em>. A lo
+                largo de las sesiones, modelarán algebraicamente los costos de materiales, dimensiones de corte láser y
+                ensamblaje de piezas mecánicas educativas para escuelas en Torreón, utilizando polinomios y ecuaciones
+                de primer grado para justificar financieramente el proyecto.</li>
+            <li><strong>Perfil de Ingreso:</strong> Estudiantes de educación media superior inicial con conocimientos de
+                aritmética básica y disposición para el trabajo colaborativo en talleres y entornos web.</li>
+            <li><strong>Requisitos Tecnológicos y Materiales:</strong> Navegador web actualizado compatible con HTML5 y
+                MathJax, acceso a procesadores de hojas de cálculo y software de diseño vectorial básico.</li>
+            <li><strong>Forma de Evaluación:</strong> Evaluación formativa continua con revisión de avances del proyecto
+                ABP, coevaluación de modelos algebraicos y una presentación final presupuestal.</li>
+            <li><strong>Duración:</strong> 50 horas (distribuidas en 50 Masterclasses de 1 hora)[cite: 5].</li>
+        </ul>
+
+        <!-- 3. DESGLOSE TEMÁTICO DE LAS 50 MASTERCLASSES -->
+        <h2>3. Desglose Temático Detallado (50 Masterclasses)</h2>
+        <table>
+            <tr>
+                <th>MC</th>
+                <th>Propósito MCCEMS[cite: 5]</th>
+                <th>Tema Integrado al ABP</th>
+            </tr>
+            <tr>
+                <td colspan="3" class="mc-header">Unidad I: Lenguaje Algebraico y Monomios en el Taller</td>
+            </tr>
+            <tr class="mc-row">
+                <td>01</td>
+                <td>Propósito 1</td>
+                <td>Introducción al ABP: De la aritmética al diseño de piezas en MDF.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>02</td>
+                <td>Propósito 1</td>
+                <td>Definición formal: Suma, producto, razón, cociente, diferencia y residuo[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>03</td>
+                <td>Propósito 1</td>
+                <td>Uso de símbolos y letras en el lenguaje algebraico[cite: 5] para representar longitudes de corte.
+                </td>
+            </tr>
+            <tr class="mc-row">
+                <td>04</td>
+                <td>Propósito 1</td>
+                <td>El concepto de incógnita[cite: 5] aplicado a la falta de medidas en planos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>05</td>
+                <td>Propósito 1</td>
+                <td>Estructuración de términos y expresiones algebraicas[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>06</td>
+                <td>Propósito 1</td>
+                <td>Traducción de requerimientos de taller (lenguaje común) a expresiones algebraicas[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>07</td>
+                <td>Propósito 2</td>
+                <td>Clasificación inicial de expresiones: Monomio, binomio, trinomio y polinomio[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>08</td>
+                <td>Propósito 2</td>
+                <td>Componentes de un monomio: coeficiente, variable, exponente positivo y grado[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>09</td>
+                <td>Propósito 2</td>
+                <td>Representación de situaciones reales (áreas de piezas) con monomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>10</td>
+                <td>Propósito 3</td>
+                <td>Operaciones fundamentales: Suma y resta de monomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>11</td>
+                <td>Propósito 3</td>
+                <td>Operaciones fundamentales: Multiplicación de monomios[cite: 5] para calcular áreas rectangulares.
+                </td>
+            </tr>
+            <tr class="mc-row">
+                <td>12</td>
+                <td>Propósito 3</td>
+                <td>Operaciones fundamentales: División de monomios[cite: 5] para determinar proporciones.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>13</td>
+                <td>Propósito 3</td>
+                <td>Aplicación estricta de las reglas de los exponentes y los signos[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>14</td>
+                <td>Propósito 3</td>
+                <td>Integración de operaciones con fracciones[cite: 5] en la medición de calibres de MDF.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>15</td>
+                <td>Propósito 3</td>
+                <td>Técnicas de factorización de monomios[cite: 5].</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad II: Operaciones con Polinomios y Costos de Materiales</td>
+            </tr>
+            <tr class="mc-row">
+                <td>16</td>
+                <td>Propósito 3</td>
+                <td>Estructura del binomio y trinomio simple[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>17</td>
+                <td>Propósito 4</td>
+                <td>Introducción a las operaciones complejas: Suma de polinomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>18</td>
+                <td>Propósito 4</td>
+                <td>Restas de polinomios[cite: 5] para calcular mermas y desperdicios de material.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>19</td>
+                <td>Propósito 4</td>
+                <td>Multiplicación de polinomios[cite: 5] en el cálculo de volumen de ensambles.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>20</td>
+                <td>Propósito 4</td>
+                <td>División de polinomios[cite: 5] y distribución de presupuestos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>21</td>
+                <td>Propósito 4</td>
+                <td>Repaso interactivo: Reglas de los exponentes y los signos en polinomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>22</td>
+                <td>Propósito 4</td>
+                <td>Aplicación de operaciones con fracciones en polinomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>23</td>
+                <td>Propósito 4</td>
+                <td>Identificación y desarrollo de productos notables[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>24</td>
+                <td>Propósito 4</td>
+                <td>Cuadrado de un binomio y su representación geométrica plana.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>25</td>
+                <td>Propósito 4</td>
+                <td>Binomios conjugados y su uso en la optimización de cortes.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>26</td>
+                <td>Propósito 4</td>
+                <td>Fundamentos de la factorización de polinomios[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>27</td>
+                <td>Propósito 4</td>
+                <td>Factorización por factor común.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>28</td>
+                <td>Propósito 4</td>
+                <td>Identificación y factorización del trinomio cuadrado perfecto[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>29</td>
+                <td>Propósito 5</td>
+                <td>Aplicación práctica: Cálculo de un presupuesto personal y de taller (ingresos, gastos,
+                    ahorros)[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>30</td>
+                <td>Propósito 5</td>
+                <td>Modelado algebraico para el ajuste de proporciones (escalado de piezas mecánicas)[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>31</td>
+                <td>Propósito 5</td>
+                <td>Hallar precios finales aplicando porcentajes en compras con descuento[cite: 5] (proveedores locales
+                    en Torreón).</td>
+            </tr>
+            <tr class="mc-row">
+                <td>32</td>
+                <td>Transversal</td>
+                <td>Revisión de avance del proyecto ABP: Matrices de polinomios para inventario.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>33</td>
+                <td>Transversal</td>
+                <td>Evaluación formativa de la Unidad II mediante simulador interactivo.</td>
+            </tr>
+
+            <tr>
+                <td colspan="3" class="mc-header">Unidad III: Ecuaciones, Igualdades y Justificación del Proyecto</td>
+            </tr>
+            <tr class="mc-row">
+                <td>34</td>
+                <td>Propósito 6</td>
+                <td>Concepto de igualdad e identidad algebraica[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>35</td>
+                <td>Propósito 6</td>
+                <td>Relaciones de igualdad entre números reales[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>36</td>
+                <td>Propósito 6</td>
+                <td>Propiedades de igualdad: Reflexiva y simétrica[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>37</td>
+                <td>Propósito 6</td>
+                <td>Propiedades de igualdad: Transitiva y de uniformidad[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>38</td>
+                <td>Propósito 6</td>
+                <td>Estructura y despeje de una ecuación lineal simple.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>39</td>
+                <td>Propósito 6</td>
+                <td>Resolución de ecuaciones de primer grado con una incógnita[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>40</td>
+                <td>Propósito 6</td>
+                <td>Aplicación de operaciones inversas para el despeje de variables.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>41</td>
+                <td>Propósito 6</td>
+                <td>Ecuaciones lineales con signos de agrupación y coeficientes fraccionarios.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>42</td>
+                <td>Propósito 6</td>
+                <td>Traducción de problemas de costos a ecuaciones de primer grado.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>43</td>
+                <td>Propósito 6</td>
+                <td>Encontrar el valor de la incógnita en situaciones de interés comercial[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>44</td>
+                <td>Propósito 6</td>
+                <td>Verificación y comprobación de resultados en igualdades matemáticas[cite: 5].</td>
+            </tr>
+            <tr class="mc-row">
+                <td>45</td>
+                <td>Transversal</td>
+                <td>Integración del modelo: Planteamiento de las ecuaciones finales del presupuesto del ensamble.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>46</td>
+                <td>Transversal</td>
+                <td>Cálculo del punto de equilibrio financiero del proyecto educativo mediante ecuaciones.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>47</td>
+                <td>Transversal</td>
+                <td>Preparación del reporte técnico: Justificación de resultados algebraicos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>48</td>
+                <td>Transversal</td>
+                <td>Taller de montaje para la presentación final interactiva en HTML.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>49</td>
+                <td>Transversal</td>
+                <td>Revisión de pares y coevaluación de los modelos algebraicos de costos.</td>
+            </tr>
+            <tr class="mc-row">
+                <td>50</td>
+                <td>Transversal</td>
+                <td>Evaluación Sumativa Final: Defensa argumentativa del presupuesto y diseño del ensamble.</td>
+            </tr>
+        </table>
+
+        <!-- 4. GUÍA DE ACTIVIDADES -->
+        <h2>4. Guía de actividades de aprendizaje por unidad</h2>
+        <table>
+            <tr>
+                <th colspan="5">Unidad II: Operaciones con Polinomios y Costos de Materiales | Objetivo: Aplicar la
+                    aritmética y el manejo del álgebra para realizar operaciones con trinomios y polinomios referentes a
+                    presupuestos reales[cite: 5].</th>
+            </tr>
+            <tr>
+                <th>Título e Instrucciones</th>
+                <th>Materiales / Recursos</th>
+                <th>Participación</th>
+                <th>Medio de Entrega y Periodo</th>
+                <th>Ponderación y Criterios</th>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 1: Mermas y Volúmenes de MDF</strong><br>
+                    <em>Instrucciones:</em> Dada la expresión polinomial para el área de una plancha de MDF $$A = 9x^2 +
+                    24x + 16$$, factoriza el trinomio cuadrado perfecto[cite: 5] para determinar la expresión algebraica
+                    de los lados de corte.
+                </td>
+                <td>Módulo interactivo HTML5 de factorizaciones, catálogo digital de maderas.</td>
+                <td>Individual.</td>
+                <td>Resolución en plataforma web.<br><em>Periodo:</em> Masterclasses 26 a 28.</td>
+                <td>
+                    <strong>Valor: 40% de la Unidad</strong><br>
+                    <em>Criterios:</em> Factorización exacta del trinomio[cite: 5], correcta justificación de los
+                    exponentes[cite: 5].
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Actividad 2: Presupuesto del Proyecto Mecánico</strong><br>
+                    <em>Instrucciones:</em> Utilizando sumas y multiplicaciones de polinomios[cite: 5], calcula el costo
+                    total de los insumos. Posteriormente, aplica el álgebra para hallar precios finales aplicando
+                    porcentajes de descuento de los proveedores[cite: 5].
+                </td>
+                <td>Hoja de cálculo en la nube, matriz de precios.</td>
+                <td>Colaborativa (Equipos de 3).</td>
+                <td>Matriz de costos y reporte en PDF.<br><em>Periodo:</em> Masterclasses 29 a 31.</td>
+                <td>
+                    <strong>Valor: 60% de la Unidad</strong><br>
+                    <em>Criterios:</em> Operaciones precisas con polinomios[cite: 5], correcta aplicación de descuentos
+                    en precios[cite: 5].
+                </td>
+            </tr>
+        </table>
+
+        <!-- 5. ESTRUCTURA DE EVALUACIÓN -->
+        <h2>5. Estructura de un Instrumento de Evaluación del Aprendizaje</h2>
+        <div
+            style="border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; background-color: #ffffff;">
+            <h3 style="margin-top: 0; color: var(--primary-color);">Instrumento: Rúbrica Analítica de Proyecto
+                Transversal (Evaluación Final ABP)</h3>
+            <p><strong>Actividad de aprendizaje a evaluar:</strong> Presentación y defensa del presupuesto algebraico
+                para el diseño y fabricación de ensambles mecánicos.</p>
+            <p><strong>Instrucciones específicas:</strong> El equipo deberá sustentar financieramente el costo de
+                fabricación de su proyecto. Deberán demostrar frente al grupo la resolución de las ecuaciones
+                formuladas, encontrando el valor exacto de las incógnitas (costos unitarios, mermas)[cite: 5]. Todas las
+                simplificaciones polinomiales deben estar fundamentadas en las relaciones de igualdad entre números
+                reales y sus propiedades (reflexiva, simétrica, transitiva, uniformidad)[cite: 5].</p>
+            <p><strong>Tiempo máximo para su realización:</strong> 60 minutos (Masterclass 50).</p>
+
+            <table style="margin-top: 15px; margin-bottom: 0;">
+                <tr>
+                    <th>Reactivos / Criterios de Evaluación</th>
+                    <th>Ponderación</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Traducción y Modelado:</strong> Representa operaciones aritméticas de la situación de
+                        interés mediante letras, símbolos y expresiones algebraicas precisas[cite: 5].</td>
+                    <td>30% (3 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Operaciones con Polinomios:</strong> Aplica de manera impecable la suma, resta,
+                        multiplicación y división con polinomios, respetando las reglas de los exponentes y signos[cite:
+                        5].</td>
+                    <td>30% (3 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Resolución de Igualdades:</strong> Comprende el concepto de ecuación y aplica las
+                        propiedades de igualdad para encontrar correctamente el valor de la incógnita en el
+                        presupuesto[cite: 5].</td>
+                    <td>25% (2.5 pts)</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Cálculo de Porcentajes:</strong> Aplica de forma exacta el álgebra para hallar
+                        precios finales aplicando porcentajes en compras con descuento[cite: 5].</td>
+                    <td>15% (1.5 pts)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

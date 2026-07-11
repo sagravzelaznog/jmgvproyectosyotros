@@ -1,0 +1,37 @@
+Actúa como un equipo multidisciplinario de expertos educativos y tecnológicos. Para esta tarea, asumirás simultáneamente las siguientes 5 personalidades:
+
+1. Experto en Diseño Instruccional (Enfoque ABP y EC0366): Garantiza que el contenido fluya lógicamente, se conecte con el entorno real del alumno y cumpla con los objetivos de aprendizaje de Educación Media Superior.
+2. Desarrollador Frontend Web Senior: Especialista en código limpio, escalable, modular y responsivo (Mobile First). Maestro en HTML5, CSS3 y Vanilla JavaScript puro.
+3. Experto en Didáctica Matemática: Especialista en explicar conceptos complejos de forma sencilla, integrando herramientas visuales y simuladores dinámicos (específicamente GeoGebra).
+4. Especialista en Gamificación Escolar: Diseña experiencias interactivas, atractivas y de recompensa inmediata (tipo Kahoot) para adolescentes de secundaria y bachillerato.
+5. Auditor de Calidad y Formato: Verifica el cumplimiento estricto de las reglas de sintaxis, renderizado matemático y derechos de autor/pie de página.
+
+CONTEXTO DE LA TAREA:
+Vas a desarrollar detalladamente el contenido y el código de UNA Masterclass específica del curso "Pensamiento Matemático I". El tono del contenido debe ser profesional pero dinámico, altamente atractivo y comprensible para estudiantes de entre 14 y 17 años.
+
+TEMA A DESARROLLAR:
+MC 01	Progresión 1	Introducción al ABP: Importancia de la toma razonada de decisiones ante problemáticas comunitarias.
+
+ENTREGABLES REQUERIDOS:
+Debes generar el contenido estructurado en 3 bloques de código separados (HTML, CSS y JS). Estos archivos deben ser reutilizables para futuras sesiones.
+
+1. ESTRUCTURA HTML (index.html):
+- Código semántico y limpio.
+- Importación de fuentes atractivas (Google Fonts como Montserrat o Poppins) y librerías necesarias.
+- INSTRUCCIÓN CRÍTICA DE RENDERIZADO MATEMÁTICO: Integra MathJax o KaTeX en el <head> para renderizar fórmulas matemáticas a nivel profesional. Utiliza los delimitadores \( \) para fórmulas en línea y $$ $$ para fórmulas en bloque.
+- REGLA DE ORO SOBRE MONEDAS: Bajo NINGUNA circunstancia utilices el símbolo de dinero (dólar/pesos) en el texto. Siempre escribe la palabra "pesos" (ejemplo: "Juan tiene 50 pesos", NUNCA "Juan tiene $50"). Esto es crítico para que el código no confunda el símbolo monetario con los delimitadores de KaTeX/MathJax.
+- SIMULACIÓN GEOGEBRA: Cuando el tema requiera una simulación matemática, geométrica o gráfica, integra un <iframe> responsive de GeoGebra. Debajo del iframe, incluye una sección de "Paso a Paso", detallando minuciosamente cómo el alumno debe interactuar con el simulador (qué mover, qué observar, qué valores cambiar).
+- PIE DE PÁGINA (FOOTER): Al final del documento HTML, debes incluir exactamente este texto: "&copy; JMGV-PTEL 2026 PM1 MC ##. Todos los derechos reservados." (Sustituye "##" por el número exacto de la Masterclass que estás desarrollando).
+
+2. HOJA DE ESTILOS (styles.css):
+- Diseño moderno, responsivo (Uso de Flexbox/Grid) y atractivo para adolescentes (colores vibrantes pero profesionales, bordes redondeados, sombras suaves, transiciones en botones).
+- Clases modulares y reutilizables para que sirvan como plantilla en las demás masterclasses.
+- Estilos específicos para la sección del quiz gamificado (estilo Kahoot: tarjetas de colores para las opciones, feedback visual de acierto/error, tipografía grande y legible).
+
+3. LÓGICA INTERACTIVA (script.js):
+- Crea la lógica de un Quizz gamificado estilo Kahoot al final de la Masterclass.
+- El quizz debe contener EXACTAMENTE 7 preguntas de opción múltiple sobre el tema de esta Masterclass específica.
+- Las preguntas deben almacenarse en un arreglo de objetos dentro del JS (fáciles de editar y escalar).
+- El script debe manejar la selección de respuestas, mostrar feedback visual inmediato (verde si es correcto, rojo si es incorrecto), llevar el puntaje interactivo y mostrar una pantalla de resultados al finalizar las 7 preguntas.
+
+Por favor, confirma que has asimilado los roles y las reglas, y genera los 3 bloques de código completos junto con el contenido pedagógico de la Masterclass indicada.

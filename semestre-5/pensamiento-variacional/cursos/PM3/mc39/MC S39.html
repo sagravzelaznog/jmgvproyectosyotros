@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 39: El Teorema de Pitágoras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 39: El Algoritmo Universal de Distancias (Pitágoras)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Tragedia de las Herramientas</h3>
+            <p>Conoces los catetos. Conoces la hipotenusa. Pero el proveedor solo te mandó dos medidas y desapareció. Tienes la altura de la pared ($3m$) y la longitud del piso ($4m$). Tienes que encargar la rampa de acero (hipotenusa). Si no sabes cuánto mide, tendrás que enviar a un obrero a subir la pared con una cinta métrica. Eso es del siglo pasado. La ingeniería moderna no mide físicamente, <strong>calcula</strong>. Aquí nace el arma más sagrada de la topografía mundial: <strong>El Teorema de Pitágoras</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Ley de las Áreas (La Fórmula de Poder)</h3>
+            <p>Pitágoras no era un topógrafo, era un filósofo místico que descubrió una regla incrustada en el código fuente del universo: <strong>$c^2 = a^2 + b^2$</strong>. Traducido al lenguaje corporativo: Si agarras un Cateto (suelo) y lo ELEVAS AL CUADRADO. Luego agarras el otro Cateto (pared) y lo ELEVAS AL CUADRADO. Y luego SUMAS esos dos resultados... ¡Magia pura! Obtendrás exactamente el valor de la Hipotenusa elevada al Cuadrado. Este teorema conecta el acero, el concreto y el espacio en una sola ecuación indestructible.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Anatomía de la Ecuación Pitagórica</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Algoritmo ($c^2 = a^2 + b^2$):</h4>
+                <ol>
+                    <li><strong>La Nomenclatura Estricta:</strong> En esta fórmula, la letra '$c$' siempre, innegociablemente, es la HIPOTENUSA (el lado mayor, la diagonal). Las letras '$a$' y '$b$' son los dos Catetos (el orden no importa, da igual quién es 'a' o 'b').</li>
+                    <li><strong>El Motor de Fusión (El Cuadrado):</strong> La fórmula no suma simples distancias ($3+4$). La fórmula opera en la segunda dimensión (Áreas). Construye un cuadrado en el suelo ($4^2 = 16$), y un cuadrado en la pared ($3^2 = 9$).</li>
+                    <li><strong>El Tiro de Gracia (El Despeje):</strong> La fórmula te da como resultado '$c^2$' (la hipotenusa al cuadrado). Pero tú no compras una rampa cuadrada. Quieres la medida lineal '$c$'. Así que, SIEMPRE, el último maldito paso de Pitágoras es <strong>aplicar una Raíz Cuadrada</strong> al número final para liberarlo.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Discípulo de Pitágoras</h3>
+            <div id="quiz-setup">
+                <p>Domina la estructura del algoritmo que calcula distancias en el universo y salva presupuestos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Armar Algoritmo!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Posees la llave que abre el espacio tridimensional de la ingeniería civil.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Laboratorio</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc38/MC S38.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc40/MC S40.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

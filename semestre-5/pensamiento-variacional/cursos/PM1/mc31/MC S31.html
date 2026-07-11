@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 31: Modelado en Hojas de Cálculo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 31: Uso de hojas de cálculo interactivas para el modelado de fracciones y porcentajes</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Poder Absoluto de la Automatización</h3>
+            <p>Hasta este momento has calculado fracciones y porcentajes a mano o usando la consola de GeoGebra. Pero en el mundo profesional real (ingeniería, contabilidad, ciencia de datos masivos), los cálculos no se hacen una vez; se hacen millones de veces de forma simultánea e interconectada. Aquí es donde entran triunfantes las <strong>Hojas de Cálculo (Microsoft Excel, Google Sheets o la vista de Hoja de Cálculo del propio GeoGebra)</strong>.</p>
+            <p>El secreto de una hoja de cálculo es que no operas con números estáticos, sino con <strong>referencias de celdas</strong> (como <code>A1</code>, <code>B2</code>). Esto permite crear verdaderos modelos matemáticos dinámicos.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Modelando Fórmulas Básicas</h3>
+            <p>Para decirle a una hoja de cálculo moderna que vas a ingresar una operación matemática, <strong>siempre debes iniciar con el signo igual (<code>=</code>)</strong>.</p>
+            <ul>
+                <li><strong>El modelo de fracción (División):</strong> Para calcular el equivalente decimal de la fracción \(\frac{3}{4}\), si el número 3 está alojado en la celda A1 y el 4 en la celda B1, la fórmula es simplemente <code>=A1/B1</code>.</li>
+                <li><strong>El modelo de porcentaje rápido (Multiplicación):</strong> Para sacar exactamente el 16% de una cantidad gigantesca guardada en C1, la fórmula más limpia y profesional es <code>=C1 * 0.16</code>. Si quieres calcular el precio final de un producto con ese IVA ya incluido directamente: <code>=C1 * 1.16</code>.</li>
+                <li><strong>La inmensa ventaja dinámica:</strong> Si un día cambias el valor original en C1, absolutamente todos los porcentajes y resultados dependientes se actualizarán mágicamente al instante en toda la hoja, sin tener que borrar ni recalcular nada jamás.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Tu Primer Modelo Dinámico</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Abre la herramienta correcta:</strong> En GeoGebra, ve al menú de vistas (esquina superior derecha) y selecciona <strong>"Hoja de Cálculo"</strong>. (Verás una cuadrícula idéntica a Excel).</li>
+                    <li><strong>Ingresa los datos primarios:</strong> En la celda <code>A1</code>, escribe el número <code>5000</code>.</li>
+                    <li><strong>Crea el modelo fraccionario:</strong> En la celda <code>B1</code>, escribe la fórmula <code>=A1 * (3/4)</code> y presiona Enter. Te mostrará <code>3750</code>.</li>
+                    <li><strong>¡La Magia Informática!:</strong> Ahora regresa a la celda <code>A1</code>, cambia el <code>5000</code> por un <code>1000</code> y presiona Enter. Observa asombrado cómo <code>B1</code> se actualiza automáticamente y en milisegundos a <code>750</code>. ¡Acabas de crear un modelo matemático automatizado!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Ingeniero de Datos</h3>
+            <div id="quiz-setup">
+                <p>Mide tu comprensión lógica profunda sobre cómo las hojas de cálculo entienden las matemáticas y las referencias de celdas.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc30/MC S30.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc32/MC S32.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 31. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

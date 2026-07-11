@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 28: Multiplicación de Fracciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 28: Multiplicación de fracciones y su simplificación en geometría (Áreas)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Operación más Amigable de la Aritmética</h3>
+            <p>A diferencia de la rigurosa suma, la multiplicación de fracciones <strong>NO</strong> requiere que los denominadores sean iguales. ¡No necesitas perder el tiempo calculando el MCM! Es la operación más directa y amigable de todo tu curso.</p>
+            <p>La regla de oro es visualmente simple: <strong>Numerador por numerador (arriba por arriba) y denominador por denominador (abajo por abajo)</strong>.</p>
+            <p>Ejemplo: \(\frac{2}{3} \times \frac{4}{5} = \frac{2 \times 4}{3 \times 5} = \frac{8}{15}\).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Fracciones de Fracciones (Uso en Geometría)</h3>
+            <p>En el mundo real, multiplicar fracciones significa sacar "una porción de otra porción ya existente".</p>
+            <p>Si compras \(\frac{1}{2}\) de un terreno disponible, y luego decides construir una casa que ocupa \(\frac{1}{2}\) de esa mitad tuya, ¿qué parte del área total inicial ocupa la casa terminada? Multiplicas: \(\frac{1}{2} \times \frac{1}{2} = \frac{1}{4}\). Tu casa ocupa exactamente un cuarto del terreno total.</p>
+            <p>También se usa extensivamente para calcular <strong>Áreas</strong> (base por altura). Si un rectángulo mide \(\frac{3}{4}\) de metro de base y \(\frac{2}{3}\) de metro de altura, su área será \(\frac{3}{4} \times \frac{2}{3} = \frac{6}{12}\), que al simplificarlo (MCD=6) te da exactamente \(\frac{1}{2}\) metro cuadrado.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Áreas Rápidas</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Símbolo de Multiplicación Directa:</strong> En el CAS de GeoGebra (y en casi todos los lenguajes de programación), el símbolo de multiplicación es el asterisco <code>*</code>.</li>
+                    <li><strong>Calcula el área con simplificación:</strong> Escribe <code>(3/4) * (2/3)</code>. Notarás de inmediato que GeoGebra no te da <code>6/12</code>, sino que automáticamente aplica el MCD y te entrega el resultado puramente simplificado e irreducible: <code>1/2</code>.</li>
+                    <li><strong>Entero por Fracción:</strong> Recuerda la regla del disfraz. Si tu terreno mide 5 metros enteros de base y 1/2 metro de altura, escribe <code>5 * (1/2)</code>. El software asume de inmediato que es <code>5/1 * 1/2</code> y te responde impecablemente con <code>5/2</code>.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Multiplicador Geométrico</h3>
+            <div id="quiz-setup">
+                <p>Domina la regla infalible de "arriba por arriba y abajo por abajo" en estos retos de cálculo de áreas y proporciones.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc27/MC S27.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc29/MC S29.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 28. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 34: Validación con Applets (Cuadráticas)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 34: El Ojo de Dios (Validación con Applets HTML5)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Fusión de Dos Mundos</h3>
+            <p>Dibujar a mano te dio la fuerza bruta intelectual. Pero cuando estás en una junta directiva peleando por un contrato de millones, presentas el modelo renderizado por inteligencia artificial. Usar <strong>Applets Dinámicos (GeoGebra, Desmos)</strong> no es para flojos; es la <strong>Auditoría Visual Definitiva</strong>. Inyectas la ecuación cuadrática bruta en la consola y la máquina traza la parábola perfecta en nanosegundos, revelando todos sus secretos sin ocultar los errores algebraicos.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Comandos Ejecutivos para la Parábola</h3>
+            <p>La máquina es poderosa, pero estúpida si no sabes ordenarle. Una vez que inyectas $y = -2x^2 + 8x - 5$, usas los Comandos Especiales para extraer los Pilares de Acero sin mover un dedo:</p>
+            <ul>
+                <li><strong>Comando 1: <code>Raíces(f)</code>.</strong> Le ordena a la IA buscar y marcar con puntos precisos todos los impactos terrestres (Eje X). Aparecerán el punto 'A' y 'B'.</li>
+                <li><strong>Comando 2: <code>Extremo(f)</code>.</strong> Es el misil buscador de GeoGebra. Encuentra instantáneamente el Vértice, ya sea un domo (máximo) o un pozo (mínimo), marcando la coordenada corporativa absoluta.</li>
+                <li><strong>Comando 3: <code>Interseca(f, EjeY)</code>.</strong> Para marcar oficialmente el impacto con la pared Y (el término 'c').</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Geoespacial: La Auditoría Final</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Diagnóstico Operativo ($y = x^2 - 6x + 9$):</h4>
+                <ol>
+                    <li><strong>Inyección:</strong> Escribes en la consola de GeoGebra <code>y = x^2 - 6x + 9</code>. Enter. La parábola aparece.</li>
+                    <li><strong>Auditoría Visual Inmediata:</strong> Antes de teclear comandos, miras la pantalla. Ves que la curva baja, TOCA el Eje X en el número 3, y rebota hacia arriba. ¡Peligro! Solo tocó un punto, no dos.</li>
+                    <li><strong>Confirmación de IA:</strong> Escribes <code>Raíces(f)</code>. GeoGebra te arroja UN SOLO punto: $A = (3, 0)$.</li>
+                    <li><strong>El Veredicto del Ingeniero:</strong> Sabes exactamente lo que significa sin usar fórmulas. Si la parábola rebota tocando el suelo en un solo punto, ¡es un Trinomio Cuadrado Perfecto! El Discriminante de esa ecuación es exactamente cero. La IA acaba de confirmar tus sospechas matemáticas en dos clics.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Operador de Consola</h3>
+            <div id="quiz-setup">
+                <p>Usa los comandos del Applet para extraer la información táctica de la obra curva.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Diagnóstico IA!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Dominas la tecnología para validar modelos físicos y arrasar en la licitación.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Mando Central</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc33/MC S33.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc35/MC S35.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

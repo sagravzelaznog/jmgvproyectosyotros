@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 32: Raíces (Intersección X)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 32: El Impacto Terrestre (Raíces de la Parábola)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Nivel del Suelo (El Eje X)</h3>
+            <p>Ya dominas el Vértice (el fondo del túnel o la cima del puente). Pero en la obra civil, la gerencia te hará la pregunta más brutal: <em>"¿En qué kilómetros exactos el túnel entrará y saldrá de la tierra?"</em>. La 'tierra' en tu plano es el Eje X (donde la altura 'y' vale estrictamente cero). Cuando una parábola choca contra el Eje X, a esos puntos de impacto se les llama <strong>Raíces, Ceros o Intersecciones con X</strong>. Para encontrarlas, no adivinas, desenfundas las armas que ya conoces.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Aniquilación de 'Y'</h3>
+            <p>El protocolo de extracción de raíces es violento: Tomas la ecuación de la parábola ($y = x^2 - 5x + 6$) y <strong>ASESINAS a la 'y'</strong>. Literalmente borras la 'y' y pones un CERO ($0 = x^2 - 5x + 6$). ¿Te parece familiar? ¡Acabas de convertir una función gráfica en una simple y mortal Ecuación Cuadrática tradicional! Ahora puedes usar todo tu arsenal de élite: Factorización (Juego de dos números), Fórmula General o Completar el Cuadrado para destruir la ecuación y obtener los dos puntos de impacto terrestre ($x_1$ y $x_2$).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Trazado de Impactos</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Calculando la Entrada del Túnel ($y = x^2 - 2x - 8$):</h4>
+                <ol>
+                    <li><strong>Protocolo de Cero:</strong> Anulo la 'y'. Queda $x^2 - 2x - 8 = 0$.</li>
+                    <li><strong>Arma Seleccionada (Factorización rápida):</strong> Busco dos números que multipliquen $-8$ y resten $-2$. Pienso en $4$ y $2$. Para que el centro sea negativo ($-2$), el $4$ debe ser el negativo. Contenedores: $(x - 4)(x + 2) = 0$.</li>
+                    <li><strong>Separación e Interrogatorio (Raíces):</strong> $x - 4 = 0 \rightarrow x = 4$. Por el otro lado, $x + 2 = 0 \rightarrow x = -2$.</li>
+                    <li><strong>Reporte de Obra:</strong> El túnel subterráneo perforará la tierra en el kilómetro $-2$, descenderá, y volverá a salir a la superficie exactamente en el kilómetro $4$. Si el Discriminante hubiera sido negativo, significaría que la curva jamás tocaría el suelo (un puente que levita).</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Perforador</h3>
+            <div id="quiz-setup">
+                <p>Identifica los puntos exactos de colisión terrestre forzando la ecuación a cero y resolviéndola.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Perforación!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Calculas zonas de impacto con precisión milimétrica.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a la Superficie</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc31/MC S31.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc33/MC S33.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

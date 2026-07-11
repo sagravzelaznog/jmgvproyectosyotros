@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 23: El Molde Base Compartido</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #8b5cf6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Optimización y Estandarización de Recursos</h1>
+        <h2>Masterclass 23: Binomios con Término Común (Suma-Multiplica)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Diseño Industrial Semi-Estandarizado</h3>
+            <p>A veces los clientes corporativos exigen multiplicar dos diseños que NO son clones idénticos (como el Binomio al Cuadrado), ni tampoco clones destructivos (como los Conjugados). Piden multiplicar piezas asimétricas como $(x + 5) \cdot (x + 2)$. Tienen un "Término Común" (la costosa letra $x$) y dos "Términos No Comunes" (el 5 y el 2). En la alta industria usamos el letal atajo gerencial del <strong>Suma-Multiplica</strong> para no perder tiempo haciendo el proceso de Ataque en Cadena paso a paso.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Regla de Oro del Suma-Multiplica (3 Cortes)</h3>
+            <p>Para expandir el presupuesto $(x+5)(x+2)$ en solo 5 segundos frente a la junta directiva, aplica esta regla inquebrantable:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Corte 1: El Cuadrado del Jefe Común.</strong> Toma la pieza que se repite en ambos paréntesis y elévala agresivamente al cuadrado. $(x)(x) = x^2$. Este es tu pilar izquierdo irrompible.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>Corte 2: SUMA de Incompatibles.</strong> Suma o resta mentalmente los números diferentes que están huérfanos. ($+5 + 2 = +7$). Y el paso más importante: a ese resultado, <strong>pégale la letra común como guardaespaldas</strong> ($+7x$). Este es el pilar central del edificio.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>Corte 3: MULTIPLICACIÓN de Incompatibles.</strong> Ahora toma esos mismos números diferentes del paso anterior y multiplícalos sin piedad. $(+5)(+2) = +10$. Respetando siempre la ley de los signos. Este es tu muro derecho final.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Ensamblando con el Atajo de Élite</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Término Común en tiempo récord:</h4>
+                <ol>
+                    <li><strong>Orden Ejecutiva:</strong> Expandir $(x - 6)(x + 4)$ al instante y facturarlo.</li>
+                    <li><strong>Corte 1 (Cuadrado Seguro):</strong> $(x)^2 \rightarrow x^2$</li>
+                    <li><strong>Corte 2 (La Suma Mental):</strong> Tienes una gran deuda de $-6$ y un pobre pago de $+4$. Tu saldo o suma real es $-2$. Le pegamos su guardia '$x$' $\rightarrow -2x$. (Si olvidas la x, colapsará).</li>
+                    <li><strong>Corte 3 (La Multiplicación Letal):</strong> Menos por Más da Menos. $(-6)(+4) \rightarrow -24$.</li>
+                    <li><strong>Ensamblaje Instantáneo: $x^2 - 2x - 24$</strong>. El presupuesto está 100% facturado y optimizado, sin perder tiempo en fusiones.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Analista de Datos Veloz</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que puedes diferenciar perfectamente entre sumar y multiplicar los términos no comunes, sin entrar en pánico con los signos negativos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Iniciar Atajo Industrial!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has dominado el tercer producto notable. Eres un verdadero as del diseño y las facturas industriales de alto perfil.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Escritorio Ejecutivo</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc22/MC S22.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc24/MC S24.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

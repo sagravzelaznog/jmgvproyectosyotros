@@ -18,6 +18,7 @@ export default function LessonPage() {
   const { user } = useAuth();
   const [lesson, setLesson] = useState<any>(null);
   const [quiz, setQuiz] = useState<any[]>([]);
+  const [nextLessonId, setNextLessonId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentQuiz, setCurrentQuiz] = useState(0);
   const [score, setScore] = useState(0);
@@ -61,7 +62,27 @@ export default function LessonPage() {
         const lessonRef = doc(db, "Lessons", lessonId as string);
         const snapshot = await getDoc(lessonRef);
         if (snapshot.exists()) {
-          setLesson({ id: snapshot.id, ...snapshot.data() });
+          const lessonData = { id: snapshot.id, ...snapshot.data() };
+          setLesson(lessonData);
+
+          // 3. Buscar la siguiente lección por order+1 dentro del mismo curso
+          const lessonAny = lessonData as any;
+          const nextOrder = (lessonAny.order || 0) + 1;
+          const courseId = lessonAny.courseId || null;
+          const lessonsRef = collection(db, "Lessons");
+          let nextQuery;
+          if (courseId) {
+            nextQuery = query(lessonsRef,
+              where("courseId", "==", courseId),
+              where("order", "==", nextOrder)
+            );
+          } else {
+            nextQuery = query(lessonsRef, where("order", "==", nextOrder));
+          }
+          const nextSnap = await getDocs(nextQuery);
+          if (!nextSnap.empty) {
+            setNextLessonId(nextSnap.docs[0].id);
+          }
         }
 
         // 2. Cargar el Quiz Independiente
@@ -225,20 +246,9 @@ export default function LessonPage() {
             <span className="text-xl">&larr;</span> ESCAPE TO DASHBOARD
           </button>
           
-          {lesson?.order < 64 && (
+          {nextLessonId && (
             <button 
-              onClick={() => {
-                const matchWithCourse = (lessonId as string).match(/lesson_(\d+)_(.+)/);
-                const matchSimple = (lessonId as string).match(/^lesson_(\d+)$/);
-                if (matchWithCourse) {
-                  const nextNumber = parseInt(matchWithCourse[1], 10) + 1;
-                  const courseId = matchWithCourse[2];
-                  router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
-                } else if (matchSimple) {
-                  const nextNumber = parseInt(matchSimple[1], 10) + 1;
-                  router.push(`/dashboard/lesson/lesson_${nextNumber}`);
-                }
-              }}
+              onClick={() => router.push(`/dashboard/lesson/${nextLessonId}`)}
               className="text-neon-pink hover:text-white hover:drop-shadow-[0_0_8px_#FF007F] transition-all flex items-center gap-2 font-bold tracking-wide text-sm md:text-base"
             >
               SIGUIENTE LECCIÓN <span className="text-xl">&rarr;</span>
@@ -396,20 +406,9 @@ export default function LessonPage() {
                   >
                     VOLVER AL HUB
                   </button>
-                  {lesson?.order < 64 && (
+                  {nextLessonId && (
                     <button 
-                      onClick={() => {
-                        const matchWithCourse = (lessonId as string).match(/lesson_(\d+)_(.+)/);
-                        const matchSimple = (lessonId as string).match(/^lesson_(\d+)$/);
-                        if (matchWithCourse) {
-                          const nextNumber = parseInt(matchWithCourse[1], 10) + 1;
-                          const courseId = matchWithCourse[2];
-                          router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
-                        } else if (matchSimple) {
-                          const nextNumber = parseInt(matchSimple[1], 10) + 1;
-                          router.push(`/dashboard/lesson/lesson_${nextNumber}`);
-                        }
-                      }}
+                      onClick={() => router.push(`/dashboard/lesson/${nextLessonId}`)}
                       className="bg-neon-cyan text-black font-black py-4 px-10 rounded-full hover:bg-white hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"
                     >
                       SIGUIENTE LECCIÓN &rarr;

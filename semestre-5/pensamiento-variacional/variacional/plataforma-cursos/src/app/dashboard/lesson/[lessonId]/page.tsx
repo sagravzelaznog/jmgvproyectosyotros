@@ -228,11 +228,15 @@ export default function LessonPage() {
           {lesson?.order < 64 && (
             <button 
               onClick={() => {
-                const match = (lessonId as string).match(/lesson_(\d+)_(.+)/);
-                if (match) {
-                  const nextNumber = parseInt(match[1], 10) + 1;
-                  const courseId = match[2];
+                const matchWithCourse = (lessonId as string).match(/lesson_(\d+)_(.+)/);
+                const matchSimple = (lessonId as string).match(/^lesson_(\d+)$/);
+                if (matchWithCourse) {
+                  const nextNumber = parseInt(matchWithCourse[1], 10) + 1;
+                  const courseId = matchWithCourse[2];
                   router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
+                } else if (matchSimple) {
+                  const nextNumber = parseInt(matchSimple[1], 10) + 1;
+                  router.push(`/dashboard/lesson/lesson_${nextNumber}`);
                 }
               }}
               className="text-neon-pink hover:text-white hover:drop-shadow-[0_0_8px_#FF007F] transition-all flex items-center gap-2 font-bold tracking-wide text-sm md:text-base"
@@ -395,11 +399,15 @@ export default function LessonPage() {
                   {lesson?.order < 64 && (
                     <button 
                       onClick={() => {
-                        const match = (lessonId as string).match(/lesson_(\d+)_(.+)/);
-                        if (match) {
-                          const nextNumber = parseInt(match[1], 10) + 1;
-                          const courseId = match[2];
+                        const matchWithCourse = (lessonId as string).match(/lesson_(\d+)_(.+)/);
+                        const matchSimple = (lessonId as string).match(/^lesson_(\d+)$/);
+                        if (matchWithCourse) {
+                          const nextNumber = parseInt(matchWithCourse[1], 10) + 1;
+                          const courseId = matchWithCourse[2];
                           router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
+                        } else if (matchSimple) {
+                          const nextNumber = parseInt(matchSimple[1], 10) + 1;
+                          router.push(`/dashboard/lesson/lesson_${nextNumber}`);
                         }
                       }}
                       className="bg-neon-cyan text-black font-black py-4 px-10 rounded-full hover:bg-white hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"

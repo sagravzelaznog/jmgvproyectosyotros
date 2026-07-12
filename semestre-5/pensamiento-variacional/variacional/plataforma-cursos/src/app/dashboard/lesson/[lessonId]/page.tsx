@@ -228,10 +228,11 @@ export default function LessonPage() {
           {lesson?.order < 64 && (
             <button 
               onClick={() => {
-                const match = (lessonId as string).match(/lesson_(\d+)_pm1/);
+                const match = (lessonId as string).match(/lesson_(\d+)_(.+)/);
                 if (match) {
                   const nextNumber = parseInt(match[1], 10) + 1;
-                  router.push(`/dashboard/lesson/lesson_${nextNumber}_pm1`);
+                  const courseId = match[2];
+                  router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
                 }
               }}
               className="text-neon-pink hover:text-white hover:drop-shadow-[0_0_8px_#FF007F] transition-all flex items-center gap-2 font-bold tracking-wide text-sm md:text-base"
@@ -394,10 +395,11 @@ export default function LessonPage() {
                   {lesson?.order < 64 && (
                     <button 
                       onClick={() => {
-                        const match = (lessonId as string).match(/lesson_(\d+)_pm1/);
+                        const match = (lessonId as string).match(/lesson_(\d+)_(.+)/);
                         if (match) {
                           const nextNumber = parseInt(match[1], 10) + 1;
-                          router.push(`/dashboard/lesson/lesson_${nextNumber}_pm1`);
+                          const courseId = match[2];
+                          router.push(`/dashboard/lesson/lesson_${nextNumber}_${courseId}`);
                         }
                       }}
                       className="bg-neon-cyan text-black font-black py-4 px-10 rounded-full hover:bg-white hover:shadow-[0_0_30px_#00FFFF] transition-all duration-300 transform hover:scale-105"

@@ -13,14 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Datos estructurados de los proyectos (simulando una BD o API)
     const projectCategories = [
         {
-            title: "Semestre 5",
+            title: "Plataforma Unificada (Semestres 1, 2, 3 y 5)",
             projects: [
                 {
-                    link: "https://jmgvproyectosyotros-sagravzelaznogs-projects.vercel.app/dashboard",
-                    tag: "AppWeb (PWA)",
-                    title: "Pensamiento Variacional",
-                    description: "Curso gamificado con Firebase, quizzes interactivos y diseño móvil.",
+                    link: "semestre-5/pensamiento-variacional/index.html",
+                    tag: "Portal Maestro",
+                    title: "Pensamiento Variacional (S5)",
+                    description: "Curso principal de 50 sesiones gamificadas. Incluye acceso a los módulos de semestres anteriores.",
                     icon: "fa-mobile-screen-button"
+                },
+                {
+                    link: "semestre-5/pensamiento-variacional/cursos/PM1/index.html",
+                    tag: "Módulo Consolidado",
+                    title: "PM1 (Álgebra Base)",
+                    description: "Fundamentos de ecuaciones y el lenguaje del dinero.",
+                    icon: "fa-calculator"
+                },
+                {
+                    link: "semestre-5/pensamiento-variacional/cursos/PM2/index.html",
+                    tag: "Módulo Consolidado",
+                    title: "PM2 (Geometría)",
+                    description: "Diseño y trazo geométrico aplicado al urbanismo.",
+                    icon: "fa-shapes"
+                },
+                {
+                    link: "semestre-5/pensamiento-variacional/cursos/PM3/index.html",
+                    tag: "Módulo Consolidado",
+                    title: "PM3 (Trazado Urbano)",
+                    description: "Estadística, parábolas y construcción avanzada.",
+                    icon: "fa-city"
                 }
             ]
         },

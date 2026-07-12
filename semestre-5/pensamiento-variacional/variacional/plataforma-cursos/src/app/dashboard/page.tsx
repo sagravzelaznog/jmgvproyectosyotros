@@ -72,13 +72,13 @@ export default function DashboardPage() {
       </div>
 
       <div className="space-y-6">
-        {[
+        {([
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
           { id: "pm1", title: "PM1 (Álgebra Base)", adminOnly: false, description: "Fundamentos de ecuaciones y el lenguaje del dinero." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
           { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
           { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." }
-        ]
+        ] as Array<{ id: string; title: string; adminOnly: boolean; description?: string; externalUrl?: string }>)
         .filter(course => !course.adminOnly || isAdmin)
         .map(course => {
           const isExpanded = expandedCourse === course.id;

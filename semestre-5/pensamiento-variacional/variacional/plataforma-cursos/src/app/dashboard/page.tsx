@@ -72,7 +72,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="space-y-6">
-        {[
+        {([
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
           { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },

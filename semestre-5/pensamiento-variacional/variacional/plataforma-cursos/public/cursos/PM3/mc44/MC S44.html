@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 44: Calculadora Científica (SOHCAHTOA)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 44: El Teclado de Dios (Uso de Calculadora Científica)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Fracaso del Hardware Mal Calibrado</h3>
+            <p>Puedes ser un genio identificando Catetos Opuestos y armando fracciones de Tangente. Pero si el arma principal (tu Calculadora Científica o App del celular) está mal calibrada, destruirás el proyecto multimillonario con un solo clic. La trigonometría no funciona en el vacío, funciona en sistemas de medición angular. El error número uno en las oficinas de cálculo de todo el planeta Tierra es no revisar la pequeña letra que aparece en la pantalla de la calculadora antes de disparar el botón de <code>SIN</code>, <code>COS</code> o <code>TAN</code>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Letra 'D' (Modo Degree / Grados)</h3>
+            <p>Existen tres sistemas de medida de ángulos: Grados (Degrees), Radianes (Radians) y Gradianes (Gradians). En la obra civil y arquitectura estándar de tu nivel, TRABAJAS EXCLUSIVAMENTE CON GRADOS. Tu calculadora tiene que mostrar una minúscula letra <strong>'D'</strong> o la palabra <strong>'DEG'</strong> en la parte superior de la pantalla. Si ves una 'R' (Radianes), estás muerto. Si calculas el Seno de $30^\circ$ en modo Radianes, la máquina te dará un número abismalmente equivocado y la grúa volcará. <strong>Revisar la 'D' es el primer paso de tu protocolo de supervivencia.</strong></p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Funciones Directas vs Inversas</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Teclado Científico:</h4>
+                <ol>
+                    <li><strong>Caso 1: Conoces el Ángulo (Disparo Directo).</strong> Te dicen que el ángulo es de $45^\circ$. Quieres saber cuánto vale su Tangente para usarla en una ecuación. Protocolo: Verificas la 'D'. Presionas <code>TAN</code>. Escribes <code>45</code>. Cierras paréntesis (obligatorio en muchas máquinas). Presionas <code>=</code>. La pantalla explota y arroja un hermoso <strong>$1$</strong>. La máquina ha conectado el ángulo de $45^\circ$ con la proporción métrica de $1$.</li>
+                    <li><strong>Caso 2: NO Conoces el Ángulo (Disparo Inverso $\text{SHIFT}$).</strong> Estás en el plano. Armaste tu fracción de Seno y la calculadora te dio que $\text{Sen}(x) = 0.5$. Necesitas saber ¡cuántos grados de inclinación! significa ese $0.5$. Protocolo de Reversa: Presionas <code>SHIFT</code> (o <code>INV</code> o <code>2nd</code>). Luego presionas <code>SIN</code>. En la pantalla aparecerá <strong>$\text{sin}^{-1}($</strong>. Escribes tu <code>0.5</code>. Cierras. Presionas <code>=</code>. ¡Boom! La máquina traduce de regreso y te escupe <strong>$30$</strong>. El ángulo era de $30^\circ$.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Operador de Consola</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que puedes controlar el hardware científico sin causar un desastre estructural.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Iniciar Calibración de Hardware!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Controlas la máquina con precisión absoluta.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Escritorio</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc43/MC S43.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc45/MC S45.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

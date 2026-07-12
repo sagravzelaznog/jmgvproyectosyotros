@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 46: Polígonos de Lotificación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #8b5cf6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad V: Análisis Urbano y Cierre del Proyecto</h1>
+        <h2>Masterclass 46: Geometría de Terrenos Complejos (Polígonos)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Abandono del Triángulo</h3>
+            <p>El Triángulo Rectángulo fue tu herramienta para calcular alturas y cables. Pero cuando compras un terreno masivo para el Fraccionamiento, rara vez tiene forma de triángulo. Los terrenos reales tienen 5, 6, 8 lados irregulares. Estás entrando al mundo de los <strong>Polígonos de Lotificación</strong>. Tu primera misión como desarrollador inmobiliario es auditar la geometría perimetral del terreno para asegurarte de que el plano cierra perfectamente y no hay fugas de terreno hacia los vecinos.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Fórmula Maestra del Perímetro Interno</h3>
+            <p>Sabes que los ángulos de un triángulo (3 lados) suman $180^\circ$. Sabes que un cuadrado (4 lados) suma $360^\circ$. Pero el CEO te entrega el plano de un terreno en forma de Pentágono Irregular (5 lados) y te pregunta: <em>"¿Cuánto debe sumar la topografía interna?"</em> No adivinas, usas el algoritmo corporativo universal: <strong>$180 \times (n - 2)$</strong>, donde 'n' es el número de lados del terreno. El '-2' representa el núcleo geométrico (siempre le restas 2 a los lados, y multiplicas por 180).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Auditoría de Linderos</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando un Terreno Hexagonal (6 lados):</h4>
+                <ol>
+                    <li><strong>La Extracción de Lados:</strong> Identificas que el terreno colinda con 6 calles. Es un hexágono. Tu 'n' vale $6$.</li>
+                    <li><strong>El Núcleo Base:</strong> Le restas el código sagrado '-2'. ($6 - 2 = 4$). Este $4$ significa que adentro del terreno se podrían formar exactamente 4 triángulos perfectos de $180^\circ$ cada uno.</li>
+                    <li><strong>El Presupuesto Total Interno:</strong> Multiplicas ese núcleo por $180^\circ$. $4 \times 180 = 720^\circ$. El topógrafo debe medir las 6 esquinas del terreno y, al sumarlas, deben dar EXACTAMENTE $720^\circ$. Si da $719^\circ$, el muro perimetral no cerrará.</li>
+                    <li><strong>El Ángulo Individual (Solo si es Regular):</strong> Si todos los lados son iguales, divides el pastel: $720 / 6 = 120^\circ$ por esquina. Todo ensambla perfectamente.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Agrimensor</h3>
+            <div id="quiz-setup">
+                <p>Audita los planos de polígonos complejos y autoriza la construcción del muro perimetral.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Iniciar Auditoría Geométrica!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tienes control absoluto sobre la forma del espacio geográfico.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Despacho</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc45/MC S45.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior (Unidad IV)</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc47/MC S47.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

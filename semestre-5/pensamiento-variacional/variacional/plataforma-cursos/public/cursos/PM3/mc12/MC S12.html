@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 12: Sistemas de Presupuestos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #3b82f6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Sistemas de Ecuaciones y Optimización</h1>
+        <h2>Masterclass 12: El Dilema del Presupuesto (Sistemas 2x2)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Problema de las Dos Variables</h3>
+            <p>En la Unidad I aprendiste que una ecuación con dos incógnitas (ej. $3x + 2y = 100$) tiene infinitas soluciones. Puedes inventar valores para 'x' y la máquina te escupe un valor para 'y'. Pero, ¿qué pasa cuando el proveedor de concreto ($x$) y el de asfalto ($y$) te mandan una factura combinada y tú NECESITAS saber el precio exacto de cada uno? Con una sola ecuación estás ciego, no puedes saber cuál de las infinitas opciones es la real. Estás atrapado.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Arquitectura de los Sistemas 2x2</h3>
+            <p>Para romper este candado corporativo, necesitas una <strong>Segunda Condición Inquebrantable</strong>. El contador te da otra pista: "Sabemos que el precio de un saco de concreto menos el de asfalto es igual a $5$ pesos" ($x - y = 5$). ¡Bam! Ahora tienes un <strong>Sistema de Ecuaciones 2x2</strong>. Tienes dos variables desconocidas ($x, y$) bloqueadas dentro de dos ecuaciones independientes. Al obligar a las dos ecuaciones a cumplirse al mismo tiempo, el universo de infinitas soluciones colapsa y revela UN solo resultado absoluto y perfecto. Has acorralado a los proveedores.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Geoespacial: Análisis de Restricciones</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Auditoría de Restricciones Cruzadas:</h4>
+                <ol>
+                    <li><strong>Ecuación A (El Presupuesto):</strong> $3x + 2y = 100$. Representa el costo total de los materiales masivos. Por sí sola, es inútil para descubrir los precios individuales.</li>
+                    <li><strong>Ecuación B (El Control de Calidad):</strong> $x - y = 5$. Representa una restricción técnica o diferencia de precios reportada.</li>
+                    <li><strong>El Sistema:</strong> Agrupas ambas bajo una llave matemática. Tu objetivo en esta unidad será dominar los métodos destructivos (Analíticos) para forzar a estas dos ecuaciones a revelar los verdaderos precios de 'x' e 'y'.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Auditor de Presupuestos</h3>
+            <div id="quiz-setup">
+                <p>Comprende la naturaleza estructural de los sistemas 2x2 antes de intentar resolverlos a ciegas.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #3b82f6;">¡Iniciar Análisis de Sistema!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #3b82f6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Entiendes perfectamente cómo acorralar variables.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Despacho</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc11/MC S11.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #3b82f6;">Menú Principal</a>
+            <a href="../mc13/MC S13.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

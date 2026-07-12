@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 13: Los Números Reales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 13: Clasificación general de los números reales aplicados al dimensionamiento de espacios</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Universo de los Números Reales (\(\mathbb{R}\))</h3>
+            <p>Imagina que estás diseñando un parque para tu proyecto comunitario. Necesitarás diferentes tipos de números para medir y presupuestar:</p>
+            <ul>
+                <li><strong>Naturales (\(\mathbb{N}\)):</strong> Para contar bancas o árboles (\(1, 2, 3\)).</li>
+                <li><strong>Enteros (\(\mathbb{Z}\)):</strong> Incluyen a los naturales, el cero, y los negativos para medir excavaciones bajo el nivel del suelo (\(-2\text{ m}\)).</li>
+                <li><strong>Racionales (\(\mathbb{Q}\)):</strong> Números que se pueden expresar como fracción o decimales exactos/periódicos. Ej: Comprar medio bulto de cemento (\(0.5\) o \(1/2\)).</li>
+                <li><strong>Irracionales (\(\mathbb{I}\)):</strong> Números con decimales infinitos que no se repiten, como \(\pi\) (para áreas circulares) o \(\sqrt{2}\) (para diagonales).</li>
+            </ul>
+            <p>Todos estos conjuntos agrupados forman a los <strong>Números Reales (\(\mathbb{R}\))</strong>.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>2. Explorador Interactivo: Descubriendo Irracionales</h3>
+            <p>El Teorema de Pitágoras nos dice que si tenemos un cuadrado perfecto de \(1 \times 1\) metro, su diagonal medirá exactamente \(\sqrt{2}\) metros. Esto volvió locos a los matemáticos griegos porque \(\sqrt{2}\) no se puede escribir como una fracción perfecta. Es un número <strong>irracional</strong>.</p>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Calculando la raíz:</strong> En la barra de entrada inferior, escribe <code>sqrt(2)</code> o utiliza el botón de raíz cuadrada.</li>
+                    <li><strong>Observa los decimales:</strong> GeoGebra te mostrará un valor aproximado: <code>1.41421...</code></li>
+                    <li><strong>Experimenta con Pi:</strong> Ahora escribe <code>pi</code> y presiona Enter. Verás <code>3.14159...</code>. Estos números llenan los huecos infinitos de la recta numérica donde los racionales no llegan.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Clasificando el Espacio</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que puedes identificar a qué conjunto matemático pertenece cada número de tu entorno.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc12/MC S12.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc14/MC S14.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 13. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

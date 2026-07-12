@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 09: Mesoamérica y el Cero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 09: La importancia histórica y matemática del cero en los pueblos olmeca y maya</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Descubrimiento del Vacío</h3>
+            <p>La idea de representar "la nada" matemáticamente es uno de los mayores logros del intelecto humano. Mientras que los romanos y los griegos clásicos no tenían un número para el cero, en Mesoamérica, los <strong>Olmecas</strong> y posteriormente los <strong>Mayas</strong> lo descubrieron de forma totalmente independiente a la India.</p>
+            <p>El cero maya se representaba gráficamente como un caracol o una semilla. Este pequeño símbolo permitió que su sistema matemático y astronómico fuera increíblemente preciso, siendo capaces de predecir eclipses con siglos de anticipación.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Sistema Vigesimal (Base 20)</h3>
+            <p>A diferencia de nuestro sistema moderno basado en el número 10 (por los dedos de las manos), los pueblos mesoamericanos contaban usando <strong>base 20 (vigesimal)</strong>, probablemente sumando los dedos de las manos y los pies.</p>
+            <p>Era un sistema <strong>posicional vertical</strong>. Escribían de abajo hacia arriba. La primera posición valía unidades (\(20^0 = 1\)), la segunda valía veintenas (\(20^1 = 20\)), la tercera valía cuatrocientos (\(20^2 = 400\)), etc. Y si una posición estaba vacía, ¡ahí colocaban el glorioso cero (el caracol)!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando la Base 20</h3>
+            <p>Vamos a usar el poder de cálculo de GeoGebra para pensar como un astrónomo maya y convertir nuestras cifras de base 10 a base 20.</p>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Abre el CAS:</strong> Posiciónate en la barra de entrada inferior.</li>
+                    <li><strong>Comando de conversión:</strong> Utilizaremos de nuevo la función <code>ToBase[numero, base]</code>.</li>
+                    <li><strong>El año de 365 días:</strong> Escribe <code>ToBase[365, 20]</code>. Obtendrás <code>"18, 5"</code>. Esto significa 18 veintenas (18 x 20 = 360) más 5 unidades.</li>
+                    <li><strong>El uso del cero posicional:</strong> Ahora intenta convertir el número 400 con <code>ToBase[400, 20]</code>. ¡Aparecerá <code>"1, 0, 0"</code>! Un "1" en la posición de \(400\) (\(20^2\)), y dos ceros en las posiciones de 20 y de 1.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Sabiduría Ancestral</h3>
+            <div id="quiz-setup">
+                <p>Demuestra lo que has aprendido sobre la genialidad matemática de Mesoamérica.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc08/MC S08.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc10/MC S10.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 09. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 44: Progresiones Geométricas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ecf0f1; padding: 10px; border-radius: 10px; color: #2c3e50; display: inline-block;">Unidad VI: Sucesiones, Progresiones y Series</h1>
+        <h2>Masterclass 44: Progresiones Geométricas (Crecimiento Explosivo)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Interés Compuesto y los Virus</h3>
+            <p>La progresión aritmética (sumar y sumar) es lenta. Pero en el mundo real, los virus se replican, las células se dividen y el dinero en el banco genera interés compuesto. Cuando el patrón de crecimiento de una sucesión se hace <strong>MULTIPLICANDO</strong> siempre por el mismo número, estás frente a una bestia indomable: la <strong>Progresión Geométrica</strong>. Su crecimiento es exponencial y explosivo.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La "Razón" ($r$)</h3>
+            <p>Observa este reporte de infecciones: $2, 6, 18, 54, 162...$</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>El Patrón No es Suma:</strong> De 2 a 6 sumó +4. Pero de 6 a 18 sumó +12. No es aritmética.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>El Patrón es Multiplicación:</strong> ¡El 2 se <strong>multiplicó por 3</strong> para llegar a 6! El 6 se multiplicó por 3 para llegar a 18. A este peligroso número que multiplica todo (el 3) ya no se le llama 'Diferencia' ($d$). Ahora recibe el título de <strong>La Razón ($r$)</strong>. En nuestro ejemplo, $r = 3$.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h3>3. El Misil Exponencial ($a_n$)</h3>
+            <p>Para predecir el futuro en una progresión geométrica, usamos una fórmula que funciona con potencias (exponentes), porque la multiplicación repetida crea monstruos exponenciales.</p>
+            <div style="font-size: 2rem; text-align: center; margin: 20px 0; background-color: var(--card-bg); padding: 20px; border-radius: 10px; border: 2px solid #8b5cf6;">
+                $$ a_n = a_1 \cdot r^{(n - 1)} $$
+            </div>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>$a_1$:</strong> Sigue siendo la semilla o base de operaciones (el primer número de la lista).</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #8b5cf6; padding-left: 10px; margin: 10px 0;"><strong>$r$:</strong> El multiplicador explosivo (La Razón).</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>$n - 1$:</strong> De nuevo "La Lógica del Elevador". Al número de saltos que te piden, le quitas uno. ¡Pero cuidado! Ahora este $(n-1)$ es un <strong>exponente</strong>. Vas a elevar a la $r$ a ese poder cósmico.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>4. Taller Analítico: Prediciendo el Colapso</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando $5, 10, 20, 40 ...$</h4>
+                <p><strong>Misión:</strong> ¿Qué número estará en la Posición 8 ($a_{8}$)? (Parece pequeño, pero la geometría asusta).</p>
+                <ol>
+                    <li><strong>Identificar:</strong> El primer número ($a_1$) es $5$.</li>
+                    <li><strong>La Razón ($r$):</strong> De 5 saltó a 10 multiplicando por 2. De 10 a 20 por 2. Así que $r = 2$.</li>
+                    <li><strong>El Exponente:</strong> Posición objetivo es $n=8$. El salto $(n-1)$ será $7$.</li>
+                    <li><strong>Inyectar en la Fórmula:</strong>
+                        <br>$a_{8} = 5 \cdot 2^{(8 - 1)}$
+                        <br>$a_{8} = 5 \cdot (2^7)$
+                        <br>$a_{8} = 5 \cdot (128)$
+                        <br>$a_{8} = 640$
+                    </li>
+                    <li><strong>Resultado:</strong> En el paso 8, el virus ya infectó a 640 personas partiendo de 5. El crecimiento fue bestial comparado con una aritmética.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Bio-Analista</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que comprendes el terror y el poder del crecimiento multiplicativo exponencial usando la fórmula geométrica.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Simular Crecimiento!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Ahora sabes por qué las deudas del banco y los virus crecen tan rápido.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Microscopio</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc43/MC S43.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc45/MC S45.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

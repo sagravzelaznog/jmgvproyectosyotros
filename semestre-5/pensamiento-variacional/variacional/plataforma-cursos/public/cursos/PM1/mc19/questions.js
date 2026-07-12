@@ -1,0 +1,9 @@
+const questions = [
+    { question: "¿Para qué tipo de problemas de la vida real es sumamente útil calcular el Máximo Común Divisor (MCD)?", options: ["Para saber cuándo se encontrarán dos planetas", "Para repartir, dividir o cortar diferentes cantidades en partes iguales, que sean lo más grandes posibles y sin que sobre absolutamente nada", "Para sumar intereses del banco", "Para medir la temperatura ambiental"], correct: 1 },
+    { question: "¿Cuál es el MCD (el divisor más grande en común) entre 24 y 36?", options: ["2", "6", "12", "72"], correct: 2 },
+    { question: "En un proyecto escolar tienes 100 kilos de abono y 50 litros de agua. ¿Cuál es el mayor número de kits idénticos que puedes armar sin que sobre material?", options: ["10 kits", "25 kits", "50 kits", "100 kits"], correct: 2 },
+    { question: "¿Qué comando matemático utilizamos en la barra de entrada de GeoGebra CAS para resolver instantáneamente estos problemas de optimización?", options: ["Raiz[]", "MCM[]", "MCD[] (o GCD en inglés)", "Divide[]"], correct: 2 },
+    { question: "Si calculamos el MCD de dos números que son primos entre sí (por ejemplo, 7 y 5), ¿cuál será obligatoriamente el resultado?", options: ["El cero (0)", "El número uno (1), porque es el único divisor que comparten", "El número 35 (su multiplicación)", "No se puede calcular en GeoGebra"], correct: 1 },
+    { question: "Si cortas dos cuerdas de 120m y 80m en tramos idénticos lo más largos posibles (cuyo MCD es 40m). ¿Cuántos tramos totales obtienes?", options: ["2 tramos", "3 tramos", "5 tramos (3 tramos de la primera y 2 tramos de la segunda)", "40 tramos"], correct: 2 },
+    { question: "¿Cuál es el primer paso si quisieras calcular el MCD a mano, matemáticamente, sin simuladores?", options: ["Sumarlos y restar 1", "Descomponer ambos números en sus factores primos", "Restarlos algebraicamente", "Multiplicarlos"], correct: 1 }
+];

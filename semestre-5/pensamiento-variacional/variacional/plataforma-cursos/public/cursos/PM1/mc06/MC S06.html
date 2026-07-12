@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 06: La Bicondicional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 06: Lógica de programación básica: Proposiciones bicondicionales (Sí y solo sí)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Contrato Perfecto: La Bicondicional</h3>
+            <p>Si la condicional era una promesa de un solo lado ("Si pasa A, entonces pasa B"), la <strong>Bicondicional</strong> es un contrato estricto de doble vía: "Pasa A <em>sí y solo sí</em> pasa B".</p>
+            <p>Su símbolo es una flecha de doble punta \(\leftrightarrow\). Significa que ambas partes están obligadas a tener el mismo valor de verdad para que el contrato sea válido.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Equivalencia y Sentencias Interactivas</h3>
+            <p>En el mundo de la programación y la robótica, los sensores funcionan bajo esta lógica. Analiza este escenario de un sistema de riego automático para un proyecto escolar:</p>
+            <ul>
+                <li>\(p\): La bomba de agua se enciende.</li>
+                <li>\(q\): El sensor detecta tierra seca.</li>
+            </ul>
+            <p>El sistema debe estar programado así: "La bomba se enciende SÍ Y SOLO SÍ el sensor detecta tierra seca" (\(p \leftrightarrow q\)).</p>
+            <p>Regla de la bicondicional: <em>El resultado es Verdadero cuando AMBAS proposiciones son exactamente iguales (ambas Verdaderas o ambas Falsas). Si son diferentes, el sistema tiene un error (Falso).</em></p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando la Bicondicional</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Estado correcto 1:</strong> En GeoGebra, asigna <code>p = true</code> (bomba encendida) y <code>q = true</code> (tierra seca).</li>
+                    <li><strong>Comprueba la bicondicional:</strong> Escribe <code>p <-> q</code> (o la expresión de igualdad) y presiona Enter.</li>
+                    <li><strong>Analiza:</strong> Obtienes <em>true</em>, el sistema funciona correctamente según lo programado.</li>
+                    <li><strong>Estado de error:</strong> Ahora cambia <code>p = true</code> pero <code>q = false</code> (la bomba enciende aunque la tierra esté mojada). Vuelve a evaluar la expresión. Te dará <em>false</em>, indicando un grave fallo en la lógica del sistema.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Evalúa tu Lógica</h3>
+            <div id="quiz-setup">
+                <p>Terminemos la serie de conectores lógicos dominando la bicondicional.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc05/MC S05.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc07/MC S07.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 06. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

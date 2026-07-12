@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 21: Ecuaciones Cuadráticas y Áreas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 21: El Salto a la Segunda Dimensión (El Cuadrado)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Límite de las Líneas</h3>
+            <p>Hasta ahora, todo nuestro trabajo en el Fraccionamiento (tuberías, bardas, cables) ha sido lineal. Medíamos distancias puras usando $x$ o $y$. Pero no puedes vender una casa basada en la longitud de un cable. Los bienes raíces se venden por <strong>Metros Cuadrados</strong>. Cuando un lado del terreno ($x$) se multiplica por el otro lado del terreno ($x$), nace una bestia completamente nueva: el $x^2$. Acabas de entrar al mundo de las <strong>Ecuaciones Cuadráticas</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Anatomía del Monstruo</h3>
+            <p>Una ecuación cuadrática corporativa completa tiene un ADN de tres partes: <strong>$ax^2 + bx + c = 0$</strong>. El término $ax^2$ (Término Cuadrático) es el jefe absoluto, el que define el área. El término $bx$ (Término Lineal) representa los caminos o bardas internas. El término $c$ (Término Independiente) son los costos fijos o recortes del terreno. Si la $x^2$ desaparece, tu terreno pierde su área y regresas a la Unidad I. La $x^2$ es innegociable.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Identificación de Terrenos</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Auditoría de Modelos:</h4>
+                <ol>
+                    <li><strong>Caso A:</strong> $3x^2 - 5x + 10 = 0$. Es una cuadrática COMPLETA. Tiene Área ($3x^2$), tiene barda ($-5x$) y tiene costo ($10$).</li>
+                    <li><strong>Caso B:</strong> $4x^2 - 16 = 0$. Es una cuadrática INCOMPLETA (Pura). Falta el término lineal ($bx$). Es un terreno cuadrado perfecto con un recorte, muy fácil de calcular.</li>
+                    <li><strong>Caso C:</strong> $5x + 20 = 0$. ¡ALERTA! Esto NO es cuadrático. El arquitecto olvidó el exponente $2$. Este es un plano lineal sin área construible. Rechazar inmediatamente.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Tasador de Bienes Raíces</h3>
+            <div id="quiz-setup">
+                <p>Identifica correctamente la anatomía de los modelos de área antes de asignar presupuesto.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Tasación!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Posees la visión para identificar áreas bidimensionales.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Despacho</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc20/MC S20.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior (Unidad II)</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc22/MC S22.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

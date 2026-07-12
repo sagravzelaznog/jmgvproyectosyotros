@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 26: Raíz Cuadrada Directa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 26: El Despeje Rápido (Propiedad de la Raíz)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Ecuación Cuadrática Pura (El Cuadrado Perfecto en el Terreno)</h3>
+            <p>Factorizar es un arte elegante, pero en las negociaciones rápidas no hay tiempo para desarmar motores. Si tienes la inmensa suerte de toparte con un modelo Incompleto Puro como $x^2 - 100 = 0$, debes agradecer al universo. Este tipo de terrenos tienen el Área ($x^2$) y el Recorte ($c$), pero les falta el asqueroso pasillo de la 'x' lineal ($bx$). Sin la 'x' lineal que nos estorbe, podemos <strong>despejar directamente</strong>, destruyendo el cuadrado de un solo golpe usando su némesis absoluto: la Raíz Cuadrada.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Némesis (Extracción de Raíz)</h3>
+            <p>La regla corporativa es brutal pero sencilla: Aislas la bestia al cuadrado en el lado izquierdo de la frontera. Por ejemplo, $x^2 = 100$. La variable está secuestrada por el exponente '$2$'. Para liberarla, inyectas una Raíz Cuadrada ($\sqrt{\quad}$) en AMBOS lados de la balanza. Al chocar la raíz con el cuadrado (lado izquierdo), ambos se aniquilan mutuamente en una explosión matemática, dejando a la 'x' libre y desnuda.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Despeje con Firma Dual ($\pm$)</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando $2x^2 - 32 = 0$:</h4>
+                <ol>
+                    <li><strong>Aislamiento Total:</strong> El $-32$ huye sumando: $2x^2 = 32$. El $2$ está estorbando como multiplicador, así que cruza dividiendo: $x^2 = 32 / 2$. El núcleo queda expuesto: $x^2 = 16$.</li>
+                    <li><strong>El Tiro de Gracia (La Raíz):</strong> Aplico la raíz a toda la balanza: $\sqrt{x^2} = \sqrt{16}$. El exponente desaparece dejando la 'x'.</li>
+                    <li><strong>La Firma Corporativa Dual ($\pm$):</strong> La raíz cuadrada en ecuaciones SIEMPRE escupe DOS resultados (gemelos, pero opuestos). ¿Por qué? Porque tanto $4 \cdot 4 = 16$, como $-4 \cdot -4 = 16$. El contrato exige ambas respuestas.</li>
+                    <li><strong>El Reporte Oficial:</strong> $x_1 = 4$ y $x_2 = -4$. Eliges el positivo para la construcción.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Liquidador de Raíces</h3>
+            <div id="quiz-setup">
+                <p>Libera a la variable de su prisión cuadrática aplicando el tiro de gracia correcto.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Despeje!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Ejecutas despejes directos como un experto y siempre recuerdas la firma dual.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Laboratorio</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc25/MC S25.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc27/MC S27.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

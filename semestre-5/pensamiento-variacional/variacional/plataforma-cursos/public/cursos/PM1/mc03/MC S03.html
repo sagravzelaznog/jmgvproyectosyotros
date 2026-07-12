@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 03: La Conjunción Lógica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 03: Proposiciones compuestas y el uso del operador lógico de conjunción (y)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Proposiciones Compuestas</h3>
+            <p>A veces, una sola afirmación no es suficiente para describir la realidad. Necesitamos combinar ideas. Cuando unimos dos o más proposiciones simples, creamos una <strong>proposición compuesta</strong>.</p>
+            <p>Para unirlas, usamos los llamados "conectores lógicos". Hoy nos enfocaremos en el más estricto de todos: la <strong>Conjunción</strong> (representada por la letra "y" en español, o por el símbolo \(\land\) en matemáticas).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Conjunción (\(\land\)) y la Toma de Decisiones</h3>
+            <p>Imagina que quieres comprar una computadora para tus estudios. Para lograrlo, te pones dos metas:</p>
+            <ul>
+                <li>\(p\): Ahorrar 5000 pesos de tu trabajo.</li>
+                <li>\(q\): Obtener un apoyo escolar de 2000 pesos.</li>
+            </ul>
+            <p>El costo total es 7000 pesos. Por lo tanto, necesitas que AMBAS cosas sucedan al mismo tiempo. Esto se escribe matemáticamente como \(p \land q\).</p>
+            <p>La regla de oro de la conjunción es implacable: <em>El resultado es Verdadero SÓLO si todas sus partes son Verdaderas. Si falla tan solo una de las condiciones, todo el proyecto fracasa (Falso).</em></p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando la Conjunción</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Abre la Vista Algebraica:</strong> Escribe directamente en la barra de entrada de GeoGebra.</li>
+                    <li><strong>Define \(p\):</strong> Escribe <code>p = true</code> (Lograste ahorrar el dinero).</li>
+                    <li><strong>Define \(q\):</strong> Escribe <code>q = false</code> (No te dieron el apoyo escolar).</li>
+                    <li><strong>Evalúa el resultado:</strong> En la siguiente línea, teclea <code>p && q</code> (usando doble ampersand para la conjunción en informática) y presiona Enter.</li>
+                    <li><strong>Analiza:</strong> GeoGebra te dirá que el resultado es <em>false</em>. Modifica <code>q = true</code> y observa cómo automáticamente el proyecto se vuelve exitoso (<em>true</em>).</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Evalúa tu Lógica</h3>
+            <div id="quiz-setup">
+                <p>Estás a punto de iniciar un reto de 7 preguntas sobre proposiciones compuestas y la conjunción.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc02/MC S02.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc04/MC S04.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 03. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

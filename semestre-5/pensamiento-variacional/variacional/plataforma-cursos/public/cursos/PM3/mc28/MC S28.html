@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 28: La Fórmula General</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 28: El Arma de Destrucción Masiva (La Fórmula General)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Límite de las Herramientas Manuales</h3>
+            <p>Factorizar es rápido, pero solo sirve si el proveedor te da números enteros nobles. Completar el Cuadrado es un hackeo letal, pero si el coeficiente principal 'a' no es 1, o el del medio 'b' es impar, las fracciones asquerosas van a retrasar tu obra civil. En el mundo corporativo, cuando te enfrentas a una monstruosidad como $4.2x^2 - 13.7x + 2.1 = 0$, no pierdes tiempo jugando a las adivinanzas. Sacas el <strong>Arma de Destrucción Masiva: La Fórmula General (coloquialmente 'La Chicharronera')</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Matriz A-B-C</h3>
+            <p>La Fórmula General no despeja, no asume, no factoriza. <strong>Es una procesadora industrial de coeficientes.</strong> Agarra a los tres líderes de tu ecuación ($a, b, c$), los mete en una trituradora algebraica y te escupe el valor de la 'x' sin importar los decimales o fracciones. El protocolo de uso exige igualar todo a CERO primero, luego identificar fríamente quién es 'a' (el dueño del cuadrado), quién es 'b' (el dueño de la 'x' lineal) y quién es 'c' (el dinero fijo). Sus signos importan. Un signo mal inyectado, y la fórmula te volará en la cara.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Algoritmo Definitivo</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Detonación Oficial: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</h4>
+                <ol>
+                    <li><strong>Identificación (El Sistema $2x^2 - 5x - 3 = 0$):</strong> Se extraen las variables tácticas. $a = 2$, $b = -5$, $c = -3$.</li>
+                    <li><strong>Inyección Frontal ($-b$):</strong> El primer término exige el NEGATIVO de 'b'. Como 'b' ya es $-5$, el choque de signos lo transforma en un orgulloso $+5$.</li>
+                    <li><strong>El Núcleo Radiactivo ($b^2 - 4ac$):</strong> Esta es la cámara de combustión. Elevas $-5$ al cuadrado (da $25$ positivo). Luego multiplicas el cuarteto de la muerte: $-4$ por $2$ por $-3$ (da $+24$). Sumas el núcleo: $25 + 24 = 49$.</li>
+                    <li><strong>La Liquidación (División por $2a$):</strong> Tienes $x = \frac{5 \pm \sqrt{49}}{4}$. O sea $x = \frac{5 \pm 7}{4}$. Escupirá dos resultados impecables: $x_1 = 3$ y $x_2 = -0.5$. Destrucción total completada.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Artillero</h3>
+            <div id="quiz-setup">
+                <p>Identifica y carga correctamente los coeficientes en la trituradora matemática suprema.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Armar Fórmula!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Operas la Fórmula General con precisión letal.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Bunker</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc27/MC S27.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc29/MC S29.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

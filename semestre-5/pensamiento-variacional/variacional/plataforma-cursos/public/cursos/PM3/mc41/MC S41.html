@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 41: Cálculo de Catetos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 41: Operación Resta (Despejando Catetos)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Contrato Inverso</h3>
+            <p>La vida real te lanzará un balde de agua fría. A veces YA TIENES la rampa de acero (la Hipotenusa 'c'). Compraste una rampa de 20 metros. El piso mide 12 metros de largo ('a'). Y el topógrafo te pregunta: <em>"¿A qué altura exacta de la pared va a chocar la punta de esa rampa?"</em>. Tienes que calcular el Cateto Vertical ('b'). Si intentas usar la técnica de la MC40 (Sumar) vas a arruinar toda la estructura. Las reglas del juego corporativo acaban de invertirse por completo.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Lógica de la Resta Corporativa</h3>
+            <p>Si la Hipotenusa es la jefa final (el número más grande), ¿cómo encuentras a un empleado (el cateto menor)? ¡Restándole poder al jefe! Para encontrar un Cateto ('a' o 'b'), debes tomar el cuadrado gigante de la Hipotenusa ('c') y <strong>RESTARLE</strong> el cuadrado del Cateto que ya conoces. Si sumas, crearás un monstruo matemático que será más grande que la Hipotenusa, violando las leyes del triángulo.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Despeje Agresivo</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando $b^2 = c^2 - a^2$ (Rampa de 20m, Piso de 12m):</h4>
+                <ol>
+                    <li><strong>Clasificación Letal:</strong> Rampa = 20 (Hipotenusa 'c'). Piso = 12 (Cateto 'a'). Altura = Misterio (Cateto 'b').</li>
+                    <li><strong>Los Cuadrados Independientes:</strong> $20^2 = 400$. El piso es $12^2 = 144$.</li>
+                    <li><strong>El Choque de Resta:</strong> Agarras a la jefa (400) y le restas el empleado (144). ¡Cuidado, el jefe siempre va primero o la máquina colapsará con números negativos! $400 - 144 = 256$. Tu $b^2$ vale 256.</li>
+                    <li><strong>Liberación Lineal (Raíz):</strong> $\sqrt{256} = 16$.</li>
+                    <li><strong>Auditoría Visual:</strong> ¿El 16 es menor que la Hipotenusa (20)? Sí. Todo en orden. La rampa chocará exactamente a 16 metros de altura en la pared.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Desmantelador de Alturas</h3>
+            <div id="quiz-setup">
+                <p>Calcula paredes o pisos faltantes aplicando la regla estricta de la resta hipotética.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Iniciar Despeje!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Operas el despeje inverso con total seguridad.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Andamio Frontal</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc40/MC S40.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc42/MC S42.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

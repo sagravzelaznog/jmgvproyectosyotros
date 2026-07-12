@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 45: Series Aritméticas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ecf0f1; padding: 10px; border-radius: 10px; color: #2c3e50; display: inline-block;">Unidad VI: Sucesiones, Progresiones y Series (La Línea de Tiempo)</h1>
+        <h2>Masterclass 45: Series Aritméticas (Consolidando las Ganancias)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Nivel Directivo (El Concepto de "Serie")</h3>
+            <p>Una simple "Progresión" ($a_n$) solo te responde una cosa muy pobre: cuánto dinero exacto entrará a la empresa en un mes específico y solitario. Pero la realidad es que a un CEO, a un banquero o al SAT NO le interesa saber solamente cuánto ganaste aisladamente en el mes 100. El gobierno exige saber fríamente el <strong>GRAN TOTAL ACUMULADO Y CONSOLIDADO</strong> desde tu mes 1 hasta tu mes 100 sumados juntos. Cuando abandonas las comas y agarras todos los malditos números de la progresión para SUMARLOS violentamente entre sí ($1 + 2 + 3...$), legal y matemáticamente dejas de ser una triste progresión y asciendes a la jerarquía de una poderosa <strong>SERIE</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Truco del Niño Genio Gauss (La Fórmula Maestra de la Serie Aritmética)</h3>
+            <p>Sumar a mano desnuda y de uno en uno $1 + 2 + 3 + ... + 100$ te tomaría horas y seguramente te equivocarías. El matemático genio Carl F. Gauss inventó en primaria un atajo letal de tres pasos para engañar al sistema:</p>
+            <div style="font-size: 2rem; text-align: center; margin: 20px 0; background-color: var(--card-bg); padding: 20px; border-radius: 10px; border: 2px solid #3498db;">
+                $$ S_n = \frac{n(a_1 + a_n)}{2} $$
+            </div>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>El Gran Total ($S_n$):</strong> La 'S' mayúscula significa Suma o Serie. Es el gran total acumulado millonario en la bóveda de la empresa.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>El Primer Paso Letal $(a_1 + a_n)$:</strong> ¡No sumes todo! Solo suma pura y fríamente el PRIMER número de la asquerosa lista de pagos con el ÚLTIMO número de la maldita lista. (La magia oculta de los números garantiza que los extremos siempre suman igual que los de en medio).</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>El Segundo Paso del Volumen $(n)$:</strong> Multiplica sin miedo esa extraña primera suma base exactamente por la <em>cantidad total</em> de números, clientes o meses ($n$) que hay operando en toda la lista de tu empresa.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>El Tercer Paso (El Corte de Gracia $/2$):</strong> Como el truco de magia consistió en agrupar estúpidamente todo en "parejas" (el primero con el último), estás obligado militarmente a dividir el gigantesco resultado final entre 2 para no inflar artificialmente las finanzas. ¡Boom! Magia corporativa pura. Tienes la suma total en segundos.</li>
+            </ul>
+        </section>
+
+        <section class="content-block">
+            <h3>3. El Talón de Aquiles de Gauss (La Doble Táctica Operativa)</h3>
+            <p>Para poder usar la brillante y veloz fórmula de Gauss en la vida real, <strong>NECESITAS OBLIGATORIAMENTE saber cuánto diablos vale el último maldito número de tu lista ($a_n$)</strong>. Si el jefe estúpido te pide la "suma de los primeros 50 meses", pero NO te dice cuánto es el pago final en el mes 50 (solo te da los primeros 3 pagos), tu fórmula de Serie queda trabada e inservible. Tienes que actuar rápido y ejecutar dos pasos:</p>
+            <ol>
+                <li><strong>La Búsqueda:</strong> Pausa la Serie, saca tu viejo manual de la MC43 y usa la fórmula aburrida de "Progresión Aritmética" solo para averiguar el maldito valor exacto oculto del $a_{50}$.</li>
+                <li><strong>El Impacto:</strong> Ahora que por fin tienes capturado al $a_{50}$, inyéctalo con furia en la nueva fórmula de Serie de Gauss para poder sumar todo y cobrar tu cheque.</li>
+            </ol>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>4. Taller Analítico: Consolidación Agresiva de Activos</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Sumar el consolidado de: $2 + 5 + 8 + ...$ (Durante los primeros 20 meses)</h4>
+                <ol>
+                    <li><strong>Paso 1 (Hallar al fantasma final):</strong> No sé quién carajos está sentado en la posición 20. Uso la vieja confiable MC43:
+                        <br>$a_{20} = a_1 + (20-1)d \rightarrow 2 + (19)3 = 2 + 57 = 59$.
+                        <br>El pago oculto en el último mes es de 59 millones. Capturado.
+                    </li>
+                    <li><strong>Paso 2 (La Suma Maestra):</strong> Ahora sí, uso mi arma de Gauss.
+                        <br>$S_{20} = \frac{20(2 + 59)}{2}$
+                        <br>$S_{20} = \frac{20(61)}{2} = \frac{1220}{2} = 610$.
+                    </li>
+                    <li><strong>Resultado Corporativo:</strong> Señor CEO, la suma total acumulada y consolidada de los 20 meses es de exactamente 610 millones en caja libre.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Consolidador Contable Jefe</h3>
+            <div id="quiz-setup">
+                <p>Demuestra implacablemente frente a los auditores externos que puedes sumar, consolidar y reportar listas gigantescas de dinero sin siquiera usar una pesada calculadora de escritorio, todo gracias a la brillante e inmortal lógica de Gauss.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #2c3e50;">¡Iniciar Consolidación de Cuentas!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #2c3e50;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado con Autoridad! Has dominado para siempre el antiguo arte matemático de consolidar fortunas y hackear la línea temporal financiera. Tu sueldo está justificado.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver Cansado al Libro Mayor Contable</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc44/MC S44.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #2c3e50;">Menú Principal</a>
+            <a href="../mc46/MC S46.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

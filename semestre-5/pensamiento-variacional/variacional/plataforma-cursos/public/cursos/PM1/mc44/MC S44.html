@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 44: Jerarquía de Operaciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 44: Técnicas algorítmicas para la resolución de operaciones combinadas (Jerarquía PEMDAS)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Absoluto Caos de Leer de Izquierda a Derecha</h3>
+            <p>Imagina que en un examen te ponen este problema trampa: \(5 + 3 \times 2\). Si, por un instinto básico y erróneo, lo lees y resuelves de izquierda a derecha como si fuera una novela normal, sumarías alegremente 5+3=8, y luego lo multiplicarías por 2, dando un falso resultado de 16.</p>
+            <p>Pero si le das exactamente este mismo problema a una computadora del Pentágono, a GeoGebra o a tu celular, te dirá fríamente que la respuesta innegable es <strong>11</strong>. ¿Se volvió loca la máquina? No. Las leyes universales de las matemáticas NO se leen de izquierda a derecha, se leen mediante un sistema de autoridad policial estricto y riguroso llamado <strong>Jerarquía de Operaciones</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Rey, la Reina y los Peones (Algoritmo PEMDAS)</h3>
+            <p>La jerarquía dicta y ordena bajo amenaza el orden de vida o muerte en el que debes resolver cualquier problema matemático en este universo. Se resume globalmente en el famoso acrónimo <strong>PEMDAS</strong>:</p>
+            <ol>
+                <li><strong>P</strong>aréntesis (Y corchetes. Son el comodín, la tarjeta de máxima prioridad, se resuelve todo lo de adentro primero, ignorando el mundo exterior).</li>
+                <li><strong>E</strong>xponentes (y sus hermanas, las Raíces. Son los verdaderos reyes del álgebra. Se resuelven con orgullo antes que cualquier otra cosa básica).</li>
+                <li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión (Tienen exactamente el mismo poder y rango. Si chocan, se resuelven democráticamente de izquierda a derecha según vayan apareciendo).</li>
+                <li><strong>A</strong>dición (Sumas) y <strong>S</strong>ustracción (Restas). (Son simplemente los peones del tablero, siempre sufren y se dejan al mero final del problema).</li>
+            </ol>
+            <p>Volviendo al ejemplo tramposo \(5 + 3 \times 2\): La multiplicación tiene un altísimo rango militar y manda sobre la suma. Primero debes multiplicar \(3 \times 2 = 6\). Ya terminado eso, luego le sumas el humilde 5. Resultado perfecto e impecable: 11.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Desafiando a la Jerarquía Algorítmica</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador (Tu Auditor):</h4>
+                <ol>
+                    <li><strong>La trampa mortal demostrada:</strong> Escribe en el CAS de GeoGebra la bomba lógica <code>10 - 2 * 4</code>. La máquina, sin sentimientos, seguirá el protocolo militar PEMDAS: primero multiplicará obligatoriamente \(2 \times 4 = 8\), y hasta el final hará la resta de peones \(10 - 8 = 2\).</li>
+                    <li><strong>El poder supremo del Paréntesis:</strong> Si en tu diseño de ingeniería tú realmente necesitabas restar primero, debes usar a la fuerza tu "tarjeta de máxima prioridad absoluta". Escribe con autoridad <code>(10 - 2) * 4</code>. Ahora GeoGebra, sumiso al paréntesis, restará primero adentro (dando 8) y lo multiplicará por el 4 externo, arrojando <code>32</code>. ¡Un solo paréntesis cambia dramáticamente todo el destino de tu puente!</li>
+                    <li><strong>Operación combinada, Nivel Jefe Final:</strong> Escribe <code>2^3 + 5 * 2</code>. Observa la masacre: Primero destripan a la potencia rey (\(2^3 = 8\)), luego a la multiplicación reina (\(5 \times 2 = 10\)), y solo hasta el final el sistema suma los restos (\(8+10 = 18\)). GeoGebra confirmará obedientemente tu 18.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Maestro Algorítmico</h3>
+            <div id="quiz-setup">
+                <p>Mide severamente tu disciplina mental e impulsos básicos, y sigue las estrictas reglas de PEMDAS para no caer nunca en trampas matemáticas fatales.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Jerárquico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Superado! Dominas el Sistema PEMDAS.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Intentar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc43/MC S43.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc45/MC S45.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 44. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

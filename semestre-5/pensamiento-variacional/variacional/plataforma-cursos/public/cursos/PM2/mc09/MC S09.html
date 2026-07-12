@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 09: Gemelos de Fábrica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Lenguaje Algebraico y Monomios en el Taller</h1>
+        <h2>Masterclass 09: Términos Semejantes y el Control de Inventario</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Caos Absoluto en el Almacén</h3>
+            <p>Imagina que en tu enorme fábrica hay 100 piezas de madera carísima tiradas por todo el piso del almacén. Algunas son superficies cuadradas ($x^2$), otras son tiras largas y rectangulares ($x$) y otras son extrañas piezas redondas ($y$). Si tu jefe corporativo te pide el inventario urgente, no puedes, como un novato, simplemente contarlas todas juntas y decir estúpidamente "hay 100 piezas de madera". ¡Eso es un desastre financiero! Tienes que clasificarlas y separarlas por su forma y tamaño geométrico exacto. En el álgebra industrial, a las piezas que son idénticas en su estructura matemática se les llama <strong>Términos Semejantes</strong> (Gemelos).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Regla de Sangre: La Parte Literal Intocable</h3>
+            <p>¿Cómo sabe tu cerebro y la máquina si dos términos son semejantes (gemelos compatibles)? Solo existe una regla inquebrantable en todo el universo:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>Tienen que tener las MISMAS malditas letras:</strong> Si un bloque tiene $x$ y el otro tiene $y$, ¡NO son semejantes! Es como intentar mezclar y atornillar peras con manzanas; el mueble se va a caer a pedazos.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Con los MISMOS exponentes exactos:</strong> ¡Alerta máxima! $5x$ y $3x^2$ NO son semejantes nunca. Uno es una simple línea ($1D$) y el otro es un área plana ($2D$). ¡No puedes mezclarlos en el mismo estante del inventario!</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>El coeficiente gigante NO importa:</strong> El número grande de enfrente solo te dice "cuántos" objetos hay de ese tipo. $100x^2$ y $2x^2$ SÍ SON semejantes, porque ambos hablan exactamente del mismo tipo de forma de madera ($x^2$).</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Escáner Láser de Gemelos</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el escáner visual del almacén:</h4>
+                <ol>
+                    <li><strong>Llega el cargamento de madera:</strong> $4x^2$, $-7x$, $15x^2$, $3xy$, $x$.</li>
+                    <li><strong>Misión Corporativa:</strong> Encontrar a la fuerza la pareja gemela del $4x^2$.</li>
+                    <li><strong>Análisis frío:</strong> El $4x^2$ tiene como "Parte Literal" estructural a "$x^2$".</li>
+                    <li><strong>Escaneamos el resto:</strong> ¿El $-7x$? Falla porque le falta el exponente $2$. ¿El $3xy$? Falla porque tiene una letra intrusa '$y$'.</li>
+                    <li><strong>¡Alerta de coincidencia biológica!</strong> El $15x^2$ tiene exactamente la misma parte literal intacta ("$x^2$").</li>
+                    <li><strong>Conclusión de gerencia:</strong> $4x^2$ y $15x^2$ son indiscutiblemente <strong>Términos Semejantes</strong>. Se pueden agrupar y guardar en el mismo estante del almacén para futuros cálculos.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Controlador Supremo de Inventario</h3>
+            <div id="quiz-setup">
+                <p>Demuestra si puedes escanear y detectar términos semejantes a la velocidad de la luz para salvar la organización de la fábrica.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Iniciar Escáner Láser!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Tienes visión de rayos X corporativa. Tu almacén algebraico está perfectamente clasificado y listo para producir.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Almacén Principal</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc08/MC S08.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc10/MC S10.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

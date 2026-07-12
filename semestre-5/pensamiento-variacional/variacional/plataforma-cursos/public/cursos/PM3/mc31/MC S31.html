@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 31: La Parábola Corporativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 31: Arquitectura Curva (La Parábola y el Vértice)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Colapso de la Línea Recta</h3>
+            <p>Hasta ahora resolvías la cuadrática ($ax^2+bx+c=0$) para hallar terrenos. Pero si decides GRAFICAR esa cuadrática completa ($y = ax^2+bx+c$) en el plano cartesiano... no obtendrás una línea recta aburrida. El exponente cuadrado ($^2$) dobla la realidad física, obligando a los cables a curvarse hacia arriba o hacia abajo. Nace <strong>La Parábola</strong>. Piensa en la antena parabólica del fraccionamiento, o en el cable de suspensión del puente principal. Es aerodinámica pura y brutal.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Rey de la Obra: El Vértice</h3>
+            <p>En una parábola, la gravedad obliga a la curva a tener un punto máximo (el pico de un puente) o un punto mínimo (el fondo de un túnel). Ese punto único y sagrado se llama <strong>Vértice</strong>. Es la coordenada más crítica del proyecto. Para encontrar la posición exacta de este Vértice ('$x$') sin dibujar nada, existe un hack corporativo militar heredado de la Fórmula General: <strong>$x = \frac{-b}{2a}$</strong>. ¡Es la Fórmula General, pero con la raíz cuadrada totalmente amputada!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Extracción del Núcleo de Curvatura</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Auditoría de un Cable en Suspensión ($y = x^2 - 6x + 5$):</h4>
+                <ol>
+                    <li><strong>Inyección Directa (La Amputación):</strong> Quieres saber el centro exacto del puente. Aplicas la orden táctica $x = \frac{-b}{2a}$. Tus datos son $a=1, b=-6$.</li>
+                    <li><strong>El Choque (Numerador):</strong> La fórmula exige "$-b$". Como tu 'b' es $-6$, el choque de signos lo transforma en $+6$.</li>
+                    <li><strong>El Anclaje (Denominador):</strong> Abajo tienes "$2a$". Como tu 'a' es $1$, el anclaje es simplemente $2(1) = 2$.</li>
+                    <li><strong>El Despeje del Centro:</strong> $x = 6 / 2 = 3$. ¡El puente tiene su punto crítico de gravedad (vértice) posicionado exactamente en el kilómetro 3 del eje $X$!</li>
+                    <li><strong>El Fondo del Túnel:</strong> Para saber a qué profundidad cae ese túnel (el eje $Y$), agarras ese $3$ y lo disparas de regreso como Búmeran a la ecuación original: $y = (3)^2 - 6(3) + 5 \rightarrow y = 9 - 18 + 5 \rightarrow y = -4$. El Vértice absoluto está en la coordenada corporativa $(3, -4)$.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Maestro de Curvas</h3>
+            <div id="quiz-setup">
+                <p>Identifica y extrae el centro de gravedad de las infraestructuras parabólicas en tiempo récord.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Calcular Gravedad!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Posees la fórmula para encontrar el núcleo crítico de cualquier arco.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a los Planos de Suspensión</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc30/MC S30.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc32/MC S32.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

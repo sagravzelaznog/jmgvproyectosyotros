@@ -1,9 +1,0 @@
-const questions = [
-    { question: "¿Cuál fue la principal razón por la que nacieron las matemáticas en las primeras civilizaciones?", options: ["Para aprobar exámenes", "Por una necesidad social de administrar recursos y medir el tiempo", "Para programar computadoras", "Por entretenimiento"], correct: 1 },
-    { question: "El sistema de numeración del antiguo Egipto usaba jeroglíficos. ¿Qué tipo de base utilizaba?", options: ["Base 2 (Binario)", "Base 60 (Sexagesimal)", "Base 10 (Decimal)", "Base 20 (Vigesimal)"], correct: 2 },
-    { question: "¿Qué característica principal tenía el sistema de Egipto respecto a la posición de sus símbolos?", options: ["Era estrictamente posicional", "No era posicional (el símbolo valía lo mismo sin importar dónde estuviera)", "Solo funcionaba con fracciones", "Usaba el cero posicional"], correct: 1 },
-    { question: "La civilización en Mesopotamia (sumerios y babilonios) destacó por inventar un sistema matemático basado en:", options: ["Base 10", "Base 20", "Base 60", "Base 100"], correct: 2 },
-    { question: "¿Cuál es un ejemplo vivo del legado matemático de Mesopotamia que usamos todos los días?", options: ["El sistema métrico decimal", "El uso de letras para el álgebra", "La división del tiempo en horas de 60 minutos y minutos de 60 segundos", "Las fracciones egipcias"], correct: 2 },
-    { question: "Matemáticamente, ¿por qué la base 60 era tan conveniente para el comercio y los cálculos antiguos?", options: ["Porque 60 tiene muchos divisores exactos, lo que facilitaba dividir y repartir raciones", "Porque es un número pequeño", "Porque era el número sagrado de los egipcios", "Porque es un número primo"], correct: 0 },
-    { question: "Si usamos el comando ToBase[75, 60] en GeoGebra, nos devuelve '1, 15'. ¿Qué significa esto?", options: ["1 multiplicado por 15", "1 grupo de 60 unidades, más 15 unidades sobrantes", "1.15 decimal", "75 dividido entre 60 da 15"], correct: 1 }
-];

@@ -1,9 +1,0 @@
-const questions = [
-    { question: "¿Cuál es la función principal de los números naturales en la vida cotidiana?", options: ["Medir temperaturas bajo cero", "Contar elementos enteros y reales del entorno (1, 2, 3...)", "Representar fracciones", "Hacer cálculos con decimales"], correct: 1 },
-    { question: "¿Qué sistema numérico se utilizaba en Europa para el comercio antes del siglo XIII, haciéndolo extremadamente ineficiente?", options: ["El sistema maya", "El sistema binario", "Los números romanos", "El sistema sexagesimal"], correct: 2 },
-    { question: "¿Quién fue el matemático italiano que introdujo el sistema numérico moderno en Europa?", options: ["Pitágoras", "Leonardo da Vinci", "Galileo Galilei", "Leonardo de Pisa (Fibonacci)"], correct: 3 },
-    { question: "¿Cómo se llamó el influyente libro publicado en 1202 que revolucionó las matemáticas comerciales?", options: ["Los Elementos", "Liber Abaci (El Libro del Cálculo)", "Principia Mathematica", "El Código Da Vinci"], correct: 1 },
-    { question: "El sistema numérico que Fibonacci introdujo a Europa se llama 'Indoarábigo'. ¿Cuáles son sus dos grandes ventajas?", options: ["Es posicional y utiliza el cero", "Usa letras y es muy largo", "Solo tiene 5 números y es fácil de aprender", "No usa símbolos, solo nudos"], correct: 0 },
-    { question: "¿Qué permitió la adopción de los 10 dígitos (0-9) en el comercio europeo?", options: ["Usar más hojas de papel", "Estandarizar algoritmos eficientes para sumar, restar, multiplicar y dividir en columnas", "Complicar las matemáticas", "Volver al uso del ábaco romano"], correct: 1 },
-    { question: "En GeoGebra, si exploramos la sucesión de Fibonacci con 'Secuencia[Fibonacci[n], n, 1, 10]', ¿qué estamos visualizando?", options: ["Una suma aleatoria", "Números romanos convertidos", "Una famosa sucesión matemática presente en la naturaleza descubierta por Leonardo de Pisa", "Ecuaciones diferenciales"], correct: 2 }
-];

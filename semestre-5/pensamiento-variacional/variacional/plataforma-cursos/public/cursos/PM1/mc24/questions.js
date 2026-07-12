@@ -1,9 +1,0 @@
-const questions = [
-    { question: "Aplicando el método rápido (Truco del Reloj), ¿cuál es la fracción impropia estrictamente equivalente de 3 enteros y 1/2 (3 1/2)?", options: ["6/2", "7/2", "3/2", "4/2"], correct: 1 },
-    { question: "¿Cómo se llama el proceso matemático y mental para pasar velozmente de una fracción mixta a una impropia?", options: ["Multiplicar el entero por el numerador superior", "Restar el denominador inferior al entero", "Multiplicar el entero por el denominador (abajo) y sumarle el numerador (arriba)", "Dividir el numerador entre el entero principal"], correct: 2 },
-    { question: "Tienes la fracción impropia 22/5 (útil en álgebra pero mala para medir madera). Si la divides para encontrar los enteros, ¿cuál es su forma mixta correcta?", options: ["4 enteros y 2/5", "22 enteros y 5", "2 enteros y 4/5", "5 enteros y 2/22"], correct: 0 },
-    { question: "Si vas a la ferretería o carpintería y pides '15/4 de pulgada' de un clavo, el vendedor se confundirá. ¿Cómo deberías pedírselo correctamente en fracción mixta comercial?", options: ["1 pulgada y 3/4", "15 pulgadas", "3 pulgadas y 3/4", "4 pulgadas y 1/4"], correct: 2 },
-    { question: "En un simulador avanzado como GeoGebra o en lenguajes de programación en la nube, ¿cómo debes escribir correctamente la fracción mixta 5 1/4 para que la máquina no lo confunda con una operación de multiplicación errónea?", options: ["5(1/4)", "5_1/4", "5 + (1/4)", "5 1/4"], correct: 2 },
-    { question: "Transforma mentalmente 6 enteros y 2/3 (6 2/3) a fracción impropia. ¿El resultado directo es?", options: ["12/3", "20/3", "18/3", "8/3"], correct: 1 },
-    { question: "Transforma mentalmente la fracción impropia 19/2 a fracción mixta. ¿El resultado numérico es?", options: ["9 enteros y 1/2", "19 enteros", "8 enteros y 1/2", "10 enteros y 1/2"], correct: 0 }
-];

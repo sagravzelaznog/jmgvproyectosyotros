@@ -74,10 +74,10 @@ export default function DashboardPage() {
       <div className="space-y-6">
         {([
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
-          { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
-          { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
-          { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
-          { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." }
+          { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística.", externalUrl: "/cursos/PM1/index.html" },
+          { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo.", externalUrl: "/cursos/PM2/index.html" },
+          { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada.", externalUrl: "/cursos/PM3/index.html" },
+          { id: "pm4", title: "PM4 (Ingeniería y Polinomios)", adminOnly: false, description: "Pensamiento variacional, cónicas y modelado matemático urbano.", externalUrl: "/cursos/PM4/index.html" }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description?: string; externalUrl?: string }>)
         .filter(course => !course.adminOnly || isAdmin)
         .map(course => {

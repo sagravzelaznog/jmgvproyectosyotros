@@ -74,7 +74,7 @@ export default function DashboardPage() {
       <div className="space-y-6">
         {([
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
-          { id: "pm1", title: "PM1 (Álgebra Base)", adminOnly: false, description: "Fundamentos de ecuaciones y el lenguaje del dinero." },
+          { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
           { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
           { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." }

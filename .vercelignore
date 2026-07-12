@@ -1,9 +1,9 @@
-# Ignore huge machine learning weights and cache directories
+# Ignore huge directories to prevent Vercel 1GB upload limit
 202606_a/
-semestre-5/pensamiento-variacional/variacional/
 trabajosexternos/
 market/
 semesttre-6/
 semestre 1/*.pdf
 semestre_3/*.pdf
 semestre_2/*.pdf
+uploads/

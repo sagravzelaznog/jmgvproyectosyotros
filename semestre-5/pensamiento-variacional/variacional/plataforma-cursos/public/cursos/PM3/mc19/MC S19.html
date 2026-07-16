@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 19: Cramer (Solución 2x2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #3b82f6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Sistemas de Ecuaciones y Optimización</h1>
+        <h2>Masterclass 19: Ejecución por Cramer (El Asalto a Variables)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Los Determinantes Secundarios (El Clon Alterado)</h3>
+            <p>Ya sabes calcular el Determinante Maestro ($\Delta$). Pero el Maestro no te dice el precio del asfalto ni del concreto, solo te dice si el sistema está vivo. Para descubrir el valor de 'x' o 'y', necesitas crear <strong>Determinantes Secundarios</strong> ($\Delta x$ y $\Delta y$). El proceso es un asalto corporativo: clonas la matriz original, pero reemplazas fríamente la columna de la variable que quieres investigar por la columna de los resultados (los presupuestos o términos libres).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Asalto a X ($\Delta x$)</h3>
+            <p>Si quieres saber qué pasa con la letra 'x', creas el determinante $\Delta x$. Tomas la matriz base, arrancas la columna de los coeficientes originales de 'x' (porque ahora 'x' es el objetivo) y en ese lugar inyectas la columna de los resultados. La columna de la 'y' se queda intacta. Multiplicas cruzado de nuevo (bajada menos subida). Obtienes un nuevo número. Luego, para el asalto a 'Y' ($\Delta y$), repites el proceso pero ahora arrancando la columna de la 'y' e inyectando los resultados ahí.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Remate Cramer</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Resolviendo $2x + 3y = 12$ y $x - y = 1$</h4>
+                <ol>
+                    <li><strong>Paso 1: El Maestro ($\Delta$):</strong> Columnas (2,1) y (3,-1). Bajada: $-2$. Subida (castigada): $-3$. Maestro = $-5$.</li>
+                    <li><strong>Paso 2: El Secundario $\Delta x$:</strong> Reemplazas la columna X por resultados (12, 1). La caja queda (12,1) y (3,-1). Bajada: $-12$. Subida: $-3$. Total $\Delta x = -15$.</li>
+                    <li><strong>Paso 3: El Secundario $\Delta y$:</strong> Reemplazas la columna Y por resultados (12, 1). La caja queda (2,1) y (12,1). Bajada: $2$. Subida: $-12$. Total $\Delta y = -10$.</li>
+                    <li><strong>El Remate (División):</strong> Para sacar 'x', divides su secundario entre el jefe: $x = -15 / -5 = 3$. Para 'y': $y = -10 / -5 = 2$. Coordenada maestra: $(3, 2)$. Eres imparable.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Liquidador de Sistemas</h3>
+            <div id="quiz-setup">
+                <p>Domina el reemplazo de columnas y el cálculo final por divisiones para resolver cualquier sistema sin tocar el álgebra.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #3b82f6;">¡Iniciar Liquidación!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #3b82f6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Dominas el método más letal y elegante de la ingeniería matricial.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Despacho Ejecutivo</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc18/MC S18.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #3b82f6;">Menú Principal</a>
+            <a href="../mc20/MC S20.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

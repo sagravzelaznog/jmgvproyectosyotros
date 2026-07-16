@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 42 - Profundidad de Zanjas Normativas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 42: Cálculo Trigonométrico de Profundidad</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Todo el semestre analizamos la red desde arriba (Plano XY). Pero, ¿qué pasa cuando la calle sube por un cerro? La zanja debe mantener una profundidad constante de seguridad (según CFE, 80 cm bajo tierra para Media Tensión).</p>
+        
+        <div class="alert-box">
+            <strong>Riesgo Subterráneo:</strong> Si excavas horizontalmente contra un cerro inclinado, en algún punto el cable saldrá a la superficie. La excavación debe ser perfectamente paralela a la pendiente de la calle. Usaremos las razones trigonométricas para garantizarlo.
+        </div>
+        <p>Aprenderemos a proyectar vectores en el Eje Z (Alzado).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Pendiente Topográfica (Ángulo de Elevación)</h3>
+        <p>La calle tiene una inclinación topográfica. Si avanzas 10 metros en horizontal ($x=10$) y subes 2 metros en vertical ($z=2$), formaste un triángulo rectángulo.</p>
+        <p>La pendiente (m) y el ángulo ($\theta$) se calculan con la Tangente:</p>
+        <div class="math-box">
+            $$\tan(\theta) = \frac{\text{Cateto Opuesto}}{\text{Cateto Adyacente}} = \frac{z}{x}$$
+            $$\tan(\theta) = \frac{2}{10} = 0.2 \quad \Rightarrow \quad \theta = \tan^{-1}(0.2) = 11.3^\circ$$
+        </div>
+
+        <h3>2. Perforación Perpendicular vs Vertical</h3>
+        <p>Si la norma exige 80cm ($0.8\text{m}$) de profundidad, ¿cavas 80cm rectos hacia el centro de la Tierra (gravedad) o cavas 80cm perpendiculares al pavimento?</p>
+        <p>¡Perpendiculares al pavimento! Para saber cuánto clavar la pala verticalmente ($Z_{real}$) respecto a la gravedad, debes usar el coseno:</p>
+        <div class="math-box">
+            $$\cos(\theta) = \frac{0.8}{Z_{real}} \quad \Rightarrow \quad Z_{real} = \frac{0.8}{\cos(11.3^\circ)}$$
+            $$Z_{real} = \frac{0.8}{0.98} = 0.816 \text{ metros}$$
+        </div>
+        <p>El operador de la máquina debe configurar el láser a 81.6 cm de profundidad vertical para garantizar 80 cm de escudo protector de concreto oblicuo.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Corte de Elevación)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Realizaremos el cálculo para una calle muy inclinada (rampa de acceso):</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> La rampa de acceso a un fraccionamiento exclusivo sube 15 metros en vertical por cada 25 metros de avance horizontal.</li>
+            <li><strong>Paso 2: Ángulo.</strong> $\tan(\theta) = \frac{15}{25} = 0.6 \Rightarrow \theta = 30.96^\circ$.</li>
+            <li><strong>Paso 3: Profundidad Aparente.</strong> La CFE pide 1 metro ($1.0\text{m}$) de recubrimiento (profundidad perpendicular).</li>
+            <li><strong>Paso 4: Profundidad Vertical.</strong> $Z_{real} = \frac{1.0}{\cos(30.96^\circ)} = \frac{1.0}{0.857} = 1.16 \text{ metros}$.</li>
+            <li><strong>Conclusión:</strong> El residente de obra debe pedirle al excavador que cave a 1.16 metros rectos hacia abajo para cumplir la norma.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu bitácora, calcula la profundidad vertical requerida $Z_{real}$ si la norma pide $1.2\text{m}$ de recubrimiento en una calle que tiene una inclinación extrema de $45^\circ$. Muestra tu cálculo de Coseno.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc41/MC_S41.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc43/MC_S43.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 42. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El ángulo de inclinación de una calle se calcula en topografía relacionando la altura (Z) y el avance (X) mediante la función:", options: ["Seno", "Tangente", "Coseno", "Logaritmo"], correct: 1 },
+        { q: "Si la CFE pide 80 cm de recubrimiento, esta distancia debe medirse de forma:", options: ["Vertical hacia el núcleo de la Tierra", "Perpendicular a la superficie inclinada del pavimento (para proteger el tubo del peso de los autos)", "Horizontal", "Aleatoria"], correct: 1 },
+        { q: "Dado que las excavadoras perforan verticalmente guiadas por gravedad, debemos convertir la profundidad perpendicular usando la función:", options: ["Seno", "Coseno", "Raíz", "Tangente"], correct: 1 },
+        { q: "Si la inclinación de la calle es cero (plana), el Coseno de 0° es 1. Por tanto, la excavación vertical será:", options: ["El doble", "La mitad", "Exactamente igual a la profundidad perpendicular de la norma", "Cero"], correct: 2 },
+        { q: "En el entregable extremo (45°), el cos(45) es aprox 0.707. Para cumplir 1.2m de norma, la zanja vertical (1.2 / 0.707) debe ser:", options: ["0.84 metros", "1.70 metros (mucho más profunda para compensar)", "1.2 metros", "Cero"], correct: 1 },
+        { q: "Si excavas menos de la profundidad calculada en un cerro, ¿cuál es el peligro?", options: ["El cable podría quedar expuesto por la erosión o aplastado por los vehículos pesados", "Gastas mucho dinero", "No hay peligro", "La máquina se apaga"], correct: 0 },
+        { q: "Estos cálculos pertenecen a la geometría del espacio en el plano:", options: ["Planimétrico (X,Y)", "Altimétrico o de Elevación (Eje Z)", "Polar", "Vectorial 4D"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

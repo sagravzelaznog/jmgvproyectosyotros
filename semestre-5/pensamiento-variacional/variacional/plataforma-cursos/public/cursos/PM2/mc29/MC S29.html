@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 29: El Método de Reducción (Suma y Resta)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ecf0f1; padding: 10px; border-radius: 10px; color: #2c3e50; display: inline-block;">Unidad II: Sistemas 2x2</h1>
+        <h2>Masterclass 29: El Método de Reducción (La Suma Destructiva)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Problema de los Dos Frentes</h3>
+            <p>Tienes dos ecuaciones y dos incógnitas (x e y). No puedes despejar una ecuación normal si tiene dos letras diferentes estorbando. Necesitamos un método violento para "eliminar" a uno de los enemigos. El método más directo es el de "Reducción" (también conocido como Suma y Resta).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Suma Vertical (Buscando la Antimateria)</h3>
+            <p>Si tienes $3x + 2y = 12$ y abajo tienes $5x - 2y = 4$, observa con cuidado. Tienes un $+2y$ arriba y un $-2y$ abajo. Son materia y antimateria. Si agarras un mazo y <strong>SUMAS verticalmente</strong> ambas ecuaciones como si fueran una suma de primaria de arriba hacia abajo, ¿qué pasa? ¡Las "y" chocan y explotan, quedando en cero!</p>
+            <ul>
+                <li>$3x + 5x = 8x$</li>
+                <li>$+2y - 2y = 0$ (Destruidas)</li>
+                <li>$12 + 4 = 16$</li>
+                <li><strong>Sobrevive:</strong> $8x = 16$. Has limpiado el camino y ahora es un simple despeje ($x = 2$).</li>
+            </ul>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Artillero</h3>
+            <div id="quiz-setup">
+                <button id="start-btn" class="btn-primary" style="background-color: #2c3e50;">¡Iniciar Bombardeo!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #2c3e50;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Cuartel</button>
+            </div>
+        </section>
+
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc28/MC S28.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #2c3e50;">Menú Principal</a>
+            <a href="../mc30/MC S30.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+    <footer>&copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.</footer>
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

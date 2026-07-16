@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 07: Mesopotamia y Egipto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 07: Los sistemas de conteo y su evolución social en Mesopotamia y Egipto</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Necesidad Social de Contar</h3>
+            <p>Antes de que existieran los números tal como los conocemos, las primeras civilizaciones necesitaban administrar sus recursos: contar granos, ganado y medir el tiempo. La aritmética nació por una <strong>necesidad social</strong>.</p>
+            <p>En el antiguo Egipto, desarrollaron un sistema de numeración basado en jeroglíficos. Era un sistema <strong>decimal (base 10)</strong> pero <strong>no posicional</strong>, es decir, el símbolo para 100 valía 100 sin importar en qué posición lo escribieran.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Genio de Mesopotamia: La Base 60</h3>
+            <p>Los sumerios y babilonios en Mesopotamia fueron pioneros en usar un sistema <strong>sexagesimal (base 60)</strong> y parcialmente posicional. Escribían sus números usando marcas en forma de cuña sobre tablillas de arcilla (escritura cuneiforme).</p>
+            <p>¿Te has preguntado por qué una hora tiene 60 minutos, y un minuto 60 segundos? ¿O por qué un círculo tiene \(360^\circ\)? Es un legado directo de la matemática mesopotámica. El número 60 es matemáticamente brillante porque tiene muchos divisores: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30 y 60, lo que facilitaba enormemente el cálculo de fracciones.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando la Base 60</h3>
+            <p>Podemos usar GeoGebra para convertir nuestros números modernos (base 10) al sistema de base 60 de los babilonios.</p>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Abre la Vista de Cálculo (CAS):</strong> Escribe en la barra de entrada inferior.</li>
+                    <li><strong>Comando de conversión:</strong> GeoGebra tiene un comando llamado <code>ToBase[numero, base]</code> (o en español <code>EnBase[numero, base]</code>).</li>
+                    <li><strong>Convierte 75:</strong> Escribe <code>ToBase[75, 60]</code> y presiona Enter. GeoGebra te mostrará <code>"1, 15"</code>. Esto significa que hay 1 grupo de 60, y sobran 15. ¡Así contaban los babilonios!</li>
+                    <li><strong>Experimenta:</strong> Intenta convertir el número de días en un año <code>ToBase[365, 60]</code>. Te dará <code>"6, 5"</code> (6 grupos de 60, más 5).</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Arqueología Matemática</h3>
+            <div id="quiz-setup">
+                <p>Pon a prueba tus conocimientos sobre los primeros sistemas de numeración de la humanidad.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc06/MC S06.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc08/MC S08.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 07. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

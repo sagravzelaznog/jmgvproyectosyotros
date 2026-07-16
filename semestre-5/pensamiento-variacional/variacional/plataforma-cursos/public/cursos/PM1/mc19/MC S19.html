@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 19: El Máximo Común Divisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 19: Cálculo del Máximo Común Divisor (MCD) para optimizar recursos materiales</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Repartir sin Desperdiciar</h3>
+            <p>Imagina que tu proyecto escolar recibió una donación de 24 libretas y 36 lápices. Quieres armar paquetes escolares idénticos para donarlos, asegurando que todos los paquetes tengan lo mismo y que <strong>no sobre nada</strong> de material.</p>
+            <p>¿Cuál es el mayor número de paquetes que puedes armar? Para resolver este problema logístico sin tener que adivinar, usamos el <strong>Máximo Común Divisor (MCD)</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Lógica del MCD</h3>
+            <p>El MCD es el número más grande que puede dividir exactamente a dos o más cantidades.</p>
+            <ul>
+                <li>Divisores de 24: 1, 2, 3, 4, 6, 8, <strong>12</strong>, 24</li>
+                <li>Divisores de 36: 1, 2, 3, 4, 6, 9, <strong>12</strong>, 18, 36</li>
+            </ul>
+            <p>El mayor número que aparece en ambas listas es el <strong>12</strong>. Por lo tanto, puedes armar exactamente 12 paquetes (cada uno contendrá 2 libretas y 3 lápices). ¡Cero desperdicio!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Optimizando Materiales</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Comando Directo:</strong> En la vista de CAS de GeoGebra, existe un comando para calcular esto al instante, ahorrándote el proceso de factorización prima manual.</li>
+                    <li><strong>Calcula los paquetes:</strong> Escribe <code>MCD[24, 36]</code> y presiona Enter. Te devolverá exactamente <code>12</code>.</li>
+                    <li><strong>Materiales de gran escala:</strong> Supongamos que tienes 120 metros de cable de cobre y 80 metros de tubería, y necesitas cortarlos en tramos idénticos lo más largos posibles. Escribe <code>MCD[120, 80]</code>. La respuesta es <code>40</code> metros por tramo.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Logística Perfecta</h3>
+            <div id="quiz-setup">
+                <p>Evalúa si puedes identificar cuándo un problema logístico requiere el uso del MCD.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc18/MC S18.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc20/MC S20.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 19. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

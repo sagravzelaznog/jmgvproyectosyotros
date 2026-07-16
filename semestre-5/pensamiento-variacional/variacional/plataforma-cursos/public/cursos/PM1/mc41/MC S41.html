@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 41: Dimensiones Locales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 41: Manejo de unidades de medida para el modelado de fenómenos locales</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. De lo Abstracto a tu Realidad Local</h3>
+            <p>Ya sabemos como científicos que el Metro (m) y el Kilogramo (kg) son los reyes absolutos del Sistema Internacional. Pero, ¿cómo los usamos para modelar y resolver un problema físico real en nuestra propia colonia o comunidad?</p>
+            <p>Supongamos que el municipio va a pavimentar tu calle principal y un pasante dice: <em>"La calle mide 500"</em>. ¿500 qué? ¿Metros? ¿Centímetros? ¿Kilómetros? <strong>Un número sin unidad de medida asociada es un "número fantasma" que no sirve para absolutamente nada en la ingeniería.</strong></p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Modelando Escalas con Múltiplos y Submúltiplos</h3>
+            <p>Para medir cosas muy enormes (como carreteras) o muy pequeñas (como tornillos), el SI usa "prefijos" oficiales que funcionan exactamente como potencias de 10:</p>
+            <ul>
+                <li><strong>Kilo (k):</strong> Significa matemáticamente "mil veces". Un <em>Kilo</em>metro (\(km\)) son exactamente 1000 metros (\(10^3\)). Un <em>Kilo</em>gramo son 1000 gramos.</li>
+                <li><strong>Centi (c):</strong> Significa "cien pedacitos". Un <em>centí</em>metro (\(cm\)) es el metro base dividido entre 100 partes (\(10^{-2}\)).</li>
+                <li><strong>Mili (m):</strong> Significa "mil pedacitos". Un <em>milí</em>metro (\(mm\)) es el metro base dividido entre mil partes microscópicas (\(10^{-3}\)).</li>
+            </ul>
+            <p><strong>El Modelado Profesional:</strong> Si la calle de tu colonia mide \(1.5\) kilómetros, para modelar cuánto cemento crudo necesitas comprar, SIEMPRE debes destapar el prefijo y convertir a la unidad base: \(1.5 \times 1000 = 1500\) metros lineales de asfalto.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Conversor Exacto de Magnitudes</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador Analítico:</h4>
+                <ol>
+                    <li><strong>Conversión de Kilos a Base:</strong> En GeoGebra CAS, si vas a modelar una compra de 2.8 Kilogramos de material especial, multiplícalo por \(10^3\) para pasarlo a gramos. Escribe la operación <code>2.8 * 10^3</code>. El resultado contundente es <code>2800</code> gramos.</li>
+                    <li><strong>Modelando un Parque Local:</strong> Un parque reforestado tiene un área física de 5 Hectáreas. Una hectárea (ha) es una medida agrícola, equivale exactamente a 10,000 metros cuadrados. Escribe <code>5 * 10000</code>. Tienes <code>50000</code> \(m^2\) para sembrar árboles.</li>
+                    <li><strong>Construyendo una fórmula combinada:</strong> Para calcular la velocidad del río local, divides la distancia entre el tiempo. Escribe <code>1500 / 120</code>. Significa que el agua recorrió 1500 metros en 120 segundos. ¡La velocidad local modelada fue de 12.5 \(m/s\)!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Ingeniero Municipal</h3>
+            <div id="quiz-setup">
+                <p>Aplica correctamente y sin errores los prefijos y conversiones del SI para diseñar proyectos en tu propia localidad.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Urbano!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Evaluativo Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Modelar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc40/MC S40.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc42/MC S42.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 41. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

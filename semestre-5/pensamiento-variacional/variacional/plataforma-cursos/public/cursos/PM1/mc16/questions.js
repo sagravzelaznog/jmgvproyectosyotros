@@ -1,0 +1,9 @@
+const questions = [
+    { question: "¿Cuál es la ecuación matemática que define la Propiedad Asociativa de la suma?", options: ["a + b = b + a", "a * (b + c) = ab + ac", "(a + b) + c = a + (b + c)", "a + 0 = a"], correct: 2 },
+    { question: "La Propiedad Distributiva nos enseña que una multiplicación por fuera de un paréntesis que contiene una suma...", options: ["Se cancela automáticamente", "Se reparte o 'distribuye' multiplicando a cada número de adentro de la suma", "Solo multiplica al primer número", "Se vuelve una resta"], correct: 1 },
+    { question: "Si aplicamos la propiedad distributiva a la expresión 5 * (2 + 4), ¿qué obtenemos como suma distribuida?", options: ["(5 * 2) + 4", "(5 + 2) * (5 + 4)", "(5 * 2) + (5 * 4)", "10 + 4"], correct: 2 },
+    { question: "En geometría, la fórmula del perímetro de un rectángulo es P = 2 * (base + altura). Si la base es 10 y la altura es 5, ¿cuál es el resultado aplicando estrictamente la distribución?", options: ["(2 * 10) + (2 * 5) = 30", "2 * 15 = 45", "(2 + 10) * (2 + 5) = 84", "10 + 5 = 15"], correct: 0 },
+    { question: "¿La propiedad asociativa funciona también para la resta? Es decir, ¿(10 - 5) - 2 es igual a 10 - (5 - 2)?", options: ["Sí, da el mismo resultado", "No, en la primera da 3 y en la segunda da 7", "Siempre da cero", "Solo si usamos números negativos"], correct: 1 },
+    { question: "En el software GeoGebra CAS, ¿qué comando nos ayuda a aplicar la propiedad distributiva automáticamente a una expresión algebraica como a*(b+c)?", options: ["Simplifica", "Factoriza", "Desarrolla", "Raiz"], correct: 2 },
+    { question: "¿Por qué es muy útil dominar mentalmente la propiedad distributiva?", options: ["Porque los maestros la piden en los exámenes", "Porque facilita el cálculo mental rápido (ej. 7 * 12 = 7 * (10 + 2) = 70 + 14 = 84)", "Porque los paréntesis se ven más estéticos", "Porque hace los números más pequeños"], correct: 1 }
+];

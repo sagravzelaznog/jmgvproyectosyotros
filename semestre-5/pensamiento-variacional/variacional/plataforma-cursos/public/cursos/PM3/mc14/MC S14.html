@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 14: Método de Sustitución</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #3b82f6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Sistemas de Ecuaciones y Optimización</h1>
+        <h2>Masterclass 14: La Infiltración (Método de Sustitución)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Fraude del Espía</h3>
+            <p>La Igualación funciona perfecto cuando AMBAS ecuaciones son nobles y tienen la letra despejada. Pero en la vida real, te encontrarás con sistemas donde una ecuación está lista ($x = 2y + 4$) y la otra es una maraña militar blindada ($3x + 5y = 34$). Despejar ambas te hará perder tiempo y dinero. Aquí usamos la táctica de la <strong>Sustitución</strong>: Tomas el bloque de información de la ecuación débil, y lo inyectas violentamente (lo infiltrado) adentro de la ecuación blindada para hacerla explotar desde adentro.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Paréntesis Infiltrado</h3>
+            <p>La regla sagrada de la Sustitución es el uso del "Paréntesis de Cuarentena". Si sabes que $x = (2y + 4)$, no puedes simplemente tirar ese bloque desnudo adentro del $3x$. Tienes que protegerlo. El $3$ estaba multiplicando a la 'x'. Al infiltrar, el $3$ debe obligatoriamente multiplicar a TODO el bloque entero: $3(2y + 4)$. Una vez adentro, la letra 'x' muere aniquilada. Te queda una ecuación larga pero inofensiva, llena de puras 'y', lista para ser limpiada y despejada.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Operación Sustitución</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Sistema ($x = 2y - 1$ y $4x + 3y = 18$):</h4>
+                <ol>
+                    <li><strong>Identificar la Llave:</strong> La Ec1 ya tiene la 'x' despejada. Esa es tu llave de infiltración.</li>
+                    <li><strong>Infiltrar en la Bóveda:</strong> Vas a la Ec2. Arrancas la letra 'x' e incrustas el bloque de la Ec1 envuelto en paréntesis: $4(2y - 1) + 3y = 18$.</li>
+                    <li><strong>Detonar el Paréntesis (Multiplicar):</strong> El $4$ bombardea a ambos inquilinos del paréntesis. $4 \times 2y = 8y$ y $4 \times -1 = -4$. Queda: $8y - 4 + 3y = 18$.</li>
+                    <li><strong>Limpieza Final:</strong> Fusionas las 'y' ($8y + 3y = 11y$) y pasas el $-4$ sumando. $11y = 22 \rightarrow y = 2$. Luego aplicas el búmeran para hallar 'x' ($x = 2(2) - 1 = 3$). Coordenada: $(3, 2)$.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Infiltrador</h3>
+            <div id="quiz-setup">
+                <p>Domina el arte de inyectar bloques de ecuaciones dentro de otras para destruirlas desde adentro.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #3b82f6;">¡Iniciar Sustitución!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #3b82f6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Operas el método de sustitución con la frialdad de un espía corporativo.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a la Base</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc13/MC S13.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #3b82f6;">Menú Principal</a>
+            <a href="../mc15/MC S15.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

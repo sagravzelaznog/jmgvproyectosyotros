@@ -1,0 +1,252 @@
+[
+    {
+        "mc_num": "01",
+        "purpose": "Propósito 1",
+        "topic": "Introducción: Comprende el concepto de recta y de punto para su representación y análisis\n                    algebraico[cite: 7]."
+    },
+    {
+        "mc_num": "02",
+        "purpose": "Propósito 1",
+        "topic": "Concepto de punto[cite: 7] como coordenada de un registro eléctrico."
+    },
+    {
+        "mc_num": "03",
+        "purpose": "Propósito 1",
+        "topic": "Concepto de recta[cite: 7] para el modelado de tendido de cableado."
+    },
+    {
+        "mc_num": "04",
+        "purpose": "Propósito 1",
+        "topic": "Tipos de recta (tangente, secante)[cite: 7] en intersecciones viales."
+    },
+    {
+        "mc_num": "05",
+        "purpose": "Propósito 1",
+        "topic": "Construcción de figuras[cite: 7] topográficas base en CAD."
+    },
+    {
+        "mc_num": "06",
+        "purpose": "Propósito 1",
+        "topic": "Elementos de la circunferencia[cite: 7] en el diseño urbano."
+    },
+    {
+        "mc_num": "07",
+        "purpose": "Propósito 4",
+        "topic": "Observa el comportamiento de dos variables en relación de proporcionalidad directa para deducir la\n                    ecuación de la recta[cite: 7]."
+    },
+    {
+        "mc_num": "08",
+        "purpose": "Propósito 4",
+        "topic": "Comportamiento de dos variables[cite: 7] cartesianas."
+    },
+    {
+        "mc_num": "09",
+        "purpose": "Propósito 4",
+        "topic": "Ecuación de la recta: forma punto-pendiente[cite: 7]. $$y - y_1 = m(x - x_1)$$"
+    },
+    {
+        "mc_num": "10",
+        "purpose": "Propósito 4",
+        "topic": "Ecuación de la recta: forma pendiente-ordenada al origen[cite: 7]."
+    },
+    {
+        "mc_num": "11",
+        "purpose": "Propósito 4",
+        "topic": "Ecuación de la recta: forma simétrica[cite: 7]."
+    },
+    {
+        "mc_num": "12",
+        "purpose": "Propósito 2",
+        "topic": "Analiza la relación entre los lados y los ángulos de un triángulo rectángulo[cite: 7]."
+    },
+    {
+        "mc_num": "13",
+        "purpose": "Propósito 2",
+        "topic": "Razones trigonométricas[cite: 7] aplicadas a desniveles subterráneos."
+    },
+    {
+        "mc_num": "14",
+        "purpose": "Propósito 2",
+        "topic": "Cálculo de pendientes y ángulos de inclinación topográfica."
+    },
+    {
+        "mc_num": "15",
+        "purpose": "Propósito 2",
+        "topic": "Demostraciones de identidades trigonométricas[cite: 7] fundamentales."
+    },
+    {
+        "mc_num": "16",
+        "purpose": "Propósito 2",
+        "topic": "Laboratorio interactivo: Ángulos de elevación y depresión."
+    },
+    {
+        "mc_num": "17",
+        "purpose": "Propósito 3",
+        "topic": "Gráfica en el plano cartesiano polinomios de dos variables con coeficientes reales[cite: 7]."
+    },
+    {
+        "mc_num": "18",
+        "purpose": "Propósito 3",
+        "topic": "Identificación de polinomios de dos variables con coeficientes reales[cite: 7]."
+    },
+    {
+        "mc_num": "19",
+        "purpose": "Propósito 3",
+        "topic": "Deducir las propiedades geométricas de simetría y extensión[cite: 7]."
+    },
+    {
+        "mc_num": "20",
+        "purpose": "Propósito 3",
+        "topic": "Uso de GeoGebra para el modelado polinomial interactivo."
+    },
+    {
+        "mc_num": "21",
+        "purpose": "Propósito 5",
+        "topic": "Analiza situaciones o fenómenos que involucren en su modelado de funciones cuadráticas[cite: 7]."
+    },
+    {
+        "mc_num": "22",
+        "purpose": "Propósito 5",
+        "topic": "Deducir propiedades analíticas de la parábola[cite: 7]."
+    },
+    {
+        "mc_num": "23",
+        "purpose": "Propósito 5",
+        "topic": "Ecuación ordinaria de parábolas verticales y horizontales, con vértice en el origen[cite: 7]."
+    },
+    {
+        "mc_num": "24",
+        "purpose": "Propósito 5",
+        "topic": "Ecuación ordinaria de parábolas verticales y horizontales, con vértice fuera del origen[cite: 7]."
+    },
+    {
+        "mc_num": "25",
+        "purpose": "Propósito 5",
+        "topic": "Modelado[cite: 7] de catenarias para tendidos de media tensión."
+    },
+    {
+        "mc_num": "26",
+        "purpose": "Propósito 5",
+        "topic": "Taller de programación: Gráficas cuadráticas dinámicas en HTML5."
+    },
+    {
+        "mc_num": "27",
+        "purpose": "Propósito 6",
+        "topic": "Estudia movimientos circulares, de elipse, y coplanaridad[cite: 7]."
+    },
+    {
+        "mc_num": "28",
+        "purpose": "Propósito 6",
+        "topic": "Desarrollo y análisis de la ecuación de la circunferencia[cite: 7]."
+    },
+    {
+        "mc_num": "29",
+        "purpose": "Propósito 6",
+        "topic": "Trazado de zonas de influencia (radios de transformadores)."
+    },
+    {
+        "mc_num": "30",
+        "purpose": "Propósito 6",
+        "topic": "Introducción al pensamiento variacional[cite: 7]."
+    },
+    {
+        "mc_num": "31",
+        "purpose": "Propósito 6",
+        "topic": "Aplicación y entendimiento de las leyes de Kepler[cite: 7]."
+    },
+    {
+        "mc_num": "32",
+        "purpose": "Propósito 6",
+        "topic": "Análisis de la elipse y coplanaridad[cite: 7]."
+    },
+    {
+        "mc_num": "33",
+        "purpose": "Propósito 6",
+        "topic": "Modelado geométrico de elementos orbitales y radiales."
+    },
+    {
+        "mc_num": "34",
+        "purpose": "Propósito 7",
+        "topic": "Aplica conocimientos sobre ecuaciones con dos variables para realizar estimaciones sencillas[cite:\n                    7]."
+    },
+    {
+        "mc_num": "35",
+        "purpose": "Propósito 7",
+        "topic": "Aplicación de las secciones cónicas: elipse[cite: 7]."
+    },
+    {
+        "mc_num": "36",
+        "purpose": "Propósito 7",
+        "topic": "Aplicación de las secciones cónicas: parábola[cite: 7]."
+    },
+    {
+        "mc_num": "37",
+        "purpose": "Propósito 7",
+        "topic": "Aplicación de las secciones cónicas: hipérbola[cite: 7]."
+    },
+    {
+        "mc_num": "38",
+        "purpose": "Propósito 7",
+        "topic": "Aplicación de las secciones cónicas: circunferencia[cite: 7]."
+    },
+    {
+        "mc_num": "39",
+        "purpose": "Propósito 7",
+        "topic": "Modelado y estimación[cite: 7] de costos lineales para infraestructura urbana."
+    },
+    {
+        "mc_num": "40",
+        "purpose": "Transversal",
+        "topic": "Taller CAD 1: Exportación de las ecuaciones de las cónicas a formatos vectoriales."
+    },
+    {
+        "mc_num": "41",
+        "purpose": "Transversal",
+        "topic": "Taller CAD 2: Planimetría de la red de electrificación subterránea."
+    },
+    {
+        "mc_num": "42",
+        "purpose": "Transversal",
+        "topic": "Cálculo trigonométrico de profundidad de zanjas normativas (CFE)."
+    },
+    {
+        "mc_num": "43",
+        "purpose": "Transversal",
+        "topic": "Consolidar los aprendizajes[cite: 7] de funciones mediante desarrollo web."
+    },
+    {
+        "mc_num": "44",
+        "purpose": "Transversal",
+        "topic": "Taller Láser: Preparación de archivos de corte en MDF."
+    },
+    {
+        "mc_num": "45",
+        "purpose": "Transversal",
+        "topic": "Ensamblaje del modelo topográfico físico."
+    },
+    {
+        "mc_num": "46",
+        "purpose": "Transversal",
+        "topic": "Coevaluación de las gráficas polinomiales proyectadas en el plano."
+    },
+    {
+        "mc_num": "47",
+        "purpose": "Transversal",
+        "topic": "Estimación presupuestal del material empleado en pesos."
+    },
+    {
+        "mc_num": "48",
+        "purpose": "Transversal",
+        "topic": "Revisión de la memoria técnica y planos generados."
+    },
+    {
+        "mc_num": "49",
+        "purpose": "Transversal",
+        "topic": "Ensayos de la presentación técnica del modelo cartesian."
+    },
+    {
+        "mc_num": "50",
+        "purpose": "Transversal",
+        "topic": "Evaluación Sumativa Final: Defensa del proyecto de electrificación y sustentación de los modelos\n                    trigonométricos y cónicos."
+    }
+]

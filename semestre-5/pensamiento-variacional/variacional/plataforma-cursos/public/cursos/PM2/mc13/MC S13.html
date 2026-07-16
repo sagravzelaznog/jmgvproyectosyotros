@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 13: El Ensamblaje Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Ensamblaje y Modificación de Estructuras</h1>
+        <h2>Masterclass 13: Suma y Resta de Polinomios</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Uniendo Dos Muebles Gigantes</h3>
+            <p>Ya sabes fusionar piezas pequeñas de madera de la misma familia. Pero, ¿qué pasa cuando el cliente corporativo exige que agarres el diseño estructural completo de un Mueble A (un inmenso polinomio) y lo fusiones a la fuerza con el diseño del Mueble B (otro polinomio) para fabricar una mega-cocina? En el argot del taller, a esto le llamamos <strong>Suma de Polinomios</strong>. Es literalmente ensamblar dos estructuras arquitectónicas complejas en una sola factura unificada sin que el edificio se derrumbe.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Técnica Quirúrgica del Ensamblaje Vertical</h3>
+            <p>Para no equivocarte, cruzar los cables y arruinar ambos muebles, los ingenieros utilizamos el método de Alineación Vertical:</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Paso 1: El Mueble A en el piso superior.</strong> Escribe el primer polinomio, siempre ordenado alfabéticamente o por grado, en la línea de arriba.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>Paso 2: El Mueble B abajo (Alineación Láser Perfecta).</strong> Escribe el segundo polinomio justo abajo, pero ¡CUIDADO DE MUERTE! Debes alinear perfectamente los términos semejantes en columnas (las familias $x^2$ debajo de las $x^2$, las familias $x$ debajo de las $x$). Si alineas mal una sola pieza y fuerzas el encaje, el mueble quedará torcido y quebrarás.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #e74c3c; padding-left: 10px; margin: 10px 0;"><strong>Paso 3: ¡El Efecto Letal de la Resta!</strong> Si el cliente ordenó una RESTA, el signo negativo actuará como un virus y le cambiará obligatoriamente el signo a TODOS y cada uno de los términos del mueble de abajo antes de poder ensamblarlos.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Ensamblando la Megacocina VIP</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el ensamble vertical de la fábrica:</h4>
+                <ol>
+                    <li><strong>Módulo A (Gabinete):</strong> $5x^2 - 3x + 10$</li>
+                    <li><strong>Módulo B (Isla central):</strong> $2x^2 + 8x - 4$</li>
+                    <li><strong>Orden del Cliente:</strong> ¡Súmalos y dame un precio único!</li>
+                    <li><strong>Alineación Vertical Industrial:</strong>
+                        <br>&nbsp;&nbsp;&nbsp;$5x^2 - 3x + 10$
+                        <br>$+ (2x^2 + 8x - 4)$
+                    </li>
+                    <li><strong>Corte limpio por columnas:</strong>
+                        <br>Columna pesada ($x^2$): $5 + 2 = 7x^2$
+                        <br>Columna ligera ($x$): $-3 + 8 = +5x$
+                        <br>Columna costos fijos (números): $10 - 4 = +6$
+                    </li>
+                    <li><strong>Mega-Mueble Final (Factura): $7x^2 + 5x + 6$</strong>. Listo y autorizado para la línea de producción.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Maestro Ensamblador</h3>
+            <div id="quiz-setup">
+                <p>Demuestra si tienes el pulso firme para alinear y fusionar polinomios completos sin destruir la fábrica ni la contabilidad en el proceso.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Iniciar Ensamblaje Láser!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Eres indiscutiblemente el jefe supremo de producción. Tus muebles encajan a la milimétrica perfección y tu contabilidad es invulnerable.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Taller Central de Ensamblaje</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc12/MC S12.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc14/MC S14.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

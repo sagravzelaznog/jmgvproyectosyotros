@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 24 - Elipse Fuera del Origen</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad IV - Órbitas y Elipses</span>
+        <h1>MC 24: Traslación de Zonas Elípticas</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Al igual que con el transformador circular, las antenas direccionales casi nunca se instalan en el centro topográfico. Normalmente se instalan en las orillas del fraccionamiento para apuntar la cobertura elíptica hacia adentro.</p>
+        
+        <div class="alert-box">
+            <strong>Traslación Compleja:</strong> Desplazar una elipse implica la misma lógica que desplazar una circunferencia: debemos modificar las variables $x$ e $y$ restándoles las coordenadas del nuevo centro $C(h,k)$.
+        </div>
+        <p>Aprenderemos a modelar y evaluar zonas de cobertura asimétricas y desplazadas.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Ecuación Ordinaria de la Elipse</h3>
+        <p>Si la antena se encuentra en $C(h,k)$, la ecuación se convierte en:</p>
+        
+        <div class="math-box">
+            $$\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1$$
+        </div>
+
+        <h3>2. Evaluando un Escenario Real</h3>
+        <p>Instalamos una antena en el límite Oeste del terreno, en la coordenada $C(-50, 20)$. Su capacidad de transmisión cubre $a = 60\text{m}$ (horizontal) y $b = 20\text{m}$ (vertical).</p>
+        <div class="math-box">
+            $$h = -50, \quad k = 20$$
+            $$\frac{(x - (-50))^2}{60^2} + \frac{(y - 20)^2}{20^2} = 1$$
+            $$\frac{(x + 50)^2}{3600} + \frac{(y - 20)^2}{400} = 1$$
+        </div>
+
+        <h3>3. Verificación de Límite Extremo</h3>
+        <p>¿Tendrá señal una vivienda ubicada en el origen $(0,0)$?</p>
+        <div class="math-box">
+            $$\frac{(0 + 50)^2}{3600} + \frac{(0 - 20)^2}{400} \stackrel{?}{\leq} 1$$
+            $$\frac{2500}{3600} + \frac{400}{400} \stackrel{?}{\leq} 1$$
+            $$0.69 + 1 = 1.69$$
+        </div>
+        <p>Como $1.69$ es mayor que $1$, la vivienda en el origen está totalmente desconectada (fuera de la elipse).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Verificaremos este cálculo dibujándolo:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Usa <code>ELLIPSE</code>, opción Centro.</li>
+            <li><strong>Paso 2:</strong> Especifica el centro: <code>-50,20</code>.</li>
+            <li><strong>Paso 3:</strong> Mueve el mouse a la derecha y teclea <code>60</code> (eje X).</li>
+            <li><strong>Paso 4:</strong> Mueve el mouse arriba y teclea <code>20</code> (eje Y).</li>
+            <li><strong>Paso 5:</strong> Dibuja un punto <code>POINT</code> en <code>0,0</code>. Visualmente confirmarás que el origen se quedó "corto" por 10 metros; la elipse llegó hasta $x = 10$ ($h + a = -50 + 60 = 10$) ¡Pero espera! Si la elipse llega hasta $x=10$, ¿por qué $(0,0)$ falló? Porque el origen está en $y=0$, mientras que el centro de la elipse está elevado en $y=20$. ¡La curva elíptica desciende antes de llegar a $x=0$!</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte, modela una antena en $C(100, 100)$ con $a = 50$ y $b = 80$. Sustituye las coordenadas de una casa ubicada en $(120, 150)$ y demuestra matemáticamente si recibe o no la señal.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc23/MC_S23.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc25/MC_S25.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 24. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La ecuación ordinaria de la elipse difiere de la canónica porque:", options: ["Ya no tiene divisiones", "Incluye los desplazamientos (h,k) del centro", "Solo tiene el radio 'a'", "No sirve para antenas"], correct: 1 },
+        { q: "Si el centro de la antena está en (-50, 20), el término de 'x' en la ecuación será:", options: ["(x - 50)²", "(x + 50)²", "(x - 20)²", "(x + 20)²"], correct: 1 },
+        { q: "En el ejemplo CAD, el punto más a la derecha de la elipse llegó hasta x = 10, pero el origen (0,0) quedó fuera porque:", options: ["El origen está embrujado", "La elipse se aplana y en los extremos no cubre tanto verticalmente como en el centro", "El radio 'a' era muy pequeño", "AutoCAD falló"], correct: 1 },
+        { q: "En la ecuación del entregable: (120-100)²/2500 + (150-100)²/6400, el primer término (x) da como resultado:", options: ["20/2500", "400/2500 = 0.16", "20/50", "1"], correct: 1 },
+        { q: "El segundo término (y) (150-100)²/6400 da como resultado:", options: ["50/6400", "2500/6400 = 0.39", "1", "0"], correct: 1 },
+        { q: "Sumando 0.16 + 0.39 da 0.55. Como 0.55 es menor que 1, la casa:", options: ["No recibe señal", "Recibe señal de milagro", "Sí recibe señal y está holgadamente cubierta", "Está en el borde exacto"], correct: 2 },
+        { q: "En AutoCAD, ¿qué ocurre si a=50 y b=50 al usar el comando ELLIPSE?", options: ["Da error", "Se dibuja un círculo perfecto", "Se dibuja un cuadrado", "Se dibuja una parábola"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 48: Proyecto Final ABP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 48: Cálculo final del proyecto ABP: Integración total de notación científica, lógica y jerarquía</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Gran Cierre Magistral del Proyecto</h3>
+            <p>Hemos llegado juntos al momento cumbre, el momento de la verdad absoluta. A lo largo de todo este intenso semestre hemos recolectado datos crudos sobre los recursos de tu localidad, hemos construido estrictas Tablas de Verdad lógicas para validar su viabilidad, calculamos porcentajes estadísticos de eficiencia y descubrimos el tejido mismo de la ciencia usando notación científica, raíces y potencias.</p>
+            <p>Ahora, en este proyecto final integrador (Aprendizaje Basado en Proyectos - ABP), debes comportarte como un ingeniero en jefe y consolidar absolutamente TODO este conocimiento disperso para entregar un único informe cuantitativo, blindado y profesional, capaz de convencer a cualquier inversionista, banco o alcalde exigente de tu comunidad.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Integración Transversal (La Fórmula Maestra y Bestial)</h3>
+            <p>Imagina por un momento que estás evaluando matemáticamente la rentabilidad a largo plazo de instalar paneles solares ecológicos en tu comunidad. Tu fórmula de proyección financiera es una bestia que incluye todos tus aprendizajes de los últimos meses:</p>
+            <p style="text-align: center; font-size: 1.5em; font-weight: bold; padding: 20px;">Fórmula: \(\frac{ \text{Datos} \times (1.5 \times 10^4) }{ [ 100 - (20 + 5^2) ] }\)</p>
+            <p>Para resolverla sin que te tiemble la mano, debes ser un maestro PEMDAS. Primero, atacamos el inmenso corchete inferior (el denominador). Dentro del corchete hay un núcleo (un paréntesis). Primero matamos la potencia \(5^2=25\). Luego sumamos ese paréntesis \(20+25=45\). Luego restamos para destruir el corchete \(100-45=55\).</p>
+            <p>En el piso de arriba, el numerador usa la elegante <strong>Notación Científica</strong> (\(1.5 \times 10^4\)), que al descomprimir equivale a \(15,000\). Si recolectaste datos de \(2\) grandes paneles, el numerador bruto es \(2 \times 15,000 = 30,000\). Finalmente, calculamos la razón maestra (la división final): \(30000 / 55 = 545.45\) pesos exactos ahorrados de forma neta al año.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Simulador Final de Inversiones</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador (El Reporte Final):</h4>
+                <ol>
+                    <li><strong>Cargando el Algoritmo Completo:</strong> En la cónsola de GeoGebra CAS, mete toda la fórmula financiera en una sola y elegante línea de código, demostrando al mundo tu poder con los paréntesis de agrupación. Escribe: <code>(2 * 1.5 * 10^4) / (100 - (20 + 5^2))</code>.</li>
+                    <li><strong>Comprobación del Software:</strong> Al presionar Enter, GeoGebra te arrojará la fracción irreducible <code>6000 / 11</code>. Usa el botón de aproximación decimal computacional (\(\approx\)) para destapar y ver tus flamantes <code>545.45</code> pesos exactos de ahorro.</li>
+                    <li><strong>Toma Final de Decisiones (La Tabla de Verdad regresa):</strong> Si este ahorro anual calculado supera los 500 pesos teóricos (Convirtiéndose en una premisa Verdadera, V) Y (Operador Lógico AND) la inversión inicial te resultó baja o subsidiada (Otra premisa Verdadera, V), entonces por la sagrada puerta lógica de la Conjunción (AND), la conclusión de tu proyecto completo es 100% VIABLE (V). ¡Acabas de unir impecablemente todo el semestre matemático en una sola y brillante decisión para tu comunidad!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Ingeniero Consultor Integrador</h3>
+            <div id="quiz-setup">
+                <p>Demuestra sin margen de error que eres capaz de combinar aritmética, álgebra básica, notación científica y lógica computacional estricta en una sola visión analítica global.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Evaluación ABP Final!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡PROYECTO ABP Y SEMESTRE COMPLETADO CON HONORES! Eres un experto.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Evaluar el Proyecto</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc47/MC S47.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc49/MC S49.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 48. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 20: El Mínimo Común Múltiplo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 20: Uso del Mínimo Común Múltiplo (MCM) en la planeación de eventos y suministros</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Punto de Encuentro (Coincidencias temporales)</h3>
+            <p>Si el MCD nos servía para <em>dividir y repartir</em>, el <strong>Mínimo Común Múltiplo (MCM)</strong> sirve para predecir <em>encuentros en el futuro</em>.</p>
+            <p>Imagina la logística de los servicios en tu escuela: El camión de la basura pasa cada 4 días. El camión purificador de agua pasa cada 6 días. Hoy pasaron ambos al mismo tiempo. ¿En cuántos días volverán a coincidir en la entrada de la escuela?</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Lógica del MCM</h3>
+            <p>Para resolverlo de forma estructurada, analizamos los <strong>múltiplos</strong> (básicamente las tablas de multiplicar de cada intervalo de días):</p>
+            <ul>
+                <li>Días que pasa la basura (múltiplos de 4): 4, 8, <strong>12</strong>, 16, 20, <strong>24</strong>, 28...</li>
+                <li>Días que pasa el agua (múltiplos de 6): 6, <strong>12</strong>, 18, <strong>24</strong>, 30...</li>
+            </ul>
+            <p>Hay muchas fechas en el calendario donde coincidirán (como en el día 24, el 36, etc.), pero nosotros buscamos el <strong>Mínimo</strong>, la coincidencia más cercana. El número más pequeño que comparten ambas listas es el <strong>12</strong>. ¡Coincidirán exactamente en 12 días!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Programando Suministros</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Comando Directo:</strong> Abre la vista CAS de GeoGebra.</li>
+                    <li><strong>Calcula los días:</strong> Escribe <code>MCM[4, 6]</code> y presiona Enter. Te devolverá rápidamente <code>12</code>.</li>
+                    <li><strong>Planeta y Órbitas:</strong> Piensa en gran escala. El planeta Mercurio tarda unos 88 días en orbitar al Sol. Venus tarda unos 225 días. Escribe <code>MCM[88, 225]</code>. ¿En cuántos días terrestres volverán a alinearse exactamente en el mismo punto de partida orbital? (Te sorprenderá ver que da <code>19800</code> días).</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Prediciendo el Futuro</h3>
+            <div id="quiz-setup">
+                <p>Comprueba tu habilidad para planear eventos periódicos usando el asombroso MCM.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc19/MC S19.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc21/MC S21.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 20. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 22: Fracciones Equivalentes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 22: Fracciones equivalentes y simplificación en escalas de planos</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Disfraz de los Números (Equivalencias)</h3>
+            <p>Imagina que comes \(\frac{1}{2}\) pizza. Tu amigo corta su pizza en 4 rebanadas y se come \(\frac{2}{4}\). Otro amigo la corta en 8 y se come \(\frac{4}{8}\). ¿Quién comió más cantidad? ¡Absolutamente todos comieron exactamente lo mismo!</p>
+            <p>Las <strong>fracciones equivalentes</strong> son aquellas que se escriben con números distintos, pero representan la misma cantidad o medida real. \(\frac{1}{2} = \frac{2}{4} = \frac{4}{8}\).</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Regla de Oro: Amplificar y Simplificar</h3>
+            <p>Para crear fracciones equivalentes usamos dos procesos inversos: la <strong>amplificación</strong> y la <strong>simplificación</strong>.</p>
+            <ul>
+                <li><strong>Amplificar:</strong> Multiplica el numerador y el denominador por el mismo número exacto. Ej. \(\frac{1}{2} \times \frac{2}{2} = \frac{2}{4}\).</li>
+                <li><strong>Simplificar:</strong> Divide ambos números entre un divisor común exacto (¡aquí se usa secretamente el MCD!). Ej. \(\frac{4}{8} \div \frac{4}{4} = \frac{1}{2}\). En ciencias e ingeniería, siempre debes reducir las fracciones a su expresión más pequeña y elegante.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simplificación Automática</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Modo Fracción:</strong> A diferencia de la calculadora de tu celular, GeoGebra en su vista de Cálculo Simbólico (CAS) simplifica fracciones de forma automática sin convertirlas forzosamente a decimales.</li>
+                    <li><strong>Simplifica fracciones gigantes:</strong> Imagina una escala de mapa enorme: <code>150 / 3000</code>. Escribe eso en la barra de entrada del CAS y presiona Enter.</li>
+                    <li><strong>El resultado:</strong> El software dividirá arriba y abajo usando su MCD y te mostrará la fracción reducida a su mínima expresión irreducible: <code>1 / 20</code>. ¡Es la misma proporción exacta para el plano!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Maestro de las Proporciones</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que las matemáticas no te pueden engañar con fracciones disfrazadas.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc21/MC S21.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc23/MC S23.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 22. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

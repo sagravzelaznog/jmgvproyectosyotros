@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 33: Trampa Defensiva (Multiplicación Cruzada)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ecf0f1; padding: 10px; border-radius: 10px; color: #2c3e50; display: inline-block;">Unidad II: Sistemas 2x2</h1>
+        <h2>Masterclass 33: La Trampa Defensiva (Forzando la Reducción)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Cuando el Escudo es Impenetrable</h3>
+            <p>A veces, el sistema enemigo no tiene antimateria obvia. Ejemplo: $4x + 3y = 10$ y abajo $2x + 5y = 12$. Nada se anula al sumar. Tienes que ser astuto y multiplicar una (o ambas) ecuaciones por un número estratégico para FORZAR a que aparezca un término y su antimateria antes de sumar.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Inyección de Poder (Multiplicación Táctica)</h3>
+            <p>Observas el $4x$ arriba y el $2x$ abajo. ¿No sería genial que el de abajo fuera un $-4x$ para que exploten? ¡Entonces multiplica TODA la ecuación de abajo por $-2$!
+            $(-2)[2x + 5y = 12] \rightarrow -4x - 10y = -24$.
+            Ahora sumas con la de arriba y ¡boom! Las X desaparecen.</p>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Táctico</h3>
+            <div id="quiz-setup">
+                <button id="start-btn" class="btn-primary" style="background-color: #2c3e50;">¡Hackear el Escudo!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #2c3e50;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Cuartel</button>
+            </div>
+        </section>
+
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc32/MC S32.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #2c3e50;">Menú Principal</a>
+            <a href="../mc34/MC S34.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+    <footer>&copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.</footer>
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

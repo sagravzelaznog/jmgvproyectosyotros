@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 35 - Aplicación de la Elipse (Secciones Cónicas)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VII - Secciones Cónicas</span>
+        <h1>MC 35: Elipse como Sección Cónica</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Hasta ahora hemos dibujado la elipse plana (2D) para modelar zonas de influencia de antenas. Pero, ¿de dónde sale esta figura geométricamente en el mundo 3D?</p>
+        
+        <div class="alert-box">
+            <strong>Geometría Descriptiva:</strong> Si tomas el faro cónico de luz que emite una linterna y lo proyectas contra una pared inclinada, la mancha de luz ya no será un círculo, sino una elipse. Las circunferencias, elipses, parábolas e hipérbolas nacen de "rebanar" un cono de luz sólido.
+        </div>
+        <p>Aprenderemos cómo la inclinación del corte define el tipo de curva que obtenemos.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. ¿Qué es una Sección Cónica?</h3>
+        <p>Imagina dos conos gigantes unidos por la punta (como un reloj de arena de luz). A este volumen le llamaremos "Cono doble". Si usamos un plano imaginario como cuchillo para cortar ese cono, el "borde" del corte es una sección cónica.</p>
+        
+        <h3>2. El Corte Elíptico</h3>
+        <p>Para obtener una elipse, el plano debe cortar <strong>un solo lado</strong> del cono doble, y debe estar <strong>inclinado</strong> respecto al eje central, pero <em>sin llegar a ser paralelo a la pared del cono</em>.</p>
+        <ul>
+            <li>Si cortas totalmente recto (perpendicular al eje), obtienes un Círculo perfecto.</li>
+            <li>Si inclinas el cuchillo un poco, obtienes una Elipse.</li>
+        </ul>
+
+        <h3>3. Aplicación Lumínica (Luminarias de CFE)</h3>
+        <p>En el diseño de alumbrado público, los postes de luz emiten un cono de luz hacia el suelo. Si la calle es plana, la luz forma un círculo. Pero si el poste se instala en una subida pronunciada (calle inclinada), el cono de luz corta contra el pavimento inclinado. ¡La zona iluminada se vuelve una elipse! Esto obliga a los ingenieros a calcular zonas oscuras imprevistas.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Simulación de Cortes)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Visualizaremos el cono de luz de una luminaria:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Imagina una lámpara a $10\text{m}$ de altura que abre su luz $30^\circ$. En piso plano, forma un círculo de iluminación de radio $r$.</li>
+            <li><strong>Paso 2: Inclinación.</strong> Ahora imagina que el pavimento tiene una pendiente de $15^\circ$ hacia arriba. El lado "alto" de la calle intercepta la luz más rápido (cerca del poste), y el lado "bajo" permite que la luz viaje más lejos.</li>
+            <li><strong>Paso 3: Elipse Resultante.</strong> La mancha de luz se comprime en la subida y se estira en la bajada. Se convierte en una elipse donde el poste ya no está en el centro geométrico.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu bitácora, dibuja un cono de luz cortado por una calle plana (círculo) y otro cortado por una rampa (elipse). Escribe una reflexión sobre por qué los postes de luz en calles muy empinadas deben instalarse más juntos que en calles planas para evitar zonas oscuras.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc34/MC_S34.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc36/MC_S36.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 35. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "En geometría 3D, una sección cónica se obtiene al:", options: ["Sumar dos ecuaciones", "Cortar un cono sólido con un plano imaginario", "Dibujar con compás", "Doblar un tubo"], correct: 1 },
+        { q: "Si el plano corta el cono de forma completamente recta (perpendicular al eje central), la figura resultante es:", options: ["Un cuadrado", "Una parábola", "Una elipse alargada", "Un círculo perfecto"], correct: 3 },
+        { q: "Para que el corte genere una elipse, el plano debe:", options: ["Cortar de forma inclinada, pero sin llegar a ser paralelo a la pared del cono", "Ser paralelo a la pared", "Cortar el vértice", "No tocar el cono"], correct: 0 },
+        { q: "En alumbrado público, si un poste se instala en una subida muy empinada, la mancha de luz en el suelo será:", options: ["Un círculo perfecto", "Un cuadrado", "Una elipse, porque el plano de la calle corta el cono de luz de forma inclinada", "Invisible"], correct: 2 },
+        { q: "En la mancha de luz elíptica de una calle inclinada, la luz en el lado de 'bajada' viajará:", options: ["Más lejos, estirando la mancha de luz", "Menos lejos", "Hacia arriba", "Hacia atrás"], correct: 0 },
+        { q: "La geometría de las secciones cónicas nos demuestra que las figuras 2D (círculos, elipses):", options: ["Son inventos sin aplicación", "Están todas interconectadas y provienen del mismo volumen tridimensional (el cono)", "Son errores matemáticos", "Solo existen en AutoCAD"], correct: 1 },
+        { q: "¿Por qué en calles inclinadas los postes deben estar más juntos?", options: ["Porque el cable es más barato", "Para que los autos no choquen", "Porque la distorsión elíptica de la luz deja las zonas laterales más estrechas y oscuras", "Para gastar más dinero del municipio"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

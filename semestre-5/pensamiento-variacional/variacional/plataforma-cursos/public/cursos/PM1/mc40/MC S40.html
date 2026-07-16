@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 40: Historia de la Medición</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 40: Procesos sociales históricos del concepto de medición e introducción al Sistema Internacional</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Gran Caos Antes del Metro</h3>
+            <p>Hace tan solo unos cuantos siglos, el mundo del comercio internacional y la ciencia primitiva era un completo desastre y caos total. Si ibas al mercado europeo a comprar un trozo de tela, te la vendían por "Codos", "Brazas" o "Pies" (medidas basadas, literalmente y sin bromear, en el tamaño del brazo o del pie del rey que gobernaba en ese momento). ¡Imagínate! Un comerciante inglés y uno francés nunca se ponían de acuerdo porque sus pies de medición eran de tamaños muy diferentes.</p>
+            <p>La acción de Medir es simple y llanamente <strong>comparar una magnitud desconocida con un patrón de referencia fijo y aceptado por absolutamente todos</strong>. Pero si el patrón cambia mágicamente (como cambia el tamaño del pie de un nuevo rey), la ciencia exacta se vuelve imposible y colapsa.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Gran Revolución del Sistema Internacional (SI)</h3>
+            <p>Durante la agitación de la Revolución Francesa, los científicos y pensadores decidieron que el mundo civilizado necesitaba urgente un estándar universal que no dependiera de la biología de los reyes ni de la magia. Así nació el concepto del <strong>Metro</strong> (calculado y definido inicialmente con sudor y sangre como una fracción astronómica exacta de la distancia física desde el Polo Norte hasta la línea del Ecuador).</p>
+            <p>Este esfuerzo diplomático y matemático mundial dio origen al monumental <strong>Sistema Internacional de Unidades (SI)</strong>. Hoy en día, prácticamente todos los países del mundo (excepto unos pocos renegados históricos, como Estados Unidos) utilizan este sistema lógico basado impecablemente en potencias de 10. Sus magnitudes sagradas fundamentales son:</p>
+            <ul>
+                <li><strong>Longitud (Distancia):</strong> El glorioso Metro (m).</li>
+                <li><strong>Masa (Cantidad de Materia):</strong> El Kilogramo (kg).</li>
+                <li><strong>Tiempo Cronológico:</strong> El Segundo (s).</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Millonario Fracaso del Mars Climate Orbiter</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso (Análisis del Caso Forense):</h4>
+                <ol>
+                    <li><strong>El error fatal de 125 millones de dólares:</strong> En 1999, la agencia NASA perdió y desintegró vergonzosamente en el espacio profundo la sonda <em>Mars Climate Orbiter</em>. ¿Por qué ocurrió la tragedia? Un equipo de ingenieros confió y diseñó una parte del software usando el obsoleto sistema de unidades imperiales inglesas (Libras de fuerza para el empuje) mientras que otro equipo brillante programó los motores espaciales usando estrictamente el Sistema Internacional (Newtons).</li>
+                    <li><strong>La importancia de la estandarización brutal:</strong> En cualquier hoja de cálculo de GeoGebra, Python o Excel, si tu mezclas descuidadamente peras con manzanas (o metros científicos con pulgadas anticuadas) sin hacer una conversión formal, tus modelos matemáticos colapsarán en llamas.</li>
+                    <li><strong>La Regla de Oro Profesional Absoluta:</strong> En la ciencia de datos, la física y la ingeniería moderna, el paso CERO e innegociable antes de atreverse a hacer cualquier cálculo es verificar y jurar que TODAS y cada una de tus variables estén estandarizadas en el Sistema Internacional.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Estandarizador Jefe de Datos</h3>
+            <div id="quiz-setup">
+                <p>Evalúa analíticamente la colosal importancia histórica y técnica de respetar el Sistema Internacional de Unidades en cualquier proyecto serio.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Histórico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Evaluativo Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Analizar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc39/MC S39.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc41/MC S41.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 40. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

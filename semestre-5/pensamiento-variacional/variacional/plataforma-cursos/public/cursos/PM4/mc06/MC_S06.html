@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 06 - Elementos de la Circunferencia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 06: La Circunferencia y Radios de Transformadores</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Un transformador eléctrico tipo pedestal no puede suministrar energía a distancias infinitas. Existe un fenómeno llamado "Caída de Tensión". Si una casa está muy lejos, los focos parpadearán y los electrodomésticos fallarán.</p>
+        
+        <div class="alert-box">
+            <strong>Contexto CFE:</strong> La normativa dicta que un transformador de 50 kVA tiene una zona de influencia máxima en forma de círculo (un radio máximo de 45 metros). Todas las casas dentro de esa circunferencia tendrán energía estable. Las que estén fuera, necesitan otro transformador.
+        </div>
+        <p>Geométricamente, la circunferencia es la clave del diseño urbano y la distribución de carga.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. ¿Qué es una Circunferencia?</h3>
+        <p>Es el lugar geométrico de todos los puntos en el plano que están a una distancia constante de un punto fijo. El punto fijo se llama <strong>Centro</strong> $C(h,k)$ y la distancia constante se llama <strong>Radio</strong> $r$.</p>
+
+        <h3>2. Elementos Principales</h3>
+        <ul>
+            <li><strong>Radio ($r$):</strong> Distancia del centro al borde. En nuestro ABP, es la "zona de influencia" del transformador.</li>
+            <li><strong>Diámetro ($D$):</strong> Segmento que une dos puntos de la circunferencia pasando por el centro ($D = 2r$).</li>
+            <li><strong>Cuerda:</strong> Segmento que une dos puntos de la circunferencia sin pasar necesariamente por el centro (una tubería secante subterránea que cruza una rotonda).</li>
+        </ul>
+
+        <h3>3. Ecuación Canónica</h3>
+        <p>Si el transformador está exactamente en el origen $C(0,0)$ y su radio es de $45\text{m}$, la ecuación que modela su zona de influencia es:</p>
+        <div class="math-box">
+            $$x^2 + y^2 = r^2$$
+            $$x^2 + y^2 = 45^2$$
+            $$x^2 + y^2 = 2025$$
+        </div>
+        <p>Si una casa está en la coordenada $(30, 30)$, verificamos si está dentro sustituyendo: $30^2 + 30^2 = 900 + 900 = 1800$. Como $1800 < 2025$, ¡la casa tiene excelente cobertura!</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Dibujaremos las zonas de influencia en AutoCAD para verificar qué casas quedan sin electricidad:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Colocar el transformador.</strong> Dibuja un punto en <code>100,100</code> (comando <code>POINT</code>).</li>
+            <li><strong>Paso 2: Dibujar la zona de cobertura (Circunferencia).</strong> Escribe el comando <code>CIRCLE</code>. AutoCAD te pedirá el punto central: selecciona el punto que acabas de crear o teclea <code>100,100</code>.</li>
+            <li><strong>Paso 3: Definir el radio.</strong> El comando ahora pide "Specify radius of circle". Escribe <code>45</code> y presiona Enter.</li>
+            <li><strong>Paso 4: Análisis Visual.</strong> Dibuja un polígono que simule una casa en <code>140, 140</code>. Observarás gráficamente que la casa cae por fuera del círculo de 45m. Esa vivienda sufriría apagones constantes.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu plano maestro, ubica dos transformadores de tal forma que sus circunferencias de radio 45m sean <em>tangentes exteriores</em> (es decir, se toquen en un solo borde, sin sobreponerse). Anota las coordenadas de ambos centros.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc05/MC_S05.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc07/MC_S07.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 06. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El centro de la circunferencia en nuestro proyecto representa:", options: ["El cableado principal", "Una casa", "El transformador pedestal", "Un registro de paso"], correct: 2 },
+        { q: "La zona de influencia máxima permitida del transformador se modela matemáticamente como el:", options: ["Radio de la circunferencia", "Diámetro de la circunferencia", "Arco tangencial", "Punto secante"], correct: 0 },
+        { q: "Si la ecuación es x² + y² = 100, el radio de cobertura es de:", options: ["100 metros", "10 metros", "50 metros", "200 metros"], correct: 1 },
+        { q: "¿Qué pasa si una casa está ubicada en un punto donde x² + y² es mayor al radio al cuadrado?", options: ["Está muy cerca del transformador", "Recibirá demasiada energía", "Está fuera de la zona de cobertura", "Es el centro de la circunferencia"], correct: 2 },
+        { q: "En AutoCAD, el comando para trazar la zona de influencia es:", options: ["RADIUS", "ARC", "CIRCLE", "OVAL"], correct: 2 },
+        { q: "Un segmento que une dos bordes pasando por el centro se llama:", options: ["Cuerda", "Radio", "Tangente", "Diámetro"], correct: 3 },
+        { q: "Si dos circunferencias se tocan en un solo punto exteriormente, se les llama:", options: ["Secantes", "Concéntricas", "Tangentes exteriores", "Aisladas"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

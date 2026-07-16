@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 40 - Taller CAD 1: Ecuaciones a Vectores</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 40: Exportación Vectorial de Cónicas</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Proyecto Integrador de Cierre</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Estamos a 10 sesiones de concluir el semestre. Hemos analizado la matemática de la electrificación urbana, pero el mundo físico no entiende de ecuaciones, entiende de máquinas láser y planos arquitectónicos.</p>
+        
+        <div class="alert-box">
+            <strong>El Puente entre la Mente y la Máquina:</strong> Una ecuación escrita en papel no sirve para cortar madera MDF. Necesitamos convertir nuestro conocimiento analítico en "Vectores" (archivos .DXF o .DWG) que la computadora pueda leer y enviar a una cortadora láser CNC para fabricar nuestra maqueta física final.
+        </div>
+        <p>Comenzamos la fase de Manufactura del Proyecto Integrador.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. ¿Qué es un Vector en CAD?</h3>
+        <p>Un archivo vectorial no está hecho de píxeles (cuadritos de color como las fotos JPG). Está hecho de <strong>nuestras ecuaciones matemáticas</strong>. Cuando guardas un círculo en AutoCAD, no guarda un dibujo, guarda las coordenadas $C(h,k)$ y el radio $r$ internamente. Por eso puedes hacer zoom infinito sin que se "pixelee".</p>
+
+        <h3>2. Preparación para Corte Láser</h3>
+        <p>La máquina láser interpreta las líneas según su grosor y color:</p>
+        <ul>
+            <li><strong>Línea Roja (Corte):</strong> El láser atraviesa la madera para recortar piezas (ej. los bordes de la manzana, rotondas, bases de transformador).</li>
+            <li><strong>Línea Negra (Grabado):</strong> El láser solo 'quema' superficialmente para dibujar el plano (ej. trazar el cableado y las zonas de influencia encima de la base).</li>
+        </ul>
+
+        <h3>3. Escala y Unidades</h3>
+        <p>Si la cuadra de CFE mide 100 metros en la vida real, no podemos cortar 100 metros de madera. Debemos usar <strong>Factores de Escala</strong> (proporciones, vistos en MC01). Generalmente usamos escala 1:100 o 1:200, donde 1 metro en la realidad es 1 centímetro en AutoCAD.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Creación del Archivo Maestro)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Iniciaremos la base estructural del modelo láser:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Abre un nuevo archivo de AutoCAD. Verifica que las unidades estén en milímetros (<code>UNITS</code>).</li>
+            <li><strong>Paso 2: Capas (Layers).</strong> Crea dos capas. Una llamada "CORTE" (color rojo, grosor 0.00mm). Otra llamada "GRABADO" (color negro, grosor 0.00mm). El grosor cero es clave para el láser.</li>
+            <li><strong>Paso 3: Base del Fraccionamiento.</strong> En la capa CORTE, dibuja un <code>RECTANGLE</code> de $600\text{mm} \times 400\text{mm}$ (será la base de triplay de 60x40 cm).</li>
+            <li><strong>Paso 4: Trazado Matemático.</strong> Cambia a la capa GRABADO. Traza al menos 2 zonas de influencia circulares (transformadores) cruzándose, y dibuja la zanja parabólica o recta (cuerda) que los une. Asegúrate que obedezcan las ecuaciones analíticas de tu proyecto.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Sube tu primer archivo vectorial <code>.DXF</code> o <code>.DWG</code> a la plataforma. Verifica en pantalla de revisión que el perímetro esté rojo (corte) y las matemáticas interiores en negro (grabado).
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc39/MC_S39.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc41/MC_S41.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 40. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Un archivo vectorial (.DXF, .DWG) no se pixelea al hacer zoom porque:", options: ["Es mágico", "Está formado por ecuaciones y coordenadas geométricas (x,y), no por píxeles o fotos", "La resolución de la pantalla es alta", "Usa mucha RAM"], correct: 1 },
+        { q: "Para que la máquina láser sepa que debe atravesar y cortar la madera totalmente, usamos generalmente:", options: ["Línea negra punteada", "Texto gigante", "Color Rojo continuo con grosor cero", "Color azul marino"], correct: 2 },
+        { q: "El grabado láser (dibujar superficialmente las ecuaciones) se asigna comúnmente al color:", options: ["Rojo", "Verde brillante", "Negro con grosor cero", "Blanco"], correct: 2 },
+        { q: "Si la realidad mide 100 metros, y hacemos un plano donde mida 1 metro, estamos usando un principio matemático de:", options: ["Proporcionalidad y Factor de Escala (1:100)", "Derivadas", "Hipérbolas", "Error topográfico"], correct: 0 },
+        { q: "En AutoCAD, ¿por qué los láseres exigen que el grosor de línea sea '0.00mm' o 'Hairline'?", options: ["Porque a la máquina le gusta", "Para que el haz de luz del láser pase como un hilo infinitesimal exacto por las coordenadas, sin quemar de más", "Para ahorrar tinta de impresora", "Para no ver la línea"], correct: 1 },
+        { q: "Si el perímetro de la base está dibujado en Negro, la máquina láser:", options: ["Lo cortará bien", "Solo dibujará un cuadro, no cortará la base física de madera, arruinando la maqueta", "Explotará", "Lo pintará con spray"], correct: 1 },
+        { q: "¿Cuál es el objetivo final de exportar vectores en este ABP (Aprendizaje Basado en Proyectos)?", options: ["Solo para tener un archivo digital", "Fabricar un modelo físico táctil (maqueta láser) de la red eléctrica para defenderlo en evaluación", "Mandar un email a la NASA", "Pasar la materia de arte"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

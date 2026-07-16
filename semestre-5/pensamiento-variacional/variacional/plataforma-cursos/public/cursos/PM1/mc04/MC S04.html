@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 04: La Disyunción Lógica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 04: Análisis de decisiones con el operador de disyunción (o)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Flexibilidad de la Disyunción</h3>
+            <p>Mientras que la conjunción (y) es extremadamente estricta, en la vida real a menudo tenemos alternativas o segundas opciones. Aquí es donde brilla el operador de <strong>Disyunción</strong>.</p>
+            <p>La disyunción se representa con la letra "o" en el lenguaje común, y con el símbolo matemático \(\lor\) (que parece una pequeña "v").</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Modelando Alternativas</h3>
+            <p>Imagina que estás organizando una reforestación en tu comunidad. Para llevar la composta al parque, necesitas transporte. Tienes dos opciones:</p>
+            <ul>
+                <li>\(p\): El municipio nos presta una camioneta.</li>
+                <li>\(q\): Cooperamos 200 pesos para pagar un servicio de carga.</li>
+            </ul>
+            <p>El proyecto se salva si logran la camioneta O si pagan el flete. Esto se modela como \(p \lor q\).</p>
+            <p>La regla de oro de la disyunción es la flexibilidad: <em>El resultado es Verdadero siempre y cuando AL MENOS UNA de las opciones sea verdadera. Solo fracasa (es Falso) si absolutamente todas las opciones fallan.</em></p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Simulando la Disyunción</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Define las variables:</strong> En la barra de entrada escribe <code>p = false</code> (No les prestaron la camioneta). Presiona Enter.</li>
+                    <li><strong>Define la alternativa:</strong> Escribe <code>q = true</code> (Lograron juntar el dinero). Presiona Enter.</li>
+                    <li><strong>Evalúa la disyunción (O):</strong> Escribe <code>p || q</code> (usando las dos barras verticales, que es el símbolo informático para 'o').</li>
+                    <li><strong>Analiza:</strong> A diferencia de la conjunción, el resultado ahora es <em>true</em>. El proyecto de reforestación sigue en pie gracias a que tenían un plan B. ¡Experimenta cambiando ambas a <em>false</em> para ver cómo fracasa!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Evalúa tu Lógica</h3>
+            <div id="quiz-setup">
+                <p>Demuestra tu agilidad mental evaluando opciones y alternativas lógicas. ¡Son 7 preguntas!</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc03/MC S03.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc05/MC S05.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 04. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 19 - Intersección de Tuberías (CAD)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad II - Zonas de Influencia</span>
+        <h1>MC 19: Intersecciones Avanzadas y Recorte en CAD</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Ya sabemos trazar zanjas rectas y zonas de influencia circulares. Pero en obra, los elementos colisionan. ¿Qué pasa cuando tu tubería recta choca contra la banqueta curva de una glorieta?</p>
+        
+        <div class="alert-box">
+            <strong>Requisito de Diseño:</strong> Matemáticamente, esto es un "Sistema de Ecuaciones Mixtas" (una recta interactuando con una circunferencia). En el plano de obra, no puedes dejar que la línea del cable atraviese por en medio de la fuente de la glorieta. Debes detener la zanja justo en el borde.
+        </div>
+        <p>Aprenderemos a encontrar estos puntos de colisión mediante herramientas CAD y limpiaremos nuestro plano para que sea construible.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Colisiones en el Plano (Sistemas Mixtos)</h3>
+        <p>Si la glorieta es el círculo $x^2 + y^2 = 100$ (radio 10m) y tu cableado es la recta $y = x + 2$, la zanja cruzará la glorieta en dos puntos exactos. Analíticamente, se sustituye la recta en el círculo y se resuelve con la fórmula general cuadrática.</p>
+
+        <h3>2. El concepto de Recorte (Trim)</h3>
+        <p>Una vez que encontramos dónde choca la recta con el círculo, en la vida real <strong>detenemos la excavación</strong>, ponemos un registro de desviación, y bordeamos. Por tanto, el segmento de recta que quedó "adentro" del círculo debe ser eliminado del plano constructivo.</p>
+        
+        <h3>3. Empalmes y Empates</h3>
+        <p>Cuando dos zonas de influencia de transformadores chocan (dos circunferencias), la intersección forma una lenteja geométrica. Esa zona es afortunada: ¡está respaldada por dos transformadores! En caso de que falle uno, la CFE puede hacer una maniobra de transferencia de carga.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Comandos INTERSECT y TRIM)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>AutoCAD es excepcional manejando sistemas de ecuaciones visualmente:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Dibujar Glorieta.</strong> Usa <code>CIRCLE</code> en <code>50,50</code> con radio <code>20</code>.</li>
+            <li><strong>Paso 2: Dibujar Zanja.</strong> Usa <code>LINE</code> desde <code>0,0</code> hasta <code>100,100</code>. Observarás que la línea atraviesa brutalmente la glorieta.</li>
+            <li><strong>Paso 3: Activar OSNAP Intersection.</strong> Presiona <code>F3</code> para asegurar que OSNAP esté encendido. Verifica que "Intersection" esté con palomita. Si acercas el mouse, verás una "X" verde en los dos puntos donde chocan.</li>
+            <li><strong>Paso 4: Limpiar con Trim.</strong> Teclea el comando <code>TRIM</code> (o <code>TR</code>) y presiona Enter dos veces (para seleccionar todo como límite).</li>
+            <li><strong>Paso 5: Cortar.</strong> Haz clic en el pedazo de línea que quedó <em>adentro</em> del círculo. AutoCAD lo borrará instantáneamente, dejando la zanja detenida justo en la banqueta.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu plano final, debe haber al menos un cruce con una rotonda o área verde circular. Demuestra que usaste el comando TRIM para evitar que el cableado cruce por áreas prohibidas. Toma captura del antes y el después.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc18/MC_S18.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc20/MC_S20.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 19. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Resolver el cruce de una zanja recta y una glorieta circular implica resolver analíticamente un:", options: ["Sistema de ecuaciones lineales", "Sistema de ecuaciones mixtas (recta y circunferencia)", "Polinomio de grado 3", "Teorema de Tales"], correct: 1 },
+        { q: "Si la recta es secante al círculo, ¿cuántos puntos de intersección hay?", options: ["0", "1", "2", "Infinitos"], correct: 2 },
+        { q: "En AutoCAD, el comando para borrar partes de una línea que cruzan un límite (como la glorieta) es:", options: ["ERASE", "DELETE", "TRIM", "OFFSET"], correct: 2 },
+        { q: "Para que AutoCAD detecte magnéticamente el punto exacto de choque, usamos:", options: ["OSNAP Endpoint", "OSNAP Midpoint", "OSNAP Intersection", "GRID"], correct: 2 },
+        { q: "La zona donde se sobreponen las influencias de dos transformadores:", options: ["Es un área de fallo eléctrico", "Es un área segura con redundancia o transferencia de carga", "Causará un cortocircuito", "Es ilegal"], correct: 1 },
+        { q: "Al hacer TRIM, si no presionas Enter dos veces en versiones antiguas de CAD, AutoCAD te pedirá primero:", options: ["El color de la línea", "Seleccionar las aristas de corte (límites)", "Guardar el archivo", "El radio"], correct: 1 },
+        { q: "¿Por qué cortamos la zanja en la glorieta?", options: ["Para ahorrar 2 metros de cable", "Para evitar obra civil invasiva en zonas verdes o fuentes", "Para aumentar el voltaje", "Para perder el tiempo"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

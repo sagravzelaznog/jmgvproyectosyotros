@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 01: Lógica Matemática</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Archivo CSS Modular -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Integración de KaTeX para Renderizado Matemático -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 01: Introducción a la lógica matemática y selección de la problemática del entorno</h2>
+    </header>
+
+    <main>
+        <!-- Bloque 1: Introducción Teórica -->
+        <section class="content-block">
+            <h3>1. ¿Qué es la Lógica Matemática?</h3>
+            <p>Imagina que estás programando un videojuego o tomando una decisión crucial. Necesitas reglas claras para
+                saber qué es verdad y qué es mentira. La lógica matemática es exactamente eso: el lenguaje que usamos
+                para determinar si una afirmación es verdadera o falsa, eliminando cualquier ambigüedad.</p>
+            <p>En matemáticas, a estas afirmaciones las llamamos <strong>proposiciones</strong>. Una proposición es un
+                enunciado del cual podemos decir con certeza si es Verdadero (V) o Falso (F). Por ejemplo:</p>
+            <ul>
+                <li><em>"El agua se congela a cero grados centígrados"</em> (Verdadero)</li>
+                <li><em>"Un triángulo tiene 4 lados"</em> (Falso)</li>
+                <li><em>"¡Hola, presta atención!"</em> (No es proposición, es una exclamación y no se puede medir su
+                    verdad).</li>
+            </ul>
+        </section>
+
+        <!-- Bloque 2: Operadores Lógicos -->
+        <section class="content-block">
+            <h3>2. Conectores Lógicos: Uniendo Ideas</h3>
+            <p>Así como usamos palabras para unir oraciones, en matemáticas usamos conectores lógicos para unir
+                proposiciones. Los principales son:</p>
+            <ul>
+                <li><strong>Conjunción (Y):</strong> Se representa con el símbolo \(\land\). Ambas proposiciones deben
+                    ser verdaderas para que el resultado sea verdadero.</li>
+                <li><strong>Disyunción (O):</strong> Se representa con el símbolo \(\lor\). Basta con que al menos una
+                    proposición sea verdadera para que el resultado lo sea.</li>
+                <li><strong>Negación (NO):</strong> Se representa con el símbolo \(\neg\). Cambia el valor de verdad (lo
+                    verdadero lo hace falso y viceversa).</li>
+            </ul>
+        </section>
+
+        <!-- Bloque 3: Enfoque ABP (Problemática del entorno) -->
+        <section class="content-block">
+            <h3>3. Modelando un Problema del Entorno</h3>
+            <p>¿Para qué nos sirve la lógica? Para modelar problemas reales de tu comunidad. Imagina que quieres iniciar
+                un proyecto para recolectar PET y reciclarlo. Si el kilo de plástico se paga a 15 pesos y logras juntar
+                10 kilos, ganarás 150 pesos.</p>
+            <p>Podemos usar lógica para definir las condiciones de éxito de tu proyecto. Sea \(p\): "Recolectamos más de
+                10 kilos". Sea \(q\): "Ganamos más de 100 pesos".</p>
+            <p>Podemos formar la expresión \(p \rightarrow q\) (Si recolectamos más de 10 kilos, entonces ganamos más de
+                100 pesos). Modelar estas situaciones te permitirá tomar decisiones basadas en datos estructurados.</p>
+        </section>
+
+        <!-- Bloque 4: Simulación Didáctica -->
+        <section class="geogebra-section">
+            <h3>4. Explorador Interactivo: Operaciones Booleanas</h3>
+            <div class="iframe-container">
+                <!-- Simulador de GeoGebra Classic -->
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <p style="margin-bottom: 10px; color: var(--text-color); font-weight: 500;">Vamos a "programar"
+                    proposiciones lógicas directamente en la consola de GeoGebra:</p>
+                <ol>
+                    <li><strong>Crear la Proposición \(p\):</strong> Haz clic en la <em>Barra de Entrada</em> (el cuadro
+                        de texto a la izquierda que dice "Entrada...") y escribe exactamente <code>p = true</code>
+                        ("true" es Verdadero en inglés). Presiona Enter.</li>
+                    <li><strong>Crear la Proposición \(q\):</strong> En la siguiente línea, escribe
+                        <code>q = false</code> ("false" es Falso) y presiona Enter.</li>
+                    <li><strong>Probar la Conjunción (Y):</strong> En una nueva línea, escribe <code>p && q</code>
+                        (usando el símbolo "y" comercial) y presiona Enter. El resultado automático será <em>false</em>,
+                        ya que la regla del (Y) dicta que ambas deben ser verdaderas.</li>
+                    <li><strong>Probar la Disyunción (O):</strong> En otra línea, escribe <code>p || q</code> (usando
+                        las barras verticales) y presiona Enter. El resultado será <em>true</em> porque basta con que
+                        una (\(p\)) sea verdadera.</li>
+                    <li><strong>¡Experimenta!:</strong> Haz doble clic donde escribiste <code>q = false</code>, cámbialo
+                        a <code>q = true</code> y presiona Enter. ¡Observa cómo los resultados de abajo se actualizan
+                        automáticamente! Intercambia entre <em>true</em> y <em>false</em> para construir mentalmente tu
+                        Tabla de Verdad.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Bloque 5: Gamificación (Quiz Estilo Kahoot) -->
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: ¡Pon a prueba tu Lógica!</h3>
+
+            <div id="quiz-setup">
+                <p>Estás a punto de iniciar un reto interactivo con 7 preguntas. ¡Concéntrate, analiza y elige la
+                    respuesta correcta!</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid">
+                    <!-- Las opciones se inyectan dinámicamente con JS -->
+                </div>
+            </div>
+
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div></div>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc02/MC S02.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 01. Todos los derechos reservados.
+    </footer>
+
+    <!-- Script de Lógica Interactiva -->
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+
+</html>

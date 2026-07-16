@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 01 - Concepto de Recta y Punto</title>
+    
+    <!-- Fuentes y Estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <!-- Configuración MathJax para Ecuaciones -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { 
+                inlineMath: [['$', '$'], ['\\(', '\\)']], 
+                displayMath: [['$$', '$$'], ['\\[', '\\]']] 
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 01: El Punto y la Recta en la Infraestructura Urbana</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <!-- 1. INTRODUCCIÓN -->
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Imagina que eres el ingeniero encargado de llevar electricidad a un nuevo fraccionamiento en Torreón, Coahuila. Antes de empezar a excavar, necesitas un plano topográfico exacto. ¿Cómo le dices a las máquinas excavadoras dónde empezar y dónde terminar?</p>
+        
+        <div class="alert-box">
+            <strong>Problema Real:</strong> No puedes simplemente decir "haz un pozo por aquel árbol". En ingeniería, necesitamos precisión absoluta. Cada registro eléctrico subterráneo se representa matemáticamente como un <strong>Punto</strong> en el espacio, y la tubería por donde viaja el cable de media tensión es una <strong>Recta</strong>.
+        </div>
+        
+        <p>Hoy aprenderemos a traducir el terreno físico de la ciudad a un lenguaje de coordenadas algebraicas que programas como AutoCAD pueden entender para trazar nuestra red eléctrica.</p>
+    </section>
+
+    <!-- 2. DESARROLLO DEL CONCEPTO -->
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. El Plano Cartesiano en la Topografía</h3>
+        <p>Para ubicar cualquier elemento, usamos un sistema de referencia de dos dimensiones creado por René Descartes: el <strong>Plano Cartesiano</strong>. Consiste en dos ejes perpendiculares:</p>
+        <ul>
+            <li><strong>Eje X (Abscisas):</strong> Representa el desplazamiento Este-Oeste en nuestro terreno.</li>
+            <li><strong>Eje Y (Ordenadas):</strong> Representa el desplazamiento Norte-Sur.</li>
+        </ul>
+        
+        <div class="math-box">
+            <p>El cruce de ambos ejes se llama <strong>Origen</strong>, denotado algebraicamente como $O(0,0)$. En nuestro proyecto, el origen será el punto de conexión principal (la acometida de CFE).</p>
+        </div>
+
+        <h3>2. El Punto (Registro Eléctrico)</h3>
+        <p>Un punto no tiene dimensiones (ni largo, ni ancho), solo indica una <strong>posición exacta</strong>. Algebraicamente se representa con una letra mayúscula y sus dos coordenadas $(x, y)$.</p>
+        <p>Por ejemplo, si ubicamos un registro eléctrico $R_1$ a 5 metros al Este y 3 metros al Norte del origen, lo escribimos así:</p>
+        <div class="math-box">
+            $$R_1(5, 3)$$
+        </div>
+
+        <h3>3. La Recta (Zanja de Cableado)</h3>
+        <p>En geometría analítica, una línea recta es una sucesión continua e infinita de puntos alineados en una misma dirección. El postulado fundamental nos dice:</p>
+        <div class="alert-box">
+            <em>"Por dos puntos distintos pasa una y sólo una línea recta."</em>
+        </div>
+        <p>Si tenemos nuestro registro inicial $R_1(5, 3)$ y queremos llevar el cableado hasta el registro secundario $R_2(-2, -4)$, matemáticamente existe un único trazo lineal perfecto que los conecta, minimizando el costo de excavación y uso de cable (cuyo presupuesto calcularemos más adelante en pesos).</p>
+    </section>
+
+    <!-- 3. ACTIVIDAD PRÁCTICA -->
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Vamos a realizar el primer trazo de nuestro proyecto integrador. Abre AutoCAD (versión 2015 o superior) o en su defecto, entra al simulador web de GeoGebra.</p>
+        
+        <ol>
+            <li><strong>Paso 1: Configurar el sistema.</strong> En AutoCAD, asegúrate de tener las unidades en metros. En la línea de comandos escribe <code>UNITS</code> y selecciona <em>Meters</em>.</li>
+            <li><strong>Paso 2: Trazar el primer registro (Punto).</strong> Selecciona la herramienta <code>POINT</code>. En la barra de comandos, ingresa la coordenada del origen: <code>0,0</code>. Este es tu suministro de CFE.</li>
+            <li><strong>Paso 3: Trazar el segundo registro.</strong> Vuelve a usar el comando <code>POINT</code> y digita <code>150, 45</code>. Este es el primer transformador del fraccionamiento, ubicado a 150m al Este y 45m al Norte.</li>
+            <li><strong>Paso 4: Trazar la trayectoria (Recta).</strong> Selecciona la herramienta <code>LINE</code>. Cuando pida el primer punto, escribe <code>0,0</code>. Cuando pida el siguiente punto, escribe <code>150,45</code> y presiona Enter.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Reto del Entregable:</strong> En tu hoja de reporte, dibuja a escala este plano topográfico. Etiqueta el Origen como $P_1(0,0)$ y el transformador como $P_2(150,45)$. En la siguiente sesión aprenderemos a calcular exactamente cuántos metros de cable en línea recta necesitas para unir estos dos puntos.
+        </div>
+    </section>
+
+    <!-- 4. CIERRE Y QUIZZ -->
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Hoy aprendimos que la geometría analítica no son solo números al azar, es el lenguaje mediante el cual digitalizamos el mundo físico. Un registro es un <strong>punto</strong> y una zanja de tubería es un segmento de <strong>recta</strong>.</p>
+        
+        <!-- QUIZ CONTAINER -->
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="quiz-progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Preguntas inyectadas por JS -->
+            <div id="quiz-questions-wrapper"></div>
+            
+            <!-- Resultados -->
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <p>Gran trabajo analizando las bases del plano topográfico.</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar Quizz</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Volver al Dashboard</a>
+                    <a href="../mc02/MC_S02.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 01. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<!-- Logica del Quizz -->
+<script>
+    const questions = [
+        {
+            q: "¿Qué representa el Eje X en nuestro plano topográfico del proyecto?",
+            options: ["Elevación", "Desplazamiento Norte-Sur", "Desplazamiento Este-Oeste", "Presión del cableado"],
+            correct: 2
+        },
+        {
+            q: "Algebraicamente, ¿cómo se representa el punto de origen?",
+            options: ["P(x,y)", "O(1,1)", "O(0,0)", "O(x,0)"],
+            correct: 2
+        },
+        {
+            q: "En AutoCAD o geometría, ¿cuántas líneas rectas pueden pasar exactamente por dos puntos distintos?",
+            options: ["Infinitas", "Ninguna", "Dos", "Una y sólo una"],
+            correct: 3
+        },
+        {
+            q: "¿Qué elemento geométrico utilizamos para modelar la ubicación exacta de un registro eléctrico?",
+            options: ["Una parábola", "Un punto", "Un plano", "Un segmento"],
+            correct: 1
+        },
+        {
+            q: "Si un transformador está en T(10, -5), ¿en qué cuadrante del plano se encuentra?",
+            options: ["Cuadrante I", "Cuadrante II", "Cuadrante III", "Cuadrante IV"],
+            correct: 3
+        },
+        {
+            q: "Para trazar el recorrido de la tubería subterránea entre dos registros, usamos el concepto de:",
+            options: ["Circunferencia", "Recta (segmento)", "Punto de fuga", "Ángulo de elevación"],
+            correct: 1
+        },
+        {
+            q: "¿Cuál es el comando en AutoCAD para dibujar una sucesión continua de puntos alineados?",
+            options: ["POINT", "CIRCLE", "LINE", "EXTRUDE"],
+            correct: 2
+        }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            
+            const title = document.createElement('div');
+            title.className = 'question-text';
+            title.textContent = `${qIndex + 1}. ${q.q}`;
+            block.appendChild(title);
+
+            const grid = document.createElement('div');
+            grid.className = 'options-grid';
+
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn);
+                grid.appendChild(btn);
+            });
+
+            block.appendChild(grid);
+            wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        
+        allBtns.forEach(b => {
+            b.disabled = true;
+            b.style.opacity = '0.5';
+            b.style.cursor = 'default';
+        });
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            btn.style.opacity = '1';
+            score++;
+        } else {
+            btn.classList.add('wrong');
+            btn.style.opacity = '1';
+            allBtns[questions[qIndex].correct].classList.add('correct');
+            allBtns[questions[qIndex].correct].style.opacity = '1';
+        }
+
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active');
+            currentQ++;
+            if (currentQ < questions.length) {
+                document.getElementById(`q-${currentQ}`).classList.add('active');
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }, 1200);
+    }
+
+    function updateProgress() {
+        counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`;
+        progressBar.style.width = `${(currentQ / questions.length) * 100}%`;
+    }
+
+    function showResults() {
+        document.querySelector('.quiz-progress').style.display = 'none';
+        resultsBlock.classList.add('active');
+        scoreDisplay.textContent = `${score}/${questions.length}`;
+    }
+
+    function resetQuiz() {
+        currentQ = 0;
+        score = 0;
+        document.querySelector('.quiz-progress').style.display = 'flex';
+        resultsBlock.classList.remove('active');
+        initQuiz();
+    }
+
+    // Inicializar al cargar
+    initQuiz();
+</script>
+
+</body>
+</html>

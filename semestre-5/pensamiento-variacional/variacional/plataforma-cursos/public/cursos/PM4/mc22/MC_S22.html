@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 22 - Parábola y Caída Libre</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad III - Catenarias y Caída Libre</span>
+        <h1>MC 22: Seguridad en Obra (Modelo de Caída Libre)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>La parábola no solo nos sirve para dibujar cables. Es la base de las Leyes de Newton para la aceleración gravitacional.</p>
+        
+        <div class="alert-box">
+            <strong>Riesgo Laboral:</strong> Estás instalando una lámpara en un poste de 15 metros de altura. Por accidente, se te resbalan las pinzas de electricista de medio kilo. ¿Cuánto tiempo tiene tu compañero abajo para esquivarlas?
+        </div>
+        <p>Al modelar la caída de objetos, el tiempo está al cuadrado, generando una curva parabólica que dicta qué tan rápido se acerca la tragedia.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación del Desplazamiento Vertical</h3>
+        <p>En física, la distancia que recorre un objeto cayendo (si se suelta desde el reposo) depende de la aceleración de la gravedad ($g = 9.81 \text{ m/s}^2$) y del cuadrado del tiempo ($t$).</p>
+        
+        <div class="math-box">
+            $$y = \frac{1}{2} g t^2$$
+            $$y = \frac{1}{2} (9.81) t^2$$
+            $$y = 4.905 t^2$$
+        </div>
+        <p>¡Observa! Esto es idéntico a nuestra ecuación $y = ax^2$, solo que usamos $t$ en lugar de $x$. ¡El desplazamiento vertical forma una rama de la parábola!</p>
+
+        <h3>2. Calculando el Tiempo de Impacto</h3>
+        <p>Si las pinzas caen desde $15\text{m}$, ¿cuánto tardan en chocar contra el piso? Igualamos la ecuación a la altura de caída ($y = 15$):</p>
+        <div class="math-box">
+            $$15 = 4.905 t^2$$
+        </div>
+        <p>Despejamos $t$ (el tiempo):</p>
+        <div class="math-box">
+            $$t^2 = \frac{15}{4.905}$$
+            $$t^2 = 3.058$$
+            $$t = \sqrt{3.058} = 1.74 \text{ segundos}$$
+        </div>
+        <p>Tu compañero tiene menos de dos segundos para reaccionar. Por esto el uso del casco de seguridad es obligatorio bajo la Norma Oficial Mexicana (NOM).</p>
+
+        <h3>3. La Velocidad Final (Derivada Intuitiva)</h3>
+        <p>Como la parábola es curva (crece más rápido cada segundo), la velocidad no es constante. Las pinzas golpean el piso a una velocidad letal de: $V = g \times t = 9.81 \times 1.74 = 17.06 \text{ m/s}$ (¡Más de 60 km/h!).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Análisis de Riesgo)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>En el ABP de obra, calcularemos distintas zonas de impacto:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Zanja (3 metros).</strong> Un bloque de concreto cae a la zanja subterránea desde nivel de calle. Tiempo: $t = \sqrt{3 / 4.905} = 0.78$ segundos. (Tiempo de reacción nulo, aplastamiento inminente).</li>
+            <li><strong>Paso 2: Andamio 1 (6 metros).</strong> Cae herramienta ligera. Tiempo: $t = \sqrt{6 / 4.905} = 1.10$ s.</li>
+            <li><strong>Paso 3: Andamio 2 (12 metros).</strong> Cae casco. Tiempo: $t = \sqrt{12 / 4.905} = 1.56$ s.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Realiza el cálculo para un transformador aéreo que se desprende desde un poste de 18 metros. ¿En cuántos segundos tocará el suelo? Usa la fórmula de la parábola despejada $t = \sqrt{\frac{y}{4.905}}$.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc21/MC_S21.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc23/MC_S23.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 22. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La ecuación de caída libre y = 4.905t² tiene la misma estructura algebraica que:", options: ["Una circunferencia", "Una recta constante", "Una parábola de segundo grado", "Una curva trigonométrica"], correct: 2 },
+        { q: "¿Por qué el tiempo está al cuadrado en esta ecuación?", options: ["Porque es un error de Newton", "Porque el objeto acelera; recorre más distancia cada segundo", "Para dificultar las matemáticas", "Porque cae en línea recta constante"], correct: 1 },
+        { q: "Si las pinzas caen de un andamio más alto, el tiempo de caída será:", options: ["Menor, la gravedad tira más fuerte", "Mayor, porque hay más distancia vertical que recorrer", "El mismo", "Cero"], correct: 1 },
+        { q: "En la ecuación 15 = 4.905t², el primer paso para despejar el tiempo es:", options: ["Sacar raíz de 15", "Multiplicar 15 por 4.905", "Dividir 15 entre 4.905", "Restar 4.905 a 15"], correct: 2 },
+        { q: "La constante 4.905 proviene de dividir entre 2 la gravedad. ¿Cuál es el valor estándar de la gravedad (g)?", options: ["3.1416", "9.81 m/s²", "100 m/s", "5 m/s²"], correct: 1 },
+        { q: "En el entregable, para 18 metros: 18 / 4.905 es aprox 3.67. La raíz de 3.67 es:", options: ["1.91 segundos", "13.4 segundos", "3.67 segundos", "0.5 segundos"], correct: 0 },
+        { q: "¿Qué medida de seguridad en obra está directamente respaldada por esta demostración parabólica de corto tiempo de reacción?", options: ["El chaleco reflectante", "Las botas dieléctricas", "El casco rígido contra impactos", "Los guantes de tela"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

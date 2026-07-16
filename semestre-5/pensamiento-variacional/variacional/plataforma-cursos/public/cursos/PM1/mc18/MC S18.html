@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 18: Factorización y el Teorema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 18: Factorización de números naturales y el Teorema Fundamental de la Aritmética</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El ADN de los Números: Los Números Primos</h3>
+            <p>Los <strong>números primos</strong> son aquellos que solo se pueden dividir exactamente entre 1 y entre sí mismos (ej. 2, 3, 5, 7, 11). Son como los "átomos" de las matemáticas: no se pueden romper en pedazos más pequeños.</p>
+            <p>Los números que sí se pueden romper en más divisores (como el 6, que se divide entre 2 y 3) se llaman <strong>números compuestos</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Teorema Fundamental de la Aritmética</h3>
+            <p>Este teorema es una de las verdades más grandes del universo: <em>Todo número entero positivo mayor que 1 puede expresarse de forma única como una multiplicación de números primos.</em></p>
+            <p>A este proceso se le llama <strong>Factorización</strong> (desarmar un número en sus factores primos). Por ejemplo, el número 12. Si lo desarmamos: \(12 = 2 \times 6\). Pero el 6 no es primo, así que lo volvemos a desarmar: \(12 = 2 \times 2 \times 3\). ¡Ese es su ADN único!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Escáner de Factorización</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Escáner Primo:</strong> GeoGebra tiene una herramienta poderosa para encontrar el ADN de un número. Abre la vista de Cálculo (CAS).</li>
+                    <li><strong>Factoriza el 12:</strong> Escribe el comando <code>FactoresPrimos[12]</code>. Te mostrará <code>{2, 2, 3}</code>.</li>
+                    <li><strong>Números Gigantes:</strong> Intenta desarmar un número enorme, como 2024. Escribe <code>FactoresPrimos[2024]</code>. Te dirá <code>{2, 2, 2, 11, 23}</code>. Si los multiplicas todos, obtendrás 2024 de nuevo. ¡Es mágico!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Decodificando el ADN Numérico</h3>
+            <div id="quiz-setup">
+                <p>Aplica el Teorema Fundamental y descompón estos números.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc17/MC S17.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc19/MC S19.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 18. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

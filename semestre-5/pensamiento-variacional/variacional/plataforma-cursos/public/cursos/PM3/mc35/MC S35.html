@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 35: Optimización de Áreas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 35: El Negocio de los Máximos (Optimización)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Límite de los Recursos</h3>
+            <p>Bienvenidos a las grandes ligas del Fraccionamiento. Aquí no te dan el área. Aquí te dan RECURSOS LIMITADOS. El jefe te dice: <em>"Tienes exactamente 100 metros de malla ciclónica. Ciérrame un terreno rectangular pegado al muro de la bodega. Quiero que el área de ese terreno sea LA MÁXIMA POSIBLE para venderla más cara."</em> No buscas resolver una ecuación igualada a cero, buscas <strong>Optimizar</strong> el área, buscas el pico de la montaña financiera.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Forjando la Ecuación de Ganancias</h3>
+            <p>Usas 100m de malla para tres lados (el muro ya cubre un lado). Si los dos laterales miden 'x', gastaste $2x$ de malla. El frente que sobra mide $100 - 2x$. La función del Área (Ganancia) es Base por Altura: $A(x) = x(100 - 2x)$. Detonas el paréntesis: <strong>$A = -2x^2 + 100x$</strong>. ¡Alerta! Esta es una parábola. Y la 'a' es NEGATIVA ($-2$). Eso significa que la curva abre hacia ABAJO ($\\cap$). ¡Tu función de ganancias tiene un PICO MÁXIMO (el vértice)!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Extrayendo el Máximo Financiero</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando la Riqueza ($A = -2x^2 + 100x$):</h4>
+                <ol>
+                    <li><strong>El Detector de Picos:</strong> Como es una parábola hacia abajo, el Vértice nos dará el valor máximo absoluto de área. Aplicas el misil táctico: $x = \frac{-b}{2a}$.</li>
+                    <li><strong>Inyección de Datos:</strong> Tu 'b' es $100$, 'a' es $-2$. El misil queda: $x = \frac{-100}{2(-2)}$.</li>
+                    <li><strong>La Decisión Constructiva:</strong> $x = -100 / -4 \rightarrow x = 25$. Para obtener el área MÁS grande posible, los lados laterales del terreno deben medir exactamente $25$ metros cada uno.</li>
+                    <li><strong>El Búmeran (La Ganancia Máxima):</strong> ¿Cuánto es esa área máxima? Disparas el $25$ de vuelta a la función: $A = -2(25)^2 + 100(25) = -2(625) + 2500 = -1250 + 2500 = 1250$. El área máxima vendible es de <strong>$1250$ metros cuadrados</strong>. Si usas 24 o 26 metros, perderás área y dinero. Has optimizado el proyecto.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Optimizador Financiero</h3>
+            <div id="quiz-setup">
+                <p>Modela recursos limitados y extrae el vértice máximo para maximizar las ganancias del Fraccionamiento.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Optimización!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Transformas materiales finitos en la máxima riqueza geométrica.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Muro de Inversiones</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc34/MC S34.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc36/MC S36.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

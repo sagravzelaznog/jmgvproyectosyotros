@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 46 - Coevaluación de Gráficas Polinomiales</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 46: Coevaluación Topográfica de Maquetas</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Auditoría de Proyectos</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>En ingeniería y arquitectura, ningún plano se construye sin pasar antes por un equipo de "Auditores". Tú puedes estar seguro de que tu elipse de cobertura es correcta, pero el ingeniero del municipio debe revisar y autorizar tus sellos.</p>
+        
+        <div class="alert-box">
+            <strong>Proceso de Coevaluación:</strong> Hoy intercambiaremos maquetas físicas entre equipos. Actuarás como el Inspector de la Secretaría de Obras Públicas, buscando errores matemáticos y topográficos en el diseño de tus compañeros, calificándolos con rigor técnico.
+        </div>
+        <p>La precisión matemática no es opinable, es medible.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Validación de Ecuaciones vs Realidad</h3>
+        <p>Si el reporte impreso de tu compañero dice que el transformador T1 tiene la ecuación $(x-50)^2 + (y-50)^2 = 1600$, el radio esperado es $40\text{m}$.</p>
+        <p>A escala 1:100, eso son $40\text{cm}$ en la maqueta. Como auditor, debes tomar un escalímetro o regla, ubicar el transformador en el MDF, y medir el radio grabado por el láser. Si mide $30\text{cm}$, ¡hay un error en la exportación CAD! Multa para el contratista.</p>
+
+        <h3>2. Detección de Zonas Muertas (Fallo Cónico)</h3>
+        <p>El inspector debe buscar minuciosamente "Diamantes" o espacios en blanco entre las circunferencias o elipses. Si existe una manzana del fraccionamiento que no cae dentro del grabado láser de ningún transformador, la red tiene un defecto de diseño gravísimo.</p>
+
+        <h3>3. Verificación de Trayectorias Rectas (Costos)</h3>
+        <p>Verifica el hilo del cableado. ¿El equipo usó "Cuerdas" para atajar distancias o bordeó todos los "Arcos"? Pide su justificación técnica para el uso de trayectorias. Si bordeó un arco sin razón (gastando metros de cable a lo tonto), recrimínalo en el reporte.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Auditoría Técnica Cruzada)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Ejecuta la rúbrica de auditoría sobre la maqueta de otro equipo:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Medición.</strong> Mide con regla al menos un radio circular y un semieje mayor (a) de una elipse. Compara tu medida con la Ecuación que entregó el equipo en su portada. (Recuerda aplicar la escala de conversión).</li>
+            <li><strong>Paso 2: Centro (h,k).</strong> Mide la distancia desde la esquina inferior izquierda (Origen $0,0$) de la base de madera hasta el prisma del transformador central. ¿Coincide con el $(h,k)$ de su ecuación?</li>
+            <li><strong>Paso 3: Redacción del Dictamen.</strong> Llena el formulario de "Acta de Inspección". Califica con "Aprobado", "Aprobado con Observaciones" o "Clausurado".</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Escanea o toma una foto clara de tu <strong>Acta de Inspección</strong> firmada por ti (como Auditor), con tus mediciones en centímetros demostrando si las gráficas polinomiales de tus compañeros cuadraron con la realidad física.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc45/MC_S45.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc47/MC_S47.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 46. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La Coevaluación en el Aprendizaje Basado en Proyectos sirve para:", options: ["Criticar por envidia", "Aprender a auditar errores como en la vida profesional, contrastando matemáticas vs modelo físico", "Subir los puntos", "Pasar el rato"], correct: 1 },
+        { q: "Si la ecuación reportada es (x-10)² + (y-10)² = 900, y la escala es 1:100, ¿qué radio en centímetros debe tener el grabado en la maqueta?", options: ["900 cm", "9 cm", "30 cm", "10 cm"], correct: 2 },
+        { q: "Para comprobar el centro topográfico (h,k) de un transformador, el auditor debe medir desde:", options: ["El techo", "El borde superior derecho", "La esquina inferior izquierda (Origen 0,0 de la base de madera) hacia el centro del grabado", "El centro del círculo hacia afuera"], correct: 2 },
+        { q: "Si un equipo dejó un espacio en blanco entre sus círculos de cobertura sobre una manzana residencial, la maqueta debe ser:", options: ["Aprobada con honores", "Clausurada o devuelta por falla de cobertura eléctrica (zona muerta)", "Pintada de azul", "Ignorada"], correct: 1 },
+        { q: "Al auditar el hilo de la red, si un equipo usó un Arco bordeando una glorieta en lugar de una Cuerda recta pasando por debajo del césped, el auditor debe preguntar:", options: ["¿De qué color es el hilo?", "¿Por qué justificaron usar la ruta larga, más cara, en vez de cortar directo?", "¿A qué huele el MDF?", "¿Quién cortó la madera?"], correct: 1 },
+        { q: "El 'Acta de Inspección' es un documento técnico que reemplaza al clásico:", options: ["Examen escrito de falso y verdadero", "Libro de texto", "Receso", "Recreo"], correct: 0 },
+        { q: "Al revisar el trabajo de otros, el inspector refuerza su propio entendimiento de:", options: ["Las ecuaciones cónicas, las escalas y la geometría espacial (X,Y,Z)", "La historia de México", "La literatura abstracta", "La química del láser"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

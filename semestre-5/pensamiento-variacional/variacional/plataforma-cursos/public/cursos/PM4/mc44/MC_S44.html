@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 44 - Taller Láser (Corte MDF)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 44: Taller Láser y Fabricación en MDF</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Manufactura Física</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Tus ecuaciones se convirtieron en vectores y tus vectores están a punto de convertirse en fuego. Las máquinas de corte láser CNC concentran un rayo de luz tan poderoso que sublima (evapora) la madera instantáneamente, guiado por la matemática pura de tu plano cartesiano.</p>
+        
+        <div class="alert-box">
+            <strong>Precisión Milimétrica:</strong> Al fabricar en MDF (Tablero de Fibra de Media Densidad), el margen de error es cero. Si tu ecuación de la elipse era un milímetro más grande de lo debido, la pieza física no ensamblará. Hoy cortaremos la maqueta topográfica de nuestra red eléctrica.
+        </div>
+        <p>Es hora de operar tecnología industrial.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Parámetros de Operación Láser (Potencia y Velocidad)</h3>
+        <p>La máquina CNC (Control Numérico por Computadora) obedece al software <em>RDWorks</em> o <em>LightBurn</em>. Las dos variables críticas son:</p>
+        <ul>
+            <li><strong>Velocidad (mm/s):</strong> Qué tan rápido se mueve el cabezal.</li>
+            <li><strong>Potencia (%):</strong> Qué tanta energía dispara el tubo láser de CO₂.</li>
+        </ul>
+        <p><strong>Variación Inversa:</strong> Si la máquina va muy rápido, el rayo no tiene tiempo de quemar la madera, solo la 'rasguña' (Grabado). Si va muy lento, el rayo se queda demasiado tiempo en el mismo lugar y atraviesa la madera (Corte).</p>
+
+        <h3>2. Configuración para MDF de 3mm</h3>
+        <p>Para la base (corte perimetral en rojo): Velocidad = $15\text{ mm/s}$, Potencia = $65\%$. (Alta potencia, baja velocidad para perforar).</p>
+        <p>Para dibujar las ecuaciones (grabado en negro): Velocidad = $300\text{ mm/s}$, Potencia = $15\%$. (Baja potencia, alta velocidad para solo sombrear).</p>
+
+        <h3>3. El Cero Máquina (Origen)</h3>
+        <p>El láser tiene un botón llamado "Origin". Este botón calibra la coordenada $(0,0)$ en el plano físico de la máquina. Todo el corte que diseñaste se calculará tomando ese punto como referencia exacta.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Protocolo de Seguridad y Corte)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Procedimiento estricto para operar la máquina del taller:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Extracción.</strong> Enciende siempre el extractor de humo ANTES de prender el láser. Los gases del MDF son tóxicos.</li>
+            <li><strong>Paso 2: Enfoque Térmico (Z).</strong> Coloca el calibrador de acrílico sobre la tabla de MDF y baja el cabezal hasta que la boquilla lo roce. Esto asegura que el "Foco" de luz (¿recuerdas la parábola?) esté exactamente sobre la superficie.</li>
+            <li><strong>Paso 3: Carga Vectorial.</strong> Importa el .DXF en LightBurn. Asigna los parámetros de Corte (Rojo) y Grabado (Negro).</li>
+            <li><strong>Paso 4: Frame.</strong> Presiona el botón "Frame" (Marco). El láser dibujará un rectángulo imaginario sin disparar luz para que verifiques que el corte no se saldrá de la tabla.</li>
+            <li><strong>Paso 5: Disparo.</strong> Cierra la tapa (seguridad ocular contra radiación IR), presiona START y observa cómo tus ecuaciones toman forma física.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Toma una foto de la cama de corte láser mientras corta tus piezas, y otra foto del producto final ya extraído de la máquina. Pégalas en tu reporte y anota la Velocidad y Potencia exacta que usaste para Cortar y Grabar.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc43/MC_S43.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc45/MC_S45.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 44. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Una máquina CNC (Control Numérico Computarizado) funciona leyendo:", options: ["Píxeles y colores", "Coordenadas matemáticas (X,Y) y líneas paramétricas desde el archivo vectorial", "Imágenes JPG", "Fotos del celular"], correct: 1 },
+        { q: "Para atravesar la madera (Corte), la relación entre Velocidad y Potencia debe ser:", options: ["Velocidad altísima, potencia bajísima", "Velocidad baja (lento) y Potencia alta", "Ambas en cero", "Velocidad media y láser apagado"], correct: 1 },
+        { q: "Si configuras el láser a 300 mm/s y 15% de potencia, el resultado será:", options: ["Un corte profundo", "Fuego en el taller", "Un grabado superficial (solo dibuja u oscurece la madera sin romperla)", "Un corte 3D"], correct: 2 },
+        { q: "El botón 'Origin' de la cortadora láser tiene la misma función matemática que:", options: ["El botón de apagado", "Establecer el punto (0,0) en un plano cartesiano", "Darle brillo a la madera", "Imprimir"], correct: 1 },
+        { q: "El calibrador de enfoque térmico de acrílico asegura que la lente del láser:", options: ["Esté limpia", "Concentre toda la energía focal exactamente sobre la superficie del MDF, como una parábola perfecta", "No raye el vidrio", "Sea del color correcto"], correct: 1 },
+        { q: "Presionar el botón 'Frame' antes de disparar el láser sirve para:", options: ["Enmarcar la maqueta", "Previsualizar el rectángulo exterior del trabajo y asegurar que las ecuaciones encajan en la madera física sin salir del borde", "Tomar una foto", "Apagar el extractor"], correct: 1 },
+        { q: "Por seguridad obligatoria, ¿qué debe estar encendido SIEMPRE que el láser está quemando?", options: ["El aire acondicionado", "La música", "El extractor de humos (para evitar intoxicación y fuego)", "Las luces apagadas"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

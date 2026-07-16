@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 23: Modelado de Fracciones Impropias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 23: Taller visual II: Representación y modelado de fracciones impropias</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Límite del Entero</h3>
+            <p>Una fracción propia, como \(\frac{3}{8}\), cabe perfectamente dentro de un solo círculo o un solo entero dibujado. Pero, ¿qué pasa cuando el numerador es más grande, como en \(\frac{11}{8}\)?</p>
+            <p>A esto le llamamos una <strong>fracción impropia</strong>. Matemáticamente, te está diciendo que un solo entero ya no es suficiente. Necesitas pedir otro entero prestado, partirlo igual, y seguir contando hasta llegar a 11.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Modelando en la Vida Real</h3>
+            <p>Imagina que estás pidiendo pizzas. Cada pizza viene cortada exactamente en 8 rebanadas (el denominador es 8). Tienes mucha hambre y quieres comerte 11 rebanadas (\(\frac{11}{8}\)).</p>
+            <ul>
+                <li>La primera caja de pizza te da 8 rebanadas (\(\frac{8}{8} = 1\) entero completo).</li>
+                <li>Pero aún te faltan 3 rebanadas más para llegar a las 11.</li>
+                <li>Así que abres la segunda pizza y tomas esas 3 rebanadas extra (\(\frac{3}{8}\)).</li>
+            </ul>
+            <p>Por lo tanto, visualmente demostramos que \(\frac{11}{8}\) es exactamente lo mismo que tener \(1\) pizza entera y \(\frac{3}{8}\) de otra. (\(1\frac{3}{8}\)).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Visual: El Creador de Pizzas</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Dibuja el entero:</strong> Selecciona la herramienta "Círculo" en GeoGebra y traza uno. Este representaría nuestra pizza de 8 rebanadas.</li>
+                    <li><strong>Verificación matemática:</strong> Ve a la barra de entrada de la vista CAS y escribe la división matemática directa: <code>11 / 8</code>.</li>
+                    <li><strong>Análisis:</strong> GeoGebra te mostrará <code>1.375</code>. El número "1" antes del punto decimal confirma lógicamente que tienes 1 entero completo. El ".375" representa la porción fraccionaria sobrante (los 3 octavos extras).</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Repartidor Maestro</h3>
+            <div id="quiz-setup">
+                <p>Demuestra que puedes visualizar y convertir fracciones impropias mentalmente y rápidamente.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc22/MC S22.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc24/MC S24.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 23. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

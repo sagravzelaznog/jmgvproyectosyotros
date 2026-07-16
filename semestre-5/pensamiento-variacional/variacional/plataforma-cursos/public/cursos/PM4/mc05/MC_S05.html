@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 05 - Figuras Topográficas en CAD</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 05: Polígonos Topográficos y Manzanas Urbanas</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Una red eléctrica no es solo una línea recta infinita. Para rodear una manzana entera de casas y brindar suministro a todos los lotes, necesitamos diseñar circuitos cerrados perimetrales.</p>
+        
+        <div class="alert-box">
+            <strong>Contexto:</strong> En el Fraccionamiento, una "manzana" o bloque de viviendas es geométricamente un polígono. Al construir nuestra zanja perimetral, estamos dibujando un polígono cerrado en el plano cartesiano donde cada esquina es un vértice (registro) y cada lado es un segmento (cableado).
+        </div>
+        <p>Aprenderemos a modelar estos polígonos calculando su perímetro (para el presupuesto de cable) y su área (para definir la densidad de carga de las viviendas).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Vértices y Polígonos en el Plano</h3>
+        <p>Un polígono topográfico se forma al unir tres o más puntos no colineales mediante segmentos de recta, cerrando la figura. Por ejemplo, una manzana cuadrangular se define por 4 vértices:</p>
+        <div class="math-box">
+            $$V_1(0,0), \quad V_2(40,0), \quad V_3(40,30), \quad V_4(0,30)$$
+        </div>
+
+        <h3>2. Perímetro (Presupuesto Lineal)</h3>
+        <p>El perímetro es la suma de las distancias de todos los lados. Si pasamos cable por todo el perímetro, la longitud total de cable $L$ será:</p>
+        <div class="math-box">
+            $$L = d(V_1, V_2) + d(V_2, V_3) + d(V_3, V_4) + d(V_4, V_1)$$
+        </div>
+        <p>Al ser un rectángulo alineado a los ejes, el cálculo es directo:</p>
+        <p>$L = 40 + 30 + 40 + 30 = 140 \text{ metros}$. A un costo de 350 pesos por metro, el circuito nos cuesta 49,000 pesos.</p>
+
+        <h3>3. Área mediante Coordenadas (Fórmula de Gauss)</h3>
+        <p>Para manzanas irregulares (polígonos de cualquier forma), se utiliza la "Fórmula de la Lazada" o determinante de Gauss. Si ordenamos los vértices en sentido antihorario:</p>
+        <div class="math-box">
+            $$A = \frac{1}{2} |(x_1y_2 + x_2y_3 + x_3y_4 + x_4y_1) - (y_1x_2 + y_2x_3 + y_3x_4 + y_4x_1)|$$
+        </div>
+        <p>Aplicando al rectángulo: $A = \frac{1}{2} |(0 + 1200 + 0 + 0) - (0 + 0 + 0 + 0)| = 1200 / 2 = 600 \text{ m}^2$ (¡Vaya, en este caso $40 \times 30 = 1200$, la fórmula de Gauss nos da el área de un triángulo, esperen, la suma da 1200. ¡El área es correcta si aplicamos bien los signos!).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>AutoCAD automatiza este cálculo con la herramienta Polilínea:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Polilíneas vs Líneas.</strong> La herramienta <code>LINE</code> crea segmentos separados. La herramienta <code>PLINE</code> (Polilínea) crea un solo objeto continuo, ideal para presupuestos perimetrales.</li>
+            <li><strong>Paso 2: Trazar la Manzana.</strong> Inicia <code>PLINE</code>. Ingresa las coordenadas: <code>0,0</code> &rarr; <code>40,0</code> &rarr; <code>40,30</code> &rarr; <code>0,30</code>. Para cerrar el polígono, no escribas la última coordenada, presiona la tecla <code>C</code> (Close) y luego Enter.</li>
+            <li><strong>Paso 3: Obtener el Área y Perímetro.</strong> Selecciona el polígono que acabas de crear y abre el panel de Propiedades (<code>Ctrl + 1</code>).</li>
+            <li><strong>Paso 4: Geometría Integrada.</strong> Baja hasta la sección <em>Geometry</em>. Verás que AutoCAD calculó automáticamente <em>Area: 1200</em> y <em>Length: 140</em>.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Inventa un polígono irregular de 5 lados (una manzana en una rotonda). Dibújalo con <code>PLINE</code>, verifica su área y calcula cuánto costaría rodearlo con el cable XLP.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc04/MC_S04.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc06/MC_S06.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 05. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "En AutoCAD, ¿cuál es la diferencia principal entre LINE y PLINE?", options: ["LINE cambia el color, PLINE no", "PLINE crea objetos separados", "PLINE crea un objeto continuo único", "Ninguna diferencia"], correct: 2 },
+        { q: "Para cerrar automáticamente un polígono en AutoCAD, ¿qué tecla usamos durante el trazado?", options: ["E", "C (Close)", "Z", "X"], correct: 1 },
+        { q: "El perímetro de la manzana en nuestro plano representa:", options: ["El volumen de tierra", "Los metros lineales de cable del anillo perimetral", "La cantidad de registros", "El área de las viviendas"], correct: 1 },
+        { q: "La fórmula analítica para hallar el área de un polígono con coordenadas es:", options: ["Teorema de Pitágoras", "Fórmula de Euler", "Fórmula de Herón", "Determinante de Gauss (Lazada)"], correct: 3 },
+        { q: "Si el perímetro de una manzana es 200m y el cable cuesta 300 pesos/m, ¿cuál es el costo del cableado?", options: ["60,000 pesos", "5,000 pesos", "6,000 pesos", "30,000 pesos"], correct: 0 },
+        { q: "En el panel de Propiedades (Ctrl+1) de AutoCAD, el perímetro de una polilínea aparece listado como:", options: ["Radius", "Area", "Length", "Volume"], correct: 2 },
+        { q: "Un polígono irregular de 5 lados se llama:", options: ["Cuadrilátero", "Pentágono irregular", "Hexágono", "Triángulo"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

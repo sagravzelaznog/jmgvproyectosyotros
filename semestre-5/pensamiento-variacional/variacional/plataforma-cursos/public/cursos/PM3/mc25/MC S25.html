@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 25: Resolución por Factorización</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 25: La Propiedad del Cero Absoluto (Resolución)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Contrato Incompleto</h3>
+            <p>A lo largo de las masterclasses anteriores te convertiste en un maestro desarmando motores. Pasaste de $x^2 + 5x + 6 = 0$ a la elegante forma factorizada $(x + 2)(x + 3) = 0$. Pero el director de obra te grita: <em>"¡No me importan tus paréntesis matemáticos! Dime ya, ¿cuántos malditos metros mide el terreno ('x')?"</em>. Factorizar no es terminar. Factorizar es solo preparar la dinamita. Ahora tienes que detonarla para descubrir el valor numérico oculto de la 'x'.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Ley del Cero Multiplicativo</h3>
+            <p>Para detonar la ecuación desarmada dependes de una ley universal inquebrantable: <strong>Si dos cosas multiplicadas dan CERO, obligatoriamente una de las dos tiene que valer CERO</strong> (¡O incluso las dos!). No hay otra forma matemática de obtener un cero mediante multiplicación. Así que agarras tu motor desarmado $(x + 2)(x + 3) = 0$ y le aplicas el asalto corporativo: Rompes la multiplicación y separas a los prisioneros en dos celdas de interrogatorio distintas.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Extracción de Raíces Cuadráticas</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Detonando $(x - 5)(x + 8) = 0$:</h4>
+                <ol>
+                    <li><strong>Separación (Ruptura del Bloque):</strong> Rompes la multiplicación por la mitad e igualas cada contenedor a la ley del cero.</li>
+                    <li><strong>Interrogatorio Celda 1:</strong> $x - 5 = 0$. Despejas la 'x' mandando el $-5$ al otro lado de la balanza (paga peaje). El resultado es $x_1 = 5$.</li>
+                    <li><strong>Interrogatorio Celda 2:</strong> $x + 8 = 0$. Mandas el $+8$ al otro lado. El resultado es $x_2 = -8$.</li>
+                    <li><strong>El Veredicto:</strong> ¡Tienes dos respuestas viables matemáticas! En un modelo puro, ambas valen. En un plano físico real, rechazas automáticamente la raíz negativa (no existen calles de $-8$ metros) y te quedas con el terreno de $5$ metros.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Interrogador</h3>
+            <div id="quiz-setup">
+                <p>Rompe los paréntesis y extrae violentamente el valor de la variable usando la Ley del Cero.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Interrogatorio!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Ejecutas las ecuaciones cuadráticas hasta sus últimas consecuencias numéricas.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Campo</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc24/MC S24.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc26/MC S26.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los preptechs.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

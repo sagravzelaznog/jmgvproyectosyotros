@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 45: Símbolos de Agrupación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 45: Reglas estrictas en el uso de símbolos de agrupación: paréntesis, corchetes y llaves</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Las Cajas Fuertes Blindadas de las Matemáticas</h3>
+            <p>En la clase anterior aprendimos que la letra 'P' en PEMDAS significa "Paréntesis", y le da prioridad absoluta y divina a cualquier operación. Pero, ¿qué pasa cuando la ecuación es tan inmensa y kilométrica que necesitas meter un paréntesis adentro de otro paréntesis, y ese adentro de otro? Se vuelve un caos visual ilegible.</p>
+            <p>Para mantener el orden visual en el papel, los ingenieros usamos tres niveles de cajas fuertes (Símbolos de Agrupación), que funcionan exactamente como las famosas muñecas rusas (Matrioskas):</p>
+            <ol>
+                <li><strong>( ) Los Paréntesis:</strong> La caja más pequeña, profunda y fundamental.</li>
+                <li><strong>[ ] Los Corchetes:</strong> La caja de nivel medio que se usa para encerrar a los paréntesis sin confundirse.</li>
+                <li><strong>{ } Las Llaves:</strong> La gran caja fuerte maestra que encierra a los corchetes y agrupa bloques inmensos de la ecuación.</li>
+            </ol>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Regla de la Destrucción Interna</h3>
+            <p>Para resolver sin llorar una expresión monstruosa como <strong>\( \{ 5 + [ 3 \times (4 - 2) ] \} \)</strong>, la regla de oro inquebrantable es: <strong>Destruye siempre la estructura de ADENTRO hacia AFUERA</strong>.</p>
+            <ul>
+                <li><strong>Paso 1 (El Núcleo Adentro):</strong> Localiza y destruye el paréntesis más profundo. \((4 - 2) = 2\). La ecuación queda así: \(\{ 5 + [ 3 \times 2 ] \}\).</li>
+                <li><strong>Paso 2 (Nivel Medio):</strong> Destruye ahora los corchetes resolviendo su interior en paz. \([3 \times 2] = 6\). Queda una simple operación: \(\{ 5 + 6 \}\).</li>
+                <li><strong>Paso 3 (El Exterior):</strong> Destruye las llaves maestras. \(\{ 5 + 6 \} = 11\). ¡Problema colosal resuelto en 3 pasos sin morir en el intento!</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Creador de Cajas Informáticas</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador (Limitaciones Informáticas):</h4>
+                <ol>
+                    <li><strong>Los límites del Software Moderno:</strong> ¡Atención futuros ingenieros! En programas de código duro como Python, Excel, calculadoras Casio o GeoGebra, los teclados NO diferencian corchetes de llaves para el álgebra (esos símbolos los usan para programar listas y conjuntos). <strong>En software se usan exclusivamente y de forma infinita los Paréntesis anidados: <code>( )</code>.</strong></li>
+                    <li><strong>Programando anidaciones extremas:</strong> Para resolver \(\{2 \times [3 + (10/2)]\}\), en GeoGebra debes traducirlo hábilmente usando puros paréntesis, uno dentro de otro. Escribe con cuidado: <code>(2 * (3 + (10 / 2)))</code>. Asegúrate siempre de cerrar la misma cantidad exacta de paréntesis que abriste (en este caso 3).</li>
+                    <li><strong>Comprobación Autómata:</strong> Presiona Enter y GeoGebra destruirá desde el centro: \(10/2 = 5\). Luego \(3+5 = 8\). Luego multiplicará \(2 \times 8 = 16\). ¡16 es impecablemente correcto!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Desactivador de Bombas Lógicas</h3>
+            <div id="quiz-setup">
+                <p>Usa tu sangre fría y la lógica de "adentro hacia afuera" para desactivar ecuaciones rodeadas de múltiples escudos de agrupación sin equivocarte de cable.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Desactivador!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Superado! Cajas fuertes abiertas con éxito.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Intentar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc44/MC S44.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc46/MC S46.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 45. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

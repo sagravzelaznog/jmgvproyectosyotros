@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 15: Método de Reducción</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #3b82f6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Sistemas de Ecuaciones y Optimización</h1>
+        <h2>Masterclass 15: La Aniquilación Mutua (Método de Reducción)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Método de los Asesinos</h3>
+            <p>La Igualación y la Sustitución son para burócratas que tienen tiempo de despejar variables. En el campo de batalla de la construcción, cuando tienes dos ecuaciones gigantes como $3x + 5y = 100$ y $2x - 5y = 20$, no pierdes el tiempo despejando. Usas el <strong>Método de Reducción (Suma y Resta)</strong>. El objetivo es alinear las dos ecuaciones, una encima de la otra, y sumarlas verticalmente para provocar una explosión que aniquile una de las letras instantáneamente.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Buscando la Antimateria</h3>
+            <p>Para que la suma vertical provoque una explosión, necesitas encontrar "Antimateria". Esto significa que la misma letra debe tener el MISMO coeficiente en ambas ecuaciones, pero con SIGNOS OPUESTOS. Por ejemplo: $+5y$ arriba y $-5y$ abajo. Cuando pasas la raya y sumas... $5y - 5y = 0$. ¡Boom! La 'y' deja de existir. Sumas las 'x' restantes, sumas los números independientes, y el sistema 2x2 se colapsa en un simple despeje de 5 segundos.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Explosión Controlada</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Sistema de Cemento:</h4>
+                <p>Ec1: $4x + 3y = 24$<br>Ec2: $2x - 3y = 6$</p>
+                <ol>
+                    <li><strong>Detección de Antimateria:</strong> Analizas las columnas. La columna de las 'x' tiene $4x$ y $2x$ (no explota). La columna de las 'y' tiene $+3y$ y $-3y$. ¡Bingo! Antimateria detectada y armada.</li>
+                    <li><strong>La Detonación (Suma Vertical):</strong> Sumas columna por columna. $4x + 2x = 6x$. Los $+3y$ y $-3y$ explotan ($0$). $24 + 6 = 30$.</li>
+                    <li><strong>Sobreviviente:</strong> El humo se disipa y te queda la inofensiva ecuación $6x = 30$.</li>
+                    <li><strong>Despeje:</strong> $x = 30 / 6 \rightarrow x = 5$. Sacas la 'y' usando el búmeran en la Ec1. Fin del juego.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Demoledor</h3>
+            <div id="quiz-setup">
+                <p>Alinea las ecuaciones y detona la antimateria para destruir sistemas enteros en un solo movimiento.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #3b82f6;">¡Iniciar Demolición!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #3b82f6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has demolido los presupuestos complejos usando pura fuerza bruta y antimateria matemática.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Búnker</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc14/MC S14.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #3b82f6;">Menú Principal</a>
+            <a href="../mc16/MC S16.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

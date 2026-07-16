@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 08: América, India y Arabia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 08: Aritmética antigua: Los sistemas de conteo en América, India y Arabia</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. Sudamérica: Los Quipus Incas</h3>
+            <p>Aislados del resto del mundo antiguo, los Incas en Sudamérica desarrollaron un sistema matemático fascinante. En lugar de escribir en tablillas o papiro, utilizaban <strong>Quipus</strong>: una serie de cuerdas anudadas. Este sistema era <strong>decimal (base 10)</strong> y sorprendentemente, <strong>posicional</strong>. La altura del nudo en la cuerda indicaba si eran unidades, decenas o centenas.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Revolución de la India y la Transmisión Árabe</h3>
+            <p>El mayor avance en la historia de la aritmética ocurrió en la antigua India. Los matemáticos hindúes inventaron un sistema que lo cambiaría todo: un sistema <strong>decimal, estrictamente posicional</strong> y que introdujo un símbolo para la "nada" (un precursor del cero).</p>
+            <p>Más tarde, los eruditos matemáticos de <strong>Arabia</strong> tradujeron y perfeccionaron estos textos hindúes. Los árabes no solo aportaron el álgebra (palabra que viene del árabe <em>al-jabr</em>), sino que fueron el puente que llevó este sistema numérico a Europa. Por eso hoy llamamos a nuestros números: <strong>números indoarábigos</strong>.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Entendiendo la Posición</h3>
+            <p>La magia del sistema hindú es que un mismo símbolo, como el '3', vale 3, 30 o 300 dependiendo de su posición. Visualicemos la descomposición posicional matemática.</p>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <ol>
+                    <li><strong>Comprender la base 10:</strong> En la barra de entrada, vamos a descomponer el número 345 algebraicamente.</li>
+                    <li><strong>Centenas:</strong> Escribe <code>c = 3 * 10^2</code>. GeoGebra calculará 300.</li>
+                    <li><strong>Decenas:</strong> Escribe <code>d = 4 * 10^1</code>. GeoGebra calculará 40.</li>
+                    <li><strong>Unidades:</strong> Escribe <code>u = 5 * 10^0</code>. Cualquier número elevado a la potencia cero es 1, así que obtendrás 5.</li>
+                    <li><strong>La suma:</strong> Escribe <code>c + d + u</code> y verás cómo se forma exactamente el 345. ¡Esta es la lógica brillante detrás de nuestro sistema posicional!</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Matemáticas Sin Fronteras</h3>
+            <div id="quiz-setup">
+                <p>Descubre cuánto has aprendido sobre la evolución de los números alrededor del mundo.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc07/MC S07.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc09/MC S09.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 08. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

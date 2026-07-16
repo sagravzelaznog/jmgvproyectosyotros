@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 43: Introducción a las Razones (SOH-CAH-TOA)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 43: El Conjuro SOH-CAH-TOA (Razones Trigonométricas)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Límite de Pitágoras</h3>
+            <p>Pitágoras es poderoso, pero tiene una debilidad fatal: <strong>Necesita conocer por lo menos DOS lados del edificio para funcionar</strong>. ¿Qué pasa si el director de obra solo te da UN lado de la rampa y te regala el ángulo de inclinación (ej. $35^\circ$)? Pitágoras colapsa, es ciego a los ángulos. Para conectar el mundo de las medidas lineales (metros) con el mundo de las inclinaciones (grados), tienes que ascender a las <strong>Razones Trigonométricas</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Bautizo Relativo (Opuesto y Adyacente)</h3>
+            <p>Con Pitágoras, los dos catetos eran iguales (a y b). Ahora, su nombre cambiará <strong>dependiendo de dónde estés tú parado</strong> (tu ángulo de visión). Si te paras en la esquina de los $35^\circ$:</p>
+            <ul>
+                <li><strong>La Hipotenusa (H):</strong> Sigue siendo la misma diagonal jefa inamovible. Nunca cambia.</li>
+                <li><strong>El Cateto OPUESTO (O):</strong> Es la pared que está MUY LEJOS de ti. Está exactamente al OTRO LADO de tu ángulo, cruzando la habitación. Si dispararas una flecha desde tu ángulo, le darías al Opuesto.</li>
+                <li><strong>El Cateto ADYACENTE (A):</strong> Es el suelo que estás pisando. Está PEGADO a tu pie. (Nota: tu pie toca la Hipotenusa y el Adyacente, ¡pero tú ya sabes quién es la Hipotenusa!).</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Conjuro Sagrado</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Memorizando las Tres Armas de Precisión:</h4>
+                <ol>
+                    <li>Existen tres misiles trigonométricos para conectar grados con metros: <strong>Seno (Sen), Coseno (Cos) y Tangente (Tan)</strong>. Jamás las olvidarás si grabas en tu cerebro este conjuro de ingeniería global: <strong>SOH-CAH-TOA</strong>.</li>
+                    <li><strong>S O H:</strong> El <strong>S</strong>eno es el misil que conecta el Cateto <strong>O</strong>puesto dividido entre la <strong>H</strong>ipotenusa ($\text{Sen} = O/H$).</li>
+                    <li><strong>C A H:</strong> El <strong>C</strong>oseno conecta el Cateto <strong>A</strong>dyacente dividido entre la <strong>H</strong>ipotenusa ($\text{Cos} = A/H$).</li>
+                    <li><strong>T O A:</strong> La <strong>T</strong>angente es el único misil terrestre (sin diagonales). Conecta el Cateto <strong>O</strong>puesto dividido entre el Cateto <strong>A</strong>dyacente ($\text{Tan} = O/A$). Es la máquina de hacer pendientes y rampas.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Francotirador Visual</h3>
+            <div id="quiz-setup">
+                <p>Identifica a tus catetos desde diferentes ángulos y arma el conjuro SOH-CAH-TOA.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Iniciar Calibración!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has cargado las tres fórmulas de precisión en tu arsenal.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a la Base</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc42/MC S42.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc44/MC S44.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

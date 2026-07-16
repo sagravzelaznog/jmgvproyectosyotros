@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 47: Laboratorio Combinado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 47: Laboratorio matemático: Operaciones combinadas complejas integrando potencias y raíces</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Monstruo Final de la Lógica</h3>
+            <p>Has entrenado duro en las trincheras matemáticas. Ya conoces de sobra a los peones (suma/resta), a la nobleza (multiplicación/división), a los reyes arrogantes (potencias/raíces) y al emperador absoluto y dictatorial (el paréntesis). Es la hora exacta del examen final de tu resistencia lógica.</p>
+            <p>Una <strong>Operación Combinada Compleja</strong> es básicamente una ecuación monstruosa que tiene absolutamente todos estos elementos mezclados, peleando entre sí en una sola línea horizontal. Resolverla sin equivocarse y morir requiere de nervios de acero y de seguir ciegamente el protocolo PEMDAS militar al pie de la letra.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Disección Quirúrgica de una Bestia Matemática</h3>
+            <p>Ataquemos juntos y sin miedo esta operación de nivel jefe: <strong>\( 5 + (3^2 - \sqrt{16}) \times 2 \)</strong></p>
+            <ul>
+                <li><strong>Fase 1 (El Emperador manda):</strong> Ubicamos visualmente el paréntesis central \( (3^2 - \sqrt{16}) \). Todo lo demás en la ecuación espera congelado en el tiempo.</li>
+                <li><strong>Fase 2 (Los Reyes atacan adentro):</strong> Exclusivamente dentro de ese paréntesis, los reyes mandan. Resolvemos la potencia (\(3^2 = 9\)) y la raíz cuadrada (\(\sqrt{16} = 4\)). El paréntesis herido ahora queda así de simple: \( (9 - 4) \).</li>
+                <li><strong>Fase 3 (El Peón limpia adentro):</strong> Terminamos el trabajo del paréntesis con la humilde resta: \( 9 - 4 = 5 \). El paréntesis, al quedarse con un solo número, se destruye y libera al mundo un glorioso \(5\).</li>
+                <li><strong>Fase 4 (La Nobleza externa):</strong> La ecuación completa ahora se ve pacífica: \( 5 + 5 \times 2 \). La multiplicación manda y mata a la suma. \( 5 \times 2 = 10 \).</li>
+                <li><strong>Fase 5 (El último Peón):</strong> Sumamos los restos finales de la guerra. \( 5 + 10 = 15 \). ¡Victoria absoluta, el resultado es 15!</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Laboratorio Interactivo: El Auditor Implacable</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en la Computadora:</h4>
+                <ol>
+                    <li><strong>Comprobación Científica:</strong> Escribe toda la bestia de un solo golpe en la consola CAS de GeoGebra: <code>5 + (3^2 - sqrt(16)) * 2</code>. ¡GeoGebra seguirá tu mismo algoritmo y confirmará tu <code>15</code> al instante!</li>
+                    <li><strong>La trampa mortal de la raíz bloque:</strong> A veces el "techo" de la raíz actúa ocultamente como un paréntesis gigante. Escribe <code>sqrt(9 + 16)</code>. Observa atentamente que GeoGebra primero suma lo de adentro (25) y HASTA EL FINAL le saca la raíz (5). En cambio, si caes en la trampa y escribes separados <code>sqrt(9) + sqrt(16)</code> te dará 7. ¡Mucho cuidado con las ilusiones visuales!</li>
+                    <li><strong>Sube de rango:</strong> Crea tú mismo en el papel una operación larga y tramposa que contenga al menos una potencia, una raíz, un paréntesis engañoso y una multiplicación. Usa GeoGebra para auditarla.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Maestro del Algoritmo</h3>
+            <div id="quiz-setup">
+                <p>Evalúa ecuaciones masivas y complejas mentalmente demostrando de una vez por todas que dominas la jerarquía absoluta de PEMDAS.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Final!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Superado! Eres un maestro algorítmico.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Entrenar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc46/MC S46.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc48/MC S48.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 47. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

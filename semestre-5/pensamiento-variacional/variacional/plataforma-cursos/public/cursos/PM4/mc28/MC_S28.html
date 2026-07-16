@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 28 - Ecuación General de la Circunferencia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad II - Zonas de Influencia</span>
+        <h1>MC 28: Expansión a la Forma General de la Circunferencia</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Vimos que la ecuación ordinaria de la zona de un transformador desplazado es $(x - h)^2 + (y - k)^2 = r^2$. Sin embargo, si programas esta ecuación en el sistema de Catastro Municipal para que dibuje el radio de impacto de CFE, algunos softwares no aceptan paréntesis. Solo aceptan polinomios largos y expandidos.</p>
+        
+        <div class="alert-box">
+            <strong>Álgebra Aplicada:</strong> Para comunicar nuestros cálculos con otros ingenieros, debemos expandir los binomios al cuadrado y acomodar los términos en orden, llegando a la <strong>Forma General de la Circunferencia</strong>.
+        </div>
+        <p>El día de hoy repasaremos el trinomio cuadrado perfecto para desglosar la ecuación.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Regla del Binomio al Cuadrado</h3>
+        <p>Recordemos de álgebra básica que: $(a \pm b)^2 = a^2 \pm 2ab + b^2$ (El cuadrado del primero, más/menos el doble producto del primero por el segundo, más el cuadrado del segundo).</p>
+
+        <h3>2. Expandiendo la Ecuación Topográfica</h3>
+        <p>Supongamos que nuestro transformador está en $C(4, 3)$ con un radio de $5\text{m}$. La forma ordinaria es:</p>
+        <div class="math-box">
+            $$(x - 4)^2 + (y - 3)^2 = 25$$
+        </div>
+        <p>Expandimos el primer binomio $(x - 4)^2$:</p>
+        <div class="math-box">
+            $$x^2 - 2(x)(4) + 4^2 \quad \Rightarrow \quad x^2 - 8x + 16$$
+        </div>
+        <p>Expandimos el segundo binomio $(y - 3)^2$:</p>
+        <div class="math-box">
+            $$y^2 - 2(y)(3) + 3^2 \quad \Rightarrow \quad y^2 - 6y + 9$$
+        </div>
+
+        <h3>3. Acomodo en la Forma General</h3>
+        <p>Unimos ambas partes y pasamos el radio (25) al lado izquierdo para igualar a cero:</p>
+        <div class="math-box">
+            $$x^2 - 8x + 16 + y^2 - 6y + 9 - 25 = 0$$
+        </div>
+        <p>Ordenamos ($x^2$, $y^2$, $x$, $y$, números) y sumamos los términos independientes ($16 + 9 - 25 = 0$):</p>
+        <div class="math-box">
+            $$x^2 + y^2 - 8x - 6y = 0$$
+        </div>
+        <p>¡Listo! Esta es la ecuación general. (Curiosamente, como el término numérico final fue $0$, esto significa que la circunferencia pasa exactamente por el origen $0,0$).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Desarrollo en Libreta)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Toca hacer talacha algebraica. Tienes la siguiente zona de cobertura desplazada por el contratista hacia el Sur-Oeste:</p>
+        
+        <div class="math-box">
+            $$(x + 2)^2 + (y + 5)^2 = 49$$
+        </div>
+
+        <ol>
+            <li><strong>Paso 1:</strong> Analiza qué indica la ecuación: el centro está en $C(-2, -5)$ y el radio es $r = 7$.</li>
+            <li><strong>Paso 2:</strong> Desarrolla $(x+2)^2$. El resultado es $x^2 + 4x + 4$.</li>
+            <li><strong>Paso 3:</strong> Desarrolla $(y+5)^2$. El resultado es $y^2 + 10y + 25$.</li>
+            <li><strong>Paso 4:</strong> Une todo: $x^2 + y^2 + 4x + 10y + 4 + 25 - 49 = 0$.</li>
+            <li><strong>Paso 5:</strong> La ecuación general final es: <strong>$x^2 + y^2 + 4x + 10y - 20 = 0$</strong>.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu portafolio, desarrolla la ecuación general para un transformador ubicado en $C(10, -10)$ con una cobertura de radio $r = 30$. Muestra todos los pasos del trinomio cuadrado perfecto.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc27/MC_S27.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc29/MC_S29.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 28. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La forma general de la circunferencia SIEMPRE debe estar igualada a:", options: ["El radio al cuadrado", "Cero", "Uno", "La pendiente"], correct: 1 },
+        { q: "Al desarrollar el binomio (x - 4)², el término central o lineal (-8x) se obtiene al:", options: ["Sumar x + 4", "Multiplicar el doble del primero (x) por el segundo (-4)", "Elevar -4 al cuadrado", "Dividir entre dos"], correct: 1 },
+        { q: "El orden estandarizado para la ecuación general polinomial es:", options: ["Números, x, y, x², y²", "x², y², x, y, Número Independiente", "y, x, y², x²", "No importa el orden"], correct: 1 },
+        { q: "Si la ecuación general termina sin un número independiente (ej. + 0 = 0), geométricamente significa que:", options: ["La circunferencia no existe", "La circunferencia pasa exactamente tocando el origen (0,0)", "El radio es cero", "El transformador está apagado"], correct: 1 },
+        { q: "Al expandir (y + 5)², el cuadrado del segundo término es:", options: ["10", "25", "y²", "-25"], correct: 1 },
+        { q: "En el entregable, el centro en (10, -10) implica que el binomio en 'y' será:", options: ["(y - 10)²", "(y + 10)²", "(y - 100)²", "(y)²"], correct: 1 },
+        { q: "¿Por qué hacemos este proceso en ingeniería si ya teníamos la forma ordinaria?", options: ["Para complicar las matemáticas", "Porque muchos lenguajes de programación y sistemas GIS de catastro requieren la entrada de polinomios expandidos", "Para dibujar en AutoCAD", "No sirve para nada"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

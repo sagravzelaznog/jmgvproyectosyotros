@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 30: El Discriminante</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 30: Visión de Rayos X (Análisis del Discriminante)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Oráculo del Sistema</h3>
+            <p>Usar la Fórmula General completa requiere tiempo (y en los negocios el tiempo es dinero). ¿Qué pasaría si pudieras predecir el futuro de tu ecuación en solo 5 segundos sin tener que resolverla toda? Eso es exactamente lo que hace el <strong>Discriminante ($\Delta$)</strong>. Es la pieza radiactiva que vive adentro de la raíz cuadrada: <strong>$b^2 - 4ac$</strong>. Al extraer solo esa pieza y calcularla, obtendrás una predicción absoluta sobre el destino de tu proyecto inmobiliario.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Los Tres Escenarios del Destino</h3>
+            <p>Calculas rápidamente tu $b^2 - 4ac$. El número resultante (el oráculo) te dará una de estas tres sentencias inamovibles:</p>
+            <ul>
+                <li><strong>El Oráculo POSITIVO ($> 0$):</strong> Si el número es positivo (ej. $25$), significa que el terreno tiene <strong>DOS soluciones reales y diferentes</strong> (ej. $x=5$ y $x=-2$). Hay opciones de diseño, la obra civil es totalmente viable y próspera.</li>
+                <li><strong>El Oráculo CERO ($= 0$):</strong> Si el número es exactamente CERO, significa perfección matemática absoluta. La ecuación escupirá <strong>UNA SOLA solución repetida</strong> (ej. $x=3$). ¡Acabas de descubrir a lo lejos un Trinomio Cuadrado Perfecto disfrazado! El terreno es un cuadrado de élite.</li>
+                <li><strong>El Oráculo NEGATIVO ($< 0$):</strong> Si el número da negativo (ej. $-16$), <strong>¡ALARMA ROJA! ¡NO HAY SOLUCIÓN REAL!</strong> Como no le puedes sacar raíz a un negativo, la máquina colapsará. El arquitecto mintió, el terreno es geométricamente imposible (un fraude). Rechaza el contrato en ese mismo segundo.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Escáner Corporativo</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Destino:</h4>
+                <ol>
+                    <li><strong>Caso A (Escáner Rápido):</strong> $x^2 - 4x + 4 = 0$. Extraes: $a=1, b=-4, c=4$. Calculas el oráculo: $(-4)^2 - 4(1)(4) = 16 - 16 = 0$. Veredicto: El oráculo dio Cero. Hay 1 sola solución, es un terreno cuadrado (TCP).</li>
+                    <li><strong>Caso B (Escáner de Fraude):</strong> $2x^2 + x + 5 = 0$. Extraes: $a=2, b=1, c=5$. Calculas el oráculo: $(1)^2 - 4(2)(5) = 1 - 40 = -39$. Veredicto: El oráculo dio Negativo ($-39$). La obra es imposible. Te ahorraste resolver el resto de la maldita fórmula y salvaste millones en concreto. Esa es la verdadera ingeniería.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Vidente Matemático</h3>
+            <div id="quiz-setup">
+                <p>Usa la visión de rayos X para diagnosticar y descartar proyectos fraudulentos en segundos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Activar Escáner!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Puedes predecir el fracaso de una obra con solo mirar su ADN.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Escáner</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc29/MC S29.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc31/MC S31.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

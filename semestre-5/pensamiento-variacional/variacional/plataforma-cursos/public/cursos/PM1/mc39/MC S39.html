@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 39: La Regla de Cancelación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #27ae60; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Potencias, Medición y Operaciones Combinadas</h1>
+        <h2>Masterclass 39: La raíz cuadrada como inverso de potencias positivas y la regla de cancelación</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Épico Choque de Dos Titanes Matemáticos</h3>
+            <p>Sabemos perfectamente que la suma y la resta se anulan entre sí (si sumas 5 pasos y luego restas 5 pasos, quedas exactamente donde empezaste). Las potencias y las raíces hacen exactamente este mismo baile pero en niveles matemáticos superiores.</p>
+            <p>Si tomas un número base, lo elevas al cuadrado multiplicándolo velozmente, y luego <em>inmediatamente</em> le sacas la raíz cuadrada para revertir el tiempo, el número vuelve a la normalidad absoluta. Es como si ambas operaciones, al ser opuestas, chocaran violentamente y se autodestruyeran.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Mágica Regla de Cancelación Inmediata</h3>
+            <p>Esta es indiscutiblemente la regla analítica más usada en el mundo para despejar ecuaciones en física, química y álgebra avanzada:</p>
+            <p style="text-align: center; font-size: 1.5em; font-weight: bold; padding: 20px;">\(\sqrt{x^2} = x\)</p>
+            <p>Cuando un número tiene un exponente de potencia (ej. \(2\)) escondido adentro de una raíz que tiene exactamente el MISMO índice (ej. raíz cuadrada, con su índice invisible 2), ¡puedes tacharlos y cancelarlos a ambos de un solo plumazo! El número (el radicando) queda libre de ataduras y escapa ileso de la casita de la raíz.</p>
+            <p><em>Ojo de experto:</em> Esto funciona maravillosamente para cualquier índice, siempre que sean gemelos. Una raíz cúbica cancela a una potencia al cubo: \(\sqrt[3]{5^3} = 5\).</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Comprobación del Escape</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso Analítico en el Simulador:</h4>
+                <ol>
+                    <li><strong>Comprueba la anulación destructiva:</strong> En la vista CAS de GeoGebra, escribe <code>sqrt(7^2)</code>. La máquina primero obedecerá y elevará el 7 al cuadrado (dando 49) y luego, obligatoriamente le sacará la raíz cuadrada, devolviéndote el humilde <code>7</code> original. Todo el esfuerzo para nada.</li>
+                    <li><strong>Álgebra pura en acción:</strong> Escribe <code>sqrt(x^2) == x</code> en el panel CAS. (Nota técnica: dependiendo de las configuraciones absolutas, a veces el CAS devuelve el valor absoluto |x| porque asume que podría haber variables negativas ocultas, pero conceptualmente para medidas de distancias y objetos reales, se cancelan limpiamente).</li>
+                    <li><strong>Cancelaciones exóticas de nivel superior:</strong> Si usas el comando superior de raíz cúbica <code>cbrt(12^3)</code>, GeoGebra te arrojará fríamente el número <code>12</code>. La potencia y la raíz detectaron que eran del nivel 3 y se aniquilaron mutuamente.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Despejador Experto de Ecuaciones</h3>
+            <div id="quiz-setup">
+                <p>Usa magistralmente la poderosa regla de cancelación para liberar números y resolver problemas algebraicos sin tocar una calculadora.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Algebraico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado con Honores!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Entrenar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc38/MC S38.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc40/MC S40.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 39. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

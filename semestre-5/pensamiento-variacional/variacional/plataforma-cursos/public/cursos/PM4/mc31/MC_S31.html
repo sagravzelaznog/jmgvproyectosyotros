@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 31 - Leyes de Kepler</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad V - Movimiento y Órbitas</span>
+        <h1>MC 31: Órbitas y las Leyes de Kepler</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea (Satélites de CFE)</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Gran parte de la red de alta tensión nacional está monitoreada por GPS y telecomunicaciones satelitales. ¿Alguna vez te has preguntado qué trayectoria matemática sigue un satélite allá arriba? No giran en círculos perfectos.</p>
+        
+        <div class="alert-box">
+            <strong>Johannes Kepler:</strong> En el siglo XVII, Kepler descubrió usando el Pensamiento Variacional y Geometría Analítica que los planetas (y los satélites de telecomunicaciones) giran trazando <strong>Elipses</strong>, no circunferencias. 
+        </div>
+        <p>Hoy veremos cómo la ecuación de la elipse gobierna todo el universo.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Primera Ley de Kepler (Órbitas Elípticas)</h3>
+        <p>"Los cuerpos celestes describen órbitas elípticas, estando el cuerpo central (la Tierra, o el Sol) en uno de los <strong>Focos</strong> de la elipse".</p>
+        <p>Recuerda la ecuación $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$. El centro geométrico $(0,0)$ está vacío en el espacio. La Tierra está desfasada del centro geométrico, alojada en un punto focal $c$.</p>
+
+        <h3>2. Segunda Ley de Kepler (Variación de la Velocidad)</h3>
+        <p>Aquí entra el pensamiento variacional: el satélite no viaja a velocidad constante. Cuando la elipse lo acerca a la Tierra (Perigeo), la gravedad lo acelera enormemente. Cuando se aleja (Apogeo), se frena.</p>
+        <p>Kepler lo formuló como: "El segmento que une al sol con el planeta barre <strong>áreas iguales en tiempos iguales</strong>".</p>
+
+        <h3>3. Aplicación Satelital (CFE)</h3>
+        <p>Si la CFE contrata un satélite con órbita altamente elíptica, este pasará "volando muy rápido" cerca de México (poco tiempo para transmitir datos de los transformadores), y pasará mucho tiempo "lento" sobre el lado opuesto del mundo. ¡Por eso se usan órbitas geoestacionarias casi circulares para comunicaciones constantes!</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Cálculo del Foco)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Calcularemos dónde está la Tierra dentro de una órbita satelital elíptica:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> La fórmula para hallar la distancia focal ($c$) desde el centro es el Teorema de Pitágoras adaptado: $c = \sqrt{a^2 - b^2}$.</li>
+            <li><strong>Paso 2:</strong> Tenemos un satélite con $a = 10,000\text{km}$ y $b = 8,000\text{km}$.</li>
+            <li><strong>Paso 3:</strong> Evaluamos: $c = \sqrt{100,000,000 - 64,000,000}$.</li>
+            <li><strong>Paso 4:</strong> $c = \sqrt{36,000,000} = 6,000\text{km}$.</li>
+            <li><strong>Conclusión:</strong> El centro geométrico de la elipse está en el origen (0,0), pero el centro de la Tierra (el foco real de rotación) se ubica en la coordenada <strong>(6000, 0)</strong>.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Traza en AutoCAD o en tu libreta a escala la elipse con $a=100$, $b=80$. Marca el centro con una cruz azul en $(0,0)$. Luego, con una cruz verde, marca la posición de la Tierra en $(60, 0)$. Dibuja el satélite en su punto más lejano y en su punto más cercano.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc30/MC_S30.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc32/MC_S32.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 31. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La Primera Ley de Kepler establece que las órbitas celestes y satelitales no son círculos perfectos, sino:", options: ["Parábolas", "Elipses", "Líneas rectas", "Cuadrados"], correct: 1 },
+        { q: "Según Kepler, el cuerpo central que ejerce la gravedad (ej. La Tierra o el Sol) se ubica en:", options: ["El centro geométrico exacto de la órbita (0,0)", "Uno de los focos de la elipse", "Fuera de la elipse", "En el borde"], correct: 1 },
+        { q: "La Segunda Ley de Kepler nos dice que la velocidad del satélite es:", options: ["Completamente constante siempre", "Cero en el espacio", "Variable: más rápido al acercarse al foco, más lento al alejarse", "Solo depende del viento"], correct: 2 },
+        { q: "La fórmula c = √(a² - b²) sirve para encontrar:", options: ["El radio de la Tierra", "El costo del satélite", "La distancia focal (c) desde el centro geométrico hasta donde está la Tierra", "La circunferencia"], correct: 2 },
+        { q: "Si el foco nos dio 6000 km, y el semieje mayor 'a' es 10000 km. ¿Cuál es la distancia más corta (perigeo) entre la Tierra y el satélite?", options: ["4000 km (10000 - 6000)", "16000 km", "10000 km", "6000 km"], correct: 0 },
+        { q: "Si un satélite pasa muy rápido en la zona baja y muy lento en la zona alta, este es un excelente ejemplo de:", options: ["Variación lineal", "Una falla mecánica", "Pensamiento Variacional (Tasa de cambio dinámica)", "Magia"], correct: 2 },
+        { q: "¿Por qué las telecomunicaciones (como GPS o monitoreo CFE) prefieren órbitas 'geoestacionarias' casi circulares en lugar de altamente elípticas?", options: ["Para gastar más combustible", "Para que la velocidad sea constante y el satélite siempre esté sobre el mismo punto del país", "Para que choque con otros", "Porque a Kepler no le gustaba la elipse"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

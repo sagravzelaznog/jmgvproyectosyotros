@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 02: Tablas de Verdad y Viabilidad</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Archivo CSS Modular -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <!-- Integración de KaTeX para Renderizado Matemático -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1>Pensamiento Matemático I</h1>
+        <h2>Masterclass 02: Construcción de tablas de verdad aplicadas a la viabilidad de recursos locales</h2>
+    </header>
+
+    <main>
+        <!-- Bloque 1: Introducción Teórica -->
+        <section class="content-block">
+            <h3>1. ¿Qué es una Tabla de Verdad?</h3>
+            <p>Ya sabemos cómo evaluar una proposición simple, pero ¿qué pasa cuando tenemos un problema complejo con múltiples condiciones que interactúan entre sí? Para no perdernos, utilizamos una <strong>Tabla de Verdad</strong>.</p>
+            <p>Una tabla de verdad es una herramienta matemática que nos permite listar de forma ordenada, sistemática y visual <strong>todos los escenarios posibles</strong> de un problema lógico. Por regla general, si tenemos \(n\) proposiciones, nuestra tabla tendrá \(2^n\) filas o escenarios distintos.</p>
+            <ul>
+                <li>Si solo tenemos \(p\) (1 proposición): \(2^1 = 2\) escenarios posibles (V, F).</li>
+                <li>Si tenemos \(p\) y \(q\) (2 proposiciones): \(2^2 = 4\) combinaciones posibles (VV, VF, FV, FF).</li>
+            </ul>
+        </section>
+
+        <!-- Bloque 2: Enfoque ABP (Viabilidad de Recursos Locales) -->
+        <section class="content-block">
+            <h3>2. Modelando la Viabilidad de un Proyecto Comunitario</h3>
+            <p>Imagina que tu grupo escolar quiere implementar un huerto sustentable en su colonia. Para que el proyecto sea <strong>viable</strong> (es decir, que se pueda realizar con éxito), dependen puramente de los recursos locales.</p>
+            <p>Analicemos dos recursos críticos para iniciar:</p>
+            <ul>
+                <li>\(p\): "Contamos con una inversión de 3000 pesos de las autoridades."</li>
+                <li>\(q\): "El terreno cuenta con acceso constante a agua de riego."</li>
+            </ul>
+            <p>El éxito del huerto exige que se cumplan AMBAS condiciones simultáneamente. Esto se modela como una conjunción (\(p \land q\)). Revisemos la tabla de verdad para este problema:</p>
+            
+            <div style="overflow-x:auto;">
+                <table style="width: 100%; text-align: center; border-collapse: collapse; margin-top: 1rem; border: 2px solid var(--primary-color);">
+                    <tr style="background-color: var(--primary-color); color: white;">
+                        <th style="padding: 10px; border: 1px solid #ccc;">(p) Presupuesto de 3000 pesos</th>
+                        <th style="padding: 10px; border: 1px solid #ccc;">(q) Acceso a Agua</th>
+                        <th style="padding: 10px; border: 1px solid #ccc;">(\(p \land q\)) ¿Proyecto Viable?</th>
+                    </tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ccc;">Verdadero</td><td style="padding: 10px; border: 1px solid #ccc;">Verdadero</td><td style="padding: 10px; border: 1px solid #ccc; font-weight: bold; color: var(--success-color);">Verdadero (¡Éxito total!)</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ccc;">Verdadero</td><td style="padding: 10px; border: 1px solid #ccc;">Falso</td><td style="padding: 10px; border: 1px solid #ccc; color: var(--error-color);">Falso (Sin agua, se seca)</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ccc;">Falso</td><td style="padding: 10px; border: 1px solid #ccc;">Verdadero</td><td style="padding: 10px; border: 1px solid #ccc; color: var(--error-color);">Falso (No hay dinero inicial)</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #ccc;">Falso</td><td style="padding: 10px; border: 1px solid #ccc;">Falso</td><td style="padding: 10px; border: 1px solid #ccc; color: var(--error-color);">Falso (Totalmente inviable)</td></tr>
+                </table>
+            </div>
+            <p style="margin-top: 1rem;">Al construir la tabla, demostramos lógicamente que de 4 posibles realidades, solo 1 permite que el proyecto sobreviva. ¡Esto nos ayuda a no desperdiciar tiempo ni esfuerzo!</p>
+        </section>
+
+        <!-- Bloque 3: Simulación Didáctica en GeoGebra -->
+        <section class="geogebra-section">
+            <h3>3. Explorador Interactivo: Hoja de Cálculo Booleana</h3>
+            <div class="iframe-container">
+                <!-- Simulador de GeoGebra Classic -->
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador:</h4>
+                <p style="margin-bottom: 10px; color: var(--text-color); font-weight: 500;">Vamos a crear nuestra propia tabla de verdad dinámica usando la Hoja de Cálculo:</p>
+                <ol>
+                    <li><strong>Activar la Hoja de Cálculo:</strong> En GeoGebra, haz clic en las tres líneas horizontales arriba a la derecha (Menú principal) \(\rightarrow\) Selecciona <em>Vista</em> \(\rightarrow\) Activa la casilla de <em>Hoja de Cálculo</em>. Verás aparecer una cuadrícula tipo Excel.</li>
+                    <li><strong>Definir la columna \(p\):</strong> En la celda <code>A1</code> escribe <code>true</code> y presiona Enter. En la celda <code>A2</code> escribe <code>false</code>.</li>
+                    <li><strong>Definir la columna \(q\):</strong> En la celda <code>B1</code> escribe <code>true</code>. En la celda <code>B2</code> escribe <code>true</code>.</li>
+                    <li><strong>Programar la Viabilidad Lógica:</strong> Selecciona la celda <code>C1</code> y escribe la fórmula matemática booleana: <code>= A1 && B1</code>. Al presionar Enter, GeoGebra calculará el valor de verdad automáticamente.</li>
+                    <li><strong>Automatización:</strong> Selecciona la celda <code>C2</code> y escribe <code>= A2 && B2</code>. Ahora, cambia los valores de las celdas A1 o B1 por <em>false</em> y observa cómo la columna C recalcula la viabilidad del proyecto al instante.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Bloque 4: Gamificación (Quiz Estilo Kahoot) -->
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: Evalúa tu Lógica</h3>
+            
+            <div id="quiz-setup">
+                <p>Estás a punto de iniciar un reto interactivo con 7 preguntas sobre tablas de verdad y viabilidad de proyectos. ¡Aplica lo aprendido!</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto!</button>
+            </div>
+            
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid">
+                    <!-- Las opciones se inyectan dinámicamente con JS -->
+                </div>
+            </div>
+
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Jugar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc01/MC S01.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc03/MC S03.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 02. Todos los derechos reservados.
+    </footer>
+
+    <!-- Script de Lógica Interactiva -->
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

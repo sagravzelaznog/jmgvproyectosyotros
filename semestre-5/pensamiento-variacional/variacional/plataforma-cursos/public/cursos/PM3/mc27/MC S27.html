@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 27: Completando el Cuadrado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #f59e0b; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad III: Ecuaciones Cuadráticas y Diseño de Áreas</h1>
+        <h2>Masterclass 27: Ingeniería Forzada (Completar el Cuadrado Perfecto)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Hackeo Matemático Definitivo</h3>
+            <p>Ya sabes cómo comprimir un Diamante (TCP). Pero, ¿qué haces cuando el terreno que te dieron NO es perfecto y no encuentras los números para factorizarlo? Eres un ingeniero élite, no te rindes. Aplicas el <strong>Hackeo de Completar el Cuadrado</strong>. Tomas un terreno ordinario e incompleto ($x^2 + bx$) y le INYECTAS capital (números) a la fuerza para MUTARLO y obligarlo a convertirse en un TCP artificial. Forzamos la perfección geométrica.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Fórmula Mágica de Inyección ($\frac{b}{2}$ al Cuadrado)</h3>
+            <p>Si tienes el proyecto a medias $x^2 + 8x$, le falta el dinero final (el término 'c') para ser un TCP. La táctica de ingeniería para descubrir ese número faltante perfecto es brutal: Tomas al maldito coeficiente del medio (la barda '$b$', en este caso el $8$). Lo agarras, lo obligas a partirse a la MITAD (da $4$). Y a ese miserable resultado, lo ELEVAS AL CUADRADO corporativo ($4 \cdot 4 = 16$). ¡El $16$ es el número sagrado! Se lo sumas al final de tu ecuación, y acabas de forjar en hierro un Trinomio Cuadrado Perfecto: $x^2 + 8x + 16$.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Protocolo de Balance</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Resolviendo $x^2 - 10x - 24 = 0$ forzando un TCP:</h4>
+                <ol>
+                    <li><strong>Despejar la Zona de Combate:</strong> Mandas al $-24$ original (que es basura y no te sirve) al lado derecho de la frontera: $x^2 - 10x = 24$. Dejas un espacio hueco a la izquierda para tu inyección.</li>
+                    <li><strong>Calcular la Inyección:</strong> El número del medio es $-10$. Su mitad es $-5$. Elevado al cuadrado da $+25$.</li>
+                    <li><strong>Inyectar y Balancear:</strong> Metes el $+25$ a la izquierda. Pero la regla corporativa te EXIGE que lo que metes de un lado, lo metas del otro para no destruir la balanza. Así que sumas $25$ en ambos bandos: $x^2 - 10x + 25 = 24 + 25$.</li>
+                    <li><strong>Comprimir y Detonar:</strong> La izquierda mutó a TCP, la comprimes: $(x - 5)^2 = 49$. ¡Boom! Ahora despejas sacando raíz a ambos lados: $x - 5 = \pm 7$. Te dan las respuestas $x = 12$ y $x = -2$. Magistral.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Mutador Genético</h3>
+            <div id="quiz-setup">
+                <p>Obliga a las ecuaciones ordinarias a convertirse en Diamantes inyectando el número mágico correcto.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #f59e0b;">¡Iniciar Mutación!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #f59e0b;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Posees el poder de reescribir la geometría del sistema.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Laboratorio</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc26/MC S26.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #f59e0b;">Menú Principal</a>
+            <a href="../mc28/MC S28.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 33: Evaluación entre Pares</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #2980b9; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad II: Números, Operaciones y Fracciones</h1>
+        <h2>Masterclass 33: Evaluación entre pares de los modelos matemáticos construidos</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Ojo Crítico del Auditor Experto</h3>
+            <p>En el mundo real de la ingeniería, la ciencia o los negocios corporativos, nunca se publica o presenta un modelo matemático sin que otro experto colega lo revise exhaustivamente. A esta práctica profesional se le llama <strong>"Revisión por pares" (Peer Review)</strong>.</p>
+            <p>Tu misión el día de hoy no es crear un modelo nuevo, sino evaluar y auditar críticamente el modelo fraccionario y los cálculos de porcentaje que elaboró tu compañero de equipo sobre el mapa urbano de la colonia.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Rúbrica de Auditoría (¿Qué debes buscar?)</h3>
+            <p>Al auditar y revisar el trabajo analítico de otro, debes ser incansablemente riguroso y verificar estos 3 pilares matemáticos:</p>
+            <ul>
+                <li><strong>Coherencia Lógica del Denominador:</strong> ¿El compañero usó realmente el terreno TOTAL como su denominador (ej. las 120 hectáreas)? Si cometió el error novato de usar una parte aislada como base, todo su modelo será un fraude.</li>
+                <li><strong>Simplificación Correcta y Elegante:</strong> ¿Se tomó la molestia de reducir las fracciones a su mínima expresión usando el Máximo Común Divisor (MCD)? (ej. pasando de \(\frac{15}{120}\) al irreducible \(\frac{1}{8}\)).</li>
+                <li><strong>Traducción a Porcentaje Base 100:</strong> ¿La conversión final a porcentaje decimal tiene sentido lógico en la calculadora o se equivocó trágicamente al mover el punto decimal? (ej. escribir 1.25% en un reporte en lugar del 12.5% correcto).</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Interactivo: Auditoría en Tiempo Real</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Paso a Paso en el Simulador (Tu herramienta de auditor):</h4>
+                <ol>
+                    <li><strong>Comprueba a tu compañero en segundos:</strong> Si tu compañero afirma con seguridad que la fracción gigante \(\frac{40}{200}\) se simplifica a \(\frac{1}{4}\), abre de inmediato el CAS de GeoGebra y escribe <code>40/200</code>.</li>
+                    <li><strong>El Veredicto Computacional:</strong> GeoGebra te mostrará fríamente que el resultado es <code>1/5</code>. ¡Acabas de encontrar un error crítico en su modelo matemático! Anótalo en tu reporte oficial.</li>
+                    <li><strong>Validación Lógica de Porcentajes:</strong> Si tu compañero dice en su documento que la proporción fraccionaria equivale al 25%, escribe la comprobación lógica <code>1/5 == 25%</code> en el CAS. GeoGebra te dirá contundentemente <code>false</code>. Definitivamente su modelo técnico necesita correcciones urgentes antes de ser presentado a la alcaldía.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Auditor Matemático</h3>
+            <div id="quiz-setup">
+                <p>Evalúa estos escenarios como un auditor senior experto y encuentra los errores ocultos que podrían arruinar los modelos de tus compañeros.</p>
+                <button id="start-btn" class="btn-primary">¡Comenzar Reto Analítico!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Completado!</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver a Auditar</button>
+            </div>
+        </section>
+    
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc32/MC S32.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none;">Índice Principal</a>
+            <a href="../mc34/MC S34.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM1 MC 33. Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

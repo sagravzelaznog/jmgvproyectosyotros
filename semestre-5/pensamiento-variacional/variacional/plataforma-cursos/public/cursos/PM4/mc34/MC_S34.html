@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 34 - Ecuaciones y Estimaciones Básicas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VI - Modelado y Estimaciones</span>
+        <h1>MC 34: Estimaciones Rápidas con Dos Variables</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Imagina que estás en la obra bajo un sol ardiente de $40^\circ \text{C}$. El supervisor te pregunta: "Oye ingeniero, ¿cuánto concreto y cuánto tubo compro para la cuadra siguiente?". No tienes computadora ni AutoCAD a la mano, solo tu casco, un lápiz y tu conocimiento de Álgebra.</p>
+        
+        <div class="alert-box">
+            <strong>Matemáticas de Campo:</strong> Las "Estimaciones Sencillas" nos permiten usar ecuaciones lineales de dos variables ($x, y$) para predecir costos y materiales mentalmente o con un rápido trazo en papel, logrando una precisión del 90% en segundos.
+        </div>
+        <p>Aprenderemos a crear "Ecuaciones Paramétricas de Obra".</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Ecuaciones de Dos Variables en Obra</h3>
+        <p>Cualquier tarea de obra civil depende de un "Costo Fijo" (arranque) y un "Costo Variable" (lo que cambia por cada metro avanzado).</p>
+        <p>Ejemplo: Rentar la retroexcavadora cuesta $5,000$ pesos por llevarla al sitio (Fijo), y cobra $300$ pesos por cada hora de uso (Variable).</p>
+        
+        <div class="math-box">
+            $$y = 300x + 5000$$
+        </div>
+        <ul>
+            <li><strong>$x$:</strong> Variable independiente (Horas de uso).</li>
+            <li><strong>$y$:</strong> Variable dependiente (Costo total en pesos).</li>
+        </ul>
+
+        <h3>2. Estimación Rápida</h3>
+        <p>Si calculas "a ojo" que hacer la zanja de esa cuadra tomará 8 horas, la estimación rápida es:</p>
+        <div class="math-box">
+            $$y = 300(8) + 5000$$
+            $$y = 2400 + 5000 = 7400 \text{ pesos}$$
+        </div>
+
+        <h3>3. Sistemas de Restricciones</h3>
+        <p>A veces la variable independiente es el dinero. Tienes un presupuesto de $11,000$ pesos. ¿Cuántas horas ($x$) la puedes rentar?</p>
+        <div class="math-box">
+            $$11000 = 300x + 5000$$
+            $$11000 - 5000 = 300x$$
+            $$6000 = 300x \quad \Rightarrow \quad x = 20 \text{ horas}$$
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Modelado Presupuestal)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Crearemos una ecuación de estimación para el material de la red subterránea:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Identificar Costo Fijo.</strong> Comprar un transformador de pedestal cuesta $35,000$ pesos (solo necesitas uno para iniciar la obra de la cuadra).</li>
+            <li><strong>Paso 2: Identificar Costo Variable.</strong> El cable subterráneo cuesta $120$ pesos el metro lineal ($x$).</li>
+            <li><strong>Paso 3: Construir Modelo.</strong> La ecuación es $y = 120x + 35000$.</li>
+            <li><strong>Paso 4: Estimar.</strong> El topógrafo te dice por radio que la calle mide aprox $150$ metros. Estima el costo del material: $y = 120(150) + 35000 = 18000 + 35000 = 53,000$ pesos.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu hoja de presupuesto, redacta tu propia ecuación de estimación para la pintura vial de la calle. Asume que la máquina pintadora cuesta $2000$ pesos de renta (Fijo) y cada litro de pintura (que rinde para 10 metros) cuesta $150$ pesos. ¿Cuál es la ecuación final y cuánto costará pintar una avenida de 300 metros?
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc33/MC_S33.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc35/MC_S35.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 34. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Una estimación rápida mediante ecuaciones de dos variables (y = mx + b) se basa en un modelo:", options: ["Cuadrático", "Elíptico", "Lineal", "Trigonométrico"], correct: 2 },
+        { q: "En el contexto de presupuestos de obra, la variable '+ b' (ordenada al origen) representa:", options: ["El costo variable por metro", "El costo fijo inicial (arranque, rentas base)", "Los impuestos", "El tiempo total"], correct: 1 },
+        { q: "En la ecuación y = 120x + 35000, si la obra es de CERO metros (x=0), el costo 'y' es:", options: ["0 pesos", "120 pesos", "35,000 pesos (compraste el transformador pero no avanzaste nada)", "Incalculable"], correct: 2 },
+        { q: "Si la variable independiente 'x' es el dinero disponible (presupuesto tope), debemos:", options: ["Multiplicar", "Despejar 'x' haciendo operaciones inversas a la ecuación", "Llorar", "Ignorar el costo fijo"], correct: 1 },
+        { q: "En el entregable, si 1 litro cuesta 150 pesos y rinde 10 metros. ¿Cuál es el costo variable por CADA metro (x)?", options: ["150 pesos", "15 pesos", "1500 pesos", "1.5 pesos"], correct: 1 },
+        { q: "La ecuación final del entregable, usando 15 pesos por metro (x), sería:", options: ["y = 150x + 2000", "y = 2000x + 15", "y = 15x + 2000", "y = 10x + 150"], correct: 2 },
+        { q: "Evaluar la ecuación anterior para 300 metros da como resultado (15 * 300) + 2000:", options: ["6500 pesos", "4500 pesos", "5000 pesos", "8000 pesos"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

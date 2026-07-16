@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 37: Topografía y el Triángulo de Poder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 37: La Escuadra Perfecta (El Triángulo Rectángulo)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Mundo Real no es Plano</h3>
+            <p>Hemos diseñado terrenos perfectos (cuadrados y rectángulos). Pero en la vida real, el suelo tiene desniveles. Tienes que construir rampas, calcular la altura de un edificio usando su sombra, o tender un cable de acero en diagonal desde el techo hasta el suelo. Cuando las líneas rectas (X e Y) chocan con las Diagonales, la ingeniería entra al mundo de la <strong>Trigonometría</strong>. Y su arma principal, la base de toda la arquitectura mundial, es el <strong>Triángulo Rectángulo</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Firma del Poder (El Ángulo Recto)</h3>
+            <p>No cualquier triángulo sirve en esta industria. El Triángulo Rectángulo es la estructura más estable conocida por el hombre. Su ADN contiene una firma inquebrantable: <strong>Un Ángulo Recto exacto de 90 Grados ($90^\circ$)</strong>. Este ángulo es la esquina perfecta (como la pared de tu cuarto chocando contra el piso). Si un triángulo tiene una esquina de $89^\circ$ o $91^\circ$, la estructura está comprometida, el edificio se caerá y todo el sistema de fórmulas trigonométricas colapsará. El $90^\circ$ es sagrado.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: Inspección de Estructuras</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Auditoría de Ángulos Internos:</h4>
+                <ol>
+                    <li><strong>La Ley de los $180^\circ$:</strong> Por decreto geométrico universal, la suma de los tres ángulos internos de CUALQUIER triángulo siempre debe ser exactamente $180^\circ$. Ni uno más, ni uno menos.</li>
+                    <li><strong>El Presupuesto Restante:</strong> Si sabes que el Triángulo de Poder ya gastó $90^\circ$ en su esquina perfecta (la escuadra)... ¡solo le quedan $90^\circ$ para repartir entre las otras dos esquinas (los ángulos agudos)!</li>
+                    <li><strong>Cálculo Táctico Rápido:</strong> Si el arquitecto te dice que el ángulo superior mide $30^\circ$, no usas calculadoras complejas. Ya tienes el de $90^\circ$. Gastaste $30^\circ$ arriba. Llevas $120^\circ$. El ángulo inferior debe medir obligatoriamente $60^\circ$ ($180 - 120 = 60$). Eres un radar de precisión geométrica.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Topógrafo</h3>
+            <div id="quiz-setup">
+                <p>Identifica y audita la estabilidad estructural midiendo la distribución de los ángulos internos.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Iniciar Auditoría!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has calibrado tu visión para detectar la escuadra perfecta.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Teodolito</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc36/MC S36.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior (Unidad III)</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal</a>
+            <a href="../mc38/MC S38.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

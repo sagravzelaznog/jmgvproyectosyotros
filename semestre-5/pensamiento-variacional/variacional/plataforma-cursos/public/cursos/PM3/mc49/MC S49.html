@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 49: Dispersión del Presupuesto (Varianza y Desviación)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #8b5cf6; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad V: Análisis Urbano y Cierre del Proyecto</h1>
+        <h2>Masterclass 49: El Riesgo de Inversión (Varianza y Desviación Estándar)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Falsa Seguridad del Promedio</h3>
+            <p>El Proveedor A te vende 3 tipos de focos LED a estos precios: $100, $100, $100. (Promedio: $100). El Proveedor B te vende focos a $1, $100, $199. (Promedio: $100). Si solo miras el promedio, ambos parecen iguales. Pero el Proveedor B es un <strong>Caos Financiero</strong>; hoy te cobra casi nada y mañana te roba. La Media no te dice qué tan 'locos' o dispersos están los datos. Para medir el Riesgo e Inestabilidad de un mercado, desatas a los dos sabuesos de la estadística superior: <strong>La Varianza y la Desviación Estándar ($\sigma$)</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Auditoría del Caos (El Algoritmo de la Varianza)</h3>
+            <p>La Varianza no mide precios, <strong>mide DISTANCIAS contra el jefe (la Media)</strong>. Su trabajo es ver qué tan rebelde es cada número. El protocolo militar exige que cada dato sea castigado: tomas al dato rebelde, le RESTAS el promedio de la empresa, y luego lo ELEVAS AL CUADRADO para asegurarte de que el castigo sea positivo. Sumas todos los castigos al cuadrado y los divides entre los trabajadores. Obtendrás un número mutante (Varianza en dólares cuadrados). Es el índice de caos.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: La Desviación Estándar (El Sello de Calidad)</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando el Riesgo del Proveedor B ($1, $100, $199):</h4>
+                <ol>
+                    <li><strong>El Promedio Base:</strong> Ya sabemos que la Media ($\bar{x}$) es 100.</li>
+                    <li><strong>El Castigo de los Rebeldes:</strong> <br>
+                        Dato 1 ($1): $(1 - 100)^2 = (-99)^2 = 9801$.<br>
+                        Dato 2 ($100): $(100 - 100)^2 = (0)^2 = 0$.<br>
+                        Dato 3 ($199): $(199 - 100)^2 = (99)^2 = 9801$.</li>
+                    <li><strong>La Varianza (El Caos Crudo):</strong> Sumas los castigos: $9801 + 0 + 9801 = 19602$. Lo divides entre los 3 focos: $19602 / 3 = 6534$. La Varianza es un ridículo "$6534$ dólares cuadrados".</li>
+                    <li><strong>El Escudo de la Desviación Estándar ($\sigma$):</strong> Como la varianza mutó todo a "cuadrados", le aplicas el antídoto geométrico universal: <strong>¡La Raíz Cuadrada!</strong> $\sqrt{6534} = 80.8$. ¡Listo! Esa es tu Desviación Estándar ($\sigma$).</li>
+                    <li><strong>La Conclusión Ejecutiva:</strong> Tu promedio es \$100, pero la Desviación de $80.8$ te grita que los precios de ese proveedor pueden "brincar" 80 dólares hacia arriba o hacia abajo en cualquier momento. Es un riesgo total inaceptable. Cancela el contrato.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Gestor de Riesgos</h3>
+            <div id="quiz-setup">
+                <p>Audita la volatilidad de los mercados usando la Desviación Estándar para proteger el presupuesto.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #8b5cf6;">¡Iniciar Análisis de Riesgo!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #8b5cf6;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Puedes detectar el caos financiero escondido detrás de los promedios.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Servidor Central</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc48/MC S48.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #8b5cf6;">Menú Principal</a>
+            <a href="../mc50/MC S50.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

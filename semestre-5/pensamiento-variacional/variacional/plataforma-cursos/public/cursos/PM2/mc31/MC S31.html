@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 31: Sistemas 2x2 y el Cruce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #e74c3c; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Ecuaciones y Resolución de Problemas (La Cacería)</h1>
+        <h2>Masterclass 31: Sistemas 2x2 (El Cruce de Líneas de Producción)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Problema Letal de las Dos Variables</h3>
+            <p>Bienvenidos a la violenta Unidad IV. Hasta ahora, en secundaria solo cazábamos y despejábamos a una variable a la vez (como la cobarde $x$). Pero en el rudo mundo corporativo real, los problemas millonarios siempre tienen DOS o más variables desconocidas al mismo tiempo. Ejemplo clásico: Si sabemos que "2 sillas ejecutivas y 1 mesa cuestan 500 pesos en total", eso se traduce al álgebra como $2x + 1y = 500$. El problema mortal es que <strong>una sola ecuación aislada NO es suficiente</strong> para descubrir el precio individual de cada mueble, ¡hay infinitas combinaciones! Para lograr acorralar y atrapar a DOS sospechosos ($x$ e $y$), necesitas OBLIGATORIAMENTE DOS ecuaciones (dos pistas independientes) cruzadas. A esta trampa doble se le llama formalmente un <strong>Sistema de Ecuaciones Lineales 2x2</strong>.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. El Violento Choque de Líneas (El Método Gráfico)</h3>
+            <p>Cada simple ecuación de primer grado (como $x + y = 10$) representa físicamente en la vida real una infinita <strong>LÍNEA RECTA</strong> en un plano cartesiano. Cuando te entregan un Sistema 2x2, básicamente tienes dos líneas rectas dibujadas combatiendo en el mismo mapa. La "solución" milagrosa del sistema es simple y llanamente <strong>el punto exacto de impacto donde ambas líneas chocan, se cruzan y mueren</strong>.</p>
+            <ul>
+                <li style="font-size: 1.1rem; border-left: 5px solid #3498db; padding-left: 10px; margin: 10px 0;"><strong>Caso 1 (El Choque Perfecto):</strong> Las líneas se cruzan agresivamente en un solo punto $(x, y)$. Hay UNA solución única. El problema tiene respuesta facturable y el caso se cierra con éxito.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #f39c12; padding-left: 10px; margin: 10px 0;"><strong>Caso 2 (Líneas Paralelas Intocables):</strong> Las líneas jamás se tocan. Tienen exactamente la misma inclinación (pendiente) pero están separadas. <strong>NO hay solución física</strong> (Sistema Incompatible). El cliente te entregó un problema matemáticamente imposible.</li>
+                <li style="font-size: 1.1rem; border-left: 5px solid #10b981; padding-left: 10px; margin: 10px 0;"><strong>Caso 3 (Las Líneas Clonadas):</strong> Una línea está dibujada descaradamente encima de la otra. Son exactamente la misma ecuación, solo que disfrazada. Tienes <strong>Infinitas soluciones</strong>. El cliente es un estafador y no te dio dos pistas reales.</li>
+            </ul>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Taller Analítico: El Radar Cartesiano de Impacto</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Rastreando el sistema de objetivos:</h4>
+                <p><strong>Ecuación 1 (Línea Azul):</strong> $x + y = 5$<br>
+                   <strong>Ecuación 2 (Línea Roja):</strong> $2x - y = 4$</p>
+                <ol>
+                    <li>Si dibujamos la Línea 1, sus posibles coordenadas de pista pasan por puntos como (3,2), (4,1).</li>
+                    <li>Si dibujamos la Línea 2, sus trayectorias pasan por puntos como (3,2), (2,0).</li>
+                    <li><strong>El Impacto Crítico:</strong> ¡Ambas líneas se cruzan y chocan exactamente en la coordenada <strong>(3, 2)</strong>!</li>
+                    <li><strong>La Solución y Cierre del Caso:</strong> Esto significa indudablemente que el escurridizo sospechoso $x = 3$, y el cómplice $y = 2$. Has resuelto el caso corporativo de manera 100% visual.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Controlador de Tráfico Aéreo</h3>
+            <div id="quiz-setup">
+                <p>Demuestra sin llorar ante la junta directiva que entiendes la naturaleza puramente física de los sistemas de ecuaciones antes de intentar resolverlos con la fría álgebra en las siguientes masterclasses.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #e74c3c;">¡Iniciar el Rastreo Cartesiano!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #e74c3c;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado con Grandeza! Has comprendido profundamente que el álgebra y la geometría abstracta son solamente dos idiomas distintos para describir la misma verdad del universo.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver Exitosamente al Radar</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc30/MC S30.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #e74c3c;">Menú Principal</a>
+            <a href="../mc32/MC S32.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM2 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

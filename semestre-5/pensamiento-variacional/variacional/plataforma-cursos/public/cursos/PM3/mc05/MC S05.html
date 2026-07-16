@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 05: Simulador de Distancias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #10b981; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad I: Ecuaciones Lineales y Trazado Urbano</h1>
+        <h2>Masterclass 05: Verificación de Incógnitas en Terreno</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. La Prueba del Ácido Corporativa</h3>
+            <p>Un ingeniero novato resuelve la ecuación, anota el resultado $x = 12$ y se va a dormir. Un ingeniero corporativo élite <strong>verifica</strong> ese resultado antes de gastar un solo peso del presupuesto. La verificación es la prueba del ácido matemática: agarras el valor que encontraste para la incógnita y lo inyectas violentamente de regreso en la ecuación original (donde estaba la letra). Si la balanza pesa exactamente lo mismo a la izquierda y a la derecha, tu cálculo es oro puro.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. Evitando el Colapso Financiero</h3>
+            <p>Supongamos que tu ecuación original era $3x + 10 = 40$. Resolviste y dijiste "jefe, la calle mide $x = 10$ metros". Hagamos la verificación: Inyectas el $10$ en la 'x'. La cuenta queda: $3(10) + 10$. Eso da $30 + 10 = 40$. ¡$40$ de la izquierda es perfectamente igual al $40$ de la derecha! La balanza corporativa está en equilibrio perfecto. Si hubieras dicho que $x = 8$, al inyectarlo daría $24 + 10 = 34$... $34$ no es igual a $40$. ¡Alerta de error millonario!</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Simulador: Validando Distancias Lineales</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Protocolo Estricto de Verificación:</h4>
+                <ol>
+                    <li><strong>Ecuación Base:</strong> Tomas el plano original en papel: $5x - 8 = 32$.</li>
+                    <li><strong>Inyección del Dato:</strong> Insertas tu resultado sospechoso (ej. $x = 8$) dentro de un paréntesis: $5(8) - 8 = 32$.</li>
+                    <li><strong>Ejecución Aritmética:</strong> Multiplicas $5$ por $8$ ($40$). A $40$ le restas $8$ ($32$).</li>
+                    <li><strong>Cruce Final:</strong> Comparas el muro izquierdo ($32$) contra el muro derecho ($32$). ¡Equilibrio garantizado! Se aprueba la compra de materiales.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El Auditor de Obras</h3>
+            <div id="quiz-setup">
+                <p>Caza los errores matemáticos ajenos inyectando incógnitas para probar si las balanzas colapsan o resisten.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #10b981;">¡Iniciar Auditoría Externa!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #10b981;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Reto Magistral Superado! Has salvado a la constructora de la quiebra con tus verificaciones de hierro.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Volver al Simulador</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc04/MC S04.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #10b981;">Menú Principal</a>
+            <a href="../mc06/MC S06.html" class="btn-secondary" style="text-decoration: none;">Siguiente &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

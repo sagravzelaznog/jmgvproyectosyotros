@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 11 - Forma Simétrica de la Recta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 11: Intersecciones Duales (Forma Simétrica)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>A veces, el problema no es la inclinación del cableado, sino los límites físicos. Imagina que vas a trazar una zanja recta que cruza de la barda Sur (eje X) a la barda Oeste (eje Y) de un terreno en esquina.</p>
+        
+        <div class="alert-box">
+            <strong>Contexto Arquitectónico:</strong> Sabes exactamente a qué distancia del origen (la esquina de la cuadra) debes romper cada barda. Conoces el corte en X y el corte en Y, pero no sabes la ecuación de la trayectoria intermedia.
+        </div>
+        <p>Para casos donde el diseño depende de los "cortes" con los ejes (las bardas perimetrales), utilizamos la forma más elegante de la recta: la <strong>Ecuación Simétrica</strong>.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación Simétrica</h3>
+        <p>Si una línea recta interseca el eje X en la coordenada $(a, 0)$ y el eje Y en la coordenada $(0, b)$, su ecuación simétrica se define simplemente como:</p>
+        
+        <div class="math-box">
+            $$\frac{x}{a} + \frac{y}{b} = 1$$
+        </div>
+        <ul>
+            <li><strong>$a$:</strong> Abscisa al origen (corte en la barda horizontal / eje X).</li>
+            <li><strong>$b$:</strong> Ordenada al origen (corte en la barda vertical / eje Y).</li>
+        </ul>
+
+        <h3>2. Aplicación a la Trinchera Diagonal</h3>
+        <p>Para dar suministro a una torre residencial, CFE nos indica que debemos perforar la banqueta Sur a 12 metros de la esquina $(a=12)$ y la banqueta Oeste a 8 metros de la esquina $(b=8)$.</p>
+        <p>La ecuación que gobierna toda la zanja diagonal será:</p>
+        <div class="math-box">
+            $$\frac{x}{12} + \frac{y}{8} = 1$$
+        </div>
+        
+        <h3>3. Conversión a Forma General</h3>
+        <p>Para programar esta ruta en un sistema CAD o GPS, a veces se requiere la ecuación general ($Ax + By + C = 0$). Solo debemos quitar los denominadores multiplicando todo por el Mínimo Común Múltiplo de 12 y 8 (que es 24):</p>
+        <div class="math-box">
+            $$24 \left( \frac{x}{12} + \frac{y}{8} \right) = 24(1)$$
+            $$2x + 3y = 24$$
+            $$2x + 3y - 24 = 0$$
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Cortes de Esquina en CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Vamos a diseñar este cruce diagonal en AutoCAD utilizando el comando Chamfer (Chaflán):</p>
+        
+        <ol>
+            <li><strong>Paso 1: Dibujar la Esquina.</strong> Usa <code>LINE</code> para dibujar el eje X (de 0,0 a 30,0) y el eje Y (de 0,0 a 0,30). Tienes una esquina de 90 grados.</li>
+            <li><strong>Paso 2: Comando Chamfer.</strong> Teclea <code>CHAMFER</code> (o <code>CHA</code>).</li>
+            <li><strong>Paso 3: Configurar distancias.</strong> El comando te pedirá distancias de corte. Selecciona la opción <em>Distance</em> (teclea <code>D</code>). Para la primera línea (eje X) pon <code>12</code>. Para la segunda línea (eje Y) pon <code>8</code>.</li>
+            <li><strong>Paso 4: Aplicar.</strong> Haz clic en el segmento del Eje X, luego en el segmento del Eje Y. AutoCAD cortará la esquina y trazará la diagonal perfecta automáticamente, basada en los parámetros $a=12$ y $b=8$.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte, si la ecuación simétrica es $\frac{x}{5} + \frac{y}{15} = 1$, conviértela a su forma general ($Ax + By + C = 0$). Explica a cuántos metros de la esquina corta cada barda.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc10/MC_S10.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc12/MC_S12.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 11. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La forma simétrica de la ecuación de la recta requiere conocer:", options: ["La pendiente y el ángulo", "Los puntos de corte con ambos ejes", "Solo el origen", "El radio"], correct: 1 },
+        { q: "En la ecuación x/a + y/b = 1, la letra 'a' representa:", options: ["El corte con el eje Y", "La pendiente", "El corte con el eje X", "El área del triángulo"], correct: 2 },
+        { q: "Si a = 5 y b = 5, ¿qué ángulo de inclinación tendrá la recta (en grados)?", options: ["0", "90", "45", "180"], correct: 2 },
+        { q: "Para convertir la forma simétrica a la forma general, usualmente debemos:", options: ["Dividir entre cero", "Sacar raíz cuadrada", "Multiplicar por el Mínimo Común Múltiplo de los denominadores", "Elevar al cuadrado"], correct: 2 },
+        { q: "En AutoCAD, el comando que automatiza el corte diagonal de una esquina dados dos valores 'a' y 'b' es:", options: ["FILLET", "CHAMFER", "TRIM", "EXTEND"], correct: 1 },
+        { q: "Si la ecuación simétrica es x/10 + y/10 = 1, ¿en qué coordenada cruza al eje X?", options: ["(0, 10)", "(10, 0)", "(10, 10)", "(0,0)"], correct: 1 },
+        { q: "La ecuación general de la recta tiene la forma:", options: ["y = mx+b", "x/a + y/b = 1", "y - y1 = m(x-x1)", "Ax + By + C = 0"], correct: 3 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

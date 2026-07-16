@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass 45: Taller de Distancias Inaccesibles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+</head>
+<body>
+    <header>
+        <h1 style="background-color: #ef4444; padding: 10px; border-radius: 10px; color: white; display: inline-block;">Unidad IV: Trigonometría Básica (Ingeniería de Distancias)</h1>
+        <h2>Masterclass 45: Taller de Topografía (Distancias Inaccesibles)</h2>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <h3>1. El Fraude de la Cinta Métrica</h3>
+            <p>Se te exige calcular la altura exacta de la Torre de Telecomunicaciones del Fraccionamiento. No puedes trepar la torre con una cinta métrica. No puedes derribarla. Eres un ingeniero, no un malabarista. Tu única arma es pararte a una distancia segura en el suelo firme (ej. a $50m$ de la base) y usar tu teodolito láser para apuntar a la punta de la torre y medir el Ángulo de Elevación (ej. $60^\circ$). Acabas de crear un Triángulo de Poder invisible en el aire. Tienes tu ángulo de disparo ($60^\circ$) y tu suelo seguro ($50m$). Ahora, desata el infierno.</p>
+        </section>
+
+        <section class="content-block">
+            <h3>2. La Selección del Arma (TOA)</h3>
+            <p>El error del novato es usar fórmulas al azar. Tú auditas el terreno. Estás parado en el ángulo de $60^\circ$. El suelo que pisas es tu <strong>Adyacente ($50m$)</strong>. La altura de la torre (lo que quieres destruir/calcular) está al otro lado de la calle, inalcanzable. Es tu <strong>Opuesto</strong>. Escaneas el conjuro corporativo SOH-CAH-TOA. Tienes la 'A'. Quieres la 'O'. ¡No te importa la Hipotenusa! (No vas a tender un cable). La única fórmula que junta la 'O' y la 'A' es la <strong>Tangente (TOA)</strong>. Has seleccionado tu arma de asalto.</p>
+        </section>
+
+        <section class="geogebra-section">
+            <h3>3. Resolución Ejecutiva de la Licitación</h3>
+            <div class="iframe-container">
+                <iframe src="https://www.geogebra.org/classic" title="Simulador GeoGebra" allowfullscreen></iframe>
+            </div>
+            <div class="paso-a-paso">
+                <h4>Hackeando la Altura de la Torre ($\text{Tan}(60^\circ) = O / 50$):</h4>
+                <ol>
+                    <li><strong>Planteamiento Frontal:</strong> Armas el misil en la libreta. $\text{Tan}(60^\circ) = \frac{x}{50}$. (La 'x' está ARRIBA porque es el Opuesto, y la fórmula TOA dice $O/A$).</li>
+                    <li><strong>La Extracción Decimal:</strong> Vas a tu calculadora científica (modo D). Presionas <code>TAN 60 =</code>. La máquina te entrega el ADN del ángulo: $1.732$. Tu ecuación ahora dice $1.732 = \frac{x}{50}$.</li>
+                    <li><strong>El Despeje Final:</strong> Para dejar a la 'x' sola, tienes que quitar el maldito 50 que la está DIVIDIENDO. La ley suprema del álgebra dicta: lo que divide, pasa al otro lado MULTIPLICANDO. Tomas el 50 y lo lanzas multiplicando al decimal.</li>
+                    <li><strong>El Resultado (La Torre):</strong> $1.732 \times 50 = 86.6$. La Torre de Telecomunicaciones mide exactamente <strong>$86.6$ metros de altura</strong>. Acabas de calcular una distancia inaccesible estando parado cómodamente en el suelo.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-container">
+            <h3>Desafío Final: El CEO de Trigonometría</h3>
+            <div id="quiz-setup">
+                <p>Usa la trigonometría para derribar objetivos lejanos y cierra la Unidad IV con honores.</p>
+                <button id="start-btn" class="btn-primary" style="background-color: #ef4444;">¡Sellar Licitación de Alturas!</button>
+            </div>
+            <div id="quiz-active" class="hidden">
+                <div class="progress-bar"><div id="progress-fill" style="background-color: #ef4444;"></div></div>
+                <h4 id="question-text">Pregunta</h4>
+                <div id="options-grid" class="options-grid"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h4>¡Unidad IV Superada! Posees el poder de calcular el universo sin siquiera tocarlo.</h4>
+                <p id="score-text"></p>
+                <button id="restart-btn" class="btn-secondary">Firmar Contrato Global</button>
+            </div>
+        </section>
+
+        <!-- Navegación -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding: 20px; background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="../mc44/MC S44.html" class="btn-secondary" style="text-decoration: none;">&larr; Anterior</a>
+            <a href="../index.html" class="btn-primary" style="text-decoration: none; background-color: #ef4444;">Menú Principal (Fin Unidad IV)</a>
+            <a href="../mc46/MC S46.html" class="btn-secondary" style="text-decoration: none;">Unidad V &rarr;</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; JMGV-PTEL 2026 PM3 - Todos los derechos reservados.
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="../assets/js/quiz-engine.js"></script>
+</body>
+</html>

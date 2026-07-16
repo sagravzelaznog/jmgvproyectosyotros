@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 25 - Sectores y Segmentos Circulares</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad V - Áreas Urbanas y Glorietas</span>
+        <h1>MC 25: Sectores Circulares y Pasto Urbano</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>No todo en la electrificación es cable. Al finalizar la obra subterránea, debes restituir (volver a plantar) el pasto de la rotonda o glorieta que destruiste. Pero, si no destruiste todo el parque, sino solo una "rebanada de pizza", ¿cómo calculas los metros cuadrados de pasto que debes comprar?</p>
+        
+        <div class="alert-box">
+            <strong>Problema de Áreas:</strong> Una "rebanada" de un círculo con centro en el origen recibe el nombre técnico de <strong>Sector Circular</strong>. Para presupuestar la reposición de jardinería, necesitamos saber calcular su área exacta dependiendo del ángulo de apertura.
+        </div>
+        <p>Aprenderemos a combinar el área total del círculo con fracciones de 360 grados.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Área Total de la Rotonda</h3>
+        <p>Si la glorieta tiene un radio de $20\text{m}$ ($r = 20$), el área total ($A_T$) de pasto es:</p>
+        <div class="math-box">
+            $$A_T = \pi \times r^2$$
+            $$A_T = 3.1416 \times 400 = 1256.64 \text{ m}^2$$
+        </div>
+
+        <h3>2. El Sector Circular</h3>
+        <p>Las zanjas excavadas formaron un ángulo desde el centro de la glorieta de $45^\circ$. Todo lo que quedó dentro de ese ángulo fue destruido por la máquina. ¿Cuál es el área de ese sector ($A_s$)?</p>
+        <p>Simplemente aplicamos una regla de tres (o proporción) usando los $360^\circ$ del círculo completo:</p>
+        <div class="math-box">
+            $$A_s = A_T \times \left( \frac{\theta}{360} \right)$$
+            $$A_s = 1256.64 \times \left( \frac{45}{360} \right)$$
+            $$A_s = 1256.64 \times 0.125$$
+            $$A_s = 157.08 \text{ m}^2$$
+        </div>
+
+        <h3>3. Presupuestando la Reposición</h3>
+        <p>Si el rollo de pasto San Agustín cuesta 60 pesos el metro cuadrado, la CFE deberá pagar al municipio:</p>
+        <div class="math-box">
+            $$\text{Costo} = 157.08 \times 60 = 9,424.80 \text{ pesos}$$
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Podemos aislar el sector circular en AutoCAD usando Hatch:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Dibuja la glorieta: <code>CIRCLE</code> en <code>0,0</code>, radio <code>20</code>.</li>
+            <li><strong>Paso 2:</strong> Dibuja la rebanada. Traza una <code>LINE</code> de <code>0,0</code> a <code>20,0</code> (eje X, $0^\circ$).</li>
+            <li><strong>Paso 3:</strong> Traza la segunda línea. Usa <code>LINE</code> desde <code>0,0</code>, teclea la coordenada polar <code>@20&lt;45</code> (longitud 20, ángulo 45).</li>
+            <li><strong>Paso 4: Rellenar (HATCH).</strong> Teclea <code>HATCH</code> (H). Haz clic dentro de la rebanada de pizza.</li>
+            <li><strong>Paso 5: Propiedades.</strong> Selecciona el sombreado verde que creaste y abre propiedades (Ctrl+1). En la sección Geometry dirá <em>Area: 157.08</em>. ¡AutoCAD hizo todo el cálculo analítico por ti!</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En una glorieta masiva de radio 50m, la maquinaria pesada destruyó un sector circular con una apertura de $120^\circ$. Calcula matemáticamente cuántos metros cuadrados se perdieron y cuál será el costo de reposición a 60 pesos/m².
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc24/MC_S24.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc26/MC_S26.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 25. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "En geometría, una 'rebanada de pizza' delimitada por dos radios y un arco se llama:", options: ["Segmento circular", "Sector circular", "Triángulo curvo", "Cuadrante"], correct: 1 },
+        { q: "La fórmula base para el área total de un círculo es:", options: ["π × r", "2 × π × r", "π × r²", "π × d"], correct: 2 },
+        { q: "La fracción (θ / 360) representa:", options: ["El porcentaje o proporción del círculo total que estamos analizando", "El costo del pasto", "El radio al cuadrado", "El ángulo en radianes"], correct: 0 },
+        { q: "Si el ángulo destruido es de 90°, la fracción (90/360) equivale a:", options: ["La mitad del círculo", "Una tercera parte (1/3)", "Una cuarta parte (0.25)", "Un décimo"], correct: 2 },
+        { q: "En AutoCAD, el comando para 'rellenar' un área cerrada y automáticamente calcular sus metros cuadrados es:", options: ["FILL", "COLOR", "PAINT", "HATCH"], correct: 3 },
+        { q: "En el entregable, el área total de una glorieta de 50m de radio es (3.1416 x 2500):", options: ["7854 m²", "157 m²", "2500 m²", "314 m²"], correct: 0 },
+        { q: "Si se destruyeron 120° de los 360°, eso representa 1/3 del área total. El área a reponer (7854 / 3) es:", options: ["2618 m²", "1000 m²", "500 m²", "3927 m²"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

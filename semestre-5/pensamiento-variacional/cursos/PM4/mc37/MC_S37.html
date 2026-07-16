@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 37 - Aplicación de la Hipérbola</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VII - Secciones Cónicas</span>
+        <h1>MC 37: Hipérbola, GPS y Torres de Enfriamiento</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>¿Cómo sabe Google Maps en tu celular dónde estás si tú no envías ninguna señal fuerte? El celular simplemente escucha pasivamente la hora en la que llegan señales de múltiples satélites y calcula la diferencia de tiempos. Las "diferencias de distancia" dibujan curvas hiperbólicas, y tú estás en su intersección.</p>
+        
+        <div class="alert-box">
+            <strong>Arquitectura Estructural:</strong> Además de ubicarte en el mapa, la hipérbola es famosa en las plantas generadoras de electricidad. Esas enormes chimeneas curvas de las centrales nucleares y termoeléctricas (Torres de Enfriamiento) tienen forma de "Hiperboloide".
+        </div>
+        <p>Conozcamos la cónica más exótica y poderosa estructuralmente.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. El Corte Hiperbólico</h3>
+        <p>Volvemos al cono doble de luz (un reloj de arena). Si el plano cortante rebana el cono <strong>completamente en vertical</strong> (paralelo al eje central), cortará tanto el cono de arriba como el de abajo. Esto genera una curva con "dos brazos" opuestos e idénticos: La Hipérbola.</p>
+
+        <h3>2. Ecuación Canónica (El Gemelo Malvado)</h3>
+        <p>La ecuación de la hipérbola es idéntica a la de la elipse, pero con un detalle crucial: ¡tiene un signo menos!</p>
+        <div class="math-box">
+            $$\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$$
+        </div>
+        <p>Ese signo de resta es lo que provoca que la figura se rompa en dos partes (ramas) y se abra hacia el infinito, huyendo del origen.</p>
+
+        <h3>3. ¿Por qué las Torres de Enfriamiento son curvas?</h3>
+        <p>Las plantas termoeléctricas de CFE usan "Hiperboloides de revolución" (una hipérbola que gira sobre su eje). Se construyen así porque:</p>
+        <ul>
+            <li><strong>Aerodinámica:</strong> Soportan vientos huracanados mucho mejor que un cilindro recto.</li>
+            <li><strong>Materiales:</strong> Sorprendentemente, a pesar de ser curvas, ¡se pueden construir uniendo varillas de acero 100% rectas en forma de red (superficie reglada)!</li>
+            <li><strong>Tiro Térmico:</strong> El 'cuello de botella' acelera la salida del vapor de agua por el Efecto Venturi.</li>
+        </ul>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Visualizando la Superficie Reglada)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Demostraremos cómo líneas rectas forman curvas:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Toma un vaso transparente cilíndrico o imagina un círculo en la mesa y otro igual suspendido $20\text{cm}$ arriba.</li>
+            <li><strong>Paso 2:</strong> Ata un hilo tenso desde el borde del círculo de abajo hasta el borde del círculo de arriba (perfectamente vertical).</li>
+            <li><strong>Paso 3: Torsión.</strong> Gira el círculo de arriba unos $45^\circ$. El hilo, aunque siga estando perfectamente tenso y recto, ahora estará en diagonal.</li>
+            <li><strong>Paso 4: El Hiperboloide.</strong> Si pusieras 100 hilos y torcieras la estructura, los hilos se cruzarían en el centro, creando un "cuello" más estrecho. Si lo miras de perfil, la pared exterior dibuja una hipérbola perfecta hecha de líneas rectas de tensión.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu bitácora, explica con tus propias palabras qué es una Superficie Reglada. Describe por qué esto es una ventaja masiva para la CFE al construir torres de 150 metros de altura usando varillas y vigas rectas en vez de varillas dobladas curvas.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc36/MC_S36.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc38/MC_S38.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 37. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Para cortar un cono y generar una hipérbola, el plano debe ser:", options: ["Completamente horizontal", "Perpendicular al eje, formando un círculo", "Completamente vertical o tan inclinado que corte las dos mitades del cono doble", "Paralelo a la generatriz"], correct: 2 },
+        { q: "Visualmente, la hipérbola se compone de:", options: ["Un círculo cerrado", "Una sola curva en U", "Dos ramas o brazos opuestos y simétricos", "Tres líneas rectas"], correct: 2 },
+        { q: "Matemáticamente, la ecuación de la hipérbola es idéntica a la de la elipse, excepto por:", options: ["Que no tiene fracciones", "Que tiene un signo de resta ( - ) entre los términos cuadráticos", "Que está igualada a 0", "Que usa logaritmos"], correct: 1 },
+        { q: "El principio matemático de las diferencias de distancias hiperbólicas es la base de la tecnología:", options: ["Microondas", "Refrigeración", "GPS (Posicionamiento Global)", "Fibra óptica"], correct: 2 },
+        { q: "En ingeniería civil, las torres de enfriamiento de termoeléctricas tienen forma de hiperboloide porque:", options: ["Se ven bonitas", "Es más fácil pintarlas", "Son aerodinámicas contra vientos y térmicamente eficientes (Efecto Venturi)", "Ocupan más espacio"], correct: 2 },
+        { q: "El fenómeno geométrico de que una superficie curva en 3D (hiperboloide) pueda construirse cruzando líneas o vigas 100% rectas se llama:", options: ["Magia", "Superficie Reglada", "Línea quebrada", "Cuadrilátero"], correct: 1 },
+        { q: "En el entregable, la ventaja constructiva de la Superficie Reglada para CFE es:", options: ["Evitar tener que fabricar vigas de acero curvas (ahorro millonario de rolado de acero)", "Ahorrar cemento", "Hacer que caiga la lluvia dentro", "Ninguna"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

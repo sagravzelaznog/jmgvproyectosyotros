@@ -77,7 +77,7 @@ export default function DashboardPage() {
           { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
           { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
-          { id: "pm4", title: "PM4 (Ingeniería y Polinomios)", adminOnly: false, description: "Pensamiento variacional, cónicas y modelado matemático urbano." }
+          { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description?: string; externalUrl?: string }>)
         .filter(course => !course.adminOnly || isAdmin)
         .map(course => {

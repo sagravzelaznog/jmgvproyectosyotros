@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 07 - Proporcionalidad Directa y Ecuación de la Recta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 07: Proporcionalidad y la Ecuación Lineal</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>¿Alguna vez te has preguntado cómo los contratistas saben exactamente cuánto cobrarte por el material antes de hacer la zanja? No adivinan; utilizan <strong>modelos lineales matemáticos</strong>.</p>
+        
+        <div class="alert-box">
+            <strong>Contexto Presupuestal:</strong> En el proyecto eléctrico, hay dos variables que siempre van de la mano: los "Metros de cable instalados" ($x$) y el "Costo total del cable" ($y$). Si compras el doble de metros, el costo será el doble. Esto es la esencia de una recta en el plano cartesiano.
+        </div>
+        <p>Aprenderemos a modelar el costo de la infraestructura utilizando el comportamiento proporcional que subyace a la ecuación general de la recta.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Relación de Proporcionalidad Directa</h3>
+        <p>Dos variables, $x$ e $y$, son directamente proporcionales si al multiplicar una de ellas por un número, la otra se multiplica por el mismo número. Si dividimos $y$ entre $x$, el resultado es una constante de proporcionalidad llamada $m$ (que curiosamente, es la pendiente).</p>
+        
+        <div class="math-box">
+            $$y = mx$$
+        </div>
+        <p>Si el metro de cable cuesta 350 pesos, la constante es $m = 350$. Si compro $x$ metros, el costo $y$ se modela como: $y = 350x$.</p>
+
+        <h3>2. Ecuación de la Recta (Forma Pendiente-Ordenada)</h3>
+        <p>¿Qué pasa si además del cable, la CFE nos cobra una "Tarifa fija de contratación" de 5,000 pesos, sin importar cuántos metros instalemos? La ecuación cambia, sumando la constante fija (ordenada al origen $b$):</p>
+        <div class="math-box">
+            $$y = mx + b$$
+            $$y = 350x + 5000$$
+        </div>
+        <p>Esta es la ecuación de una línea recta, donde:</p>
+        <ul>
+            <li><strong>$x$:</strong> Metros de cable (Variable Independiente).</li>
+            <li><strong>$y$:</strong> Costo total en pesos (Variable Dependiente).</li>
+            <li><strong>$m$ (350):</strong> Costo por metro (Pendiente o ritmo de crecimiento).</li>
+            <li><strong>$b$ (5000):</strong> Costo inicial en $x=0$ (Ordenada al origen).</li>
+        </ul>
+
+        <h3>3. Análisis Gráfico</h3>
+        <p>Si graficamos esta ecuación, obtendremos una recta que NO pasa por el origen $(0,0)$, sino que inicia en $(0, 5000)$. Por cada metro que avanza a la derecha (eje X), la recta sube 350 unidades hacia arriba (eje Y).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio TIC)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Vamos a usar GeoGebra Web o la calculadora gráfica para visualizar el presupuesto:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Abre GeoGebra o la calculadora de Windows.</li>
+            <li><strong>Paso 2: Modelar la ecuación.</strong> En la entrada algebraica, escribe la función del presupuesto: <code>y = 350x + 5000</code>.</li>
+            <li><strong>Paso 3: Ajuste de escala.</strong> La línea parecerá casi vertical porque los valores de Y crecen muy rápido. Cambia la escala del eje Y para que muestre valores de miles (0, 5000, 10000, etc.).</li>
+            <li><strong>Paso 4: Predicción.</strong> Busca en la gráfica el punto donde $x = 100$ (100 metros de zanja). ¿A qué altura $y$ llega la recta? (Debería ser 40,000 pesos).</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Inventa un modelo para los registros de concreto. Cada registro cuesta 1,200 pesos, más un flete fijo de 800 pesos por viaje. Escribe la ecuación $y = mx + b$ e indica cuánto costarían 8 registros.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc06/MC_S06.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc08/MC_S08.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 07. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La relación matemática donde si una variable se duplica, la otra también, se llama:", options: ["Proporcionalidad Inversa", "Proporcionalidad Directa", "Exponencial", "Logarítmica"], correct: 1 },
+        { q: "En la ecuación de presupuesto y = 350x + 5000, ¿qué representa la 'x'?", options: ["El costo total en pesos", "El costo base de contratación", "Los metros de cable a instalar", "El peso del cable"], correct: 2 },
+        { q: "En la ecuación geométrica de la recta y = mx + b, la constante 'm' representa:", options: ["La ordenada al origen", "El eje de abscisas", "La pendiente o tasa de crecimiento", "El vértice"], correct: 2 },
+        { q: "El valor fijo o constante (b = 5000) provoca en la gráfica que:", options: ["La recta empiece en el origen (0,0)", "La recta corte al eje Y en 5000", "La recta sea totalmente plana", "La recta corte al eje X en 5000"], correct: 1 },
+        { q: "Si instalo 0 metros de cable, ¿cuánto pagaré según la ecuación y = 350x + 5000?", options: ["0 pesos", "350 pesos", "5,000 pesos", "5,350 pesos"], correct: 2 },
+        { q: "Para modelar gráficamente el costo con respecto a los metros lineales se usa:", options: ["Una circunferencia", "Una elipse", "Una parábola", "Una línea recta"], correct: 3 },
+        { q: "En el entregable, si cada registro cuesta 1,200 y el flete 800, la ecuación es:", options: ["y = 1200 + 800x", "y = 800x - 1200", "y = 1200x + 800", "y = 2000x"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 36 - Aplicación de la Parábola (Secciones Cónicas)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VII - Secciones Cónicas</span>
+        <h1>MC 36: Parábola como Sección Cónica</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>En el diseño de antenas satelitales (las famosas "antenas parabólicas" de CFE Telecomunicaciones), la forma del plato no es un círculo plano ni un tazón al azar. Es una Parábola de revolución en 3D (un paraboloide).</p>
+        
+        <div class="alert-box">
+            <strong>Concentración de Energía:</strong> La magia de la parábola es que cualquier señal paralela que rebote en sus paredes, <strong>siempre se reflejará directamente hacia el Foco</strong>, sin importar en qué punto de la curva haya golpeado. 
+        </div>
+        <p>Veremos de qué corte cónico nace esta maravilla geométrica y cómo la aprovechamos.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. El Corte Parabólico</h3>
+        <p>Recuperando nuestro cono doble de luz, si inclinamos el plano "cuchillo" <strong>exactamente paralelo a la línea lateral (generatriz) del cono</strong>, obtendremos una curva abierta que nunca se cierra sobre sí misma: La Parábola.</p>
+        <p>A diferencia de la elipse, que se cierra formando un óvalo, la parábola se expande hasta el infinito abriendo sus brazos cada vez más.</p>
+
+        <h3>2. El Foco de la Antena</h3>
+        <p>Matemáticamente, la parábola es el conjunto de puntos que están a la misma distancia del <strong>Foco</strong> y de una línea recta imaginaria llamada <strong>Directriz</strong>.</p>
+        <p>En un plato satelital de la subestación eléctrica, el LNB (el receptor o 'trompetita' que cuelga frente al plato) se coloca milimétricamente en la coordenada del <strong>Foco</strong>. Así, la débil señal del satélite rebota en toda el área gigante del plato y se suma en ese único punto receptor.</p>
+
+        <h3>3. Aplicación Inversa (Luminarias)</h3>
+        <p>Funciona al revés también. Si pones un foco de luz (el bulbo) exactamente en la coordenada focal de un espejo parabólico, la luz rebotará y saldrá en líneas 100% paralelas. ¡Así funcionan los reflectores gigantes que usa CFE para trabajar de noche en la zanja!</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Cálculo del Foco)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>En la ecuación de la parábola con vértice en el origen, $x^2 = 4py$, la variable $p$ es la distancia del vértice al foco.</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Compras un plato satelital cuya curva obedece a $x^2 = 20y$.</li>
+            <li><strong>Paso 2:</strong> Igualas la fórmula: $4p = 20$.</li>
+            <li><strong>Paso 3:</strong> Despejas la distancia focal $p$: $p = \frac{20}{4} = 5\text{m}$.</li>
+            <li><strong>Paso 4: Verificación.</strong> El receptor debe ir montado en un tubo a <strong>$5\text{ metros}$</strong> exactos frente al centro del plato. Si lo pones a 4.9m, no habrá señal, la energía se dispersará.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu memoria técnica, modela un reflector de obra con perfil $y = 0.1x^2$. <em>Pista: conviértelo a la forma $x^2 = 4py \Rightarrow x^2 = 10y$.</em> Calcula a qué distancia en cm (o metros) desde el fondo del espejo deben atornillar el bulbo LED para que la luz salga perfectamente paralela y no encandile.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc35/MC_S35.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc37/MC_S37.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 36. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Para obtener una parábola cortando un cono 3D, el plano cortante debe ser:", options: ["Perpendicular al eje", "Horizontal absoluto", "Exactamente paralelo a la pared lateral (generatriz) del cono", "Paralelo al piso"], correct: 2 },
+        { q: "A diferencia de la elipse, la parábola es una curva:", options: ["Cerrada", "Que forma un triángulo", "Abierta al infinito", "Cuadrada"], correct: 2 },
+        { q: "La propiedad física más importante de la parábola en ingeniería de telecomunicaciones es que:", options: ["Rebota todas las señales entrantes hacia un único punto central llamado Foco", "Es de color blanco", "Absorbe la luz", "Es barata"], correct: 0 },
+        { q: "En el receptor de Sky o Dish, la 'trompetita' que cuelga frente al plato (LNB) está ubicada precisamente en:", options: ["El origen (0,0)", "La directriz", "El Vértice", "El Foco de la parábola"], correct: 3 },
+        { q: "En la ecuación x² = 4py, la variable 'p' representa:", options: ["El precio", "El radio", "La distancia focal (desde el vértice hasta el foco)", "El perímetro"], correct: 2 },
+        { q: "En el entregable, para y = 0.1x², si lo pasamos a x² = 10y, ¿cuál es el valor de 'p'?", options: ["10 / 4 = 2.5", "10", "4", "0.1"], correct: 0 },
+        { q: "Si pones un foco de luz en la coordenada focal de un espejo parabólico (ej. reflectores o faros de auto), ¿hacia dónde sale la luz?", options: ["Se dispersa para todos lados", "Sale en líneas rectas 100% paralelas, creando un haz fuerte", "Regresa al foco", "No sale"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

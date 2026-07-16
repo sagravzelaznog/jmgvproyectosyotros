@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 32 - Análisis de Elipse y Coplanaridad</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad IV - Órbitas y Elipses</span>
+        <h1>MC 32: Intersecciones Elípticas Coplanares</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Ya vimos que dos círculos de cobertura pueden cruzarse. Pero, ¿qué ocurre si instalamos dos antenas direccionales (elípticas) apuntando una hacia la otra en el mismo parque industrial? ¿Cómo calculamos si sus señales se tocan o dejan zonas muertas?</p>
+        
+        <div class="alert-box">
+            <strong>Coplanaridad de Señales:</strong> Las ondas electromagnéticas viajan en el espacio (3D), pero las "huellas de cobertura" en el mapa urbano se asumen como <strong>coplanares</strong> (están dibujadas sobre el mismo plano Z=0, es decir, a nivel de calle). 
+        </div>
+        <p>Aprenderemos a analizar sistemas de dos elipses sobre el mismo plano topográfico.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Sistema de Dos Elipses</h3>
+        <p>Imagina una avenida larga. Tienes la Antena 1 en el origen $(0,0)$ apuntando hacia el Este, y la Antena 2 en $(150, 0)$ apuntando hacia el Oeste. Ambas son elipses alargadas horizontalmente con $a = 80$ y $b = 30$.</p>
+        <div class="math-box">
+            $$E_1: \frac{x^2}{80^2} + \frac{y^2}{30^2} \leq 1$$
+            $$E_2: \frac{(x - 150)^2}{80^2} + \frac{y^2}{30^2} \leq 1$$
+        </div>
+
+        <h3>2. Verificando el Traslape</h3>
+        <p>Para que no haya zonas muertas en el centro de la avenida, la suma de los radios "a" de ambas antenas debe ser mayor que la distancia entre ellas.</p>
+        <ul>
+            <li>Alcance Antena 1: $x_{max} = 0 + 80 = 80$</li>
+            <li>Alcance Antena 2: $x_{min} = 150 - 80 = 70$</li>
+        </ul>
+        <p>Como la Antena 1 llega hasta $80$ y la Antena 2 empieza a cubrir desde $70$, existe un traslape de 10 metros (desde $x=70$ hasta $x=80$). ¡Diseño exitoso!</p>
+
+        <h3>3. Eje Menor Crítico</h3>
+        <p>¿Qué pasa en los costados de la avenida (eje Y)? Ambas antenas tienen $b=30$. Si la avenida tiene 80 metros de ancho (va de $y=-40$ a $y=40$), ambas antenas dejarán las banquetas exteriores sin cobertura, porque solo cubren hasta $y=\pm 30$.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Análisis de Fallos)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Realiza la comprobación analítica de una casa ubicada en la coordenada $(75, 25)$ (justo en la zona de traslape central, pero un poco hacia el Norte):</p>
+        
+        <ol>
+            <li><strong>Paso 1: Evaluar en Antena 1 (0,0):</strong> $\frac{75^2}{6400} + \frac{25^2}{900} = \frac{5625}{6400} + \frac{625}{900} = 0.87 + 0.69 = 1.56$.<br>
+            ¡Sorpresa! Como $1.56 > 1$, la Antena 1 NO llega a esta casa.</li>
+            <li><strong>Paso 2: Evaluar en Antena 2 (150,0):</strong> $\frac{(75-150)^2}{6400} + \frac{25^2}{900} = \frac{5625}{6400} + \frac{625}{900} = 1.56$.<br>
+            La Antena 2 tampoco llega.</li>
+            <li><strong>Paso 3: Conclusión.</strong> Aunque dijimos que había "traslape" en el eje X, al subir un poco en el eje Y ($y=25$), las curvas elípticas ya se han "cerrado" demasiado. La casa está en una zona muerta.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu bitácora, dibuja un croquis a mano alzada de estas dos elipses cruzándose. Sombrea con rojo la "lenteja" de traslape real y explica por qué la casa en $(75, 25)$ quedó fuera, a pesar de estar dentro del rango $X$ (70 a 80).
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc31/MC_S31.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc33/MC_S33.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 32. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El término 'coplanaridad' aplicado a las huellas de cobertura significa que:", options: ["Las señales son invisibles", "Todas se analizan dibujadas en el mismo mapa urbano plano (2D)", "Las antenas están en el mismo poste", "Los radios son iguales"], correct: 1 },
+        { q: "Si la Antena 1 está en x=0 y alcanza hasta 80, y la Antena 2 está en x=150 y alcanza 80 metros hacia atrás (hasta 70). ¿Hay traslape en el eje X?", options: ["Sí, de 10 metros (entre 70 y 80)", "No, hay un hueco de 10 metros", "Se anulan mutuamente", "Chocan los postes"], correct: 0 },
+        { q: "A pesar de haber traslape en el eje X absoluto, ¿por qué la casa en (75, 25) falló la prueba analítica?", options: ["Porque se fue la luz", "Porque la elipse 'se encoge' verticalmente conforme te alejas del centro", "Porque sumamos mal", "Por la coplanaridad"], correct: 1 },
+        { q: "Para solucionar el problema de la zona muerta en (75, 25), ¿qué parámetro de la antena deberíamos comprar más grande?", options: ["Solo el eje 'a' (hacerla más larga)", "El eje 'b' (hacerla más ancha)", "Cambiar a una antena satelital", "Bajar el voltaje"], correct: 1 },
+        { q: "Si en lugar de elipses usáramos círculos perfectos de radio 80, ¿la casa en (75, 25) tendría señal de la Antena 1?", options: ["Sí (75² + 25² = 6250 < 6400)", "No", "Depende", "Se quemaría la casa"], correct: 0 },
+        { q: "Geométricamente, la zona de intersección o traslape entre dos elipses se parece a:", options: ["Un rectángulo", "Un círculo perfecto", "Una 'lenteja' o huso", "Un triángulo"], correct: 2 },
+        { q: "En la evaluación, un resultado de 1.56 al final de la ecuación indica que:", options: ["La señal es 56% más fuerte de lo normal", "El punto está un 56% 'por fuera' del límite máximo permisible (1)", "El voltaje es 1.56V", "La ecuación es errónea"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

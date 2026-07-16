@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 45 - Ensamblaje del Modelo Topográfico</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 45: Ensamblaje Físico del Modelo</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Manufactura Física</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Los archivos de AutoCAD ya fueron cortados, las piezas huelen a madera quemada y están apiladas en tu mesa. Este es el momento de la verdad en la ingeniería: comprobar si la matemática del plano coincide con las dimensiones de la vida real.</p>
+        
+        <div class="alert-box">
+            <strong>Tolerancias de Ensamblaje:</strong> A diferencia de las ecuaciones perfectas, en el mundo físico la madera MDF tiene variaciones de grosor y el láser quema 0.1mm extra de material. El ensamblaje pondrá a prueba tu destreza manual y tu diseño paramétrico.
+        </div>
+        <p>Armaremos la maqueta topográfica de nuestra red de electrificación.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Ejes de Proyección (Las Capas del Modelo)</h3>
+        <p>Tu maqueta no es plana, es tridimensional. La base grande representa el <strong>Plano Topográfico (Z=0)</strong>. Sobre él, pegaremos las manzanas urbanas, las glorietas y los registros. Debajo de la base (si usaste diseño con patas), se encuentra el subsuelo, donde va la zanja real.</p>
+
+        <h3>2. Simbología Viva</h3>
+        <p>Las zonas grabadas por el láser en negro (elipses y circunferencias de cobertura) son marcas de referencia. Sobre los centros de esos círculos deberás ensamblar físicamente los prismas que representan los transformadores de CFE.</p>
+
+        <h3>3. El Concepto de Tolerancia (Kerf)</h3>
+        <p>En ingeniería de precisión, el <em>Kerf</em> es el grosor del rayo láser (aprox $0.15\text{mm}$). Si diseñaste un hueco de $10\text{mm}$ para encajar un poste cuadrado de $10\text{mm}$, al cortarlo, el hueco crecerá a $10.15\text{mm}$ y el poste se achicará a $9.85\text{mm}$. Quedará flojo. El uso de pegamento compensará esta tolerancia.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Taller de Pegado)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Protocolo de ensamblaje arquitectónico:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Presentación en Seco.</strong> Antes de usar cualquier pegamento, coloca TODAS las piezas en su lugar. Verifica que encajen y que no falte nada. Acomoda los transformadores sobre los centros de los círculos grabados.</li>
+            <li><strong>Paso 2: Pegado de Manzanas.</strong> Usa pegamento blanco o de madera (PVA). Aplica capas muy finas. Pega los bloques de las cuadras del fraccionamiento, guiándote por las líneas del grabado láser.</li>
+            <li><strong>Paso 3: Infraestructura.</strong> Pega los pequeños prismas (transformadores y registros). </li>
+            <li><strong>Paso 4: Trazado de Cableado.</strong> Usa hilo negro o alambre delgado, y fíjalo con pegamento rápido (Cianoacrilato / Kola Loka) siguiendo la zanja recta y parabólica grabada en la base para simular la red de Alta Tensión subterránea.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Toma una foto a detalle (Close-Up) de un transformador montado justo en el centro $(h,k)$ de su radio de influencia grabado, mostrando el hilo de cableado conectándolo al siguiente registro. Adjunta la foto en la plataforma.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc44/MC_S44.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc46/MC_S46.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 45. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El 'Kerf' en la fabricación láser se refiere a:", options: ["El tipo de madera", "El grosor del rayo láser que quema un porcentaje mínimo de material y genera tolerancias de error", "El pegamento blanco", "El humo"], correct: 1 },
+        { q: "Si omites la regla del Kerf al diseñar en CAD, las piezas de MDF al ensamblarse quedarán:", options: ["Completamente unidas", "Flojas, porque el hueco crece y la pieza se achica por la madera evaporada", "Imposibles de meter (muy apretadas)", "Invisibles"], correct: 1 },
+        { q: "El 'Presentado en Seco' significa:", options: ["Secar la madera al sol", "Poner las piezas en su lugar sin usar pegamento para comprobar que todo encaja primero", "Pintar la maqueta", "Bañarse antes de la clase"], correct: 1 },
+        { q: "Los prismas que representan los transformadores deben pegarse exactamente sobre:", options: ["Cualquier lugar libre", "El centro (coordenada h,k) de los círculos grabados de influencia", "La esquina de la maqueta", "Encima de las casas"], correct: 1 },
+        { q: "En la maqueta, el plano de la base de madera (suelo) representa matemáticamente:", options: ["El eje Y", "La parábola", "El plano topográfico Z=0 (Nivel de Calle)", "El eje Z negativo"], correct: 2 },
+        { q: "El hilo o alambre que pegamos sobre las marcas láser simula físicamente:", options: ["La trayectoria polinomial de la zanja subterránea y el cableado", "Un adorno", "Los cables de internet", "La cerca de los vecinos"], correct: 0 },
+        { q: "Al ensamblar, logramos concretar el objetivo del Aprendizaje Basado en Proyectos porque:", options: ["Perdimos el tiempo", "Materializamos ecuaciones matemáticas abstractas en una estructura de ingeniería civil tangible y evaluable", "Aprendimos a usar pegamento", "No hubo objetivo"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

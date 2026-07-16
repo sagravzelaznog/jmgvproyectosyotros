@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 29 - Trazado de Zonas de Influencia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad II - Zonas de Influencia</span>
+        <h1>MC 29: Trazado Masivo de Radios de Transformadores</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Una ciudad no funciona con un solo transformador. Un fraccionamiento real requiere una "red" de transformadores esparcidos estratégicamente. El reto topográfico es asegurar que <strong>cada centímetro cuadrado del fraccionamiento</strong> caiga dentro de la zona de influencia de al menos uno de ellos.</p>
+        
+        <div class="alert-box">
+            <strong>Optimización de Recursos:</strong> Si pones demasiados transformadores, la obra será incosteable. Si pones muy pocos, habrá zonas muertas sin electricidad. El objetivo matemático es lograr una cobertura total (traslapada) con el mínimo número de círculos posibles.
+        </div>
+        <p>Hoy pasaremos del análisis de un solo círculo, al trazado y análisis de una red multicéntrica.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Sistemas de Ecuaciones Simultáneas</h3>
+        <p>Para modelar una red de 3 transformadores (T1, T2, T3) todos de radio $50\text{m}$, necesitamos plantear tres ecuaciones de circunferencia independientes, cada una con su propio centro $(h_n, k_n)$:</p>
+        
+        <div class="math-box">
+            $$T_1: (x - 20)^2 + (y - 20)^2 \leq 2500$$
+            $$T_2: (x - 80)^2 + (y - 20)^2 \leq 2500$$
+            $$T_3: (x - 50)^2 + (y - 80)^2 \leq 2500$$
+        </div>
+        <p><em>Nota: Usamos $\leq$ (menor o igual a) porque nos interesa el área sólida, no solo el borde.</em></p>
+
+        <h3>2. Zonas de Intersección (Traslape)</h3>
+        <p>Si resolvemos el sistema para encontrar dónde se cruzan T1 y T2, descubriremos los puntos exactos de traslape. Un área traslapada es una zona de <strong>alta redundancia</strong>: si el T1 se incendia, el T2 puede suplir energía a esas casas mediante una maniobra de transferencia de carga.</p>
+
+        <h3>3. Zonas Muertas</h3>
+        <p>Si existe una casa en la coordenada $(50, 45)$, evaluemos en T1 y T2:</p>
+        <ul>
+            <li>En T1: $(50-20)^2 + (45-20)^2 = 900 + 625 = 1525 \leq 2500$ (¡Tiene luz de T1!)</li>
+            <li>En T2: $(50-80)^2 + (45-20)^2 = 900 + 625 = 1525 \leq 2500$ (¡Tiene luz de T2!)</li>
+        </ul>
+        <p>Esa casa está en la intersección perfecta.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Redes en AutoCAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Trazaremos una red de optimización:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Dibuja un rectángulo (fraccionamiento) de <code>200 x 100</code> metros.</li>
+            <li><strong>Paso 2:</strong> Dibuja el primer círculo <code>CIRCLE</code> en la esquina inferior izquierda (ej. en <code>25,25</code>) con radio <code>40</code>.</li>
+            <li><strong>Paso 3: Matriz Rectangular.</strong> En vez de dibujar círculo por círculo, usa el comando <code>ARRAYRECT</code> (Matriz Rectangular).</li>
+            <li><strong>Paso 4:</strong> Configura la distancia entre columnas a <code>60</code> metros y entre filas a <code>60</code> metros.</li>
+            <li><strong>Paso 5: Análisis Visual.</strong> AutoCAD llenará el fraccionamiento de círculos entrelazados. Observa los huecos (diamantes) que se forman entre cuatro círculos. Esas son "zonas muertas". Deberás ajustar la distancia (acercarlos) hasta que los diamantes desaparezcan.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu plano final del ABP, debe haber un "Layer" (capa) llamado <code>COBERTURA_CFE</code> con todos los radios dibujados. Realiza una captura de pantalla demostrando que no dejaste ninguna zona residencial del fraccionamiento como "zona muerta" (sin cubrir).
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc28/MC_S28.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc30/MC_S30.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 29. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El objetivo de trazar múltiples zonas de influencia en un plano urbano es:", options: ["Gastar mucho cable", "Lograr cobertura total sin zonas muertas, minimizando el número de equipos", "Dibujar círculos bonitos", "Hacer que la luz falle"], correct: 1 },
+        { q: "Si evaluamos un punto en dos ecuaciones de circunferencia distintas y en ambas nos da ≤ r², significa que el punto:", options: ["Está en una zona muerta", "Está en el origen", "Está en una zona de traslape (redundancia) cubierta por ambos transformadores", "Provocará un corto circuito"], correct: 2 },
+        { q: "En AutoCAD, la herramienta más rápida para copiar un objeto repetidamente con separaciones exactas (como una red de antenas) es:", options: ["COPY pegando uno por uno", "ARRAY (Matriz)", "OFFSET", "MIRROR"], correct: 1 },
+        { q: "Si los centros de los transformadores están demasiado separados, geométricamente se formarán:", options: ["Cuadrados perfectos", "Huecos sin cobertura (zonas muertas)", "Redundancia extrema", "Triángulos rectángulos"], correct: 1 },
+        { q: "Para eliminar las zonas muertas entre 4 círculos tangentes, se debe:", options: ["Aumentar el radio o acercar los centros (traslaparlos)", "Disminuir el radio", "Borrar los círculos", "Cambiar de CFE a otra compañía"], correct: 0 },
+        { q: "La redundancia en ingeniería (traslape de coberturas) se considera:", options: ["Un error de diseño", "Una medida de seguridad para transferir cargas si un equipo falla", "Un desperdicio inútil", "Algo ilegal en la norma"], correct: 1 },
+        { q: "Si tenemos 3 transformadores idénticos de r=50m, ¿qué valor tendrán todas sus ecuaciones en el lado derecho de la igualdad?", options: ["0", "50", "2500", "150"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

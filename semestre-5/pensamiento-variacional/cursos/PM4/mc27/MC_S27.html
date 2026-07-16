@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 27 - Movimientos Circulares y Coplanaridad</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad V - Movimiento y Órbitas</span>
+        <h1>MC 27: Cinemática Circular y Coplanaridad</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Hasta ahora, toda nuestra infraestructura ha sido estática (quieta en el plano). Pero, ¿qué pasa cuando la CFE tiene que tender cables usando enormes bobinas circulares rodando sobre el pavimento, o cuando el medidor del transformador tiene un disco magnético que gira?</p>
+        
+        <div class="alert-box">
+            <strong>Dinámica Rotacional:</strong> A diferencia de la traslación rectilínea, donde un objeto se mueve de A a B, en el movimiento circular un punto repite su trayectoria infinitas veces alrededor de un eje. 
+        </div>
+        <p>Hoy diferenciaremos entre trasladar y rotar, y exploraremos el concepto de "Coplanaridad", fundamental para que dos cables no choquen al desenrollarse.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Traslación vs. Rotación</h3>
+        <ul>
+            <li><strong>Traslación:</strong> Ocurre cuando el centro $C(h,k)$ de la circunferencia o elipse cambia a otro punto del plano $C'(h', k')$, pero el objeto no gira sobre sí mismo. (Ej. el camión de la CFE manejando recto).</li>
+            <li><strong>Rotación:</strong> Ocurre cuando el centro se queda fijo en su lugar, pero los puntos del borde barren un ángulo $\theta$ a lo largo del tiempo. (Ej. las llantas del camión).</li>
+        </ul>
+
+        <h3>2. Ecuación Paramétrica del Movimiento Circular</h3>
+        <p>Para modelar "dónde está" un punto en el borde de una bobina rodante en un instante de tiempo, usamos el Seno y Coseno, no como triángulos, sino como funciones de trayectoria:</p>
+        <div class="math-box">
+            $$x(t) = r \cdot \cos(t)$$
+            $$y(t) = r \cdot \sin(t)$$
+        </div>
+        <p>Al ir variando el tiempo $t$ (que aquí actúa como el ángulo barrido), la coordenada $(x,y)$ dibuja matemáticamente el círculo perfecto.</p>
+
+        <h3>3. Coplanaridad en Obras Subterráneas</h3>
+        <p>La "Coplanaridad" significa que múltiples objetos existen o se mueven exactamente en el <strong>mismo plano 2D</strong> (ej. la misma profundidad de zanja $z = -1.5\text{m}$).</p>
+        <p>Si desenrollas dos bobinas gigantes coplanares (en la misma zanja a la misma altura), y sus rutas se cruzan, ¡los cables colisionarán! Para evitarlo, los ingenieros desfasan los tubos para que ya <strong>no sean coplanares</strong> (uno pasa por arriba del otro en el eje Z).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Modelado de Colisiones)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Diferenciaremos sistemas coplanares y no coplanares en el plano de alzado:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> En tu cuaderno o software, dibuja un "Plano Z=0" (Nivel de calle).</li>
+            <li><strong>Paso 2: Trazado Coplanar.</strong> Dibuja la Tubería 1 (Línea A) en el plano $Z = -1$. Dibuja la Tubería 2 (Línea B) cruzando la primera, <em>también en el plano $Z = -1$</em>. Marca el punto de cruce con una X roja. ¡Hay colisión! Es un sistema coplanar.</li>
+            <li><strong>Paso 3: Trazado No Coplanar.</strong> Ahora, modifica la Tubería 2 para que en el punto de cruce "baje" a $Z = -1.5$ (un desnivel). Vistas desde arriba parecen cruzarse, pero en 3D no se tocan. Resolviste el problema eludiendo la coplanaridad.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Observa los cables telefónicos, de internet y eléctricos en los postes de tu calle. ¿Están amarrados de manera coplanar (al mismo nivel) o no coplanar (a distintas alturas)? Redacta una justificación de 3 líneas del porqué de este diseño en tu bitácora.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc26/MC_S26.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc28/MC_S28.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 27. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El movimiento circular se diferencia de la traslación porque:", options: ["Es más rápido", "El objeto gira sobre un eje (barre ángulos) sin necesariamente moverse de lugar", "Ocurre en 3D", "Solo pasa en la CFE"], correct: 1 },
+        { q: "Para calcular la posición (x,y) de un punto en movimiento circular usando el tiempo (ángulo), usamos:", options: ["Sumas y restas simples", "Logaritmos", "Las funciones Seno y Coseno (ecuaciones paramétricas)", "Fórmula de Pitágoras directamente"], correct: 2 },
+        { q: "Dos líneas o cables son coplanares si:", options: ["Existen y operan en el mismo plano 2D bidimensional (misma altura)", "Pertenecen a la misma compañía eléctrica", "Son paralelos", "Están aislados con plástico"], correct: 0 },
+        { q: "Si dos tuberías subterráneas se cruzan formando una X, pero NO son coplanares:", options: ["Van a chocar y romper los cables", "No chocarán físicamente porque una pasa por debajo de la otra en 3D", "Provocarán un incendio", "No se puede calcular en matemáticas"], correct: 1 },
+        { q: "En la ecuación x = r * cos(t), ¿qué determina la 'r'?", options: ["El tiempo", "El radio de la rueda o bobina", "La resistencia", "La fuerza gravitacional"], correct: 1 },
+        { q: "En el entregable, los cables de internet y los eléctricos de alta tensión en un poste:", options: ["Son coplanares obligatorios", "Se entrelazan", "Son NO coplanares (se instalan a diferentes alturas por seguridad y normativa)", "Solo hay un cable"], correct: 2 },
+        { q: "En un plano de planta (visto desde arriba), un cruce NO coplanar de tuberías se ve:", options: ["Invisible", "Como una intersección aparente", "De un solo color", "Como un cuadrado"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

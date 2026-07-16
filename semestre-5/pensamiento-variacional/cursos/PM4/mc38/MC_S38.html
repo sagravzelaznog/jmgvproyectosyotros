@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 38 - Aplicación de la Circunferencia (Cónicas)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VII - Secciones Cónicas</span>
+        <h1>MC 38: El Círculo como Caso Especial</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Hemos pasado semanas enteras estudiando la circunferencia como la base de nuestra cobertura eléctrica urbana. Hoy descubriremos que, en el fondo, la circunferencia es simplemente una Elipse que no se estiró.</p>
+        
+        <div class="alert-box">
+            <strong>Fusión Geométrica:</strong> El círculo es el caso más perfecto de las secciones cónicas. Se obtiene cuando el plano que corta el cono de luz está perfectamente nivelado (horizontal). 
+        </div>
+        <p>Aprenderemos a transformar matemáticamente la ecuación de una elipse en la ecuación de un círculo.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. El Corte Perpendicular</h3>
+        <p>Si la lámpara de calle ($10\text{m}$ de altura, cono de luz) proyecta hacia abajo, y el piso está completamente horizontal ($0^\circ$ de inclinación), el plano del suelo corta el cono perpendicularmente a su eje vertical. La mancha de luz es un círculo perfecto.</p>
+
+        <h3>2. De la Elipse a la Circunferencia</h3>
+        <p>Recuerda la ecuación de la elipse:</p>
+        <div class="math-box">
+            $$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$$
+        </div>
+        <p>Si la antena deja de ser direccional y transmite igual hacia todos lados, entonces el alcance horizontal ($a$) se vuelve exactamente igual al alcance vertical ($b$). Digamos que ambos valen $r$ (el radio).</p>
+        <div class="math-box">
+            $$\frac{x^2}{r^2} + \frac{y^2}{r^2} = 1$$
+        </div>
+        <p>Como tienen el mismo denominador, podemos sumar los numeradores directamente:</p>
+        <div class="math-box">
+            $$\frac{x^2 + y^2}{r^2} = 1$$
+        </div>
+        <p>Pasamos $r^2$ multiplicando al otro lado, ¡y pum!</p>
+        <div class="math-box">
+            $$x^2 + y^2 = r^2$$
+        </div>
+        <p><strong>Conclusión:</strong> Hemos demostrado algebraicamente que el círculo es una elipse con semiejes iguales ($a = b = r$).</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Comprobación Focal)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>En una elipse, teníamos dos focos. ¿Dónde están los focos en un círculo?</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> La fórmula para hallar los focos en una elipse es $c = \sqrt{a^2 - b^2}$.</li>
+            <li><strong>Paso 2:</strong> En un círculo, $a$ y $b$ son iguales (ambos son $r$). Sustituye esto en la fórmula: $c = \sqrt{r^2 - r^2}$.</li>
+            <li><strong>Paso 3:</strong> $c = \sqrt{0} = 0$.</li>
+            <li><strong>Paso 4: Significado Físico.</strong> La distancia desde el centro a los focos es CERO. Esto significa que los dos focos de la elipse colapsaron y se fusionaron exactamente en el centro geométrico del círculo.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu bitácora, explica qué le pasaría a la órbita de la Tierra si los semiejes de su trayectoria dejaran de medir distinto y se volvieran idénticos ($a=b$). ¿Dónde quedaría el Sol según tu cálculo del paso 4?
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc37/MC_S37.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc39/MC_S39.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 38. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Para obtener un círculo perfecto cortando un cono, el plano debe estar:", options: ["Totalmente vertical", "Inclinado a 45 grados", "Perfectamente nivelado o perpendicular al eje del cono", "Paralelo a la generatriz"], correct: 2 },
+        { q: "Algebraicamente, una circunferencia es simplemente:", options: ["Una parábola doble", "Una elipse cuyos radios o semiejes 'a' y 'b' son exactamente iguales", "Una recta curva", "Un hiperboloide"], correct: 1 },
+        { q: "En la ecuación x²/r² + y²/r² = 1, si multiplicamos toda la ecuación por r², obtenemos:", options: ["x + y = r", "x² + y² = 1", "x² + y² = r²", "Error matemático"], correct: 2 },
+        { q: "En una elipse normal hay dos focos separados. En una circunferencia perfecta:", options: ["No hay focos", "Los focos están en el borde", "Hay infinitos focos", "Los dos focos están fusionados exactamente en el centro (0,0)"], correct: 3 },
+        { q: "En el entregable, si la órbita de la Tierra se volviera un círculo perfecto, el Sol:", options: ["Se apagaría", "Quedaría ubicado exactamente en el centro geométrico de la órbita", "Saldría volando", "Estaría en el borde"], correct: 1 },
+        { q: "Si la ecuación es x²/100 + y²/100 = 1, el radio de este círculo es:", options: ["100", "50", "10", "1"], correct: 2 },
+        { q: "La comprensión de que todas estas curvas provienen del mismo cono se le atribuye históricamente a los:", options: ["Romanos", "Egipcios", "Griegos (Apolonio de Perga)", "Mayas"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

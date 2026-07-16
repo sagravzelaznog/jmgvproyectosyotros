@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 18 - Circunferencia Fuera del Origen</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad II - Zonas de Influencia</span>
+        <h1>MC 18: Transformadores Trasladados (Forma Ordinaria)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>En el mundo real, la CFE casi nunca puede poner el transformador en el origen topográfico (0,0). Muchas veces ese punto es propiedad privada. Tienen que instalar el transformador tres cuadras a la derecha y dos hacia el sur.</p>
+        
+        <div class="alert-box">
+            <strong>Desafío Topográfico:</strong> Si desplazamos el transformador, todo su "círculo de cobertura" se mueve con él. ¿Cómo adaptamos nuestra ecuación de $x^2 + y^2 = r^2$ para que refleje este movimiento en el plano?
+        </div>
+        <p>Introduciremos las coordenadas del nuevo centro, conocidas en geometría analítica como el punto $C(h, k)$.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación Ordinaria</h3>
+        <p>Cuando el centro del círculo ya no es $(0,0)$ sino que está en una coordenada específica $C(h, k)$, la ecuación sufre una "traslación". A las variables originales les restamos las coordenadas del centro:</p>
+        
+        <div class="math-box">
+            $$(x - h)^2 + (y - k)^2 = r^2$$
+        </div>
+        <ul>
+            <li><strong>$h$:</strong> Coordenada X del centro del transformador (desplazamiento Este/Oeste).</li>
+            <li><strong>$k$:</strong> Coordenada Y del centro del transformador (desplazamiento Norte/Sur).</li>
+            <li><strong>$r$:</strong> Radio de cobertura (ej. 50m).</li>
+        </ul>
+
+        <h3>2. Sustitución y Cuidado con los Signos</h3>
+        <p>CFE aprueba instalar el transformador en un lote baldío ubicado en las coordenadas $C(40, -20)$. Su radio es $r = 50\text{m}$. Modelemos la ecuación:</p>
+        <div class="math-box">
+            $$h = 40, \quad k = -20$$
+            $$(x - 40)^2 + (y - (-20))^2 = 50^2$$
+            $$(x - 40)^2 + (y + 20)^2 = 2500$$
+        </div>
+        <p>¡Mucho cuidado! Como $k$ era negativo (Sur), el doble signo negativo lo convirtió en positivo dentro del paréntesis $(y + 20)^2$.</p>
+
+        <h3>3. Verificación de una Vivienda</h3>
+        <p>Una casa está en $(10, 10)$. ¿Tiene cobertura?</p>
+        <div class="math-box">
+            $$(10 - 40)^2 + (10 + 20)^2 \stackrel{?}{\leq} 2500$$
+            $$(-30)^2 + (30)^2 \stackrel{?}{\leq} 2500$$
+            $$900 + 900 = 1800$$
+        </div>
+        <p>Como $1800$ es menor que $2500$, la casa está perfectamente cubierta.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Visualizaremos la traslación de cobertura en AutoCAD:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Dibuja un círculo en el origen: <code>CIRCLE</code> en <code>0,0</code> con radio <code>50</code>.</li>
+            <li><strong>Paso 2:</strong> Dibuja la casa en <code>10,10</code> con el comando <code>POINT</code>. Notarás que está muy cerca del centro original.</li>
+            <li><strong>Paso 3: Trasladar (Move).</strong> Selecciona el círculo. Teclea el comando <code>MOVE</code> (M). Como punto base selecciona el centro (0,0). </li>
+            <li><strong>Paso 4:</strong> Como punto final teclea las nuevas coordenadas: <code>40,-20</code>.</li>
+            <li><strong>Paso 5: Inspección.</strong> AutoCAD ha movido físicamente la zona de influencia. Revisa visualmente la casa en <code>10,10</code>. Sigue estando dentro del círculo, pero ahora más cerca del límite Oeste de la cobertura.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> Escribe la ecuación de la circunferencia para un transformador ubicado en $C(-15, -30)$ con radio de 45m. ¿La casa ubicada en el origen $(0,0)$ tendrá suministro eléctrico? Demuéstralo matemáticamente.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc17/MC_S17.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc19/MC_S19.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 18. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Las coordenadas (h, k) representan:", options: ["Cualquier punto de la frontera", "El origen del plano", "El centro desplazado de la circunferencia", "El radio"], correct: 2 },
+        { q: "Si el centro está en C(5, -7), la ecuación comenzará como:", options: ["(x+5)² + (y-7)²", "(x-5)² + (y+7)²", "(x-5)² - (y-7)²", "(x+5)² - (y+7)²"], correct: 1 },
+        { q: "Si una ecuación es (x+8)² + (y-2)² = 100, ¿dónde está el transformador?", options: ["C(8, 2)", "C(-8, -2)", "C(-8, 2)", "C(8, -2)"], correct: 2 },
+        { q: "Al evaluar la coordenada de una casa en la ecuación, si el resultado es menor al radio al cuadrado:", options: ["La casa no tiene cobertura", "La casa está en el borde exacto", "La casa está dentro de la zona de influencia", "La casa explotará"], correct: 2 },
+        { q: "En AutoCAD, el comando para trasladar la circunferencia sin cambiar su tamaño es:", options: ["SCALE", "OFFSET", "MOVE", "COPY"], correct: 2 },
+        { q: "En el entregable C(-15,-30) r=45, evaluando el origen (0,0) nos queda (15)² + (30)². Esto suma:", options: ["225", "1125", "45", "900"], correct: 1 },
+        { q: "Como 1125 es menor que 45² (2025), la casa en el origen:", options: ["Sí tiene cobertura", "No tiene cobertura", "Está en el límite", "Falta información"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

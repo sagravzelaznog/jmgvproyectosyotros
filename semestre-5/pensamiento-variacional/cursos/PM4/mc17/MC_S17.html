@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 17 - Circunferencia en el Origen</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad II - Zonas de Influencia</span>
+        <h1>MC 17: Cobertura Eléctrica (Centro en el Origen)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Previamente conocimos los elementos básicos del círculo. Hoy nos pondremos rigurosos. Si la CFE instala el Transformador Principal exactamente en el centro de la ciudad, en la coordenada $(0,0)$, ¿cómo sabemos exactamente hasta qué cuadra llega la luz sin que haya caída de tensión?</p>
+        
+        <div class="alert-box">
+            <strong>Problema Real:</strong> Una constructora quiere hacer casas en la avenida $x = 30$. Quieren saber hasta qué coordenada $y$ (qué tan al Norte o Sur) pueden construir antes de salir de la zona de cobertura de nuestro transformador de radio 50m.
+        </div>
+        <p>Usaremos la Ecuación Canónica de la Circunferencia para predecir los límites exactos de infraestructura.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación Canónica (Centro en 0,0)</h3>
+        <p>Todo punto $(x, y)$ que esté en el borde exacto de la cobertura de un transformador ubicado en el origen cumple con la regla de Pitágoras:</p>
+        <div class="math-box">
+            $$x^2 + y^2 = r^2$$
+        </div>
+        <p>Si el transformador tiene una cobertura máxima de $r = 50\text{m}$, la ecuación de su frontera límite es:</p>
+        <div class="math-box">
+            $$x^2 + y^2 = 50^2$$
+            $$x^2 + y^2 = 2500$$
+        </div>
+
+        <h3>2. Resolviendo Intersecciones Límite</h3>
+        <p>La constructora edificará sobre la calle ubicada en $x = 30$. Sustituimos este valor en nuestra ecuación para ver dónde corta la circunferencia:</p>
+        <div class="math-box">
+            $$(30)^2 + y^2 = 2500$$
+            $$900 + y^2 = 2500$$
+        </div>
+        <p>Despejamos $y$:</p>
+        <div class="math-box">
+            $$y^2 = 2500 - 900$$
+            $$y^2 = 1600$$
+            $$y = \pm \sqrt{1600}$$
+            $$y = \pm 40$$
+        </div>
+        <p><strong>Resultado:</strong> Sobre la calle 30, la luz llegará desde la cuadra $y = 40$ (Norte) hasta la cuadra $y = -40$ (Sur). Si construyen en $(30, 41)$, esa casa sufrirá apagones.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Despejes en Hoja de Cálculo)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Vamos a programar el despeje de la ecuación en Excel:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> En la celda A1 escribe "Radio (r)". En B1 pon <code>50</code>.</li>
+            <li><strong>Paso 2:</strong> En la celda A2 escribe "Calle (x)". En B2 pon <code>30</code>.</li>
+            <li><strong>Paso 3: Fórmulas.</strong> En la celda A3 escribe "Límite Norte (+y)". En B3 escribe la fórmula del despeje: <code>=SQRT((B1^2) - (B2^2))</code>.</li>
+            <li><strong>Paso 4: Análisis Dinámico.</strong> Cambia la calle en B2 a <code>40</code>. Verás que el límite en Y baja a <code>30</code>. Cambia la calle a <code>60</code> (fuera del radio). ¡Excel te dará un error <code>#NUM!</code> porque $\sqrt{-1100}$ no existe en números reales!</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu memoria de cálculo, resuelve a mano: Si el transformador tiene un radio de 65m, y quiero construir sobre el eje $y = 25$, ¿cuáles son los límites en $x$ (Oeste y Este)? Muestra tu despeje.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc16/MC_S16.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc18/MC_S18.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 17. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La ecuación canónica x² + y² = r² aplica únicamente cuando el transformador está en:", options: ["El Cuadrante I", "El origen (0,0)", "Cualquier punto del mapa", "El eje Y"], correct: 1 },
+        { q: "Si la ecuación es x² + y² = 10000, el radio de cobertura del transformador es:", options: ["10000 m", "10 m", "5000 m", "100 m"], correct: 3 },
+        { q: "Al despejar y, obtenemos un valor positivo y uno negativo porque:", options: ["Los cables fallan el 50% de las veces", "La raíz cuadrada tiene dos soluciones (Norte y Sur de la circunferencia)", "El transformador no sirve", "Excel cometió un error"], correct: 1 },
+        { q: "Si al calcular la raíz cuadrada en Excel nos da un error de número negativo, significa que:", options: ["La calle (x) está completamente fuera de la zona de cobertura del transformador", "Falta memoria RAM", "El transformador es muy grande", "La ciudad es redonda"], correct: 0 },
+        { q: "Si queremos encontrar los límites Este-Oeste, debemos despejar la variable:", options: ["Radio (r)", "x", "y", "Pendiente (m)"], correct: 1 },
+        { q: "En el problema x² + 25² = 65², el valor 65² es igual a:", options: ["4225", "25", "625", "130"], correct: 0 },
+        { q: "Sustituir x=0 en la ecuación del círculo nos dará directamente:", options: ["El valor del diámetro", "El valor máximo de y (igual al radio)", "Cero", "Error matemático"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

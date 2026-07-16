@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 12 - Triángulos Rectángulos en Desniveles</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 12: Trigonometría Base y Desniveles de Zanja</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Hasta ahora hemos visto el terreno desde arriba (vista en planta o 2D plana). Pero el mundo real tiene relieve. Si hay una colina en el fraccionamiento, la tubería no puede ir horizontal; tiene que seguir la inclinación del terreno.</p>
+        
+        <div class="alert-box">
+            <strong>Problema Real:</strong> Cuando el terreno sube o baja, la cantidad de cable que necesitas es MAYOR que la distancia horizontal que mides en el mapa topográfico plano. Para calcular ese cable extra sin ir a medirlo físicamente, usamos la Trigonometría.
+        </div>
+        <p>Hoy veremos cómo un desnivel forma un triángulo rectángulo perfecto, donde el cable eléctrico es la hipotenusa.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Elementos del Triángulo Rectángulo</h3>
+        <p>Un triángulo rectángulo tiene un ángulo exacto de $90^\circ$ (recto). Sus lados reciben nombres especiales según el ángulo de inclinación $\theta$ (theta) que estemos analizando:</p>
+        <ul>
+            <li><strong>Cateto Adyacente:</strong> Es la distancia horizontal en el mapa (la base).</li>
+            <li><strong>Cateto Opuesto:</strong> Es la diferencia de altura o desnivel entre los dos registros (la altura).</li>
+            <li><strong>Hipotenusa:</strong> Es el lado más largo, opuesto al ángulo de $90^\circ$. En nuestro proyecto, <strong>es el cable real</strong> que vamos a instalar en la zanja inclinada.</li>
+        </ul>
+
+        <h3>2. Relación Pitagórica en 3D</h3>
+        <p>Si miras un plano topográfico, ves que el Registro A y B están separados por $40\text{m}$ horizontales. Pero las curvas de nivel indican que el Registro B está $9\text{m}$ más profundo que el A.</p>
+        <div class="math-box">
+            $$c^2 = a^2 + b^2$$
+            $$c = \sqrt{40^2 + 9^2}$$
+            $$c = \sqrt{1600 + 81}$$
+            $$c = \sqrt{1681} = 41 \text{ metros}$$
+        </div>
+        <p>¡Necesitas comprar $41\text{m}$ de cable, no $40\text{m}$! Ese metro extra parece poco, pero a 350 pesos el metro, en 50 calles, el error presupuestal sería masivo.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio 3D CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Aprenderemos a visualizar el desnivel en AutoCAD:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> En AutoCAD, cambia tu vista. Escribe <code>VPOINT</code> y teclea <code>1,-1,1</code> para entrar en una vista isométrica 3D.</li>
+            <li><strong>Paso 2: Trazar el Cateto Adyacente (Plano).</strong> Usa <code>LINE</code> para trazar una línea horizontal de <code>0,0,0</code> a <code>40,0,0</code>.</li>
+            <li><strong>Paso 3: Trazar el Cateto Opuesto (Desnivel).</strong> Desde el final de esa línea, traza hacia abajo (eje Z). Usa <code>LINE</code> desde <code>40,0,0</code> hasta <code>40,0,-9</code>.</li>
+            <li><strong>Paso 4: Trazar la Hipotenusa (Cable).</strong> Usa <code>LINE</code> desde <code>0,0,0</code> hasta <code>40,0,-9</code>. Usa el comando <code>LIST</code> sobre esta línea diagonal y AutoCAD te confirmará que <em>Length = 41.000</em>.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte, haz el cálculo de la hipotenusa (metros de cable XLP) si la distancia horizontal en tu plano es de 120 metros, y la diferencia de altura por un cerro es de 50 metros.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc11/MC_S11.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc13/MC_S13.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 12. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Un triángulo rectángulo se caracteriza por tener un ángulo de:", options: ["45 grados", "60 grados", "90 grados", "180 grados"], correct: 2 },
+        { q: "En nuestra zanja inclinada, la hipotenusa matemáticamente representa:", options: ["La profundidad del hoyo", "El nivel del mar", "La distancia vista desde arriba", "Los metros reales de cable"], correct: 3 },
+        { q: "El cateto que representa el desnivel o profundidad de la zanja se suele llamar:", options: ["Cateto Adyacente", "Cateto Opuesto", "Hipotenusa", "Secante"], correct: 1 },
+        { q: "Si la distancia horizontal es 4 y el desnivel es 3, ¿cuántos metros de cable necesito?", options: ["5", "7", "1", "12"], correct: 0 },
+        { q: "En AutoCAD, el comando VPOINT 1,-1,1 nos sirve para:", options: ["Borrar líneas", "Ver el plano en perspectiva 3D", "Guardar el archivo", "Imprimir"], correct: 1 },
+        { q: "En el espacio 3D, el desnivel hacia abajo se grafica usando el eje:", options: ["X", "Y", "Z negativo", "W"], correct: 2 },
+        { q: "No considerar el desnivel al presupuestar cable provocará que:", options: ["Sobre presupuesto de cable", "Falte cable en la obra real", "El cable se derrita", "El transformador explote"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

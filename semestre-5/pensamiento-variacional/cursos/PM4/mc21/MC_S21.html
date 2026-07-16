@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 21 - Ecuación de la Parábola</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad III - Catenarias y Caída Libre</span>
+        <h1>MC 21: Modelando el Cable Aéreo (La Parábola)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Sabemos trazar líneas rectas, pero mira por la ventana hacia los postes de luz en la calle. El cable eléctrico nunca forma una línea recta perfecta; siempre tiene una pequeña "panza" colgando hacia abajo debido a la gravedad.</p>
+        
+        <div class="alert-box">
+            <strong>Alerta de Seguridad:</strong> Si tensas un cable demasiado fuerte para que quede "recto", el viento o el frío harán que se rompa, causando un apagón letal. Esa curva obligatoria se asemeja matemáticamente a una <strong>Parábola</strong> (aunque técnicamente es una Catenaria, la parábola es nuestro modelo de aproximación perfecto en distancias cortas).
+        </div>
+        <p>Hoy aprenderemos cómo las ecuaciones de segundo grado (cuadráticas) dan origen a las curvas parabólicas.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación Cuadrática</h3>
+        <p>A diferencia de la recta ($y = mx+b$), en la parábola la variable $x$ está elevada al cuadrado. La ecuación canónica más simple es:</p>
+        
+        <div class="math-box">
+            $$y = ax^2$$
+        </div>
+        <p>El valor de $a$ (el coeficiente de flexión) dictamina qué tan "gorda" o "delgada" es la panza del cable. Si $a$ es positivo, la curva se abre hacia arriba (forma de "U").</p>
+
+        <h3>2. Vértice y Foco</h3>
+        <p>Toda parábola tiene un <strong>Vértice</strong>, que es el punto más bajo donde cuelga el cable. En $y = ax^2$, el vértice está en $(0,0)$.</p>
+        <p>Además, existe el <strong>Foco</strong>. En la ingeniería de antenas (telecomunicaciones), el foco es el punto donde rebotan las ondas. En topografía, la posición del vértice nos importa más para asegurarnos de que el cable no cuelgue tan bajo que choque con los camiones de carga.</p>
+
+        <h3>3. Evaluando la "Panza" del Cable</h3>
+        <p>Imagina que dos postes están separados por 20 metros. El poste 1 está en $x = -10$ y el poste 2 está en $x = 10$. El cable sigue la ecuación $y = 0.05x^2$.</p>
+        <p>¿A qué altura están amarrados los cables en los postes?</p>
+        <div class="math-box">
+            $$y = 0.05(10)^2$$
+            $$y = 0.05(100)$$
+            $$y = 5 \text{ metros}$$
+        </div>
+        <p>Esto significa que si los postes miden 5 metros de alto, en el centro ($x=0$), el cable cuelga hasta $y=0$ (¡tocaría el piso!). Obviamente necesitamos subir todo el sistema.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Graficación Digital)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Vamos a observar cómo cambia la flecha (panza) del cable modificando la tensión:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Abre GeoGebra Clásico.</li>
+            <li><strong>Paso 2: Tensión Baja.</strong> En la entrada de comandos escribe: <code>y = 0.02x^2</code>. Verás una parábola muy ancha; el cable cuelga mucho.</li>
+            <li><strong>Paso 3: Tensión Alta.</strong> Crea otra ecuación: <code>y = 0.5x^2</code>. La "U" se cierra drásticamente.</li>
+            <li><strong>Paso 4: Parábola Negativa (Puente).</strong> Ahora escribe: <code>y = -0.1x^2</code>. La parábola se voltea hacia abajo. Esto no modela un cable, ¡modela la bóveda de un túnel subterráneo!</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu hoja de excel, realiza una tabla de tabulación para la ecuación $y = 0.1x^2 + 4$. Evalúa desde $x = -5$ hasta $x = 5$. Dibuja a mano o imprime la gráfica resultante. ¿En qué altura (Y) se encuentra el punto más bajo (vértice) ahora que sumamos el "+ 4"?
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc20/MC_S20.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc22/MC_S22.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 21. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La ecuación geométrica fundamental para modelar la caída de un cable tenso es:", options: ["Una línea recta", "Una circunferencia", "Una parábola", "Una elipse"], correct: 2 },
+        { q: "En la ecuación y = ax², la presencia del 'cuadrado' nos indica que es una ecuación de:", options: ["Primer grado", "Segundo grado", "Tercer grado", "Trigonométrica"], correct: 1 },
+        { q: "El punto más bajo donde cuelga el cable en una parábola que abre hacia arriba se llama:", options: ["Foco", "Directriz", "Vértice", "Cenit"], correct: 2 },
+        { q: "Si el coeficiente 'a' en y = ax² es un número negativo (ej. y = -3x²), la parábola:", options: ["Se abre hacia la derecha", "Desaparece", "Se abre hacia arriba (U)", "Se abre hacia abajo (Túnel/Puente)"], correct: 3 },
+        { q: "Si en la ecuación y = 0.05x² sustituimos x = 10, ¿qué parte de la jerarquía de operaciones se hace primero?", options: ["Multiplicar por 0.05", "Elevar 10 al cuadrado", "Sumar 10", "Sacar raíz"], correct: 1 },
+        { q: "Por normativa, ¿por qué no se tensan los cables formando una línea recta perfecta?", options: ["Porque se ven feos", "Por la dilatación térmica y los esfuerzos del viento (evitar ruptura)", "Para gastar menos cable", "Para que los pájaros no se paren"], correct: 1 },
+        { q: "En la función entregable y = 0.1x² + 4, el '+ 4' provoca que el vértice se desplace:", options: ["4 metros hacia abajo", "4 metros a la derecha", "4 metros hacia arriba", "No se mueve"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

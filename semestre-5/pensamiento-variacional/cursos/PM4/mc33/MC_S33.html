@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 33 - Elementos Orbitales y Radiales</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad V - Movimiento y Órbitas</span>
+        <h1>MC 33: Modelado Geométrico de Rutas Circulares</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Cuando trazamos una avenida que hace una curva perfectamente circular (como un periférico urbano o el libramiento de un parque solar), estamos creando una <strong>Ruta Radial</strong>. Los camiones de CFE que transitan por ella experimentan fuerzas dinámicas.</p>
+        
+        <div class="alert-box">
+            <strong>Geometría Aplicada:</strong> Para que un camión con una bobina de 5 toneladas no se voltee al tomar la curva del fraccionamiento, el ingeniero civil y el topógrafo deben conocer a la perfección los <em>Elementos Radiales</em> de la curva matemática.
+        </div>
+        <p>Traduciremos los elementos de la circunferencia al lenguaje del modelado de rutas físicas.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. Elementos Radiales de una Ruta</h3>
+        <ul>
+            <li><strong>Radio (R):</strong> Distancia del centro de la curva al centro del carril. Si la ecuación de la vía es $x^2 + y^2 = 10000$, el radio es de $100\text{m}$. Un radio amplio significa una curva suave.</li>
+            <li><strong>Arco (S):</strong> Es el tramo de circunferencia que efectivamente pavimentamos. Es la "longitud del arco".</li>
+            <li><strong>Cuerda (C):</strong> Es la línea recta que une el principio y el fin de la curva. Si tender cables en curva es muy difícil, la CFE a veces prefiere hacer una "cuerda" (zanja recta) cortando por debajo del parque.</li>
+        </ul>
+
+        <h3>2. Ecuación del Desplazamiento Angular</h3>
+        <p>Si un vehículo recorre la curva, su posición no solo cambia en X o Y, cambia en ángulo ($\theta$). La longitud del arco ($S$) recorrido depende del ángulo (en radianes) y del radio:</p>
+        <div class="math-box">
+            $$S = R \cdot \theta$$
+        </div>
+        <p>Si la curva del periférico tiene un radio de $100\text{m}$ y da un cuarto de vuelta ($90^\circ = \pi/2$ radianes), la longitud de pavimento requerida es:</p>
+        <div class="math-box">
+            $$S = 100 \cdot (1.5708) = 157.08 \text{ metros}$$
+        </div>
+
+        <h3>3. La Cuerda de la Zanja</h3>
+        <p>Si en vez de seguir el periférico hacemos una zanja recta (cuerda) que una el inicio y fin de esos 90 grados, usando Pitágoras ($a^2+b^2=c^2$ con $a=100, b=100$):</p>
+        <div class="math-box">
+            $$Cuerda = \sqrt{100^2 + 100^2} = \sqrt{20000} = 141.42 \text{ metros}$$
+        </div>
+        <p>Ahorraríamos casi 16 metros de cable, ¡pero tendríamos que romper el parque privado!</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Cálculo de Rutas)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Compararemos la longitud orbital (Arco) contra la trayectoria rectilínea (Cuerda):</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Imagina una curva de fraccionamiento que representa media vuelta ($180^\circ$ o $\pi$ radianes). El radio de la calle es $R = 50\text{m}$.</li>
+            <li><strong>Paso 2: Ruta Orbital (Arco).</strong> Calcula la longitud de cable si sigues la banqueta de la curva: $S = 50 \cdot (3.1416) = 157.08\text{m}$.</li>
+            <li><strong>Paso 3: Ruta Radial (Cuerda).</strong> Media vuelta es ir de un extremo a otro del círculo pasando por el centro. Esa línea recta es literalmente el <strong>Diámetro</strong>. Distancia $= 2R = 100\text{m}$.</li>
+            <li><strong>Paso 4: Análisis de Costo.</strong> La ruta recta (100m) ahorra 57 metros de cable respecto a la ruta orbital curva (157m). A 200 pesos el metro, es un ahorro de $11,400$ pesos.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu plano en AutoCAD, identifica la curva más pronunciada. Dibuja la cota de "Longitud de Arco" (Arc Length) siguiendo la banqueta, y luego dibuja la línea recta "Cuerda" entre los extremos. Muestra ambas medidas y justifica cuál ruta elegirías para el cableado eléctrico.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc32/MC_S32.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc34/MC_S34.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 33. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "La longitud del borde curvo pavimentado de una calle se conoce en matemáticas como:", options: ["Cuerda", "Arco", "Radio", "Secante"], correct: 1 },
+        { q: "La línea recta más corta que une el inicio y el fin de una curva se llama:", options: ["Arco", "Cuerda", "Tangente", "Centro"], correct: 1 },
+        { q: "En la fórmula S = R · θ, el ángulo θ debe estar obligatoriamente expresado en:", options: ["Grados", "Radianes", "Porcentajes", "Metros"], correct: 1 },
+        { q: "Si instalas el cableado siguiendo la 'cuerda' en lugar del 'arco', la cantidad de cable utilizado será:", options: ["Mayor", "Menor (es la distancia más corta entre dos puntos)", "Igual", "No se puede saber"], correct: 1 },
+        { q: "¿Por qué los ingenieros a veces prefieren la ruta larga (arco) por la banqueta en vez de la cuerda?", options: ["Para gastar más dinero", "Porque la cuerda recta suele requerir romper propiedad privada, parques o estructuras en medio de la curva", "Porque el cable recto no conduce bien", "Porque es más fácil"], correct: 1 },
+        { q: "En una curva de media vuelta (180°), la 'cuerda' recta es equivalente geométricamente al:", options: ["Radio", "Perímetro total", "Diámetro (2 veces el radio)", "Origen"], correct: 2 },
+        { q: "En AutoCAD, la herramienta para acotar específicamente la longitud de un tramo curvo es:", options: ["Linear Dimension", "Aligned Dimension", "Arc Length", "Radius"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

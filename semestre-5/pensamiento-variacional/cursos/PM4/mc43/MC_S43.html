@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 43 - Funciones y Desarrollo Web</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad VIII - Talleres Integradores</span>
+        <h1>MC 43: Funciones Matemáticas en la Web (Sistemas)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Plataforma de Visualización</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>¿Dónde terminan las matemáticas de ingeniería moderna? No se quedan en un papel, ni siquiera en AutoCAD. Se suben a un servidor y se exponen como un <strong>Dashboard (Tablero de Control) web</strong> para que el alcalde, los inversores o la CFE las puedan monitorear en tiempo real desde el celular.</p>
+        
+        <div class="alert-box">
+            <strong>Matemáticas Embebidas:</strong> Todo "botón" en un sistema web moderno ejecuta una <em>Función</em> matemática ($f(x)$). Hoy programaremos el cotizador variacional que hicimos en Excel, pero convertido a JavaScript puro dentro de una página HTML interactiva.
+        </div>
+        <p>Convertirás tus ecuaciones en una App de uso real.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. ¿Qué es una Función en Programación?</h3>
+        <p>En matemáticas, $f(x) = 450x + 18000$. Metes una $x$, sale un número. En programación, declaras <code>function calcularPresupuesto(x)</code>, recibe un dato, procesa la misma ecuación y hace un <code>return</code> (devuelve) el resultado al usuario.</p>
+
+        <h3>2. Manipulación del DOM (Document Object Model)</h3>
+        <p>Para que la función sepa qué $x$ usar, debe "leer" el número que el usuario escribió en la caja de texto (un <code>&lt;input&gt;</code>). Y para mostrar la $y$ (el costo), debe escribir el resultado en otra caja. Esta conexión entre matemática y pantalla se llama DOM.</p>
+
+        <h3>3. Estandarización de Variables</h3>
+        <p>En ingeniería de software, a las variables no se les llama solo $x$ o $y$. Se les llama <code>metrosZanja</code> y <code>costoTotal</code>. Usar nombres descriptivos evita desastres en proyectos grandes.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (App de Cotización Web)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Interactúa con esta mini-aplicación web insertada. La programación oculta realiza la ecuación lineal en tiempo real:</p>
+        
+        <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; max-width: 400px; margin: 20px auto; border: 1px solid #10b981; text-align: center;">
+            <h3 style="color: #10b981; margin-bottom: 15px;">Cotizador CFE Web</h3>
+            <label style="display: block; margin-bottom: 5px;">Ingresa metros lineales de zanja ($x$):</label>
+            <input type="number" id="inputMetros" value="0" style="padding: 10px; width: 80%; border-radius: 4px; border: none; text-align: center; font-size: 1.1em; color: black;"><br><br>
+            
+            <button onclick="ejecutarFuncion()" class="btn-primary" style="background: #10b981;">Calcular Presupuesto $f(x)$</button>
+            
+            <div style="margin-top: 20px; font-size: 1.2em;">
+                Costo Estimado ($y$): <br>
+                <strong style="font-size: 1.5em; color: #38bdf8;">$ <span id="resultadoCosto">18000.00</span></strong>
+            </div>
+        </div>
+
+        <script>
+            function ejecutarFuncion() {
+                // 1. Leer X
+                let x = parseFloat(document.getElementById('inputMetros').value);
+                if(isNaN(x) || x < 0) x = 0;
+                
+                // 2. Ejecutar Matemáticas: y = mx + b
+                let m = 450;
+                let b = 18000;
+                let y = (m * x) + b;
+                
+                // 3. Escribir Y
+                document.getElementById('resultadoCosto').innerText = y.toLocaleString('es-MX', {minimumFractionDigits: 2});
+            }
+        </script>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte final, captura la pantalla de tu proyecto donde se vea la ecuación $y = 450x + 18000$ funcionando en una hoja de Excel, en una gráfica o en una herramienta web como esta. Explica la ventaja de entregarle esto al municipio en lugar de cálculos a mano.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc42/MC_S42.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc44/MC_S44.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 43. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "En programación, el equivalente a la fórmula f(x) matemática se conoce como:", options: ["Una Función o Método (function)", "Una tabla", "Un párrafo", "El mouse"], correct: 0 },
+        { q: "El término 'DOM' en diseño web se refiere a:", options: ["Una ecuación cónica", "El puente tecnológico que permite al código JavaScript leer y escribir datos en las cajas de la pantalla", "El servidor de CFE", "Dominio Operativo Matemático"], correct: 1 },
+        { q: "Si el usuario ingresa 100 en la app de arriba, ¿cuál será el resultado mostrado?", options: ["18000", "45000", "63000 (450*100 + 18000)", "0"], correct: 2 },
+        { q: "Una buena práctica en el código es cambiar el nombre de las variables de 'x' y 'y' a:", options: ["a y b", "Nombres descriptivos (ej. metrosZanja, costoTotal) para evitar confusión en proyectos grandes", "Nombres de mascotas", "Mantener siempre x y y"], correct: 1 },
+        { q: "El comando de programación 'return' o la escritura en pantalla equivalen matemáticamente a:", options: ["El despeje", "La variable independiente", "El resultado final o salida (y) de la ecuación", "El signo negativo"], correct: 2 },
+        { q: "Al integrar matemáticas variacionales en un desarrollo web o sistema en la nube, la principal ventaja para un municipio o empresa es:", options: ["La automatización de cálculos y acceso en tiempo real a estimaciones", "Gastar luz", "Borrar AutoCAD", "Nada"], correct: 0 },
+        { q: "¿Por qué el costo base nunca es cero, incluso si el usuario pone 0 metros?", options: ["Porque el botón está roto", "Porque siempre hay Costos Fijos iniciales (la ordenada 'b', = 18000) de rentas y permisos", "Por error de programación", "Porque el código no sirve"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

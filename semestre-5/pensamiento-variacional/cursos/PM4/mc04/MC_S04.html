@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 04 - Tipos de Recta: Tangente y Secante</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad I - Topografía Subterránea</span>
+        <h1>MC 04: Intersecciones Viales y Relatividad Lineal</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>No estamos tirando cables en un campo abierto. Estamos diseñando en una ciudad con avenidas y camellones curvos, como los de la colonia Campestre La Rosita en Torreón.</p>
+        
+        <div class="alert-box">
+            <strong>Problema Real:</strong> Cuando nuestra tubería recta subterránea cruza un camellón circular o un parque central, existen dos posibilidades: ¿Atraviesa el parque por el medio partiendo las jardineras, o simplemente pasa rozando el borde de la banqueta para evitar excavación masiva?
+        </div>
+        <p>Hoy diferenciaremos los tipos de líneas rectas relativas a una curva: <strong>Secantes y Tangentes</strong>, y su impacto directo en costos de obra civil.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Recta Secante (Atraviesa)</h3>
+        <p>Matemáticamente, una recta es <strong>secante</strong> a una circunferencia o curva cuando la intersecta en <strong>dos puntos distintos</strong>.</p>
+        <p>En obra, esto significa que la zanja va a cortar a través de un espacio (como un parque). Implica romper y luego reponer concreto, lo cual añade 1,200 pesos por metro lineal al presupuesto.</p>
+        
+        <div class="math-box">
+            Si la curva es $x^2 + y^2 = 25$ y el cableado es la recta $y = 3$, intersectarán en dos puntos: $(-4, 3)$ y $(4, 3)$. 
+        </div>
+
+        <h3>2. La Recta Tangente (Roza)</h3>
+        <p>Una recta es <strong>tangente</strong> cuando toca a la curva en <strong>un único punto</strong> exacto, sin cruzar hacia su interior. Este punto se conoce como punto de tangencia.</p>
+        <p>En ingeniería urbana, trazar de manera tangente permite bordear obstáculos (una rotonda) sin destruirlos, optimizando el diseño.</p>
+        
+        <div class="math-box">
+            Propiedad fundamental: El radio de la circunferencia trazado hasta el punto de tangencia siempre forma un <strong>ángulo de 90 grados</strong> (perpendicular) con la recta tangente.
+        </div>
+
+        <h3>3. La Recta Exterior</h3>
+        <p>Si la recta no toca a la curva en ningún punto, se considera exterior. Para nuestro tendido eléctrico, significa que pasamos por la calle contraria sin afectar la glorieta.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Aprenderemos a forzar tangencias en AutoCAD:</p>
+        
+        <ol>
+            <li><strong>Paso 1: Crear el obstáculo.</strong> Usa <code>CIRCLE</code>. Haz clic en el centro <code>50,50</code> y dale un radio de <code>20</code>. Este es el parque central.</li>
+            <li><strong>Paso 2: Trazar una secante.</strong> Usa <code>LINE</code> desde <code>0,50</code> hasta <code>100,50</code>. Observa cómo atraviesa el parque en dos puntos. Bórrala.</li>
+            <li><strong>Paso 3: Trazar una Tangente exacta.</strong> Queremos que el cable venga del registro $R(0, 100)$ y pase rozando el parque. Inicia el comando <code>LINE</code>, especifica el punto <code>0,100</code>.</li>
+            <li><strong>Paso 4: Forzar el SNAP Tangente.</strong> Mantén presionada la tecla SHIFT y haz Clic Derecho. Selecciona <strong>Tangent</strong> en el menú contextual. Haz clic sobre el borde del círculo. AutoCAD calculará el punto de contacto único perfecto.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte del proyecto, traza 3 rotondas y dibuja la línea de cableado principal de modo que sea tangente a las tres. Adjunta captura.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>Reconocer la diferencia analítica entre secante y tangente nos permite tomar decisiones de ingeniería. Una tangente bordea y protege la infraestructura; una secante atraviesa directo pero incrementa el costo de reposición.</p>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc03/MC_S03.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc05/MC_S05.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 04. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Una recta tangente toca a la curva en...", options: ["Ningún punto", "Un solo punto", "Dos puntos", "Infinitos puntos"], correct: 1 },
+        { q: "En la construcción, una recta secante al trazar un parque implica:", options: ["Bordear el parque", "Atravesar y romper el parque", "Elevar el cable por el aire", "No hacer obra"], correct: 1 },
+        { q: "El radio que se conecta al punto de tangencia forma un ángulo de:", options: ["45 grados", "90 grados", "180 grados", "0 grados"], correct: 1 },
+        { q: "¿Qué opción en AutoCAD fuerza a la línea a rozar un círculo perfectamente?", options: ["SNAP Center", "SNAP Endpoint", "SNAP Tangent", "SNAP Midpoint"], correct: 2 },
+        { q: "Si la recta intersecta la circunferencia en los puntos A y B, la recta se llama:", options: ["Tangente", "Exterior", "Secante", "Paralela"], correct: 2 },
+        { q: "Al trazar cables, la reposición de concreto incrementa los costos, medidos en:", options: ["Dólares", "Metros cuadrados", "Pesos", "Voltios"], correct: 2 },
+        { q: "Para forzar un modo SNAP específico durante un comando en AutoCAD, uso:", options: ["CTRL + C", "SHIFT + Clic Derecho", "ALT + TAB", "ESC"], correct: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

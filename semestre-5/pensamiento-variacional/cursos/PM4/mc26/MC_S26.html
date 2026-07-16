@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 26 - Taller de Programación Gráfica</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad V - Programación y Visualización</span>
+        <h1>MC 26: Gráficas Cuadráticas Dinámicas en HTML5</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>¿Alguna vez te has preguntado cómo hacen los ingenieros de software para crear simuladores interactivos como GeoGebra o PhET? No dibujan cada curva a mano, le enseñan a la computadora a resolver la matemática y "pintarla" en la pantalla.</p>
+        
+        <div class="alert-box">
+            <strong>El Poder del Canvas:</strong> Hoy daremos un salto del plano cartesiano de papel al <em>lienzo digital</em> (el <code>&lt;canvas&gt;</code> de HTML5). Aprenderemos que las computadoras también usan coordenadas (X, Y) para encender píxeles.
+        </div>
+        <p>Traduciremos nuestras ecuaciones de parábolas ($y = ax^2 + bx + c$) a código JavaScript puro.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto (Matemática Computacional)</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. El Plano Cartesiano Invertido</h3>
+        <p>El mayor reto de programar gráficas es que <strong>las computadoras tienen el Eje Y al revés</strong>. En tu cuaderno, si "y" aumenta, vas hacia arriba. En una pantalla de computadora, el origen $(0,0)$ está en la esquina superior izquierda, y si "y" aumenta, vas hacia <strong>abajo</strong>.</p>
+        <p>Para graficar nuestra parábola correctamente, el código debe "invertir" matemáticamente la coordenada Y multiplicándola por -1 o restándola de la altura total de la pantalla.</p>
+
+        <h3>2. Uniendo Puntos (Interpolación)</h3>
+        <p>Una computadora no "dibuja curvas". Lo que hace un simulador es calcular cientos de puntos diminutos y trazar líneas rectas muy pequeñitas entre ellos (<code>lineTo(x,y)</code>). Si los puntos están suficientemente cerca, el ojo humano lo percibe como una curva perfecta.</p>
+
+        <h3>3. El Algoritmo Base</h3>
+        <div class="math-box" style="text-align: left; font-family: monospace;">
+            // 1. Movernos al centro de la pantalla (Origen Virtual)<br>
+            // 2. Hacer un ciclo (for) desde x = -100 hasta x = 100<br>
+            // 3. Calcular y = a*(x*x) + b*x + c<br>
+            // 4. Invertir 'y' para pantalla: yPantalla = centroY - y<br>
+            // 5. Dibujar línea hasta (x, yPantalla)
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Laboratorio Interactivo de Código)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>Prueba en vivo el algoritmo. Modifica los coeficientes $a, b, c$ de la parábola y observa cómo el código redibuja el cable al instante:</p>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+            <div style="flex: 1; min-width: 250px; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px;">
+                <label>Coeficiente <strong>a</strong> (Apertura): <span id="valA">0.05</span></label>
+                <input type="range" id="sliderA" min="-0.2" max="0.2" step="0.01" value="0.05" style="width: 100%; margin-bottom:10px;" oninput="drawGraph()">
+                
+                <label>Coeficiente <strong>b</strong> (Desplazamiento X): <span id="valB">0</span></label>
+                <input type="range" id="sliderB" min="-5" max="5" step="0.5" value="0" style="width: 100%; margin-bottom:10px;" oninput="drawGraph()">
+                
+                <label>Coeficiente <strong>c</strong> (Vértice en Y): <span id="valC">0</span></label>
+                <input type="range" id="sliderC" min="-100" max="100" step="10" value="0" style="width: 100%;" oninput="drawGraph()">
+            </div>
+            
+            <div style="flex: 1.5; min-width: 300px; text-align: center;">
+                <canvas id="mathCanvas" width="300" height="200" style="background: #1e293b; border: 1px solid #475569; border-radius: 8px; width: 100%;"></canvas>
+            </div>
+        </div>
+
+        <script>
+            function drawGraph() {
+                const canvas = document.getElementById('mathCanvas');
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width; const height = canvas.height;
+                const oX = width / 2; const oY = height / 2; // Origen al centro
+                
+                let a = parseFloat(document.getElementById('sliderA').value);
+                let b = parseFloat(document.getElementById('sliderB').value);
+                let c = parseFloat(document.getElementById('sliderC').value);
+                
+                document.getElementById('valA').innerText = a;
+                document.getElementById('valB').innerText = b;
+                document.getElementById('valC').innerText = c;
+                
+                // Limpiar
+                ctx.clearRect(0, 0, width, height);
+                
+                // Dibujar Ejes
+                ctx.strokeStyle = '#475569'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(0, oY); ctx.lineTo(width, oY); ctx.stroke(); // X
+                ctx.beginPath(); ctx.moveTo(oX, 0); ctx.lineTo(oX, height); ctx.stroke(); // Y
+                
+                // Dibujar Parábola
+                ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3;
+                ctx.beginPath();
+                for(let x = -oX; x < oX; x++) {
+                    let y = a*(x*x) + b*x + c; // Ecuacion Matematica Real
+                    let screenX = oX + x;
+                    let screenY = oY - y; // INVERSION DEL EJE Y
+                    if(x === -oX) ctx.moveTo(screenX, screenY);
+                    else ctx.lineTo(screenX, screenY);
+                }
+                ctx.stroke();
+            }
+            // Retraso para que el DOM cargue
+            setTimeout(drawGraph, 500);
+        </script>
+
+        <div class="math-box" style="margin-top: 20px;">
+            <strong>Entregable:</strong> En tu reporte de Excel, redacta qué sucedió en el simulador cuando cambiaste el coeficiente "a" a un número negativo. ¿Qué aplicación estructural tendría esta forma inversa?
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc25/MC_S25.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc27/MC_S27.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 26. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "El mayor reto de programar gráficas matemáticas en pantalla es que:", options: ["Las computadoras no saben multiplicar", "El eje Y en informática crece hacia abajo, no hacia arriba", "Los píxeles son redondos", "Solo se puede usar Excel"], correct: 1 },
+        { q: "Para que la parábola se dibuje 'hacia arriba' en la pantalla, el código debe:", options: ["Pintar de rojo", "Restar la coordenada 'Y' al alto total o invertir su signo", "Apagar el monitor", "Usar números imaginarios"], correct: 1 },
+        { q: "La etiqueta de HTML5 usada para dibujar gráficos matemáticos se llama:", options: ["<image>", "<math>", "<canvas>", "<plot>"], correct: 2 },
+        { q: "En la ecuación y = ax² + bx + c, el coeficiente 'c' determina:", options: ["El cruce o desplazamiento vertical exacto (ordenada al origen)", "La inclinación horizontal", "Si la curva abre arriba o abajo", "El color de la línea"], correct: 0 },
+        { q: "Si en el simulador cambiamos el valor de 'a' de 0.05 a 0.20, la gráfica:", options: ["Se hace más estrecha (se cierra más rápido)", "Se hace completamente plana", "Desaparece", "Se convierte en un círculo"], correct: 0 },
+        { q: "¿Cómo logramos que la computadora dibuje una curva continua?", options: ["Usa un comando mágico de curvas", "Calcula puntos muy juntos (ej. de pixel en pixel) y los une con pequeñas líneas rectas", "Le pedimos a la IA que la dibuje", "Imprime la imagen"], correct: 1 },
+        { q: "En el entregable, si 'a' se vuelve negativo, la parábola parece un túnel o puente. Esto es ideal para modelar:", options: ["Bóvedas de drenaje subterráneo", "Caída libre", "Voltaje eléctrico", "Costo en pesos"], correct: 0 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

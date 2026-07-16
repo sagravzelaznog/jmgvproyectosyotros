@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM4 MC 23 - Ecuación de la Elipse</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/masterclass.css">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Unidad IV - Órbitas y Elipses</span>
+        <h1>MC 23: Cobertura Direccional (La Elipse)</h1>
+        <div class="meta">Pensamiento Matemático IV | Duración: 45 minutos | ABP: Electrificación Subterránea</div>
+    </header>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🔌 Introducción y Enganche</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        <p>No toda la cobertura se irradia como un círculo perfecto. Las antenas direccionales de telemetría (las que usa CFE para leer medidores a distancia de forma inalámbrica) empujan la señal mucho más lejos hacia el frente que hacia los lados.</p>
+        
+        <div class="alert-box">
+            <strong>Geometría Estirada:</strong> Cuando un círculo se estira en un eje (ya sea X o Y), se convierte en una Elipse. Su zona de cobertura ya no tiene un solo "Radio", sino un Radio Mayor y un Radio Menor.
+        </div>
+        <p>Aprenderemos a modelar esta zona de influencia "estirada" usando la ecuación canónica de la elipse con centro en el origen.</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>📐 Desarrollo del Concepto</span>
+            <span class="time-badge">20 min</span>
+        </h2>
+        
+        <h3>1. La Ecuación Canónica de la Elipse</h3>
+        <p>Si colocamos nuestra antena inteligente en el origen $(0,0)$, la frontera de su señal obedece a la siguiente ecuación:</p>
+        
+        <div class="math-box">
+            $$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$$
+        </div>
+        <ul>
+            <li><strong>$a$:</strong> Semieje en X (Radio horizontal).</li>
+            <li><strong>$b$:</strong> Semieje en Y (Radio vertical).</li>
+        </ul>
+        <p>Si $a = b$, la ecuación es idéntica a la de una circunferencia. Pero si $a > b$, la elipse está "acostada" a lo largo del eje X.</p>
+
+        <h3>2. Evaluando Cobertura de Telemetría</h3>
+        <p>CFE instala un repetidor en el origen. El fabricante dice que alcanza 100m hacia el Este y Oeste ($a = 100$), pero solo 40m hacia el Norte y Sur ($b = 40$) porque hay edificios bloqueando.</p>
+        <div class="math-box">
+            $$\frac{x^2}{100^2} + \frac{y^2}{40^2} = 1$$
+            $$\frac{x^2}{10000} + \frac{y^2}{1600} = 1$$
+        </div>
+
+        <h3>3. Verificación de Medidores</h3>
+        <p>Hay un medidor inteligente instalado en una casa en la coordenada $(80, 20)$. ¿Llegará la señal?</p>
+        <div class="math-box">
+            $$\frac{80^2}{10000} + \frac{20^2}{1600} \stackrel{?}{\leq} 1$$
+            $$\frac{6400}{10000} + \frac{400}{1600} \stackrel{?}{\leq} 1$$
+            $$0.64 + 0.25 = 0.89$$
+        </div>
+        <p>Como $0.89$ es menor que $1$, ¡la señal de telemetría llega perfectamente al medidor!</p>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>⚙️ Actividad Práctica (Trazado de Elipses en CAD)</span>
+            <span class="time-badge">15 min</span>
+        </h2>
+        
+        <p>En AutoCAD, el trazado de elipses requiere especificar explícitamente ambos radios:</p>
+        
+        <ol>
+            <li><strong>Paso 1:</strong> Inicia el comando <code>ELLIPSE</code>.</li>
+            <li><strong>Paso 2: Modo Centro.</strong> AutoCAD te pedirá el eje. Presiona <code>C</code> (Center) para empezar a dibujar desde el centro, como lo harías con un círculo.</li>
+            <li><strong>Paso 3:</strong> Especifica el centro: teclea <code>0,0</code>.</li>
+            <li><strong>Paso 4: Eje X (a).</strong> Mueve el mouse hacia la derecha (asegúrate que esté horizontal con F8 Ortho) y teclea <code>100</code>.</li>
+            <li><strong>Paso 5: Eje Y (b).</strong> Mueve el mouse hacia arriba y teclea <code>40</code>. AutoCAD dibujará tu zona de cobertura direccional.</li>
+        </ol>
+
+        <div class="math-box">
+            <strong>Entregable:</strong> En tu reporte, modela una antena que tiene un alcance de 80m Norte-Sur, pero solo 30m Este-Oeste. Escribe su ecuación. Evalúa si una casa en $(20, 60)$ recibirá la señal.
+        </div>
+    </section>
+
+    <section class="section-card">
+        <h2 class="section-title">
+            <span>🧠 Cierre y Validación del Aprendizaje</span>
+            <span class="time-badge">5 min</span>
+        </h2>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-progress">
+                <span id="quiz-counter">Pregunta 1 de 7</span>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress-bar"></div></div>
+            </div>
+            <div id="quiz-questions-wrapper"></div>
+            <div id="quiz-results" class="question-block quiz-result">
+                <h3>¡Completado!</h3>
+                <div class="quiz-score" id="quiz-score-display">0/7</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <a href="../mc22/MC_S22.html" class="btn-primary" style="background: rgba(255,255,255,0.1); color: white;">Anterior</a>
+                    <button class="btn-primary" onclick="resetQuiz()" style="background: rgba(255,255,255,0.1); color: white;">Reintentar</button>
+                    <a href="../../dashboard/index.html" class="btn-primary">Dashboard</a>
+                    <a href="../mc24/MC_S24.html" class="btn-primary" style="background: #10b981;">Siguiente Sesión ➔</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        JMGV-PTEL 2026. PM4 MC 23. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+</div>
+
+<script>
+    const questions = [
+        { q: "Una elipse se diferencia de una circunferencia porque:", options: ["Tiene 3 focos", "No tiene centro", "Tiene un radio horizontal (a) y un radio vertical (b) de diferentes tamaños", "No es una curva cerrada"], correct: 2 },
+        { q: "En la ecuación de la elipse, si la variable 'a' es mayor que 'b', la elipse está:", options: ["Acostada (alargada en el eje X)", "Vertical (alargada en el eje Y)", "Inclinada 45 grados", "Es un círculo perfecto"], correct: 0 },
+        { q: "En el entregable, la antena alcanza 80m Norte-Sur y 30m Este-Oeste. Esto significa que:", options: ["a = 80, b = 30", "a = 30, b = 80", "a = 30, b = 30", "a = 80, b = 80"], correct: 1 },
+        { q: "Si al sustituir las coordenadas (x,y) de una casa el resultado de la suma de fracciones es 1.25, la casa:", options: ["Tiene señal perfecta", "Está en el límite de la señal", "Está fuera de la zona de cobertura (porque 1.25 > 1)", "La ecuación explotó"], correct: 2 },
+        { q: "Para comenzar a trazar una elipse desde el origen en AutoCAD, tras llamar al comando, usamos la opción:", options: ["Center (C)", "Radius (R)", "Diameter (D)", "Endpoint (E)"], correct: 0 },
+        { q: "En el mundo real, ¿por qué la CFE usaría antenas con cobertura elíptica?", options: ["Para adornar", "Para cubrir cañones o calles largas sin desperdiciar señal hacia áreas deshabitadas", "Porque son más baratas", "Por error de cálculo"], correct: 1 },
+        { q: "Si la ecuación es x²/25 + y²/9 = 1, el alcance máximo sobre el eje X es de:", options: ["25 metros", "9 metros", "5 metros", "3 metros"], correct: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    const wrapper = document.getElementById('quiz-questions-wrapper');
+    const counter = document.getElementById('quiz-counter');
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const resultsBlock = document.getElementById('quiz-results');
+    const scoreDisplay = document.getElementById('quiz-score-display');
+
+    function initQuiz() {
+        wrapper.innerHTML = '';
+        questions.forEach((q, qIndex) => {
+            const block = document.createElement('div');
+            block.className = `question-block ${qIndex === 0 ? 'active' : ''}`;
+            block.id = `q-${qIndex}`;
+            const title = document.createElement('div');
+            title.className = 'question-text'; title.textContent = `${qIndex + 1}. ${q.q}`; block.appendChild(title);
+            const grid = document.createElement('div'); grid.className = 'options-grid';
+            q.options.forEach((opt, oIndex) => {
+                const btn = document.createElement('button'); btn.className = 'option-btn'; btn.textContent = opt;
+                btn.onclick = () => handleAnswer(qIndex, oIndex, btn); grid.appendChild(btn);
+            });
+            block.appendChild(grid); wrapper.appendChild(block);
+        });
+        updateProgress();
+    }
+    function handleAnswer(qIndex, oIndex, btn) {
+        const isCorrect = (oIndex === questions[qIndex].correct);
+        const allBtns = document.getElementById(`q-${qIndex}`).querySelectorAll('.option-btn');
+        allBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; b.style.cursor = 'default'; });
+        if (isCorrect) { btn.classList.add('correct'); btn.style.opacity = '1'; score++; } 
+        else { btn.classList.add('wrong'); btn.style.opacity = '1'; allBtns[questions[qIndex].correct].classList.add('correct'); allBtns[questions[qIndex].correct].style.opacity = '1'; }
+        setTimeout(() => {
+            document.getElementById(`q-${qIndex}`).classList.remove('active'); currentQ++;
+            if (currentQ < questions.length) { document.getElementById(`q-${currentQ}`).classList.add('active'); updateProgress(); } 
+            else { showResults(); }
+        }, 1200);
+    }
+    function updateProgress() { counter.textContent = `Pregunta ${currentQ + 1} de ${questions.length}`; progressBar.style.width = `${(currentQ / questions.length) * 100}%`; }
+    function showResults() { document.querySelector('.quiz-progress').style.display = 'none'; resultsBlock.classList.add('active'); scoreDisplay.textContent = `${score}/${questions.length}`; }
+    function resetQuiz() { currentQ = 0; score = 0; document.querySelector('.quiz-progress').style.display = 'flex'; resultsBlock.classList.remove('active'); initQuiz(); }
+    initQuiz();
+</script>
+
+</body>
+</html>

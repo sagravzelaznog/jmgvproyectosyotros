@@ -86,8 +86,7 @@ export default function DashboardPage() {
           
           // Filtrar los módulos de este curso
           const courseModules = modules.filter(m => 
-            (course.id === "pensamiento-variacional-1" && !m.courseId) || 
-            (m.courseId === course.id)
+            m.courseId === course.id || (course.id === "pensamiento-variacional-1" && !m.courseId)
           );
 
           if (course.externalUrl) {

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -21,7 +22,17 @@ export default function LoginPage() {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, email, password);
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Crear documento con 24 horas de acceso
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+        await setDoc(doc(db, "Users", user.uid), {
+          email: user.email,
+          hasAccess: true,
+          expiresAt: expiresAt,
+          createdAt: new Date().toISOString()
+        });
       }
       router.push("/dashboard"); // Redirigimos al dashboard después del login
     } catch (err: any) {
@@ -35,13 +46,26 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="px-8 pt-8 pb-6 bg-slate-900 text-white">
-          <h2 className="text-3xl font-bold text-center">
+        <div className="px-8 pt-8 pb-6 bg-slate-900 text-white relative overflow-hidden">
+          {/* Decorative background element */}
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+          
+          <h2 className="text-3xl font-bold text-center relative z-10">
             {isLogin ? "Bienvenido de nuevo" : "Crea tu cuenta"}
           </h2>
-          <p className="mt-2 text-center text-slate-300">
+          <p className="mt-2 text-center text-slate-300 relative z-10">
             Pensamiento Variacional I
           </p>
+          
+          {!isLogin && (
+            <div className="mt-4 p-3 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 rounded-xl relative z-10 text-center shadow-lg">
+              <span className="text-xl">🎁</span>
+              <p className="text-sm font-medium text-indigo-200 mt-1">
+                Regístrate hoy y obtén 24 horas de acceso gratuito
+              </p>
+            </div>
+          )}
         </div>
         
         <div className="p-8">

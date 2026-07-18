@@ -1,61 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { collection, query, orderBy, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase/firebase";
 import { useAuth } from "@/components/providers/AuthProvider";
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const { user, isAdmin, hasAccess, expiresAt } = useAuth();
-  const [modules, setModules] = useState<any[]>([]);
-  const [lessons, setLessons] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [expandedCourse, setExpandedCourse] = useState<string | null>("pensamiento-variacional-1");
+  const { isAdmin, hasAccess, expiresAt } = useAuth();
 
-  const getDaysRemaining = () => {
+  const getRemainingTime = () => {
     if (!expiresAt) return null;
     const diffTime = expiresAt.getTime() - new Date().getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? diffDays : 0;
+    if (diffTime <= 0) return { expired: true };
+    
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    return { expired: false, days: diffDays, hours: diffHours };
   };
 
-  const daysRemaining = getDaysRemaining();
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        // Cargar Módulos
-        const modulesRef = collection(db, "Modules");
-        const modSnap = await getDocs(query(modulesRef, orderBy("order", "asc")));
-        setModules(modSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-        
-        // Cargar Sesiones
-        const lessonsRef = collection(db, "Lessons");
-        const lesSnap = await getDocs(query(lessonsRef, orderBy("order", "asc")));
-        setLessons(lesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-      } catch (error) {
-        console.error("Error cargando contenido", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContent();
-  }, []);
+  const remaining = getRemainingTime();
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Mis Cursos</h1>
+        <h1 className="text-3xl font-bold text-white">Mis Cursos</h1>
         <p className="text-slate-400 mt-2">Prepárate para aprender la matemática del cambio y modelar el entorno.</p>
         
-        {!isAdmin && hasAccess && daysRemaining !== null && (
+        {!isAdmin && hasAccess && remaining && !remaining.expired && (
           <div className="mt-6 flex items-center justify-between p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-xl">
             <div>
-              <p className="text-indigo-300 font-medium text-sm">Suscripción Activa</p>
+              <p className="text-indigo-300 font-medium text-sm">Prueba Gratuita Activa</p>
               <p className="text-white font-bold text-lg">
-                Te quedan {daysRemaining} {daysRemaining === 1 ? 'día' : 'días'} de acceso
+                Te quedan {(remaining.days ?? 0) > 0 
+                  ? `${remaining.days} ${remaining.days === 1 ? 'día' : 'días'} y ${remaining.hours} hrs` 
+                  : `${remaining.hours} horas`} de acceso libre
               </p>
             </div>
             <div className="hidden sm:block text-indigo-400 opacity-50">
@@ -71,139 +48,41 @@ export default function DashboardPage() {
         )}
       </div>
 
-      <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {([
-          { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
-          { id: "pm4", title: "PM4 (Variacional)", adminOnly: false, description: "Electrificación Subterránea y Planimetría Urbana." },
           { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
           { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
+          { id: "pm4", title: "PM4 (Variacional)", adminOnly: false, description: "Electrificación Subterránea y Planimetría Urbana." },
+          { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false, description: "Curso original del semestre 5." },
           { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." },
           { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Fundamentos y técnicas profesionales de diseño vectorial." }
-        ] as Array<{ id: string; title: string; adminOnly: boolean; description?: string; externalUrl?: string }>)
+        ] as Array<{ id: string; title: string; adminOnly: boolean; description: string }>)
         .filter(course => !course.adminOnly || isAdmin)
-        .map(course => {
-          const isExpanded = expandedCourse === course.id;
-          
-          // Filtrar los módulos de este curso
-          const courseModules = modules.filter(m => 
-            m.courseId === course.id || (course.id === "pensamiento-variacional-1" && !m.courseId)
-          );
-
-          if (course.externalUrl) {
-            return (
-              <div key={course.id} className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl transition-all">
-                <a 
-                  href={course.externalUrl}
-                  className="w-full p-6 flex items-center justify-between hover:bg-slate-800/50 transition-colors text-left group block"
-                >
-                  <div>
-                    <h2 className="text-xl font-bold text-white flex items-center gap-3">
-                      <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                      {course.title}
-                      <span className="text-xs bg-emerald-400/20 text-emerald-400 px-2 py-1 rounded-full font-medium ml-2">Curso Consolidado</span>
-                    </h2>
-                    <p className="text-slate-400 mt-2 text-sm ml-9">{course.description}</p>
-                  </div>
-                  <div className="bg-emerald-500 text-white rounded-full p-2 transform group-hover:scale-110 transition-transform">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
-            );
-          }
-
-          return (
-            <div key={course.id} className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl transition-all">
-              {/* Encabezado del Curso (Acordeón) */}
-              <button 
-                onClick={() => setExpandedCourse(isExpanded ? null : course.id)}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-800/30 transition-colors text-left"
-              >
-                <h2 className="text-xl font-bold text-white flex items-center gap-3">
-                  <svg className={`w-6 h-6 ${course.id === 'pensamiento-variacional-1' ? 'text-indigo-500' : 'text-neon-pink'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                  {course.title}
-                  {course.adminOnly && (
-                    <span className="text-xs bg-neon-pink/20 text-neon-pink px-2 py-1 rounded-full font-medium ml-2">En Desarrollo</span>
-                  )}
-                </h2>
-                <svg className={`w-6 h-6 text-slate-500 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        .map(course => (
+          <Link 
+            href={`/dashboard/course/${course.id}`} 
+            key={course.id} 
+            className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] hover:border-indigo-500/50 transition-all group flex flex-col h-full"
+          >
+            <div className="p-6 flex-1 flex flex-col">
+              <div className="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all">
+                <svg className={`w-6 h-6 ${course.id.startsWith('pm') ? 'text-neon-pink' : 'text-indigo-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-              </button>
+              </div>
+              <h2 className="text-xl font-bold text-white mb-2">{course.title}</h2>
+              <p className="text-slate-400 text-sm flex-1">{course.description}</p>
               
-              {/* Contenido del Curso (Módulos y Sesiones) */}
-              {isExpanded && (
-                <div className="p-6 pt-0 border-t border-slate-800/50">
-                  {loading ? (
-                    <div className="animate-pulse space-y-4 mt-6">
-                      <div className="h-16 bg-slate-800 rounded-lg"></div>
-                      <div className="h-16 bg-slate-800 rounded-lg"></div>
-                    </div>
-                  ) : courseModules.length > 0 ? (
-                    <div className="space-y-6 mt-6">
-                      {courseModules.map((mod: any) => {
-                        const modLessons = lessons.filter(l => l.moduleId === mod.id);
-                        
-                        return (
-                          <div key={mod.id} className="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/20">
-                            <div className="bg-slate-800/80 p-4 border-b border-slate-800 flex justify-between items-center">
-                              <h3 className="font-bold text-lg text-white">{mod.title}</h3>
-                              <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">
-                                {modLessons.length} Sesiones
-                              </span>
-                            </div>
-                            
-                            <div className="divide-y divide-slate-800">
-                              {modLessons.map((lesson: any) => (
-                                <Link 
-                                  key={lesson.id} 
-                                  href={`/dashboard/lesson/${lesson.id}`} 
-                                  className="block p-4 hover:bg-slate-800/50 transition-colors flex items-center justify-between group"
-                                >
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-sm">
-                                      {lesson.order}
-                                    </div>
-                                    <span className="text-slate-300 group-hover:text-indigo-300 transition-colors font-medium">
-                                      {lesson.title.replace(`SESIÓN ${lesson.order}:`, '').trim()}
-                                    </span>
-                                  </div>
-                                  <svg className="w-5 h-5 text-slate-600 group-hover:text-indigo-400 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                  </svg>
-                                </Link>
-                              ))}
-                              {modLessons.length === 0 && (
-                                <div className="p-4 text-sm text-slate-500 text-center">No hay sesiones en este módulo.</div>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="text-center py-12 border-2 border-dashed border-slate-700/50 rounded-xl bg-slate-900/50 mt-6">
-                      <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      </div>
-                      <h3 className="text-lg font-medium text-slate-300">Aún no hay contenido disponible</h3>
-                      <p className="text-slate-500 mt-2">Las sesiones están siendo preparadas y pronto estarán aquí.</p>
-                    </div>
-                  )}
-                </div>
-              )}
+              <div className="mt-6 flex items-center text-indigo-400 text-sm font-semibold group-hover:text-indigo-300">
+                Ver Módulos
+                <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
             </div>
-          );
-        })}
+          </Link>
+        ))}
       </div>
     </div>
   );

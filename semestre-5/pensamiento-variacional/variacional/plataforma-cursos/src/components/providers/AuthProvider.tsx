@@ -38,12 +38,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         unsubscribeFirestore = onSnapshot(doc(db, "Users", currentUser.uid), (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
-            setHasAccess(!!data.hasAccess);
+            let validAccess = !!data.hasAccess;
+            let expirationDate = null;
+
             if (data.expiresAt) {
-              setExpiresAt(new Date(data.expiresAt));
-            } else {
-              setExpiresAt(null);
+              expirationDate = new Date(data.expiresAt);
+              if (new Date() > expirationDate) {
+                validAccess = false; // Trial has expired
+              }
             }
+            
+            setHasAccess(validAccess);
+            setExpiresAt(expirationDate);
           } else {
             setHasAccess(false);
             setExpiresAt(null);

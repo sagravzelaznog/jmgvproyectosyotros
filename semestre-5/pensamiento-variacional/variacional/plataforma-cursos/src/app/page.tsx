@@ -58,9 +58,25 @@ export default function LandingPage() {
       {/* Pricing Section */}
       <section id="comprar" className="py-24 bg-slate-950 relative overflow-hidden border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Elige tu plan de estudio</h2>
             <p className="text-slate-400 text-lg">Acceso a las 50 sesiones intensivas, simuladores de GeoGebra y plataforma interactiva.</p>
+          </div>
+
+          {/* Banner Promo 24h */}
+          <div className="max-w-4xl mx-auto mb-16 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div className="relative z-10 text-center md:text-left mb-6 md:mb-0">
+              <h3 className="text-2xl font-bold text-white mb-2 flex items-center justify-center md:justify-start gap-2">
+                <span>🎁</span> Empieza Gratis
+              </h3>
+              <p className="text-indigo-200">Regístrate hoy y obtén 24 horas de acceso total y gratuito a todos los cursos.</p>
+            </div>
+            <div className="relative z-10">
+              <Link href="/login" className="whitespace-nowrap inline-flex justify-center items-center px-6 py-3 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-500 transition-all shadow-[0_0_30px_-5px_rgba(79,70,229,0.5)]">
+                Reclamar Prueba de 24h
+              </Link>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">

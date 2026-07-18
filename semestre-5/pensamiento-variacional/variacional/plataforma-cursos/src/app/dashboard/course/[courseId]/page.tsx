@@ -13,6 +13,7 @@ const COURSE_INFO: Record<string, { title: string, adminOnly: boolean }> = {
   "pm3": { title: "PM3 (Trazado Urbano)", adminOnly: false },
   "pm4": { title: "PM4 (Variacional)", adminOnly: false },
   "pensamiento-variacional-1": { title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false },
+  "tuto-colab": { title: "Google Colab (Mini-Curso)", adminOnly: false },
   "probabilidad": { title: "Probabilidad y Estadística", adminOnly: false },
   "inkscape": { title: "Diseño Vectorial (Inkscape)", adminOnly: false }
 };

@@ -134,6 +134,7 @@ export default function LandingPage() {
               { icon: "📐", title: "Geometría y Urbanismo", desc: "Diseño y trazo geométrico aplicado al espacio y la planificación de ciudades." },
               { icon: "📈", title: "Pensamiento Variacional", desc: "El corazón del cálculo: modelos, tasas de cambio, optimización y acumulación." },
               { icon: "⚡", title: "Electrificación y Planimetría", desc: "Proyectos avanzados que unen la matemática con la infraestructura." },
+              { icon: "💻", title: "Google Colab", desc: "Aprende a utilizar cuadernos interactivos y programación en Python." },
               { icon: "📊", title: "Probabilidad Avanzada", desc: "Toma de decisiones fundamentada en distribuciones y análisis de datos." },
               { icon: "🎨", title: "Diseño Vectorial", desc: "Herramientas de nivel profesional con Inkscape para desatar tu creatividad." }
             ].map((curso, index) => (

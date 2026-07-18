@@ -50,7 +50,7 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {([
-          { id: "pm1", title: "PM1 (Estadístico)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
+          { id: "pm1", title: "PM1 (Aritmético)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
           { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
           { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
           { id: "pm4", title: "PM4 (Variacional)", adminOnly: false, description: "Electrificación Subterránea y Planimetría Urbana." },

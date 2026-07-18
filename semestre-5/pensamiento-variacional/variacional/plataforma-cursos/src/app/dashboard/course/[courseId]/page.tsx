@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
 const COURSE_INFO: Record<string, { title: string, adminOnly: boolean }> = {
-  "pm1": { title: "PM1 (Estadístico)", adminOnly: false },
+  "pm1": { title: "PM1 (Aritmético)", adminOnly: false },
   "pm2": { title: "PM2 (Geometría)", adminOnly: false },
   "pm3": { title: "PM3 (Trazado Urbano)", adminOnly: false },
   "pm4": { title: "PM4 (Variacional)", adminOnly: false },

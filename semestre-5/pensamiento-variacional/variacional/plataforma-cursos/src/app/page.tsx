@@ -116,28 +116,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Temario Section */}
-      <section id="temario" className="py-24 bg-slate-900 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Cursos Section */}
+      <section id="temario" className="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+        {/* Glow Effects */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4">Un plan de estudio estructurado</h2>
-            <p className="text-slate-400">Desde los conceptos más intuitivos hasta la optimización y acumulación del cálculo avanzado.</p>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Un universo de conocimiento a tu alcance</h2>
+            <p className="text-slate-400 text-lg">Explora nuestra extensa biblioteca de cursos, que abarca desde los fundamentos de la aritmética hasta el diseño vectorial profesional.</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { num: "01", title: "De lo Constante a lo Variable", desc: "Transición del pensamiento aritmético al variacional." },
-              { num: "02", title: "Modelando el Entorno", desc: "Funciones reales, tabulación y graficación de comportamientos." },
-              { num: "03", title: "El Límite de la Intuición", desc: "Aproximación sucesiva, noción de límite y asíntotas." },
-              { num: "04", title: "La Tasa Instantánea", desc: "De la recta secante a la tangente. Derivada intuitiva." },
-              { num: "05", title: "Optimización y Acumulación", desc: "Máximos y mínimos. Introducción intuitiva a la integral." }
-            ].map((bloque) => (
-              <div key={bloque.num} className="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:border-indigo-500/50 transition-colors group">
-                <div className="text-4xl font-bold text-slate-800 mb-4 group-hover:text-indigo-900 transition-colors">
-                  {bloque.num}
+              { icon: "🔢", title: "Aritmética y Estadística", desc: "Sienta las bases con probabilidad, lógica y operaciones matemáticas esenciales." },
+              { icon: "📐", title: "Geometría y Urbanismo", desc: "Diseño y trazo geométrico aplicado al espacio y la planificación de ciudades." },
+              { icon: "📈", title: "Pensamiento Variacional", desc: "El corazón del cálculo: modelos, tasas de cambio, optimización y acumulación." },
+              { icon: "⚡", title: "Electrificación y Planimetría", desc: "Proyectos avanzados que unen la matemática con la infraestructura." },
+              { icon: "📊", title: "Probabilidad Avanzada", desc: "Toma de decisiones fundamentada en distribuciones y análisis de datos." },
+              { icon: "🎨", title: "Diseño Vectorial", desc: "Herramientas de nivel profesional con Inkscape para desatar tu creatividad." }
+            ].map((curso, index) => (
+              <div key={index} className="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:border-indigo-500/30 transition-all group relative overflow-hidden">
+                <div className="text-4xl mb-4 group-hover:scale-110 transform transition-transform duration-300">
+                  {curso.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{bloque.title}</h3>
-                <p className="text-slate-400">{bloque.desc}</p>
+                <h3 className="text-xl font-bold text-white mb-2">{curso.title}</h3>
+                <p className="text-slate-400 leading-relaxed">{curso.desc}</p>
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
               </div>
             ))}
           </div>

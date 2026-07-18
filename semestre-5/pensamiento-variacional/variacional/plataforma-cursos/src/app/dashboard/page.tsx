@@ -50,13 +50,13 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {([
-          { id: "pm1", title: "PM1 (Aritmético)", adminOnly: false, description: "Fundamentos de probabilidad, lógica y estadística." },
-          { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Diseño y trazo geométrico aplicado al urbanismo." },
-          { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Estadística, parábolas y construcción avanzada." },
-          { id: "pm4", title: "PM4 (Variacional)", adminOnly: false, description: "Electrificación Subterránea y Planimetría Urbana." },
-          { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false, description: "Curso original del semestre 5." },
-          { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Análisis de datos, distribuciones y toma de decisiones probabilísticas." },
-          { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Fundamentos y técnicas profesionales de diseño vectorial." }
+          { id: "pm1", title: "PM1 (Aritmético)", adminOnly: false, description: "Domina los fundamentos de los números y las operaciones matemáticas. ¡Da el primer paso hacia el pensamiento lógico y descubre el poder de la aritmética!" },
+          { id: "pm2", title: "PM2 (Geometría)", adminOnly: false, description: "Explora las propiedades del espacio, las formas y las proporciones. ¡Aprende a diseñar y trazar con precisión geométrica en el mundo real!" },
+          { id: "pm3", title: "PM3 (Trazado Urbano)", adminOnly: false, description: "Aplica la matemática en la planificación y estructuración de espacios. ¡Diseña ciudades inteligentes y descubre la geometría detrás del urbanismo!" },
+          { id: "pm4", title: "PM4 (Variacional)", adminOnly: false, description: "Analiza el cambio continuo, la acumulación y el modelado del entorno. ¡Prepárate para entender la matemática en movimiento y dominar el cálculo!" },
+          { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false, description: "De lo constante a lo variable. ¡Explora el curso original paso a paso y desata todo tu potencial analítico!" },
+          { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Aprende a analizar datos, predecir tendencias y tomar decisiones informadas. ¡Domina la incertidumbre y dale sentido a la información!" },
+          { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Crea gráficos, ilustraciones y trazados escalables con precisión. ¡Desata tu creatividad y domina las herramientas del diseño digital profesional!" }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description: string }>)
         .filter(course => !course.adminOnly || isAdmin)
         .map(course => (

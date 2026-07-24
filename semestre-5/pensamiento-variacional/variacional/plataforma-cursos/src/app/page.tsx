@@ -137,7 +137,8 @@ export default function LandingPage() {
               { icon: "💻", title: "Google Colab", desc: "Aprende a utilizar cuadernos interactivos y programación en Python." },
               { icon: "📗", title: "Excel Intermedio", desc: "Domina herramientas, fórmulas avanzadas, y análisis de datos en hojas de cálculo." },
               { icon: "📊", title: "Probabilidad Avanzada", desc: "Toma de decisiones fundamentada en distribuciones y análisis de datos." },
-              { icon: "🎨", title: "Diseño Vectorial", desc: "Herramientas de nivel profesional con Inkscape para desatar tu creatividad." }
+              { icon: "🎨", title: "Diseño Vectorial", desc: "Herramientas de nivel profesional con Inkscape para desatar tu creatividad." },
+              { icon: "⚙️", title: "AutoCAD Profesional", desc: "Diseño y modelado de piezas mecánicas en 2D con nivel industrial." }
             ].map((curso, index) => (
               <div key={index} className="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:border-indigo-500/30 transition-all group relative overflow-hidden">
                 <div className="text-4xl mb-4 group-hover:scale-110 transform transition-transform duration-300">

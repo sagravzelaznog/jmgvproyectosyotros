@@ -58,7 +58,8 @@ export default function DashboardPage() {
           { id: "pensamiento-variacional-1", title: "Pensamiento Variacional (Plataforma S5)", adminOnly: false, description: "De lo constante a lo variable. ¡Explora el curso original paso a paso y desata todo tu potencial analítico!" },
           { id: "excel-intermedio", title: "Excel Intermedio", adminOnly: false, description: "Domina Excel desde los fundamentos hasta funciones avanzadas. Limpia datos, crea fórmulas y analiza información con eficacia." },
           { id: "probabilidad", title: "Probabilidad y Estadística", adminOnly: false, description: "Aprende a analizar datos, predecir tendencias y tomar decisiones informadas. ¡Domina la incertidumbre y dale sentido a la información!" },
-          { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Crea gráficos, ilustraciones y trazados escalables con precisión. ¡Desata tu creatividad y domina las herramientas del diseño digital profesional!" }
+          { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Crea gráficos, ilustraciones y trazados escalables con precisión. ¡Desata tu creatividad y domina las herramientas del diseño digital profesional!" },
+          { id: "autocad", title: "AutoCAD Profesional", adminOnly: false, description: "Aprende a diseñar y modelar piezas mecánicas en 2D utilizando comandos avanzados, coordenadas polares y matrices." }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description: string }>)
         .filter(course => !course.adminOnly || isAdmin)
         .map(course => (

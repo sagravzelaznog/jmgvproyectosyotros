@@ -16,7 +16,8 @@ const COURSE_INFO: Record<string, { title: string, adminOnly: boolean }> = {
   "tuto-colab": { title: "Google Colab (Mini-Curso)", adminOnly: false },
   "excel-intermedio": { title: "Excel Intermedio", adminOnly: false },
   "probabilidad": { title: "Probabilidad y Estadística", adminOnly: false },
-  "inkscape": { title: "Diseño Vectorial (Inkscape)", adminOnly: false }
+  "inkscape": { title: "Diseño Vectorial (Inkscape)", adminOnly: false },
+  "autocad": { title: "AutoCAD Profesional", adminOnly: false }
 };
 
 export default function CoursePage() {

@@ -19,6 +19,15 @@ export const UIManager = {
     farmObjects: null,
     lastRenderedFase: -1,
 
+    // Lógica Animación Campesino
+    campesinoState: 'IDLE',
+    targetRock: null,
+    carriedRock: null,
+    wheelbarrowObj: null,
+    campesinoAction: null,
+    campesinoMixer: null,
+    campesinoAnimations: [],
+
     init: function () {
         this.canvas = document.getElementById('game-canvas');
         
@@ -71,9 +80,11 @@ export const UIManager = {
             this.modelCampesino.position.set(0, 0, 0);
             this.scene.add(this.modelCampesino);
             if(gltf.animations && gltf.animations.length > 0) {
-                const mixer = new THREE.AnimationMixer(this.modelCampesino);
-                mixer.clipAction(gltf.animations[0]).play();
-                this.mixers.push(mixer);
+                this.campesinoMixer = new THREE.AnimationMixer(this.modelCampesino);
+                this.campesinoAnimations = gltf.animations;
+                this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[0]);
+                this.campesinoAction.play();
+                this.mixers.push(this.campesinoMixer);
             }
         });
 
@@ -85,7 +96,7 @@ export const UIManager = {
             this.scene.add(this.modelPeon);
             if(gltf.animations && gltf.animations.length > 0) {
                 const mixer = new THREE.AnimationMixer(this.modelPeon);
-                const action = mixer.clipAction(gltf.animations[1] || gltf.animations[0]);
+                const action = mixer.clipAction(gltf.animations[1] || gltf.animations[0]); // 1 es Walk/Run en Soldier
                 action.timeScale = 1.5;
                 action.play();
                 this.mixers.push(mixer);
@@ -113,6 +124,17 @@ export const UIManager = {
         const interactuar = (e) => {
             if (!GameState.fasePagada) return;
             TycoonEngine.agregarProgreso(GameState.poderClicBase, true);
+            
+            // Animación Campesino al hacer clic en Fase 0
+            if (GameState.faseActualIndex === 0 && this.campesinoState === 'IDLE' && this.modelCampesino && this.farmObjects) {
+                let possibleRocks = this.farmObjects.children.filter(c => c !== this.wheelbarrowObj && !c.isCarried && c.isRock);
+                if (possibleRocks.length > 0) {
+                    this.targetRock = possibleRocks[Math.floor(Math.random() * possibleRocks.length)];
+                    this.campesinoState = 'MOVING_TO_ROCK';
+                    this.playCampesinoAnimation(1); // 1 = Run/Walk
+                }
+            }
+
             let x, y;
             if (e.changedTouches) {
                 x = e.changedTouches[0].clientX;
@@ -141,7 +163,30 @@ export const UIManager = {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
+    playCampesinoAnimation: function(index) {
+        if(!this.campesinoMixer || !this.campesinoAnimations[index]) return;
+        if(this.campesinoAction) {
+            // Animación cruzada suave de 0.2s
+            const previousAction = this.campesinoAction;
+            this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[index]);
+            this.campesinoAction.reset();
+            this.campesinoAction.play();
+            previousAction.crossFadeTo(this.campesinoAction, 0.2, true);
+        } else {
+            this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[index]);
+            this.campesinoAction.play();
+        }
+    },
+
     updateFarmObjects: function(faseIndex) {
+        // Reset state
+        this.campesinoState = 'IDLE';
+        this.playCampesinoAnimation(0);
+        if (this.carriedRock && this.modelCampesino) {
+            this.modelCampesino.remove(this.carriedRock);
+            this.carriedRock = null;
+        }
+
         // Limpiar objetos anteriores
         while(this.farmObjects.children.length > 0) { 
             this.farmObjects.remove(this.farmObjects.children[0]); 
@@ -150,26 +195,42 @@ export const UIManager = {
         const radioEsparcimiento = 15;
 
         if (faseIndex === 0) {
+            // Carretilla
+            this.wheelbarrowObj = new THREE.Group();
+            const wbMat = new THREE.MeshLambertMaterial({ color: 0x8b4513 });
+            const wbGeo = new THREE.BoxGeometry(2, 1, 3);
+            const wbMesh = new THREE.Mesh(wbGeo, wbMat);
+            wbMesh.position.y = 1;
+            this.wheelbarrowObj.add(wbMesh);
+            const wheelGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.5, 16);
+            const wheelMat = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            const wheel = new THREE.Mesh(wheelGeo, wheelMat);
+            wheel.rotation.z = Math.PI/2;
+            wheel.position.set(0, 0.5, 1.5);
+            this.wheelbarrowObj.add(wheel);
+            
+            this.wheelbarrowObj.position.set(8, 0, 8); // A un lado
+            this.farmObjects.add(this.wheelbarrowObj);
+
             // Rocas
             const rockGeo = new THREE.DodecahedronGeometry(0.5);
             const rockMat = new THREE.MeshLambertMaterial({ color: 0x888888 });
             for (let i = 0; i < 40; i++) {
                 const rock = new THREE.Mesh(rockGeo, rockMat);
+                rock.isRock = true;
                 rock.position.set(
                     (Math.random() - 0.5) * radioEsparcimiento * 2,
                     0.25,
                     (Math.random() - 0.5) * radioEsparcimiento * 2
                 );
-                // Evitar solapamiento con el campesino central
-                if(Math.abs(rock.position.x) < 2 && Math.abs(rock.position.z) < 2) continue;
+                if(Math.abs(rock.position.x) < 3 && Math.abs(rock.position.z) < 3) continue;
                 rock.rotation.y = Math.random() * Math.PI;
                 rock.scale.setScalar(Math.random() * 0.5 + 0.5);
                 this.farmObjects.add(rock);
             }
         } 
         else if (faseIndex >= 5 && faseIndex <= 10) {
-            // Plantas en crecimiento (Conos verdes)
-            const growthProgress = (faseIndex - 4) / 6; // 1/6 a 6/6
+            const growthProgress = (faseIndex - 4) / 6;
             const plantHeight = 0.5 + (growthProgress * 1.5);
             const plantGeo = new THREE.ConeGeometry(0.2, plantHeight, 5);
             const plantMat = new THREE.MeshLambertMaterial({ color: 0x2ecc71 });
@@ -186,7 +247,6 @@ export const UIManager = {
             }
         }
         else if (faseIndex >= 11 && faseIndex <= 12) {
-            // Cosecha lista (Cilindros amarillos/dorados)
             const harvestGeo = new THREE.CylinderGeometry(0.15, 0.15, 2.5, 5);
             const harvestMat = new THREE.MeshLambertMaterial({ color: 0xf1c40f });
             
@@ -305,6 +365,77 @@ export const UIManager = {
         if (idx !== this.lastRenderedFase) {
             this.updateFarmObjects(idx);
             this.lastRenderedFase = idx;
+        }
+
+        // --- LÓGICA DE ANIMACIÓN DEL CAMPESINO (FASE 0) ---
+        if (this.modelCampesino) {
+            if (this.campesinoState === 'MOVING_TO_ROCK' && this.targetRock) {
+                const dest = this.targetRock.position.clone();
+                dest.y = this.modelCampesino.position.y;
+                
+                // Rotar suavemente hacia destino
+                const quaternion = new THREE.Quaternion();
+                const m = new THREE.Matrix4();
+                m.lookAt(this.modelCampesino.position, dest, this.modelCampesino.up);
+                quaternion.setFromRotationMatrix(m);
+                this.modelCampesino.quaternion.slerp(quaternion, 10 * delta);
+
+                // Mover
+                if (this.modelCampesino.position.distanceTo(dest) > 1.0) {
+                    this.modelCampesino.translateZ(5 * delta); // El modelo mira hacia +Z o -Z dependiendo, ajustado con lerp
+                    // TranslateZ se mueve en el eje local. Si lookAt() funciona, avanzará hacia adelante.
+                    // Para evitar complicaciones de ejes locales del GLB, usamos lerp o moveTowards
+                    this.modelCampesino.position.lerp(dest, 3 * delta);
+                } else {
+                    // Alcanzó la piedra
+                    this.targetRock.isCarried = true;
+                    this.carriedRock = this.targetRock;
+                    this.farmObjects.remove(this.targetRock);
+                    this.modelCampesino.add(this.carriedRock);
+                    
+                    // Ajustar escala porque al emparejar hereda la escala del campesino (que es 3x3x3)
+                    this.carriedRock.scale.setScalar(0.2); 
+                    this.carriedRock.position.set(0, 0.5, 0.2); // Posición relativa a las manos/frente
+                    
+                    this.campesinoState = 'MOVING_TO_WHEELBARROW';
+                }
+            } 
+            else if (this.campesinoState === 'MOVING_TO_WHEELBARROW' && this.wheelbarrowObj) {
+                const dest = this.wheelbarrowObj.position.clone();
+                dest.y = this.modelCampesino.position.y;
+                
+                const quaternion = new THREE.Quaternion();
+                const m = new THREE.Matrix4();
+                m.lookAt(this.modelCampesino.position, dest, this.modelCampesino.up);
+                quaternion.setFromRotationMatrix(m);
+                this.modelCampesino.quaternion.slerp(quaternion, 10 * delta);
+
+                if (this.modelCampesino.position.distanceTo(dest) > 2.5) {
+                    this.modelCampesino.position.lerp(dest, 3 * delta);
+                } else {
+                    // Alcanzó carretilla
+                    this.modelCampesino.remove(this.carriedRock);
+                    this.wheelbarrowObj.add(this.carriedRock);
+                    this.carriedRock.scale.setScalar(0.5); // Restaurar escala relativa a la carretilla
+                    this.carriedRock.position.set((Math.random()-0.5), 1 + Math.random(), (Math.random()-0.5));
+                    this.carriedRock = null;
+                    
+                    this.campesinoState = 'IDLE';
+                    this.playCampesinoAnimation(0); // Volver a Idle
+                }
+            }
+            else if (this.campesinoState === 'IDLE' && idx !== 0) {
+                // Asegurar que si no está en fase de rocas vuelva al centro lentamente
+                const center = new THREE.Vector3(0,0,0);
+                if (this.modelCampesino.position.distanceTo(center) > 0.5) {
+                    const quaternion = new THREE.Quaternion();
+                    const m = new THREE.Matrix4();
+                    m.lookAt(this.modelCampesino.position, center, this.modelCampesino.up);
+                    quaternion.setFromRotationMatrix(m);
+                    this.modelCampesino.quaternion.slerp(quaternion, 5 * delta);
+                    this.modelCampesino.position.lerp(center, 2 * delta);
+                }
+            }
         }
 
         // Tinte de la tierra

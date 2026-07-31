@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Campesino Tycoon</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Pantalla de Login (Firebase) -->
+    <div id="login-screen" class="screen active">
+        <div class="login-panel">
+            <h1>🚜 Campesino Tycoon</h1>
+            <p>Trabaja la tierra, invierte y conviértete en el mejor agricultor.</p>
+            <button id="btn-login-google" class="btn-primary">
+                <i class="fab fa-google"></i> Iniciar sesión con Google
+            </button>
+            <p id="login-status"></p>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal del Juego -->
+    <div id="game-container" class="screen">
+        <!-- Motor Visual -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD Superior (Glassmorphism) -->
+        <div id="hud" class="glass-panel">
+            <div class="hud-stats">
+                <div class="stat-line text-gold"><i class="fas fa-coins"></i> $<span id="ui-capital">2500</span></div>
+                <div class="stat-line text-purple"><i class="fas fa-star"></i> XP: <span id="ui-xp">0</span></div>
+                <div class="stat-line text-red" id="ui-deuda-container" style="display:none;">
+                    <i class="fas fa-landmark"></i> Deuda: -$<span id="ui-deuda">0</span>
+                </div>
+            </div>
+            <div class="hud-stats" style="text-align: right;">
+                <div class="stat-line"><i class="fas fa-map"></i> Hectáreas: <span id="ui-hectareas">1</span></div>
+                <div class="stat-line text-green"><i class="fas fa-leaf"></i> Calidad: x<span id="ui-calidad">1.0</span></div>
+                <div id="btn-logout" class="logout-icon"><i class="fas fa-sign-out-alt"></i> Salir</div>
+            </div>
+        </div>
+
+        <!-- UI Central (Fases y Progreso) -->
+        <div id="center-ui">
+            <div id="fase-title">1. Quitar piedra</div>
+            <div class="progress-container" id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <button id="btn-pagar" class="action-button btn-pay">Pagar Insumos</button>
+            <button id="btn-prestamo" class="action-button btn-loan">Pedir Crédito (+15%)</button>
+        </div>
+
+        <!-- Tienda (Bottom Sheet) -->
+        <div id="shop-panel">
+            <button id="shop-toggle"><i class="fas fa-store"></i> TIENDA Y MAQUINARIA</button>
+            <div class="shop-items" id="shop-items-container">
+                <!-- Se inyecta dinámicamente desde JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts (Módulos ES6) -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>

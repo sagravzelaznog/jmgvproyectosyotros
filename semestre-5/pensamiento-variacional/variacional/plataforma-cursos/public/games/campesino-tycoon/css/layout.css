@@ -1,0 +1,285 @@
+/* Gestión de Pantallas (Screens) */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.screen.active {
+    display: block;
+}
+
+/* =========================================
+   LOGIN SCREEN
+   ========================================= */
+#login-screen {
+    display: none; /* Oculto por defecto, .active lo muestra */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000') center/cover;
+}
+#login-screen.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: var(--glass-shadow);
+}
+.login-panel h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+.login-panel p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+#login-status {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--accent-red);
+}
+
+/* =========================================
+   GAME CONTAINER & CANVAS
+   ========================================= */
+#game-container {
+    position: relative;
+}
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* =========================================
+   HUD (Superior)
+   ========================================= */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--glass-border);
+}
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    pointer-events: none; /* Para que el tap pase al canvas, excepto botones */
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+.hud-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.stat-line {
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+.logout-icon {
+    pointer-events: auto;
+    margin-top: 10px;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+/* =========================================
+   UI CENTRAL (Progreso y Botones)
+   ========================================= */
+#center-ui {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+}
+#fase-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+    letter-spacing: 1px;
+}
+.progress-container {
+    width: 100%;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: none;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green-dark));
+    transition: width 0.1s linear;
+}
+
+.action-button {
+    pointer-events: auto;
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.action-button:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.btn-pay {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    display: none;
+}
+.btn-loan {
+    background: linear-gradient(135deg, var(--accent-purple), #8e44ad);
+    display: none;
+    animation: pulse 1.5s infinite;
+}
+
+/* =========================================
+   TIENDA BOTTOM SHEET
+   ========================================= */
+#shop-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    background: var(--panel-bg);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.6);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 20;
+    pointer-events: auto;
+}
+#shop-panel.open {
+    transform: translateY(0);
+}
+
+#shop-toggle {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--panel-bg);
+    padding: 12px 35px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--gold);
+    pointer-events: auto;
+    border: none;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: color 0.2s;
+}
+#shop-toggle:hover {
+    color: var(--text-light);
+}
+
+.shop-items {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+/* Scrollbar para la tienda */
+.shop-items::-webkit-scrollbar { width: 6px; }
+.shop-items::-webkit-scrollbar-track { background: transparent; }
+.shop-items::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+.upgrade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.upgrade-info {
+    flex: 1;
+    padding-right: 15px;
+}
+.upgrade-info h4 {
+    color: var(--gold);
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+.upgrade-info p {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.3;
+}
+
+.btn-buy {
+    background: var(--accent-green);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 90px;
+    transition: background 0.2s, transform 0.1s;
+}
+.btn-buy:active { transform: scale(0.95); }
+.btn-buy:disabled {
+    background: #34495e;
+    color: #7f8c8d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.locked-item {
+    opacity: 0.5;
+    background: rgba(0, 0, 0, 0.5);
+}
+.locked-item h4 { color: #888; }

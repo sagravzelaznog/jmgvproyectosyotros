@@ -1,17 +1,69 @@
 import { GameState } from './GameState.js';
 import { TycoonEngine } from './TycoonEngine.js';
 
+class CharacterAgent {
+    constructor(mesh, animations, isPlayerControlled) {
+        this.mesh = mesh;
+        this.state = 'IDLE';
+        this.targetRock = null;
+        this.carriedRock = null;
+        this.isPlayerControlled = isPlayerControlled;
+        this.speed = isPlayerControlled ? 7 : (3 + Math.random() * 2);
+        
+        this.animations = animations;
+        this.mixer = new THREE.AnimationMixer(this.mesh);
+        this.currentAction = null;
+        
+        if (this.animations && this.animations.length > 0) {
+            this.currentAction = this.mixer.clipAction(this.animations[0]);
+            this.currentAction.play();
+        }
+    }
+    
+    playAnim(index) {
+        if (!this.animations[index]) return;
+        if (this.currentAction) {
+            const prev = this.currentAction;
+            this.currentAction = this.mixer.clipAction(this.animations[index]);
+            this.currentAction.reset();
+            this.currentAction.play();
+            prev.crossFadeTo(this.currentAction, 0.2, true);
+        } else {
+            this.currentAction = this.mixer.clipAction(this.animations[index]);
+            this.currentAction.play();
+        }
+    }
+    
+    reset() {
+        this.state = 'IDLE';
+        this.playAnim(0);
+        if (this.carriedRock) {
+            this.mesh.remove(this.carriedRock);
+            this.carriedRock = null;
+        }
+        if (this.targetRock) {
+            this.targetRock.isTargeted = false;
+            this.targetRock = null;
+        }
+    }
+}
+
+class DropoffVehicle {
+    constructor(mesh, capacity) {
+        this.mesh = mesh;
+        this.capacity = capacity;
+        this.currentLoad = 0;
+        this.state = 'IDLE'; // IDLE, LEAVING, RETURNING
+        this.startPos = mesh.position.clone();
+        this.leavePos = this.startPos.clone().add(new THREE.Vector3(30, 0, 0)); // Afuera de la pantalla
+    }
+}
+
 export const UIManager = {
     canvas: null,
     renderer: null,
     scene: null,
     camera: null,
-    
-    // Modelos
-    modelCampesino: null,
-    modelPeon: null,
-    modelCapataz: null,
-    mixers: [], // Para animaciones
     clock: null,
     
     // Entorno
@@ -19,50 +71,46 @@ export const UIManager = {
     farmObjects: null,
     lastRenderedFase: -1,
 
-    // Lógica Animación Campesino
-    campesinoState: 'IDLE',
-    targetRock: null,
-    carriedRock: null,
-    wheelbarrowObj: null,
-    campesinoAction: null,
-    campesinoMixer: null,
-    campesinoAnimations: [],
+    // Lógica AI
+    agents: [],
+    playerAgent: null,
+    vehicles: [],
+    
+    // Almacenamos el modelo original para clonarlo
+    baseModel: null,
+    baseAnimations: null,
+    
+    lastPeonCount: -1, // Para detectar compras de jornaleros
 
     init: function () {
         this.canvas = document.getElementById('game-canvas');
-        
-        // Setup Three.js
         this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x87CEEB); // Cielo azul
+        this.scene.background = new THREE.Color(0x87CEEB);
         
         this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
         this.camera.position.set(0, 15, 20);
         this.camera.lookAt(0, 0, 0);
         
         this.clock = new THREE.Clock();
-
         this.resize();
         window.addEventListener('resize', () => this.resize());
 
-        // Iluminación
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         this.scene.add(ambientLight);
         const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
         dirLight.position.set(10, 20, 10);
         this.scene.add(dirLight);
 
-        // Grupo para objetos dinámicos (rocas, plantas)
         this.farmObjects = new THREE.Group();
         this.scene.add(this.farmObjects);
 
-        // Suelo (Parcela) con Textura
         const textureLoader = new THREE.TextureLoader();
         const planeMat = new THREE.MeshLambertMaterial({ color: 0xffffff });
         textureLoader.load('./assets/tierra.png', (texture) => {
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set(10, 10); // Repetir textura
+            texture.repeat.set(10, 10);
             planeMat.map = texture;
             planeMat.needsUpdate = true;
         });
@@ -72,51 +120,23 @@ export const UIManager = {
         this.planoTierra.rotation.x = -Math.PI / 2;
         this.scene.add(this.planoTierra);
 
-        // Cargar Modelos (GLTF) - Personajes
+        // Cargar Modelo Base
         const loader = new THREE.GLTFLoader();
         loader.load('./assets/models/Campesino.glb', (gltf) => {
-            this.modelCampesino = gltf.scene;
-            this.modelCampesino.scale.set(3, 3, 3);
-            this.modelCampesino.position.set(0, 0, 0);
-            this.scene.add(this.modelCampesino);
-            if(gltf.animations && gltf.animations.length > 0) {
-                this.campesinoMixer = new THREE.AnimationMixer(this.modelCampesino);
-                this.campesinoAnimations = gltf.animations;
-                this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[0]);
-                this.campesinoAction.play();
-                this.mixers.push(this.campesinoMixer);
-            }
+            this.baseModel = gltf.scene;
+            this.baseAnimations = gltf.animations;
+            
+            // Instanciar al Campesino (Jugador)
+            const campMesh = THREE.SkeletonUtils.clone(this.baseModel);
+            campMesh.scale.set(3, 3, 3);
+            campMesh.position.set(0, 0, 0);
+            this.scene.add(campMesh);
+            this.playerAgent = new CharacterAgent(campMesh, this.baseAnimations, true);
+            this.agents.push(this.playerAgent);
+            
+            this.verificarJornaleros();
         });
 
-        loader.load('./assets/models/Campesino.glb', (gltf) => {
-            this.modelPeon = gltf.scene;
-            this.modelPeon.scale.set(2.5, 2.5, 2.5);
-            this.modelPeon.position.set(-6, 0, 2);
-            this.modelPeon.visible = false;
-            this.scene.add(this.modelPeon);
-            if(gltf.animations && gltf.animations.length > 0) {
-                const mixer = new THREE.AnimationMixer(this.modelPeon);
-                const action = mixer.clipAction(gltf.animations[1] || gltf.animations[0]); // 1 es Walk/Run en Soldier
-                action.timeScale = 1.5;
-                action.play();
-                this.mixers.push(mixer);
-            }
-        });
-
-        loader.load('./assets/models/Campesino.glb', (gltf) => {
-            this.modelCapataz = gltf.scene;
-            this.modelCapataz.scale.set(3.2, 3.2, 3.2);
-            this.modelCapataz.position.set(6, 0, -2);
-            this.modelCapataz.visible = false;
-            this.scene.add(this.modelCapataz);
-            if(gltf.animations && gltf.animations.length > 0) {
-                const mixer = new THREE.AnimationMixer(this.modelCapataz);
-                mixer.clipAction(gltf.animations[0]).play();
-                this.mixers.push(mixer);
-            }
-        });
-
-        // Eventos UI
         document.getElementById('btn-pagar').addEventListener('click', () => TycoonEngine.intentarPagarInsumos());
         document.getElementById('btn-prestamo').addEventListener('click', () => TycoonEngine.pedirPrestamo());
         document.getElementById('shop-toggle').addEventListener('click', () => document.getElementById('shop-panel').classList.toggle('open'));
@@ -125,13 +145,15 @@ export const UIManager = {
             if (!GameState.fasePagada) return;
             TycoonEngine.agregarProgreso(GameState.poderClicBase, true);
             
-            // Animación Campesino al hacer clic en Fase 0
-            if (GameState.faseActualIndex === 0 && this.campesinoState === 'IDLE' && this.modelCampesino && this.farmObjects) {
-                let possibleRocks = this.farmObjects.children.filter(c => c !== this.wheelbarrowObj && !c.isCarried && c.isRock);
-                if (possibleRocks.length > 0) {
-                    this.targetRock = possibleRocks[Math.floor(Math.random() * possibleRocks.length)];
-                    this.campesinoState = 'MOVING_TO_ROCK';
-                    this.playCampesinoAnimation(1); // 1 = Run/Walk
+            // Clic Jugador
+            if (GameState.faseActualIndex === 0 && this.playerAgent && this.playerAgent.state === 'IDLE') {
+                let rocks = this.farmObjects.children.filter(c => c.isRock && !c.isTargeted);
+                if (rocks.length > 0) {
+                    let r = rocks[Math.floor(Math.random() * rocks.length)];
+                    r.isTargeted = true;
+                    this.playerAgent.targetRock = r;
+                    this.playerAgent.state = 'MOVING_TO_ROCK';
+                    this.playerAgent.playAnim(1); // Run/Walk
                 }
             }
 
@@ -156,6 +178,27 @@ export const UIManager = {
         this.animate();
     },
 
+    verificarJornaleros: function() {
+        if(!this.baseModel) return;
+        const peonCount = TycoonEngine.upgrades.peon.nivel + (GameState.tieneCapataz ? 1 : 0);
+        
+        if (peonCount !== this.lastPeonCount) {
+            // Eliminar AIs anteriores que no sean el jugador
+            this.agents = this.agents.filter(a => a.isPlayerControlled);
+            
+            // Recrear
+            for(let i=0; i<peonCount; i++) {
+                const mesh = THREE.SkeletonUtils.clone(this.baseModel);
+                mesh.scale.set(2.5, 2.5, 2.5);
+                mesh.position.set(-6 + (Math.random()*4), 0, 2 + (Math.random()*4));
+                this.scene.add(mesh);
+                const agent = new CharacterAgent(mesh, this.baseAnimations, false);
+                this.agents.push(agent);
+            }
+            this.lastPeonCount = peonCount;
+        }
+    },
+
     resize: function() {
         if(!this.camera || !this.renderer) return;
         this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -163,31 +206,11 @@ export const UIManager = {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
-    playCampesinoAnimation: function(index) {
-        if(!this.campesinoMixer || !this.campesinoAnimations[index]) return;
-        if(this.campesinoAction) {
-            // Animación cruzada suave de 0.2s
-            const previousAction = this.campesinoAction;
-            this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[index]);
-            this.campesinoAction.reset();
-            this.campesinoAction.play();
-            previousAction.crossFadeTo(this.campesinoAction, 0.2, true);
-        } else {
-            this.campesinoAction = this.campesinoMixer.clipAction(this.campesinoAnimations[index]);
-            this.campesinoAction.play();
-        }
-    },
-
     updateFarmObjects: function(faseIndex) {
-        // Reset state
-        this.campesinoState = 'IDLE';
-        this.playCampesinoAnimation(0);
-        if (this.carriedRock && this.modelCampesino) {
-            this.modelCampesino.remove(this.carriedRock);
-            this.carriedRock = null;
-        }
+        // Reset vehicles and objects
+        this.vehicles = [];
+        this.agents.forEach(a => a.reset());
 
-        // Limpiar objetos anteriores
         while(this.farmObjects.children.length > 0) { 
             this.farmObjects.remove(this.farmObjects.children[0]); 
         }
@@ -195,29 +218,49 @@ export const UIManager = {
         const radioEsparcimiento = 15;
 
         if (faseIndex === 0) {
-            // Carretilla
-            this.wheelbarrowObj = new THREE.Group();
+            // 1. Carretilla
+            const wbGrp = new THREE.Group();
             const wbMat = new THREE.MeshLambertMaterial({ color: 0x8b4513 });
             const wbGeo = new THREE.BoxGeometry(2, 1, 3);
             const wbMesh = new THREE.Mesh(wbGeo, wbMat);
             wbMesh.position.y = 1;
-            this.wheelbarrowObj.add(wbMesh);
+            wbGrp.add(wbMesh);
             const wheelGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.5, 16);
             const wheelMat = new THREE.MeshLambertMaterial({ color: 0x333333 });
             const wheel = new THREE.Mesh(wheelGeo, wheelMat);
             wheel.rotation.z = Math.PI/2;
             wheel.position.set(0, 0.5, 1.5);
-            this.wheelbarrowObj.add(wheel);
-            
-            this.wheelbarrowObj.position.set(8, 0, 8); // A un lado
-            this.farmObjects.add(this.wheelbarrowObj);
+            wbGrp.add(wheel);
+            wbGrp.position.set(10, 0, 8);
+            this.farmObjects.add(wbGrp);
+            this.vehicles.push(new DropoffVehicle(wbGrp, 100));
 
-            // Rocas
+            // 2. Yunta de Bueyes
+            if (GameState.tieneYunta) {
+                const yuntaGrp = new THREE.Group();
+                const oxMat = new THREE.MeshLambertMaterial({color: 0x5c4033});
+                const oxGeo = new THREE.BoxGeometry(1.5, 2, 3.5);
+                const ox1 = new THREE.Mesh(oxGeo, oxMat); ox1.position.set(-1.2, 1, 2);
+                const ox2 = new THREE.Mesh(oxGeo, oxMat); ox2.position.set(1.2, 1, 2);
+                yuntaGrp.add(ox1); yuntaGrp.add(ox2);
+                const trailerMat = new THREE.MeshLambertMaterial({color: 0x8b4513});
+                const trailerGeo = new THREE.BoxGeometry(4.5, 0.8, 5);
+                const trailer = new THREE.Mesh(trailerGeo, trailerMat);
+                trailer.position.set(0, 0.8, -2);
+                yuntaGrp.add(trailer);
+                yuntaGrp.position.set(-12, 0, 8);
+                this.farmObjects.add(yuntaGrp);
+                this.vehicles.push(new DropoffVehicle(yuntaGrp, 250));
+            }
+
+            // 3. Rocas
             const rockGeo = new THREE.DodecahedronGeometry(0.5);
             const rockMat = new THREE.MeshLambertMaterial({ color: 0x888888 });
-            for (let i = 0; i < 40; i++) {
+            // Mas rocas para ver trabajar a multiples AIs
+            for (let i = 0; i < 150; i++) {
                 const rock = new THREE.Mesh(rockGeo, rockMat);
                 rock.isRock = true;
+                rock.isTargeted = false;
                 rock.position.set(
                     (Math.random() - 0.5) * radioEsparcimiento * 2,
                     0.25,
@@ -234,7 +277,6 @@ export const UIManager = {
             const plantHeight = 0.5 + (growthProgress * 1.5);
             const plantGeo = new THREE.ConeGeometry(0.2, plantHeight, 5);
             const plantMat = new THREE.MeshLambertMaterial({ color: 0x2ecc71 });
-            
             for (let i = 0; i < 80; i++) {
                 const plant = new THREE.Mesh(plantGeo, plantMat);
                 plant.position.set(
@@ -242,14 +284,12 @@ export const UIManager = {
                     plantHeight / 2,
                     (Math.random() - 0.5) * radioEsparcimiento * 2
                 );
-                if(Math.abs(plant.position.x) < 2 && Math.abs(plant.position.z) < 2) continue;
                 this.farmObjects.add(plant);
             }
         }
         else if (faseIndex >= 11 && faseIndex <= 12) {
             const harvestGeo = new THREE.CylinderGeometry(0.15, 0.15, 2.5, 5);
             const harvestMat = new THREE.MeshLambertMaterial({ color: 0xf1c40f });
-            
             for (let i = 0; i < 80; i++) {
                 const harvest = new THREE.Mesh(harvestGeo, harvestMat);
                 harvest.position.set(
@@ -257,7 +297,6 @@ export const UIManager = {
                     1.25,
                     (Math.random() - 0.5) * radioEsparcimiento * 2
                 );
-                if(Math.abs(harvest.position.x) < 2 && Math.abs(harvest.position.z) < 2) continue;
                 harvest.rotation.x = (Math.random() - 0.5) * 0.2;
                 harvest.rotation.z = (Math.random() - 0.5) * 0.2;
                 this.farmObjects.add(harvest);
@@ -274,7 +313,6 @@ export const UIManager = {
         document.getElementById('ui-xp').innerText = GameState.xp;
         document.getElementById('ui-hectareas').innerText = GameState.hectareas;
         document.getElementById('ui-calidad').innerText = GameState.multiplicadorCosecha.toFixed(2);
-
         const uiDeudaContainer = document.getElementById('ui-deuda-container');
         if (GameState.deudaBancaria > 0) {
             uiDeudaContainer.style.display = 'block';
@@ -282,19 +320,15 @@ export const UIManager = {
         } else {
             uiDeudaContainer.style.display = 'none';
         }
-
-        const costoFase = TycoonEngine.obtenerCostoFase();
         document.getElementById('fase-title').innerText = GameState.fases[GameState.faseActualIndex].nombre;
-
         const btnPagar = document.getElementById('btn-pagar');
         const btnPrestamo = document.getElementById('btn-prestamo');
         const progressContainer = document.getElementById('progress-container');
-
         if (!GameState.fasePagada) {
             progressContainer.style.display = 'none';
-            if (GameState.capital >= costoFase) {
+            if (GameState.capital >= TycoonEngine.obtenerCostoFase()) {
                 btnPagar.style.display = 'block';
-                btnPagar.innerText = `Pagar Insumos ($${costoFase})`;
+                btnPagar.innerText = `Pagar Insumos ($${TycoonEngine.obtenerCostoFase()})`;
                 btnPrestamo.style.display = 'none';
             } else {
                 btnPagar.style.display = 'none';
@@ -308,6 +342,7 @@ export const UIManager = {
     },
 
     renderizarTienda: function () {
+        this.verificarJornaleros(); // Actualizar si se compró
         const container = document.getElementById('shop-items-container');
         container.innerHTML = '';
         Object.keys(TycoonEngine.upgrades).forEach(key => {
@@ -336,9 +371,7 @@ export const UIManager = {
             }
             container.appendChild(div);
             const btn = document.getElementById(`buy-${upg.id}`);
-            if(btn && !btn.disabled) {
-                btn.addEventListener('click', () => TycoonEngine.comprarMejora(upg.id));
-            }
+            if(btn && !btn.disabled) btn.addEventListener('click', () => TycoonEngine.comprarMejora(upg.id));
         });
     },
 
@@ -355,101 +388,137 @@ export const UIManager = {
 
     animate: function () {
         requestAnimationFrame(() => this.animate());
-        
         const delta = this.clock.getDelta();
-        this.mixers.forEach(mixer => mixer.update(delta));
-
-        const idx = GameState.faseActualIndex;
         
-        // Actualizar Objetos si cambió de fase
+        const idx = GameState.faseActualIndex;
         if (idx !== this.lastRenderedFase) {
             this.updateFarmObjects(idx);
             this.lastRenderedFase = idx;
         }
 
-        // --- LÓGICA DE ANIMACIÓN DEL CAMPESINO (FASE 0) ---
-        if (this.modelCampesino) {
-            if (this.campesinoState === 'MOVING_TO_ROCK' && this.targetRock) {
-                const dest = this.targetRock.position.clone();
-                dest.y = this.modelCampesino.position.y;
-                
-                // Rotar suavemente hacia destino
-                const quaternion = new THREE.Quaternion();
-                const m = new THREE.Matrix4();
-                m.lookAt(this.modelCampesino.position, dest, this.modelCampesino.up);
-                quaternion.setFromRotationMatrix(m);
-                this.modelCampesino.quaternion.slerp(quaternion, 10 * delta);
-
-                // Mover
-                if (this.modelCampesino.position.distanceTo(dest) > 1.0) {
-                    this.modelCampesino.translateZ(5 * delta); // El modelo mira hacia +Z o -Z dependiendo, ajustado con lerp
-                    // TranslateZ se mueve en el eje local. Si lookAt() funciona, avanzará hacia adelante.
-                    // Para evitar complicaciones de ejes locales del GLB, usamos lerp o moveTowards
-                    this.modelCampesino.position.lerp(dest, 3 * delta);
-                } else {
-                    // Alcanzó la piedra
-                    this.targetRock.isCarried = true;
-                    this.carriedRock = this.targetRock;
-                    this.farmObjects.remove(this.targetRock);
-                    this.modelCampesino.add(this.carriedRock);
-                    
-                    // Ajustar escala porque al emparejar hereda la escala del campesino (que es 3x3x3)
-                    this.carriedRock.scale.setScalar(0.2); 
-                    this.carriedRock.position.set(0, 0.5, 0.2); // Posición relativa a las manos/frente
-                    
-                    this.campesinoState = 'MOVING_TO_WHEELBARROW';
-                }
-            } 
-            else if (this.campesinoState === 'MOVING_TO_WHEELBARROW' && this.wheelbarrowObj) {
-                const dest = this.wheelbarrowObj.position.clone();
-                dest.y = this.modelCampesino.position.y;
-                
-                const quaternion = new THREE.Quaternion();
-                const m = new THREE.Matrix4();
-                m.lookAt(this.modelCampesino.position, dest, this.modelCampesino.up);
-                quaternion.setFromRotationMatrix(m);
-                this.modelCampesino.quaternion.slerp(quaternion, 10 * delta);
-
-                if (this.modelCampesino.position.distanceTo(dest) > 2.5) {
-                    this.modelCampesino.position.lerp(dest, 3 * delta);
-                } else {
-                    // Alcanzó carretilla
-                    this.modelCampesino.remove(this.carriedRock);
-                    this.wheelbarrowObj.add(this.carriedRock);
-                    this.carriedRock.scale.setScalar(0.5); // Restaurar escala relativa a la carretilla
-                    this.carriedRock.position.set((Math.random()-0.5), 1 + Math.random(), (Math.random()-0.5));
-                    this.carriedRock = null;
-                    
-                    this.campesinoState = 'IDLE';
-                    this.playCampesinoAnimation(0); // Volver a Idle
-                }
-            }
-            else if (this.campesinoState === 'IDLE' && idx !== 0) {
-                // Asegurar que si no está en fase de rocas vuelva al centro lentamente
-                const center = new THREE.Vector3(0,0,0);
-                if (this.modelCampesino.position.distanceTo(center) > 0.5) {
-                    const quaternion = new THREE.Quaternion();
-                    const m = new THREE.Matrix4();
-                    m.lookAt(this.modelCampesino.position, center, this.modelCampesino.up);
-                    quaternion.setFromRotationMatrix(m);
-                    this.modelCampesino.quaternion.slerp(quaternion, 5 * delta);
-                    this.modelCampesino.position.lerp(center, 2 * delta);
-                }
-            }
-        }
-
         // Tinte de la tierra
         if(this.planoTierra) {
-            if (idx === 0) this.planoTierra.material.color.setHex(0xaaaaaa); // Grisáceo
-            else if (idx >= 1 && idx <= 4) this.planoTierra.material.color.setHex(0xffffff); // Color natural tierra
-            else if (idx >= 5 && idx <= 10) this.planoTierra.material.color.setHex(0xbbffbb); // Tinte verde
-            else if (idx >= 11 && idx <= 12) this.planoTierra.material.color.setHex(0xffffbb); // Tinte amarillo
+            if (idx === 0) this.planoTierra.material.color.setHex(0xaaaaaa);
+            else if (idx >= 1 && idx <= 4) this.planoTierra.material.color.setHex(0xffffff);
+            else if (idx >= 5 && idx <= 10) this.planoTierra.material.color.setHex(0xbbffbb);
+            else if (idx >= 11 && idx <= 12) this.planoTierra.material.color.setHex(0xffffbb);
         }
 
-        // Mostrar Peon si hay trabajo auto
-        if (this.modelPeon) this.modelPeon.visible = (GameState.progresoPorSegundo > 0);
-        // Mostrar Capataz si se tiene la mejora
-        if (this.modelCapataz) this.modelCapataz.visible = GameState.tieneCapataz;
+        const rocksLeft = this.farmObjects.children.filter(c => c.isRock).length;
+
+        // Vechicles Logic
+        for (let veh of this.vehicles) {
+            if (veh.state === 'IDLE') {
+                if (veh.currentLoad >= veh.capacity || (rocksLeft === 0 && veh.currentLoad > 0)) {
+                    veh.state = 'LEAVING';
+                }
+            } else if (veh.state === 'LEAVING') {
+                veh.mesh.position.lerp(veh.leavePos, 2 * delta);
+                if (veh.mesh.position.distanceTo(veh.leavePos) < 1.0) {
+                    veh.currentLoad = 0; // Se asume vaciado (se tiran las piedras)
+                    veh.state = 'RETURNING';
+                }
+            } else if (veh.state === 'RETURNING') {
+                veh.mesh.position.lerp(veh.startPos, 2 * delta);
+                if (veh.mesh.position.distanceTo(veh.startPos) < 1.0) {
+                    veh.state = 'IDLE';
+                }
+            }
+        }
+
+        // Agents Logic
+        for (let agent of this.agents) {
+            agent.mixer.update(delta);
+            
+            if (idx !== 0) {
+                // If not in rock phase, just wander or idle
+                if (agent.state !== 'IDLE') agent.reset();
+                if (!agent.isPlayerControlled) {
+                    agent.mesh.visible = (GameState.progresoPorSegundo > 0);
+                    if(agent.mesh.visible) {
+                         // Solo que estén de pie
+                         agent.playAnim(0);
+                    }
+                } else {
+                    // Player returns to center
+                    const center = new THREE.Vector3(0,0,0);
+                    if (agent.mesh.position.distanceTo(center) > 0.5) {
+                        const m = new THREE.Matrix4(); m.lookAt(agent.mesh.position, center, agent.mesh.up);
+                        agent.mesh.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(m), 5*delta);
+                        agent.mesh.position.lerp(center, 2*delta);
+                    }
+                }
+                continue;
+            }
+
+            // Phase 0 AI (Non-player controlled, auto-fetch)
+            if (!agent.isPlayerControlled && agent.state === 'IDLE' && GameState.progresoPorSegundo > 0) {
+                agent.mesh.visible = true;
+                let rocks = this.farmObjects.children.filter(c => c.isRock && !c.isTargeted);
+                if (rocks.length > 0) {
+                    let r = rocks[Math.floor(Math.random() * rocks.length)];
+                    r.isTargeted = true;
+                    agent.targetRock = r;
+                    agent.state = 'MOVING_TO_ROCK';
+                    agent.playAnim(1); // Run/Walk
+                }
+            } else if (!agent.isPlayerControlled && GameState.progresoPorSegundo === 0) {
+                agent.mesh.visible = false;
+            }
+
+            if (agent.state === 'MOVING_TO_ROCK' && agent.targetRock) {
+                const dest = agent.targetRock.position.clone(); dest.y = agent.mesh.position.y;
+                const m = new THREE.Matrix4(); m.lookAt(agent.mesh.position, dest, agent.mesh.up);
+                agent.mesh.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(m), 10*delta);
+
+                if (agent.mesh.position.distanceTo(dest) > 1.0) {
+                    agent.mesh.position.lerp(dest, agent.speed * delta);
+                } else {
+                    agent.carriedRock = agent.targetRock;
+                    this.farmObjects.remove(agent.targetRock);
+                    agent.mesh.add(agent.carriedRock);
+                    agent.carriedRock.scale.setScalar(0.2);
+                    agent.carriedRock.position.set(0, 0.5, 0.2);
+                    agent.state = 'MOVING_TO_DROPOFF';
+                }
+            }
+            else if (agent.state === 'MOVING_TO_DROPOFF' && agent.carriedRock) {
+                // Find closest IDLE vehicle
+                let closestVeh = null;
+                let minDist = Infinity;
+                for (let v of this.vehicles) {
+                    if (v.state === 'IDLE') {
+                        let d = agent.mesh.position.distanceTo(v.mesh.position);
+                        if (d < minDist) { minDist = d; closestVeh = v; }
+                    }
+                }
+
+                if (closestVeh) {
+                    if (agent.currentAction && agent.currentAction.getClip().name !== agent.animations[1].name) {
+                        agent.playAnim(1); // Ensure walking
+                    }
+                    const dest = closestVeh.mesh.position.clone(); dest.y = agent.mesh.position.y;
+                    const m = new THREE.Matrix4(); m.lookAt(agent.mesh.position, dest, agent.mesh.up);
+                    agent.mesh.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(m), 10*delta);
+
+                    if (agent.mesh.position.distanceTo(dest) > 2.5) {
+                        agent.mesh.position.lerp(dest, agent.speed * delta);
+                    } else {
+                        // Dropoff
+                        agent.mesh.remove(agent.carriedRock);
+                        closestVeh.currentLoad++;
+                        // Si queremos visualmente acumular en el vehiculo, aqui hariamos algo,
+                        // Pero para no saturar memoria, solo desaparece en el vehiculo o se muestra contabilidad
+                        agent.carriedRock = null;
+                        agent.state = 'IDLE';
+                        agent.playAnim(0);
+                    }
+                } else {
+                    // Esperando que un vehiculo vuelva
+                    agent.playAnim(0);
+                }
+            }
+        }
 
         if (this.renderer && this.scene && this.camera) {
             this.renderer.render(this.scene, this.camera);

@@ -3,26 +3,100 @@ import { TycoonEngine } from './TycoonEngine.js';
 
 export const UIManager = {
     canvas: null,
-    ctx: null,
-
-    imgCampesino: null,
-    imgPeon: null,
-    imgCapataz: null,
+    renderer: null,
+    scene: null,
+    camera: null,
     
+    // Modelos
+    modelCampesino: null,
+    modelPeon: null,
+    modelCapataz: null,
+    mixers: [], // Para animaciones
+    clock: null,
+    
+    // Entorno
+    planoTierra: null,
+
     init: function () {
         this.canvas = document.getElementById('game-canvas');
-        this.ctx = this.canvas.getContext('2d');
+        
+        // Setup Three.js
+        this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x87CEEB); // Cielo azul
+        
+        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+        // Perspectiva isométrica/inclinada
+        this.camera.position.set(0, 15, 20);
+        this.camera.lookAt(0, 0, 0);
+        
+        this.clock = new THREE.Clock();
+
         this.resize();
         window.addEventListener('resize', () => this.resize());
 
-        // Precargar imágenes 3D
-        this.imgCampesino = new Image();
-        this.imgCampesino.src = './assets/campesino.png';
-        this.imgPeon = new Image();
-        this.imgPeon.src = './assets/peon.png';
-        this.imgCapataz = new Image();
-        this.imgCapataz.src = './assets/capataz.png';
+        // Iluminación
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        this.scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(10, 20, 10);
+        this.scene.add(dirLight);
 
+        // Suelo (Parcela)
+        const planeGeo = new THREE.PlaneGeometry(50, 50);
+        const planeMat = new THREE.MeshLambertMaterial({ color: 0x785a3c });
+        this.planoTierra = new THREE.Mesh(planeGeo, planeMat);
+        this.planoTierra.rotation.x = -Math.PI / 2;
+        this.scene.add(this.planoTierra);
+
+        // Cargar Modelos (GLTF)
+        const loader = new THREE.GLTFLoader();
+        // Usamos el mismo modelo (Soldier) de prueba para los 3, pero los escalamos y posicionamos distinto
+        loader.load('./assets/models/Campesino.glb', (gltf) => {
+            this.modelCampesino = gltf.scene;
+            this.modelCampesino.scale.set(3, 3, 3);
+            this.modelCampesino.position.set(0, 0, 0); // Centro
+            this.scene.add(this.modelCampesino);
+            
+            // Animación
+            if(gltf.animations && gltf.animations.length > 0) {
+                const mixer = new THREE.AnimationMixer(this.modelCampesino);
+                mixer.clipAction(gltf.animations[0]).play(); // Idle
+                this.mixers.push(mixer);
+            }
+        });
+
+        loader.load('./assets/models/Campesino.glb', (gltf) => {
+            this.modelPeon = gltf.scene;
+            this.modelPeon.scale.set(2.5, 2.5, 2.5);
+            this.modelPeon.position.set(-6, 0, 2); // Izquierda
+            this.modelPeon.visible = false;
+            this.scene.add(this.modelPeon);
+            
+            if(gltf.animations && gltf.animations.length > 0) {
+                const mixer = new THREE.AnimationMixer(this.modelPeon);
+                const action = mixer.clipAction(gltf.animations[1] || gltf.animations[0]); // Run/Walk si existe
+                action.timeScale = 1.5;
+                action.play();
+                this.mixers.push(mixer);
+            }
+        });
+
+        loader.load('./assets/models/Campesino.glb', (gltf) => {
+            this.modelCapataz = gltf.scene;
+            this.modelCapataz.scale.set(3.2, 3.2, 3.2);
+            this.modelCapataz.position.set(6, 0, -2); // Derecha
+            this.modelCapataz.visible = false;
+            this.scene.add(this.modelCapataz);
+            
+            if(gltf.animations && gltf.animations.length > 0) {
+                const mixer = new THREE.AnimationMixer(this.modelCapataz);
+                mixer.clipAction(gltf.animations[0]).play();
+                this.mixers.push(mixer);
+            }
+        });
+
+        // UI HTML Events
         document.getElementById('btn-pagar').addEventListener('click', () => TycoonEngine.intentarPagarInsumos());
         document.getElementById('btn-prestamo').addEventListener('click', () => TycoonEngine.pedirPrestamo());
 
@@ -34,7 +108,6 @@ export const UIManager = {
             if (!GameState.fasePagada) return;
             TycoonEngine.agregarProgreso(GameState.poderClicBase, true);
             
-            // Partículas
             let x, y;
             if (e.changedTouches) {
                 x = e.changedTouches[0].clientX;
@@ -46,6 +119,7 @@ export const UIManager = {
             this.mostrarFlotante("+1", x, y, '#f1c40f');
         };
 
+        // Escuchar clics en el canvas globalmente
         this.canvas.addEventListener('mousedown', interactuar);
         this.canvas.addEventListener('touchstart', (e) => { e.preventDefault(); interactuar(e); }, { passive: false });
 
@@ -55,12 +129,14 @@ export const UIManager = {
         this.renderizarTienda();
         
         // Bucle de render visual
-        requestAnimationFrame(() => this.renderizarParcela());
+        this.animate();
     },
 
     resize: function() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        if(!this.camera || !this.renderer) return;
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
     actualizarBarraProgreso: function(porcentaje) {
@@ -162,63 +238,39 @@ export const UIManager = {
         setTimeout(() => el.remove(), 1200);
     },
 
-    renderizarParcela: function () {
-        if(!this.ctx) return;
-        const ctx = this.ctx;
+    animate: function () {
+        requestAnimationFrame(() => this.animate());
+        
+        const delta = this.clock.getDelta();
+        
+        // Actualizar animaciones
+        this.mixers.forEach(mixer => mixer.update(delta));
+
+        // Lógica de visibilidad y color de tierra
         const idx = GameState.faseActualIndex;
-        const w = this.canvas.width;
-        const h = this.canvas.height;
+        let colorHex = 0x785a3c;
+        if (idx === 0) colorHex = 0xa0a0a0; // Piedras
+        else if (idx >= 1 && idx <= 4) colorHex = 0x654321; // Tierra preparada
+        else if (idx >= 5 && idx <= 10) colorHex = 0x27ae60; // Verde plantas
+        else if (idx >= 11 && idx <= 12) colorHex = 0xf1c40f; // Amarillo cosecha
+
+        if(this.planoTierra) {
+            this.planoTierra.material.color.setHex(colorHex);
+        }
+
+        // Mostrar Peon si hay trabajo auto
+        if (this.modelPeon) {
+            this.modelPeon.visible = (GameState.progresoPorSegundo > 0);
+        }
         
-        let r=120, g=90, b=60; // Tierra base
-        
-        if (idx === 0) { r=160; g=160; b=160; } // Piedras
-        else if (idx >= 1 && idx <= 4) { r=101; g=67; b=33; } // Tierra preparada
-        else if (idx >= 5 && idx <= 10) { r=39; g=174; b=96; } // Verde plantas
-        else if (idx >= 11 && idx <= 12) { r=241; g=196; b=15; } // Amarillo cosecha
-
-        ctx.fillStyle = `rgb(${r},${g},${b})`;
-        ctx.fillRect(0, 0, w, h);
-        
-        // Simulación de surcos
-        ctx.strokeStyle = `rgba(0,0,0,0.1)`;
-        ctx.lineWidth = 4;
-        for(let i=0; i<w; i+=40) {
-            ctx.beginPath();
-            ctx.moveTo(i, 0);
-            ctx.lineTo(i, h);
-            ctx.stroke();
+        // Mostrar Capataz si se tiene la mejora
+        if (this.modelCapataz) {
+            this.modelCapataz.visible = GameState.tieneCapataz;
         }
 
-        // --- Renderizar Personajes 3D ---
-        const time = Date.now();
-        // Animación de rebote (idle)
-        const bounceOffset = Math.sin(time / 200) * 5; 
-
-        // Dibujar Campesino (Siempre presente)
-        if (this.imgCampesino && this.imgCampesino.complete) {
-            const size = 100;
-            // Centro de la parcela
-            ctx.drawImage(this.imgCampesino, (w/2) - (size/2), (h/2) - (size/2) + bounceOffset, size, size);
+        // Renderizar
+        if (this.renderer && this.scene && this.camera) {
+            this.renderer.render(this.scene, this.camera);
         }
-
-        // Dibujar Peón (Si hay progreso automático)
-        if (GameState.progresoPorSegundo > 0 && this.imgPeon && this.imgPeon.complete) {
-            const size = 80;
-            // Animación desfasada
-            const bounceOffset2 = Math.sin(time / 180) * 5;
-            // Colocar a la izquierda
-            ctx.drawImage(this.imgPeon, (w/2) - 100 - (size/2), (h/2) + 20 - (size/2) + bounceOffset2, size, size);
-        }
-
-        // Dibujar Capataz (Si se tiene la mejora)
-        if (GameState.tieneCapataz && this.imgCapataz && this.imgCapataz.complete) {
-            const size = 90;
-            // Animación más lenta
-            const bounceOffset3 = Math.sin(time / 300) * 3;
-            // Colocar a la derecha
-            ctx.drawImage(this.imgCapataz, (w/2) + 100 - (size/2), (h/2) + 10 - (size/2) + bounceOffset3, size, size);
-        }
-
-        requestAnimationFrame(() => this.renderizarParcela());
     }
 };

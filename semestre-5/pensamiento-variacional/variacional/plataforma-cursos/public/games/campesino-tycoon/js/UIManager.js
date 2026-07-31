@@ -5,11 +5,23 @@ export const UIManager = {
     canvas: null,
     ctx: null,
 
+    imgCampesino: null,
+    imgPeon: null,
+    imgCapataz: null,
+    
     init: function () {
         this.canvas = document.getElementById('game-canvas');
         this.ctx = this.canvas.getContext('2d');
         this.resize();
         window.addEventListener('resize', () => this.resize());
+
+        // Precargar imágenes 3D
+        this.imgCampesino = new Image();
+        this.imgCampesino.src = './assets/campesino.png';
+        this.imgPeon = new Image();
+        this.imgPeon.src = './assets/peon.png';
+        this.imgCapataz = new Image();
+        this.imgCapataz.src = './assets/capataz.png';
 
         document.getElementById('btn-pagar').addEventListener('click', () => TycoonEngine.intentarPagarInsumos());
         document.getElementById('btn-prestamo').addEventListener('click', () => TycoonEngine.pedirPrestamo());
@@ -151,11 +163,11 @@ export const UIManager = {
     },
 
     renderizarParcela: function () {
-        // En lugar de motor gráfico complejo, por ahora pintamos la tierra
-        // según la fase actual.
         if(!this.ctx) return;
         const ctx = this.ctx;
         const idx = GameState.faseActualIndex;
+        const w = this.canvas.width;
+        const h = this.canvas.height;
         
         let r=120, g=90, b=60; // Tierra base
         
@@ -165,16 +177,46 @@ export const UIManager = {
         else if (idx >= 11 && idx <= 12) { r=241; g=196; b=15; } // Amarillo cosecha
 
         ctx.fillStyle = `rgb(${r},${g},${b})`;
-        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.fillRect(0, 0, w, h);
         
         // Simulación de surcos
         ctx.strokeStyle = `rgba(0,0,0,0.1)`;
         ctx.lineWidth = 4;
-        for(let i=0; i<this.canvas.width; i+=40) {
+        for(let i=0; i<w; i+=40) {
             ctx.beginPath();
             ctx.moveTo(i, 0);
-            ctx.lineTo(i, this.canvas.height);
+            ctx.lineTo(i, h);
             ctx.stroke();
+        }
+
+        // --- Renderizar Personajes 3D ---
+        const time = Date.now();
+        // Animación de rebote (idle)
+        const bounceOffset = Math.sin(time / 200) * 5; 
+
+        // Dibujar Campesino (Siempre presente)
+        if (this.imgCampesino && this.imgCampesino.complete) {
+            const size = 100;
+            // Centro de la parcela
+            ctx.drawImage(this.imgCampesino, (w/2) - (size/2), (h/2) - (size/2) + bounceOffset, size, size);
+        }
+
+        // Dibujar Peón (Si hay progreso automático)
+        if (GameState.progresoPorSegundo > 0 && this.imgPeon && this.imgPeon.complete) {
+            const size = 80;
+            // Animación desfasada
+            const bounceOffset2 = Math.sin(time / 180) * 5;
+            // Colocar a la izquierda
+            ctx.drawImage(this.imgPeon, (w/2) - 100 - (size/2), (h/2) + 20 - (size/2) + bounceOffset2, size, size);
+        }
+
+        // Dibujar Capataz (Si se tiene la mejora)
+        if (GameState.tieneCapataz && this.imgCapataz && this.imgCapataz.complete) {
+            const size = 90;
+            // Animación más lenta
+            const bounceOffset3 = Math.sin(time / 300) * 3;
+            // Colocar a la derecha
+            ctx.drawImage(this.imgCapataz, (w/2) + 100 - (size/2), (h/2) + 10 - (size/2) + bounceOffset3, size, size);
         }
 
         requestAnimationFrame(() => this.renderizarParcela());

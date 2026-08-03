@@ -209,7 +209,38 @@ export const UIManager = {
     updateFarmObjects: function(faseIndex) {
         // Reset vehicles and objects
         this.vehicles = [];
-        this.agents.forEach(a => a.reset());
+        this.agents.forEach(a => {
+            a.reset();
+            
+            // Lógica del Azadón para Peones en Fases 1 a 4
+            let asadon = a.mesh.getObjectByName('azadon');
+            if (faseIndex >= 1 && faseIndex <= 4 && !a.isPlayerControlled) {
+                if (!asadon) {
+                    const grp = new THREE.Group();
+                    grp.name = 'azadon';
+                    // Palo de madera
+                    const paloGeo = new THREE.CylinderGeometry(0.05, 0.05, 1.5);
+                    const paloMat = new THREE.MeshLambertMaterial({color: 0x8b4513});
+                    const palo = new THREE.Mesh(paloGeo, paloMat);
+                    grp.add(palo);
+                    // Hoja de metal
+                    const hojaGeo = new THREE.BoxGeometry(0.3, 0.4, 0.05);
+                    const hojaMat = new THREE.MeshLambertMaterial({color: 0x777777});
+                    const hoja = new THREE.Mesh(hojaGeo, hojaMat);
+                    hoja.position.set(0.15, -0.6, 0);
+                    grp.add(hoja);
+                    
+                    // Posicionarlo a la altura de las manos
+                    grp.position.set(0.4, 0.8, 0.3);
+                    grp.rotation.z = Math.PI / 4;
+                    a.mesh.add(grp);
+                }
+            } else {
+                if (asadon) {
+                    a.mesh.remove(asadon);
+                }
+            }
+        });
 
         while(this.farmObjects.children.length > 0) { 
             this.farmObjects.remove(this.farmObjects.children[0]); 

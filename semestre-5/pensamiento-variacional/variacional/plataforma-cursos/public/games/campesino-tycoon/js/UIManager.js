@@ -183,7 +183,13 @@ export const UIManager = {
         const peonCount = TycoonEngine.upgrades.peon.nivel + (GameState.tieneCapataz ? 1 : 0);
         
         if (peonCount !== this.lastPeonCount) {
-            // Eliminar AIs anteriores que no sean el jugador
+            // Eliminar AIs anteriores que no sean el jugador de la escena
+            this.agents.forEach(a => {
+                if (!a.isPlayerControlled) {
+                    this.scene.remove(a.mesh);
+                }
+            });
+            // Limpiar arreglo
             this.agents = this.agents.filter(a => a.isPlayerControlled);
             
             // Recrear

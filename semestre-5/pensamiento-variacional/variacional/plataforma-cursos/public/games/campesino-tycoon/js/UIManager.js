@@ -467,8 +467,36 @@ export const UIManager = {
                 if (!agent.isPlayerControlled) {
                     agent.mesh.visible = (GameState.progresoPorSegundo > 0);
                     if(agent.mesh.visible) {
-                         // Solo que estén de pie
-                         agent.playAnim(0);
+                         // Lógica de "trabajar/pasear" para peones
+                         if (!agent.wanderTarget || agent.mesh.position.distanceTo(agent.wanderTarget) < 0.5) {
+                             if (Math.random() < 0.01) { // Elegir nuevo destino al azar
+                                 agent.wanderTarget = new THREE.Vector3(
+                                     (Math.random() - 0.5) * 20, 0, (Math.random() - 0.5) * 20
+                                 );
+                             } else {
+                                 agent.playAnim(0); // Idle
+                             }
+                         }
+                         
+                         let isWalking = false;
+                         if (agent.wanderTarget && agent.mesh.position.distanceTo(agent.wanderTarget) >= 0.5) {
+                             isWalking = true;
+                             agent.playAnim(1); // Walk
+                             const m = new THREE.Matrix4(); m.lookAt(agent.mesh.position, agent.wanderTarget, agent.mesh.up);
+                             agent.mesh.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(m), 5*delta);
+                             agent.mesh.position.lerp(agent.wanderTarget, 1.5 * delta); // Lento
+                         }
+                         
+                         // Animación de asadón
+                         let asadon = agent.mesh.getObjectByName('azadon');
+                         if (asadon) {
+                             // Si está quieto (Idle) pica simulando trabajo
+                             if (!isWalking) {
+                                 asadon.rotation.z = Math.PI/4 + Math.sin(Date.now() * 0.015) * 0.5;
+                             } else {
+                                 asadon.rotation.z = Math.PI/4;
+                             }
+                         }
                     }
                 } else {
                     // Player returns to center

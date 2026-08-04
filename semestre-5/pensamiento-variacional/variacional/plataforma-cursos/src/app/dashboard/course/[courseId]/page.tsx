@@ -17,7 +17,8 @@ const COURSE_INFO: Record<string, { title: string, adminOnly: boolean }> = {
   "excel-intermedio": { title: "Excel Intermedio", adminOnly: false },
   "probabilidad": { title: "Probabilidad y Estadística", adminOnly: false },
   "inkscape": { title: "Diseño Vectorial (Inkscape)", adminOnly: false },
-  "autocad": { title: "AutoCAD Profesional", adminOnly: false }
+  "autocad": { title: "AutoCAD Profesional", adminOnly: false },
+  "fisica": { title: "Análisis Físicos", adminOnly: false }
 };
 
 export default function CoursePage() {

@@ -61,6 +61,7 @@ export default function DashboardPage() {
           { id: "inkscape", title: "Diseño Vectorial (Inkscape)", adminOnly: false, description: "Crea gráficos, ilustraciones y trazados escalables con precisión. ¡Desata tu creatividad y domina las herramientas del diseño digital profesional!" },
           { id: "autocad", title: "AutoCAD Profesional", adminOnly: false, description: "Aprende a diseñar y modelar piezas mecánicas en 2D utilizando comandos avanzados, coordenadas polares y matrices." },
           { id: "fisica", title: "Análisis Físicos (Física)", adminOnly: false, description: "Curso de estática, dinámica, cinemática y termodinámica orientado al diseño y construcción de una prótesis mecánica o grúa hidráulica." },
+          { id: "archicad", title: "Archicad 27: MEP y Modelado", adminOnly: false, description: "Curso intensivo de modelado de instalaciones MEP y flujo de trabajo BIM con Archicad 27." },
           { id: "campesino-tycoon", title: "Campesino Tycoon (Juego)", adminOnly: false, description: "¡Gestiona tu propia granja, invierte sabiamente y haz crecer tu imperio agrícola en este divertido juego inactivo!", url: "/games/campesino-tycoon/index.html" }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description: string; url?: string }>)
         .filter(course => !course.adminOnly || isAdmin)

@@ -374,7 +374,7 @@ export default function LessonPage() {
                     return (
                       <button
                         key={index}
-                        onClick={() => handleAnswer(index, quiz[currentQuiz].answer)}
+                        onClick={() => handleAnswer(index, quiz[currentQuiz].correctAnswer)}
                         className={`border-2 font-bold p-6 rounded-xl transition-all duration-300 flex items-center justify-center text-center min-h-[100px] text-lg md:text-xl transform hover:-translate-y-1 ${colors[index % 4]}`}
                       >
                         <ReactMarkdown 

@@ -8,9 +8,10 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
-import "katex/dist/katex.min.css"; // Importar CSS de KaTeX
+import "katex/dist/katex.min.css";
 import rehypeInlineMath from "@/lib/rehype-inline-math";
 import { useAuth } from "@/components/providers/AuthProvider";
+import renderMathInElement from "katex/contrib/auto-render";
 
 export default function LessonPage() {
   const { lessonId } = useParams();
@@ -27,6 +28,7 @@ export default function LessonPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const utteranceQueue = useRef<SpeechSynthesisUtterance[]>([]);
+  const htmlContentRef = useRef<HTMLDivElement>(null);
 
   // Hook para detener TTS si el usuario sale de la página o recarga
   useEffect(() => {
@@ -39,6 +41,22 @@ export default function LessonPage() {
       }
     };
   }, []);
+
+  // Renderizar fórmulas LaTeX en el HTML dinámico con KaTeX auto-render
+  useEffect(() => {
+    if (htmlContentRef.current && lesson?.content?.trimStart().startsWith('<')) {
+      renderMathInElement(htmlContentRef.current, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true },
+        ],
+        throwOnError: false,
+        strict: false,
+      });
+    }
+  }, [lesson]);
 
   // Hook para la barra de progreso
   useEffect(() => {
@@ -331,6 +349,7 @@ export default function LessonPage() {
           {/* Detectar si el content es HTML puro o Markdown */}
           {lesson.content && lesson.content.trimStart().startsWith('<') ? (
             <div
+              ref={htmlContentRef}
               dangerouslySetInnerHTML={{ __html: lesson.content }}
               className="lesson-html-content"
             />

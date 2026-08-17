@@ -328,12 +328,20 @@ export default function LessonPage() {
             prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
             prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
         >
-          <ReactMarkdown 
-            remarkPlugins={[remarkMath]} 
-            rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
-          >
-            {lesson.content.replace(/^[ \t]+/gm, '')}
-          </ReactMarkdown>
+          {/* Detectar si el content es HTML puro o Markdown */}
+          {lesson.content && lesson.content.trimStart().startsWith('<') ? (
+            <div
+              dangerouslySetInnerHTML={{ __html: lesson.content }}
+              className="lesson-html-content"
+            />
+          ) : (
+            <ReactMarkdown 
+              remarkPlugins={[remarkMath]} 
+              rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
+            >
+              {lesson.content.replace(/^[ \t]+/gm, '')}
+            </ReactMarkdown>
+          )}
         </article>
 
         {/* Mini-Quiz Interactivo Estilo Cyberpunk */}

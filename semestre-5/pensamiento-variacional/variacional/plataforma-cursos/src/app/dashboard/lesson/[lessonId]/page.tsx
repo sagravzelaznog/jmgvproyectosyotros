@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo, useMemo } from "react";
 import { doc, getDoc, collection, query, where, getDocs, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
 import { useParams, useRouter } from "next/navigation";
@@ -12,6 +12,29 @@ import "katex/dist/katex.min.css";
 import rehypeInlineMath from "@/lib/rehype-inline-math";
 import { useAuth } from "@/components/providers/AuthProvider";
 import renderMathInElement from "katex/contrib/auto-render";
+
+// Componente memoizado para evitar que GeoGebra iframes se destruyan
+// al re-renderizar el componente padre (scroll, TTS, quizzes, etc.)
+const MemoizedMarkdown = memo(function MarkdownContent({ content }: { content: string }) {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkMath]}
+      rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
+      components={{
+        iframe: ({ node, ...props }) => (
+          <iframe
+            {...props}
+            style={{ width: '100%', height: '650px', border: 'none', borderRadius: '0.75rem' }}
+            loading="lazy"
+            allow="fullscreen"
+          />
+        ),
+      }}
+    >
+      {content.replace(/^[ \t]+/gm, '')}
+    </ReactMarkdown>
+  );
+});
 
 export default function LessonPage() {
   const { lessonId } = useParams();
@@ -346,7 +369,6 @@ export default function LessonPage() {
             prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
             prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
         >
-          {/* Detectar si el content es HTML puro o Markdown */}
           {lesson.content && lesson.content.trimStart().startsWith('<') ? (
             <div
               ref={htmlContentRef}
@@ -354,12 +376,7 @@ export default function LessonPage() {
               className="lesson-html-content"
             />
           ) : (
-            <ReactMarkdown 
-              remarkPlugins={[remarkMath]} 
-              rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
-            >
-              {lesson.content.replace(/^[ \t]+/gm, '')}
-            </ReactMarkdown>
+            <MemoizedMarkdown content={lesson.content} />
           )}
         </article>
 

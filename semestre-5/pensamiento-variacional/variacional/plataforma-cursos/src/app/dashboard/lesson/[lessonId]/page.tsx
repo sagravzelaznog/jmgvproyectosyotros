@@ -19,11 +19,7 @@ const MemoizedMarkdown = memo(function MarkdownContent({ content }: { content: s
   return (
     <ReactMarkdown
       remarkPlugins={[remarkMath]}
-      // Orden correcto: remarkMath detecta $...$ → rehypeKatex convierte a HTML → rehypeRaw permite HTML crudo
-      rehypePlugins={[
-        [rehypeKatex, { strict: false, throwOnError: false, output: 'htmlAndMathml' }],
-        rehypeRaw,
-      ]}
+      rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
       components={{
         iframe: ({ node, ...props }) => (
           <iframe

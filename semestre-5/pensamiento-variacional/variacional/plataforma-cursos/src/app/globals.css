@@ -171,3 +171,155 @@ body {
 .lesson-html-content .h-6 { height: 1.5rem; }
 .lesson-html-content .leading-tight { line-height: 1.25; }
 .lesson-html-content .mb-8 { margin-bottom: 2rem; }
+
+/* ─────────────────────────────────────────────────────────────────
+   ESTILOS PARA MC01 HTML DETALLADO (details, form, aspect-video, etc.)
+───────────────────────────────────────────────────────────────── */
+
+/* Header hero de la MC */
+.lesson-html-content header { background: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(88,28,135,0.2)); border-bottom: 1px solid #334155; padding: 2.5rem 1.5rem; text-align: center; }
+
+/* Navegación de tabs */
+.lesson-html-content nav { display: flex; gap: 0.5rem; border-bottom: 1px solid #334155; margin-bottom: 2rem; overflow-x: auto; padding-bottom: 0.5rem; }
+.lesson-html-content nav button { padding: 0.75rem 1.5rem; font-weight: 600; white-space: nowrap; cursor: pointer; transition: color 0.2s; background: transparent; border: none; color: #94a3b8; }
+.lesson-html-content nav button:hover { color: #22d3ee; }
+
+/* Secciones ocultas (tabs) */
+.lesson-html-content .hidden { display: none !important; }
+
+/* Details / Summary — Acordeón interactivo */
+.lesson-html-content details { background: rgba(30,41,59,0.5); border-radius: 0.5rem; border: 1px solid #334155; transition: all 0.3s; margin-bottom: 0.75rem; }
+.lesson-html-content details[open] { border-color: rgba(34,211,238,0.4); }
+.lesson-html-content summary { padding: 0.75rem 1rem; font-weight: 600; cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+.lesson-html-content summary::-webkit-details-marker { display: none; }
+.lesson-html-content details[open] > summary { border-bottom: 1px solid #334155; color: #22d3ee; }
+.lesson-html-content details > div { padding: 0.75rem 1rem; font-size: 0.875rem; color: #94a3b8; background: rgba(0,0,0,0.2); }
+
+/* Grid layouts para la MC */
+.lesson-html-content .md\:grid-cols-2 { grid-template-columns: repeat(1, 1fr); }
+.lesson-html-content .lg\:grid-cols-3 { grid-template-columns: repeat(1, 1fr); }
+.lesson-html-content .col-span-2 { grid-column: span 1; }
+@media (min-width: 768px) {
+  .lesson-html-content .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .lesson-html-content .col-span-2 { grid-column: span 2; }
+}
+@media (min-width: 1024px) {
+  .lesson-html-content .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Aspect ratio video placeholder */
+.lesson-html-content .aspect-video { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.75rem; background: #000; border: 1px solid #334155; }
+.lesson-html-content .aspect-video > * { position: absolute; inset: 0; }
+.lesson-html-content .aspect-video .absolute { position: absolute; }
+
+/* Formularios radio */
+.lesson-html-content form label { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; border-radius: 0.5rem; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
+.lesson-html-content form label:hover { background: rgba(51,65,85,0.5); border-color: #475569; }
+.lesson-html-content form input[type="radio"] { margin-top: 0.2rem; accent-color: #22d3ee; width: 1rem; height: 1rem; flex-shrink: 0; }
+.lesson-html-content form button[type="submit"] { background: #0891b2; color: #fff; font-weight: 700; padding: 0.75rem 2rem; border-radius: 0.5rem; border: none; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 0 15px rgba(0,255,255,0.25); }
+.lesson-html-content form button[type="submit"]:hover { background: #06b6d4; }
+
+/* Colores cyan */
+.lesson-html-content .text-cyan-400 { color: #22d3ee; }
+.lesson-html-content .text-cyan-300 { color: #67e8f9; }
+.lesson-html-content .text-cyan-200 { color: #a5f3fc; }
+.lesson-html-content .border-cyan-400 { border-color: #22d3ee; }
+.lesson-html-content .border-b-2.border-cyan-400 { border-bottom: 2px solid #22d3ee; }
+.lesson-html-content .bg-cyan-600 { background-color: #0891b2; }
+.lesson-html-content .bg-cyan-500 { background-color: #06b6d4; }
+.lesson-html-content .bg-cyan-600\/20 { background: rgba(8,145,178,0.2); }
+.lesson-html-content .border-cyan-500\/50 { border-color: rgba(6,182,212,0.5); }
+
+/* Colores purple */
+.lesson-html-content .text-purple-400 { color: #c084fc; }
+.lesson-html-content .border-purple-400 { border-color: #c084fc; }
+.lesson-html-content .border-purple-500\/50 { border-color: rgba(168,85,247,0.5); }
+.lesson-html-content .border-t-purple-500 { border-top-color: #a855f7; }
+.lesson-html-content .bg-purple-500\/20 { background: rgba(168,85,247,0.2); }
+.lesson-html-content .bg-purple-600\/90 { background: rgba(147,51,234,0.9); }
+
+/* Colores emerald */
+.lesson-html-content .text-emerald-400 { color: #34d399; }
+.lesson-html-content .border-emerald-400\/50 { border-color: rgba(52,211,153,0.5); }
+.lesson-html-content .border-t-emerald-500 { border-top-color: #10b981; }
+.lesson-html-content .bg-emerald-500\/20 { background: rgba(16,185,129,0.2); }
+
+/* Bordes top coloreados */
+.lesson-html-content .border-t-4 { border-top-width: 4px; }
+
+/* Espaciados adicionales */
+.lesson-html-content .space-y-8 > * + * { margin-top: 2rem; }
+.lesson-html-content .space-y-3 > * + * { margin-top: 0.75rem; }
+.lesson-html-content .space-y-2 > * + * { margin-top: 0.5rem; }
+.lesson-html-content .gap-2 { gap: 0.5rem; }
+.lesson-html-content .gap-4 { gap: 1rem; }
+.lesson-html-content .gap-6 { gap: 1.5rem; }
+.lesson-html-content .gap-8 { gap: 2rem; }
+.lesson-html-content .p-3 { padding: 0.75rem; }
+.lesson-html-content .p-4 { padding: 1rem; }
+.lesson-html-content .p-5 { padding: 1.25rem; }
+.lesson-html-content .p-6 { padding: 1.5rem; }
+.lesson-html-content .p-8 { padding: 2rem; }
+.lesson-html-content .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.lesson-html-content .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.lesson-html-content .px-8 { padding-left: 2rem; padding-right: 2rem; }
+.lesson-html-content .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.lesson-html-content .pt-4 { padding-top: 1rem; }
+.lesson-html-content .pb-3 { padding-bottom: 0.75rem; }
+.lesson-html-content .mb-5 { margin-bottom: 1.25rem; }
+.lesson-html-content .mb-6 { margin-bottom: 1.5rem; }
+.lesson-html-content .mt-1 { margin-top: 0.25rem; }
+.lesson-html-content .mt-3 { margin-top: 0.75rem; }
+.lesson-html-content .mt-4 { margin-top: 1rem; }
+.lesson-html-content .mt-10 { margin-top: 2.5rem; }
+.lesson-html-content .flex-col { flex-direction: column; }
+.lesson-html-content .flex-wrap { flex-wrap: wrap; }
+.lesson-html-content .items-center { align-items: center; }
+.lesson-html-content .items-start { align-items: flex-start; }
+.lesson-html-content .justify-center { justify-content: center; }
+.lesson-html-content .justify-between { justify-content: space-between; }
+.lesson-html-content .italic { font-style: italic; }
+.lesson-html-content .uppercase { text-transform: uppercase; }
+.lesson-html-content .tracking-wider { letter-spacing: 0.05em; }
+.lesson-html-content .antialiased { -webkit-font-smoothing: antialiased; }
+.lesson-html-content .overflow-hidden { overflow: hidden; }
+.lesson-html-content .overflow-x-auto { overflow-x: auto; }
+.lesson-html-content .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+.lesson-html-content .shadow-inner { box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+.lesson-html-content .inset-0 { inset: 0; }
+.lesson-html-content .z-10 { z-index: 10; }
+.lesson-html-content .relative { position: relative; }
+.lesson-html-content .h-auto { height: auto; }
+.lesson-html-content .w-4 { width: 1rem; }
+.lesson-html-content .w-10 { width: 2.5rem; }
+.lesson-html-content .w-20 { width: 5rem; }
+.lesson-html-content .h-10 { height: 2.5rem; }
+.lesson-html-content .h-20 { height: 5rem; }
+.lesson-html-content .ml-2 { margin-left: 0.5rem; }
+.lesson-html-content .ml-4 { margin-left: 1rem; }
+.lesson-html-content .list-disc { list-style-type: disc; }
+.lesson-html-content .list-outside { list-style-position: outside; }
+.lesson-html-content .max-w-6xl { max-width: 72rem; }
+.lesson-html-content .mx-auto { margin-left: auto; margin-right: auto; }
+.lesson-html-content .max-w-2xl { max-width: 42rem; }
+.lesson-html-content .opacity-40 { opacity: 0.4; }
+.lesson-html-content .bg-cover { background-size: cover; }
+.lesson-html-content .bg-center { background-position: center; }
+.lesson-html-content .transition-colors { transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
+.lesson-html-content .transition-all { transition: all 0.3s; }
+.lesson-html-content .duration-300 { transition-duration: 300ms; }
+.lesson-html-content .duration-500 { transition-duration: 500ms; }
+.lesson-html-content .hover\:scale-110:hover { transform: scale(1.1); }
+.lesson-html-content .rotate-180 { transform: rotate(180deg); }
+.lesson-html-content .transition-transform { transition: transform 0.2s; }
+.lesson-html-content .drop-shadow-md { filter: drop-shadow(0 4px 3px rgba(0,0,0,0.3)); }
+.lesson-html-content .bg-black\/20 { background: rgba(0,0,0,0.2); }
+.lesson-html-content .bg-black\/30 { background: rgba(0,0,0,0.3); }
+.lesson-html-content .bg-black\/40 { background: rgba(0,0,0,0.4); }
+.lesson-html-content .bg-slate-800\/40 { background: rgba(30,41,59,0.4); }
+.lesson-html-content .bg-slate-800\/50 { background: rgba(30,41,59,0.5); }
+.lesson-html-content .bg-slate-700\/50 { background: rgba(51,65,85,0.5); }
+.lesson-html-content .hover\:bg-slate-700\/50:hover { background: rgba(51,65,85,0.5); }
+.lesson-html-content .backdrop-blur-sm { backdrop-filter: blur(4px); }
+.lesson-html-content .animate-fade-in { animation: fadeIn 0.4s ease-in; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }

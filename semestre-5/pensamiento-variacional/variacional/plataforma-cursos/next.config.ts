@@ -5,25 +5,50 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Aplicar a todas las rutas
         source: "/(.*)",
         headers: [
           {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.geogebra.org https://cdn.geogebra.org https://cdn.tailwindcss.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.gstatic.com https://apis.google.com",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
-              "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
+              // Scripts: GeoGebra, PayPal, Firebase, Tailwind CDN, Google Fonts, KaTeX, MathJax
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'" +
+                " https://www.geogebra.org https://cdn.geogebra.org https://geo.geogebra.org" +
+                " https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com" +
+                " https://cdn.tailwindcss.com" +
+                " https://fonts.googleapis.com" +
+                " https://cdn.jsdelivr.net" +
+                " https://www.gstatic.com https://apis.google.com" +
+                " https://*.firebaseapp.com https://*.firebase.com",
+              // Estilos
+              "style-src 'self' 'unsafe-inline'" +
+                " https://fonts.googleapis.com https://cdn.jsdelivr.net",
+              // Fuentes
+              "font-src 'self' data:" +
+                " https://fonts.gstatic.com https://cdn.jsdelivr.net",
+              // Imágenes
               "img-src 'self' data: blob: https: http:",
-              "frame-src 'self' https://www.geogebra.org https://geogebra.org https://www.youtube.com https://player.vimeo.com https://www.desmos.com",
-              "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com wss://*.firebaseio.com https://www.geogebra.org",
+              // Iframes permitidos
+              "frame-src 'self'" +
+                " https://www.geogebra.org https://geogebra.org" +
+                " https://www.paypal.com https://c.paypal.com" +
+                " https://www.youtube.com https://player.vimeo.com" +
+                " https://www.desmos.com",
+              // Conexiones de red (Firebase, GeoGebra, PayPal)
+              "connect-src 'self'" +
+                " https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com" +
+                " wss://*.firebaseio.com" +
+                " https://www.geogebra.org https://cdn.geogebra.org https://geo.geogebra.org" +
+                " https://www.paypal.com https://api.paypal.com" +
+                " https://identitytoolkit.googleapis.com",
+              // Workers y media
               "worker-src 'self' blob:",
               "media-src 'self' blob: https:",
+              // GeoGebra carga objetos desde su CDN
+              "object-src 'none'",
             ].join("; "),
           },
           {
-            // Permitir que nuestra propia plataforma sea embebida en iframes
             key: "X-Frame-Options",
             value: "SAMEORIGIN",
           },
@@ -42,3 +67,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

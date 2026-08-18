@@ -52,6 +52,7 @@ export default function LessonPage() {
   const [isPaused, setIsPaused] = useState(false);
   const utteranceQueue = useRef<SpeechSynthesisUtterance[]>([]);
   const htmlContentRef = useRef<HTMLDivElement>(null);
+  const articleRef = useRef<HTMLElement>(null);
 
   // Hook para detener TTS si el usuario sale de la página o recarga
   useEffect(() => {
@@ -65,10 +66,15 @@ export default function LessonPage() {
     };
   }, []);
 
-  // Renderizar fórmulas LaTeX en el HTML dinámico con KaTeX auto-render
+  // Renderizar fórmulas LaTeX con KaTeX auto-render
+  // Se aplica SIEMPRE sobre el article completo (HTML y Markdown)
+  // para capturar expresiones cortas como $p$, $q$ que remark-math puede omitir
   useEffect(() => {
-    if (htmlContentRef.current && lesson?.content?.trimStart().startsWith('<')) {
-      renderMathInElement(htmlContentRef.current, {
+    const target = articleRef.current;
+    if (!target || !lesson) return;
+    // Pequeño delay para que React termine de pintar el DOM
+    const timer = setTimeout(() => {
+      renderMathInElement(target, {
         delimiters: [
           { left: '$$', right: '$$', display: true },
           { left: '$', right: '$', display: false },
@@ -77,8 +83,10 @@ export default function LessonPage() {
         ],
         throwOnError: false,
         strict: false,
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
       });
-    }
+    }, 150);
+    return () => clearTimeout(timer);
   }, [lesson]);
 
   // Hook para la barra de progreso
@@ -368,6 +376,7 @@ export default function LessonPage() {
             prose-a:text-neon-cyan hover:prose-a:text-neon-pink prose-a:transition-colors
             prose-code:text-neon-pink prose-code:bg-neon-pink/10 prose-code:px-1 prose-code:rounded
             prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
+          ref={articleRef}
         >
           {lesson.content && lesson.content.trimStart().startsWith('<') ? (
             <div

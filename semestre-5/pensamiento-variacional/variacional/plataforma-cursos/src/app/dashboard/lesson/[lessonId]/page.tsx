@@ -11,7 +11,6 @@ import rehypeRaw from "rehype-raw";
 import "katex/dist/katex.min.css";
 import rehypeInlineMath from "@/lib/rehype-inline-math";
 import { useAuth } from "@/components/providers/AuthProvider";
-import renderMathInElement from "katex/contrib/auto-render";
 
 // Componente memoizado para evitar que GeoGebra iframes se destruyan
 // al re-renderizar el componente padre (scroll, TTS, quizzes, etc.)
@@ -66,28 +65,6 @@ export default function LessonPage() {
     };
   }, []);
 
-  // Renderizar fórmulas LaTeX con KaTeX auto-render
-  // Se aplica SIEMPRE sobre el article completo (HTML y Markdown)
-  // para capturar expresiones cortas como $p$, $q$ que remark-math puede omitir
-  useEffect(() => {
-    const target = articleRef.current;
-    if (!target || !lesson) return;
-    // Pequeño delay para que React termine de pintar el DOM
-    const timer = setTimeout(() => {
-      renderMathInElement(target, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false },
-          { left: '\\(', right: '\\)', display: false },
-          { left: '\\[', right: '\\]', display: true },
-        ],
-        throwOnError: false,
-        strict: false,
-        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option'],
-      });
-    }, 150);
-    return () => clearTimeout(timer);
-  }, [lesson]);
 
   // Hook para la barra de progreso
   useEffect(() => {
@@ -378,15 +355,7 @@ export default function LessonPage() {
             prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
           ref={articleRef}
         >
-          {lesson.content && lesson.content.trimStart().startsWith('<') ? (
-            <div
-              ref={htmlContentRef}
-              dangerouslySetInnerHTML={{ __html: lesson.content }}
-              className="lesson-html-content"
-            />
-          ) : (
-            <MemoizedMarkdown content={lesson.content} />
-          )}
+          <MemoizedMarkdown content={lesson.content || ""} />
         </article>
 
         {/* Mini-Quiz Interactivo Estilo Cyberpunk */}

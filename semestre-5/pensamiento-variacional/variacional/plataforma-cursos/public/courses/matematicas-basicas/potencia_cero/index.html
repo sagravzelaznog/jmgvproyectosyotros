@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Poder del Cero - Potencias</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .explicacion {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        .ejemplo {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .ejercicio {
+            background-color: #e8f8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        .respuesta {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 3px solid #2ecc71;
+        }
+        .correcto {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrecto {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>El Misterio de la Potencia Cero</h1>
+    
+    <div class="explicacion">
+        <h2>¿Por qué cualquier número elevado a la potencia cero es igual a 1?</h2>
+        <p>Puede parecer extraño que cualquier número (excepto cero) elevado a la potencia de 0 sea igual a 1. Vamos a explorar por qué esto tiene sentido.</p>
+        
+        <h3>Usando la división de potencias</h3>
+        <p>Recordemos la propiedad de división de potencias con la misma base:</p>
+        <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+            a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m-n</sup>
+        </p>
+        
+        <p>Ahora, veamos qué pasa cuando m = n:</p>
+        <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+            a<sup>n</sup> ÷ a<sup>n</sup> = a<sup>n-n</sup> = a<sup>0</sup>
+        </p>
+        
+        <p>Pero también sabemos que cualquier número dividido por sí mismo es 1:</p>
+        <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+            a<sup>n</sup> ÷ a<sup>n</sup> = 1
+        </p>
+        
+        <p>Por lo tanto, igualando ambas expresiones:</p>
+        <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+            a<sup>0</sup> = 1
+        </p>
+    </div>
+    
+    <div class="ejemplo">
+        <h2>Ejemplos con división de potencias</h2>
+        <p>Veamos algunos ejemplos numéricos:</p>
+        <div style="background-color: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
+            <p><strong>Ejemplo 1:</strong> 2³ ÷ 2³ = 2<sup>3-3</sup> = 2⁰</p>
+            <p>8 ÷ 8 = 1 → por lo tanto 2⁰ = 1</p>
+        </div>
+        <div style="background-color: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
+            <p><strong>Ejemplo 2:</strong> 10² ÷ 10² = 10<sup>2-2</sup> = 10⁰</p>
+            <p>100 ÷ 100 = 1 → por lo tanto 10⁰ = 1</p>
+        </div>
+        <div style="background-color: white; padding: 10px; border-radius: 5px; margin: 10px 0;">
+            <p><strong>Ejemplo general:</strong> Para cualquier número a ≠ 0,</p>
+            <p>a⁰ = a<sup>n-n</sup> = a<sup>n</sup> ÷ a<sup>n</sup> = 1</p>
+        </div>
+        <p><strong>Excepción importante:</strong> 0⁰ es una forma indeterminada en matemáticas.</p>
+    </div>
+    
+    <div class="ejercicio">
+        <h2>¡Practiquemos!</h2>
+        <p>Intenta resolver estos ejercicios:</p>
+        
+        <div id="ejercicio1">
+            <p>1. ¿Cuánto es 7⁰?</p>
+            <button onclick="verificarRespuesta('respuesta1', '1', '1')">Ver respuesta</button>
+            <div id="respuesta1" class="respuesta"></div>
+        </div>
+        
+        <div id="ejercicio2">
+            <p>2. Calcula (2/3)⁰</p>
+            <button onclick="verificarRespuesta('respuesta2', '1', '1')">Ver respuesta</button>
+            <div id="respuesta2" class="respuesta"></div>
+        </div>
+        
+        <div id="ejercicio3">
+            <p>3. Si x ≠ 0, ¿cuánto es x⁰?</p>
+            <button onclick="verificarRespuesta('respuesta3', '1', '1')">Ver respuesta</button>
+            <div id="respuesta3" class="respuesta"></div>
+        </div>
+        
+        <div id="ejercicio4">
+            <p>4. ¿Es cierto que (-5)⁰ = 1?</p>
+            <button onclick="verificarRespuesta('respuesta4', 'Sí, cualquier número distinto de cero elevado a la potencia cero es 1.', '1')">Ver respuesta</button>
+            <div id="respuesta4" class="respuesta"></div>
+        </div>
+    </div>
+    
+    <div class="ejercicio">
+        <h2>Reto Adicional</h2>
+        <p>Piensa en esto: Si seguimos el patrón de división, ¿qué crees que significaría 0⁰? ¿Por qué crees que los matemáticos lo consideran una forma indeterminada?</p>
+        <button onclick="document.getElementById('reto').style.display='block'">Ver explicación</button>
+        <div id="reto" class="respuesta" style="display: none;">
+            <p>0⁰ es una forma indeterminada porque hay dos patrones en conflicto:</p>
+            <ol>
+                <li>Cualquier número elevado a la potencia 0 es 1.</li>
+                <li>0 elevado a cualquier potencia positiva es 0.</li>
+            </ol>
+            <p>No hay un valor único que satisfaga ambas condiciones simultáneamente, por lo que se considera indeterminado.</p>
+        </div>
+    </div>
+    
+    <script>
+        function verificarRespuesta(elementoId, respuestaCorrecta, respuestaUsuario) {
+            const elemento = document.getElementById(elementoId);
+            elemento.style.display = 'block';
+            
+            if (respuestaUsuario === respuestaCorrecta) {
+                elemento.innerHTML = `<span class="correcto">¡Correcto!</span> La respuesta es ${respuestaCorrecta}`;
+            } else {
+                elemento.innerHTML = `<span class="incorrecto">Respuesta incorrecta.</span> La respuesta correcta es: ${respuestaCorrecta}`;
+            }
+        }
+    </script>
+</body>
+</html>

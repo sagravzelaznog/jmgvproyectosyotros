@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas de Multiplicar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Tablas de Multiplicar</h1>
+    
+    <div class="controls">
+        <button id="showAll">Mostrar Todas</button>
+        <button id="hideAll">Ocultar Todas</button>
+        <div class="table-selector">
+            <label for="tableNumber">Ver tabla del:</label>
+            <input type="number" id="tableNumber" min="1" max="9" value="1">
+            <button id="showTable">Mostrar</button>
+        </div>
+    </div>
+
+    <div class="container" id="tablesContainer">
+        <!-- Las tablas se generarán con JavaScript -->
+    </div>
+
+    <div class="practice-section">
+        <h2>¡Practica!</h2>
+        <div class="score-container">
+            Puntos: <span id="score">0</span>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="resultsChart"></canvas>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <span class="stat-value" id="correctCount">0</span>
+                <span class="stat-label">Correctas</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value" id="incorrectCount">0</span>
+                <span class="stat-label">Incorrectas</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value" id="accuracy">0%</span>
+                <span class="stat-label">Precisión</span>
+            </div>
+        </div>
+        <div class="practice-question" id="question"></div>
+        <div>
+            <input type="number" id="answer" placeholder="Tu respuesta">
+            <button id="checkAnswer">Verificar</button>
+            <button id="newQuestion">Nueva Pregunta</button>
+            <button id="resetScore" class="reset-btn">Reiniciar Puntuación</button>
+        </div>
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Variables globales
+        const tablesContainer = document.getElementById('tablesContainer');
+        const scoreElement = document.getElementById('score');
+        let resultsChart = null;
+        let currentQuestion = {};
+        let score = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let chartInitialized = false;
+        
+        function generateTables() {
+            tablesContainer.innerHTML = '';
+            for (let i = 1; i <= 9; i++) {
+                const tableDiv = document.createElement('div');
+                tableDiv.className = 'table-container';
+                tableDiv.id = `table-${i}`;
+                
+                let tableHTML = `<h2>Tabla del ${i}</h2><ul class="multiplication-list">`;
+                for (let j = 1; j <= 10; j++) {
+                    tableHTML += `<li>${i} × ${j} = <span class="result" id="result-${i}-${j}">${i * j}</span></li>`;
+                }
+                tableHTML += '</ul>';
+                
+                tableDiv.innerHTML = tableHTML;
+                tablesContainer.appendChild(tableDiv);
+            }
+        }
+
+        // Mostrar/ocultar tablas
+        document.getElementById('showAll').addEventListener('click', () => {
+            document.querySelectorAll('.table-container').forEach(el => {
+                el.style.display = 'block';
+            });
+        });
+
+        document.getElementById('hideAll').addEventListener('click', () => {
+            document.querySelectorAll('.table-container').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+
+        document.getElementById('showTable').addEventListener('click', () => {
+            const tableNumber = parseInt(document.getElementById('tableNumber').value);
+            if (tableNumber >= 1 && tableNumber <= 9) {
+                document.querySelectorAll('.table-container').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.getElementById(`table-${tableNumber}`).style.display = 'block';
+            } else {
+                alert('Por favor ingresa un número del 1 al 9');
+            }
+        });
+
+        // Inicializar gráfico
+        function initChart() {
+            const ctx = document.getElementById('resultsChart').getContext('2d');
+            resultsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correctas', 'Incorrectas'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['#27ae60', '#e74c3c'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%',
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+        }
+
+        function updateScore(points) {
+            score += points;
+            scoreElement.textContent = score;
+            // Efecto visual al sumar puntos
+            scoreElement.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                scoreElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function updateStats() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = incorrectAnswers;
+            const total = correctAnswers + incorrectAnswers;
+            const accuracy = total > 0 ? Math.round((correctAnswers / total) * 100) : 0;
+            document.getElementById('accuracy').textContent = `${accuracy}%`;
+            
+            // Actualizar o inicializar el gráfico
+            if (!chartInitialized) {
+                initChart();
+                chartInitialized = true;
+            } else if (resultsChart) {
+                resultsChart.data.datasets[0].data = [correctAnswers, incorrectAnswers];
+                resultsChart.update();
+            }
+        }
+
+        function resetScore() {
+            if (confirm('¿Estás seguro de que quieres reiniciar tu puntuación y estadísticas?')) {
+                score = 0;
+                correctAnswers = 0;
+                incorrectAnswers = 0;
+                scoreElement.textContent = '0';
+                updateStats();
+                generateQuestion();
+            }
+        }
+
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            currentQuestion = {
+                num1: num1,
+                num2: num2,
+                answer: num1 * num2
+            };
+            document.getElementById('question').textContent = `¿Cuánto es ${num1} × ${num2}?`;
+            document.getElementById('answer').value = '';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('answer').focus();
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            const feedback = document.getElementById('feedback');
+            const answerInput = document.getElementById('answer');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = 'Por favor ingresa un número';
+                feedback.className = 'feedback incorrect';
+                answerInput.value = '';
+                answerInput.focus();
+                return false;
+            }
+            
+            if (userAnswer === currentQuestion.answer) {
+                feedback.textContent = '¡Correcto! +1 punto';
+                feedback.className = 'feedback correct';
+                updateScore(1);
+                correctAnswers++;
+                answerInput.value = '';
+                updateStats();
+                return true;
+            } else {
+                feedback.textContent = `Incorrecto. La respuesta correcta es ${currentQuestion.answer}.`;
+                feedback.className = 'feedback incorrect';
+                incorrectAnswers++;
+                answerInput.value = '';
+                answerInput.focus();
+                updateStats();
+                return false;
+            }
+        }
+
+        function handleAnswer() {
+            if (checkAnswer()) {
+                // Si la respuesta es correcta, esperar 1 segundo y generar nueva pregunta
+                setTimeout(() => {
+                    generateQuestion();
+                    document.getElementById('answer').focus();
+                }, 1000);
+            }
+        }
+
+        // Event listeners
+        document.getElementById('checkAnswer').addEventListener('click', handleAnswer);
+        document.getElementById('newQuestion').addEventListener('click', generateQuestion);
+        document.getElementById('resetScore').addEventListener('click', resetScore);
+        document.getElementById('answer').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleAnswer();
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            generateTables();
+            generateQuestion();
+            updateStats(); // Esto inicializará el gráfico cuando sea necesario
+        });
+    </script>
+</body>
+<footer>
+    <p>© 2025 JMGV - PTEL. Todos los derechos reservados.</p>
+</footer>
+</html>

@@ -19,7 +19,8 @@ const COURSE_INFO: Record<string, { title: string, adminOnly: boolean }> = {
   "inkscape": { title: "Diseño Vectorial (Inkscape)", adminOnly: false },
   "autocad": { title: "AutoCAD Profesional", adminOnly: false },
   "fisica": { title: "Análisis Físicos", adminOnly: false },
-  "archicad": { title: "Archicad 27: MEP y Modelado", adminOnly: false }
+  "archicad": { title: "Archicad 27: MEP y Modelado", adminOnly: false },
+  "matematicas-basicas": { title: "Recursos Matemáticos Básicos", adminOnly: false }
 };
 
 export default function CoursePage() {

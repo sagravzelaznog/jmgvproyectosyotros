@@ -20,7 +20,6 @@ async function run() {
   console.log('🚀 Iniciando subida de 40 Ejercicios de AutoCAD...');
 
   const courseId = 'autocad';
-  const moduleId = 'mod_ejercicios_2d';
   
   const exercisesDir = "C:\\\\Users\\\\admin\\\\Documents\\\\000 A PREPA\\\\planeaciones especialidades\\\\Proyectos y Otros\\\\semestre-5\\\\pensamiento-variacional\\\\cursos\\\\Autocad";
   
@@ -32,7 +31,15 @@ async function run() {
     }
     
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    const lessonId = `autocad_ejercicio_${i}`;
+    
+    // IDs originales de Firebase
+    const lessonId = `lesson_${i}_autocad`;
+    
+    // Módulos originales según el rango
+    let moduleId = 'mod_autocad_1';
+    if (i > 10 && i <= 20) moduleId = 'mod_autocad_2';
+    else if (i > 20 && i <= 30) moduleId = 'mod_autocad_3';
+    else if (i > 30 && i <= 40) moduleId = 'mod_autocad_4';
     
     // Construir HTML Premium a partir del JSON
     let unifiedStepsHtml = '';
@@ -46,8 +53,9 @@ async function run() {
         const visualInstruction = fase.instruccion_visual ? `<p class="text-slate-300 text-lg mb-3"><strong>Objetivo de la fase:</strong> ${fase.instruccion_visual}</p>` : '';
         const commands = fase.comandos_clave ? `<div class="flex flex-wrap gap-2 mb-4">${fase.comandos_clave.map(cmd => `<span class="bg-black border border-yellow-400/30 px-3 py-1 rounded text-sm font-mono text-yellow-200 shadow-[0_0_5px_rgba(250,204,21,0.2)]">${cmd}</span>`).join('')}</div>` : '';
         
-        // Convert array of instructions into a cohesive paragraph separated by spaces or line breaks
-        const instructionsText = paso.instrucciones ? `<div class="bg-black/30 p-4 rounded-md border border-slate-700 font-mono text-sm text-slate-300 leading-relaxed mb-4">${paso.instrucciones.join(' ')}</div>` : '';
+        // Convert array of instructions into an ordered list, filtering out empty strings
+        const validInstructions = paso.instrucciones ? paso.instrucciones.filter(inst => inst.trim() !== "") : [];
+        const instructionsText = validInstructions.length > 0 ? `<div class="bg-black/30 p-4 rounded-md border border-slate-700 mb-4"><ol class="list-decimal pl-6 space-y-2 font-mono text-sm text-slate-300 leading-relaxed">${validInstructions.map(inst => `<li>${inst}</li>`).join('')}</ol></div>` : '';
         
         const tip = paso.explicacion_didactica ? `<div class="bg-neon-cyan/10 text-neon-cyan text-sm p-4 rounded-lg flex gap-3 items-start border border-neon-cyan/20"><span class="text-xl">💡</span><p class="leading-relaxed">${paso.explicacion_didactica}</p></div>` : '';
 
@@ -162,10 +170,18 @@ async function run() {
     };
 
     await db.collection('Lessons').doc(lessonId).set(lessonData, { merge: true });
-    console.log(`✅ Ejercicio ${i} subido exitosamente.`);
+    
+    // Eliminar la lección duplicada que creamos por error
+    const wrongLessonId = `autocad_ejercicio_${i}`;
+    await db.collection('Lessons').doc(wrongLessonId).delete().catch(() => {});
+    
+    console.log(`✅ Ejercicio ${i} subido exitosamente al módulo ${moduleId}.`);
   }
 
-  console.log('🎉 Subida masiva de ejercicios de AutoCAD completada.');
+  // Eliminar el módulo creado por error
+  await db.collection('Modules').doc('mod_ejercicios_2d').delete().catch(() => {});
+
+  console.log('🎉 Subida masiva de ejercicios de AutoCAD completada (IDs originales actualizados).');
 }
 
 run().catch(console.error);

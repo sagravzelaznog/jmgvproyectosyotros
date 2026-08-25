@@ -86,6 +86,22 @@ async function run() {
         </div>
     </div>
 
+    <!-- Plano del Ejercicio (Visor PDF) -->
+    <div class="bg-slate-900 rounded-xl overflow-hidden border border-slate-700 shadow-xl">
+        <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center">
+            <h3 class="font-bold text-white flex items-center gap-2">
+                <span>📄</span> Plano de Referencia Oficial
+            </h3>
+            <span class="bg-slate-700 px-3 py-1 rounded text-xs text-slate-300 font-mono">Pág. ${data.pagina_pdf}</span>
+        </div>
+        <iframe 
+            src="/courses/autocad/CAD_Exercises%202D.pdf#page=${data.pagina_pdf}&view=FitH" 
+            class="w-full bg-white" 
+            style="height: 700px; border: none;"
+            title="Plano del Ejercicio"
+        ></iframe>
+    </div>
+
     <!-- Guión de Síntesis -->
     <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
         <h3 class="text-xl font-bold text-neon-pink mb-3 flex items-center gap-2">

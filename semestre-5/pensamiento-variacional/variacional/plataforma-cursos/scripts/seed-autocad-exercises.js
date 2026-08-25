@@ -95,7 +95,7 @@ async function run() {
             <span class="bg-slate-700 px-3 py-1 rounded text-xs text-slate-300 font-mono">Pág. ${data.pagina_pdf}</span>
         </div>
         <iframe 
-            src="/courses/autocad/CAD_Exercises%202D.pdf#page=${data.pagina_pdf}&view=FitH" 
+            src="/courses/autocad/ejercicios/ejercicio_${data.pagina_pdf}.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
             class="w-full bg-white" 
             style="height: 700px; border: none;"
             title="Plano del Ejercicio"

@@ -35,6 +35,36 @@ async function run() {
     const lessonId = `autocad_ejercicio_${i}`;
     
     // Construir HTML Premium a partir del JSON
+    let unifiedStepsHtml = '';
+    const maxSteps = Math.max(data.fases_dibujo.length, data.guia_paso_a_paso.length);
+    for (let j = 0; j < maxSteps; j++) {
+        const fase = data.fases_dibujo[j] || {};
+        const paso = data.guia_paso_a_paso[j] || {};
+        const stepNum = fase.orden || paso.paso || (j + 1);
+        const stepTitle = fase.nombre_fase || paso.accion || `Paso ${stepNum}`;
+        
+        const visualInstruction = fase.instruccion_visual ? `<p class="text-slate-300 text-lg mb-3"><strong>Objetivo de la fase:</strong> ${fase.instruccion_visual}</p>` : '';
+        const commands = fase.comandos_clave ? `<div class="flex flex-wrap gap-2 mb-4">${fase.comandos_clave.map(cmd => `<span class="bg-black border border-yellow-400/30 px-3 py-1 rounded text-sm font-mono text-yellow-200 shadow-[0_0_5px_rgba(250,204,21,0.2)]">${cmd}</span>`).join('')}</div>` : '';
+        
+        // Convert array of instructions into a cohesive paragraph separated by spaces or line breaks
+        const instructionsText = paso.instrucciones ? `<div class="bg-black/30 p-4 rounded-md border border-slate-700 font-mono text-sm text-slate-300 leading-relaxed mb-4">${paso.instrucciones.join(' ')}</div>` : '';
+        
+        const tip = paso.explicacion_didactica ? `<div class="bg-neon-cyan/10 text-neon-cyan text-sm p-4 rounded-lg flex gap-3 items-start border border-neon-cyan/20"><span class="text-xl">💡</span><p class="leading-relaxed">${paso.explicacion_didactica}</p></div>` : '';
+
+        unifiedStepsHtml += `
+        <div class="bg-slate-900/80 p-6 md:p-8 rounded-xl border-l-4 border-yellow-400 hover:bg-slate-800 transition-colors relative shadow-lg">
+            <div class="absolute -left-4 top-6 w-8 h-8 bg-yellow-400 rounded-full text-black flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(250,204,21,0.6)]">${stepNum}</div>
+            <h3 class="font-black text-2xl text-white mb-4 ml-4">${stepTitle}</h3>
+            <div class="ml-4">
+                ${visualInstruction}
+                ${commands}
+                ${instructionsText}
+                ${tip}
+            </div>
+        </div>
+        `;
+    }
+
     let htmlContent = `
 <div class="space-y-8 text-slate-300">
     <!-- Encabezado y Objetivo -->
@@ -56,17 +86,19 @@ async function run() {
         <p class="italic text-slate-400">"${data.guion_sintesis_voz}"</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Configuración y Geometría -->
-        <div class="bg-slate-900 rounded-xl p-6 shadow-md border border-slate-800">
-            <h3 class="text-lg font-bold text-neon-green mb-4">⚙️ Configuración del Entorno</h3>
-            <ul class="list-disc pl-5 space-y-2 mb-6">
+    <!-- Configuración y Geometría (Unificado a ancho completo) -->
+    <div class="bg-slate-900 rounded-xl p-6 md:p-8 shadow-md border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <h3 class="text-xl font-bold text-neon-green mb-4 flex items-center gap-2"><span>⚙️</span> Configuración del Entorno</h3>
+            <ul class="list-disc pl-5 space-y-2 text-slate-300">
                 ${data.configuracion_entorno.map(c => `<li>${c}</li>`).join('')}
             </ul>
-            
-            <h3 class="text-lg font-bold text-neon-green mb-4">🔬 Análisis Geométrico</h3>
-            <div class="space-y-4 text-sm">
-                <p><span class="font-bold text-white">Origen:</span> ${data.analisis_geometrico.origen_coordenadas}</p>
+        </div>
+        
+        <div>
+            <h3 class="text-xl font-bold text-neon-green mb-4 flex items-center gap-2"><span>🔬</span> Análisis Geométrico</h3>
+            <div class="space-y-4 text-sm text-slate-300">
+                <p><span class="font-bold text-white text-base">Origen:</span> ${data.analisis_geometrico.origen_coordenadas}</p>
                 
                 <div>
                     <span class="font-bold text-white block mb-2">Figuras Primitivas:</span>
@@ -76,48 +108,22 @@ async function run() {
                 </div>
                 
                 <div>
-                    <span class="font-bold text-white block mb-2">Referencias a Objetos (Osnap):</span>
+                    <span class="font-bold text-white block mb-3">Referencias a Objetos (Osnap):</span>
                     <div class="flex flex-wrap gap-2">
-                        ${data.analisis_geometrico.osnap_requeridos.map(o => `<span class="bg-slate-800 px-2 py-1 rounded text-xs text-neon-cyan">${o}</span>`).join('')}
+                        ${data.analisis_geometrico.osnap_requeridos.map(o => `<span class="bg-slate-800 px-3 py-1.5 rounded-md text-xs font-medium text-neon-cyan border border-neon-cyan/20">${o}</span>`).join('')}
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Fases de Dibujo -->
-        <div class="bg-slate-900 rounded-xl p-6 shadow-md border border-slate-800">
-            <h3 class="text-lg font-bold text-yellow-400 mb-4">🗺️ Fases de Dibujo</h3>
-            <div class="space-y-6">
-                ${data.fases_dibujo.map(f => `
-                    <div class="border-l-2 border-yellow-400/50 pl-4 relative">
-                        <div class="absolute -left-2.5 top-0 w-5 h-5 bg-yellow-400 rounded-full text-black flex items-center justify-center font-bold text-xs">${f.orden}</div>
-                        <h4 class="font-bold text-white mb-1">${f.nombre_fase}</h4>
-                        <p class="text-sm text-slate-400 mb-2">${f.instruccion_visual}</p>
-                        <div class="flex flex-wrap gap-2">
-                            ${f.comandos_clave.map(cmd => `<span class="bg-black border border-yellow-400/30 px-2 py-1 rounded text-xs font-mono text-yellow-200">${cmd}</span>`).join('')}
-                        </div>
-                    </div>
-                `).join('')}
             </div>
         </div>
     </div>
 
-    <!-- Guía Paso a Paso -->
-    <div class="mt-8">
-        <h2 class="text-2xl font-black text-white mb-6 border-b border-slate-700 pb-2">👣 Procedimiento Paso a Paso</h2>
-        <div class="space-y-4">
-            ${data.guia_paso_a_paso.map(p => `
-                <div class="bg-slate-900/80 p-5 rounded-lg border-l-4 border-neon-cyan hover:bg-slate-800 transition-colors">
-                    <h3 class="font-bold text-lg text-white mb-2">Paso ${p.paso}: ${p.accion}</h3>
-                    <ul class="list-decimal pl-6 space-y-1 text-slate-300 font-mono text-sm mb-3">
-                        ${p.instrucciones.map(inst => `<li>${inst}</li>`).join('')}
-                    </ul>
-                    <div class="bg-neon-cyan/10 text-neon-cyan text-sm p-3 rounded flex gap-2 items-start">
-                        <span>💡</span>
-                        <p>${p.explicacion_didactica}</p>
-                    </div>
-                </div>
-            `).join('')}
+    <!-- Desarrollo Unificado del Ejercicio -->
+    <div class="mt-12">
+        <h2 class="text-3xl font-black text-white mb-8 flex items-center gap-3 border-b border-slate-700 pb-4">
+            <span class="text-yellow-400">🚀</span> Desarrollo Detallado del Ejercicio
+        </h2>
+        <div class="space-y-8">
+            ${unifiedStepsHtml}
         </div>
     </div>
 

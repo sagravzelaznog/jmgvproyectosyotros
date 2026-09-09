@@ -70,6 +70,65 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDownloadCSV = async () => {
+    if (!user) return;
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch('/api/admin/export-progress', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Error al generar el CSV');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'usuarios_avance.csv';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    } catch (error) {
+      console.error('Download error:', error);
+      alert('Hubo un error al descargar los avances.');
+    }
+  };
+
+  const handleDeleteUser = async (targetUid: string) => {
+    if (!user) return;
+    if (!window.confirm("¿Estás seguro de que deseas ELIMINAR permanentemente a este usuario? Esta acción no se puede deshacer.")) {
+      return;
+    }
+    
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch('/api/admin/delete-user', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ targetUid })
+      });
+      
+      const data = await response.json();
+      if (data.success) {
+        fetchUsers(); // Recargar lista
+      } else {
+        alert(data.error || 'Error al eliminar usuario');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Error de red al intentar eliminar el usuario.');
+    }
+  };
+
+
   return (
     <ProtectedRoute requireAdmin={true}>
       <div className="bg-[#0B0C10] min-h-screen text-slate-300 py-12 px-4 sm:px-6 lg:px-8 font-sans">
@@ -127,6 +186,12 @@ export default function AdminDashboard() {
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <span className="text-neon-pink">👥</span> Alumnos con Acceso Gratuito
                   </h2>
+                  <button
+                    onClick={handleDownloadCSV}
+                    className="bg-neon-green/10 text-neon-green border border-neon-green font-bold py-2 px-4 rounded hover:bg-neon-green hover:text-black hover:shadow-[0_0_15px_#39FF14] transition-all flex items-center gap-2 text-sm"
+                  >
+                    <span>📊</span> Descargar CSV
+                  </button>
                 </div>
                 
                 <div className="overflow-x-auto">
@@ -136,18 +201,19 @@ export default function AdminDashboard() {
                         <th className="px-6 py-4 font-medium">Email</th>
                         <th className="px-6 py-4 font-medium">Contraseña Temporal</th>
                         <th className="px-6 py-4 font-medium">Fecha de Alta</th>
+                        <th className="px-6 py-4 font-medium text-right">Acciones</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800">
                       {fetching ? (
                         <tr>
-                          <td colSpan={3} className="px-6 py-8 text-center text-slate-500">
+                          <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
                             Cargando registros...
                           </td>
                         </tr>
                       ) : grantedUsers.length === 0 ? (
                         <tr>
-                          <td colSpan={3} className="px-6 py-8 text-center text-slate-500">
+                          <td colSpan={4} className="px-6 py-8 text-center text-slate-500">
                             No hay alumnos registrados con acceso gratuito aún.
                           </td>
                         </tr>
@@ -162,6 +228,15 @@ export default function AdminDashboard() {
                             </td>
                             <td className="px-6 py-4 text-slate-400">
                               {new Date(u.grantedAt).toLocaleDateString()}
+                            </td>
+                            <td className="px-6 py-4 text-right">
+                              <button
+                                onClick={() => handleDeleteUser(u.id)}
+                                className="text-red-500 hover:text-red-400 p-2 rounded hover:bg-red-500/10 transition-colors"
+                                title="Eliminar Usuario"
+                              >
+                                🗑️
+                              </button>
                             </td>
                           </tr>
                         ))

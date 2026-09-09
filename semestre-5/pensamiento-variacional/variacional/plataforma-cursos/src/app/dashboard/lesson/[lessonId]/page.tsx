@@ -143,14 +143,26 @@ export default function LessonPage() {
       // Guardar record en Firebase si hay usuario autenticado
       if (user && lessonId) {
         try {
-          const progressRef = doc(db, "Users", user.uid, "progress", lessonId as string);
-          await setDoc(progressRef, {
-            score: finalScore,
-            total: quiz.length,
-            completedAt: serverTimestamp()
-          }, { merge: true });
+          const token = await user.getIdToken();
+          const res = await fetch('/api/user/save-progress', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              lessonId: lessonId as string,
+              score: finalScore,
+              total: quiz.length
+            })
+          });
+
+          if (!res.ok) {
+            const errorData = await res.json();
+            console.error("Error del servidor al guardar progreso:", errorData.error);
+          }
         } catch (error) {
-          console.error("Error saving quiz progress:", error);
+          console.error("Error de red al guardar progreso:", error);
         }
       }
     }

@@ -1,0 +1,38 @@
+type User @table {
+  email: String!
+  role: String! # 'customer' o 'admin'
+  name: String
+  phoneNumber: String
+}
+
+type Product @table {
+  name: String!
+  price: Float!
+  baseMaterialThickness: Float!
+  description: String
+  imageUrl: String
+  category: String
+}
+
+type Order @table {
+  status: String! # 'pending', 'cutting', 'shipped'
+  totalAmount: Float!
+  createdAt: Timestamp!
+  user: User!
+}
+
+type OrderItem @table {
+  quantity: Int!
+  priceAtPurchase: Float!
+  customDesignUrl: String
+  customText: String
+  order: Order!
+  product: Product!
+}
+
+type Review @table {
+  rating: Int!
+  comment: String
+  user: User!
+  product: Product!
+}

@@ -430,9 +430,19 @@ export default function LessonPage() {
                 <h3 className="text-4xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">
                   SISTEMA SUPERADO
                 </h3>
-                <p className="text-slate-300 text-xl font-medium mb-8">
-                  Precisión: <span className="text-neon-green font-black">{Math.round((score / quiz.length) * 100)}%</span> ({score}/{quiz.length})
-                </p>
+                <div className="mb-8 flex flex-col items-center gap-2">
+                  <p className="text-slate-300 text-xl font-medium">
+                    Precisión: <span className="text-neon-green font-black">{Math.round((score / quiz.length) * 100)}%</span> ({score}/{quiz.length})
+                  </p>
+                  <p className="text-slate-400 text-sm tracking-[0.2em] uppercase bg-black/40 px-6 py-2 rounded-full border border-slate-700/50 mt-2">
+                    MATERIA: {lesson.courseId === 'fisica' ? 'ANÁLISIS FÍSICOS' : 
+                             lesson.courseId === 'autocad' ? 'AUTOCAD BÁSICO' : 
+                             lesson.courseId === 'archicad27' ? 'ARCHICAD 27' : 
+                             lesson.courseId === 'pm1' ? 'PENSAMIENTO MATEMÁTICO I' :
+                             lesson.courseId === 'pm2' ? 'PENSAMIENTO MATEMÁTICO II' :
+                             lesson.courseId?.toUpperCase() || 'GENERAL'}
+                  </p>
+                </div>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                   <button 
                     onClick={() => router.push('/dashboard')}

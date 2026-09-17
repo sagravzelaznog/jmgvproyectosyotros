@@ -16,14 +16,23 @@
     }
   ],
   "hosting": {
-    "public": "v2-store/out",
+    "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "functions/**",
+      "ARQUITECTURA_NOSQL.md",
+      "firestore.rules",
+      "firestore.indexes.json",
+      "package.json",
+      "package-lock.json"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
-  },
-  "dataconnect": {
-    "source": "dataconnect"
   }
 }

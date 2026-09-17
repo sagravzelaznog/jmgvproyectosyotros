@@ -31,7 +31,7 @@ async function seedInkscape() {
   const rawData = fs.readFileSync(dataPath, 'utf8');
   const data = JSON.parse(rawData);
 
-  console.log(`Leídos: ${data.modules.length} Módulos, ${data.lessons.length} Lecciones`);
+  console.log(`Leídos: ${data.modules.length} Módulos, ${data.lessons.length} Lecciones, ${data.quizzes ? data.quizzes.length : 0} Quizzes`);
 
   // 1. Insertar Módulos
   console.log('\\n--- INSERTANDO MÓDULOS ---');
@@ -60,6 +60,20 @@ async function seedInkscape() {
     lessonCount++;
     if (lessonCount % 10 === 0) {
         console.log(`✅ ${lessonCount}/${data.lessons.length} Lecciones subidas...`);
+    }
+  }
+
+  // 3. Quizzes
+  if (data.quizzes) {
+    console.log('\\n--- INSERTANDO QUIZZES ---');
+    for (const quiz of data.quizzes) {
+      const quizRef = db.collection('Quizzes').doc(`quiz_${quiz.lessonId}`);
+      await quizRef.set({
+        lessonId: quiz.lessonId,
+        questions: quiz.questions,
+        createdAt: new Date().toISOString()
+      });
+      console.log(`✅ Quizz creado para lección: ${quiz.lessonId}`);
     }
   }
 

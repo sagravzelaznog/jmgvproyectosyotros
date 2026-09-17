@@ -13,6 +13,10 @@ const highlightContainerEnd = `\n</div>\n`;
 function convertHtmlToMarkdown(html) {
     let md = html;
     
+    // Remove the quizz block from markdown content so it doesn't render as text
+    md = md.replace(/<div class="quizz-masterclass">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+    md = md.replace(/<div class="quizz-masterclass">[\s\S]*?(?=<\/div>\s*<\/div>|$)/g, ''); // Fallback
+    
     // Convert strong tags
     md = md.replace(/<strong>(.*?)<\/strong>/gs, `<strong ${strongStyle}>$1</strong>`);
     md = md.replace(/<b>(.*?)<\/b>/gs, `<strong ${strongStyle}>$1</strong>`);
@@ -66,23 +70,6 @@ function convertHtmlToMarkdown(html) {
     return md.trim();
 }
 
-function getQuestionsPool() {
-    const questions = [];
-    const evalPath = path.join(inputDir, 'evaluacion_excel.html');
-    if (fs.existsSync(evalPath)) {
-        const html = fs.readFileSync(evalPath, 'utf8');
-        const matches = [...html.matchAll(/<td class="formula">(.*?)<\/td>\s*<td>(.*?)<\/td>/gs)];
-        
-        matches.forEach(m => {
-            questions.push({
-                formula: m[1].replace(/<[^>]+>/g, '').trim(),
-                desc: m[2].replace(/<[^>]+>/g, '').trim()
-            });
-        });
-    }
-    return questions;
-}
-
 const modules = [
     { id: "mod_excel_1", title: "Módulo 1: Fundamentos y Entorno", order: 1, courseId: "excel-intermedio" },
     { id: "mod_excel_2", title: "Módulo 2: Herramientas y Fórmulas", order: 2, courseId: "excel-intermedio" },
@@ -92,15 +79,6 @@ const modules = [
 
 const lessons = [];
 const quizzes = [];
-const qPool = getQuestionsPool();
-let qIndex = 0;
-
-function getRandomWrongFormulas(correctFormula, count) {
-    const wrong = qPool.filter(q => q.formula !== correctFormula).map(q => q.formula);
-    // Shuffle
-    wrong.sort(() => 0.5 - Math.random());
-    return wrong.slice(0, count);
-}
 
 let globalLessonOrder = 1;
 
@@ -116,8 +94,6 @@ for (let week = 1; week <= 16; week++) {
     
     // Extract sessions
     const sessions = [...html.matchAll(/<div id="[^"]*" class="sesion">\s*<h2>(.*?)<\/h2>\s*<div class="contenido">([\s\S]*?)<\/div>\s*<\/div>/gi)];
-    
-    let lastLessonId = "";
 
     sessions.forEach(session => {
         let title = session[1].trim();
@@ -138,37 +114,46 @@ for (let week = 1; week <= 16; week++) {
             content: markdownContent
         });
         
-        lastLessonId = lessonId;
-        globalLessonOrder++;
-    });
-
-    // Add Quizz to the LAST week of each module
-    if (week % 4 === 0 && lastLessonId && qPool.length > 0) {
-        const quizQuestions = [];
-        for (let i = 0; i < 4; i++) {
-            if (qIndex >= qPool.length) qIndex = 0; // wrap around just in case
-            const q = qPool[qIndex++];
+        // Parse Quiz from the session html directly if exists
+        const quizStartIndex = contentHtml.indexOf('<div class="quizz-masterclass">');
+        if (quizStartIndex !== -1) {
+            const quizHtml = contentHtml.substring(quizStartIndex);
+            const questions = [];
+            const questionMatches = [...quizHtml.matchAll(/<div class="pregunta" data-respuesta="([^"]+)">([\s\S]*?)<\/ul>\s*<\/div>/gi)];
             
-            const wrongOptions = getRandomWrongFormulas(q.formula, 3);
-            const allOptions = [q.formula, ...wrongOptions];
-            // Shuffle allOptions
-            allOptions.sort(() => 0.5 - Math.random());
-            const correctIdx = allOptions.indexOf(q.formula);
-
-            quizQuestions.push({
-                question: `¿Cuál es la fórmula correcta para: "${q.desc}"?`,
-                options: allOptions,
-                answer: correctIdx,
-                color: ["bg-rose-500", "bg-blue-500", "bg-amber-500", "bg-emerald-500"][i]
+            const colors = ["bg-rose-500", "bg-blue-500", "bg-amber-500", "bg-emerald-500"];
+            
+            questionMatches.forEach((qMatch, idx) => {
+                const answerIdx = parseInt(qMatch[1], 10);
+                const qContent = qMatch[2] + "</ul>"; // Re-add the ul closing tag that was consumed
+                const qTitleMatch = qContent.match(/<p>(.*?)<\/p>/i);
+                const qTitle = qTitleMatch ? qTitleMatch[1].trim() : "Pregunta";
+                
+                const options = [];
+                const optionMatches = [...qContent.matchAll(/<li>(.*?)<\/li>/gi)];
+                optionMatches.forEach(opt => options.push(opt[1].trim()));
+                
+                if (options.length > 0) {
+                    questions.push({
+                        question: qTitle,
+                        options: options,
+                        answer: answerIdx,
+                        color: colors[idx % 4]
+                    });
+                }
             });
+            
+            if (questions.length > 0) {
+                quizzes.push({
+                    lessonId: lessonId,
+                    courseId: "excel-intermedio",
+                    questions: questions
+                });
+            }
         }
         
-        quizzes.push({
-            lessonId: lastLessonId,
-            courseId: "excel-intermedio",
-            questions: quizQuestions
-        });
-    }
+        globalLessonOrder++;
+    });
 }
 
 const finalData = {

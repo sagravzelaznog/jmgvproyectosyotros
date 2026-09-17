@@ -5,11 +5,11 @@ const pm4Dir = 'c:\\Users\\admin\\Documents\\000 A PREPA\\planeaciones especiali
 const outputJSON = path.join(__dirname, 'pm4_firebase_data.json');
 
 const modules = [
-    { id: "pm4-unidad1", courseId: "pm4", order: 1, title: "Unidad I: Conceptos Básicos (Sesiones 1-10)" },
-    { id: "pm4-unidad2", courseId: "pm4", order: 2, title: "Unidad II: Trigonometría y Polinomios (Sesiones 11-20)" },
-    { id: "pm4-unidad3", courseId: "pm4", order: 3, title: "Unidad III: Funciones Cuadráticas y Parábolas (Sesiones 21-30)" },
-    { id: "pm4-unidad4", courseId: "pm4", order: 4, title: "Unidad IV: Secciones Cónicas y Modelado (Sesiones 31-40)" },
-    { id: "pm4-unidad5", courseId: "pm4", order: 5, title: "Unidad V: Análisis Urbano y Cierre (Sesiones 41-50)" }
+    { id: "mod_pm4_1", courseId: "pm4", order: 1, title: "Bloque 1: Geometría Analítica Básica (Sesiones 1 - 10)" },
+    { id: "mod_pm4_2", courseId: "pm4", order: 2, title: "Bloque 2: Rectas y Ángulos (Sesiones 11 - 20)" },
+    { id: "mod_pm4_3", courseId: "pm4", order: 3, title: "Bloque 3: Circunferencia y Parábola (Sesiones 21 - 30)" },
+    { id: "mod_pm4_4", courseId: "pm4", order: 4, title: "Bloque 4: Elipse e Hipérbola (Sesiones 31 - 40)" },
+    { id: "mod_pm4_5", courseId: "pm4", order: 5, title: "Bloque 5: Aplicaciones y Cónicas (Sesiones 41 - 50)" }
 ];
 
 const lessons = [];
@@ -19,11 +19,11 @@ const headingStyle = `class="text-2xl font-black text-transparent bg-clip-text b
 const strongStyle = `class="text-white font-black tracking-wide"`;
 
 function getModuleId(num) {
-    if (num <= 10) return "pm4-unidad1";
-    if (num <= 20) return "pm4-unidad2";
-    if (num <= 30) return "pm4-unidad3";
-    if (num <= 40) return "pm4-unidad4";
-    return "pm4-unidad5";
+    if (num <= 10) return "mod_pm4_1";
+    if (num <= 20) return "mod_pm4_2";
+    if (num <= 30) return "mod_pm4_3";
+    if (num <= 40) return "mod_pm4_4";
+    return "mod_pm4_5";
 }
 
 function convertHtmlToMarkdown(html) {
@@ -47,12 +47,28 @@ function convertHtmlToMarkdown(html) {
 
     // Convert lists
     md = md.replace(/<ul>([\s\S]*?)<\/ul>/gs, (match, items) => {
-        return items.replace(/<li>([\s\S]*?)<\/li>/gs, '- $1\n');
+        return `\n<div class="flex flex-col gap-2 my-4">\n` + 
+               items.replace(/<li>([\s\S]*?)<\/li>/gs, (m, p1) => {
+                   return `<div class="bg-[#14161c] border-l-[3px] border-neon-purple/70 pl-4 py-3 text-gray-300 font-sans shadow-sm hover:bg-[#1a1c23] hover:border-neon-purple transition-colors rounded-r-md">${p1.trim()}</div>\n`;
+               }) + 
+               `</div>\n`;
     });
-    md = md.replace(/<ol>([\s\S]*?)<\/ol>/gs, (match, items) => {
+    md = md.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gs, (match, items) => {
         let count = 1;
-        return items.replace(/<li>([\s\S]*?)<\/li>/gs, () => `${count++}. $1\n`);
+        return `\n<div class="flex flex-col gap-3 my-5">\n` + 
+               items.replace(/<li>([\s\S]*?)<\/li>/gs, (m, p1) => {
+                   const num = count++;
+                   return `<div class="bg-gradient-to-r from-[#101217] to-black border border-gray-800/80 rounded-xl p-4 flex gap-4 items-center shadow-lg hover:border-neon-cyan/60 hover:shadow-[0_0_15px_rgba(0,255,255,0.15)] transition-all transform hover:-translate-y-0.5">
+<div class="flex-shrink-0 bg-[#1a2530] text-neon-cyan font-black w-10 h-10 rounded-full flex items-center justify-center border border-neon-cyan/40 shadow-[0_0_10px_rgba(0,255,255,0.2)]">${num}</div>
+<div class="text-gray-300 font-sans text-base flex-1">${p1.trim()}</div>
+</div>\n`;
+               }) + 
+               `</div>\n`;
     });
+
+    // Convert MathJax to RemarkMath format
+    md = md.replace(/\\\((.*?)\\\)/gs, (match, p1) => '$' + p1 + '$');
+    md = md.replace(/\\\[(.*?)\\\]/gs, (match, p1) => '$$' + p1 + '$$');
 
     // Convert math boxes
     md = md.replace(/<div class="math-box">([\s\S]*?)<\/div>/gs, `\n<div class="formula-box">\n<div class="formula">\n$1\n</div>\n</div>\n`);
@@ -61,8 +77,8 @@ function convertHtmlToMarkdown(html) {
     md = md.replace(/<div class="alert-box">([\s\S]*?)<\/div>/gs, `\n<div class="bg-gradient-to-r from-[#1a1c23] to-black border-2 border-neon-purple border-b-[8px] border-r-[8px] p-6 rounded-2xl shadow-[0_10px_30px_rgba(138,43,226,0.2)] my-6 transform hover:scale-[1.02] transition-transform">\n<h4 class="text-neon-purple font-black uppercase mb-3">Nota Importante</h4>\n<p class="text-white text-lg">$1</p>\n</div>\n`);
 
     // Remove remaining divs but keep content
-    md = md.replace(/<div[^>]*>/gs, '');
-    md = md.replace(/<\/div>/gs, '');
+    // md = md.replace(/<div[^>]*>/gs, '');
+    // md = md.replace(/<\/div>/gs, '');
     
     // Convert sections
     md = md.replace(/<section class="section-card">/gs, '');

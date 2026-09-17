@@ -1,117 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureStore | Centro de Comando</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
-        #authOverlay { backdrop-filter: blur(20px); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Subir Productos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PapaParse para procesar el Excel/CSV en el frontend -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col md:flex-row relative">
+<body class="bg-gray-900 text-white font-sans antialiased min-h-screen flex items-center justify-center">
 
-    <div id="authOverlay" class="absolute inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center text-white transition-opacity duration-500">
-        <i class="fas fa-shield-alt text-6xl text-blue-500 mb-4"></i>
-        <h2 class="text-2xl font-bold tracking-widest uppercase mb-4">Acceso Administrativo</h2>
-        <button id="googleLoginBtn" class="bg-white text-slate-800 font-bold py-3 px-6 rounded-full shadow-lg hover:bg-slate-100 transition-all flex items-center mb-2">
-            <i class="fab fa-google text-red-500 mr-3 text-xl"></i>
-            Iniciar sesión con Google
-        </button>
-        <p id="authErrorMsg" class="text-rose-400 mt-2 text-sm hidden font-semibold">Acceso denegado: No tienes permisos de administrador.</p>
-        <p class="text-slate-500 mt-4 text-xs">Acceso restringido a nivel administrativo</p>
+  <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-2xl border border-gray-700">
+    <div class="flex items-center gap-3 mb-6 border-b border-gray-700 pb-4">
+      <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+      <h1 class="text-2xl font-bold">Importador de Catálogo (Excel/CSV)</h1>
     </div>
 
-    <aside class="w-full md:w-64 bg-slate-900 text-white flex flex-col min-h-screen shadow-2xl z-10">
-        <div class="p-6 border-b border-slate-700/50">
-            <h1 class="text-2xl font-bold text-blue-500"><i class="fas fa-satellite-dish mr-2 text-emerald-400"></i>Secure<span class="text-white">Admin</span></h1>
-        </div>
-        <nav class="flex-grow p-4 space-y-2">
-            <a href="#" class="block px-4 py-3 bg-blue-600 rounded-lg font-semibold flex items-center shadow-lg shadow-blue-500/30">
-                <i class="fas fa-plus-circle w-6"></i> Nuevo Producto
-            </a>
-            <a href="#" class="block px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors flex items-center">
-                <i class="fas fa-boxes w-6"></i> Inventario
-            </a>
-            <a href="#" class="block px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors flex items-center">
-                <i class="fas fa-receipt w-6"></i> Auditoría Pedidos
-            </a>
-        </nav>
-        <div class="p-4 border-t border-slate-700/50">
-            <button id="logoutBtn" class="w-full px-4 py-2 text-rose-400 hover:text-white hover:bg-rose-500/20 rounded-lg transition-colors flex items-center justify-center">
-                <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
-            </button>
-        </div>
-    </aside>
+    <div class="mb-6">
+      <p class="text-gray-400 mb-4 text-sm">Sube tu archivo <span class="text-white font-bold">.csv</span> guardado desde Excel. Asegúrate de respetar las columnas de la plantilla original.</p>
+      
+      <label class="block w-full flex justify-center px-4 py-6 border-2 border-gray-600 border-dashed rounded-md cursor-pointer hover:border-emerald-500 hover:bg-gray-700 transition-colors">
+        <span class="flex items-center space-x-2">
+          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+          <span class="font-medium text-gray-300">Seleccionar archivo Excel/CSV</span>
+        </span>
+        <input type="file" id="csv-file" accept=".csv" class="hidden">
+      </label>
+      <p id="file-name" class="text-emerald-400 text-sm mt-2 text-center font-bold hidden"></p>
+    </div>
 
-    <main class="flex-grow p-8">
-        <header class="mb-8 flex justify-between items-end">
-            <div>
-                <h2 class="text-3xl font-bold text-slate-800">Alta de Catálogo</h2>
-                <p class="text-slate-500 mt-1">Sincronización directa con Firestore y Firebase Storage</p>
-            </div>
-            <div id="adminBadge" class="hidden items-center bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm shadow-sm">
-                <i class="fas fa-check-circle mr-2"></i> Identidad Verificada
-            </div>
-        </header>
+    <div id="preview-section" class="hidden mb-6">
+      <h3 class="text-sm font-bold text-gray-300 mb-2">Vista Previa (<span id="total-rows">0</span> productos encontrados):</h3>
+      <div class="bg-gray-900 rounded p-4 max-h-40 overflow-y-auto text-xs font-mono text-gray-400 border border-gray-700" id="preview-data">
+      </div>
+    </div>
 
-        <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 max-w-4xl">
-            <form id="productForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <div class="col-span-full md:col-span-1">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Nombre del Producto</label>
-                    <input type="text" id="pNombre" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-                </div>
+    <button id="upload-btn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed hidden" disabled>
+      Subir al Servidor Seguro
+    </button>
+  </div>
 
-                <div class="col-span-full md:col-span-1 grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Precio Fijo (USD)</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-3 text-slate-400 font-bold">$</span>
-                            <input type="number" id="pPrecio" step="0.01" min="0" required class="w-full pl-8 pr-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Stock Inicial</label>
-                        <input type="number" id="pStock" min="1" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none">
-                    </div>
-                </div>
+  <script type="module">
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js";
+    import { app } from "./admin-setup.js";
+    
+    const functions = getFunctions(app);
+    let parsedData = [];
 
-                <div class="col-span-full">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Descripción Detallada</label>
-                    <textarea id="pDesc" rows="3" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
-                </div>
+    const fileInput = document.getElementById('csv-file');
+    const fileNameDisplay = document.getElementById('file-name');
+    const previewSection = document.getElementById('preview-section');
+    const previewData = document.getElementById('preview-data');
+    const totalRows = document.getElementById('total-rows');
+    const uploadBtn = document.getElementById('upload-btn');
 
-                <div class="col-span-full">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Fotografía (Archivo Seguro)</label>
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
-                        <div class="space-y-1 text-center">
-                            <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 mb-3"></i>
-                            <div class="flex text-sm text-slate-600 justify-center">
-                                <label for="pImage" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                    <span>Selecciona un archivo</span>
-                                    <input id="pImage" name="pImage" type="file" accept="image/png, image/jpeg" required class="sr-only">
-                                </label>
-                            </div>
-                            <p class="text-xs text-slate-500">PNG o JPG hasta 2MB</p>
-                        </div>
-                    </div>
-                </div>
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-                <div class="col-span-full pt-4 border-t border-slate-100 mt-2">
-                    <button type="submit" id="submitBtn" class="w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-300 flex justify-center items-center group">
-                        <i class="fas fa-database mr-2 group-hover:animate-bounce"></i> Inyectar a Firestore
-                    </button>
-                </div>
-                
-                <div id="statusBox" class="col-span-full hidden p-4 rounded-lg font-medium text-center"></div>
-            </form>
-        </div>
-    </main>
+      fileNameDisplay.textContent = `Archivo cargado: ${file.name}`;
+      fileNameDisplay.classList.remove('hidden');
 
-    <script type="module" src="./admin-setup.js"></script>
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          parsedData = results.data;
+          
+          if(parsedData.length > 0) {
+            totalRows.textContent = parsedData.length;
+            previewData.textContent = JSON.stringify(parsedData.slice(0, 2), null, 2) + "\n... y más.";
+            previewSection.classList.remove('hidden');
+            uploadBtn.classList.remove('hidden');
+            uploadBtn.disabled = false;
+          }
+        },
+        error: function(err) {
+          alert("Error al leer el archivo: " + err.message);
+        }
+      });
+    });
+
+    uploadBtn.addEventListener('click', async () => {
+      try {
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = 'Enviando a Firebase...';
+
+        // Convertir strings a números según el modelo de datos
+        const formattedData = parsedData.map(item => ({
+          name: item.nombre,
+          description: item.descripcion,
+          price: parseInt(item.precio, 10), // en centavos
+          stock: parseInt(item.stock, 10),
+          category: item.categoria,
+          images: [item.imagenUrl],
+          isActive: true
+        }));
+
+        const bulkUpload = httpsCallable(functions, 'bulkUploadProducts');
+        const result = await bulkUpload({ products: formattedData });
+
+        alert(`¡Éxito! ${result.data.count} productos fueron insertados/actualizados.`);
+        window.location.href = "index.html"; // Redirigir a la tienda
+
+      } catch (error) {
+        console.error(error);
+        alert("Error al subir los productos: " + error.message);
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = 'Subir al Servidor Seguro';
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,19 +1,83 @@
-rules_version='2'
+rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read: if true;
-      allow write: if request.auth != null && (request.auth.token.email == 'primomanuel@hotmail.com' || request.auth.token.email == 'primomanuelsagrav@gmail.com');
+
+    // =========================================================================
+    // FUNCIONES DE UTILIDAD (AUDITORÍA DE SEGURIDAD)
+    // =========================================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      // Se recomienda usar Custom Claims gestionados por Cloud Functions (auth.token.admin == true)
+      // Alternativamente, se podría leer la colección de usuarios si el costo de lectura es aceptable
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    // =========================================================================
+    // COLECCIÓN: USERS
+    // =========================================================================
+    match /users/{userId} {
+      // [LECTURA]: Solo el dueño de la cuenta o un administrador pueden leer los datos del perfil.
+      allow read: if isOwner(userId) || isAdmin();
+      
+      // [CREACIÓN]: Permitido SOLO si el ID del documento coincide con el UID del usuario logueado.
+      allow create: if isOwner(userId)
+                    && request.resource.data.keys().hasAll(['uid', 'email', 'role'])
+                    && request.resource.data.role == 'customer'; // Prevención de escalamiento de privilegios
+      
+      // [ACTUALIZACIÓN]: El usuario puede actualizar sus datos (ej. dirección).
+      // PROHIBICIÓN ABSOLUTA: Modificar su rol o su ID de cliente de Stripe.
+      allow update: if isOwner(userId) 
+                    && !request.resource.data.diff(resource.data).affectedKeys()
+                        .hasAny(['role', 'stripeCustomerId', 'uid']);
+      
+      // [BORRADO]: Solo los administradores pueden borrar usuarios definitivamente (Hard Delete).
+      allow delete: if isAdmin();
+      
+      // Subcolección para el Carrito (En caso de usar Firestore para sincronizar el carrito)
+      match /cartItems/{itemId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // =========================================================================
+    // COLECCIÓN: PRODUCTS
+    // =========================================================================
+    match /products/{productId} {
+      // [LECTURA]: Cualquier persona (incluso no autenticados) puede ver productos activos.
+      allow read: if resource.data.isActive == true || isAdmin();
+      
+      // [ESCRITURA]: Precios, inventario y descripciones están bloqueados. Solo Administradores.
+      // Previene la Inyección de Precios desde el cliente (Client-side Spoofing).
+      allow write: if isAdmin();
+    }
+
+    // =========================================================================
+    // COLECCIÓN: ORDERS
+    // =========================================================================
+    match /orders/{orderId} {
+      // [LECTURA]: Privacidad financiera. Un usuario solo puede ver sus propios recibos y pedidos.
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      
+      // [CREACIÓN]: Un usuario puede generar el documento inicial de Pedido ('pending').
+      // Nota de Seguridad: Cloud Functions validará de nuevo los precios reales antes de cobrar, 
+      // por lo que este documento sirve como intención de compra.
+      allow create: if isOwner(request.resource.data.userId)
+                    && request.resource.data.status == 'pending';
+                    
+      // [ACTUALIZACIÓN]: BLOQUEO TOTAL.
+      // Un cliente NO PUEDE alterar el estado de un pedido ('pending' a 'paid').
+      // Solo nuestro entorno Backend seguro (Cloud Functions con Admin SDK) tiene el poder
+      // de saltarse estas reglas y asentar que el pago en Stripe fue exitoso.
+      allow update, delete: if isAdmin();
     }
   }
 }

@@ -53,10 +53,15 @@ function convertHtmlToMarkdown(html) {
     // Clean up empty lines
     md = md.replace(/\n\s*\n\s*\n/g, '\n\n');
     
+    // Remove the quizz block from markdown content so it doesn't render as text
+    md = md.replace(/<div class="quizz-masterclass">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+    md = md.replace(/<div class="quizz-masterclass">[\s\S]*?(?=<\/div>\s*<\/div>|$)/g, ''); // Fallback
+    
     return md.trim();
 }
 
 const lessons = [];
+const quizzes = [];
 
 for (let i = 1; i <= 9; i++) {
     const file = path.join(inputDir, `S${i}.HTML`);
@@ -91,6 +96,44 @@ for (let i = 1; i <= 9; i++) {
     
     const markdownContent = convertHtmlToMarkdown(contentHtml);
     
+    // Parse Quiz from the session html directly if exists
+    const quizStartIndex = contentHtml.indexOf('<div class="quizz-masterclass">');
+    if (quizStartIndex !== -1) {
+        const quizHtml = contentHtml.substring(quizStartIndex);
+        const questions = [];
+        const questionMatches = [...quizHtml.matchAll(/<div class="pregunta" data-respuesta="([^"]+)">([\s\S]*?)<\/ul>\s*<\/div>/gi)];
+        
+        const colors = ["bg-rose-500", "bg-blue-500", "bg-amber-500", "bg-emerald-500"];
+        
+        questionMatches.forEach((qMatch, idx) => {
+            const answerIdx = parseInt(qMatch[1], 10);
+            const qContent = qMatch[2] + "</ul>"; // Re-add the ul closing tag that was consumed
+            const qTitleMatch = qContent.match(/<p>(.*?)<\/p>/i);
+            const qTitle = qTitleMatch ? qTitleMatch[1].trim() : "Pregunta";
+            
+            const options = [];
+            const optionMatches = [...qContent.matchAll(/<li>(.*?)<\/li>/gi)];
+            optionMatches.forEach(opt => options.push(opt[1].trim()));
+            
+            if (options.length > 0) {
+                questions.push({
+                    question: qTitle,
+                    options: options,
+                    answer: answerIdx,
+                    color: colors[idx % 4]
+                });
+            }
+        });
+        
+        if (questions.length > 0) {
+            quizzes.push({
+                lessonId: `lesson_${i}_colab`,
+                courseId: "tuto-colab",
+                questions: questions
+            });
+        }
+    }
+    
     lessons.push({
         id: `lesson_${i}_colab`,
         courseId: "tuto-colab",
@@ -102,7 +145,8 @@ for (let i = 1; i <= 9; i++) {
 }
 
 const finalData = {
-    lessons
+    lessons,
+    quizzes
 };
 
 fs.writeFileSync(outputJSON, JSON.stringify(finalData, null, 2));

@@ -1,6 +1,6 @@
 // admin-setup.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
@@ -24,8 +24,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const app = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
@@ -39,36 +39,21 @@ const statusBox = document.getElementById('statusBox');
 // ============================================================================
 // 2. AUDITORÍA DE ACCESO
 // ============================================================================
-const ADMIN_EMAILS = ["primomanuel@hotmail.com", "primomanuelsagrav@gmail.com"];
-const googleLoginBtn = document.getElementById('googleLoginBtn');
-const authErrorMsg = document.getElementById('authErrorMsg');
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        if (ADMIN_EMAILS.includes(user.email)) {
+        const idTokenResult = await user.getIdTokenResult();
+
+        if (!!idTokenResult.claims.admin) {
             authOverlay.style.opacity = '0';
             setTimeout(() => authOverlay.style.display = 'none', 500);
             adminBadge.style.display = 'flex';
-            authErrorMsg.classList.add('hidden');
         } else {
-            console.warn("Intento de acceso no autorizado registrado:", user.email);
-            authErrorMsg.classList.remove('hidden');
-            authErrorMsg.textContent = `Acceso denegado para: ${user.email}`;
-            await signOut(auth);
+            console.warn("Intento de acceso no autorizado registrado.");
+            window.location.href = "/index.html";
         }
     } else {
-        authOverlay.style.display = 'flex';
-        authOverlay.style.opacity = '1';
-        adminBadge.style.display = 'none';
-    }
-});
-
-googleLoginBtn.addEventListener('click', async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-        await signInWithPopup(auth, provider);
-    } catch (error) {
-        console.error("Error en login:", error);
+        // En un entorno real, redirige al login. Para demostración, asumimos que va al index.
+        window.location.href = "/index.html";
     }
 });
 

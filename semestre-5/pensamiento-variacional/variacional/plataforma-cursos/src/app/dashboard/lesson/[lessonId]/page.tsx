@@ -14,20 +14,28 @@ import { useAuth } from "@/components/providers/AuthProvider";
 
 // Componente memoizado para evitar que GeoGebra iframes se destruyan
 // al re-renderizar el componente padre (scroll, TTS, quizzes, etc.)
-const MemoizedMarkdown = memo(function MarkdownContent({ content }: { content: string }) {
+const MemoizedMarkdown = memo(function MarkdownContent({ content, userId }: { content: string, userId?: string }) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeRaw, rehypeInlineMath, rehypeKatex]}
       components={{
-        iframe: ({ node, ...props }) => (
-          <iframe
-            {...props}
-            style={{ width: '100%', height: '650px', border: 'none', borderRadius: '0.75rem' }}
-            loading="lazy"
-            allow="fullscreen"
-          />
-        ),
+        iframe: ({ node, ...props }) => {
+          let src = props.src as string;
+          if (userId && src && src.startsWith('/courses/')) {
+            const separator = src.includes('?') ? '&' : '?';
+            src = `${src}${separator}uid=${userId}`;
+          }
+          return (
+            <iframe
+              {...props}
+              src={src}
+              style={{ width: '100%', height: '650px', border: 'none', borderRadius: '0.75rem' }}
+              loading="lazy"
+              allow="fullscreen"
+            />
+          );
+        },
       }}
     >
       {content.replace(/^[ \t]+/gm, '')}
@@ -78,6 +86,35 @@ export default function LessonPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Hook para recibir progreso desde iframes (ej: App Divisiones)
+  useEffect(() => {
+    const handleMessage = async (event: MessageEvent) => {
+      if (event.data && event.data.type === 'SAVE_PROGRESS' && user && lessonId) {
+        try {
+          const token = await user.getIdToken();
+          await fetch('/api/user/save-progress', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              lessonId: lessonId as string,
+              score: event.data.score,
+              total: event.data.total
+            })
+          });
+          console.log("✅ Progreso recibido del iframe y guardado en la BD principal.");
+        } catch (error) {
+          console.error("❌ Error guardando progreso del iframe:", error);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [user, lessonId]);
 
   useEffect(() => {
     const fetchLessonAndQuiz = async () => {
@@ -367,7 +404,7 @@ export default function LessonPage() {
             prose-blockquote:border-l-4 prose-blockquote:border-neon-cyan prose-blockquote:bg-neon-cyan/5 prose-blockquote:not-italic prose-blockquote:p-4 prose-blockquote:rounded-r-xl"
           ref={articleRef}
         >
-          <MemoizedMarkdown content={lesson.content || ""} />
+          <MemoizedMarkdown content={lesson.content || ""} userId={user?.uid} />
         </article>
 
         {/* Mini-Quiz Interactivo Estilo Cyberpunk */}

@@ -35,15 +35,7 @@
 
 <body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col items-center font-sans">
 
-    <!-- Barra de Estado de Firebase Auth -->
-    <div class="w-full bg-slate-800 text-slate-200 text-xs px-6 py-2 flex justify-between items-center mb-8 shadow-md">
-        <span id="auth-status" class="font-mono">Firebase: Conectando...</span>
-        <button id="btn-auth-anon"
-            class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded transition-colors hidden font-bold">
-            Ingreso Anónimo para Guardar Progreso
-        </button>
-    </div>
-
+    <!-- Barra de Estado eliminada porque la autenticación es manejada por el padre -->
     <!-- [EL MAQUETADOR UI/UX] - Estructura Principal -->
     <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-200 mb-10">
 
@@ -132,55 +124,17 @@
         </main>
     </div>
 
-    <!-- [EL INGENIERO DE ESTADO] - Lógica Modular y Firebase v10 -->
+    <!-- [EL INGENIERO DE ESTADO] - Lógica Modular sin Firebase -->
     <script type="module">
-        // Importaciones de Firebase SDK v10 Modular
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        // Se ha removido la inicialización de Firebase.
+        // Ahora se respeta el usuario del componente padre (Next.js) pasándolo por URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
 
-        // Configuración de Firebase (Se debe reemplazar con credenciales reales en producción)
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
-            authDomain: "calculointegral-2601b.firebaseapp.com",
-            projectId: "calculointegral-2601b",
-            storageBucket: "calculointegral-2601b.firebasestorage.app",
-            messagingSenderId: "818910932073",
-            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
-        };
-
-        let app, auth, db;
-        let currentUser = null;
-
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-
-            onAuthStateChanged(auth, (user) => {
-                const statusEl = document.getElementById('auth-status');
-                const btnAnon = document.getElementById('btn-auth-anon');
-                if (user) {
-                    currentUser = user;
-                    statusEl.innerHTML = `👤 Usuario ID: <span class="text-emerald-400">${user.uid.substring(0, 6)}...</span>`;
-                    btnAnon.classList.add('hidden');
-                } else {
-                    currentUser = null;
-                    statusEl.innerHTML = `⚠️ Usuario no autenticado (Progreso no se guardará)`;
-                    btnAnon.classList.remove('hidden');
-                }
-            });
-
-            document.getElementById('btn-auth-anon').addEventListener('click', async () => {
-                try {
-                    await signInAnonymously(auth);
-                } catch (error) {
-                    console.error("Error en Auth:", error);
-                }
-            });
-        } catch (error) {
-            console.warn("Firebase no inicializado debido a credenciales demo.", error);
-            document.getElementById('auth-status').innerText = "Modo Local (Sin Base de Datos)";
+        if (uid) {
+            console.log("Sesión detectada desde la plataforma padre con UID:", uid);
+        } else {
+            console.warn("Modo Local o Prueba (No se pasaron parámetros de usuario en la URL)");
         }
 
         // ==========================================
@@ -508,27 +462,20 @@
                     desc.innerText = "Has dominado la división de casita en esta sesión.";
                     document.getElementById('btn-hot-retry').classList.add('hidden'); // No requiere reintento
 
-                    // Guardado en Firebase v10
-                    if (currentUser && db) {
-                        saveStatus.innerText = "Guardando progreso en base de datos...";
-                        saveStatus.classList.remove('opacity-0');
-                        try {
-                            await addDoc(collection(db, "sesiones_division"), {
-                                uid: currentUser.uid,
-                                score: this.score,
-                                timestamp: serverTimestamp(),
-                                sesion: "01"
-                            });
-                            saveStatus.innerText = "✅ Progreso guardado exitosamente.";
-                            saveStatus.classList.add('text-emerald-700');
-                        } catch (e) {
-                            console.error(e);
-                            saveStatus.innerText = "⚠️ Error al guardar en Firebase.";
-                            saveStatus.classList.add('text-rose-600');
-                        }
+                    // Enviar progreso al padre mediante postMessage
+                    saveStatus.classList.remove('opacity-0');
+                    if (uid || window.parent) {
+                        saveStatus.innerText = "Enviando progreso a la plataforma...";
+                        saveStatus.classList.add('text-indigo-700');
+                        window.parent.postMessage({
+                            type: 'SAVE_PROGRESS',
+                            score: this.score,
+                            total: this.maxRounds
+                        }, '*');
+                        saveStatus.innerText = "✅ Progreso enviado correctamente.";
+                        saveStatus.classList.add('text-emerald-700');
                     } else {
-                        saveStatus.innerText = "⚠️ Sesión completada, pero no hay base de datos conectada para guardar.";
-                        saveStatus.classList.remove('opacity-0');
+                        saveStatus.innerText = "⚠️ Modo local: progreso no guardado.";
                     }
                 } else {
                     box.className = "w-full p-8 rounded-xl text-center shadow-sm border-2 bg-rose-50 border-rose-200 text-rose-900";

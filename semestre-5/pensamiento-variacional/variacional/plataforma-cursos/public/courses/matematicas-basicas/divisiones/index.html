@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de División - Sesión 01</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Utilidades para ocultar flechas de los input type number y ajustes base */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Ocultar el marcador por defecto del details en algunos navegadores */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .math-font {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col items-center font-sans">
+
+    <!-- Barra de Estado de Firebase Auth -->
+    <div class="w-full bg-slate-800 text-slate-200 text-xs px-6 py-2 flex justify-between items-center mb-8 shadow-md">
+        <span id="auth-status" class="font-mono">Firebase: Conectando...</span>
+        <button id="btn-auth-anon"
+            class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded transition-colors hidden font-bold">
+            Ingreso Anónimo para Guardar Progreso
+        </button>
+    </div>
+
+    <!-- [EL MAQUETADOR UI/UX] - Estructura Principal -->
+    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-200 mb-10">
+
+        <header class="mb-8 text-center border-b border-slate-200 pb-6">
+            <h1 class="text-4xl font-extrabold text-indigo-700 mb-2 tracking-tight">División de Casita</h1>
+            <p class="text-slate-500 font-medium">Algoritmo Estándar Paso a Paso</p>
+
+            <div class="mt-4 flex justify-center gap-4 text-sm font-semibold">
+                <span class="bg-indigo-100 text-indigo-800 px-4 py-1.5 rounded-full shadow-sm"
+                    id="ui-round-counter">Ronda: 1 / 5</span>
+                <span
+                    class="bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full shadow-sm transition-all duration-300"
+                    id="ui-score">Puntaje: 0%</span>
+            </div>
+        </header>
+
+        <main id="app-container" class="flex flex-col items-center w-full">
+
+            <!-- Contenedor Visual de la Casita -->
+            <div id="casita-wrapper" class="w-full flex flex-col items-center mb-10">
+                <div id="casita-renderer"
+                    class="math-font text-2xl bg-white p-8 rounded-xl border-2 border-slate-100 min-h-[200px] w-full flex justify-center items-start overflow-x-auto shadow-inner">
+                    <!-- DOM Inyectado por UIRenderer -->
+                </div>
+
+                <!-- Contenedor del Acordeón de Pasos -->
+                <div id="steps-accordion-container" class="w-full max-w-lg mt-6 hidden">
+                    <!-- Acordeón Inyectado por UIRenderer -->
+                </div>
+            </div>
+
+            <!-- Interfaz de Captura de Resultados -->
+            <div id="user-input-section"
+                class="w-full max-w-lg bg-indigo-50 p-8 rounded-xl shadow-sm flex flex-col gap-6 border border-indigo-100 transition-all duration-300 relative overflow-hidden">
+
+                <!-- Overlay de Resultado de Ejercicio (Inyectado dinámicamente) -->
+                <div id="exercise-feedback"
+                    class="absolute inset-0 bg-white/95 z-10 flex-col items-center justify-center p-6 hidden backdrop-blur-sm">
+                    <h4 id="feedback-title" class="text-2xl font-bold mb-2 text-center"></h4>
+                    <p id="feedback-subtitle" class="text-slate-600 text-center mb-6 font-medium"></p>
+                    <button id="btn-next-round"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md text-lg">
+                        Siguiente Ejercicio ➔
+                    </button>
+                </div>
+
+                <h3 class="font-bold text-xl text-indigo-900 text-center">Ingresa tu Resultado Final</h3>
+
+                <div class="flex gap-6">
+                    <div class="flex-1">
+                        <label for="input-quotient" class="block text-sm font-bold text-indigo-700 mb-2">Cociente
+                            (Resultado)</label>
+                        <input type="number" id="input-quotient"
+                            class="w-full px-4 py-3 border-2 border-indigo-200 rounded-lg focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 outline-none transition-all text-lg font-bold text-slate-700"
+                            placeholder="Ej. 42">
+                    </div>
+                    <div class="flex-1">
+                        <label for="input-remainder" class="block text-sm font-bold text-indigo-700 mb-2">Residuo
+                            (Sobrante)</label>
+                        <input type="number" id="input-remainder"
+                            class="w-full px-4 py-3 border-2 border-indigo-200 rounded-lg focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 outline-none transition-all text-lg font-bold text-slate-700"
+                            placeholder="Ej. 3">
+                    </div>
+                </div>
+
+                <button id="btn-submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md mt-2 text-lg">
+                    Calificar Ejercicio
+                </button>
+            </div>
+
+            <!-- Pantalla Final y Botón de Reintento en Caliente -->
+            <div id="final-screen" class="w-full max-w-lg hidden flex-col items-center gap-6 mt-4">
+                <div id="final-message-box" class="w-full p-8 rounded-xl text-center shadow-sm border-2">
+                    <h2 id="final-title" class="text-3xl font-extrabold mb-3"></h2>
+                    <p id="final-desc" class="text-lg font-medium"></p>
+                    <p id="firebase-save-status"
+                        class="text-sm mt-4 font-bold opacity-0 transition-opacity duration-500"></p>
+                </div>
+                <button id="btn-hot-retry"
+                    class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-lg transition-colors shadow-md text-xl">
+                    Reintento en Caliente 🔄
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- [EL INGENIERO DE ESTADO] - Lógica Modular y Firebase v10 -->
+    <script type="module">
+        // Importaciones de Firebase SDK v10 Modular
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Configuración de Firebase (Se debe reemplazar con credenciales reales en producción)
+        const firebaseConfig = {
+            apiKey: "AIzaSy_REPLACE_WITH_REAL_KEY",
+            authDomain: "division-app-demo.firebaseapp.com",
+            projectId: "division-app-demo",
+            storageBucket: "division-app-demo.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        let app, auth, db;
+        let currentUser = null;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            onAuthStateChanged(auth, (user) => {
+                const statusEl = document.getElementById('auth-status');
+                const btnAnon = document.getElementById('btn-auth-anon');
+                if (user) {
+                    currentUser = user;
+                    statusEl.innerHTML = `👤 Usuario ID: <span class="text-emerald-400">${user.uid.substring(0, 6)}...</span>`;
+                    btnAnon.classList.add('hidden');
+                } else {
+                    currentUser = null;
+                    statusEl.innerHTML = `⚠️ Usuario no autenticado (Progreso no se guardará)`;
+                    btnAnon.classList.remove('hidden');
+                }
+            });
+
+            document.getElementById('btn-auth-anon').addEventListener('click', async () => {
+                try {
+                    await signInAnonymously(auth);
+                } catch (error) {
+                    console.error("Error en Auth:", error);
+                }
+            });
+        } catch (error) {
+            console.warn("Firebase no inicializado debido a credenciales demo.", error);
+            document.getElementById('auth-status').innerText = "Modo Local (Sin Base de Datos)";
+        }
+
+        // ==========================================
+        // MOTOR MATEMÁTICO
+        // ==========================================
+        const MathEngine = {
+            state: {
+                currentDividend: 0,
+                currentDivisor: 0,
+                expectedQuotient: 0,
+                expectedRemainder: 0,
+                digitsDividend: 0,
+                digitsDivisor: 0,
+                steps: [],
+                visualQuotient: ""
+            },
+
+            getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            generateNumberByDigits(minDigits, maxDigits) {
+                const targetDigits = this.getRandomInt(minDigits, maxDigits);
+                const minVal = Math.pow(10, targetDigits - 1);
+                const maxVal = Math.pow(10, targetDigits) - 1;
+                return this.getRandomInt(minVal, maxVal);
+            },
+
+            generateExercise() {
+                this.state.currentDividend = this.generateNumberByDigits(2, 8);
+                this.state.currentDivisor = this.getRandomInt(2, 999);
+
+                if (this.state.currentDividend < this.state.currentDivisor) {
+                    const temp = this.state.currentDividend;
+                    this.state.currentDividend = this.state.currentDivisor;
+                    this.state.currentDivisor = temp;
+                }
+
+                this.state.expectedQuotient = Math.floor(this.state.currentDividend / this.state.currentDivisor);
+                this.state.expectedRemainder = this.state.currentDividend % this.state.currentDivisor;
+                this.state.digitsDividend = this.state.currentDividend.toString().length;
+                this.state.digitsDivisor = this.state.currentDivisor.toString().length;
+
+                this.calculateSteps();
+            },
+
+            calculateSteps() {
+                let dividendStr = this.state.currentDividend.toString();
+                let divisorInt = this.state.currentDivisor;
+                let steps = [];
+                let currentStr = "";
+                let quotientStr = "";
+                let remainderStr = "";
+
+                for (let i = 0; i < dividendStr.length; i++) {
+                    currentStr += dividendStr[i];
+                    let currentInt = parseInt(currentStr);
+
+                    if (currentInt < divisorInt) {
+                        if (quotientStr.length > 0) {
+                            quotientStr += "0";
+                            steps.push({ type: 'pull', visualCurrent: currentStr, qDigit: 0, endPos: i });
+                        } else {
+                            quotientStr += " ";
+                        }
+                        continue;
+                    }
+
+                    let qDigit = Math.floor(currentInt / divisorInt);
+                    quotientStr += qDigit.toString();
+
+                    let subtractValue = qDigit * divisorInt;
+                    let remInt = currentInt - subtractValue;
+                    remainderStr = remInt.toString();
+
+                    steps.push({
+                        type: 'divide',
+                        visualCurrent: currentStr,
+                        visualSubtract: subtractValue.toString(),
+                        visualRemainder: remainderStr,
+                        qDigit: qDigit,
+                        endPos: i
+                    });
+
+                    currentStr = remainderStr === "0" ? "" : remainderStr;
+                }
+
+                if (currentStr === "" && remainderStr === "0") { currentStr = "0"; }
+                this.state.steps = steps;
+                this.state.visualQuotient = quotientStr;
+            }
+        };
+
+        // ==========================================
+        // MAQUETADOR UI/UX
+        // ==========================================
+        const UIRenderer = {
+            renderRow(valStr, endPos, isSub, dividendLen) {
+                let chars = new Array(dividendLen).fill(' ');
+                let start = endPos - valStr.length + 1;
+
+                for (let i = 0; i < valStr.length; i++) { chars[start + i] = valStr[i]; }
+
+                let divisorSpacer = String(MathEngine.state.currentDivisor).split('').map(() => `<span class="inline-block w-5"></span>`).join('');
+
+                let htmlSpans = chars.map((c, idx) => {
+                    let underlineClass = (isSub && idx >= start && idx <= endPos) ? 'border-b-2 border-slate-700' : 'border-b-2 border-transparent';
+                    let content = c === ' ' ? '&nbsp;' : c;
+                    return `<span class="inline-block w-5 text-center font-bold tracking-widest ${underlineClass}">${content}</span>`;
+                }).join('');
+
+                return `
+                <div class="flex w-full text-slate-600 mb-1">
+                    <div class="flex">${divisorSpacer}</div>
+                    <div class="border-l-2 border-transparent pl-1 flex">
+                        ${htmlSpans}
+                    </div>
+                </div>`;
+            },
+
+            renderCasita() {
+                let divisorChars = String(MathEngine.state.currentDivisor).split('').map(c => `<span class="inline-block w-5 text-center font-bold tracking-widest text-slate-800">${c}</span>`).join('');
+                let dividendChars = String(MathEngine.state.currentDividend).split('').map(c => `<span class="inline-block w-5 text-center font-bold tracking-widest text-slate-800">${c}</span>`).join('');
+                let quotientChars = MathEngine.state.visualQuotient.split('').map(c => {
+                    let content = c === ' ' ? '&nbsp;' : c;
+                    return `<span class="inline-block w-5 text-center font-bold tracking-widest text-transparent transition-colors duration-700 q-reveal">${content}</span>`;
+                }).join('');
+
+                let spacer = String(MathEngine.state.currentDivisor).split('').map(() => `<span class="inline-block w-5"></span>`).join('');
+                let remaindersHtml = [];
+                let firstDivideSeen = false;
+
+                for (let i = 0; i < MathEngine.state.steps.length; i++) {
+                    let step = MathEngine.state.steps[i];
+                    if (!firstDivideSeen) {
+                        if (step.type === 'divide') {
+                            firstDivideSeen = true;
+                            remaindersHtml.push(this.renderRow(step.visualSubtract, step.endPos, true, MathEngine.state.digitsDividend));
+                            if (i === MathEngine.state.steps.length - 1) {
+                                remaindersHtml.push(this.renderRow(step.visualRemainder, step.endPos, false, MathEngine.state.digitsDividend));
+                            }
+                        }
+                    } else {
+                        remaindersHtml.push(this.renderRow(step.visualCurrent, step.endPos, false, MathEngine.state.digitsDividend));
+                        if (step.type === 'divide') {
+                            remaindersHtml.push(this.renderRow(step.visualSubtract, step.endPos, true, MathEngine.state.digitsDividend));
+                            if (i === MathEngine.state.steps.length - 1) {
+                                remaindersHtml.push(this.renderRow(step.visualRemainder, step.endPos, false, MathEngine.state.digitsDividend));
+                            }
+                        }
+                    }
+                }
+
+                const html = `
+                    <div class="flex flex-col items-start select-none">
+                        <div class="flex mb-1">
+                            <div class="flex">${spacer}</div>
+                            <div class="border-l-2 border-transparent pl-1 flex">${quotientChars}</div>
+                        </div>
+                        <div class="flex mb-1">
+                            <div class="flex text-right mr-1">${divisorChars}</div>
+                            <div class="border-l-2 border-t-2 border-slate-700 pl-1 flex">${dividendChars}</div>
+                        </div>
+                        <div id="casita-remainders" class="hidden flex-col w-full opacity-0 transition-opacity duration-700">
+                            ${remaindersHtml.join('')}
+                        </div>
+                    </div>`;
+
+                document.getElementById('casita-renderer').innerHTML = html;
+            },
+
+            renderAccordion() {
+                let stepsHtml = MathEngine.state.steps.map((step, idx) => {
+                    let desc = '';
+                    if (step.type === 'divide') {
+                        desc = `<p class="text-slate-600">Tomamos el <b class="text-slate-800">${step.visualCurrent}</b>. Dividimos ${step.visualCurrent} ÷ ${MathEngine.state.currentDivisor} = <b class="text-indigo-600">${step.qDigit}</b>. Multiplicamos ${step.qDigit} × ${MathEngine.state.currentDivisor} = <b class="text-rose-600">${step.visualSubtract}</b>. Restamos y sobran <b class="text-emerald-600">${step.visualRemainder}</b>.</p>`;
+                    } else {
+                        desc = `<p class="text-slate-600">Bajamos el siguiente dígito, formando el <b class="text-slate-800">${step.visualCurrent}</b>. Como es menor que el divisor, agregamos <b class="text-indigo-600">0</b> al cociente.</p>`;
+                    }
+                    return `
+                    <li class="mb-3 p-4 bg-white rounded-lg border border-slate-100 shadow-sm">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2 block">Paso ${idx + 1}</span>
+                        ${desc}
+                    </li>`;
+                }).join('');
+
+                const html = `
+                <details class="w-full bg-slate-50 border border-slate-200 rounded-xl group cursor-pointer transition-all shadow-sm">
+                    <summary class="font-bold text-slate-700 p-5 select-none hover:bg-slate-100 rounded-xl group-open:rounded-b-none group-open:border-b border-slate-200 flex justify-between items-center transition-colors">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Ver explicación paso a paso
+                        </span>
+                        <span class="transform group-open:rotate-180 transition-transform duration-300 text-indigo-500">▼</span>
+                    </summary>
+                    <div class="p-5 bg-slate-50 rounded-b-xl border-t border-slate-100">
+                        <ol class="list-none m-0 p-0">${stepsHtml}</ol>
+                    </div>
+                </details>`;
+                document.getElementById('steps-accordion-container').innerHTML = html;
+            },
+
+            revealSolution() {
+                document.querySelectorAll('.q-reveal').forEach(el => {
+                    el.classList.remove('text-transparent');
+                    el.classList.add('text-indigo-700');
+                });
+
+                const remainders = document.getElementById('casita-remainders');
+                remainders.classList.remove('hidden');
+                setTimeout(() => remainders.classList.remove('opacity-0'), 50);
+
+                document.getElementById('steps-accordion-container').classList.remove('hidden');
+
+                // Mostrar overlay de feedback
+                const feedback = document.getElementById('exercise-feedback');
+                feedback.classList.remove('hidden');
+                feedback.classList.add('flex');
+            },
+
+            updateTopBar(round, maxRounds, score) {
+                document.getElementById('ui-round-counter').innerText = `Ronda: ${round} / ${maxRounds}`;
+                document.getElementById('ui-score').innerText = `Puntaje: ${score}%`;
+            },
+
+            cleanInputs() {
+                document.getElementById('input-quotient').value = "";
+                document.getElementById('input-remainder').value = "";
+                const feedback = document.getElementById('exercise-feedback');
+                feedback.classList.add('hidden');
+                feedback.classList.remove('flex');
+            }
+        };
+
+        // ==========================================
+        // CONTROLADOR DE ESTADO (Flujo de la Sesión)
+        // ==========================================
+        const AppController = {
+            currentRound: 1,
+            maxRounds: 5,
+            score: 0,
+
+            init() {
+                this.startRound();
+                this.bindEvents();
+            },
+
+            startRound() {
+                MathEngine.generateExercise();
+                UIRenderer.renderCasita();
+                UIRenderer.renderAccordion();
+                UIRenderer.cleanInputs();
+                UIRenderer.updateTopBar(this.currentRound, this.maxRounds, this.score);
+            },
+
+            bindEvents() {
+                document.getElementById('btn-submit').addEventListener('click', () => this.evaluateExercise());
+                document.getElementById('btn-next-round').addEventListener('click', () => this.nextStep());
+                document.getElementById('btn-hot-retry').addEventListener('click', () => this.hotRetry());
+            },
+
+            evaluateExercise() {
+                const qInput = document.getElementById('input-quotient').value;
+                const rInput = document.getElementById('input-remainder').value;
+
+                if (qInput === "" || rInput === "") {
+                    alert("Por favor ingresa ambos valores.");
+                    return;
+                }
+
+                const userQ = parseInt(qInput);
+                const userR = parseInt(rInput);
+                const actualQ = MathEngine.state.expectedQuotient;
+                const actualR = MathEngine.state.expectedRemainder;
+
+                let pointsEarned = 0;
+                let title = "";
+                let subtitle = "";
+
+                if (userQ === actualQ && userR === actualR) {
+                    pointsEarned = 20; // 5 rondas * 20 pts = 100%
+                    title = "¡Excelente! 🌟";
+                    subtitle = `Respuesta perfecta. Ganaste 20 puntos.`;
+                    document.getElementById('feedback-title').className = "text-3xl font-bold mb-2 text-emerald-600 text-center";
+                } else {
+                    title = "¡Casi! 💡";
+                    subtitle = `El cociente era ${actualQ} y el residuo ${actualR}.`;
+                    document.getElementById('feedback-title').className = "text-3xl font-bold mb-2 text-rose-600 text-center";
+                }
+
+                this.score += pointsEarned;
+                UIRenderer.updateTopBar(this.currentRound, this.maxRounds, this.score);
+
+                document.getElementById('feedback-title').innerText = title;
+                document.getElementById('feedback-subtitle').innerText = subtitle;
+
+                UIRenderer.revealSolution();
+            },
+
+            async nextStep() {
+                if (this.currentRound < this.maxRounds) {
+                    this.currentRound++;
+                    this.startRound();
+                } else {
+                    this.finishSession();
+                }
+            },
+
+            async finishSession() {
+                document.getElementById('user-input-section').classList.add('hidden');
+                document.getElementById('casita-wrapper').classList.add('hidden');
+
+                const finalScreen = document.getElementById('final-screen');
+                const title = document.getElementById('final-title');
+                const desc = document.getElementById('final-desc');
+                const box = document.getElementById('final-message-box');
+                const saveStatus = document.getElementById('firebase-save-status');
+
+                finalScreen.classList.remove('hidden');
+                finalScreen.classList.add('flex');
+
+                if (this.score >= 80) {
+                    box.className = "w-full p-8 rounded-xl text-center shadow-sm border-2 bg-emerald-50 border-emerald-200 text-emerald-900";
+                    title.innerText = `¡Aprobado! (${this.score}%) 🎓`;
+                    desc.innerText = "Has dominado la división de casita en esta sesión.";
+                    document.getElementById('btn-hot-retry').classList.add('hidden'); // No requiere reintento
+
+                    // Guardado en Firebase v10
+                    if (currentUser && db) {
+                        saveStatus.innerText = "Guardando progreso en base de datos...";
+                        saveStatus.classList.remove('opacity-0');
+                        try {
+                            await addDoc(collection(db, "sesiones_division"), {
+                                uid: currentUser.uid,
+                                score: this.score,
+                                timestamp: serverTimestamp(),
+                                sesion: "01"
+                            });
+                            saveStatus.innerText = "✅ Progreso guardado exitosamente.";
+                            saveStatus.classList.add('text-emerald-700');
+                        } catch (e) {
+                            console.error(e);
+                            saveStatus.innerText = "⚠️ Error al guardar en Firebase.";
+                            saveStatus.classList.add('text-rose-600');
+                        }
+                    } else {
+                        saveStatus.innerText = "⚠️ Sesión completada, pero no hay base de datos conectada para guardar.";
+                        saveStatus.classList.remove('opacity-0');
+                    }
+                } else {
+                    box.className = "w-full p-8 rounded-xl text-center shadow-sm border-2 bg-rose-50 border-rose-200 text-rose-900";
+                    title.innerText = `Sesión Reprobada (${this.score}%) 📉`;
+                    desc.innerText = "Necesitas un mínimo del 80% para registrar la práctica. Revisa tus procedimientos.";
+                    document.getElementById('btn-hot-retry').classList.remove('hidden');
+                }
+            },
+
+            hotRetry() {
+                // Reintento en caliente: Reseteo total sin recargar página
+                this.score = 0;
+                this.currentRound = 1;
+
+                document.getElementById('final-screen').classList.add('hidden');
+                document.getElementById('final-screen').classList.remove('flex');
+                document.getElementById('user-input-section').classList.remove('hidden');
+                document.getElementById('casita-wrapper').classList.remove('hidden');
+
+                const saveStatus = document.getElementById('firebase-save-status');
+                saveStatus.classList.add('opacity-0');
+                saveStatus.className = "text-sm mt-4 font-bold opacity-0 transition-opacity duration-500";
+
+                this.startRound();
+            }
+        };
+
+        // Bootstrap inicial
+        document.addEventListener('DOMContentLoaded', () => {
+            AppController.init();
+        });
+    </script>
+</body>
+
+</html>

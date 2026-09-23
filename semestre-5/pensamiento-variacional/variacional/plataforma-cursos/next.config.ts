@@ -44,8 +44,8 @@ const nextConfig: NextConfig = {
               // Workers y media
               "worker-src 'self' blob:",
               "media-src 'self' blob: https:",
-              // GeoGebra carga objetos desde su CDN
-              "object-src 'none'",
+              // GeoGebra carga objetos desde su CDN y los PDF requieren object-src
+              "object-src 'self'",
             ].join("; "),
           },
           {

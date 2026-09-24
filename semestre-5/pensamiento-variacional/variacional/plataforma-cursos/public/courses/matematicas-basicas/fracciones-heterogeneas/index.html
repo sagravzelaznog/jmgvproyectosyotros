@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fracciones Heterogéneas: Método Mariposa - Sesión 07</title>
+
+    <!-- Tailwind CSS (vía CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <!-- KaTeX Auto-render Extension -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        /* Ocultar controles de incremento/decremento en inputs numéricos */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Ocultar la flecha por defecto del acordeón */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Animaciones base */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Barra de estado eliminada (Auth manejado por plataforma principal) -->
+
+    <!-- [EL MAQUETADOR UI/UX] - Estructura Base -->
+    <div class="flex-grow flex flex-col items-center py-10 px-4 w-full">
+        <div class="max-w-6xl w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-200 mb-6">
+
+            <header class="mb-10 text-center border-b border-slate-200 pb-8">
+                <div class="inline-flex items-center justify-center p-3 bg-indigo-100 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
+                        </path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-extrabold text-indigo-800 mb-3 tracking-tight">Fracciones Heterogéneas: Método
+                    Mariposa</h1>
+                <p class="text-slate-500 font-medium text-lg max-w-2xl mx-auto">Calcula los productos cruzados (alas de
+                    la mariposa), el denominador común (base) y escribe tu resultado final para cada uno de los 10
+                    ejercicios.</p>
+            </header>
+
+            <!-- Contenedor Principal (Inyectado por AppController) -->
+            <main id="app-container" class="w-full flex flex-col gap-10">
+                <!-- El DOM dinámico se renderiza aquí -->
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Footer Dinámico Requerido -->
+    <footer
+        class="bg-slate-900 text-slate-400 text-center py-5 text-sm font-semibold tracking-widest w-full mt-auto shadow-inner border-t-4 border-indigo-900">
+        JMGV-PTEL 2026. TSF MC 07. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <!-- [EL INGENIERO DE ESTADO] - Lógica Modular sin Firebase -->
+    <script type="module">
+        // Se respeta el usuario del componente padre (Next.js) pasándolo por URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+
+        if (uid) {
+            console.log("Sesión detectada desde la plataforma padre con UID:", uid);
+        } else {
+            console.warn("Modo Local o Prueba (No se pasaron parámetros de usuario en la URL)");
+        }
+
+        // Configuración global de KaTeX
+        window.initMathEngine = function () {
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.getElementById('app-container'), {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    output: 'html'
+                });
+            } else {
+                setTimeout(window.initMathEngine, 50);
+            }
+        };
+
+        // [EL MOTOR MATEMÁTICO]
+        const MathEngine = {
+            exercises: [],
+
+            getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            generateExercises() {
+                this.exercises = [];
+                // Generar exactamente 10 ejercicios: 5 sumas y 5 restas
+                for (let i = 0; i < 10; i++) {
+                    const isAddition = i < 5;
+                    const op = isAddition ? '+' : '-';
+                    const opTitle = isAddition ? 'Suma' : 'Resta';
+
+                    let b = this.getRandomInt(2, 12);
+                    let d = this.getRandomInt(2, 12);
+                    while (b === d) { // Garantizar fracciones heterogéneas
+                        d = this.getRandomInt(2, 12);
+                    }
+
+                    let a = this.getRandomInt(1, 15);
+                    let c = this.getRandomInt(1, 15);
+
+                    let leftWing = a * d;
+                    let rightWing = b * c;
+
+                    // REGLA MATEMÁTICA CRÍTICA: En resta, a*d >= b*c
+                    if (!isAddition && leftWing < rightWing) {
+                        let tempA = a, tempB = b;
+                        a = c; b = d;
+                        c = tempA; d = tempB;
+                        leftWing = a * d;
+                        rightWing = b * c;
+                    }
+
+                    let baseDenom = b * d;
+                    let finalNum = isAddition ? (leftWing + rightWing) : (leftWing - rightWing);
+                    let finalDenom = baseDenom;
+
+                    this.exercises.push({
+                        id: i,
+                        opTitle: opTitle,
+                        a, b, c, d, op,
+                        leftWing, rightWing, baseDenom, finalNum, finalDenom,
+                        latexQuestion: `$$\\frac{${a}}{${b}} ${op} \\frac{${c}}{${d}}$$`,
+                        latexStep: `$$\\frac{${a}}{${b}} ${op} \\frac{${c}}{${d}} = \\frac{(${a} \\times ${d}) ${op} (${b} \\times ${c})}{${b} \\times ${d}} = \\frac{${leftWing} ${op} ${rightWing}}{${baseDenom}} = \\frac{${finalNum}}{${finalDenom}}$$`,
+                    });
+                }
+            }
+        };
+
+        // [EL MAQUETADOR UI/UX & INGENIERO DE ESTADO]
+        const AppController = {
+            init() {
+                this.hotRetry();
+            },
+
+            render() {
+                const container = document.getElementById('app-container');
+                let html = '<div class="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full fade-in">';
+
+                MathEngine.exercises.forEach((ex, idx) => {
+                    let badgeColor = ex.op === '+' ? 'bg-indigo-100 text-indigo-800' : 'bg-rose-100 text-rose-800';
+
+                    html += `
+                    <div id="card-${ex.id}" class="bg-white border-2 border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col items-center relative overflow-hidden transition-all duration-300">
+                        <span class="absolute top-0 left-0 ${badgeColor} text-xs font-bold px-4 py-1 rounded-br-lg">Ejercicio ${idx + 1} (${ex.opTitle})</span>
+                        
+                        <!-- Área de Pregunta (KaTeX) -->
+                        <div class="mt-8 mb-4 text-3xl w-full text-center min-h-[4rem] flex items-center justify-center text-slate-800">
+                            ${ex.latexQuestion}
+                        </div>
+                        
+                        <!-- Inputs Método Mariposa -->
+                        <div class="flex items-center justify-center gap-2 md:gap-4 w-full my-4 bg-slate-50 p-4 md:p-6 rounded-xl border border-slate-200">
+                            
+                            <!-- Productos Cruzados y Base -->
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="flex items-center gap-2 md:gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-[10px] text-slate-500 font-bold uppercase mb-1">Ala Izq.</span>
+                                        <input type="number" id="left-${ex.id}" class="w-14 md:w-20 text-center border-2 border-indigo-200 rounded-lg py-2 font-bold text-indigo-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-inner" placeholder="a×d">
+                                    </div>
+                                    <span class="font-extrabold text-slate-400 text-2xl mt-4">${ex.op}</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-[10px] text-slate-500 font-bold uppercase mb-1">Ala Der.</span>
+                                        <input type="number" id="right-${ex.id}" class="w-14 md:w-20 text-center border-2 border-indigo-200 rounded-lg py-2 font-bold text-indigo-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-inner" placeholder="b×c">
+                                    </div>
+                                </div>
+                                <hr class="w-full border-[1.5px] border-slate-700 rounded-full my-1">
+                                <div class="flex flex-col items-center w-full">
+                                    <input type="number" id="base-${ex.id}" class="w-24 md:w-32 text-center border-2 border-indigo-200 rounded-lg py-2 font-bold text-indigo-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all shadow-inner" placeholder="Base">
+                                </div>
+                            </div>
+                            
+                            <span class="font-extrabold text-slate-400 text-3xl mx-1 md:mx-4">=</span>
+                            
+                            <!-- Resultado Final -->
+                            <div class="flex flex-col items-center gap-2">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[10px] text-emerald-600 font-bold uppercase mb-1">Final</span>
+                                    <input type="number" id="ans-num-${ex.id}" class="w-16 md:w-20 text-center border-2 border-emerald-300 rounded-lg py-2 font-bold text-emerald-700 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none transition-all shadow-inner" placeholder="Num">
+                                </div>
+                                <hr class="w-full border-[1.5px] border-slate-700 rounded-full">
+                                <input type="number" id="ans-den-${ex.id}" class="w-16 md:w-20 text-center border-2 border-emerald-300 rounded-lg py-2 font-bold text-emerald-700 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none transition-all shadow-inner" placeholder="Den">
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Acordeón Explicativo -->
+                        <details id="accordion-${ex.id}" class="w-full bg-white border border-slate-200 rounded-xl group cursor-pointer transition-all hidden mt-auto">
+                            <summary class="font-bold text-sm text-slate-700 p-4 select-none hover:bg-slate-50 rounded-xl group-open:rounded-b-none group-open:border-b border-slate-200 flex justify-between items-center transition-colors">
+                                <span class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Ver desarrollo paso a paso
+                                </span>
+                                <span class="transform group-open:rotate-180 transition-transform duration-300 text-indigo-500 font-bold">▼</span>
+                            </summary>
+                            <div class="p-5 bg-slate-50 flex justify-center text-xl overflow-x-auto text-slate-800 rounded-b-xl">
+                                ${ex.latexStep}
+                            </div>
+                        </details>
+                    </div>
+                    `;
+                });
+
+                html += '</div>';
+
+                // Panel de Evaluación
+                html += `
+                <div class="w-full flex flex-col items-center gap-6 mt-8 border-t-2 border-dashed border-slate-200 pt-8 fade-in">
+                    <button id="btn-submit" class="w-full max-w-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-5 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl text-2xl transform hover:-translate-y-1">
+                        ✅ Calificar Práctica (10 Ejercicios)
+                    </button>
+                    
+                    <div id="results-panel" class="w-full max-w-2xl text-center hidden flex-col items-center gap-4 p-8 rounded-2xl border-2 transition-all">
+                        <h3 id="score-display" class="text-4xl font-extrabold"></h3>
+                        <p id="score-message" class="text-xl font-medium"></p>
+                        <p id="firebase-status" class="text-sm font-bold opacity-0 transition-opacity duration-500"></p>
+                        <button id="btn-hot-retry" class="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-colors shadow-md text-xl hidden">
+                            🔄 Reintento en Caliente
+                        </button>
+                    </div>
+                </div>
+                `;
+
+                container.innerHTML = html;
+                window.initMathEngine();
+                this.bindEvents();
+            },
+
+            bindEvents() {
+                document.getElementById('btn-submit').addEventListener('click', () => this.evaluate());
+                document.getElementById('btn-hot-retry').addEventListener('click', () => this.hotRetry());
+            },
+
+            evaluate() {
+                let correctCount = 0;
+                let allAnswered = true;
+
+                // Validación para asegurar que los 50 inputs (10 ej * 5 inputs) estén llenos
+                MathEngine.exercises.forEach(ex => {
+                    const lInp = document.getElementById(`left-${ex.id}`).value;
+                    const rInp = document.getElementById(`right-${ex.id}`).value;
+                    const bInp = document.getElementById(`base-${ex.id}`).value;
+                    const numInp = document.getElementById(`ans-num-${ex.id}`).value;
+                    const denInp = document.getElementById(`ans-den-${ex.id}`).value;
+
+                    if (lInp === "" || rInp === "" || bInp === "" || numInp === "" || denInp === "") {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("⚠️ Por favor, llena todos los campos (Alas, Base, y Resultado Final) de los 10 ejercicios antes de calificar.");
+                    return;
+                }
+
+                document.getElementById('btn-submit').classList.add('hidden');
+
+                // Procesamiento y calificación
+                MathEngine.exercises.forEach(ex => {
+                    const lVal = parseInt(document.getElementById(`left-${ex.id}`).value);
+                    const rVal = parseInt(document.getElementById(`right-${ex.id}`).value);
+                    const bVal = parseInt(document.getElementById(`base-${ex.id}`).value);
+                    const numVal = parseInt(document.getElementById(`ans-num-${ex.id}`).value);
+                    const denVal = parseInt(document.getElementById(`ans-den-${ex.id}`).value);
+
+                    const card = document.getElementById(`card-${ex.id}`);
+                    const accordion = document.getElementById(`accordion-${ex.id}`);
+
+                    // Bloquear los 5 inputs
+                    ['left', 'right', 'base', 'ans-num', 'ans-den'].forEach(prefix => {
+                        document.getElementById(`${prefix}-${ex.id}`).disabled = true;
+                    });
+
+                    // Mostrar acordeón
+                    accordion.classList.remove('hidden');
+
+                    // Lógica estricta de evaluación: Los 5 valores deben coincidir
+                    if (lVal === ex.leftWing && rVal === ex.rightWing && bVal === ex.baseDenom && numVal === ex.finalNum && denVal === ex.finalDenom) {
+                        correctCount++;
+                        card.classList.replace('border-slate-200', 'border-emerald-400');
+                        card.classList.add('bg-emerald-50');
+                    } else {
+                        card.classList.replace('border-slate-200', 'border-rose-400');
+                        card.classList.add('bg-rose-50');
+                    }
+                });
+
+                const score = (correctCount / 10) * 100;
+                this.processResults(score, correctCount);
+            },
+
+            async processResults(score, correctCount) {
+                const panel = document.getElementById('results-panel');
+                const display = document.getElementById('score-display');
+                const message = document.getElementById('score-message');
+                const btnRetry = document.getElementById('btn-hot-retry');
+                const fbStatus = document.getElementById('firebase-status');
+
+                panel.classList.remove('hidden');
+                panel.classList.add('flex', 'fade-in');
+
+                // Lógica del 80% (8 de 10 aciertos mínimos)
+                if (score >= 80) {
+                    panel.classList.remove('bg-rose-100', 'border-rose-300', 'text-rose-900');
+                    panel.classList.add('bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+                    display.innerText = `${score}% - ¡Práctica Aprobada! 🏆`;
+                    message.innerText = `Acertaste ${correctCount} de 10 ejercicios. Has dominado el Método Mariposa.`;
+
+                    // Guardado en la BD (pasado al padre a través de postMessage)
+                    fbStatus.classList.remove('opacity-0');
+                    if (uid || window.parent) {
+                        fbStatus.innerText = "Enviando progreso a la plataforma...";
+                        window.parent.postMessage({
+                            type: 'SAVE_PROGRESS',
+                            score: score,
+                            total: 100 // Siempre enviamos % sobre 100
+                        }, '*');
+                        fbStatus.innerText = "✅ Progreso enviado correctamente.";
+                        fbStatus.classList.add('text-emerald-700');
+                        fbStatus.classList.remove('text-rose-600');
+                    } else {
+                        fbStatus.innerText = "⚠️ Modo local: progreso no guardado.";
+                    }
+                } else {
+                    panel.classList.remove('bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+                    panel.classList.add('bg-rose-100', 'border-rose-300', 'text-rose-900');
+                    display.innerText = `${score}% - Sesión Reprobada 📉`;
+                    message.innerText = `Acertaste ${correctCount} de 10. Necesitas al menos 80% (8 aciertos). Revisa las explicaciones paso a paso.`;
+                    btnRetry.classList.remove('hidden');
+                }
+            },
+
+            hotRetry() {
+                // Reintento en caliente: Genera nuevos ejercicios y limpia la UI sin recargar la página.
+                MathEngine.generateExercises();
+                this.render();
+            }
+        };
+
+        // Bootstrap: Iniciar ciclo de vida tras cargar dependencias
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                AppController.init();
+            }, 200);
+        });
+    </script>
+</body>
+
+</html>

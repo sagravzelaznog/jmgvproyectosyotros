@@ -102,45 +102,14 @@
 
     <!-- [EL INGENIERO DE ESTADO] - Lógica Modular Completa y Firebase v10 -->
     <script type="module">
-        // Importaciones de Firebase SDK v10 Modular
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        // Se respeta el usuario del componente padre (Next.js) pasándolo por URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
 
-        // Configuración de Firebase (Se requiere reemplazar con credenciales reales en producción)
-        const firebaseConfig = {
-            apiKey: "AIzaSy_REPLACE_WITH_REAL_KEY",
-            authDomain: "parabola-app.firebaseapp.com",
-            projectId: "parabola-app",
-            storageBucket: "parabola-app.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abcdef123456"
-        };
-
-        let app, auth, db;
-        let currentUser = null;
-
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-
-            // Autenticación anónima transparente para guardar progreso de los alumnos
-            signInAnonymously(auth).catch((error) => console.warn("Error Auth Anónimo:", error));
-
-            onAuthStateChanged(auth, (user) => {
-                const statusEl = document.getElementById('auth-status');
-                if (user) {
-                    currentUser = user;
-                    statusEl.innerHTML = `✅ Autenticado | ID: <span class="text-emerald-400 font-bold">${user.uid.substring(0, 6)}...</span>`;
-                } else {
-                    currentUser = null;
-                    statusEl.innerHTML = `⚠️ Sin conexión a BD. Progreso local.`;
-                }
-            });
-        } catch (error) {
-            console.warn("Firebase no inicializado (usando modo local/demo).", error);
-            document.getElementById('auth-status').innerText = "Modo Local (Sin Base de Datos)";
+        if (uid) {
+            console.log("Sesión detectada desde la plataforma padre con UID:", uid);
+        } else {
+            console.warn("Modo Local o Prueba (No se pasaron parámetros de usuario en la URL)");
         }
 
         // Configuración global del renderizador matemático (KaTeX)
@@ -518,26 +487,20 @@
                     display.innerText = `${score}% - ¡Evaluación Aprobada! 🏆`;
                     message.innerText = `Análisis perfecto en ${correctCount} de 10 ejercicios. Has dominado el análisis de la parábola.`;
 
-                    // Guardado en Firestore
-                    if (currentUser && db) {
-                        fbStatus.classList.remove('opacity-0');
-                        fbStatus.innerText = "Sincronizando con la nube...";
-                        try {
-                            await addDoc(collection(db, "sesiones_geometria_parabola"), {
-                                uid: currentUser.uid,
-                                tema: "Elementos de la Parabola",
-                                score: score,
-                                aciertos: correctCount,
-                                sesion: "08",
-                                timestamp: serverTimestamp()
-                            });
-                            fbStatus.innerText = "✅ Progreso académico guardado en Firebase exitosamente.";
-                            fbStatus.classList.add('text-emerald-700');
-                        } catch (e) {
-                            console.error(e);
-                            fbStatus.innerText = "⚠️ Error al conectar con Firebase.";
-                            fbStatus.classList.add('text-rose-600');
-                        }
+                    // Guardado en la BD (pasado al padre a través de postMessage)
+                    fbStatus.classList.remove('opacity-0');
+                    if (uid || window.parent) {
+                        fbStatus.innerText = "Enviando progreso a la plataforma...";
+                        window.parent.postMessage({
+                            type: 'SAVE_PROGRESS',
+                            score: score,
+                            total: 100 // Siempre enviamos % sobre 100
+                        }, '*');
+                        fbStatus.innerText = "✅ Progreso enviado correctamente.";
+                        fbStatus.classList.add('text-emerald-700');
+                        fbStatus.classList.remove('text-rose-600');
+                    } else {
+                        fbStatus.innerText = "⚠️ Modo local: progreso no guardado.";
                     }
                 } else {
                     panel.classList.remove('bg-emerald-100', 'border-emerald-300', 'text-emerald-900');

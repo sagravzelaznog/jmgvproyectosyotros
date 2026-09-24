@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Parábola y sus Elementos - Sesión 08</title>
+
+    <!-- Tailwind CSS (vía CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        integrity="sha384-n8MVd4RsNIBMW4ZcbXZOkWazaO2Lsn3Oqj+14GQjGIlXI19O09OWPeiqF/nBv03E" crossorigin="anonymous">
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Gl1mQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+        crossorigin="anonymous"></script>
+
+    <!-- KaTeX Auto-render Extension -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbOxyj0O1rxVqVDMthIEEbEqoa"
+        crossorigin="anonymous"></script>
+
+    <style>
+        /* Ocultar flechas de control en inputs numéricos */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Ocultar marcador por defecto en details */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Animaciones para fluidez de interfaz */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Barra de estado técnica (Firebase) -->
+    <div class="w-full bg-slate-900 text-slate-200 text-xs px-6 py-2 flex justify-between items-center shadow-md z-10">
+        <span id="auth-status" class="font-mono tracking-wide">Firebase: Conectando...</span>
+        <span class="font-mono font-bold text-indigo-400">SESIÓN 08</span>
+    </div>
+
+    <!-- [EL MAQUETADOR UI/UX] - Estructura Base -->
+    <div class="flex-grow flex flex-col items-center py-10 px-4 w-full">
+        <div class="max-w-7xl w-full bg-white rounded-3xl shadow-2xl p-6 md:p-10 border border-slate-200 mb-6">
+
+            <header class="mb-10 text-center border-b border-slate-200 pb-8">
+                <div class="inline-flex items-center justify-center p-4 bg-indigo-100 rounded-full mb-5 shadow-inner">
+                    <svg class="w-10 h-10 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v16h16M4 12s4-8 8-8 8 8 8 8"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-extrabold text-indigo-900 mb-4 tracking-tight">La Parábola y sus
+                    Elementos</h1>
+                <p class="text-slate-500 font-medium text-lg lg:text-xl max-w-3xl mx-auto">
+                    Analiza cada ecuación ordinaria dada. Deduce los parámetros algebraicos y calcula el Vértice
+                    $V(h,k)$, el Foco $F$, la longitud del Lado Recto $LR$ y el valor numérico de la Directriz $D$.
+                </p>
+            </header>
+
+            <!-- Contenedor Principal (Inyectado por AppController) -->
+            <main id="app-container" class="w-full flex flex-col gap-10">
+                <!-- Se inyecta dinámicamente mediante JS -->
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Footer Dinámico Requerido -->
+    <footer
+        class="bg-slate-900 text-slate-400 text-center py-6 text-sm font-semibold tracking-widest w-full mt-auto shadow-inner border-t-4 border-indigo-900">
+        JMGV-PTEL 2026. TSF MC 08. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <!-- [EL INGENIERO DE ESTADO] - Lógica Modular Completa y Firebase v10 -->
+    <script type="module">
+        // Importaciones de Firebase SDK v10 Modular
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Configuración de Firebase (Se requiere reemplazar con credenciales reales en producción)
+        const firebaseConfig = {
+            apiKey: "AIzaSy_REPLACE_WITH_REAL_KEY",
+            authDomain: "parabola-app.firebaseapp.com",
+            projectId: "parabola-app",
+            storageBucket: "parabola-app.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        let app, auth, db;
+        let currentUser = null;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            // Autenticación anónima transparente para guardar progreso de los alumnos
+            signInAnonymously(auth).catch((error) => console.warn("Error Auth Anónimo:", error));
+
+            onAuthStateChanged(auth, (user) => {
+                const statusEl = document.getElementById('auth-status');
+                if (user) {
+                    currentUser = user;
+                    statusEl.innerHTML = `✅ Autenticado | ID: <span class="text-emerald-400 font-bold">${user.uid.substring(0, 6)}...</span>`;
+                } else {
+                    currentUser = null;
+                    statusEl.innerHTML = `⚠️ Sin conexión a BD. Progreso local.`;
+                }
+            });
+        } catch (error) {
+            console.warn("Firebase no inicializado (usando modo local/demo).", error);
+            document.getElementById('auth-status').innerText = "Modo Local (Sin Base de Datos)";
+        }
+
+        // Configuración global del renderizador matemático (KaTeX)
+        window.initMathEngine = function () {
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    output: 'html'
+                });
+            } else {
+                setTimeout(window.initMathEngine, 50);
+            }
+        };
+
+        // [EL MOTOR MATEMÁTICO] - Geometría Analítica
+        const MathEngine = {
+            exercises: [],
+
+            getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            // Generador de entero no nulo
+            getRandomNonZeroInt(min, max) {
+                let val = 0;
+                while (val === 0) {
+                    val = this.getRandomInt(min, max);
+                }
+                return val;
+            },
+
+            // Formateador algebraico para binomios lineales
+            formatTerm(variable, value) {
+                if (value === 0) {
+                    return variable;
+                } else if (value > 0) {
+                    return `(${variable} - ${value})`;
+                } else {
+                    return `(${variable} + ${Math.abs(value)})`;
+                }
+            },
+
+            // Formateador de binomio al cuadrado
+            formatSquaredTerm(variable, value) {
+                if (value === 0) {
+                    return `${variable}^2`;
+                } else if (value > 0) {
+                    return `(${variable} - ${value})^2`;
+                } else {
+                    return `(${variable} + ${Math.abs(value)})^2`;
+                }
+            },
+
+            generateExercises() {
+                this.exercises = [];
+
+                // Generar 10 ejercicios balanceados: 5 verticales y 5 horizontales
+                const orientations = [true, true, true, true, true, false, false, false, false, false];
+                // Mezcla aleatoria (Fisher-Yates)
+                for (let i = orientations.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [orientations[i], orientations[j]] = [orientations[j], orientations[i]];
+                }
+
+                for (let i = 0; i < 10; i++) {
+                    const isVertical = orientations[i];
+
+                    // Coordenadas enteras h y k entre -10 y 10
+                    const h = this.getRandomInt(-10, 10);
+                    const k = this.getRandomInt(-10, 10);
+
+                    // Parámetro p entero no nulo entre -6 y 6
+                    const p = this.getRandomNonZeroInt(-6, 6);
+                    const fourP = 4 * p;
+                    const ladoRecto = Math.abs(fourP);
+
+                    let equationLatex = "";
+                    let standardFormulaLatex = "";
+                    let directrixVar = "";
+                    let directrixVal = 0;
+                    let focusX = 0;
+                    let focusY = 0;
+                    let orientationName = "";
+                    let openingDirection = "";
+
+                    if (isVertical) {
+                        // (x - h)^2 = 4p(y - k)
+                        orientationName = "Parábola Vertical";
+                        openingDirection = p > 0 ? "Abre hacia arriba (p > 0)" : "Abre hacia abajo (p < 0)";
+                        standardFormulaLatex = "(x - h)^2 = 4p(y - k)";
+
+                        const leftSide = this.formatSquaredTerm('x', h);
+                        const rightTerm = this.formatTerm('y', k);
+                        equationLatex = `$$${leftSide} = ${fourP}${rightTerm}$$`;
+
+                        focusX = h;
+                        focusY = k + p;
+                        directrixVar = "y";
+                        directrixVal = k - p;
+                    } else {
+                        // (y - k)^2 = 4p(x - h)
+                        orientationName = "Parábola Horizontal";
+                        openingDirection = p > 0 ? "Abre hacia la derecha (p > 0)" : "Abre hacia la izquierda (p < 0)";
+                        standardFormulaLatex = "(y - k)^2 = 4p(x - h)";
+
+                        const leftSide = this.formatSquaredTerm('y', k);
+                        const rightTerm = this.formatTerm('x', h);
+                        equationLatex = `$$${leftSide} = ${fourP}${rightTerm}$$`;
+
+                        focusX = h + p;
+                        focusY = k;
+                        directrixVar = "x";
+                        directrixVal = h - p;
+                    }
+
+                    // Construcción del desarrollo paso a paso para el acordeón
+                    const stepLatex = `
+                    <div class="space-y-3 text-slate-700 text-sm md:text-base">
+                        <p><b class="text-indigo-900">1. Ecuación Canónica de Referencia:</b> Coincide con la forma ordinaria $$${standardFormulaLatex}$$, por lo que es una <b>${orientationName}</b>.</p>
+                        <p><b class="text-indigo-900">2. Vértice $V(h, k)$:</b> Igualando los términos trasladados a cero: 
+                           $$h = ${h}, \\quad k = ${k} \\implies V(${h}, ${k})$$</p>
+                        <p><b class="text-indigo-900">3. Parámetro $p$:</b> El coeficiente que acompaña al término lineal es $4p$:
+                           $$4p = ${fourP} \\implies p = \\frac{${fourP}}{4} = ${p}$$
+                           Como $p = ${p}$, la parábola <b>${openingDirection}</b>.</p>
+                        <p><b class="text-indigo-900">4. Foco $F$:</b> 
+                           ${isVertical
+                            ? `Para eje focal vertical: $$F(h, k + p) = F(${h},${k} + (${p})) = F(${focusX}, ${focusY})$$`
+                            : `Para eje focal horizontal: $$F(h + p, k) = F(${h} + (${p}), ${k}) = F(${focusX}, ${focusY})$$`}</p>
+                        <p><b class="text-indigo-900">5. Longitud del Lado Recto ($LR$):</b>
+                           $$LR = |4p| = |${fourP}| = ${ladoRecto}$$</p>
+                        <p><b class="text-indigo-900">6. Ecuación de la Directriz ($D$):</b>
+                           ${isVertical
+                            ? `$$y = k - p = ${k} - (${p}) = ${directrixVal}$$`
+                            : `$$x = h - p = ${h} - (${p}) = ${directrixVal}$$`}</p>
+                    </div>`;
+
+                    this.exercises.push({
+                        id: i,
+                        isVertical,
+                        orientationName,
+                        h,
+                        k,
+                        p,
+                        fourP,
+                        ladoRecto,
+                        focusX,
+                        focusY,
+                        directrixVar,
+                        directrixVal,
+                        equationLatex,
+                        stepLatex
+                    });
+                }
+            }
+        };
+
+        // [EL INGENIERO DE ESTADO] - Controlador UI y Evaluación
+        const AppController = {
+            init() {
+                this.hotRetry();
+            },
+
+            render() {
+                const container = document.getElementById('app-container');
+                let html = '<div class="flex flex-col gap-8 w-full fade-in">';
+
+                MathEngine.exercises.forEach((ex, idx) => {
+                    const badgeColor = ex.isVertical ? 'bg-indigo-100 text-indigo-800' : 'bg-teal-100 text-teal-800';
+
+                    html += `
+                    <div id="card-${ex.id}" class="bg-white border-2 border-slate-200 rounded-2xl p-6 lg:p-8 shadow-sm transition-all duration-300 relative overflow-hidden">
+                        
+                        <!-- Etiqueta superior de tipo de ejercicio -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="inline-block ${badgeColor} text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Ejercicio ${idx + 1}: ${ex.orientationName}
+                            </span>
+                            <span class="text-xs font-mono text-slate-400">ID: PARAB-0${idx + 1}</span>
+                        </div>
+
+                        <!-- Grid Principal tipo Dashboard -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            
+                            <!-- Columna Izquierda: Ecuación Ordinaria -->
+                            <div class="lg:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-200 rounded-xl min-h-[160px]">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Ecuación Ordinaria</span>
+                                <div class="text-2xl md:text-3xl text-slate-900 font-bold tracking-wide">
+                                    ${ex.equationLatex}
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha: Panel de Captura Multiparámetro (6 Inputs) -->
+                            <div class="lg:col-span-7 bg-slate-50/70 p-6 rounded-xl border border-slate-200">
+                                <h4 class="text-sm font-extrabold text-slate-700 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
+                                    Elementos de la Parábola
+                                </h4>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    
+                                    <!-- 1. Vértice V(h, k) -->
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center">
+                                        <label class="text-xs font-bold text-indigo-700 mb-1">Vértice $V(h, k)$</label>
+                                        <div class="flex items-center gap-1 font-mono text-lg text-slate-600">
+                                            <span>V(</span>
+                                            <input type="number" id="v-x-${ex.id}" class="w-14 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="h">
+                                            <span>,</span>
+                                            <input type="number" id="v-y-${ex.id}" class="w-14 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="k">
+                                            <span>)</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 2. Foco F(x, y) -->
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center">
+                                        <label class="text-xs font-bold text-indigo-700 mb-1">Foco $F$</label>
+                                        <div class="flex items-center gap-1 font-mono text-lg text-slate-600">
+                                            <span>F(</span>
+                                            <input type="number" id="f-x-${ex.id}" class="w-14 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="x">
+                                            <span>,</span>
+                                            <input type="number" id="f-y-${ex.id}" class="w-14 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="y">
+                                            <span>)</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 3. Lado Recto |4p| -->
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center">
+                                        <label class="text-xs font-bold text-indigo-700 mb-1">Lado Recto $LR = |4p|$</label>
+                                        <div class="flex items-center gap-2 font-mono text-base text-slate-600">
+                                            <span>LR =</span>
+                                            <input type="number" id="lr-${ex.id}" class="w-20 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="|4p|">
+                                        </div>
+                                    </div>
+
+                                    <!-- 4. Directriz (x= o y=) -->
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-center">
+                                        <label class="text-xs font-bold text-indigo-700 mb-1">Directriz ($D$)</label>
+                                        <div class="flex items-center gap-2 font-mono text-base text-slate-600">
+                                            <span class="font-bold text-slate-800">${ex.directrixVar} =</span>
+                                            <input type="number" id="d-val-${ex.id}" class="w-20 text-center border-2 border-indigo-200 rounded py-1 text-sm font-bold text-indigo-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none" placeholder="valor">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Acordeón Explicativo Paso a Paso (Oculto inicialmente) -->
+                        <details id="accordion-${ex.id}" class="w-full bg-slate-50 border border-slate-200 rounded-xl group cursor-pointer transition-all hidden mt-6">
+                            <summary class="font-bold text-sm text-slate-700 p-4 select-none hover:bg-slate-100 rounded-xl group-open:rounded-b-none group-open:border-b border-slate-200 flex justify-between items-center transition-colors">
+                                <span class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Ver deducción analítica paso a paso
+                                </span>
+                                <span class="transform group-open:rotate-180 transition-transform duration-300 text-indigo-600 font-bold">▼</span>
+                            </summary>
+                            <div class="p-6 bg-white rounded-b-xl border-t border-slate-100 overflow-x-auto">
+                                ${ex.stepLatex}
+                            </div>
+                        </details>
+                    </div>
+                    `;
+                });
+
+                html += '</div>';
+
+                // Panel de Control Inferior y Calificación
+                html += `
+                <div class="w-full flex flex-col items-center gap-6 mt-8 border-t-2 border-dashed border-slate-200 pt-8 fade-in">
+                    <button id="btn-submit" class="w-full max-w-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-5 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl text-xl transform hover:-translate-y-1">
+                        ✅ Calificar Análisis de Parábolas (10 Ejercicios)
+                    </button>
+                    
+                    <div id="results-panel" class="w-full max-w-2xl text-center hidden flex-col items-center gap-4 bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                        <h3 id="score-display" class="text-4xl font-extrabold"></h3>
+                        <p id="score-message" class="text-lg font-medium text-slate-600"></p>
+                        <p id="firebase-status" class="text-sm font-bold opacity-0 transition-opacity duration-300"></p>
+                        <button id="btn-hot-retry" class="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-colors shadow-md text-xl hidden">
+                            🔄 Reintento en Caliente
+                        </button>
+                    </div>
+                </div>
+                `;
+
+                container.innerHTML = html;
+                window.initMathEngine();
+                this.bindEvents();
+            },
+
+            bindEvents() {
+                document.getElementById('btn-submit').addEventListener('click', () => this.evaluate());
+                document.getElementById('btn-hot-retry').addEventListener('click', () => this.hotRetry());
+            },
+
+            evaluate() {
+                let correctCount = 0;
+                let allAnswered = true;
+
+                // Validación de que los 60 inputs (10 ej * 6 campos) estén llenos
+                MathEngine.exercises.forEach(ex => {
+                    const inputs = [
+                        document.getElementById(`v-x-${ex.id}`).value,
+                        document.getElementById(`v-y-${ex.id}`).value,
+                        document.getElementById(`f-x-${ex.id}`).value,
+                        document.getElementById(`f-y-${ex.id}`).value,
+                        document.getElementById(`lr-${ex.id}`).value,
+                        document.getElementById(`d-val-${ex.id}`).value
+                    ];
+
+                    if (inputs.some(val => val === "")) {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("⚠️ Por favor, llena todos los campos (Vértice, Foco, LR y Directriz) para los 10 ejercicios antes de calificar.");
+                    return;
+                }
+
+                // Ocultar botón de enviar
+                document.getElementById('btn-submit').classList.add('hidden');
+
+                // Procesamiento y calificación iterativa
+                MathEngine.exercises.forEach(ex => {
+                    const vx = parseInt(document.getElementById(`v-x-${ex.id}`).value);
+                    const vy = parseInt(document.getElementById(`v-y-${ex.id}`).value);
+                    const fx = parseInt(document.getElementById(`f-x-${ex.id}`).value);
+                    const fy = parseInt(document.getElementById(`f-y-${ex.id}`).value);
+                    const lr = parseInt(document.getElementById(`lr-${ex.id}`).value);
+                    const dval = parseInt(document.getElementById(`d-val-${ex.id}`).value);
+
+                    const card = document.getElementById(`card-${ex.id}`);
+                    const accordion = document.getElementById(`accordion-${ex.id}`);
+
+                    // Bloquear inputs para evitar modificaciones
+                    ['v-x', 'v-y', 'f-x', 'f-y', 'lr', 'd-val'].forEach(prefix => {
+                        document.getElementById(`${prefix}-${ex.id}`).disabled = true;
+                    });
+
+                    // Mostrar acordeón con el paso a paso
+                    accordion.classList.remove('hidden');
+
+                    // Evaluación estricta (Los 6 parámetros deben ser correctos)
+                    if (vx === ex.h && vy === ex.k && fx === ex.focusX && fy === ex.focusY && lr === ex.ladoRecto && dval === ex.directrixVal) {
+                        correctCount++;
+                        card.classList.replace('border-slate-200', 'border-emerald-400');
+                        card.classList.add('bg-emerald-50');
+                    } else {
+                        card.classList.replace('border-slate-200', 'border-rose-400');
+                        card.classList.add('bg-rose-50');
+                    }
+                });
+
+                // Calcular puntaje
+                const score = (correctCount / 10) * 100;
+                this.processResults(score, correctCount);
+            },
+
+            async processResults(score, correctCount) {
+                const panel = document.getElementById('results-panel');
+                const display = document.getElementById('score-display');
+                const message = document.getElementById('score-message');
+                const btnRetry = document.getElementById('btn-hot-retry');
+                const fbStatus = document.getElementById('firebase-status');
+
+                panel.classList.remove('hidden');
+                panel.classList.add('flex', 'fade-in');
+
+                // Lógica del 80% (8 de 10 ejercicios perfectos)
+                if (score >= 80) {
+                    panel.classList.remove('bg-rose-100', 'border-rose-300', 'text-rose-900');
+                    panel.classList.add('bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+                    display.innerText = `${score}% - ¡Evaluación Aprobada! 🏆`;
+                    message.innerText = `Análisis perfecto en ${correctCount} de 10 ejercicios. Has dominado el análisis de la parábola.`;
+
+                    // Guardado en Firestore
+                    if (currentUser && db) {
+                        fbStatus.classList.remove('opacity-0');
+                        fbStatus.innerText = "Sincronizando con la nube...";
+                        try {
+                            await addDoc(collection(db, "sesiones_geometria_parabola"), {
+                                uid: currentUser.uid,
+                                tema: "Elementos de la Parabola",
+                                score: score,
+                                aciertos: correctCount,
+                                sesion: "08",
+                                timestamp: serverTimestamp()
+                            });
+                            fbStatus.innerText = "✅ Progreso académico guardado en Firebase exitosamente.";
+                            fbStatus.classList.add('text-emerald-700');
+                        } catch (e) {
+                            console.error(e);
+                            fbStatus.innerText = "⚠️ Error al conectar con Firebase.";
+                            fbStatus.classList.add('text-rose-600');
+                        }
+                    }
+                } else {
+                    panel.classList.remove('bg-emerald-100', 'border-emerald-300', 'text-emerald-900');
+                    panel.classList.add('bg-rose-100', 'border-rose-300', 'text-rose-900');
+                    display.innerText = `${score}% - Sesión Reprobada 📉`;
+                    message.innerText = `Solo acertaste completamente ${correctCount} de 10 ejercicios. Necesitas al menos el 80% para aprobar. Analiza tus errores en los desgloses paso a paso.`;
+                    btnRetry.classList.remove('hidden');
+                }
+            },
+
+            hotRetry() {
+                // Reintento en caliente: Regenerar matemáticas y UI sin recargar la página.
+                MathEngine.generateExercises();
+                this.render();
+            }
+        };
+
+        // Bootstrap: Iniciar ciclo de vida tras cargar dependencias
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                AppController.init();
+            }, 150);
+        });
+    </script>
+</body>
+
+</html>

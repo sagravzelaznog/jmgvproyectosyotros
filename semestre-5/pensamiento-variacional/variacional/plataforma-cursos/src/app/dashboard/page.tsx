@@ -66,13 +66,8 @@ export default function DashboardPage() {
           { id: "campesino-tycoon", title: "Campesino Tycoon (Juego)", adminOnly: false, description: "¡Gestiona tu propia granja, invierte sabiamente y haz crecer tu imperio agrícola en este divertido juego inactivo!", url: "/games/campesino-tycoon/index.html" }
         ] as Array<{ id: string; title: string; adminOnly: boolean; description: string; url?: string }>)
         .filter(course => !course.adminOnly || isAdmin)
-        .map(course => (
-          <Link 
-            href={course.url ? course.url : `/dashboard/course/${course.id}`} 
-            key={course.id} 
-            className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] hover:border-indigo-500/50 transition-all group flex flex-col h-full"
-            target={course.url ? "_blank" : undefined}
-          >
+        .map(course => {
+          const innerContent = (
             <div className="p-6 flex-1 flex flex-col">
               <div className="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all">
                 <svg className={`w-6 h-6 ${course.id.startsWith('pm') ? 'text-neon-pink' : 'text-indigo-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,8 +88,35 @@ export default function DashboardPage() {
                 </svg>
               </div>
             </div>
-          </Link>
-        ))}
+          );
+
+          const cardClass = "bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] hover:border-indigo-500/50 transition-all group flex flex-col h-full";
+
+          if (course.url) {
+            // Usa <a> estándar para no activar el router de Next.js que causa 404
+            return (
+              <a 
+                href={`${course.url}?uid=${user.uid}`} 
+                key={course.id} 
+                className={cardClass}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {innerContent}
+              </a>
+            );
+          }
+
+          return (
+            <Link 
+              href={`/dashboard/course/${course.id}`} 
+              key={course.id} 
+              className={cardClass}
+            >
+              {innerContent}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

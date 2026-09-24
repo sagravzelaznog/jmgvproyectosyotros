@@ -70,11 +70,12 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDownloadCSV = async () => {
+  const handleDownloadCSV = async (courseId?: string) => {
     if (!user) return;
     try {
       const token = await user.getIdToken();
-      const response = await fetch('/api/admin/export-progress', {
+      const url = courseId ? `/api/admin/export-progress?courseId=${courseId}` : '/api/admin/export-progress';
+      const response = await fetch(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -85,13 +86,13 @@ export default function AdminDashboard() {
       }
 
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url;
-      a.download = 'usuarios_avance.csv';
+      a.href = blobUrl;
+      a.download = courseId ? `avance_${courseId}.csv` : 'usuarios_avance.csv';
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(blobUrl);
       a.remove();
     } catch (error) {
       console.error('Download error:', error);
@@ -248,6 +249,41 @@ export default function AdminDashboard() {
             </div>
 
           </div>
+
+          {/* Sección de Descargas de Avances */}
+          <div className="bg-[#12131A] border border-indigo-500/30 rounded-2xl p-6 shadow-[0_0_20px_rgba(99,102,241,0.1)] mt-8">
+            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <span className="text-indigo-400">📥</span> Descargar Avances por Curso
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => handleDownloadCSV()}
+                className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/50 hover:bg-indigo-500 hover:text-white px-4 py-2 rounded font-semibold transition-all text-sm shadow-[0_0_10px_rgba(99,102,241,0.2)]"
+              >
+                🌍 Global (Todos)
+              </button>
+              {[
+                { id: 'pm1', label: 'PM1' },
+                { id: 'pm2', label: 'PM2' },
+                { id: 'pm3', label: 'PM3' },
+                { id: 'pm4', label: 'PM4' },
+                { id: 'fisica', label: 'Física' },
+                { id: 'autocad', label: 'AutoCAD' },
+                { id: 'archicad', label: 'Archicad' },
+                { id: 'matematicas-basicas', label: 'Matemáticas' },
+                { id: 'excel-intermedio', label: 'Excel' }
+              ].map(course => (
+                <button
+                  key={course.id}
+                  onClick={() => handleDownloadCSV(course.id)}
+                  className="bg-slate-800 text-slate-300 border border-slate-700 hover:bg-neon-cyan/20 hover:text-neon-cyan hover:border-neon-cyan px-4 py-2 rounded font-medium transition-all text-sm"
+                >
+                  {course.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </ProtectedRoute>

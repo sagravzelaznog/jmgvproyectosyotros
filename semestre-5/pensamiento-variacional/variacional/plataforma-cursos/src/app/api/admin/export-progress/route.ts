@@ -25,6 +25,8 @@ export async function GET(request: NextRequest) {
       return new NextResponse('Acceso denegado. No eres administrador.', { status: 403 });
     }
 
+    const targetCourseId = request.nextUrl.searchParams.get('courseId');
+
     // Fetching Lessons
     const lessonsSnapshot = await adminDb.collection('Lessons').get();
     const lessonToCourseMap: Record<string, string> = {};
@@ -58,6 +60,9 @@ export async function GET(request: NextRequest) {
         const progData = progDoc.data();
         const courseId = lessonToCourseMap[lessonId] || 'unknown_course';
 
+        // Si se especificó un curso, ignorar el resto
+        if (targetCourseId && courseId !== targetCourseId) return;
+
         if (!courseStats[courseId]) {
           courseStats[courseId] = { completed: 0, score: 0 };
         }
@@ -67,8 +72,10 @@ export async function GET(request: NextRequest) {
       });
 
       if (Object.keys(courseStats).length === 0) {
-        // User has no progress
-        csvData.push([uid, name, email, role, "N/A", 0, 0].join(","));
+        // Solo agregar fila vacía si NO hay filtro de curso
+        if (!targetCourseId) {
+          csvData.push([uid, name, email, role, "N/A", 0, 0].join(","));
+        }
       } else {
         for (const [courseId, stats] of Object.entries(courseStats)) {
           csvData.push([uid, name, email, role, courseId, stats.completed, stats.score].join(","));
@@ -77,12 +84,13 @@ export async function GET(request: NextRequest) {
     }
 
     const csvString = csvData.join("\n");
+    const filename = targetCourseId ? `avance_${targetCourseId}.csv` : 'usuarios_avance.csv';
     
     return new NextResponse(csvString, {
       status: 200,
       headers: {
         'Content-Type': 'text/csv',
-        'Content-Disposition': 'attachment; filename="usuarios_avance.csv"'
+        'Content-Disposition': `attachment; filename="${filename}"`
       }
     });
 

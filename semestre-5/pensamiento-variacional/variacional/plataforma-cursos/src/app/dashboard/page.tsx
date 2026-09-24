@@ -4,7 +4,7 @@ import { useAuth } from "@/components/providers/AuthProvider";
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const { isAdmin, hasAccess, expiresAt } = useAuth();
+  const { user, isAdmin, hasAccess, expiresAt } = useAuth();
 
   const getRemainingTime = () => {
     if (!expiresAt) return null;
@@ -96,7 +96,7 @@ export default function DashboardPage() {
             // Usa <a> estándar para no activar el router de Next.js que causa 404
             return (
               <a 
-                href={`${course.url}?uid=${user.uid}`} 
+                href={`${course.url}?uid=${user?.uid || 'guest'}`} 
                 key={course.id} 
                 className={cardClass}
                 target="_blank"

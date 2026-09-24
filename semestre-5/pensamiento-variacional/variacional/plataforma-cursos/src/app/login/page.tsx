@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,9 +26,13 @@ export default function LoginPage() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         
+        // Update user profile with name
+        await updateProfile(user, { displayName: name });
+
         // Crear documento con 24 horas de acceso
         const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
         await setDoc(doc(db, "Users", user.uid), {
+          name: name,
           email: user.email,
           hasAccess: true,
           expiresAt: expiresAt,
@@ -76,6 +81,22 @@ export default function LoginPage() {
               </div>
             )}
             
+            {!isLogin && (
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">
+                  Nombre Completo
+                </label>
+                <input
+                  type="text"
+                  required={!isLogin}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all"
+                  placeholder="Juan Pérez"
+                />
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Correo Electrónico

@@ -30,7 +30,7 @@ async function run() {
     
     <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <iframe 
-            src="/courses/matematicas-basicas/fracciones-heterogeneas/index.html?v=2" 
+            src="/courses/matematicas-basicas/fracciones-heterogeneas/index.html?v=3" 
             class="w-full" 
             style="min-height: 900px; border: none;"
             title="Fracciones Heterogéneas: Método Mariposa"

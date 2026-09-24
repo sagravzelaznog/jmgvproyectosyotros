@@ -188,7 +188,7 @@ export default function AdminDashboard() {
                     <span className="text-neon-pink">👥</span> Alumnos con Acceso Gratuito
                   </h2>
                   <button
-                    onClick={handleDownloadCSV}
+                    onClick={() => handleDownloadCSV()}
                     className="bg-neon-green/10 text-neon-green border border-neon-green font-bold py-2 px-4 rounded hover:bg-neon-green hover:text-black hover:shadow-[0_0_15px_#39FF14] transition-all flex items-center gap-2 text-sm"
                   >
                     <span>📊</span> Descargar CSV

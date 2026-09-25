@@ -100,6 +100,12 @@ async function run() {
             style="height: 700px; border: none;"
             title="Plano del Ejercicio"
         ></iframe>
+        <div class="bg-slate-800 p-3 text-center border-t border-slate-700">
+            <a href="/courses/autocad/ejercicios/ejercicio_${data.pagina_pdf}.pdf" target="_blank" download class="inline-flex items-center gap-2 bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan hover:text-black transition-colors px-4 py-2 rounded-lg font-bold text-sm border border-neon-cyan/50">
+                <span>⬇️</span> Descargar PDF del Plano Alternativo
+            </a>
+            <p class="text-xs text-slate-400 mt-2">Si el plano no carga en tu dispositivo (muy común en celulares), usa el botón de descarga.</p>
+        </div>
     </div>
 
     <!-- Guión de Síntesis -->

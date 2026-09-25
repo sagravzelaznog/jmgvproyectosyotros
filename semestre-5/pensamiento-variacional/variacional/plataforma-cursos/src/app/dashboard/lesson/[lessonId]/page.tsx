@@ -22,7 +22,7 @@ const MemoizedMarkdown = memo(function MarkdownContent({ content, userId }: { co
       components={{
         iframe: ({ node, ...props }) => {
           let src = props.src as string;
-          if (userId && src && src.startsWith('/courses/')) {
+          if (userId && src && src.startsWith('/courses/') && !src.includes('.pdf')) {
             const separator = src.includes('?') ? '&' : '?';
             src = `${src}${separator}uid=${userId}`;
           }

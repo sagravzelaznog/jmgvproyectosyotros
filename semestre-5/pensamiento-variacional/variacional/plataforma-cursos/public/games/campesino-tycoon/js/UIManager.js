@@ -14,6 +14,11 @@ class CharacterAgent {
         this.mixer = new THREE.AnimationMixer(this.mesh);
         this.currentAction = null;
         
+        // Variables para animación procedural cartoon
+        this.wobblePhase = Math.random() * Math.PI * 2;
+        this.baseScale = this.mesh.scale.clone();
+        this.isMoving = false;
+        
         if (this.animations && this.animations.length > 0) {
             this.currentAction = this.mixer.clipAction(this.animations[0]);
             this.currentAction.play();
@@ -22,16 +27,25 @@ class CharacterAgent {
     
     playAnim(index) {
         if (!this.animations[index]) return;
+        
+        const targetAction = this.mixer.clipAction(this.animations[index]);
+        if (this.currentAction === targetAction) {
+            this.isMoving = (index === 1);
+            return;
+        }
+
         if (this.currentAction) {
             const prev = this.currentAction;
-            this.currentAction = this.mixer.clipAction(this.animations[index]);
+            this.currentAction = targetAction;
             this.currentAction.reset();
             this.currentAction.play();
             prev.crossFadeTo(this.currentAction, 0.2, true);
         } else {
-            this.currentAction = this.mixer.clipAction(this.animations[index]);
+            this.currentAction = targetAction;
             this.currentAction.play();
         }
+        
+        this.isMoving = (index === 1); // Asumimos que 1 es caminar/correr
     }
     
     reset() {
@@ -467,6 +481,26 @@ export const UIManager = {
         for (let agent of this.agents) {
             agent.mixer.update(delta);
             
+            // --- Animación Procedural Cartoon ---
+            agent.wobblePhase += delta * (agent.isMoving ? 15 : 2);
+            if (agent.isMoving) {
+                // Saltitos (Bobbing) y balanceo al caminar
+                agent.mesh.position.y = Math.abs(Math.sin(agent.wobblePhase)) * 0.4;
+                agent.mesh.rotation.z = Math.sin(agent.wobblePhase) * 0.15;
+                // Squash and stretch rápido
+                agent.mesh.scale.y = agent.baseScale.y * (1 + Math.sin(agent.wobblePhase * 2) * 0.1);
+                agent.mesh.scale.x = agent.baseScale.x * (1 - Math.sin(agent.wobblePhase * 2) * 0.05);
+                agent.mesh.scale.z = agent.baseScale.z * (1 - Math.sin(agent.wobblePhase * 2) * 0.05);
+            } else {
+                // Respiración suave (Idle breathing)
+                agent.mesh.position.y = 0;
+                agent.mesh.rotation.z = 0;
+                agent.mesh.scale.y = agent.baseScale.y * (1 + Math.sin(agent.wobblePhase) * 0.03);
+                agent.mesh.scale.x = agent.baseScale.x * (1 - Math.sin(agent.wobblePhase) * 0.015);
+                agent.mesh.scale.z = agent.baseScale.z * (1 - Math.sin(agent.wobblePhase) * 0.015);
+            }
+            // ------------------------------------
+
             if (idx !== 0) {
                 // If not in rock phase, just wander or idle
                 if (agent.state !== 'IDLE') agent.reset();

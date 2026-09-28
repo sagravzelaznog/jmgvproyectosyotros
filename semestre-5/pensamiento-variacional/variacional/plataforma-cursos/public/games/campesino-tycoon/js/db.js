@@ -66,8 +66,17 @@ export const DB = {
             estadoJuego.upgrades_adquiridos[key] = { nivel: TycoonEngine.upgrades[key].nivel };
         });
 
+        // Si estamos embebidos en la plataforma (Next.js), enviar el progreso al padre
+        if (window.parent) {
+            window.parent.postMessage({
+                type: 'SAVE_PROGRESS',
+                score: GameState.xp, // Mandamos la XP como puntaje
+                total: 1000 // XP objetivo para "completar"
+            }, '*');
+        }
+
         if(!db || !AuthManager.currentUser) {
-            // LocalStorage Fallback
+            // LocalStorage Fallback (esto guarda todo el JSON complejo)
             localStorage.setItem('campesino_save', JSON.stringify(estadoJuego));
             this.mostrarToast();
             return;

@@ -17,6 +17,20 @@ export const AuthManager = {
             btnLogout.addEventListener('click', () => this.logout());
         }
 
+        // Primero buscar si el UID viene desde el padre (Next.js)
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+
+        if (uid) {
+            console.log("Sesión de plataforma detectada con UID:", uid);
+            this.currentUser = { uid: uid };
+            // Cargar de DB local/padre (temporalmente localStorage)
+            DB.cargarProgreso(uid).then(() => {
+                this.mostrarJuego();
+            });
+            return;
+        }
+
         if (auth) {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
@@ -29,7 +43,7 @@ export const AuthManager = {
                 }
             });
         } else {
-            // Modo Local si no hay Firebase configurado
+            // Modo Local
             this.mostrarJuego();
         }
     },

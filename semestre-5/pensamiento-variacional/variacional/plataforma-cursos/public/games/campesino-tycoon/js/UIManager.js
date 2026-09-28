@@ -102,9 +102,18 @@ export const UIManager = {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x87CEEB);
         
-        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(0, 15, 20);
-        this.camera.lookAt(0, 0, 0);
+        const aspect = window.innerWidth / window.innerHeight;
+        const frustumSize = 25;
+        this.camera = new THREE.OrthographicCamera(
+            frustumSize * aspect / -2,
+            frustumSize * aspect / 2,
+            frustumSize / 2,
+            frustumSize / -2,
+            1,
+            1000
+        );
+        this.camera.position.set(20, 20, 20);
+        this.camera.lookAt(this.scene.position);
         
         this.clock = new THREE.Clock();
         this.resize();
@@ -179,6 +188,28 @@ export const UIManager = {
                 x = e.clientX;
                 y = e.clientY;
             }
+
+            // Raycaster para 3D Particles
+            if (!this.raycaster) {
+                this.raycaster = new THREE.Raycaster();
+                this.mouse = new THREE.Vector2();
+            }
+            
+            const rect = this.canvas.getBoundingClientRect();
+            this.mouse.x = ((x - rect.left) / rect.width) * 2 - 1;
+            this.mouse.y = -((y - rect.top) / rect.height) * 2 + 1;
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            
+            let objParaInteractuar = [this.planoTierra];
+            if(this.farmObjects) objParaInteractuar.push(...this.farmObjects.children);
+            
+            const intersects = this.raycaster.intersectObjects(objParaInteractuar);
+            if (intersects.length > 0) {
+                this.crearParticula3D(intersects[0].point);
+            } else {
+                this.crearParticula3D(new THREE.Vector3(0, 0, 0));
+            }
+
             this.mostrarFlotante("+1", x, y, '#f1c40f');
         };
 
@@ -221,8 +252,21 @@ export const UIManager = {
 
     resize: function() {
         if(!this.camera || !this.renderer) return;
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
+        
+        const aspect = window.innerWidth / window.innerHeight;
+        const frustumSize = 25;
+
+        if (this.camera.isOrthographicCamera) {
+            this.camera.left = -frustumSize * aspect / 2;
+            this.camera.right = frustumSize * aspect / 2;
+            this.camera.top = frustumSize / 2;
+            this.camera.bottom = -frustumSize / 2;
+            this.camera.updateProjectionMatrix();
+        } else {
+            this.camera.aspect = aspect;
+            this.camera.updateProjectionMatrix();
+        }
+        
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
@@ -430,17 +474,64 @@ export const UIManager = {
         const el = document.createElement('div');
         el.className = 'floating-text';
         el.innerText = texto;
+        el.style.position = 'absolute';
         el.style.left = `${x}px`;
         el.style.top = `${y}px`;
         el.style.color = color;
+        el.style.zIndex = '100';
+        el.style.fontWeight = 'bold';
         document.body.appendChild(el);
         setTimeout(() => el.remove(), 1200);
+    },
+
+    // --- Sistema de Partículas 3D (ESTADO 2) ---
+    crearParticula3D: function (posicion) {
+        const geometria = new THREE.OctahedronGeometry(0.3);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffd700, transparent: true, opacity: 1 });
+        const particula = new THREE.Mesh(geometria, material);
+
+        particula.position.copy(posicion);
+        particula.position.y += 0.5;
+
+        particula.userData = {
+            velocidad: new THREE.Vector3(
+                (Math.random() - 0.5) * 0.05,
+                0.06 + Math.random() * 0.04,
+                (Math.random() - 0.5) * 0.05
+            ),
+            vida: 1.0
+        };
+
+        this.scene.add(particula);
+        if (!this.particulas) this.particulas = [];
+        this.particulas.push(particula);
+    },
+
+    animarParticulas: function () {
+        if (!this.particulas) return;
+        for (let i = this.particulas.length - 1; i >= 0; i--) {
+            const p = this.particulas[i];
+            p.position.add(p.userData.velocidad);
+            p.rotation.y += 0.1;
+            p.rotation.x += 0.1;
+            p.userData.vida -= 0.02;
+            p.material.opacity = p.userData.vida;
+
+            if (p.userData.vida <= 0) {
+                this.scene.remove(p);
+                p.material.dispose();
+                p.geometry.dispose();
+                this.particulas.splice(i, 1);
+            }
+        }
     },
 
     animate: function () {
         requestAnimationFrame(() => this.animate());
         const delta = this.clock.getDelta();
         
+        this.animarParticulas();
+
         const idx = GameState.faseActualIndex;
         if (idx !== this.lastRenderedFase) {
             this.updateFarmObjects(idx);

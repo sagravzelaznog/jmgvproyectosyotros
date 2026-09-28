@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
                 " https://fonts.googleapis.com" +
                 " https://cdn.jsdelivr.net https://cdnjs.cloudflare.com" +
                 " https://www.gstatic.com https://apis.google.com" +
-                " https://*.firebaseapp.com https://*.firebase.com",
+                " https://*.firebaseapp.com https://*.firebase.com https://unpkg.com",
               // Estilos
               "style-src 'self' 'unsafe-inline'" +
                 " https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",

@@ -66,7 +66,7 @@ export const TycoonEngine = {
         if (GameState.capital >= costo) {
             GameState.capital -= costo;
             GameState.fasePagada = true;
-            UIManager.mostrarFlotante(`-$${costo}`, UIManager.canvas.width / 2, UIManager.canvas.height / 2, '#e74c3c');
+            UIManager.mostrarFlotante(`-$${costo}`, window.innerWidth / 2, window.innerHeight / 2, '#e74c3c');
             UIManager.actualizarTextos();
             DB.guardarProgreso();
         }
@@ -115,7 +115,7 @@ export const TycoonEngine = {
     completarFase: function () {
         const xpGanada = 10 + (GameState.faseActualIndex * 2);
         GameState.xp += xpGanada;
-        UIManager.mostrarFlotante(`+${xpGanada} XP`, UIManager.canvas.width / 2, UIManager.canvas.height / 2 - 40, '#9b59b6');
+        UIManager.mostrarFlotante(`+${xpGanada} XP`, window.innerWidth / 2, window.innerHeight / 2 - 40, '#9b59b6');
 
         if (GameState.faseActualIndex === 12) { // Cosechar
             const ingresoCosecha = 9999 * GameState.hectareas * GameState.multiplicadorCosecha;
@@ -125,9 +125,9 @@ export const TycoonEngine = {
             GameState.deudaBancaria = 0;
 
             if (gananciaNeta >= 0) {
-                UIManager.mostrarFlotante(`¡+$${gananciaNeta.toFixed(0)}!`, UIManager.canvas.width / 2, 100, '#2ecc71');
+                UIManager.mostrarFlotante(`¡+$${gananciaNeta.toFixed(0)}!`, window.innerWidth / 2, 100, '#2ecc71');
             } else {
-                UIManager.mostrarFlotante(`-$${Math.abs(gananciaNeta).toFixed(0)}`, UIManager.canvas.width / 2, 100, '#e74c3c');
+                UIManager.mostrarFlotante(`-$${Math.abs(gananciaNeta).toFixed(0)}`, window.innerWidth / 2, 100, '#e74c3c');
             }
 
             GameState.hectareasData.forEach(h => h.ciclos++);

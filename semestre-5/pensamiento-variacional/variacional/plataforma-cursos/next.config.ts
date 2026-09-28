@@ -34,8 +34,8 @@ const nextConfig: NextConfig = {
                 " https://www.paypal.com https://c.paypal.com" +
                 " https://www.youtube.com https://player.vimeo.com" +
                 " https://www.desmos.com",
-              // Conexiones de red (Firebase, GeoGebra, PayPal)
-              "connect-src 'self'" +
+              // Conexiones de red (Firebase, GeoGebra, PayPal, y Blobs de Three.js)
+              "connect-src 'self' blob:" +
                 " https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com" +
                 " wss://*.firebaseio.com https://www.gstatic.com" +
                 " https://www.geogebra.org https://cdn.geogebra.org https://geo.geogebra.org" +

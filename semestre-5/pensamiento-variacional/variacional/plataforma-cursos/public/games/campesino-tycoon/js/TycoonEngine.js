@@ -148,7 +148,6 @@ export const TycoonEngine = {
         UIManager.actualizarBarraProgreso(0);
         UIManager.actualizarTextos();
         UIManager.renderizarTienda();
-        UIManager.renderizarParcela();
         DB.guardarProgreso();
     },
 

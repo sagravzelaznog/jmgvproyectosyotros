@@ -4,12 +4,13 @@ import { TycoonEngine } from './TycoonEngine.js';
 
 export const UIManager = {
     scene: null, camera: null, renderer: null,
+    canvas: null, // Puente de compatibilidad para TycoonEngine.js
 
     // Controles y Jugador
     jugadorGroup: null,
     avatar: { cuerpo: null, brazos: [], piernas: [], herramienta: null },
     teclas: { w: false, a: false, s: false, d: false },
-    joystickData: { x: 0, y: 0, active: false }, // [NUEVO] Estado del Joystick
+    joystickData: { x: 0, y: 0, active: false },
     velocidadJugador: 0.12,
     cameraOffset: new THREE.Vector3(12, 18, 12),
     isMoving: false,
@@ -39,19 +40,14 @@ export const UIManager = {
 
         this.inicializarThreeJS();
         this.configurarControles();
-
-        // [NUEVO] Inicializar controles táctiles
         this.crearJoystickVirtual();
 
         window.addEventListener('resize', () => this.resize());
     },
 
-    // [NUEVO] Creación del Joystick Virtual en el DOM
     crearJoystickVirtual: function () {
-        // Solo inyectar si el dispositivo soporta eventos táctiles
         if (!('ontouchstart' in window) && navigator.maxTouchPoints <= 0) return;
 
-        // Base del Joystick
         const joystickBase = document.createElement('div');
         joystickBase.id = 'joystick-base';
         Object.assign(joystickBase.style, {
@@ -64,10 +60,9 @@ export const UIManager = {
             borderRadius: '50%',
             border: '3px solid rgba(255, 255, 255, 0.6)',
             zIndex: '1000',
-            touchAction: 'none' // Evita que la pantalla haga scroll al usarlo
+            touchAction: 'none'
         });
 
-        // Palanca del Joystick
         const joystickStick = document.createElement('div');
         joystickStick.id = 'joystick-stick';
         Object.assign(joystickStick.style, {
@@ -86,7 +81,7 @@ export const UIManager = {
         joystickBase.appendChild(joystickStick);
         document.body.appendChild(joystickBase);
 
-        const centro = 60; // Mitad de 120px
+        const centro = 60;
         const maxRadio = 60;
 
         const onTouchMove = (e) => {
@@ -94,13 +89,11 @@ export const UIManager = {
             const touch = e.targetTouches[0];
             const rect = joystickBase.getBoundingClientRect();
 
-            // Coordenadas relativas al centro del joystick
             let dx = (touch.clientX - rect.left) - centro;
             let dy = (touch.clientY - rect.top) - centro;
 
             const distancia = Math.sqrt(dx * dx + dy * dy);
 
-            // Limitar la palanca al radio máximo
             if (distancia > maxRadio) {
                 dx = (dx / distancia) * maxRadio;
                 dy = (dy / distancia) * maxRadio;
@@ -108,7 +101,6 @@ export const UIManager = {
 
             joystickStick.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
 
-            // Normalizar valores analógicos entre -1 y 1
             this.joystickData.x = dx / maxRadio;
             this.joystickData.y = dy / maxRadio;
             this.joystickData.active = true;
@@ -116,7 +108,6 @@ export const UIManager = {
 
         const onTouchEnd = (e) => {
             e.preventDefault();
-            // Retornar al centro
             joystickStick.style.transform = `translate(-50%, -50%)`;
             this.joystickData.x = 0;
             this.joystickData.y = 0;
@@ -145,9 +136,12 @@ export const UIManager = {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        // Integración de la variable canvas requerida por TycoonEngine
+        this.canvas = this.renderer.domElement;
+
         this.renderer.domElement.id = 'game-canvas-3d';
 
-        // Evitar comportamientos táctiles por defecto (zoom, pull-to-refresh) en el canvas
         Object.assign(this.renderer.domElement.style, {
             position: 'absolute',
             top: '0', left: '0',
@@ -294,40 +288,33 @@ export const UIManager = {
         window.addEventListener('keyup', (e) => setTecla(e, false));
     },
 
-    // [MODIFICADO] Fusión de eventos Táctiles y de Teclado
     procesarMovimiento: function () {
         let movX = 0, movZ = 0;
         let esAnalogo = false;
 
-        // Entradas de Teclado (Digitales: 0 o 1)
         if (this.teclas.w) movZ -= 1;
         if (this.teclas.s) movZ += 1;
         if (this.teclas.a) movX -= 1;
         if (this.teclas.d) movX += 1;
 
-        // Entradas del Joystick Virtual (Análogas: de 0.0 a 1.0). Sobreescribe teclado si se usa.
         if (this.joystickData.active) {
             movX = this.joystickData.x;
             movZ = this.joystickData.y;
             esAnalogo = true;
         }
 
-        // Zona muerta mínima para el joystick
         this.isMoving = (Math.abs(movX) > 0.05 || Math.abs(movZ) > 0.05);
 
         if (this.isMoving) {
-            // Normalizar vectores digitales para evitar velocidad extra en diagonal
             if (!esAnalogo) {
                 const length = Math.sqrt(movX * movX + movZ * movZ);
                 movX = movX / length;
                 movZ = movZ / length;
             }
 
-            // Aplicar velocidad al jugador
             this.jugadorGroup.position.x += movX * this.velocidadJugador;
             this.jugadorGroup.position.z += movZ * this.velocidadJugador;
 
-            // Rotación suave del avatar hacia donde camina
             const anguloDestino = Math.atan2(movX, movZ);
             const diff = anguloDestino - this.jugadorGroup.rotation.y;
             this.jugadorGroup.rotation.y += Math.atan2(Math.sin(diff), Math.cos(diff)) * 0.2;
@@ -350,7 +337,6 @@ export const UIManager = {
             this.avatar.cuerpo.rotation.x = 0.2;
         } else if (this.isMoving) {
             this.avatar.herramienta.visible = false;
-            // Caminata
             this.avatar.piernas[0].rotation.x = Math.sin(time) * 0.6;
             this.avatar.piernas[1].rotation.x = Math.sin(time + Math.PI) * 0.6;
             this.avatar.brazos[0].rotation.x = Math.sin(time + Math.PI) * 0.5;
@@ -520,7 +506,9 @@ export const UIManager = {
             this.camera.bottom = -frustumSize / 2;
             this.camera.updateProjectionMatrix();
         }
-        if (this.renderer) this.renderer.setSize(window.innerWidth, window.innerHeight);
+        if (this.renderer) {
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
     },
 
     actualizarBarraProgreso: function (porcentaje) {
@@ -533,6 +521,7 @@ export const UIManager = {
         document.getElementById('ui-xp').innerText = GameState.xp;
         document.getElementById('ui-hectareas').innerText = GameState.hectareas;
         document.getElementById('ui-calidad').innerText = GameState.multiplicadorCosecha.toFixed(2);
+
         const uiDeudaContainer = document.getElementById('ui-deuda-container');
         if (GameState.deudaBancaria > 0) {
             uiDeudaContainer.style.display = 'block';
@@ -540,11 +529,13 @@ export const UIManager = {
         } else {
             uiDeudaContainer.style.display = 'none';
         }
+
         document.getElementById('fase-title').innerText = GameState.fases[GameState.faseActualIndex].nombre;
         const costoFase = TycoonEngine.obtenerCostoFase();
         const btnPagar = document.getElementById('btn-pagar');
         const btnPrestamo = document.getElementById('btn-prestamo');
         const progressContainer = document.getElementById('progress-container');
+
         if (!GameState.fasePagada) {
             progressContainer.style.display = 'none';
             if (GameState.capital >= costoFase) {

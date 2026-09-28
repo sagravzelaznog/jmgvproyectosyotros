@@ -11,21 +11,21 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              // Scripts: GeoGebra, PayPal, Firebase, Tailwind CDN, Google Fonts, KaTeX, MathJax
+              // Scripts: GeoGebra, PayPal, Firebase, Tailwind CDN, Google Fonts, KaTeX, MathJax, Three.js
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'" +
                 " https://www.geogebra.org https://cdn.geogebra.org https://geo.geogebra.org" +
                 " https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com" +
                 " https://cdn.tailwindcss.com" +
                 " https://fonts.googleapis.com" +
-                " https://cdn.jsdelivr.net" +
+                " https://cdn.jsdelivr.net https://cdnjs.cloudflare.com" +
                 " https://www.gstatic.com https://apis.google.com" +
                 " https://*.firebaseapp.com https://*.firebase.com",
               // Estilos
               "style-src 'self' 'unsafe-inline'" +
-                " https://fonts.googleapis.com https://cdn.jsdelivr.net",
+                " https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
               // Fuentes
               "font-src 'self' data:" +
-                " https://fonts.gstatic.com https://cdn.jsdelivr.net",
+                " https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
               // Imágenes
               "img-src 'self' data: blob: https: http:",
               // Iframes permitidos
@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
               // Conexiones de red (Firebase, GeoGebra, PayPal)
               "connect-src 'self'" +
                 " https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com" +
-                " wss://*.firebaseio.com" +
+                " wss://*.firebaseio.com https://www.gstatic.com" +
                 " https://www.geogebra.org https://cdn.geogebra.org https://geo.geogebra.org" +
                 " https://www.paypal.com https://api.paypal.com" +
                 " https://identitytoolkit.googleapis.com",

@@ -9,6 +9,7 @@ export const UIManager = {
     jugadorGroup: null,
     avatar: { cuerpo: null, brazos: [], piernas: [], herramienta: null },
     teclas: { w: false, a: false, s: false, d: false },
+    joystickData: { x: 0, y: 0, active: false }, // [NUEVO] Estado del Joystick
     velocidadJugador: 0.12,
     cameraOffset: new THREE.Vector3(12, 18, 12),
     isMoving: false,
@@ -17,7 +18,7 @@ export const UIManager = {
     // Entorno, Parcela y VFX
     parcelaGroup: null,
     plantasMeshes: [],
-    recolectables: [], // Objetos volando hacia el jugador
+    recolectables: [],
     particulasTierra: [],
     faseRenderizada: -1,
     porcentajeProgreso: 0,
@@ -38,13 +39,100 @@ export const UIManager = {
 
         this.inicializarThreeJS();
         this.configurarControles();
+
+        // [NUEVO] Inicializar controles táctiles
+        this.crearJoystickVirtual();
+
         window.addEventListener('resize', () => this.resize());
+    },
+
+    // [NUEVO] Creación del Joystick Virtual en el DOM
+    crearJoystickVirtual: function () {
+        // Solo inyectar si el dispositivo soporta eventos táctiles
+        if (!('ontouchstart' in window) && navigator.maxTouchPoints <= 0) return;
+
+        // Base del Joystick
+        const joystickBase = document.createElement('div');
+        joystickBase.id = 'joystick-base';
+        Object.assign(joystickBase.style, {
+            position: 'absolute',
+            bottom: '40px',
+            left: '40px',
+            width: '120px',
+            height: '120px',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '50%',
+            border: '3px solid rgba(255, 255, 255, 0.6)',
+            zIndex: '1000',
+            touchAction: 'none' // Evita que la pantalla haga scroll al usarlo
+        });
+
+        // Palanca del Joystick
+        const joystickStick = document.createElement('div');
+        joystickStick.id = 'joystick-stick';
+        Object.assign(joystickStick.style, {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '60px',
+            height: '60px',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            boxShadow: '0px 4px 6px rgba(0,0,0,0.3)'
+        });
+
+        joystickBase.appendChild(joystickStick);
+        document.body.appendChild(joystickBase);
+
+        const centro = 60; // Mitad de 120px
+        const maxRadio = 60;
+
+        const onTouchMove = (e) => {
+            e.preventDefault();
+            const touch = e.targetTouches[0];
+            const rect = joystickBase.getBoundingClientRect();
+
+            // Coordenadas relativas al centro del joystick
+            let dx = (touch.clientX - rect.left) - centro;
+            let dy = (touch.clientY - rect.top) - centro;
+
+            const distancia = Math.sqrt(dx * dx + dy * dy);
+
+            // Limitar la palanca al radio máximo
+            if (distancia > maxRadio) {
+                dx = (dx / distancia) * maxRadio;
+                dy = (dy / distancia) * maxRadio;
+            }
+
+            joystickStick.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+
+            // Normalizar valores analógicos entre -1 y 1
+            this.joystickData.x = dx / maxRadio;
+            this.joystickData.y = dy / maxRadio;
+            this.joystickData.active = true;
+        };
+
+        const onTouchEnd = (e) => {
+            e.preventDefault();
+            // Retornar al centro
+            joystickStick.style.transform = `translate(-50%, -50%)`;
+            this.joystickData.x = 0;
+            this.joystickData.y = 0;
+            this.joystickData.active = false;
+        };
+
+        joystickBase.addEventListener('touchstart', onTouchMove, { passive: false });
+        joystickBase.addEventListener('touchmove', onTouchMove, { passive: false });
+        joystickBase.addEventListener('touchend', onTouchEnd);
+        joystickBase.addEventListener('touchcancel', onTouchEnd);
     },
 
     inicializarThreeJS: function () {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x6AD4F0);
-        this.scene.fog = new THREE.Fog(0x6AD4F0, 20, 40); // Niebla para difuminar el horizonte
+        this.scene.fog = new THREE.Fog(0x6AD4F0, 20, 40);
 
         const aspect = window.innerWidth / window.innerHeight;
         const frustumSize = 15;
@@ -58,10 +146,14 @@ export const UIManager = {
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.domElement.id = 'game-canvas-3d';
-        this.renderer.domElement.style.position = 'absolute';
-        this.renderer.domElement.style.top = '0';
-        this.renderer.domElement.style.left = '0';
-        this.renderer.domElement.style.zIndex = '1';
+
+        // Evitar comportamientos táctiles por defecto (zoom, pull-to-refresh) en el canvas
+        Object.assign(this.renderer.domElement.style, {
+            position: 'absolute',
+            top: '0', left: '0',
+            zIndex: '1',
+            touchAction: 'none'
+        });
 
         const oldCanvas = document.getElementById('game-canvas');
         if (oldCanvas) oldCanvas.replaceWith(this.renderer.domElement);
@@ -90,20 +182,17 @@ export const UIManager = {
     },
 
     construirMundo: function () {
-        // Suelo Base
         const pasto = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshLambertMaterial({ color: 0x5DCC53 }));
         pasto.rotation.x = -Math.PI / 2;
         pasto.receiveShadow = true;
         pasto.position.y = -0.05;
         this.scene.add(pasto);
 
-        // Tierra de Cultivo
         const tierra = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), new THREE.MeshLambertMaterial({ color: 0x8B5A2B }));
         tierra.rotation.x = -Math.PI / 2;
         tierra.receiveShadow = true;
         this.scene.add(tierra);
 
-        // Cercas decorativas
         const cercaMat = new THREE.MeshLambertMaterial({ color: 0xd4a373 });
         const posteGeom = new THREE.BoxGeometry(0.2, 1, 0.2);
         const barraGeom = new THREE.BoxGeometry(9, 0.15, 0.1);
@@ -121,16 +210,15 @@ export const UIManager = {
             const barra2 = new THREE.Mesh(barraGeom, cercaMat);
             barra2.position.set(0, 0.3, 0);
             valla.add(barra1, barra2);
-
             valla.position.set(x, 0, z);
             valla.rotation.y = rotY;
             this.scene.add(valla);
         };
 
-        construirValla(0, -4.75, 0); // Norte
-        construirValla(0, 4.75, 0);  // Sur
-        construirValla(-4.75, 0, Math.PI / 2); // Oeste
-        construirValla(4.75, 0, Math.PI / 2);  // Este
+        construirValla(0, -4.75, 0);
+        construirValla(0, 4.75, 0);
+        construirValla(-4.75, 0, Math.PI / 2);
+        construirValla(4.75, 0, Math.PI / 2);
 
         this.parcelaGroup = new THREE.Group();
         this.scene.add(this.parcelaGroup);
@@ -143,18 +231,15 @@ export const UIManager = {
         const overolMat = new THREE.MeshLambertMaterial({ color: 0x2980b9 });
         const camisaMat = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
 
-        // Cuerpo (Torso)
         const cuerpo = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.7, 0.4), overolMat);
         cuerpo.position.y = 0.8;
         cuerpo.castShadow = true;
         this.avatar.cuerpo = cuerpo;
 
-        // Cabeza
         const cabeza = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), pielMat);
         cabeza.position.y = 0.65;
         cabeza.castShadow = true;
 
-        // Gorra
         const gorra = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.15, 0.6), camisaMat);
         gorra.position.set(0, 0.3, 0.05);
         const visera = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.05, 0.3), camisaMat);
@@ -162,11 +247,10 @@ export const UIManager = {
         cabeza.add(gorra, visera);
         cuerpo.add(cabeza);
 
-        // Brazos (Con pivote superior para rotar desde el hombro)
         const crearExtremidad = (mat, x, y) => {
             const grupo = new THREE.Group();
             const malla = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.4, 0.2), mat);
-            malla.position.y = -0.2; // Bajar la malla para que el pivote quede arriba
+            malla.position.y = -0.2;
             malla.castShadow = true;
             grupo.add(malla);
             grupo.position.set(x, y, 0);
@@ -178,13 +262,11 @@ export const UIManager = {
         cuerpo.add(brazoIzq, brazoDer);
         this.avatar.brazos = [brazoIzq, brazoDer];
 
-        // Piernas
         const piernaIzq = crearExtremidad(overolMat, -0.15, 0.45);
         const piernaDer = crearExtremidad(overolMat, 0.15, 0.45);
         this.jugadorGroup.add(cuerpo, piernaIzq, piernaDer);
         this.avatar.piernas = [piernaIzq, piernaDer];
 
-        // Herramienta (Azadón) conectada al brazo derecho
         const herramienta = new THREE.Group();
         const palo = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.8), new THREE.MeshLambertMaterial({ color: 0x8b4513 }));
         const filo = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.2, 0.3), new THREE.MeshLambertMaterial({ color: 0xbdc3c7 }));
@@ -192,7 +274,7 @@ export const UIManager = {
         herramienta.add(palo, filo);
         herramienta.position.set(0, -0.3, 0.2);
         herramienta.rotation.x = Math.PI / 2;
-        herramienta.visible = false; // Se muestra solo al trabajar
+        herramienta.visible = false;
         brazoDer.add(herramienta);
         this.avatar.herramienta = herramienta;
 
@@ -212,23 +294,40 @@ export const UIManager = {
         window.addEventListener('keyup', (e) => setTecla(e, false));
     },
 
+    // [MODIFICADO] Fusión de eventos Táctiles y de Teclado
     procesarMovimiento: function () {
         let movX = 0, movZ = 0;
+        let esAnalogo = false;
+
+        // Entradas de Teclado (Digitales: 0 o 1)
         if (this.teclas.w) movZ -= 1;
         if (this.teclas.s) movZ += 1;
         if (this.teclas.a) movX -= 1;
         if (this.teclas.d) movX += 1;
 
-        this.isMoving = (movX !== 0 || movZ !== 0);
+        // Entradas del Joystick Virtual (Análogas: de 0.0 a 1.0). Sobreescribe teclado si se usa.
+        if (this.joystickData.active) {
+            movX = this.joystickData.x;
+            movZ = this.joystickData.y;
+            esAnalogo = true;
+        }
+
+        // Zona muerta mínima para el joystick
+        this.isMoving = (Math.abs(movX) > 0.05 || Math.abs(movZ) > 0.05);
 
         if (this.isMoving) {
-            const length = Math.sqrt(movX * movX + movZ * movZ);
-            movX = (movX / length) * this.velocidadJugador;
-            movZ = (movZ / length) * this.velocidadJugador;
+            // Normalizar vectores digitales para evitar velocidad extra en diagonal
+            if (!esAnalogo) {
+                const length = Math.sqrt(movX * movX + movZ * movZ);
+                movX = movX / length;
+                movZ = movZ / length;
+            }
 
-            this.jugadorGroup.position.x += movX;
-            this.jugadorGroup.position.z += movZ;
+            // Aplicar velocidad al jugador
+            this.jugadorGroup.position.x += movX * this.velocidadJugador;
+            this.jugadorGroup.position.z += movZ * this.velocidadJugador;
 
+            // Rotación suave del avatar hacia donde camina
             const anguloDestino = Math.atan2(movX, movZ);
             const diff = anguloDestino - this.jugadorGroup.rotation.y;
             this.jugadorGroup.rotation.y += Math.atan2(Math.sin(diff), Math.cos(diff)) * 0.2;
@@ -243,24 +342,22 @@ export const UIManager = {
         const time = Date.now() * 0.015;
 
         if (this.isWorking) {
-            // Animación de trabajo (Picar)
             this.avatar.herramienta.visible = true;
-            this.avatar.brazos[1].rotation.x = Math.sin(time * 2) * -1 - 0.5; // Brazo derecho azadón
+            this.avatar.brazos[1].rotation.x = Math.sin(time * 2) * -1 - 0.5;
             this.avatar.brazos[0].rotation.x = 0;
             this.avatar.piernas[0].rotation.x = 0;
             this.avatar.piernas[1].rotation.x = 0;
-            this.avatar.cuerpo.rotation.x = 0.2; // Inclinarse un poco
+            this.avatar.cuerpo.rotation.x = 0.2;
         } else if (this.isMoving) {
-            // Animación de caminar (Walk Cycle procedural)
             this.avatar.herramienta.visible = false;
+            // Caminata
             this.avatar.piernas[0].rotation.x = Math.sin(time) * 0.6;
             this.avatar.piernas[1].rotation.x = Math.sin(time + Math.PI) * 0.6;
             this.avatar.brazos[0].rotation.x = Math.sin(time + Math.PI) * 0.5;
             this.avatar.brazos[1].rotation.x = Math.sin(time) * 0.5;
             this.avatar.cuerpo.rotation.x = 0;
-            this.avatar.cuerpo.position.y = 0.8 + Math.abs(Math.sin(time)) * 0.05; // Pequeño rebote
+            this.avatar.cuerpo.position.y = 0.8 + Math.abs(Math.sin(time)) * 0.05;
         } else {
-            // Reposo (Idle)
             this.avatar.herramienta.visible = false;
             this.avatar.piernas[0].rotation.x = THREE.MathUtils.lerp(this.avatar.piernas[0].rotation.x, 0, 0.1);
             this.avatar.piernas[1].rotation.x = THREE.MathUtils.lerp(this.avatar.piernas[1].rotation.x, 0, 0.1);
@@ -281,7 +378,7 @@ export const UIManager = {
         const distancia = this.jugadorGroup.position.distanceTo(centro);
 
         if (distancia < this.radioInteraccion) {
-            this.isWorking = !this.isMoving; // Trabaja si está quieto en la zona
+            this.isWorking = !this.isMoving;
             this.cooldownTrabajo++;
 
             if (this.isWorking && this.cooldownTrabajo > 10) {
@@ -299,7 +396,6 @@ export const UIManager = {
         const geom = new THREE.BoxGeometry(0.15, 0.15, 0.15);
         const particula = new THREE.Mesh(geom, mat);
 
-        // Frente al jugador
         const offsetFrontal = new THREE.Vector3(0, 0, 0.5);
         offsetFrontal.applyQuaternion(this.jugadorGroup.quaternion);
         particula.position.copy(origen).add(offsetFrontal);
@@ -313,11 +409,10 @@ export const UIManager = {
     },
 
     animarVFX: function () {
-        // Partículas de tierra
         for (let i = this.particulasTierra.length - 1; i >= 0; i--) {
             const p = this.particulasTierra[i];
             p.position.add(p.userData.vel);
-            p.userData.vel.y -= 0.01; // Gravedad
+            p.userData.vel.y -= 0.01;
             p.rotation.x += 0.2;
             p.userData.vida -= 0.05;
 
@@ -327,12 +422,10 @@ export const UIManager = {
             }
         }
 
-        // Aspiradora Magnética (Crops volando hacia el jugador)
         for (let i = this.recolectables.length - 1; i >= 0; i--) {
             const obj = this.recolectables[i];
-            // Curva parabólica hacia el jugador
             obj.position.lerp(this.jugadorGroup.position.clone().add(new THREE.Vector3(0, 1, 0)), 0.15);
-            obj.scale.multiplyScalar(0.9); // Se achican al llegar
+            obj.scale.multiplyScalar(0.9);
 
             if (obj.position.distanceTo(this.jugadorGroup.position) < 1.0 || obj.scale.x < 0.1) {
                 this.scene.remove(obj);
@@ -343,8 +436,6 @@ export const UIManager = {
 
     actualizarGeometrias: function () {
         const idx = GameState.faseActualIndex;
-
-        // Detección de Cosecha (Transición de Fase 12/13 -> 0)
         if (this.faseRenderizada >= 11 && idx === 0) {
             this.generarEfectoCosecha();
         }
@@ -388,10 +479,9 @@ export const UIManager = {
     },
 
     generarEfectoCosecha: function () {
-        // Convierte las plantas actuales en objetos voladores antes de limpiar la escena
         this.plantasMeshes.forEach(planta => {
             const volar = planta.clone();
-            volar.material = new THREE.MeshLambertMaterial({ color: 0xf1c40f }); // Dorados
+            volar.material = new THREE.MeshLambertMaterial({ color: 0xf1c40f });
             this.scene.add(volar);
             this.recolectables.push(volar);
         });
@@ -404,7 +494,6 @@ export const UIManager = {
             const escalaObjetivo = 0.2 + (crecimiento * 1.5);
 
             this.plantasMeshes.forEach(planta => {
-                // Efecto Pop
                 planta.scale.lerp(new THREE.Vector3(escalaObjetivo, escalaObjetivo, escalaObjetivo), 0.1);
             });
         }
@@ -434,7 +523,6 @@ export const UIManager = {
         if (this.renderer) this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
-    // (El resto de métodos de HUD: actualizarBarraProgreso, actualizarTextos, renderizarTienda, mostrarFlotante se mantienen idénticos a tu lógica base)
     actualizarBarraProgreso: function (porcentaje) {
         document.getElementById('progress-bar').style.width = `${porcentaje}%`;
         this.porcentajeProgreso = porcentaje;

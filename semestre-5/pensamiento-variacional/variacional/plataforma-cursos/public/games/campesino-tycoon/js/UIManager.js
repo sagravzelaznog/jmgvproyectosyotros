@@ -3,28 +3,28 @@ import { GameState } from './GameState.js';
 import { TycoonEngine } from './TycoonEngine.js';
 
 export const UIManager = {
-    // Entorno Three.js
-    scene: null,
-    camera: null,
-    renderer: null,
+    scene: null, camera: null, renderer: null,
 
-    // Avatar y Controles
-    jugador: null,
+    // Controles y Jugador
+    jugadorGroup: null,
+    avatar: { cuerpo: null, brazos: [], piernas: [], herramienta: null },
     teclas: { w: false, a: false, s: false, d: false },
-    velocidadJugador: 0.15,
-    cameraOffset: new THREE.Vector3(15, 20, 15),
+    velocidadJugador: 0.12,
+    cameraOffset: new THREE.Vector3(12, 18, 12),
+    isMoving: false,
+    isWorking: false,
 
-    // Entorno y Parcela
+    // Entorno, Parcela y VFX
     parcelaGroup: null,
-    surcosGroup: null,
     plantasMeshes: [],
+    recolectables: [], // Objetos volando hacia el jugador
+    particulasTierra: [],
     faseRenderizada: -1,
     porcentajeProgreso: 0,
-    radioInteraccion: 4.5, // Distancia para empezar a trabajar la tierra
+    radioInteraccion: 4.5,
     cooldownTrabajo: 0,
 
     init: function () {
-        // Interfaz DOM Clásica (HUD)
         document.getElementById('btn-pagar').addEventListener('click', () => TycoonEngine.intentarPagarInsumos());
         document.getElementById('btn-prestamo').addEventListener('click', () => TycoonEngine.pedirPrestamo());
         document.getElementById('shop-toggle').addEventListener('click', () => {
@@ -36,31 +36,27 @@ export const UIManager = {
         this.actualizarTextos();
         this.renderizarTienda();
 
-        // Inicializar Motor 3D Hyper-Casual
         this.inicializarThreeJS();
         this.configurarControles();
-
         window.addEventListener('resize', () => this.resize());
     },
 
     inicializarThreeJS: function () {
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x6AD4F0); // Cielo azul vibrante toon
+        this.scene.background = new THREE.Color(0x6AD4F0);
+        this.scene.fog = new THREE.Fog(0x6AD4F0, 20, 40); // Niebla para difuminar el horizonte
 
-        // Cámara Ortográfica para mantener estilo isométrico pero enfocada en el jugador
         const aspect = window.innerWidth / window.innerHeight;
-        const frustumSize = 18;
+        const frustumSize = 15;
         this.camera = new THREE.OrthographicCamera(
             frustumSize * aspect / -2, frustumSize * aspect / 2,
-            frustumSize / 2, frustumSize / -2,
-            1, 1000
+            frustumSize / 2, frustumSize / -2, 1, 1000
         );
 
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
         this.renderer.domElement.id = 'game-canvas-3d';
         this.renderer.domElement.style.position = 'absolute';
         this.renderer.domElement.style.top = '0';
@@ -71,7 +67,6 @@ export const UIManager = {
         if (oldCanvas) oldCanvas.replaceWith(this.renderer.domElement);
         else document.body.appendChild(this.renderer.domElement);
 
-        // Iluminación vibrante (estilo Toon/Casual)
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         this.scene.add(ambientLight);
 
@@ -80,178 +75,311 @@ export const UIManager = {
         dirLight.castShadow = true;
         dirLight.shadow.mapSize.width = 2048;
         dirLight.shadow.mapSize.height = 2048;
-        dirLight.shadow.camera.near = 0.1;
+        dirLight.shadow.camera.near = -10;
         dirLight.shadow.camera.far = 50;
-        dirLight.shadow.camera.left = -20;
-        dirLight.shadow.camera.right = 20;
-        dirLight.shadow.camera.top = 20;
-        dirLight.shadow.camera.bottom = -20;
+        dirLight.shadow.camera.left = -15;
+        dirLight.shadow.camera.right = 15;
+        dirLight.shadow.camera.top = 15;
+        dirLight.shadow.camera.bottom = -15;
         this.scene.add(dirLight);
 
         this.construirMundo();
-        this.crearJugador();
+        this.crearJugadorArticulado();
 
         this.animar();
     },
 
     construirMundo: function () {
-        // Mundo infinito verde (Pasto)
-        const pastoGeom = new THREE.PlaneGeometry(100, 100);
-        const pastoMat = new THREE.MeshLambertMaterial({ color: 0x5DCC53 }); // Verde vibrante
-        const pasto = new THREE.Mesh(pastoGeom, pastoMat);
+        // Suelo Base
+        const pasto = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshLambertMaterial({ color: 0x5DCC53 }));
         pasto.rotation.x = -Math.PI / 2;
         pasto.receiveShadow = true;
-        pasto.position.y = -0.1;
+        pasto.position.y = -0.05;
         this.scene.add(pasto);
 
-        // Zona de la Parcela (Tierra de cultivo)
-        const tierraGeom = new THREE.PlaneGeometry(10, 10);
-        const tierraMat = new THREE.MeshLambertMaterial({ color: 0x8B5A2B });
-        const tierra = new THREE.Mesh(tierraGeom, tierraMat);
+        // Tierra de Cultivo
+        const tierra = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), new THREE.MeshLambertMaterial({ color: 0x8B5A2B }));
         tierra.rotation.x = -Math.PI / 2;
         tierra.receiveShadow = true;
         this.scene.add(tierra);
+
+        // Cercas decorativas
+        const cercaMat = new THREE.MeshLambertMaterial({ color: 0xd4a373 });
+        const posteGeom = new THREE.BoxGeometry(0.2, 1, 0.2);
+        const barraGeom = new THREE.BoxGeometry(9, 0.15, 0.1);
+
+        const construirValla = (x, z, rotY) => {
+            const valla = new THREE.Group();
+            for (let i = -4.5; i <= 4.5; i += 1.5) {
+                const poste = new THREE.Mesh(posteGeom, cercaMat);
+                poste.position.set(i, 0.5, 0);
+                poste.castShadow = true;
+                valla.add(poste);
+            }
+            const barra1 = new THREE.Mesh(barraGeom, cercaMat);
+            barra1.position.set(0, 0.7, 0);
+            const barra2 = new THREE.Mesh(barraGeom, cercaMat);
+            barra2.position.set(0, 0.3, 0);
+            valla.add(barra1, barra2);
+
+            valla.position.set(x, 0, z);
+            valla.rotation.y = rotY;
+            this.scene.add(valla);
+        };
+
+        construirValla(0, -4.75, 0); // Norte
+        construirValla(0, 4.75, 0);  // Sur
+        construirValla(-4.75, 0, Math.PI / 2); // Oeste
+        construirValla(4.75, 0, Math.PI / 2);  // Este
 
         this.parcelaGroup = new THREE.Group();
         this.scene.add(this.parcelaGroup);
     },
 
-    crearJugador: function () {
-        this.jugador = new THREE.Group();
+    crearJugadorArticulado: function () {
+        this.jugadorGroup = new THREE.Group();
 
-        // Estética Low-Poly / Hyper-Casual (Cuerpo de cápsula/cilindro y cabeza grande)
-        const cuerpoMat = new THREE.MeshLambertMaterial({ color: 0x2980b9 }); // Overol azul
-        const pielMat = new THREE.MeshLambertMaterial({ color: 0xf1c27d }); // Piel
+        const pielMat = new THREE.MeshLambertMaterial({ color: 0xffcc99 });
+        const overolMat = new THREE.MeshLambertMaterial({ color: 0x2980b9 });
+        const camisaMat = new THREE.MeshLambertMaterial({ color: 0xe74c3c });
 
-        const cuerpo = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.8, 16), cuerpoMat);
-        cuerpo.position.y = 0.4;
+        // Cuerpo (Torso)
+        const cuerpo = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.7, 0.4), overolMat);
+        cuerpo.position.y = 0.8;
         cuerpo.castShadow = true;
+        this.avatar.cuerpo = cuerpo;
 
-        const cabeza = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), pielMat);
-        cabeza.position.y = 1.0;
+        // Cabeza
+        const cabeza = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), pielMat);
+        cabeza.position.y = 0.65;
         cabeza.castShadow = true;
 
-        // Añadir una pequeña gorra o indicador frontal para ver hacia dónde mira
-        const gorra = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.1, 0.4), new THREE.MeshLambertMaterial({ color: 0xe74c3c }));
-        gorra.position.set(0, 1.3, 0.1);
-        gorra.castShadow = true;
+        // Gorra
+        const gorra = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.15, 0.6), camisaMat);
+        gorra.position.set(0, 0.3, 0.05);
+        const visera = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.05, 0.3), camisaMat);
+        visera.position.set(0, 0.25, 0.4);
+        cabeza.add(gorra, visera);
+        cuerpo.add(cabeza);
 
-        this.jugador.add(cuerpo, cabeza, gorra);
-        this.jugador.position.set(0, 0, 5); // Inicia un poco fuera de la parcela
-        this.scene.add(this.jugador);
+        // Brazos (Con pivote superior para rotar desde el hombro)
+        const crearExtremidad = (mat, x, y) => {
+            const grupo = new THREE.Group();
+            const malla = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.4, 0.2), mat);
+            malla.position.y = -0.2; // Bajar la malla para que el pivote quede arriba
+            malla.castShadow = true;
+            grupo.add(malla);
+            grupo.position.set(x, y, 0);
+            return grupo;
+        };
+
+        const brazoIzq = crearExtremidad(camisaMat, -0.4, 0.2);
+        const brazoDer = crearExtremidad(camisaMat, 0.4, 0.2);
+        cuerpo.add(brazoIzq, brazoDer);
+        this.avatar.brazos = [brazoIzq, brazoDer];
+
+        // Piernas
+        const piernaIzq = crearExtremidad(overolMat, -0.15, 0.45);
+        const piernaDer = crearExtremidad(overolMat, 0.15, 0.45);
+        this.jugadorGroup.add(cuerpo, piernaIzq, piernaDer);
+        this.avatar.piernas = [piernaIzq, piernaDer];
+
+        // Herramienta (Azadón) conectada al brazo derecho
+        const herramienta = new THREE.Group();
+        const palo = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.8), new THREE.MeshLambertMaterial({ color: 0x8b4513 }));
+        const filo = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.2, 0.3), new THREE.MeshLambertMaterial({ color: 0xbdc3c7 }));
+        filo.position.set(0, 0.3, 0.15);
+        herramienta.add(palo, filo);
+        herramienta.position.set(0, -0.3, 0.2);
+        herramienta.rotation.x = Math.PI / 2;
+        herramienta.visible = false; // Se muestra solo al trabajar
+        brazoDer.add(herramienta);
+        this.avatar.herramienta = herramienta;
+
+        this.jugadorGroup.position.set(0, 0, 6);
+        this.scene.add(this.jugadorGroup);
     },
 
     configurarControles: function () {
-        window.addEventListener('keydown', (e) => {
+        const setTecla = (e, estado) => {
             const key = e.key.toLowerCase();
-            if (this.teclas.hasOwnProperty(key) || key === 'arrowup' || key === 'arrowdown' || key === 'arrowleft' || key === 'arrowright') {
-                if (key === 'w' || key === 'arrowup') this.teclas.w = true;
-                if (key === 's' || key === 'arrowdown') this.teclas.s = true;
-                if (key === 'a' || key === 'arrowleft') this.teclas.a = true;
-                if (key === 'd' || key === 'arrowright') this.teclas.d = true;
-            }
-        });
-
-        window.addEventListener('keyup', (e) => {
-            const key = e.key.toLowerCase();
-            if (key === 'w' || key === 'arrowup') this.teclas.w = false;
-            if (key === 's' || key === 'arrowdown') this.teclas.s = false;
-            if (key === 'a' || key === 'arrowleft') this.teclas.a = false;
-            if (key === 'd' || key === 'arrowright') this.teclas.d = false;
-        });
+            if (key === 'w' || key === 'arrowup') this.teclas.w = estado;
+            if (key === 's' || key === 'arrowdown') this.teclas.s = estado;
+            if (key === 'a' || key === 'arrowleft') this.teclas.a = estado;
+            if (key === 'd' || key === 'arrowright') this.teclas.d = estado;
+        };
+        window.addEventListener('keydown', (e) => setTecla(e, true));
+        window.addEventListener('keyup', (e) => setTecla(e, false));
     },
 
     procesarMovimiento: function () {
-        let movX = 0;
-        let movZ = 0;
-
+        let movX = 0, movZ = 0;
         if (this.teclas.w) movZ -= 1;
         if (this.teclas.s) movZ += 1;
         if (this.teclas.a) movX -= 1;
         if (this.teclas.d) movX += 1;
 
-        if (movX !== 0 || movZ !== 0) {
-            // Normalizar vector para evitar movimiento diagonal más rápido
+        this.isMoving = (movX !== 0 || movZ !== 0);
+
+        if (this.isMoving) {
             const length = Math.sqrt(movX * movX + movZ * movZ);
             movX = (movX / length) * this.velocidadJugador;
             movZ = (movZ / length) * this.velocidadJugador;
 
-            this.jugador.position.x += movX;
-            this.jugador.position.z += movZ;
+            this.jugadorGroup.position.x += movX;
+            this.jugadorGroup.position.z += movZ;
 
-            // Rotar jugador hacia la dirección del movimiento
             const anguloDestino = Math.atan2(movX, movZ);
-            // Lerp para rotación suave
-            const diff = anguloDestino - this.jugador.rotation.y;
-            this.jugador.rotation.y += Math.atan2(Math.sin(diff), Math.cos(diff)) * 0.2;
+            const diff = anguloDestino - this.jugadorGroup.rotation.y;
+            this.jugadorGroup.rotation.y += Math.atan2(Math.sin(diff), Math.cos(diff)) * 0.2;
         }
 
-        // Actualizar Cámara (Sigue al jugador fluidamente)
-        const posObjetivoCamara = this.jugador.position.clone().add(this.cameraOffset);
-        this.camera.position.lerp(posObjetivoCamara, 0.1);
-        this.camera.lookAt(this.jugador.position);
+        const posObjetivo = this.jugadorGroup.position.clone().add(this.cameraOffset);
+        this.camera.position.lerp(posObjetivo, 0.1);
+        this.camera.lookAt(this.jugadorGroup.position);
+    },
+
+    animarAvatar: function () {
+        const time = Date.now() * 0.015;
+
+        if (this.isWorking) {
+            // Animación de trabajo (Picar)
+            this.avatar.herramienta.visible = true;
+            this.avatar.brazos[1].rotation.x = Math.sin(time * 2) * -1 - 0.5; // Brazo derecho azadón
+            this.avatar.brazos[0].rotation.x = 0;
+            this.avatar.piernas[0].rotation.x = 0;
+            this.avatar.piernas[1].rotation.x = 0;
+            this.avatar.cuerpo.rotation.x = 0.2; // Inclinarse un poco
+        } else if (this.isMoving) {
+            // Animación de caminar (Walk Cycle procedural)
+            this.avatar.herramienta.visible = false;
+            this.avatar.piernas[0].rotation.x = Math.sin(time) * 0.6;
+            this.avatar.piernas[1].rotation.x = Math.sin(time + Math.PI) * 0.6;
+            this.avatar.brazos[0].rotation.x = Math.sin(time + Math.PI) * 0.5;
+            this.avatar.brazos[1].rotation.x = Math.sin(time) * 0.5;
+            this.avatar.cuerpo.rotation.x = 0;
+            this.avatar.cuerpo.position.y = 0.8 + Math.abs(Math.sin(time)) * 0.05; // Pequeño rebote
+        } else {
+            // Reposo (Idle)
+            this.avatar.herramienta.visible = false;
+            this.avatar.piernas[0].rotation.x = THREE.MathUtils.lerp(this.avatar.piernas[0].rotation.x, 0, 0.1);
+            this.avatar.piernas[1].rotation.x = THREE.MathUtils.lerp(this.avatar.piernas[1].rotation.x, 0, 0.1);
+            this.avatar.brazos[0].rotation.x = THREE.MathUtils.lerp(this.avatar.brazos[0].rotation.x, 0, 0.1);
+            this.avatar.brazos[1].rotation.x = THREE.MathUtils.lerp(this.avatar.brazos[1].rotation.x, 0, 0.1);
+            this.avatar.cuerpo.rotation.x = THREE.MathUtils.lerp(this.avatar.cuerpo.rotation.x, 0, 0.1);
+            this.avatar.cuerpo.position.y = 0.8;
+        }
     },
 
     procesarProximidadLaboral: function () {
-        if (!GameState.fasePagada) return;
+        if (!GameState.fasePagada) {
+            this.isWorking = false;
+            return;
+        }
 
-        // La parcela está en el origen (0,0,0). Verificamos si el jugador está sobre ella.
-        const centroParcela = new THREE.Vector3(0, 0, 0);
-        const distancia = this.jugador.position.distanceTo(centroParcela);
+        const centro = new THREE.Vector3(0, 0, 0);
+        const distancia = this.jugadorGroup.position.distanceTo(centro);
 
         if (distancia < this.radioInteraccion) {
+            this.isWorking = !this.isMoving; // Trabaja si está quieto en la zona
             this.cooldownTrabajo++;
-            // Simulamos clics rápidos y continuos mientras el jugador está sobre la tierra
-            if (this.cooldownTrabajo > 5) { // Ejecuta cada ~5 frames
-                TycoonEngine.agregarProgreso(GameState.poderClicBase * 0.5, true);
-                this.cooldownTrabajo = 0;
 
-                // Efecto de rebote del jugador simulando que está "trabajando"
-                this.jugador.position.y = 0.1 + Math.sin(Date.now() * 0.02) * 0.1;
+            if (this.isWorking && this.cooldownTrabajo > 10) {
+                TycoonEngine.agregarProgreso(GameState.poderClicBase, true);
+                this.crearParticulaTierra(this.jugadorGroup.position);
+                this.cooldownTrabajo = 0;
             }
         } else {
-            this.jugador.position.y = 0; // Restaurar altura si sale
+            this.isWorking = false;
+        }
+    },
+
+    crearParticulaTierra: function (origen) {
+        const mat = new THREE.MeshBasicMaterial({ color: 0x6e4b33 });
+        const geom = new THREE.BoxGeometry(0.15, 0.15, 0.15);
+        const particula = new THREE.Mesh(geom, mat);
+
+        // Frente al jugador
+        const offsetFrontal = new THREE.Vector3(0, 0, 0.5);
+        offsetFrontal.applyQuaternion(this.jugadorGroup.quaternion);
+        particula.position.copy(origen).add(offsetFrontal);
+
+        particula.userData = {
+            vel: new THREE.Vector3((Math.random() - 0.5) * 0.1, 0.1 + Math.random() * 0.1, (Math.random() - 0.5) * 0.1),
+            vida: 1.0
+        };
+        this.scene.add(particula);
+        this.particulasTierra.push(particula);
+    },
+
+    animarVFX: function () {
+        // Partículas de tierra
+        for (let i = this.particulasTierra.length - 1; i >= 0; i--) {
+            const p = this.particulasTierra[i];
+            p.position.add(p.userData.vel);
+            p.userData.vel.y -= 0.01; // Gravedad
+            p.rotation.x += 0.2;
+            p.userData.vida -= 0.05;
+
+            if (p.userData.vida <= 0 || p.position.y < 0) {
+                this.scene.remove(p);
+                this.particulasTierra.splice(i, 1);
+            }
+        }
+
+        // Aspiradora Magnética (Crops volando hacia el jugador)
+        for (let i = this.recolectables.length - 1; i >= 0; i--) {
+            const obj = this.recolectables[i];
+            // Curva parabólica hacia el jugador
+            obj.position.lerp(this.jugadorGroup.position.clone().add(new THREE.Vector3(0, 1, 0)), 0.15);
+            obj.scale.multiplyScalar(0.9); // Se achican al llegar
+
+            if (obj.position.distanceTo(this.jugadorGroup.position) < 1.0 || obj.scale.x < 0.1) {
+                this.scene.remove(obj);
+                this.recolectables.splice(i, 1);
+            }
         }
     },
 
     actualizarGeometrias: function () {
         const idx = GameState.faseActualIndex;
+
+        // Detección de Cosecha (Transición de Fase 12/13 -> 0)
+        if (this.faseRenderizada >= 11 && idx === 0) {
+            this.generarEfectoCosecha();
+        }
+
         if (this.faseRenderizada === idx) return;
         this.faseRenderizada = idx;
 
         while (this.parcelaGroup.children.length > 0) {
-            const child = this.parcelaGroup.children[0];
-            this.parcelaGroup.remove(child);
+            this.parcelaGroup.remove(this.parcelaGroup.children[0]);
         }
         this.plantasMeshes = [];
 
-        // Distribuimos los objetos en una cuadrícula más pequeña para ajustarse a la zona de 10x10
         if (idx === 0) {
-            const rocaGeom = new THREE.DodecahedronGeometry(0.4);
-            const rocaMat = new THREE.MeshLambertMaterial({ color: 0x888888 });
-
-            for (let i = 0; i < 15; i++) {
+            const rocaGeom = new THREE.DodecahedronGeometry(0.3);
+            const rocaMat = new THREE.MeshLambertMaterial({ color: 0x95a5a6 });
+            for (let i = 0; i < 20; i++) {
                 const roca = new THREE.Mesh(rocaGeom, rocaMat);
-                roca.position.set((Math.random() - 0.5) * 8, 0.2, (Math.random() - 0.5) * 8);
+                roca.position.set((Math.random() - 0.5) * 8, 0.1, (Math.random() - 0.5) * 8);
                 roca.castShadow = true;
                 this.parcelaGroup.add(roca);
             }
         }
         else if (idx >= 5 && idx <= 12) {
             const esCosecha = (idx >= 11);
-            const colorPlanta = esCosecha ? 0xFFD700 : 0x32CD32; // Oro o Verde brillante Toon
-
-            const plantaGeom = new THREE.SphereGeometry(0.4, 8, 8); // Plantas redondas estilo cartoon
-            plantaGeom.translate(0, 0.4, 0);
+            const colorPlanta = esCosecha ? 0xf1c40f : 0x2ecc71;
+            const plantaGeom = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+            plantaGeom.translate(0, 0.25, 0);
             const plantaMat = new THREE.MeshLambertMaterial({ color: colorPlanta });
 
-            for (let x = -4; x <= 4; x += 2) {
-                for (let z = -4; z <= 4; z += 2) {
+            for (let x = -3.5; x <= 3.5; x += 1.5) {
+                for (let z = -3.5; z <= 3.5; z += 1.5) {
                     const planta = new THREE.Mesh(plantaGeom, plantaMat);
-                    planta.position.set(x + (Math.random() - 0.5) * 0.5, 0, z + (Math.random() - 0.5) * 0.5);
+                    planta.position.set(x + (Math.random() - 0.5) * 0.3, 0, z + (Math.random() - 0.5) * 0.3);
                     planta.castShadow = true;
                     planta.scale.set(0.1, 0.1, 0.1);
-
                     this.parcelaGroup.add(planta);
                     this.plantasMeshes.push(planta);
                 }
@@ -259,36 +387,43 @@ export const UIManager = {
         }
     },
 
+    generarEfectoCosecha: function () {
+        // Convierte las plantas actuales en objetos voladores antes de limpiar la escena
+        this.plantasMeshes.forEach(planta => {
+            const volar = planta.clone();
+            volar.material = new THREE.MeshLambertMaterial({ color: 0xf1c40f }); // Dorados
+            this.scene.add(volar);
+            this.recolectables.push(volar);
+        });
+    },
+
     animarPlantas: function () {
         const idx = GameState.faseActualIndex;
         if (idx >= 5 && idx <= 12) {
-            const faseNormalizada = idx - 5;
-            const progresoSubFase = this.porcentajeProgreso / 100;
-            const crecimientoTotal = (faseNormalizada + progresoSubFase) / 7.0;
+            const crecimiento = ((idx - 5) + (this.porcentajeProgreso / 100)) / 7.0;
+            const escalaObjetivo = 0.2 + (crecimiento * 1.5);
 
-            const escalaObjetivo = 0.2 + (crecimientoTotal * 1.5); // Escala en los 3 ejes para estilo cartoon
-
-            for (let i = 0; i < this.plantasMeshes.length; i++) {
-                const planta = this.plantasMeshes[i];
-                planta.scale.lerp(new THREE.Vector3(escalaObjetivo, escalaObjetivo, escalaObjetivo), 0.05);
-            }
+            this.plantasMeshes.forEach(planta => {
+                // Efecto Pop
+                planta.scale.lerp(new THREE.Vector3(escalaObjetivo, escalaObjetivo, escalaObjetivo), 0.1);
+            });
         }
     },
 
     animar: function () {
         requestAnimationFrame(() => this.animar());
-
         this.procesarMovimiento();
         this.procesarProximidadLaboral();
+        this.animarAvatar();
         this.actualizarGeometrias();
         this.animarPlantas();
-
+        this.animarVFX();
         this.renderer.render(this.scene, this.camera);
     },
 
     resize: function () {
         const aspect = window.innerWidth / window.innerHeight;
-        const frustumSize = 18;
+        const frustumSize = 15;
         if (this.camera) {
             this.camera.left = -frustumSize * aspect / 2;
             this.camera.right = frustumSize * aspect / 2;
@@ -299,6 +434,7 @@ export const UIManager = {
         if (this.renderer) this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
 
+    // (El resto de métodos de HUD: actualizarBarraProgreso, actualizarTextos, renderizarTienda, mostrarFlotante se mantienen idénticos a tu lógica base)
     actualizarBarraProgreso: function (porcentaje) {
         document.getElementById('progress-bar').style.width = `${porcentaje}%`;
         this.porcentajeProgreso = porcentaje;
@@ -309,7 +445,6 @@ export const UIManager = {
         document.getElementById('ui-xp').innerText = GameState.xp;
         document.getElementById('ui-hectareas').innerText = GameState.hectareas;
         document.getElementById('ui-calidad').innerText = GameState.multiplicadorCosecha.toFixed(2);
-
         const uiDeudaContainer = document.getElementById('ui-deuda-container');
         if (GameState.deudaBancaria > 0) {
             uiDeudaContainer.style.display = 'block';
@@ -317,14 +452,11 @@ export const UIManager = {
         } else {
             uiDeudaContainer.style.display = 'none';
         }
-
-        const costoFase = TycoonEngine.obtenerCostoFase();
         document.getElementById('fase-title').innerText = GameState.fases[GameState.faseActualIndex].nombre;
-
+        const costoFase = TycoonEngine.obtenerCostoFase();
         const btnPagar = document.getElementById('btn-pagar');
         const btnPrestamo = document.getElementById('btn-prestamo');
         const progressContainer = document.getElementById('progress-container');
-
         if (!GameState.fasePagada) {
             progressContainer.style.display = 'none';
             if (GameState.capital >= costoFase) {
@@ -357,12 +489,7 @@ export const UIManager = {
                 const costoActual = Math.floor(upg.costoBase * Math.pow(upg.multCosto, upg.nivel));
                 let puedeComprar = !esMaximo && GameState.capital >= costoActual;
                 let textoBoton = esMaximo ? 'MÁX' : '$' + costoActual;
-
-                if (upg.id === 'fertilizante' && GameState.faseActualIndex > 6) {
-                    puedeComprar = false;
-                    textoBoton = 'TARDE';
-                }
-
+                if (upg.id === 'fertilizante' && GameState.faseActualIndex > 6) { puedeComprar = false; textoBoton = 'TARDE'; }
                 div.innerHTML = `
                     <div class="upgrade-info">
                         <h4>${upg.nombre} ${upg.maxNivel === 1 ? '' : '(Nvl. ' + upg.nivel + ')'}</h4>
@@ -372,11 +499,8 @@ export const UIManager = {
                 `;
             }
             container.appendChild(div);
-
             const btn = document.getElementById(`buy-${upg.id}`);
-            if (btn && !btn.disabled) {
-                btn.addEventListener('click', () => TycoonEngine.comprarMejora(upg.id));
-            }
+            if (btn && !btn.disabled) btn.addEventListener('click', () => TycoonEngine.comprarMejora(upg.id));
         });
     },
 
@@ -385,9 +509,7 @@ export const UIManager = {
         el.className = 'floating-text';
         el.innerText = texto;
         el.style.position = 'absolute';
-        // Si el usuario ya no hace clic, los flotantes del motor (como XP o cosechas) aparecerán sobre el jugador
         if (x === window.innerWidth / 2) {
-            // Posicionar el flotante encima de la cabeza del avatar en el HTML
             el.style.left = `50%`;
             el.style.top = `40%`;
             el.style.transform = 'translate(-50%, -50%)';
@@ -395,12 +517,11 @@ export const UIManager = {
             el.style.left = `${x}px`;
             el.style.top = `${y}px`;
         }
-
         el.style.color = color;
         el.style.zIndex = '100';
-        el.style.fontWeight = 'bold';
-        el.style.fontSize = '24px'; // Más grande para el estilo casual
-        el.style.textShadow = '2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000';
+        el.style.fontWeight = '900';
+        el.style.fontSize = '28px';
+        el.style.textShadow = '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000';
         document.body.appendChild(el);
         setTimeout(() => el.remove(), 1200);
     }

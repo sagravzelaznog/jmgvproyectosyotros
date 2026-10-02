@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustitución con 2 Incógnitas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen font-sans p-6">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+        <header class="mb-8 text-center border-b border-slate-200 pb-6">
+            <h1 class="text-3xl font-extrabold text-indigo-800 mb-2">Método de Sustitución (2x2)</h1>
+            <p class="text-slate-500 font-medium">Resuelve los siguientes sistemas de ecuaciones lineales y encuentra el valor de x e y.</p>
+        </header>
+
+        <main id="app-container" class="flex flex-col gap-8 mb-8"></main>
+
+        <div class="flex justify-center mt-8">
+            <button id="btn-submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-lg">
+                Evaluar Respuestas
+            </button>
+        </div>
+        
+        <div id="evaluation-feedback" class="mt-8 hidden text-center"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.AppState = { totalExercises: 5, exercises: [] };
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateSystem() {
+            let a1, b1, a2, b2, x, y;
+            do {
+                a1 = getRandomInt(-5, 5);
+                b1 = getRandomInt(-5, 5);
+                a2 = getRandomInt(-5, 5);
+                b2 = getRandomInt(-5, 5);
+                if (a1 === 0) a1 = 1;
+                if (b1 === 0) b1 = 1;
+                if (a2 === 0) a2 = 1;
+                if (b2 === 0) b2 = 1;
+            } while ((a1 * b2) - (b1 * a2) === 0);
+            
+            x = getRandomInt(-10, 10);
+            y = getRandomInt(-10, 10);
+            
+            const c1 = a1 * x + b1 * y;
+            const c2 = a2 * x + b2 * y;
+
+            return { a1, b1, c1, a2, b2, c2, x, y };
+        }
+
+        function formatTerm(coeff, variable, isFirst) {
+            if (coeff === 0) return "";
+            let sign = coeff > 0 ? (isFirst ? "" : "+") : "-";
+            let absCoeff = Math.abs(coeff);
+            let coeffStr = absCoeff === 1 ? "" : absCoeff;
+            return `${sign} ${coeffStr}${variable}`;
+        }
+
+        function renderApp() {
+            const container = document.getElementById('app-container');
+            let html = '';
+
+            for (let i = 0; i < window.AppState.totalExercises; i++) {
+                const sys = generateSystem();
+                window.AppState.exercises.push(sys);
+
+                const eq1 = `${formatTerm(sys.a1, 'x', true)} ${formatTerm(sys.b1, 'y', false)} = ${sys.c1}`;
+                const eq2 = `${formatTerm(sys.a2, 'x', true)} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
+
+                html += `
+                    <div id="exercise-card-${i}" class="bg-indigo-50/30 rounded-xl p-6 border border-slate-200 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm font-bold text-indigo-400 uppercase tracking-widest">Sistema ${i + 1}</span>
+                        </div>
+                        <div class="text-2xl text-slate-800 text-center mb-6">
+                            $$ \\begin{cases} ${eq1} \\\\ ${eq2} \\end{cases} $$
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-bold text-slate-700">x = </span>
+                                <input id="ans-x-${i}" type="number" class="exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all">
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-bold text-slate-700">y = </span>
+                                <input id="ans-y-${i}" type="number" class="exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all">
+                            </div>
+                        </div>
+                        
+                        <details id="details-${i}" class="hidden mt-6 bg-white rounded-lg p-4 border border-indigo-100 shadow-sm">
+                            <summary class="font-bold text-indigo-700 cursor-pointer flex items-center justify-center">
+                                Mostrar solución correcta
+                            </summary>
+                            <div class="mt-4 text-slate-600 text-center">
+                                <p>La solución del sistema es:</p>
+                                <div class="font-bold text-xl mt-2">
+                                    $$ x = ${sys.x} \\quad ; \\quad y = ${sys.y} $$
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+            
+            setTimeout(() => {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }, 100);
+        }
+
+        renderApp();
+
+        const btnSubmit = document.getElementById('btn-submit');
+        const feedbackContainer = document.getElementById('evaluation-feedback');
+
+        window.evaluateExercises = function() {
+            let correctCount = 0;
+            const total = window.AppState.totalExercises;
+
+            for (let i = 0; i < total; i++) {
+                const sys = window.AppState.exercises[i];
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`exercise-card-${i}`);
+                const details = document.getElementById(`details-${i}`);
+
+                const valX = parseInt(inputX.value, 10);
+                const valY = parseInt(inputY.value, 10);
+
+                inputX.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-green-500', 'bg-green-50', 'text-green-700');
+                inputY.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-green-500', 'bg-green-50', 'text-green-700');
+
+                if (valX === sys.x && valY === sys.y) {
+                    correctCount++;
+                    inputX.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
+                    inputY.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
+                    card.classList.add('ring-2', 'ring-green-400', 'border-green-400');
+                } else {
+                    if (valX !== sys.x) inputX.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
+                    else inputX.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
+
+                    if (valY !== sys.y) inputY.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
+                    else inputY.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
+
+                    card.classList.add('ring-2', 'ring-red-400', 'border-red-400');
+                }
+
+                details.classList.remove('hidden');
+                details.open = false;
+
+                inputX.disabled = true;
+                inputY.disabled = true;
+            }
+
+            renderFeedback(correctCount, total);
+        }
+
+        async function renderFeedback(correctCount, total) {
+            btnSubmit.classList.add('hidden');
+            feedbackContainer.classList.remove('hidden');
+
+            const passed = correctCount >= 4;
+
+            if (passed) {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 p-6 rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-bold mb-2">¡Excelente Trabajo!</h3>
+                        <p class="text-lg mb-4">Aprobaste con ${correctCount} de ${total} sistemas correctos.</p>
+                        <p id="firebase-status" class="text-sm font-semibold text-emerald-600 animate-pulse">Guardando progreso en la base de datos...</p>
+                    </div>
+                `;
+                await saveProgressToFirebase(correctCount);
+            } else {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-red-100 border border-red-300 text-red-800 p-6 rounded-xl shadow-sm">
+                        <h3 class="text-2xl font-bold mb-2">Puntuación Insuficiente</h3>
+                        <p class="text-lg mb-4">Obtuviste ${correctCount} de ${total}. Se requiere al menos un 80% (4/5) para aprobar.</p>
+                        <button id="btn-retry" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow transition-colors mt-2">
+                            Reintentar
+                        </button>
+                    </div>
+                `;
+                document.getElementById('btn-retry').addEventListener('click', window.hotRetry);
+            }
+        }
+
+        window.hotRetry = function() {
+            const total = window.AppState.totalExercises;
+
+            for (let i = 0; i < total; i++) {
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`exercise-card-${i}`);
+                const details = document.getElementById(`details-${i}`);
+
+                inputX.disabled = false;
+                inputY.disabled = false;
+                inputX.value = '';
+                inputY.value = '';
+
+                inputX.className = "exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all";
+                inputY.className = "exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all";
+
+                card.classList.remove('ring-2', 'ring-green-400', 'border-green-400', 'ring-red-400', 'border-red-400');
+
+                details.classList.add('hidden');
+                details.open = false;
+            }
+
+            feedbackContainer.classList.add('hidden');
+            btnSubmit.classList.remove('hidden');
+
+            document.getElementById('exercise-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        async function saveProgressToFirebase(score) {
+            const statusElement = document.getElementById('firebase-status');
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    const progressRef = doc(db, "estudiantes", user.uid, "progreso_sesiones", "sesion_sustitucion");
+                    await setDoc(progressRef, {
+                        score: score,
+                        metodo: "sustitucion",
+                        aprobado: true,
+                        timestamp: serverTimestamp()
+                    });
+                    statusElement.innerText = "✓ Progreso guardado exitosamente en Firebase.";
+                    statusElement.classList.remove('animate-pulse');
+                } else {
+                    statusElement.innerText = "⚠ Completado localmente. (Usuario no autenticado en Firebase).";
+                    statusElement.classList.remove('animate-pulse', 'text-emerald-600');
+                    statusElement.classList.add('text-amber-600');
+                }
+            } catch (error) {
+                console.error("Error al guardar en Firebase:", error);
+                statusElement.innerText = "✖ Error de conexión al guardar el progreso.";
+                statusElement.classList.remove('animate-pulse', 'text-emerald-600');
+                statusElement.classList.add('text-red-600');
+            }
+        }
+
+        btnSubmit.addEventListener('click', window.evaluateExercises);
+        
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("Firebase Auth: Estudiante autenticado ->", user.uid);
+            } else {
+                console.log("Firebase Auth: Estudiante operando como invitado.");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -88,6 +88,54 @@
             return `${sign} ${coeffStr}${variable}`;
         }
 
+        function generateStepByStepHTML(sys) {
+            let step1 = `1. Despejamos $x$ de la primera ecuación:`;
+            let eq1_orig = `${formatTerm(sys.a1, 'x', true)} ${formatTerm(sys.b1, 'y', false)} = ${sys.c1}`;
+            let eq1_step1 = `${formatTerm(sys.a1, 'x', true)} = ${sys.c1} ${formatTerm(-sys.b1, 'y', false)}`;
+            
+            let x_expr;
+            if (sys.a1 === 1) {
+                x_expr = `${sys.c1} ${formatTerm(-sys.b1, 'y', false)}`;
+            } else if (sys.a1 === -1) {
+                x_expr = `${-sys.c1} ${formatTerm(sys.b1, 'y', false)}`;
+            } else {
+                x_expr = `\\frac{${sys.c1} ${formatTerm(-sys.b1, 'y', false)}}{${sys.a1}}`;
+            }
+            
+            let step1_math = `$$ \\begin{aligned} ${eq1_orig} \\\\ ${eq1_step1} \\\\ x &= ${x_expr} \\end{aligned} $$`;
+
+            let step2 = `2. Sustituimos $x$ en la segunda ecuación y resolvemos para $y$:`;
+            let eq2_orig = `${formatTerm(sys.a2, 'x', true)} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
+            
+            let subst_expr = sys.a1 === 1 || sys.a1 === -1 ? `(${x_expr})` : `\\left( ${x_expr} \\right)`;
+            let eq2_subst = `${formatTerm(sys.a2, '', true)}${subst_expr} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
+            
+            let step2_math = `$$ \\begin{aligned} ${eq2_orig} \\\\ ${eq2_subst} \\\\ y &= ${sys.y} \\end{aligned} $$`;
+
+            let step3 = `3. Sustituimos el valor de $y$ en la ecuación despejada de $x$:`;
+            let step3_math = `$$ \\begin{aligned} x &= ${x_expr.replace('y', `(${sys.y})`)} \\\\ x &= ${sys.x} \\end{aligned} $$`;
+
+            return `
+                <div class="text-left text-slate-700 text-sm md:text-base space-y-4 mt-4 bg-indigo-50/50 p-6 rounded-xl border border-indigo-100">
+                    <div>
+                        <p class="font-semibold text-indigo-800">${step1}</p>
+                        ${step1_math}
+                    </div>
+                    <div class="border-t border-indigo-100 pt-4">
+                        <p class="font-semibold text-indigo-800">${step2}</p>
+                        ${step2_math}
+                    </div>
+                    <div class="border-t border-indigo-100 pt-4">
+                        <p class="font-semibold text-indigo-800">${step3}</p>
+                        ${step3_math}
+                    </div>
+                    <div class="font-bold text-center text-xl mt-6 text-indigo-700 bg-white p-3 rounded-lg shadow-sm">
+                        Solución Final: $x = ${sys.x} \\quad ; \\quad y = ${sys.y}$
+                    </div>
+                </div>
+            `;
+        }
+
         function renderApp() {
             const container = document.getElementById('app-container');
             let html = '';
@@ -98,6 +146,8 @@
 
                 const eq1 = `${formatTerm(sys.a1, 'x', true)} ${formatTerm(sys.b1, 'y', false)} = ${sys.c1}`;
                 const eq2 = `${formatTerm(sys.a2, 'x', true)} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
+                
+                const stepByStepHTML = generateStepByStepHTML(sys);
 
                 html += `
                     <div id="exercise-card-${i}" class="bg-indigo-50/30 rounded-xl p-6 border border-slate-200 transition-all">
@@ -119,15 +169,11 @@
                         </div>
                         
                         <details id="details-${i}" class="hidden mt-6 bg-white rounded-lg p-4 border border-indigo-100 shadow-sm">
-                            <summary class="font-bold text-indigo-700 cursor-pointer flex items-center justify-center">
-                                Mostrar solución correcta
+                            <summary class="font-bold text-indigo-700 cursor-pointer flex items-center justify-center hover:text-indigo-800">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Mostrar solución paso a paso
                             </summary>
-                            <div class="mt-4 text-slate-600 text-center">
-                                <p>La solución del sistema es:</p>
-                                <div class="font-bold text-xl mt-2">
-                                    $$ x = ${sys.x} \\quad ; \\quad y = ${sys.y} $$
-                                </div>
-                            </div>
+                            ${stepByStepHTML}
                         </details>
                     </div>
                 `;

@@ -3,37 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sustitución con 2 Incógnitas</title>
+    <title>Sistemas 2x2: Método de Sustitución</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- KaTeX JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Suaves animaciones para el acordeón y UI */
+            scroll-behavior: smooth;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen font-sans p-6">
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
-        <header class="mb-8 text-center border-b border-slate-200 pb-6">
-            <h1 class="text-3xl font-extrabold text-indigo-800 mb-2">Método de Sustitución (2x2)</h1>
-            <p class="text-slate-500 font-medium">Resuelve los siguientes sistemas de ecuaciones lineales y encuentra el valor de x e y.</p>
-        </header>
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col items-center p-4 md:p-8">
 
-        <main id="app-container" class="flex flex-col gap-8 mb-8"></main>
+    <header class="w-full max-w-4xl text-center mb-10 mt-6 space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 drop-shadow-sm">
+            Práctica de Álgebra
+        </h1>
+        <h2 class="text-2xl font-semibold text-slate-300">Solución de Sistemas 2x2: <span class="text-emerald-400">Sustitución</span></h2>
+        <p class="text-slate-400 max-w-2xl mx-auto">
+            Resuelve cada uno de los sistemas de ecuaciones lineales encontrando los valores para $x$ e $y$. 
+            Puedes consultar el desglose paso a paso después de intentar cada ejercicio.
+        </p>
+    </header>
 
-        <div class="flex justify-center mt-8">
-            <button id="btn-submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-lg">
-                Evaluar Respuestas
-            </button>
-        </div>
+    <main id="app-container" class="w-full max-w-4xl flex-grow flex flex-col gap-8">
+        <!-- Aquí se inyectarán los ejercicios dinámicamente mediante JS en el Estado 1 -->
+    </main>
+
+    <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-slate-700/50 text-sm text-slate-500 font-mono tracking-widest">
+        JMGV-PTEL 2026. PM1 MC 09. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <!-- Lógica de la Aplicación -->
+    <script>
+        // [EL MOTOR MATEMÁTICO]
         
-        <div id="evaluation-feedback" class="mt-8 hidden text-center"></div>
-    </div>
+        // Función auxiliar para formatear términos algebraicos
+        function formatTerm(coef, variable, isFirst) {
+            if (coef === 0) return '';
+            let absCoef = Math.abs(coef);
+            let sign = coef < 0 ? '-' : '+';
+            // Ocultar el coeficiente 1 solo si la variable no es vacía y no empieza con '('
+            let coefStr = (absCoef === 1 && variable !== '' && !variable.startsWith('(')) ? '' : absCoef;
+            
+            if (isFirst) {
+                return `${coef < 0 ? '-' : ''}${coefStr}${variable}`;
+            } else {
+                return `${sign} ${coefStr}${variable}`;
+            }
+        }
 
+        // Función para formatear una ecuación completa
+        function formatEq(A, B, C) {
+            let termA = formatTerm(A, 'x', true);
+            let termB = formatTerm(B, 'y', termA === '');
+            return `${termA} ${termB} = ${C}`.trim();
+        }
+
+        // Generador de números aleatorios excluyendo el 0
+        function getRandomInt(min, max) {
+            let val = 0;
+            while(val === 0) {
+                val = Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            return val;
+        }
+
+        // Generador de un sistema de ecuaciones con solución única y entera
+        function generateSystem() {
+            let A, B, D, E, det;
+            do {
+                A = getRandomInt(-9, 9);
+                B = getRandomInt(-9, 9);
+                D = getRandomInt(-9, 9);
+                E = getRandomInt(-9, 9);
+                det = A * E - B * D;
+            } while (det === 0);
+            
+            const x = Math.floor(Math.random() * 21) - 10;
+            const y = Math.floor(Math.random() * 21) - 10;
+            
+            const C = A * x + B * y;
+            const F = D * x + E * y;
+            
+            return { A, B, C, D, E, F, x, y };
+        }
+
+        // Generador del desglose paso a paso usando interpolación KaTeX
+        function generateStepByStep(sys) {
+            const { A, B, C, D, E, F, x, y } = sys;
+            
+            let paso1 = `$$ ${formatEq(A, B, C)} \\implies ${formatTerm(A, 'x', true)} = ${C} ${formatTerm(-B, 'y', false)} \\implies x = \\frac{${C} ${formatTerm(-B, 'y', false)}}{${A}} $$`;
+            
+            let paso2 = `$$ ${D}\\left( \\frac{${C} ${formatTerm(-B, 'y', false)}}{${A}} \\right) ${formatTerm(E, 'y', false)} = ${F} $$`;
+            
+            let multD_C = D * C;
+            let multD_mB = D * (-B);
+            let paso3 = `Multiplicando por $${A}$ para eliminar el denominador y distribuyendo:<br>`;
+            paso3 += `$$ ${D}(${C} ${formatTerm(-B, 'y', false)}) ${formatTerm(A*E, 'y', false)} = ${A*F} $$`;
+            paso3 += `$$ ${multD_C} ${formatTerm(multD_mB, 'y', false)} ${formatTerm(A*E, 'y', false)} = ${A*F} $$`;
+            
+            let sumY = multD_mB + A * E;
+            let num = A * F - multD_C;
+            paso3 += `$$ ${formatTerm(sumY, 'y', true)} = ${A*F} ${formatTerm(-multD_C, '', false)} $$`;
+            paso3 += `$$ ${formatTerm(sumY, 'y', true)} = ${num} \\implies y = \\frac{${num}}{${sumY}} \\implies y = ${y} $$`;
+            
+            let paso4 = `$$ x = \\frac{${C} ${formatTerm(-B, `(${y})`, false)}}{${A}} $$`;
+            let numX = C + (-B) * y;
+            paso4 += `$$ x = \\frac{${C} ${formatTerm(-B*y, '', false)}}{${A}} = \\frac{${numX}}{${A}} \\implies x = ${x} $$`;
+
+            return `
+                <div class="text-slate-300 space-y-4 text-sm md:text-base">
+                    <div>
+                        <strong class="text-emerald-400">Paso 1:</strong> Despejamos $x$ en la primera ecuación.
+                        ${paso1}
+                    </div>
+                    <div>
+                        <strong class="text-emerald-400">Paso 2:</strong> Sustituimos este despeje en la segunda ecuación.
+                        ${paso2}
+                    </div>
+                    <div>
+                        <strong class="text-emerald-400">Paso 3:</strong> Resolvemos la ecuación lineal resultante para obtener $y$.
+                        ${paso3}
+                    </div>
+                    <div>
+                        <strong class="text-emerald-400">Paso 4:</strong> Sustituimos el valor de $y$ en el despeje original para encontrar $x$.
+                        ${paso4}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Variables globales
+        const systemSolutions = [];
+
+        // Función para renderizar los ejercicios y ejemplos
+        function renderApp() {
+            const container = document.getElementById('app-container');
+            container.innerHTML = '';
+            systemSolutions.length = 0;
+
+            // --- SECCIÓN DE EJEMPLOS ---
+            const examplesHeader = document.createElement('h3');
+            examplesHeader.className = "text-2xl md:text-3xl font-bold text-blue-400 mb-6 border-b border-slate-700 pb-2 mt-4";
+            examplesHeader.innerText = "Ejemplos Resueltos";
+            container.appendChild(examplesHeader);
+            
+            for (let i = 0; i < 5; i++) {
+                const sys = generateSystem();
+                
+                const article = document.createElement('article');
+                article.className = "bg-slate-800/80 rounded-xl p-6 shadow-lg border border-slate-700/50 mb-8";
+                
+                article.innerHTML = `
+                    <div class="mb-4">
+                        <h4 class="text-lg font-bold text-blue-300 mb-2">Ejemplo ${i + 1}</h4>
+                        <div class="text-xl overflow-x-auto overflow-y-hidden py-2 min-h-[80px] flex items-center">
+                            $$ 
+                            \\begin{cases} 
+                            ${formatEq(sys.A, sys.B, sys.C)} \\\\ 
+                            ${formatEq(sys.D, sys.E, sys.F)} 
+                            \\end{cases} 
+                            $$
+                        </div>
+                    </div>
+                    <div class="p-5 border border-slate-700 bg-slate-900/60 rounded-lg">
+                        ${generateStepByStep(sys)}
+                    </div>
+                `;
+                container.appendChild(article);
+            }
+
+            // --- SECCIÓN DE EJERCICIOS ---
+            const exercisesHeader = document.createElement('h3');
+            exercisesHeader.className = "text-2xl md:text-3xl font-bold text-indigo-400 mt-12 mb-6 border-b border-slate-700 pb-2";
+            exercisesHeader.innerText = "Ejercicios de Práctica";
+            container.appendChild(exercisesHeader);
+
+            for (let i = 0; i < 5; i++) {
+                const sys = generateSystem();
+                systemSolutions.push({ x: sys.x, y: sys.y });
+
+                const article = document.createElement('article');
+                article.className = "bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700/50 exercise-card transition-all mb-8";
+                
+                article.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-6 md:items-center justify-between mb-6">
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-bold text-indigo-300 mb-2">Ejercicio ${i + 1}</h4>
+                            <div class="text-xl overflow-x-auto overflow-y-hidden py-2 min-h-[80px] flex items-center">
+                                $$ 
+                                \\begin{cases} 
+                                ${formatEq(sys.A, sys.B, sys.C)} \\\\ 
+                                ${formatEq(sys.D, sys.E, sys.F)} 
+                                \\end{cases} 
+                                $$
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3 min-w-[200px]">
+                            <div class="flex items-center gap-3">
+                                <label class="font-mono text-lg text-emerald-400 font-bold">x =</label>
+                                <input type="number" id="input-x-${i}" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors">
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <label class="font-mono text-lg text-emerald-400 font-bold">y =</label>
+                                <input type="number" id="input-y-${i}" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <details class="group border border-slate-700 rounded-lg bg-slate-900/50 overflow-hidden mt-4">
+                        <summary class="cursor-pointer p-4 font-semibold text-slate-300 hover:text-white hover:bg-slate-700/30 transition-all flex justify-between items-center">
+                            <span>Ver paso a paso (¡Inténtalo tú primero!)</span>
+                            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </summary>
+                        <div class="p-4 border-t border-slate-700 bg-slate-800/50">
+                            ${generateStepByStep(sys)}
+                        </div>
+                    </details>
+                `;
+                container.appendChild(article);
+            }
+
+            // Botón de Evaluación
+            const actionsDiv = document.createElement('div');
+            actionsDiv.id = 'actions-container';
+            actionsDiv.className = 'w-full flex justify-center mt-6 mb-12';
+            actionsDiv.innerHTML = `
+                <button id="btn-evaluar" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-10 rounded-lg shadow-lg hover:shadow-emerald-500/30 transition-all text-lg transform hover:-translate-y-1">
+                    Evaluar Respuestas
+                </button>
+            `;
+            container.appendChild(actionsDiv);
+
+            // Renderizar matemáticas de KaTeX
+            if (window.renderMathInElement) {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError : false
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", renderApp);
+
+        // [EL INGENIERO DE ESTADO]
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.id === 'btn-evaluar') {
+                evaluarRespuestas();
+            } else if (e.target && e.target.id === 'btn-reintento') {
+                reintentoEnCaliente();
+            }
+        });
+
+        function evaluarRespuestas() {
+            let aciertos = 0;
+            const articles = document.querySelectorAll('.exercise-card');
+            
+            for (let i = 0; i < 5; i++) {
+                const inputX = document.getElementById(`input-x-${i}`);
+                const inputY = document.getElementById(`input-y-${i}`);
+                const valX = parseInt(inputX.value);
+                const valY = parseInt(inputY.value);
+                
+                const expectedX = systemSolutions[i].x;
+                const expectedY = systemSolutions[i].y;
+                
+                let correct = false;
+                if (!isNaN(valX) && !isNaN(valY) && valX === expectedX && valY === expectedY) {
+                    aciertos++;
+                    correct = true;
+                }
+                
+                // Feedback visual
+                if (correct) {
+                    articles[i].classList.add('border-emerald-500', 'bg-emerald-900/20');
+                    articles[i].classList.remove('border-slate-700/50', 'border-red-500', 'bg-red-900/20');
+                } else {
+                    articles[i].classList.add('border-red-500', 'bg-red-900/20');
+                    articles[i].classList.remove('border-slate-700/50', 'border-emerald-500', 'bg-emerald-900/20');
+                }
+                
+                // Deshabilitar inputs
+                inputX.disabled = true;
+                inputY.disabled = true;
+            }
+            
+            const actionsDiv = document.getElementById('actions-container');
+            if (aciertos >= 4) {
+                actionsDiv.innerHTML = `
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="text-2xl font-bold text-emerald-400">¡Aprobado! ${aciertos}/5 aciertos.</div>
+                        <p class="text-emerald-200">Guardando progreso...</p>
+                    </div>
+                `;
+                // Disparar evento personalizado para la capa de persistencia (Firebase)
+                const event = new CustomEvent('progresoAprobado', { detail: { score: aciertos } });
+                document.dispatchEvent(event);
+            } else {
+                actionsDiv.innerHTML = `
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="text-2xl font-bold text-red-400">Reprobado. ${aciertos}/5 aciertos (Mínimo 4).</div>
+                        <button id="btn-reintento" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-amber-500/30 transition-all text-lg transform hover:-translate-y-1">
+                            Reintento en Caliente
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function reintentoEnCaliente() {
+            const articles = document.querySelectorAll('.exercise-card');
+            for (let i = 0; i < 5; i++) {
+                const inputX = document.getElementById(`input-x-${i}`);
+                const inputY = document.getElementById(`input-y-${i}`);
+                
+                inputX.value = '';
+                inputY.value = '';
+                inputX.disabled = false;
+                inputY.disabled = false;
+                
+                articles[i].classList.remove('border-emerald-500', 'bg-emerald-900/20', 'border-red-500', 'bg-red-900/20');
+                articles[i].classList.add('border-slate-700/50');
+            }
+            
+            const actionsDiv = document.getElementById('actions-container');
+            actionsDiv.innerHTML = `
+                <button id="btn-evaluar" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-10 rounded-lg shadow-lg hover:shadow-emerald-500/30 transition-all text-lg transform hover:-translate-y-1">
+                    Evaluar Respuestas
+                </button>
+            `;
+        }
+    </script>
+
+    <!-- Módulo de Firebase v10 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -52,285 +379,45 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        window.AppState = { totalExercises: 5, exercises: [] };
-
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function generateSystem() {
-            let a1, b1, a2, b2, x, y;
-            do {
-                a1 = getRandomInt(-5, 5);
-                b1 = getRandomInt(-5, 5);
-                a2 = getRandomInt(-5, 5);
-                b2 = getRandomInt(-5, 5);
-                if (a1 === 0) a1 = 1;
-                if (b1 === 0) b1 = 1;
-                if (a2 === 0) a2 = 1;
-                if (b2 === 0) b2 = 1;
-            } while ((a1 * b2) - (b1 * a2) === 0);
-            
-            x = getRandomInt(-10, 10);
-            y = getRandomInt(-10, 10);
-            
-            const c1 = a1 * x + b1 * y;
-            const c2 = a2 * x + b2 * y;
-
-            return { a1, b1, c1, a2, b2, c2, x, y };
-        }
-
-        function formatTerm(coeff, variable, isFirst) {
-            if (coeff === 0) return "";
-            let sign = coeff > 0 ? (isFirst ? "" : "+") : "-";
-            let absCoeff = Math.abs(coeff);
-            let coeffStr = absCoeff === 1 ? "" : absCoeff;
-            return `${sign} ${coeffStr}${variable}`;
-        }
-
-        function generateStepByStepHTML(sys) {
-            let step1 = `1. Despejamos $x$ de la primera ecuación:`;
-            let eq1_orig = `${formatTerm(sys.a1, 'x', true)} ${formatTerm(sys.b1, 'y', false)} = ${sys.c1}`;
-            let eq1_step1 = `${formatTerm(sys.a1, 'x', true)} = ${sys.c1} ${formatTerm(-sys.b1, 'y', false)}`;
-            
-            let x_expr;
-            if (sys.a1 === 1) {
-                x_expr = `${sys.c1} ${formatTerm(-sys.b1, 'y', false)}`;
-            } else if (sys.a1 === -1) {
-                x_expr = `${-sys.c1} ${formatTerm(sys.b1, 'y', false)}`;
-            } else {
-                x_expr = `\\frac{${sys.c1} ${formatTerm(-sys.b1, 'y', false)}}{${sys.a1}}`;
-            }
-            
-            let step1_math = `$$ \\begin{aligned} ${eq1_orig} \\\\ ${eq1_step1} \\\\ x &= ${x_expr} \\end{aligned} $$`;
-
-            let step2 = `2. Sustituimos $x$ en la segunda ecuación y resolvemos para $y$:`;
-            let eq2_orig = `${formatTerm(sys.a2, 'x', true)} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
-            
-            let subst_expr = sys.a1 === 1 || sys.a1 === -1 ? `(${x_expr})` : `\\left( ${x_expr} \\right)`;
-            let eq2_subst = `${formatTerm(sys.a2, '', true)}${subst_expr} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
-            
-            let step2_math = `$$ \\begin{aligned} ${eq2_orig} \\\\ ${eq2_subst} \\\\ y &= ${sys.y} \\end{aligned} $$`;
-
-            let step3 = `3. Sustituimos el valor de $y$ en la ecuación despejada de $x$:`;
-            let step3_math = `$$ \\begin{aligned} x &= ${x_expr.replace('y', `(${sys.y})`)} \\\\ x &= ${sys.x} \\end{aligned} $$`;
-
-            return `
-                <div class="text-left text-slate-700 text-sm md:text-base space-y-4 mt-4 bg-indigo-50/50 p-6 rounded-xl border border-indigo-100">
-                    <div>
-                        <p class="font-semibold text-indigo-800">${step1}</p>
-                        ${step1_math}
-                    </div>
-                    <div class="border-t border-indigo-100 pt-4">
-                        <p class="font-semibold text-indigo-800">${step2}</p>
-                        ${step2_math}
-                    </div>
-                    <div class="border-t border-indigo-100 pt-4">
-                        <p class="font-semibold text-indigo-800">${step3}</p>
-                        ${step3_math}
-                    </div>
-                    <div class="font-bold text-center text-xl mt-6 text-indigo-700 bg-white p-3 rounded-lg shadow-sm">
-                        Solución Final: $x = ${sys.x} \\quad ; \\quad y = ${sys.y}$
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderApp() {
-            const container = document.getElementById('app-container');
-            let html = '';
-
-            for (let i = 0; i < window.AppState.totalExercises; i++) {
-                const sys = generateSystem();
-                window.AppState.exercises.push(sys);
-
-                const eq1 = `${formatTerm(sys.a1, 'x', true)} ${formatTerm(sys.b1, 'y', false)} = ${sys.c1}`;
-                const eq2 = `${formatTerm(sys.a2, 'x', true)} ${formatTerm(sys.b2, 'y', false)} = ${sys.c2}`;
-                
-                const stepByStepHTML = generateStepByStepHTML(sys);
-
-                html += `
-                    <div id="exercise-card-${i}" class="bg-indigo-50/30 rounded-xl p-6 border border-slate-200 transition-all">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-sm font-bold text-indigo-400 uppercase tracking-widest">Sistema ${i + 1}</span>
-                        </div>
-                        <div class="text-2xl text-slate-800 text-center mb-6">
-                            $$ \\begin{cases} ${eq1} \\\\ ${eq2} \\end{cases} $$
-                        </div>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <div class="flex items-center gap-2">
-                                <span class="text-xl font-bold text-slate-700">x = </span>
-                                <input id="ans-x-${i}" type="number" class="exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all">
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xl font-bold text-slate-700">y = </span>
-                                <input id="ans-y-${i}" type="number" class="exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all">
-                            </div>
-                        </div>
-                        
-                        <details id="details-${i}" class="hidden mt-6 bg-white rounded-lg p-4 border border-indigo-100 shadow-sm">
-                            <summary class="font-bold text-indigo-700 cursor-pointer flex items-center justify-center hover:text-indigo-800">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                Mostrar solución paso a paso
-                            </summary>
-                            ${stepByStepHTML}
-                        </details>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-            
-            setTimeout(() => {
-                renderMathInElement(document.body, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false}
-                    ],
-                    throwOnError: false
-                });
-            }, 100);
-        }
-
-        renderApp();
-
-        const btnSubmit = document.getElementById('btn-submit');
-        const feedbackContainer = document.getElementById('evaluation-feedback');
-
-        window.evaluateExercises = function() {
-            let correctCount = 0;
-            const total = window.AppState.totalExercises;
-
-            for (let i = 0; i < total; i++) {
-                const sys = window.AppState.exercises[i];
-                const inputX = document.getElementById(`ans-x-${i}`);
-                const inputY = document.getElementById(`ans-y-${i}`);
-                const card = document.getElementById(`exercise-card-${i}`);
-                const details = document.getElementById(`details-${i}`);
-
-                const valX = parseInt(inputX.value, 10);
-                const valY = parseInt(inputY.value, 10);
-
-                inputX.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-green-500', 'bg-green-50', 'text-green-700');
-                inputY.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-green-500', 'bg-green-50', 'text-green-700');
-
-                if (valX === sys.x && valY === sys.y) {
-                    correctCount++;
-                    inputX.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
-                    inputY.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
-                    card.classList.add('ring-2', 'ring-green-400', 'border-green-400');
-                } else {
-                    if (valX !== sys.x) inputX.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
-                    else inputX.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
-
-                    if (valY !== sys.y) inputY.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
-                    else inputY.classList.add('border-green-500', 'bg-green-50', 'text-green-700');
-
-                    card.classList.add('ring-2', 'ring-red-400', 'border-red-400');
-                }
-
-                details.classList.remove('hidden');
-                details.open = false;
-
-                inputX.disabled = true;
-                inputY.disabled = true;
-            }
-
-            renderFeedback(correctCount, total);
-        }
-
-        async function renderFeedback(correctCount, total) {
-            btnSubmit.classList.add('hidden');
-            feedbackContainer.classList.remove('hidden');
-
-            const passed = correctCount >= 4;
-
-            if (passed) {
-                feedbackContainer.innerHTML = `
-                    <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 p-6 rounded-xl shadow-sm">
-                        <h3 class="text-2xl font-bold mb-2">¡Excelente Trabajo!</h3>
-                        <p class="text-lg mb-4">Aprobaste con ${correctCount} de ${total} sistemas correctos.</p>
-                        <p id="firebase-status" class="text-sm font-semibold text-emerald-600 animate-pulse">Guardando progreso en la base de datos...</p>
-                    </div>
-                `;
-                await saveProgressToFirebase(correctCount);
-            } else {
-                feedbackContainer.innerHTML = `
-                    <div class="bg-red-100 border border-red-300 text-red-800 p-6 rounded-xl shadow-sm">
-                        <h3 class="text-2xl font-bold mb-2">Puntuación Insuficiente</h3>
-                        <p class="text-lg mb-4">Obtuviste ${correctCount} de ${total}. Se requiere al menos un 80% (4/5) para aprobar.</p>
-                        <button id="btn-retry" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow transition-colors mt-2">
-                            Reintentar
-                        </button>
-                    </div>
-                `;
-                document.getElementById('btn-retry').addEventListener('click', window.hotRetry);
-            }
-        }
-
-        window.hotRetry = function() {
-            const total = window.AppState.totalExercises;
-
-            for (let i = 0; i < total; i++) {
-                const inputX = document.getElementById(`ans-x-${i}`);
-                const inputY = document.getElementById(`ans-y-${i}`);
-                const card = document.getElementById(`exercise-card-${i}`);
-                const details = document.getElementById(`details-${i}`);
-
-                inputX.disabled = false;
-                inputY.disabled = false;
-                inputX.value = '';
-                inputY.value = '';
-
-                inputX.className = "exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all";
-                inputY.className = "exercise-input border-2 border-gray-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-4 py-2 w-24 text-center text-xl font-bold text-gray-800 shadow-inner transition-all";
-
-                card.classList.remove('ring-2', 'ring-green-400', 'border-green-400', 'ring-red-400', 'border-red-400');
-
-                details.classList.add('hidden');
-                details.open = false;
-            }
-
-            feedbackContainer.classList.add('hidden');
-            btnSubmit.classList.remove('hidden');
-
-            document.getElementById('exercise-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        async function saveProgressToFirebase(score) {
-            const statusElement = document.getElementById('firebase-status');
-            try {
-                const user = auth.currentUser;
-                if (user) {
-                    const progressRef = doc(db, "estudiantes", user.uid, "progreso_sesiones", "sesion_sustitucion");
-                    await setDoc(progressRef, {
-                        score: score,
-                        metodo: "sustitucion",
-                        aprobado: true,
-                        timestamp: serverTimestamp()
-                    });
-                    statusElement.innerText = "✓ Progreso guardado exitosamente en Firebase.";
-                    statusElement.classList.remove('animate-pulse');
-                } else {
-                    statusElement.innerText = "⚠ Completado localmente. (Usuario no autenticado en Firebase).";
-                    statusElement.classList.remove('animate-pulse', 'text-emerald-600');
-                    statusElement.classList.add('text-amber-600');
-                }
-            } catch (error) {
-                console.error("Error al guardar en Firebase:", error);
-                statusElement.innerText = "✖ Error de conexión al guardar el progreso.";
-                statusElement.classList.remove('animate-pulse', 'text-emerald-600');
-                statusElement.classList.add('text-red-600');
-            }
-        }
-
-        btnSubmit.addEventListener('click', window.evaluateExercises);
+        let currentUser = null;
         
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("Firebase Auth: Estudiante autenticado ->", user.uid);
+                currentUser = user;
+                console.log("Sesión activa:", user.uid);
             } else {
-                console.log("Firebase Auth: Estudiante operando como invitado.");
+                console.log("Modo local (sin sesión activa).");
             }
+        });
+
+        async function saveProgressToFirebase(score) {
+            const actionsDiv = document.getElementById('actions-container');
+            
+            if (!currentUser) {
+                actionsDiv.innerHTML += '<p class="text-amber-400 mt-2 font-semibold">Validado localmente (Inicia sesión para guardar).</p>';
+                return;
+            }
+            
+            try {
+                // Ruta estandarizada para la plataforma
+                const sessionRef = doc(db, "estudiantes", currentUser.uid, "progreso_sesiones", "sesion_sustitucion");
+                await setDoc(sessionRef, {
+                    tema: "Sistemas 2x2: Método de Sustitución",
+                    aciertos: score,
+                    umbralAprobatorio: 4,
+                    resultado: "Aprobado",
+                    ultimaPractica: serverTimestamp()
+                }, { merge: true });
+                
+                actionsDiv.innerHTML += '<p class="text-emerald-400 mt-2 font-semibold">¡Progreso respaldado en Firebase exitosamente!</p>';
+            } catch (error) {
+                console.error("Error al contactar Firestore:", error);
+                actionsDiv.innerHTML += '<p class="text-red-400 mt-2 font-semibold">Error de conexión al guardar el progreso.</p>';
+            }
+        }
+
+        document.addEventListener('progresoAprobado', (e) => {
+            saveProgressToFirebase(e.detail.score);
         });
     </script>
 </body>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas 2x2: Método de Eliminación (Suma y Resta)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <header class="w-full max-w-4xl text-center mb-10 mt-6 space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 drop-shadow-sm">
+            Práctica de Álgebra
+        </h1>
+        <h2 class="text-2xl font-semibold text-slate-700">Solución de Sistemas 2x2: <span class="text-violet-600">Eliminación (Suma y Resta)</span></h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">
+            Estudia los ejemplos guiados prestando atención a la suma vertical para eliminar una variable, y luego resuelve los ejercicios interactivos.
+        </p>
+    </header>
+
+    <main id="app-container" class="w-full max-w-4xl flex-grow flex flex-col gap-8">
+        <!-- Aquí se inyectarán las Secciones 1 y 2 en los próximos Estados -->
+    </main>
+
+    <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-slate-200 text-sm text-slate-500 font-mono tracking-widest">
+        JMGV-PTEL 2026. TSF MC 11. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <!-- Lógica de Estado 0: Motor Matemático -->
+    <script>
+        // Función para formatear términos algebraicos globalmente
+        window.formatTerm = function (coef, variable, isFirst = false) {
+            if (coef === 0) return "";
+            let sign = coef < 0 ? "-" : "+";
+            let strSign = isFirst ? (coef < 0 ? "-" : "") : ` ${sign} `;
+            let absCoef = Math.abs(coef);
+            let strCoef = (absCoef === 1 && variable !== "") ? "" : absCoef;
+            return `${strSign}${strCoef}${variable}`;
+        };
+
+        function getRandomInt(min, max, avoidZero = true) {
+            let val = 0;
+            do {
+                val = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (avoidZero && val === 0);
+            return val;
+        }
+
+        // Generador de un sistema de ecuaciones para Eliminación
+        // Dificultad progresiva:
+        // 1: Ya simétricos en Y.
+        // 2: Hay que multiplicar la Eq1 o Eq2 por un número para igualar X o Y.
+        // 3: Hay que multiplicar ambas ecuaciones (factores cruzados).
+        function generateSystem(difficulty = 3) {
+            const x = getRandomInt(-10, 10, false);
+            const y = getRandomInt(-10, 10, false);
+            
+            let A1, B1, A2, B2;
+            
+            if (difficulty === 1) {
+                // Ya simétricos en y
+                A1 = getRandomInt(-6, 6);
+                A2 = getRandomInt(-6, 6);
+                B1 = getRandomInt(1, 6);
+                B2 = -B1;
+                while (A1 * B2 === A2 * B1) A2 = getRandomInt(-6, 6);
+            } else if (difficulty === 2) {
+                // Multiplicar una ecuación
+                A1 = getRandomInt(-4, 4);
+                let factor = getRandomInt(2, 4);
+                if (Math.random() > 0.5) factor = -factor;
+                A2 = A1 * factor;
+                B1 = getRandomInt(-5, 5);
+                B2 = getRandomInt(-5, 5);
+                while (B2 === B1 * factor || A1 * B2 === A2 * B1) B2 = getRandomInt(-5, 5);
+            } else {
+                // Multiplicar ambas (coeficientes primos relativos comunes)
+                let primesX = [2, 3, 5];
+                let p1 = primesX[getRandomInt(0, 2, false)];
+                let p2 = primesX[getRandomInt(0, 2, false)];
+                if (p1 === p2) p2 = (p1 === 2) ? 3 : 2;
+                
+                if (Math.random() > 0.5) p1 = -p1;
+                if (Math.random() > 0.5) p2 = -p2;
+                
+                A1 = p1;
+                A2 = p2;
+                B1 = getRandomInt(-5, 5);
+                B2 = getRandomInt(-5, 5);
+                while (A1 * B2 === A2 * B1) B2 = getRandomInt(-5, 5);
+            }
+            
+            const C1 = A1 * x + B1 * y;
+            const C2 = A2 * x + B2 * y;
+            
+            return { A1, B1, C1, A2, B2, C2, x, y, difficulty };
+        }
+
+        // Arrays de datos matemáticos
+        window.ejemplosData = [
+            generateSystem(1), // Muy fácil, ya listos para sumar
+            generateSystem(1), 
+            generateSystem(2), // Multiplicar solo 1 eq
+            generateSystem(2),
+            generateSystem(3)  // Multiplicar ambas eqs cruzado
+        ];
+
+        window.practicaData = [
+            generateSystem(1),
+            generateSystem(2),
+            generateSystem(2),
+            generateSystem(3),
+            generateSystem(3)
+        ];
+        
+        // [ESTADO 1: Ejemplos Guiados]
+        function formatFraction(num, den) {
+            if (den === 1) return `\\frac{${num}}{1}`;
+            if (den === -1) return `\\frac{${num}}{-1}`;
+            return `\\frac{${num}}{${den}}`;
+        }
+
+        function buildStepByStepEliminacion(sys) {
+            const { A1, B1, C1, A2, B2, C2, x, y, difficulty } = sys;
+            
+            let elimY = false;
+            let factor1 = 1;
+            let factor2 = 1;
+            let varToElim = '';
+            let varToSolve = '';
+            
+            if (B1 === -B2) {
+                elimY = true; factor1 = 1; factor2 = 1; varToElim = 'y'; varToSolve = 'x';
+            } else if (A1 === -A2) {
+                elimY = false; factor1 = 1; factor2 = 1; varToElim = 'x'; varToSolve = 'y';
+            } else {
+                if (B1 % B2 === 0) {
+                    elimY = true; factor1 = 1; factor2 = -(B1 / B2); varToElim = 'y'; varToSolve = 'x';
+                } else if (B2 % B1 === 0) {
+                    elimY = true; factor1 = -(B2 / B1); factor2 = 1; varToElim = 'y'; varToSolve = 'x';
+                } else if (A1 % A2 === 0) {
+                    elimY = false; factor1 = 1; factor2 = -(A1 / A2); varToElim = 'x'; varToSolve = 'y';
+                } else if (A2 % A1 === 0) {
+                    elimY = false; factor1 = -(A2 / A1); factor2 = 1; varToElim = 'x'; varToSolve = 'y';
+                } else {
+                    elimY = true;
+                    factor1 = B2;
+                    factor2 = -B1;
+                    varToElim = 'y'; varToSolve = 'x';
+                }
+            }
+            
+            const nA1 = A1 * factor1;
+            const nB1 = B1 * factor1;
+            const nC1 = C1 * factor1;
+            
+            const nA2 = A2 * factor2;
+            const nB2 = B2 * factor2;
+            const nC2 = C2 * factor2;
+            
+            let paso1Text = "";
+            if (factor1 === 1 && factor2 === 1) {
+                paso1Text = `Las ecuaciones ya tienen coeficientes simétricos en la variable \\( ${varToElim} \\) (${window.formatTerm(elimY?B1:A1, varToElim)} y ${window.formatTerm(elimY?B2:A2, varToElim)}), listas para sumarse verticalmente.`;
+            } else if (factor1 === 1) {
+                paso1Text = `Multiplicamos la Ecuación 2 por \\( ${factor2} \\) para que el coeficiente de \\( ${varToElim} \\) sea el opuesto al de la Ecuación 1.`;
+            } else if (factor2 === 1) {
+                paso1Text = `Multiplicamos la Ecuación 1 por \\( ${factor1} \\) para que el coeficiente de \\( ${varToElim} \\) sea el opuesto al de la Ecuación 2.`;
+            } else {
+                paso1Text = `Multiplicamos la Ecuación 1 por \\( ${factor1} \\) y la Ecuación 2 por \\( ${factor2} \\) para lograr coeficientes simétricos en \\( ${varToElim} \\).`;
+            }
+            
+            const eq1_mult = (factor1 !== 1) ? `(${factor1})[${window.formatTerm(A1, 'x', true)} ${window.formatTerm(B1, 'y')} = ${C1}] \\implies ${window.formatTerm(nA1, 'x', true)} ${window.formatTerm(nB1, 'y')} = ${nC1}` : ``;
+            const eq2_mult = (factor2 !== 1) ? `(${factor2})[${window.formatTerm(A2, 'x', true)} ${window.formatTerm(B2, 'y')} = ${C2}] \\implies ${window.formatTerm(nA2, 'x', true)} ${window.formatTerm(nB2, 'y')} = ${nC2}` : ``;
+
+            let multHTML = "";
+            if (factor1 !== 1 || factor2 !== 1) {
+                multHTML = `
+                <div class="overflow-x-auto text-center w-full space-y-2 mt-2">
+                    ${factor1 !== 1 ? `$$ ${eq1_mult} $$` : ''}
+                    ${factor2 !== 1 ? `$$ ${eq2_mult} $$` : ''}
+                </div>`;
+            }
+
+            const sumA = nA1 + nA2;
+            const sumB = nB1 + nB2;
+            const sumC = nC1 + nC2;
+            
+            const eq1_str = `${window.formatTerm(nA1, 'x', true)} & ${window.formatTerm(nB1, 'y')} &= & ${nC1}`;
+            const eq2_str = `${window.formatTerm(nA2, 'x', true)} & ${window.formatTerm(nB2, 'y')} &= & ${nC2}`;
+            const sum_str = `${window.formatTerm(sumA, 'x', true)} & ${window.formatTerm(sumB, 'y')} &= & ${sumC}`;
+            
+            const sumaKaTeX = `
+            \\begin{aligned}
+            ${eq1_str} \\\\
+            + \\quad ${eq2_str} \\\\
+            \\hline
+            ${sum_str}
+            \\end{aligned}
+            `;
+
+            const resultCoef = elimY ? sumA : sumB;
+            const solvedVal = elimY ? x : y;
+            let paso3HTML = "";
+            if (resultCoef === 1) {
+                paso3HTML = `$$ ${varToSolve} = ${sumC} $$`;
+            } else if (resultCoef === -1) {
+                paso3HTML = `$$ -${varToSolve} = ${sumC} \\implies ${varToSolve} = ${solvedVal} $$`;
+            } else {
+                paso3HTML = `$$ ${window.formatTerm(resultCoef, varToSolve, true)} = ${sumC} \\implies ${varToSolve} = \\frac{${sumC}}{${resultCoef}} \\implies ${varToSolve} = ${solvedVal} $$`;
+            }
+
+            const varToSubst = varToSolve;
+            const valToSubst = solvedVal;
+            const eqOriginalA = A1;
+            const eqOriginalB = B1;
+            const eqOriginalC = C1;
+            const varRemaining = elimY ? 'y' : 'x';
+            const remainingCoef = elimY ? B1 : A1;
+            
+            let paso4HTML = "";
+            if (elimY) {
+                const c_minus_ax = eqOriginalC - (eqOriginalA * valToSubst);
+                paso4HTML = `
+                $$ ${window.formatTerm(eqOriginalA, `(${valToSubst})`, true)} ${window.formatTerm(eqOriginalB, 'y')} = ${eqOriginalC} $$
+                $$ ${eqOriginalA * valToSubst} ${window.formatTerm(eqOriginalB, 'y')} = ${eqOriginalC} $$
+                $$ ${window.formatTerm(eqOriginalB, 'y', true)} = ${eqOriginalC} ${window.formatTerm(-(eqOriginalA * valToSubst), '')} $$
+                $$ ${window.formatTerm(eqOriginalB, 'y', true)} = ${c_minus_ax} $$
+                ${remainingCoef !== 1 && remainingCoef !== -1 ? `$$ y = \\frac{${c_minus_ax}}{${remainingCoef}} \\implies y = ${y} $$` : (remainingCoef === -1 ? `$$ -y = ${c_minus_ax} \\implies y = ${y} $$` : `$$ y = ${y} $$`)}
+                `;
+            } else {
+                const c_minus_by = eqOriginalC - (eqOriginalB * valToSubst);
+                paso4HTML = `
+                $$ ${window.formatTerm(eqOriginalA, 'x', true)} ${window.formatTerm(eqOriginalB, `(${valToSubst})`)} = ${eqOriginalC} $$
+                $$ ${window.formatTerm(eqOriginalA, 'x', true)} ${window.formatTerm(eqOriginalB * valToSubst, '')} = ${eqOriginalC} $$
+                $$ ${window.formatTerm(eqOriginalA, 'x', true)} = ${eqOriginalC} ${window.formatTerm(-(eqOriginalB * valToSubst), '')} $$
+                $$ ${window.formatTerm(eqOriginalA, 'x', true)} = ${c_minus_by} $$
+                ${remainingCoef !== 1 && remainingCoef !== -1 ? `$$ x = \\frac{${c_minus_by}}{${remainingCoef}} \\implies x = ${x} $$` : (remainingCoef === -1 ? `$$ -x = ${c_minus_by} \\implies x = ${x} $$` : `$$ x = ${x} $$`)}
+                `;
+            }
+
+            return `
+                <div class="mt-4 p-5 bg-violet-50 border border-violet-200 rounded-lg text-sm md:text-base text-gray-800 space-y-5">
+                    <div>
+                        <p class="font-bold text-violet-800 mb-2">Paso 1: Preparar coeficientes simétricos</p>
+                        <p class="text-slate-700">${paso1Text}</p>
+                        ${multHTML}
+                    </div>
+                    <hr class="border-violet-300">
+                    <div>
+                        <p class="font-bold text-violet-800 mb-2">Paso 2: Suma Vertical (Eliminación de \\( ${varToElim} \\))</p>
+                        <div class="overflow-x-auto text-center w-full py-4 text-xl">
+                            $$ ${sumaKaTeX} $$
+                        </div>
+                    </div>
+                    <hr class="border-violet-300">
+                    <div>
+                        <p class="font-bold text-violet-800 mb-2">Paso 3: Resolver la variable \\( ${varToSolve} \\)</p>
+                        <div class="overflow-x-auto text-center w-full space-y-2">
+                            ${paso3HTML}
+                        </div>
+                    </div>
+                    <hr class="border-violet-300">
+                    <div>
+                        <p class="font-bold text-violet-800 mb-2">Paso 4: Sustituir \\( ${varToSolve} = ${solvedVal} \\) en la Ecuación 1</p>
+                        <div class="overflow-x-auto text-center w-full space-y-2">
+                            ${paso4HTML}
+                        </div>
+                    </div>
+                    <div class="bg-violet-700 p-4 rounded-xl text-center shadow-md mt-4">
+                        <p class="font-bold text-violet-200 tracking-wide uppercase text-xs">Solución Final</p>
+                        <div class="text-xl mt-1 text-white font-bold">
+                            $$ (x, y) = (${x}, ${y}) $$
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderEjemplos() {
+            const container = document.getElementById('app-container');
+            
+            const sectionHTML = document.createElement('section');
+            sectionHTML.id = "ejemplos-section";
+            sectionHTML.innerHTML = '<h3 class="text-2xl md:text-3xl font-bold text-violet-700 mt-4 mb-6 border-b-2 border-violet-200 pb-2">Ejemplos Guiados</h3>';
+            
+            window.ejemplosData.forEach((sys, index) => {
+                const eq1KaTeX = `${window.formatTerm(sys.A1, 'x', true)} ${window.formatTerm(sys.B1, 'y')} = ${sys.C1}`;
+                const eq2KaTeX = `${window.formatTerm(sys.A2, 'x', true)} ${window.formatTerm(sys.B2, 'y')} = ${sys.C2}`;
+                const systemKaTeX = `\\begin{cases} ${eq1KaTeX} \\\\ ${eq2KaTeX} \\end{cases}`;
+
+                const stepByStepHTML = buildStepByStepEliminacion(sys);
+
+                const cardHTML = `
+                    <article class="bg-white border border-violet-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300 mb-8" id="ejemplo-card-${index}">
+                        <div class="absolute -top-5 -left-4 bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white">
+                            E${index + 1}
+                        </div>
+                        
+                        <div class="text-xl md:text-2xl overflow-x-auto w-full flex justify-center py-6 bg-violet-50/50 rounded-xl border border-violet-100 mb-6">
+                            $$ ${systemKaTeX} $$
+                        </div>
+
+                        ${stepByStepHTML}
+                    </article>
+                `;
+                sectionHTML.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+            container.appendChild(sectionHTML);
+        }
+        
+        function renderPractica() {
+            const container = document.getElementById('app-container');
+            
+            const sectionHTML = document.createElement('section');
+            sectionHTML.id = "practica-section";
+            sectionHTML.innerHTML = `
+                <h3 class="text-2xl md:text-3xl font-bold text-violet-700 mt-12 mb-6 border-b-2 border-violet-200 pb-2">Ejercicios de Práctica</h3>
+                <div id="practica-cards-container" class="flex flex-col gap-8"></div>
+                <div id="controles-evaluacion" class="w-full flex flex-col items-center mt-6 mb-12">
+                    <button id="btn-submit" class="bg-violet-600 hover:bg-violet-700 transition-colors text-white font-extrabold py-4 px-12 rounded-xl shadow-lg text-xl w-full md:w-auto uppercase tracking-wide">
+                        Verificar Respuestas
+                    </button>
+                    <div id="evaluation-feedback" class="mt-8 w-full text-center hidden w-full max-w-2xl mx-auto"></div>
+                </div>
+            `;
+            container.appendChild(sectionHTML);
+            
+            const cardsContainer = document.getElementById('practica-cards-container');
+
+            window.practicaData.forEach((sys, index) => {
+                const eq1KaTeX = `${window.formatTerm(sys.A1, 'x', true)} ${window.formatTerm(sys.B1, 'y')} = ${sys.C1}`;
+                const eq2KaTeX = `${window.formatTerm(sys.A2, 'x', true)} ${window.formatTerm(sys.B2, 'y')} = ${sys.C2}`;
+                const systemKaTeX = `\\begin{cases} ${eq1KaTeX} \\\\ ${eq2KaTeX} \\end{cases}`;
+
+                const stepByStepHTML = buildStepByStepEliminacion(sys);
+
+                const cardHTML = `
+                    <article class="bg-white border border-violet-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300" id="practica-card-${index}">
+                        <div class="absolute -top-5 -left-4 bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white">
+                            #${index + 1}
+                        </div>
+                        
+                        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                            <div class="text-xl md:text-2xl overflow-x-auto w-full lg:w-1/2 flex justify-center py-6 bg-violet-50/50 rounded-xl border border-violet-100">
+                                $$ ${systemKaTeX} $$
+                            </div>
+
+                            <div class="flex flex-col gap-4 w-full lg:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner relative">
+                                <div class="flex items-center gap-4">
+                                    <label for="ans-x-${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( x = \\)</label>
+                                    <input type="number" id="ans-x-${index}" class="practica-input border-2 border-gray-300 focus:border-violet-500 focus:ring focus:ring-violet-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de x">
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <label for="ans-y-${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( y = \\)</label>
+                                    <input type="number" id="ans-y-${index}" class="practica-input border-2 border-gray-300 focus:border-violet-500 focus:ring focus:ring-violet-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de y">
+                                </div>
+                                
+                                <!-- Solución Oculta Directa -->
+                                <div id="correct-ans-${index}" class="hidden mt-2 bg-emerald-100 text-emerald-800 border border-emerald-300 p-3 rounded-lg text-center font-bold text-lg shadow-sm transition-all duration-500">
+                                    Solución: \\( x = ${sys.x}, \\ y = ${sys.y} \\)
+                                </div>
+                            </div>
+                        </div>
+
+                        <details class="mt-6 group hidden" id="details-practica-${index}">
+                            <summary class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-5 rounded-lg transition-colors list-none flex justify-between items-center shadow-md">
+                                <span class="flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Mostrar Desarrollo Paso a Paso
+                                </span>
+                                <span class="transform group-open:rotate-180 transition-transform duration-300">▼</span>
+                            </summary>
+                            ${stepByStepHTML}
+                        </details>
+                    </article>
+                `;
+                cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            document.getElementById('btn-submit').addEventListener('click', evaluateExercises);
+        }
+
+        function evaluateExercises() {
+            let correctCount = 0;
+            const total = window.practicaData.length;
+
+            for (let i = 0; i < total; i++) {
+                const sys = window.practicaData[i];
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
+                const correctBadge = document.getElementById(`correct-ans-${i}`);
+
+                const valX = parseInt(inputX.value, 10);
+                const valY = parseInt(inputY.value, 10);
+
+                inputX.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+                inputY.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+                card.classList.remove('ring-2', 'ring-emerald-400', 'border-emerald-400', 'ring-red-400', 'border-red-400');
+
+                if (valX === sys.x && valY === sys.y) {
+                    correctCount++;
+                    inputX.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+                    inputY.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+                    card.classList.add('ring-2', 'ring-emerald-400', 'border-emerald-400');
+                } else {
+                    if (valX !== sys.x) inputX.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
+                    else inputX.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+
+                    if (valY !== sys.y) inputY.classList.add('border-red-500', 'bg-red-50', 'text-red-700');
+                    else inputY.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+
+                    card.classList.add('ring-2', 'ring-red-400', 'border-red-400');
+                    // Revelar la respuesta correcta si se equivocó
+                    correctBadge.classList.remove('hidden');
+                }
+
+                details.classList.remove('hidden');
+                details.open = false;
+
+                inputX.disabled = true;
+                inputY.disabled = true;
+            }
+
+            renderFeedback(correctCount, total);
+        }
+
+        function renderFeedback(correctCount, total) {
+            const btnSubmit = document.getElementById('btn-submit');
+            const feedbackContainer = document.getElementById('evaluation-feedback');
+
+            btnSubmit.classList.add('hidden');
+            feedbackContainer.classList.remove('hidden');
+
+            const passed = correctCount >= 4;
+
+            if (passed) {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-emerald-100 border-2 border-emerald-300 text-emerald-900 p-8 rounded-2xl shadow-md">
+                        <h3 class="text-3xl font-extrabold mb-3">¡Misión Cumplida!</h3>
+                        <p class="text-xl mb-4">Aprobaste la práctica con ${correctCount} de ${total} sistemas correctos.</p>
+                        <div id="firebase-status" class="bg-white px-4 py-3 rounded-lg text-sm font-semibold text-emerald-600 border border-emerald-200">
+                            Sincronizando progreso...
+                        </div>
+                    </div>
+                `;
+                document.dispatchEvent(new CustomEvent('practicaAprobada', { detail: { score: correctCount } }));
+            } else {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-red-100 border-2 border-red-300 text-red-900 p-8 rounded-2xl shadow-md">
+                        <h3 class="text-3xl font-extrabold mb-3">Puntuación Insuficiente</h3>
+                        <p class="text-xl mb-6">Obtuviste ${correctCount} de ${total}. Necesitas al menos un 80% (4/5) para aprobar.</p>
+                        <button id="btn-retry" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-colors text-lg uppercase tracking-wider">
+                            Reintento en Caliente
+                        </button>
+                    </div>
+                `;
+                document.getElementById('btn-retry').addEventListener('click', hotRetry);
+            }
+        }
+
+        function hotRetry() {
+            const total = window.practicaData.length;
+
+            for (let i = 0; i < total; i++) {
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
+                const correctBadge = document.getElementById(`correct-ans-${i}`);
+
+                inputX.disabled = false;
+                inputY.disabled = false;
+                inputX.value = '';
+                inputY.value = '';
+
+                inputX.className = "practica-input border-2 border-gray-300 focus:border-violet-500 focus:ring focus:ring-violet-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm";
+                inputY.className = "practica-input border-2 border-gray-300 focus:border-violet-500 focus:ring focus:ring-violet-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm";
+
+                card.classList.remove('ring-2', 'ring-emerald-400', 'border-emerald-400', 'ring-red-400', 'border-red-400');
+
+                details.classList.add('hidden');
+                details.open = false;
+                if(correctBadge) correctBadge.classList.add('hidden');
+            }
+
+            const btnSubmit = document.getElementById('btn-submit');
+            const feedbackContainer = document.getElementById('evaluation-feedback');
+
+            feedbackContainer.classList.add('hidden');
+            btnSubmit.classList.remove('hidden');
+
+            document.getElementById('practica-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Inicialización de KaTeX global y renderizado
+        document.addEventListener("DOMContentLoaded", function() {
+            renderEjemplos();
+            renderPractica();
+
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError : false
+                });
+            }
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Credenciales oficiales de la plataforma
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                console.log("Sesión activa detectada.");
+            } else {
+                console.log("Modo Invitado.");
+            }
+        });
+
+        async function saveProgressToFirebase(score) {
+            const statusElement = document.getElementById('firebase-status');
+            if (!statusElement) return;
+
+            try {
+                if (currentUser) {
+                    const progressRef = doc(db, "estudiantes", currentUser.uid, "progreso_sesiones", "sesion_eliminacion");
+                    await setDoc(progressRef, {
+                        tema: "Sistemas 2x2: Método de Eliminación",
+                        score: score,
+                        aprobado: true,
+                        timestamp: serverTimestamp()
+                    }, { merge: true });
+                    statusElement.innerHTML = "✅ Progreso registrado exitosamente en Firebase.";
+                } else {
+                    statusElement.innerHTML = "⚠ Evaluación completada localmente (Modo Invitado).";
+                    statusElement.classList.add('text-amber-600');
+                    statusElement.classList.remove('text-emerald-600');
+                }
+            } catch (error) {
+                console.error("Error al guardar en Firebase:", error);
+                statusElement.innerHTML = "❌ Fallo de conexión al guardar el progreso.";
+                statusElement.classList.add('text-red-600');
+                statusElement.classList.remove('text-emerald-600');
+            }
+        }
+
+        document.addEventListener('practicaAprobada', (e) => {
+            saveProgressToFirebase(e.detail.score);
+        });
+    </script>
+</body>
+</html>

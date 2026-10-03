@@ -41,24 +41,19 @@
         </h1>
         <h2 class="text-2xl font-semibold text-slate-700">Solución de Sistemas 2x2: <span class="text-emerald-600">Igualación</span></h2>
         <p class="text-slate-600 max-w-2xl mx-auto">
-            Resuelve cada uno de los sistemas de ecuaciones lineales encontrando los valores para $x$ e $y$. 
-            Puedes consultar el desglose paso a paso después de intentar cada ejercicio.
+            Estudia los ejemplos guiados y resuelve cada uno de los sistemas de ecuaciones de práctica.
         </p>
     </header>
 
-    <main class="w-full max-w-4xl flex-grow flex flex-col gap-8">
-        <h3 class="text-2xl md:text-3xl font-bold text-emerald-700 mt-4 mb-2 border-b-2 border-emerald-200 pb-2">Ejercicios de Práctica</h3>
-        <div id="practica-container" class="flex flex-col gap-8">
-            <!-- Aquí se inyectarán los ejercicios dinámicamente -->
-        </div>
-        <div id="controles-evaluacion" class="w-full flex flex-col items-center mt-6 mb-12"></div>
+    <main id="app-container" class="w-full max-w-4xl flex-grow flex flex-col gap-8">
+        <!-- Aquí se inyectarán las Secciones 1 y 2 en los próximos Estados -->
     </main>
 
     <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-slate-200 text-sm text-slate-500 font-mono tracking-widest">
-        JMGV-PTEL 2026. PM1 MC 09. TODOS LOS DERECHOS RESERVADOS.
+        JMGV-PTEL 2026. TSF MC 10. TODOS LOS DERECHOS RESERVADOS.
     </footer>
 
-    <!-- Script Generador de Datos -->
+    <!-- Lógica de Estado 0: Motor Matemático -->
     <script>
         // Función para formatear términos algebraicos globalmente
         window.formatTerm = function (coef, variable, isFirst = false) {
@@ -70,6 +65,7 @@
             return `${strSign}${strCoef}${variable}`;
         };
 
+        // Generador de números aleatorios excluyendo el 0
         function getRandomInt(min, max) {
             let val = 0;
             while(val === 0) {
@@ -78,7 +74,7 @@
             return val;
         }
 
-        // Generador de sistemas (usando A1, B1, C1, A2, B2, C2)
+        // Generador de un sistema de ecuaciones con solución única y entera
         function generateSystem() {
             let A1, B1, A2, B2, det;
             do {
@@ -98,73 +94,62 @@
             return { A1, B1, C1, A2, B2, C2, x, y };
         }
 
+        // Arrays de datos matemáticos listos (Estado 0)
+        window.ejemplosData = [];
         window.practicaData = [];
+
+        // Generamos los 10 sistemas (5 ejemplos y 5 ejercicios)
         for (let i = 0; i < 5; i++) {
+            window.ejemplosData.push(generateSystem());
             window.practicaData.push(generateSystem());
         }
-    </script>
-
-    <!-- INICIO ESTADO 2: Sección de Práctica, Evaluación y Firebase -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        // Configuración real
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
-            authDomain: "calculointegral-2601b.firebaseapp.com",
-            projectId: "calculointegral-2601b",
-            storageBucket: "calculointegral-2601b.firebasestorage.app",
-            messagingSenderId: "818910932073",
-            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        function formatFraction(numStr, den) {
-            if (den === 1) return `\\frac{${numStr}}{1}`;
-            if (den === -1) return `\\frac{${numStr}}{-1}`;
-            return `\\frac{${numStr}}{${den}}`;
+        
+        // [ESTADO 1: Ejemplos Guiados]
+        function formatFraction(num, den) {
+            if (den === 1) return `\\frac{${num}}{1}`;
+            if (den === -1) return `\\frac{${num}}{-1}`;
+            return `\\frac{${num}}{${den}}`;
         }
 
-        const formatTermGlobal = window.formatTerm;
-
         function buildStepByStepIgualacion(sys) {
-            const num1 = `${sys.C1} ${formatTermGlobal(-sys.A1, 'x')}`;
-            const num2 = `${sys.C2} ${formatTermGlobal(-sys.A2, 'x')}`;
-
-            const despY1 = `y = ${formatFraction(num1, sys.B1)}`;
-            const despY2 = `y = ${formatFraction(num2, sys.B2)}`;
-
-            const igualacion = `${formatFraction(num1, sys.B1)} = ${formatFraction(num2, sys.B2)}`;
-
-            const paso3_1 = `${sys.B2}(${num1}) = ${sys.B1}(${num2})`;
-            const valLNum = sys.B2 * sys.C1;
-            const valLx = sys.B2 * -sys.A1;
-            const valRNum = sys.B1 * sys.C2;
-            const valRx = sys.B1 * -sys.A2;
-            const paso3_2 = `${valLNum} ${formatTermGlobal(valLx, 'x')} = ${valRNum} ${formatTermGlobal(valRx, 'x')}`;
-
+            const { A1, B1, C1, A2, B2, C2, x, y } = sys;
+            
+            // Paso 1
+            const num1 = `${C1} ${window.formatTerm(-A1, 'x')}`;
+            const num2 = `${C2} ${window.formatTerm(-A2, 'x')}`;
+            const despY1 = `y = ${formatFraction(num1, B1)}`;
+            const despY2 = `y = ${formatFraction(num2, B2)}`;
+            
+            // Paso 2
+            const igualacion = `${formatFraction(num1, B1)} = ${formatFraction(num2, B2)}`;
+            
+            // Paso 3
+            const paso3_1 = `${B2}(${num1}) = ${B1}(${num2})`;
+            
+            const valLNum = B2 * C1;
+            const valLx = B2 * (-A1);
+            const valRNum = B1 * C2;
+            const valRx = B1 * (-A2);
+            
+            const paso3_2 = `${valLNum} ${window.formatTerm(valLx, 'x')} = ${valRNum} ${window.formatTerm(valRx, 'x')}`;
+            
             const moveRx = -valRx;
             const moveLNum = -valLNum;
-            const paso3_3 = `${formatTermGlobal(valLx, 'x', true)} ${formatTermGlobal(moveRx, 'x')} = ${valRNum} ${formatTermGlobal(moveLNum, '')}`;
-
+            const paso3_3 = `${window.formatTerm(valLx, 'x', true)} ${window.formatTerm(moveRx, 'x')} = ${valRNum} ${window.formatTerm(moveLNum, '')}`;
+            
             const sumX = valLx + moveRx;
             const sumNum = valRNum + moveLNum;
-            const paso3_4 = `${formatTermGlobal(sumX, 'x', true)} = ${sumNum}`;
-            const paso3_5 = `x = ${sys.x}`;
-
-            const ax_val = sys.A1 * sys.x;
-            const numFinal = sys.C1 - ax_val;
-            const paso4_1 = `y = ${formatFraction(`${sys.C1} - (${sys.A1})(${sys.x})`, sys.B1)}`;
-
+            const paso3_4 = `${window.formatTerm(sumX, 'x', true)} = ${sumNum}`;
+            const paso3_5 = `x = \\frac{${sumNum}}{${sumX}} \\implies x = ${x}`;
+            
+            // Paso 4
+            const ax_val = A1 * x;
+            const numFinal = C1 - ax_val;
+            const paso4_1 = `y = ${formatFraction(`${C1} - (${A1})(${x})`, B1)}`;
             const strSignAx = ax_val < 0 ? "+" : "-";
             const absAx = Math.abs(ax_val);
-            const paso4_2 = `y = ${formatFraction(`${sys.C1} ${strSignAx}${absAx}`, sys.B1)}`;
-            const paso4_3 = `y = ${formatFraction(`${numFinal}`, sys.B1)} \\implies y = ${sys.y}`;
+            const paso4_2 = `y = ${formatFraction(`${C1} ${strSignAx} ${absAx}`, B1)}`;
+            const paso4_3 = `y = ${formatFraction(`${numFinal}`, B1)} \\implies y = ${y}`;
 
             return `
                 <div class="mt-4 p-5 bg-emerald-50 border border-emerald-200 rounded-lg text-sm md:text-base text-gray-800 space-y-5">
@@ -203,38 +188,83 @@
                     <div class="bg-emerald-700 p-4 rounded-xl text-center shadow-md">
                         <p class="font-bold text-emerald-200 tracking-wide uppercase text-xs">Solución Final</p>
                         <div class="text-xl mt-1 text-white font-bold">
-                            $$ (x, y) = (${sys.x}, ${sys.y}) $$
+                            $$ (x, y) = (${x}, ${y}) $$
                         </div>
                     </div>
                 </div>
             `;
         }
 
+        function renderEjemplos() {
+            const container = document.getElementById('app-container');
+            
+            const sectionHTML = document.createElement('section');
+            sectionHTML.id = "ejemplos-section";
+            sectionHTML.innerHTML = '<h3 class="text-2xl md:text-3xl font-bold text-emerald-700 mt-4 mb-6 border-b-2 border-emerald-200 pb-2">Ejemplos Guiados</h3>';
+            
+            window.ejemplosData.forEach((sys, index) => {
+                const eq1KaTeX = `${window.formatTerm(sys.A1, 'x', true)} ${window.formatTerm(sys.B1, 'y')} = ${sys.C1}`;
+                const eq2KaTeX = `${window.formatTerm(sys.A2, 'x', true)} ${window.formatTerm(sys.B2, 'y')} = ${sys.C2}`;
+                const systemKaTeX = `\\begin{cases} ${eq1KaTeX} \\\\ ${eq2KaTeX} \\end{cases}`;
+
+                const stepByStepHTML = buildStepByStepIgualacion(sys);
+
+                const cardHTML = `
+                    <article class="bg-white border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300 mb-8" id="ejemplo-card-${index}">
+                        <div class="absolute -top-5 -left-4 bg-emerald-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white">
+                            E${index + 1}
+                        </div>
+                        
+                        <div class="text-xl md:text-2xl overflow-x-auto w-full flex justify-center py-6 bg-emerald-50/50 rounded-xl border border-emerald-100 mb-6">
+                            $$ ${systemKaTeX} $$
+                        </div>
+
+                        ${stepByStepHTML}
+                    </article>
+                `;
+                sectionHTML.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+            container.appendChild(sectionHTML);
+        }
+        
         function renderPractica() {
-            const container = document.getElementById('practica-container');
-            container.innerHTML = '';
+            const container = document.getElementById('app-container');
+            
+            const sectionHTML = document.createElement('section');
+            sectionHTML.id = "practica-section";
+            sectionHTML.innerHTML = `
+                <h3 class="text-2xl md:text-3xl font-bold text-emerald-700 mt-12 mb-6 border-b-2 border-emerald-200 pb-2">Ejercicios de Práctica</h3>
+                <div id="practica-cards-container" class="flex flex-col gap-8"></div>
+                <div id="controles-evaluacion" class="w-full flex flex-col items-center mt-6 mb-12">
+                    <button id="btn-submit" class="bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-extrabold py-4 px-12 rounded-xl shadow-lg text-xl w-full md:w-auto uppercase tracking-wide">
+                        Verificar Respuestas
+                    </button>
+                    <div id="evaluation-feedback" class="mt-8 w-full text-center hidden w-full max-w-2xl mx-auto"></div>
+                </div>
+            `;
+            container.appendChild(sectionHTML);
+            
+            const cardsContainer = document.getElementById('practica-cards-container');
 
             window.practicaData.forEach((sys, index) => {
-                const eq1KaTeX = `${formatTermGlobal(sys.A1, 'x', true)}${formatTermGlobal(sys.B1, 'y')} &= ${sys.C1}`;
-                const eq2KaTeX = `${formatTermGlobal(sys.A2, 'x', true)}${formatTermGlobal(sys.B2, 'y')} &= ${sys.C2}`;
+                const eq1KaTeX = `${window.formatTerm(sys.A1, 'x', true)} ${window.formatTerm(sys.B1, 'y')} = ${sys.C1}`;
+                const eq2KaTeX = `${window.formatTerm(sys.A2, 'x', true)} ${window.formatTerm(sys.B2, 'y')} = ${sys.C2}`;
                 const systemKaTeX = `\\begin{cases} ${eq1KaTeX} \\\\ ${eq2KaTeX} \\end{cases}`;
 
                 const stepByStepHTML = buildStepByStepIgualacion(sys);
 
                 const cardHTML = `
                     <article class="bg-white border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300" id="practica-card-${index}">
-                        <!-- Insignia Numérica -->
                         <div class="absolute -top-5 -left-4 bg-emerald-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white">
                             #${index + 1}
                         </div>
                         
                         <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-                            <!-- Sistema 2x2 -->
                             <div class="text-xl md:text-2xl overflow-x-auto w-full lg:w-1/2 flex justify-center py-6 bg-emerald-50/50 rounded-xl border border-emerald-100">
                                 $$ ${systemKaTeX} $$
                             </div>
 
-                            <!-- Panel de Inputs -->
                             <div class="flex flex-col gap-4 w-full lg:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner">
                                 <div class="flex items-center gap-4">
                                     <label for="ans-x-${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( x = \\)</label>
@@ -247,7 +277,6 @@
                             </div>
                         </div>
 
-                        <!-- Acordeón Oculto -->
                         <details class="mt-6 group hidden" id="details-practica-${index}">
                             <summary class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-5 rounded-lg transition-colors list-none flex justify-between items-center shadow-md">
                                 <span class="flex items-center gap-2">
@@ -260,28 +289,10 @@
                         </details>
                     </article>
                 `;
-                container.insertAdjacentHTML('beforeend', cardHTML);
+                cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
             });
-
-            const controlesContainer = document.getElementById('controles-evaluacion');
-            controlesContainer.innerHTML = `
-                <button id="btn-submit" class="bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-extrabold py-4 px-12 rounded-xl shadow-lg text-xl w-full md:w-auto uppercase tracking-wide">
-                    Verificar Respuestas
-                </button>
-                <div id="evaluation-feedback" class="mt-8 w-full text-center hidden w-full max-w-2xl mx-auto"></div>
-            `;
 
             document.getElementById('btn-submit').addEventListener('click', evaluateExercises);
-
-            // SCOPE GLOBAL DE KATEX
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '\\(', right: '\\)', display: false },
-                    { left: '$', right: '$', display: false }
-                ],
-                throwOnError: false
-            });
         }
 
         function evaluateExercises() {
@@ -300,6 +311,7 @@
 
                 inputX.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
                 inputY.classList.remove('border-red-500', 'bg-red-50', 'text-red-700', 'border-emerald-500', 'bg-emerald-50', 'text-emerald-700');
+                card.classList.remove('ring-2', 'ring-emerald-400', 'border-emerald-400', 'ring-red-400', 'border-red-400');
 
                 if (valX === sys.x && valY === sys.y) {
                     correctCount++;
@@ -326,7 +338,7 @@
             renderFeedback(correctCount, total);
         }
 
-        async function renderFeedback(correctCount, total) {
+        function renderFeedback(correctCount, total) {
             const btnSubmit = document.getElementById('btn-submit');
             const feedbackContainer = document.getElementById('evaluation-feedback');
 
@@ -340,12 +352,13 @@
                     <div class="bg-emerald-100 border-2 border-emerald-300 text-emerald-900 p-8 rounded-2xl shadow-md">
                         <h3 class="text-3xl font-extrabold mb-3">¡Misión Cumplida!</h3>
                         <p class="text-xl mb-4">Aprobaste la práctica con ${correctCount} de ${total} sistemas correctos.</p>
-                        <div id="firebase-status" class="bg-white px-4 py-3 rounded-lg text-sm font-semibold text-emerald-600 animate-pulse border border-emerald-200">
-                            Sincronizando progreso con la base de datos...
+                        <div id="firebase-status" class="bg-white px-4 py-3 rounded-lg text-sm font-semibold text-emerald-600 border border-emerald-200">
+                            Sincronizando progreso...
                         </div>
                     </div>
                 `;
-                await saveProgressToFirebase(correctCount);
+                // Disparar evento para persistencia
+                document.dispatchEvent(new CustomEvent('practicaAprobada', { detail: { score: correctCount } }));
             } else {
                 feedbackContainer.innerHTML = `
                     <div class="bg-red-100 border-2 border-red-300 text-red-900 p-8 rounded-2xl shadow-md">
@@ -391,16 +404,63 @@
 
             document.getElementById('practica-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+        
+        // Inicialización Global
+        document.addEventListener("DOMContentLoaded", function() {
+            renderEjemplos();
+            renderPractica();
+            
+            // Render KaTeX for the injected content
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError : false
+                });
+            }
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Credenciales oficiales de la plataforma
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                console.log("Sesión activa detectada.");
+            } else {
+                console.log("Modo Invitado.");
+            }
+        });
 
         async function saveProgressToFirebase(score) {
             const statusElement = document.getElementById('firebase-status');
+            if (!statusElement) return;
 
             try {
-                const user = auth.currentUser;
-
-                if (user) {
-                    // Estandarizado a la ruta que usamos en sustitución
-                    const progressRef = doc(db, "estudiantes", user.uid, "progreso_sesiones", "sesion_igualacion");
+                if (currentUser) {
+                    const progressRef = doc(db, "estudiantes", currentUser.uid, "progreso_sesiones", "sesion_igualacion");
                     await setDoc(progressRef, {
                         tema: "Sistemas 2x2: Método de Igualación",
                         score: score,
@@ -408,24 +468,21 @@
                         timestamp: serverTimestamp()
                     }, { merge: true });
                     statusElement.innerHTML = "✅ Progreso registrado exitosamente en Firebase.";
-                    statusElement.classList.remove('animate-pulse');
                 } else {
                     statusElement.innerHTML = "⚠ Evaluación completada localmente (Modo Invitado).";
-                    statusElement.classList.remove('animate-pulse', 'text-emerald-600');
                     statusElement.classList.add('text-amber-600');
+                    statusElement.classList.remove('text-emerald-600');
                 }
             } catch (error) {
                 console.error("Error al guardar en Firebase:", error);
-                statusElement.innerHTML = "❌ Fallo de conexión. No se pudo sincronizar el progreso.";
-                statusElement.classList.remove('animate-pulse', 'text-emerald-600');
+                statusElement.innerHTML = "❌ Fallo de conexión al guardar el progreso.";
                 statusElement.classList.add('text-red-600');
+                statusElement.classList.remove('text-emerald-600');
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(() => {
-                renderPractica();
-            }, 100);
+        document.addEventListener('practicaAprobada', (e) => {
+            saveProgressToFirebase(e.detail.score);
         });
     </script>
 </body>

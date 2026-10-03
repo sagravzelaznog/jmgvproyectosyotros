@@ -166,48 +166,48 @@
             const paso4_2 = `y = ${formatFraction(`${sys.C1} ${strSignAx}${absAx}`, sys.B1)}`;
             const paso4_3 = `y = ${formatFraction(`${numFinal}`, sys.B1)} \\implies y = ${sys.y}`;
 
-            return \`
+            return `
                 <div class="mt-4 p-5 bg-emerald-50 border border-emerald-200 rounded-lg text-sm md:text-base text-gray-800 space-y-5">
                     <div>
                         <p class="font-bold text-emerald-800 mb-2">Paso 1: Despejamos \\( y \\) en ambas ecuaciones.</p>
                         <div class="overflow-x-auto text-center w-full">
-                            $$ \${despY1} \\quad \\text{y} \\quad \${despY2} $$
+                            $$ ${despY1} \\quad \\text{y} \\quad ${despY2} $$
                         </div>
                     </div>
                     <hr class="border-emerald-300">
                     <div>
                         <p class="font-bold text-emerald-800 mb-2">Paso 2: Igualamos las expresiones.</p>
                         <div class="overflow-x-auto text-center w-full">
-                            $$ \${igualacion} $$
+                            $$ ${igualacion} $$
                         </div>
                     </div>
                     <hr class="border-emerald-300">
                     <div>
                         <p class="font-bold text-emerald-800 mb-2">Paso 3: Multiplicamos cruzado y resolvemos la ecuación lineal.</p>
                         <div class="overflow-x-auto text-center w-full space-y-2">
-                            $$ \${paso3_1} $$
-                            $$ \${paso3_2} $$
-                            $$ \${paso3_3} $$
-                            $$ \${paso3_4} \\implies \${paso3_5} $$
+                            $$ ${paso3_1} $$
+                            $$ ${paso3_2} $$
+                            $$ ${paso3_3} $$
+                            $$ ${paso3_4} \\implies ${paso3_5} $$
                         </div>
                     </div>
                     <hr class="border-emerald-300">
                     <div>
                         <p class="font-bold text-emerald-800 mb-2">Paso 4: Sustituimos \\( x \\) para hallar \\( y \\).</p>
                         <div class="overflow-x-auto text-center w-full space-y-2">
-                            $$ \${paso4_1} $$
-                            $$ \${paso4_2} $$
-                            $$ \${paso4_3} $$
+                            $$ ${paso4_1} $$
+                            $$ ${paso4_2} $$
+                            $$ ${paso4_3} $$
                         </div>
                     </div>
                     <div class="bg-emerald-700 p-4 rounded-xl text-center shadow-md">
                         <p class="font-bold text-emerald-200 tracking-wide uppercase text-xs">Solución Final</p>
                         <div class="text-xl mt-1 text-white font-bold">
-                            $$ (x, y) = (\${sys.x}, \${sys.y}) $$
+                            $$ (x, y) = (${sys.x}, ${sys.y}) $$
                         </div>
                     </div>
                 </div>
-            \`;
+            `;
         }
 
         function renderPractica() {
@@ -215,40 +215,40 @@
             container.innerHTML = '';
 
             window.practicaData.forEach((sys, index) => {
-                const eq1KaTeX = \`\${formatTermGlobal(sys.A1, 'x', true)}\${formatTermGlobal(sys.B1, 'y')} &= \${sys.C1}\`;
-                const eq2KaTeX = \`\${formatTermGlobal(sys.A2, 'x', true)}\${formatTermGlobal(sys.B2, 'y')} &= \${sys.C2}\`;
-                const systemKaTeX = \`\\begin{cases} \${eq1KaTeX} \\\\ \${eq2KaTeX} \\end{cases}\`;
+                const eq1KaTeX = `${formatTermGlobal(sys.A1, 'x', true)}${formatTermGlobal(sys.B1, 'y')} &= ${sys.C1}`;
+                const eq2KaTeX = `${formatTermGlobal(sys.A2, 'x', true)}${formatTermGlobal(sys.B2, 'y')} &= ${sys.C2}`;
+                const systemKaTeX = `\\begin{cases} ${eq1KaTeX} \\\\ ${eq2KaTeX} \\end{cases}`;
 
                 const stepByStepHTML = buildStepByStepIgualacion(sys);
 
-                const cardHTML = \`
-                    <article class="bg-white border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300" id="practica-card-\${index}">
+                const cardHTML = `
+                    <article class="bg-white border border-emerald-200 rounded-2xl p-6 md:p-8 shadow-sm relative transition-all duration-300" id="practica-card-${index}">
                         <!-- Insignia Numérica -->
                         <div class="absolute -top-5 -left-4 bg-emerald-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white">
-                            #\${index + 1}
+                            #${index + 1}
                         </div>
                         
                         <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
                             <!-- Sistema 2x2 -->
                             <div class="text-xl md:text-2xl overflow-x-auto w-full lg:w-1/2 flex justify-center py-6 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                                $$ \${systemKaTeX} $$
+                                $$ ${systemKaTeX} $$
                             </div>
 
                             <!-- Panel de Inputs -->
                             <div class="flex flex-col gap-4 w-full lg:w-1/2 bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-inner">
                                 <div class="flex items-center gap-4">
-                                    <label for="ans-x-\${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( x = \\)</label>
-                                    <input type="number" id="ans-x-\${index}" class="practica-input border-2 border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de x">
+                                    <label for="ans-x-${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( x = \\)</label>
+                                    <input type="number" id="ans-x-${index}" class="practica-input border-2 border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de x">
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <label for="ans-y-\${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( y = \\)</label>
-                                    <input type="number" id="ans-y-\${index}" class="practica-input border-2 border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de y">
+                                    <label for="ans-y-${index}" class="font-bold text-xl text-gray-700 w-12 text-right">\\( y = \\)</label>
+                                    <input type="number" id="ans-y-${index}" class="practica-input border-2 border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 rounded-lg px-4 py-3 w-full transition-all text-center text-xl font-bold text-gray-800 shadow-sm" placeholder="Valor de y">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Acordeón Oculto -->
-                        <details class="mt-6 group hidden" id="details-practica-\${index}">
+                        <details class="mt-6 group hidden" id="details-practica-${index}">
                             <summary class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-5 rounded-lg transition-colors list-none flex justify-between items-center shadow-md">
                                 <span class="flex items-center gap-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -256,20 +256,20 @@
                                 </span>
                                 <span class="transform group-open:rotate-180 transition-transform duration-300">▼</span>
                             </summary>
-                            \${stepByStepHTML}
+                            ${stepByStepHTML}
                         </details>
                     </article>
-                \`;
+                `;
                 container.insertAdjacentHTML('beforeend', cardHTML);
             });
 
             const controlesContainer = document.getElementById('controles-evaluacion');
-            controlesContainer.innerHTML = \`
+            controlesContainer.innerHTML = `
                 <button id="btn-submit" class="bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-extrabold py-4 px-12 rounded-xl shadow-lg text-xl w-full md:w-auto uppercase tracking-wide">
                     Verificar Respuestas
                 </button>
                 <div id="evaluation-feedback" class="mt-8 w-full text-center hidden w-full max-w-2xl mx-auto"></div>
-            \`;
+            `;
 
             document.getElementById('btn-submit').addEventListener('click', evaluateExercises);
 
@@ -277,7 +277,7 @@
             renderMathInElement(document.body, {
                 delimiters: [
                     { left: '$$', right: '$$', display: true },
-                    { left: '\\\\(', right: '\\\\)', display: false },
+                    { left: '\\(', right: '\\)', display: false },
                     { left: '$', right: '$', display: false }
                 ],
                 throwOnError: false
@@ -290,10 +290,10 @@
 
             for (let i = 0; i < total; i++) {
                 const sys = window.practicaData[i];
-                const inputX = document.getElementById(\`ans-x-\${i}\`);
-                const inputY = document.getElementById(\`ans-y-\${i}\`);
-                const card = document.getElementById(\`practica-card-\${i}\`);
-                const details = document.getElementById(\`details-practica-\${i}\`);
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
 
                 const valX = parseInt(inputX.value, 10);
                 const valY = parseInt(inputY.value, 10);
@@ -336,26 +336,26 @@
             const passed = correctCount >= 4;
 
             if (passed) {
-                feedbackContainer.innerHTML = \`
+                feedbackContainer.innerHTML = `
                     <div class="bg-emerald-100 border-2 border-emerald-300 text-emerald-900 p-8 rounded-2xl shadow-md">
                         <h3 class="text-3xl font-extrabold mb-3">¡Misión Cumplida!</h3>
-                        <p class="text-xl mb-4">Aprobaste la práctica con \${correctCount} de \${total} sistemas correctos.</p>
+                        <p class="text-xl mb-4">Aprobaste la práctica con ${correctCount} de ${total} sistemas correctos.</p>
                         <div id="firebase-status" class="bg-white px-4 py-3 rounded-lg text-sm font-semibold text-emerald-600 animate-pulse border border-emerald-200">
                             Sincronizando progreso con la base de datos...
                         </div>
                     </div>
-                \`;
+                `;
                 await saveProgressToFirebase(correctCount);
             } else {
-                feedbackContainer.innerHTML = \`
+                feedbackContainer.innerHTML = `
                     <div class="bg-red-100 border-2 border-red-300 text-red-900 p-8 rounded-2xl shadow-md">
                         <h3 class="text-3xl font-extrabold mb-3">Puntuación Insuficiente</h3>
-                        <p class="text-xl mb-6">Obtuviste \${correctCount} de \${total}. Necesitas al menos un 80% (4/5) para aprobar.</p>
+                        <p class="text-xl mb-6">Obtuviste ${correctCount} de ${total}. Necesitas al menos un 80% (4/5) para aprobar.</p>
                         <button id="btn-retry" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-colors text-lg uppercase tracking-wider">
                             Reintento en Caliente
                         </button>
                     </div>
-                \`;
+                `;
                 document.getElementById('btn-retry').addEventListener('click', hotRetry);
             }
         }
@@ -364,10 +364,10 @@
             const total = window.practicaData.length;
 
             for (let i = 0; i < total; i++) {
-                const inputX = document.getElementById(\`ans-x-\${i}\`);
-                const inputY = document.getElementById(\`ans-y-\${i}\`);
-                const card = document.getElementById(\`practica-card-\${i}\`);
-                const details = document.getElementById(\`details-practica-\${i}\`);
+                const inputX = document.getElementById(`ans-x-${i}`);
+                const inputY = document.getElementById(`ans-y-${i}`);
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
 
                 inputX.disabled = false;
                 inputY.disabled = false;

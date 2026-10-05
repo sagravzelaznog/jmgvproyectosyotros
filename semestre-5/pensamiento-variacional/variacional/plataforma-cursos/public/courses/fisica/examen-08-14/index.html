@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Dinámico: Análisis Físicos MC08 - MC14</title>
+    <meta name="description" content="Examen dinámico de 10 aciertos sobre las Masterclasses 08 a 14 del curso de Análisis de Fenómenos Físicos.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --correct-color: #10b981;
+            --incorrect-color: #ef4444;
+            --hover-color: rgba(59, 130, 246, 0.2);
+            --selected-border: #60a5fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .question-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            background: var(--hover-color);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            background: var(--hover-color);
+            border-color: var(--selected-border);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--correct-color);
+        }
+
+        .option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--incorrect-color);
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .option.selected .option-indicator {
+            border-color: var(--accent-primary);
+        }
+
+        .option.selected .option-indicator::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .option.correct .option-indicator {
+            border-color: var(--correct-color);
+            background: var(--correct-color);
+        }
+
+        .option.incorrect .option-indicator {
+            border-color: var(--incorrect-color);
+            background: var(--incorrect-color);
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .btn-submit {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #475569;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-container {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-top: 2rem;
+            display: none;
+            animation: scaleIn 0.5s ease-out forwards;
+        }
+
+        .results-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-display {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .btn-print {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-print:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .student-info {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+        .info-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .info-group label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .info-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .info-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media print {
+            @page {
+                size: letter;
+                margin: 1cm;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                font-size: 10pt;
+            }
+            .student-info {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                background: none !important;
+                padding: 0 !important;
+                border: none !important;
+                text-align: left;
+            }
+            .info-group {
+                display: flex;
+                flex: 1;
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 0.5rem;
+            }
+            .info-group label {
+                color: black;
+                font-size: 11pt;
+            }
+            .info-input {
+                border: none !important;
+                border-bottom: 1px solid black !important;
+                background: none !important;
+                color: black !important;
+                border-radius: 0;
+                padding: 0 0 0.2rem 0;
+                flex: 1;
+                font-size: 11pt;
+            }
+            .container {
+                max-width: 100%;
+                width: 100%;
+            }
+            .header {
+                margin-bottom: 0.5rem;
+                animation: none !important;
+            }
+            h1 {
+                font-size: 16pt;
+                background: none;
+                -webkit-background-clip: initial;
+                -webkit-text-fill-color: black;
+                color: black;
+                margin-bottom: 0.2rem;
+            }
+            .subtitle {
+                color: #333;
+                font-size: 12pt;
+            }
+            .quiz-container {
+                gap: 0;
+            }
+            .question-card {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-bottom: 1px dashed #ccc !important;
+                border-radius: 0;
+                padding: 0.5rem 0 !important;
+                margin-bottom: 0 !important;
+                transform: none !important;
+                animation: none !important;
+                opacity: 1 !important;
+                page-break-inside: avoid;
+            }
+            .question-card h2 {
+                font-size: 11pt;
+                margin-bottom: 0.4rem;
+                color: black;
+            }
+            .options-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.2rem;
+            }
+            .option {
+                padding: 0.1rem 0;
+                border: none !important;
+                background: none !important;
+                color: black;
+                transform: none !important;
+            }
+            .option-indicator {
+                width: 12px;
+                height: 12px;
+                border-color: black !important;
+            }
+            .btn-submit, .btn-print, .results-container, .feedback {
+                display: none !important;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            .question-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print" onclick="window.print()" title="Imprimir a PDF">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Imprimir PDF
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <h1>Examen (MC08 - MC14)</h1>
+            <p class="subtitle">Fuerzas, Equilibrio y Momentos (Masterclasses 08 - 14)</p>
+            
+            <div class="student-info">
+                <div class="info-group">
+                    <label for="student-name">Nombre del Alumno(a):</label>
+                    <input type="text" id="student-name" class="info-input">
+                </div>
+                <div class="info-group">
+                    <label for="exam-date">Fecha:</label>
+                    <input type="text" id="exam-date" class="info-input">
+                </div>
+            </div>
+        </header>
+
+        <form id="quiz-form">
+            <div class="quiz-container" id="quiz-container">
+                <!-- Questions will be injected here by JS -->
+            </div>
+            
+            <button type="submit" class="btn-submit" id="submit-btn">Calificar Examen</button>
+        </form>
+
+        <div class="results-container" id="results">
+            <h2>Resultados Finales</h2>
+            <div class="score-display">
+                <span id="score-text">0</span> / 10
+            </div>
+            <p id="score-message" class="subtitle">¡Buen esfuerzo!</p>
+            <button class="btn-submit" onclick="location.reload()" style="margin-top: 2rem;">Reintentar</button>
+        </div>
+    </div>
+
+    <script>
+        const fullQuestionPool = [
+    {
+        "id": "mc8_q1",
+        "question": "¿Qué nombre reciben las fuerzas cuyas líneas de acción se cruzan en un mismo punto?",
+        "options": [
+            "Fuerzas coplanares",
+            "Fuerzas concurrentes",
+            "Fuerzas paralelas",
+            "Fuerzas distribuidas"
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Las fuerzas concurrentes son aquellas que actúan sobre el mismo punto de un cuerpo (o cuyas líneas se intersectan ahí)."
+    },
+    {
+        "id": "mc8_q2",
+        "question": "Gráficamente, ¿cómo se ve un sistema de fuerzas en equilibrio usando el método del polígono?",
+        "options": [
+            "Como una línea recta.",
+            "Como vectores paralelos que no se tocan.",
+            "Como un polígono cerrado (el inicio coincide con el fin).",
+            "Como una espiral creciente."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Un polígono cerrado indica que, tras sumar todos los desplazamientos vectoriales, regresamos al origen; resultante = cero."
+    },
+    {
+        "id": "mc8_q3",
+        "question": "Para descomponer un vector fuerza en su componente horizontal (X), usualmente multiplicamos su magnitud por el:",
+        "options": [
+            "Seno del ángulo",
+            "Coseno del ángulo",
+            "Tangente del ángulo",
+            "Cotangente del ángulo"
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Siempre que el ángulo se mida desde el eje X horizontal, la componente X adyacente se calcula con el coseno."
+    },
+    {
+        "id": "mc8_q4",
+        "question": "Si al calcular Rx y Ry, obtenemos que Rx = 10 N y Ry = -10 N, ¿está el cuerpo en equilibrio?",
+        "options": [
+            "Sí, porque 10 - 10 = 0.",
+            "No, porque las componentes en cada eje deben ser cero por separado.",
+            "Sí, porque están en ejes diferentes.",
+            "Depende de la masa del cuerpo."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El equilibrio requiere que simultáneamente Rx = 0 y Ry = 0. En este caso hay una fuerza neta diagonal."
+    },
+    {
+        "id": "mc8_q5",
+        "question": "¿Puede un objeto estar en equilibrio sometido únicamente a dos fuerzas concurrentes que no están alineadas (tienen distinto ángulo no opuesto)?",
+        "options": [
+            "Sí, si las fuerzas son muy pequeñas.",
+            "No, es físicamente imposible.",
+            "Sí, si hay fricción.",
+            "Depende del material del objeto."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Para que dos fuerzas se anulen deben tener misma magnitud y línea de acción opuesta (180 grados). Si hay otro ángulo, habrá una resultante."
+    },
+    {
+        "id": "mc9_q1",
+        "question": "¿Qué es el centro de gravedad de un objeto?",
+        "options": [
+            "El punto donde se encuentra el motor del sistema.",
+            "El punto más bajo del objeto respecto al suelo.",
+            "El punto imaginario donde se considera concentrado todo el peso del cuerpo.",
+            "El punto exacto donde la gravedad vale cero."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Es una abstracción matemática que simplifica el análisis, asumiendo que toda la masa actúa desde ese único punto."
+    },
+    {
+        "id": "mc9_q2",
+        "question": "¿Cuál es la condición para que un objeto apoyado en el suelo no vuelque (sea estable)?",
+        "options": [
+            "Que su centro de gravedad esté lo más alto posible.",
+            "Que la proyección vertical del CG caiga dentro de la base de sustentación.",
+            "Que su masa sea muy grande.",
+            "Que no haya fricción con el piso."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Si la línea de gravedad sale del área de apoyo (base), el peso generará un momento de rotación que tirará el objeto."
+    },
+    {
+        "id": "mc9_q3",
+        "question": "Si a un objeto simétrico y homogéneo le agregas un peso extra en su lado derecho, el centro de gravedad se desplazará hacia:",
+        "options": [
+            "El centro exacto.",
+            "El lado izquierdo.",
+            "El lado derecho.",
+            "Hacia arriba exclusivamente."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: El CG siempre se desplaza hacia la región donde hay una mayor concentración de masa para mantener el balance."
+    },
+    {
+        "id": "mc9_q4",
+        "question": "¿Cómo se clasifica el equilibrio de un cono apoyado sobre su punta?",
+        "options": [
+            "Equilibrio Estable",
+            "Equilibrio Inestable",
+            "Equilibrio Indiferente",
+            "Equilibrio Dinámico"
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Cualquier pequeña perturbación bajará el centro de gravedad del cono y lo hará caer irreversiblemente."
+    },
+    {
+        "id": "mc9_q5",
+        "question": "¿Puede el centro de gravedad de un objeto ubicarse fuera del material que lo compone (en el aire)?",
+        "options": [
+            "No, siempre debe estar dentro del material sólido.",
+            "Sí, por ejemplo en un anillo o una dona.",
+            "Solo en los líquidos y gases.",
+            "Solo en el espacio exterior."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: En objetos huecos o con geometrías abiertas como un anillo o una herradura, el punto de balance matemático cae en el espacio vacío interior."
+    },
+    {
+        "id": "mc10_q1",
+        "question": "¿Cuál es el propósito principal de crear un Diagrama de Cuerpo Libre (DCL)?",
+        "options": [
+            "Calcular la masa exacta de un objeto.",
+            "Aislar un cuerpo para visualizar y analizar exclusivamente las fuerzas externas que actúan sobre él.",
+            "Medir la velocidad y aceleración sin usar fórmulas.",
+            "Representar artísticamente las proporciones de una máquina."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El DCL elimina la 'basura visual' del entorno para enfocarse puramente en los vectores de fuerza."
+    },
+    {
+        "id": "mc10_q2",
+        "question": "Al dibujar el peso (W) en un DCL de un auto en una rampa inclinada de 30 grados, ¿hacia dónde debe apuntar el vector W?",
+        "options": [
+            "Inclinado a 30 grados respecto a la vertical.",
+            "Paralelo a la rampa.",
+            "Perpendicular a la rampa (hacia la superficie).",
+            "Estrictamente hacia abajo, hacia el centro de la Tierra."
+        ],
+        "correctIndex": 3,
+        "feedback": "CORRECTO: La gravedad no se ve afectada por la inclinación de la rampa; siempre tira directamente hacia abajo."
+    },
+    {
+        "id": "mc10_q3",
+        "question": "¿Qué fuerzas NO deben incluirse NUNCA en un DCL del Cuerpo A?",
+        "options": [
+            "Fuerzas de contacto ejercidas por una cuerda sobre A.",
+            "La fuerza gravitatoria ejercida por la Tierra sobre A.",
+            "Las fuerzas que el Cuerpo A ejerce sobre su entorno (el Cuerpo B).",
+            "La fuerza normal del piso empujando hacia arriba a A."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: El DCL solo registra lo que el universo le hace al objeto de estudio, no lo que el objeto le hace al universo (Tercera Ley)."
+    },
+    {
+        "id": "mc10_q4",
+        "question": "Si aislas un objeto suspendido por un cable, el vector de Tensión (T) debe dibujarse apuntando:",
+        "options": [
+            "Hacia el centro de masa del objeto.",
+            "Alejándose del objeto, siguiendo la línea del cable.",
+            "Hacia el suelo (sumándose al peso).",
+            "Perpendicular al cable."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Los cables y cuerdas solo pueden tirar (jalar), no pueden empujar. Por ello la tensión siempre 'aleja' del cuerpo."
+    },
+    {
+        "id": "mc10_q5",
+        "question": "¿Es obligatorio alinear siempre el Eje X del DCL con la horizontal perfecta del suelo real?",
+        "options": [
+            "Sí, porque la gravedad lo exige.",
+            "No, los ejes se pueden rotar convenientemente (ej. paralelos a un plano inclinado) para simplificar los cálculos.",
+            "Sí, si no lo haces el resultado matemático será incorrecto.",
+            "Solo en equilibrio dinámico."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Rotar el sistema de referencia para que el eje X coincida con el movimiento o la rampa reduce drásticamente la trigonometría necesaria."
+    },
+    {
+        "id": "mc11_q1",
+        "question": "¿Por qué es importante medir todos los ángulos desde el eje X positivo (en sentido antihorario)?",
+        "options": [
+            "Para que la magnitud de la fuerza sea mayor.",
+            "Para que las funciones trigonométricas (sen, cos) asignen correctamente el signo (+ o -) según el cuadrante.",
+            "Porque es la única forma de que la suma dé cero.",
+            "Para transformar el peso en fuerza normal."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Si usas ángulos polares estándar (0 a 360), no necesitas poner los signos negativos a mano; la calculadora lo hace al sacar el seno o coseno."
+    },
+    {
+        "id": "mc11_q2",
+        "question": "¿Qué fórmula se utiliza para hallar la magnitud total de la Fuerza Resultante a partir de Rx y Ry?",
+        "options": [
+            "R = Rx + Ry",
+            "R = Rx * Ry",
+            "R = √(Rx² + Ry²)",
+            "R = tan(Ry/Rx)"
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Rx y Ry forman los catetos de un triángulo rectángulo; la Resultante es la hipotenusa, que se halla con el Teorema de Pitágoras."
+    },
+    {
+        "id": "mc11_q3",
+        "question": "Si un ingeniero obtiene que la Resultante de un sistema es 0.05 N en lugar de 0 exacto, lo más probable es que:",
+        "options": [
+            "El edificio colapse inmediatamente.",
+            "Haya un error fatal en la Tercera Ley de Newton.",
+            "Sea un pequeño margen de error por redondeo de decimales y pueda considerarse en equilibrio.",
+            "La gravedad haya cambiado en ese punto."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: En la práctica real con senos y cosenos, pequeñas fracciones decimales residuales son normales debido al límite de cifras significativas."
+    },
+    {
+        "id": "mc11_q4",
+        "question": "¿Qué es la 'Fuerza Equilibrante'?",
+        "options": [
+            "La fuerza que anula a la gravedad.",
+            "El doble de la fuerza resultante.",
+            "Una fuerza idéntica a la resultante pero con sentido contrario (180° de diferencia).",
+            "La fricción estática máxima."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Es la fuerza exacta que necesitas agregar a un sistema desbalanceado para llevarlo al estado de suma vectorial igual a cero."
+    },
+    {
+        "id": "mc11_q5",
+        "question": "Si calculaste que Rx = 0 y Ry = 50 N, el objeto se acelerará hacia:",
+        "options": [
+            "La derecha",
+            "La izquierda",
+            "Arriba o abajo, dependiendo del signo de Ry",
+            "No se acelerará"
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Como no hay fuerza neta en X, no se mueve a los lados; toda la aceleración ocurrirá en el eje vertical (eje Y)."
+    },
+    {
+        "id": "mc12_q1",
+        "question": "¿Qué ventaja principal ofrece un simulador 2D frente al cálculo analítico manual?",
+        "options": [
+            "Reemplaza totalmente la necesidad de saber matemáticas.",
+            "Ofrece retroalimentación visual en tiempo real de cómo se ajustan los vectores de fuerza.",
+            "Genera directamente la pieza en la impresora 3D.",
+            "Evita la gravedad por completo."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Los simuladores resuelven las ecuaciones internamente para mostrar cómo los cambios afectan la estabilidad en tiempo real."
+    },
+    {
+        "id": "mc12_q2",
+        "question": "¿Qué tres parámetros básicos necesita un simulador físico para predecir correctamente el equilibrio?",
+        "options": [
+            "Color, olor y textura.",
+            "Masa/Centro de gravedad, Geometría y Condiciones de apoyo.",
+            "Precio, tamaño y velocidad.",
+            "Viento, humedad y presión."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El motor físico (physics engine) requiere la masa, la forma y saber cómo el objeto interactúa con el mundo (clavado, libre, deslizando)."
+    },
+    {
+        "id": "mc12_q3",
+        "question": "Si en el simulador aumentas la carga sin modificar la estructura, ¿qué debe hacer la fuerza normal o tensión visualmente para mantener el equilibrio?",
+        "options": [
+            "Desaparecer.",
+            "Disminuir y cambiar de color.",
+            "Aumentar su magnitud (la flecha se hace más larga) para compensar el peso.",
+            "Apuntar hacia los lados."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Para que ΣF=0 se mantenga al añadir peso, las fuerzas de reacción (tensión/normal) deben crecer proporcionalmente."
+    },
+    {
+        "id": "mc12_q4",
+        "question": "Verdadero o Falso: Los simuladores educativos como PhET tienen en cuenta TODAS las variables microscópicas del mundo real, como la fatiga del material.",
+        "options": [
+            "Verdadero, son réplicas perfectas.",
+            "Falso, suelen utilizar modelos rígidos simplificados (cuerpos ideales) y desprecian flexiones o desgastes complejos.",
+            "Verdadero, pero solo en su versión de pago.",
+            "Falso, ignoran siempre la fuerza de gravedad."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Un modelo es siempre una simplificación de la realidad útil para enseñar o predecir, pero no contempla el desgaste atómico a menos que sea un simulador FEA avanzado."
+    },
+    {
+        "id": "mc12_q5",
+        "question": "El uso de simuladores antes de construir (prototipado virtual) en el ABP sirve principalmente para:",
+        "options": [
+            "Gastar más tiempo en el celular.",
+            "Ahorrar materiales físicos probando que la teoría funciona antes del ensamble.",
+            "Decorar el reporte final.",
+            "Sustituir el examen escrito."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El prototipado virtual es una práctica estándar en la industria para iterar diseños rápidamente sin costo de manufactura."
+    },
+    {
+        "id": "mc13_q1",
+        "question": "¿Cuál es el requisito matemático indispensable para el equilibrio rotacional?",
+        "options": [
+            "Que la sumatoria de fuerzas sea cero.",
+            "Que la sumatoria de torcas (momentos) sea igual a cero.",
+            "Que el objeto no tenga masa.",
+            "Que el centro de gravedad coincida con el piso."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: La Segunda Condición de Equilibrio (Στ = 0) garantiza que no haya rotaciones indeseadas."
+    },
+    {
+        "id": "mc13_q2",
+        "question": "La torca o momento de fuerza depende de dos factores principales: la magnitud de la fuerza aplicada y...",
+        "options": [
+            "La velocidad del objeto.",
+            "La distancia desde el eje de rotación hasta el punto de aplicación (brazo de palanca).",
+            "La fuerza de gravedad ambiental.",
+            "La resistencia del aire."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Matemáticamente τ = r * F. Mientras más lejos del eje apliques la fuerza (mayor r), mayor será la torca generada."
+    },
+    {
+        "id": "mc13_q3",
+        "question": "Por convención estándar, una torca que produce un giro en sentido de las manecillas del reloj se considera:",
+        "options": [
+            "Positiva (+)",
+            "Negativa (-)",
+            "Neutra (0)",
+            "Imposible"
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: En física, la convención de la regla de la mano derecha asigna signo negativo a las rotaciones horarias y positivo a las antihorarias."
+    },
+    {
+        "id": "mc13_q4",
+        "question": "¿Por qué es más fácil abrir una puerta pesada empujándola cerca de la manija que empujándola cerca de las bisagras?",
+        "options": [
+            "Porque cerca de la manija hay menos fricción.",
+            "Porque el brazo de palanca (r) es mayor cerca de la manija, generando más torca con la misma fuerza.",
+            "Porque cerca de la bisagra la puerta pesa más.",
+            "Es una ilusión, requiere exactamente la misma fuerza."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El efecto de palanca se maximiza al alejarse del eje de rotación."
+    },
+    {
+        "id": "mc13_q5",
+        "question": "¿En qué unidades del Sistema Internacional (SI) se mide la torca?",
+        "options": [
+            "Newtons (N)",
+            "Metros (m)",
+            "Newtons por metro (N/m)",
+            "Newtons metro (N·m)"
+        ],
+        "correctIndex": 3,
+        "feedback": "CORRECTO: Se obtiene multiplicando la unidad de fuerza (Newton) por la unidad de distancia (metro)."
+    },
+    {
+        "id": "mc14_q1",
+        "question": "¿Qué célebre frase sobre las palancas se le atribuye a Arquímedes?",
+        "options": [
+            "Para cada acción hay una reacción.",
+            "La energía no se crea ni se destruye.",
+            "Dadme un punto de apoyo y moveré el mundo.",
+            "La manzana siempre cae hacia el centro de la Tierra."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: Arquímedes entendió que, con un brazo de palanca lo suficientemente largo, cualquier fuerza puede multiplicarse infinitamente."
+    },
+    {
+        "id": "mc14_q2",
+        "question": "En la fórmula de la torca (τ = F * r * sen(θ)), ¿cómo se le llama geométricamente al término 'r * sen(θ)'?",
+        "options": [
+            "Vector Resultante",
+            "Brazo de Palanca",
+            "Componente Traslacional",
+            "Radio de Giro"
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: El brazo de palanca es la distancia perpendicular más corta entre la línea de acción de la fuerza y el eje de rotación."
+    },
+    {
+        "id": "mc14_q3",
+        "question": "¿En qué ángulo (θ) debes aplicar la fuerza respecto a la llave o barra para obtener la MÁXIMA torca posible?",
+        "options": [
+            "0 grados (Paralelo a la barra)",
+            "45 grados",
+            "90 grados (Perpendicular a la barra)",
+            "180 grados"
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: El seno de 90° es 1 (su valor máximo posible). Por tanto, la fuerza perpendicular es 100% efectiva para generar rotación."
+    },
+    {
+        "id": "mc14_q4",
+        "question": "¿Qué ocurre si aplicas una fuerza apuntando directamente HACIA la bisagra de una puerta (ángulo de 0 grados o 180 grados)?",
+        "options": [
+            "La puerta gira más rápido.",
+            "La puerta se traba por fricción.",
+            "La torca es cero y la puerta no gira, sin importar la fuerza.",
+            "Se rompe el brazo de palanca."
+        ],
+        "correctIndex": 2,
+        "feedback": "CORRECTO: El seno de 0° o 180° es cero. Toda la fuerza se gasta en intentar arrancar la puerta, no en girarla."
+    },
+    {
+        "id": "mc14_q5",
+        "question": "Para levantar un automóvil usando una palanca y una fuerza humana pequeña, debes asegurar que tu brazo de palanca (motriz) sea:",
+        "options": [
+            "Mucho MENOR que el brazo de palanca del auto (resistencia).",
+            "Mucho MAYOR que el brazo de palanca del auto (resistencia).",
+            "Exactamente IGUAL al brazo del auto.",
+            "La longitud no importa, solo la fuerza."
+        ],
+        "correctIndex": 1,
+        "feedback": "CORRECTO: Un brazo de palanca motriz muy largo multiplica el efecto de la pequeña fuerza de entrada, generando una ventaja mecánica mayor a 1."
+    }
+];
+        
+        // Shuffle and pick 10
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        const questionsData = shuffleArray([...fullQuestionPool]).slice(0, 10);
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        // Render questions
+        questionsData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            const title = document.createElement('h2');
+            title.innerHTML = `${index + 1}. ${q.question}`;
+            card.appendChild(title);
+
+            const optionsList = document.createElement('div');
+            optionsList.className = 'options-list';
+
+            q.options.forEach((optText, optIndex) => {
+                const label = document.createElement('label');
+                label.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = q.id;
+                input.value = optIndex;
+
+                const indicator = document.createElement('div');
+                indicator.className = 'option-indicator';
+                
+                const text = document.createElement('span');
+                text.innerHTML = optText;
+
+                label.appendChild(input);
+                label.appendChild(indicator);
+                label.appendChild(text);
+                optionsList.appendChild(label);
+
+                // Add selection effect
+                input.addEventListener('change', () => {
+                    const allLabels = optionsList.querySelectorAll('.option');
+                    allLabels.forEach(l => l.classList.remove('selected'));
+                    if (input.checked) {
+                        label.classList.add('selected');
+                    }
+                });
+            });
+
+            card.appendChild(optionsList);
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.id = `feedback-${q.id}`;
+            card.appendChild(feedback);
+
+            quizContainer.appendChild(card);
+        });
+
+        // Inform MathJax to re-render after dynamic content is added
+        if (window.MathJax) {
+            MathJax.typesetPromise();
+        }
+
+        // Handle Form Submission
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            let allAnswered = true;
+
+            questionsData.forEach((q) => {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                const optionsList = document.querySelector(`input[name="${q.id}"]`).closest('.options-list');
+                const allLabels = optionsList.querySelectorAll('.option');
+                const feedbackEl = document.getElementById(`feedback-${q.id}`);
+
+                if (!selected) {
+                    allAnswered = false;
+                    return;
+                }
+
+                const selectedVal = parseInt(selected.value);
+                
+                // Disable further input
+                optionsList.querySelectorAll('input').forEach(input => input.disabled = true);
+                
+                // Remove hover and selected classes, evaluate correctness
+                allLabels.forEach((label, idx) => {
+                    label.style.pointerEvents = 'none';
+                    label.classList.remove('selected');
+                    
+                    if (idx === q.correctIndex) {
+                        label.classList.add('correct');
+                    }
+                });
+
+                if (selectedVal === q.correctIndex) {
+                    score++;
+                    feedbackEl.innerHTML = q.feedback;
+                    feedbackEl.style.borderLeftColor = 'var(--correct-color)';
+                } else {
+                    const selectedLabel = selected.closest('.option');
+                    selectedLabel.classList.add('incorrect');
+                    feedbackEl.innerHTML = "INCORRECTO. " + q.feedback;
+                    feedbackEl.style.borderLeftColor = 'var(--incorrect-color)';
+                }
+                
+                feedbackEl.classList.add('show');
+            });
+
+            if (!allAnswered) {
+                alert("Por favor responde todas las preguntas antes de enviar el examen.");
+                return;
+            }
+
+            // Hide submit button and show results
+            document.getElementById('submit-btn').style.display = 'none';
+            
+            const resultsDiv = document.getElementById('results');
+            document.getElementById('score-text').textContent = score;
+            
+            const msgEl = document.getElementById('score-message');
+            if (score === 10) msgEl.textContent = "¡Excelente! Dominio perfecto del tema.";
+            else if (score >= 8) msgEl.textContent = "¡Muy bien! Tienes una gran comprensión.";
+            else if (score >= 6) msgEl.textContent = "Buen trabajo, pero te sugerimos repasar algunos conceptos.";
+            else msgEl.textContent = "Te recomendamos volver a revisar el contenido de las Masterclasses.";
+            
+            resultsDiv.style.display = 'block';
+
+            // Re-render math in feedback if needed
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Dinámico - Unidad 2: La Recta y la Parábola</title>
+
+    <!-- Tailwind CSS (vía CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <!-- KaTeX Auto-Render -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Ocultar flechas de incremento/decremento en inputs numéricos */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Estilos personalizados para los radio buttons */
+        .radio-custom:checked+label {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            color: #1e3a8a;
+        }
+
+        /* Optimizaciones para Impresión en PDF (Máx 2 hojas) */
+        @media print {
+            body { background-color: white !important; font-size: 9pt !important; color: black !important; }
+            header { background-color: white !important; color: black !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
+            header h1 { font-size: 14pt !important; color: black !important; margin: 0 !important; }
+            header h2 { font-size: 11pt !important; color: black !important; margin-bottom: 0.5rem !important; }
+            .print\:hidden { display: none !important; }
+            
+            #questions-container { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 0.5rem !important; margin-top: 0 !important; }
+            .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+            
+            article { padding: 0.5rem !important; border: 1px solid #ccc !important; border-radius: 0.5rem !important; box-shadow: none !important; page-break-inside: avoid !important; margin: 0 !important; background-color: white !important; }
+            
+            .absolute.-top-5.-left-4 { position: static !important; display: inline-block !important; width: auto !important; height: auto !important; background: none !important; color: black !important; border: none !important; box-shadow: none !important; font-size: 10pt !important; margin-right: 0.25rem !important; padding: 0 !important; }
+            .text-lg, .md\:text-xl { font-size: 9.5pt !important; margin-top: 0 !important; display: inline !important; line-height: 1.2 !important; }
+            
+            .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.1rem !important; }
+            .mt-5, .mt-6 { margin-top: 0.25rem !important; }
+            .p-3 { padding: 0.1rem 0.2rem !important; border: none !important; }
+            label { font-size: 9pt !important; line-height: 1.1 !important; }
+            
+            input[type="number"], input[type="text"] { border: none !important; border-bottom: 1px solid black !important; padding: 0 !important; height: 1.2rem !important; background: transparent !important; border-radius: 0 !important; box-shadow: none !important; font-size: 10pt !important; }
+            
+            .mt-4 { margin-top: 0.25rem !important; }
+            .px-4, .px-5 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+            .py-2, .py-3 { padding-top: 0.2rem !important; padding-bottom: 0.2rem !important; }
+            .font-bold.text-lg { font-size: 9pt !important; }
+            
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between text-slate-800">
+
+    <!-- Header Principal -->
+    <header class="bg-indigo-900 text-white py-8 px-4 shadow-md border-b-4 border-indigo-500">
+        <div class="container mx-auto max-w-4xl">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-center tracking-tight mb-2">Examen: Unidad 2 Completa</h1>
+            <h2 class="text-xl md:text-2xl font-medium text-center text-indigo-200">La Ecuación de la Recta y la Parábola</h2>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal del Examen -->
+    <main class="container mx-auto max-w-4xl px-4 py-10 flex-grow print:py-2 print:px-0" id="main-content">
+
+        <!-- Datos del Estudiante -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col sm:flex-row gap-4 print:border-0 print:shadow-none print:mb-2 print:p-0">
+            <div class="flex-grow">
+                <label class="block text-xs font-bold text-slate-500 uppercase print:text-black">Nombre Completo</label>
+                <input type="text" class="w-full border-b-2 border-slate-300 focus:border-indigo-600 outline-none py-1 print:border-black print:border-b-[1px] print:rounded-none bg-transparent" placeholder="Escribe tu nombre...">
+            </div>
+            <div class="w-full sm:w-1/4">
+                <label class="block text-xs font-bold text-slate-500 uppercase print:text-black">Semestre / Grupo</label>
+                <input type="text" class="w-full border-b-2 border-slate-300 focus:border-indigo-600 outline-none py-1 print:border-black print:border-b-[1px] print:rounded-none bg-transparent" placeholder="Ej. 5to A">
+            </div>
+            <div class="w-full sm:w-1/4">
+                <label class="block text-xs font-bold text-slate-500 uppercase print:text-black">Fecha</label>
+                <input type="text" class="w-full border-b-2 border-slate-300 focus:border-indigo-600 outline-none py-1 print:border-black print:border-b-[1px] print:rounded-none bg-transparent" placeholder="DD/MM/AAAA">
+            </div>
+        </div>
+
+        <!-- Instrucciones -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8 print:hidden">
+            <h3 class="text-lg font-bold text-slate-700 mb-2 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Instrucciones
+            </h3>
+            <p class="text-slate-600">
+                Resuelve los siguientes 20 reactivos analíticos sobre la Línea Recta y la Parábola. Selecciona la opción correcta o ingresa el valor
+                numérico exacto según corresponda. Necesitas un mínimo de <strong>70% (14 aciertos)</strong> para aprobar.
+            </p>
+        </div>
+
+        <!-- Contenedor del Formulario Dinámico -->
+        <form id="exam-form" class="space-y-8 print:space-y-0">
+            <div id="questions-container" class="space-y-8 print:space-y-0">
+                <!-- Estado 1: Aquí se inyectarán los reactivos -->
+            </div>
+
+            <!-- Controles de Evaluación -->
+            <div id="exam-controls" class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-center gap-4 hidden print:hidden">
+                <button type="button" onclick="window.print()"
+                    class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-4 px-8 rounded-lg shadow-md transition-colors text-lg uppercase tracking-wide w-full md:w-auto flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Imprimir (PDF)
+                </button>
+                <button type="button" id="btn-submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-12 rounded-lg shadow-md transition-colors text-lg uppercase tracking-wide w-full md:w-auto">
+                    Calificar Examen Global
+                </button>
+            </div>
+        </form>
+
+        <!-- Contenedor de Feedback / Resultados -->
+        <div id="feedback-container" class="mt-10 hidden">
+            <!-- Estado 2: Aquí se inyectará el resultado y botón de reintento -->
+        </div>
+
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-6 mt-12 border-t border-slate-800 shadow-inner print:hidden">
+        <p class="text-xs md:text-sm font-bold tracking-widest uppercase">JMGV-PTEL 2026. TSF MC 12-13. TODOS LOS DERECHOS RESERVADOS.</p>
+    </footer>
+
+    <!-- ESTADO 0: MOTOR DE REACTIVOS Y GENERACIÓN LÓGICA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const MathEngine = {
+            // Generador de enteros aleatorios
+            getRandomInt(min, max, excludeZero = false) {
+                let val;
+                do {
+                    val = Math.floor(Math.random() * (max - min + 1)) + min;
+                } while (excludeZero && val === 0);
+                return val;
+            },
+
+            // Barajar arreglo de opciones
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            },
+
+            // Formatear término con signo adecuado para polinomios
+            formatTerm(coef, variable, isFirst = false) {
+                if (coef === 0) return "";
+                let sign = coef < 0 ? "-" : "+";
+                let strSign = isFirst ? (coef < 0 ? "-" : "") : ` ${sign} `;
+                let absCoef = Math.abs(coef);
+                let strCoef = (absCoef === 1 && variable !== "") ? "" : absCoef;
+                return `${strSign}${strCoef}${variable}`;
+            },
+
+            // Motor principal: Genera el banco de 20 preguntas
+            generateExamBank() {
+                const questions = [];
+
+                // =========================================================
+                // PARTE 1: LA ECUACIÓN DE LA RECTA
+                // =========================================================
+
+                // Reactivo 1: Forma General
+                const A1 = this.getRandomInt(2, 5);
+                const B1 = this.getRandomInt(-5, -2);
+                const C1 = this.getRandomInt(1, 10);
+                questions.push({
+                    id: 1, type: "mcq",
+                    text: "¿Cuál de las siguientes ecuaciones representa la <strong>Forma General</strong> de la recta?",
+                    options: this.shuffleArray([
+                        { text: `$$ ${A1}x ${this.formatTerm(B1, 'y')} ${this.formatTerm(C1, '')} = 0 $$`, isCorrect: true },
+                        { text: `$$ y = ${A1}x ${this.formatTerm(C1, '')} $$`, isCorrect: false },
+                        { text: `$$ \\frac{x}{${A1}} + \\frac{y}{${Math.abs(B1)}} = 1 $$`, isCorrect: false },
+                        { text: `$$ x = ${A1}t, \\quad y = ${Math.abs(B1)}t $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 2: Forma Ordinaria / Pendiente-Ordenada
+                const m2 = this.getRandomInt(2, 6) * (Math.random() > 0.5 ? 1 : -1);
+                const b2 = this.getRandomInt(-8, 8, true);
+                questions.push({
+                    id: 2, type: "mcq",
+                    text: "¿Cuál de las siguientes ecuaciones corresponde a la <strong>Forma Ordinaria</strong> (pendiente - ordenada al origen)?",
+                    options: this.shuffleArray([
+                        { text: `$$ y = ${m2}x ${this.formatTerm(b2, '')} $$`, isCorrect: true },
+                        { text: `$$ ${m2}x - y ${this.formatTerm(b2, '')} = 0 $$`, isCorrect: false },
+                        { text: `$$ \\frac{x}{${m2}} + \\frac{y}{${Math.abs(b2)}} = 1 $$`, isCorrect: false },
+                        { text: `$$ y - ${Math.abs(b2)} = ${m2}(x - 1) $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 3: Forma Paramétrica
+                const p3x = this.getRandomInt(1, 4);
+                const p3y = this.getRandomInt(-4, -1);
+                questions.push({
+                    id: 3, type: "mcq",
+                    text: "Identifica la estructura que corresponde a la ecuación de la recta en su <strong>Forma Paramétrica</strong>:",
+                    options: this.shuffleArray([
+                        { text: `$$ x = ${p3x} + 2t, \\quad y = ${p3y} - 3t $$`, isCorrect: true },
+                        { text: `$$ y - ${p3y} = \\frac{-3}{2}(x - ${p3x}) $$`, isCorrect: false },
+                        { text: `$$ \\frac{x}{2} + \\frac{y}{-3} = 1 $$`, isCorrect: false },
+                        { text: `$$ 3x + 2y - ${p3x} = 0 $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 4: Pendiente Positiva vs Negativa
+                const isPositive = Math.random() > 0.5;
+                const m4 = this.getRandomInt(2, 5) * (isPositive ? 1 : -1);
+                questions.push({
+                    id: 4, type: "mcq",
+                    text: `Dada la ecuación $$ y = ${m4}x + 7 $$, analiza su pendiente. ¿Hacia dónde se inclina la recta al graficarse de izquierda a derecha?`,
+                    options: this.shuffleArray([
+                        { text: "Asciende (Pendiente positiva).", isCorrect: isPositive },
+                        { text: "Desciende (Pendiente negativa).", isCorrect: !isPositive },
+                        { text: "Es completamente horizontal.", isCorrect: false },
+                        { text: "Es completamente vertical.", isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 5: Inclinación m > 1 vs m < 1
+                const isSteep = Math.random() > 0.5;
+                const m5_num = isSteep ? this.getRandomInt(3, 5) : 1;
+                const m5_den = isSteep ? 1 : this.getRandomInt(3, 5);
+                const m5_str = isSteep ? `${m5_num}` : `\\frac{1}{${m5_den}}`;
+                questions.push({
+                    id: 5, type: "mcq",
+                    text: `Si la pendiente de una recta es $$ m = ${m5_str} $$, ¿qué podemos afirmar sobre su inclinación respecto al eje horizontal?`,
+                    options: this.shuffleArray([
+                        { text: "Tiene una inclinación pronunciada (mayor a 45°).", isCorrect: isSteep },
+                        { text: "Tiene una inclinación suave (menor a 45°).", isCorrect: !isSteep },
+                        { text: "Forma un ángulo exacto de 45°.", isCorrect: false },
+                        { text: "La recta es paralela al eje Y.", isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 6: Pendiente nula (m=0)
+                const b6 = this.getRandomInt(2, 8) * (Math.random() > 0.5 ? 1 : -1);
+                questions.push({
+                    id: 6, type: "mcq",
+                    text: `Si la ecuación de una recta es $$ y = ${b6} $$, ¿cuál es el valor de su pendiente (\\(m\\)) y su significado geométrico?`,
+                    options: this.shuffleArray([
+                        { text: "\\( m = 0 \\), la recta es paralela al eje X (horizontal).", isCorrect: true },
+                        { text: "\\( m \\) es indefinida, la recta es paralela al eje Y (vertical).", isCorrect: false },
+                        { text: `\\( m = ${b6} \\), la recta cruza el origen.`, isCorrect: false },
+                        { text: "\\( m = 1 \\), la recta asciende a 45°.", isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 7: Pendiente a 45 grados (m=1)
+                questions.push({
+                    id: 7, type: "mcq",
+                    text: "¿Qué condición debe cumplirse en la ecuación ordinaria \\( y = mx + b \\) para que la recta forme un ángulo exacto de <strong>45 grados</strong> con el semieje positivo de las X?",
+                    options: this.shuffleArray([
+                        { text: "La pendiente debe ser $$m = 1$$", isCorrect: true },
+                        { text: "La pendiente debe ser $$m = -1$$", isCorrect: false },
+                        { text: "La ordenada al origen debe ser $$b = 45$$", isCorrect: false },
+                        { text: "La pendiente debe ser $$m = 0$$", isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 8: Extraer pendiente (m = -A/B)
+                const m8 = this.getRandomInt(-5, 5, true);
+                const B8 = this.getRandomInt(2, 4) * (Math.random() > 0.5 ? 1 : -1);
+                const A8 = -1 * m8 * B8;
+                const C8 = this.getRandomInt(-10, 10, true);
+                questions.push({
+                    id: 8, type: "input",
+                    text: `Dada la ecuación general $$ ${A8}x ${this.formatTerm(B8, 'y')} ${this.formatTerm(C8, '')} = 0 $$, calcula su <strong>pendiente (\\(m\\))</strong> exacto.`,
+                    correctAnswer: m8
+                });
+
+                // Reactivo 9: Extraer ordenada al origen (b = -C/B)
+                const b9 = this.getRandomInt(-6, 6, true);
+                const B9 = this.getRandomInt(2, 5) * (Math.random() > 0.5 ? 1 : -1);
+                const C9 = -1 * b9 * B9;
+                const A9 = this.getRandomInt(-5, 5, true);
+                questions.push({
+                    id: 9, type: "input",
+                    text: `Dada la ecuación general $$ ${A9}x ${this.formatTerm(B9, 'y')} ${this.formatTerm(C9, '')} = 0 $$, calcula su <strong>ordenada al origen (\\(b\\))</strong> exacto.`,
+                    correctAnswer: b9
+                });
+
+                // Reactivo 10: Transformación General a Ordinaria
+                const B10 = this.getRandomInt(2, 4) * (Math.random() > 0.5 ? 1 : -1);
+                const m10 = this.getRandomInt(-4, 4, true);
+                const b10 = this.getRandomInt(-5, 5, true);
+                const A10 = -1 * m10 * B10;
+                const C10 = -1 * b10 * B10;
+                questions.push({
+                    id: 10, type: "mcq",
+                    text: `Si transformamos la ecuación general $$ ${A10}x ${this.formatTerm(B10, 'y')} ${this.formatTerm(C10, '')} = 0 $$ a su forma ordinaria \\( y = mx + b \\), ¿cuál es el resultado correcto?`,
+                    options: this.shuffleArray([
+                        { text: `$$ y = ${m10}x ${this.formatTerm(b10, '')} $$`, isCorrect: true },
+                        { text: `$$ y = ${-m10}x ${this.formatTerm(b10, '')} $$`, isCorrect: false },
+                        { text: `$$ y = ${m10}x ${this.formatTerm(-b10, '')} $$`, isCorrect: false },
+                        { text: `$$ y = ${Math.abs(b10)}x ${this.formatTerm(m10, '')} $$`, isCorrect: false }
+                    ])
+                });
+
+                // =========================================================
+                // PARTE 2: LA ECUACIÓN DE LA PARÁBOLA
+                // =========================================================
+
+                // Reactivo 11: Orientación V(0,0)
+                const isVertical11 = Math.random() > 0.5;
+                const isPositive11 = Math.random() > 0.5;
+                const p11 = this.getRandomInt(1, 5) * (isPositive11 ? 1 : -1);
+                const val4p11 = 4 * p11;
+                const eq11 = isVertical11 ? `x^2 = ${val4p11}y` : `y^2 = ${val4p11}x`;
+                const correctOrientation11 = isVertical11 ? (isPositive11 ? "Abre hacia arriba" : "Abre hacia abajo") : (isPositive11 ? "Abre hacia la derecha" : "Abre hacia la izquierda");
+                const wrong11_1 = isVertical11 ? (isPositive11 ? "Abre hacia abajo" : "Abre hacia arriba") : (isPositive11 ? "Abre hacia la izquierda" : "Abre hacia la derecha");
+                const wrong11_2 = isVertical11 ? "Abre hacia la derecha" : "Abre hacia arriba";
+                const wrong11_3 = isVertical11 ? "Abre hacia la izquierda" : "Abre hacia abajo";
+                questions.push({
+                    id: 11, type: "mcq",
+                    text: `Considera la ecuación de la parábola con vértice en el origen: $$ ${eq11} $$. ¿Cuál es su orientación geométrica?`,
+                    options: this.shuffleArray([
+                        { text: correctOrientation11, isCorrect: true },
+                        { text: wrong11_1, isCorrect: false },
+                        { text: wrong11_2, isCorrect: false },
+                        { text: wrong11_3, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 12: Extraer Foco V(0,0)
+                const isVertical12 = Math.random() > 0.5;
+                const p12 = this.getRandomInt(1, 6) * (Math.random() > 0.5 ? 1 : -1);
+                const eq12 = isVertical12 ? `x^2 = ${4 * p12}y` : `y^2 = ${4 * p12}x`;
+                const correctFocus12 = isVertical12 ? `(0, ${p12})` : `(${p12}, 0)`;
+                const wrongFocus12_1 = isVertical12 ? `(${p12}, 0)` : `(0, ${p12})`;
+                const wrongFocus12_2 = isVertical12 ? `(0, ${-p12})` : `(${-p12}, 0)`;
+                const wrongFocus12_3 = isVertical12 ? `(${-p12}, 0)` : `(0, ${-p12})`;
+                questions.push({
+                    id: 12, type: "mcq",
+                    text: `Calcula las coordenadas exactas del <strong>Foco</strong> para la parábola $$ ${eq12} $$`,
+                    options: this.shuffleArray([
+                        { text: `$$ F${correctFocus12} $$`, isCorrect: true },
+                        { text: `$$ F${wrongFocus12_1} $$`, isCorrect: false },
+                        { text: `$$ F${wrongFocus12_2} $$`, isCorrect: false },
+                        { text: `$$ F${wrongFocus12_3} $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 13: Lado Recto (Input)
+                const p13 = this.getRandomInt(-8, 8, true);
+                const eq13 = Math.random() > 0.5 ? `x^2 = ${4 * p13}y` : `y^2 = ${4 * p13}x`;
+                questions.push({
+                    id: 13, type: "input",
+                    text: `Determina la longitud exacta del <strong>Lado Recto</strong> (\\( LR = |4p| \\)) de la parábola: $$ ${eq13} $$`,
+                    correctAnswer: Math.abs(4 * p13)
+                });
+
+                // Reactivo 14: Ecuación de la Directriz V(0,0)
+                const isVertical14 = Math.random() > 0.5;
+                const p14 = this.getRandomInt(-5, 5, true);
+                const eq14 = isVertical14 ? `x^2 = ${4 * p14}y` : `y^2 = ${4 * p14}x`;
+                const varDir14 = isVertical14 ? "y" : "x";
+                const varDirWrong14 = isVertical14 ? "x" : "y";
+                questions.push({
+                    id: 14, type: "mcq",
+                    text: `Identifica la ecuación que corresponde a la <strong>Directriz</strong> de la parábola $$ ${eq14} $$`,
+                    options: this.shuffleArray([
+                        { text: `$$ ${varDir14} = ${-p14} $$`, isCorrect: true },
+                        { text: `$$ ${varDir14} = ${p14} $$`, isCorrect: false },
+                        { text: `$$ ${varDirWrong14} = ${-p14} $$`, isCorrect: false },
+                        { text: `$$ ${varDirWrong14} = ${p14} $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 15: Transformación de Ordinaria a General
+                const h15 = this.getRandomInt(-4, 4, true);
+                const k15 = this.getRandomInt(-4, 4, true);
+                const p15 = this.getRandomInt(1, 3) * (Math.random() > 0.5 ? 1 : -1);
+                const signH15 = h15 > 0 ? "-" : "+";
+                const signK15 = k15 > 0 ? "-" : "+";
+                const absH15 = Math.abs(h15);
+                const absK15 = Math.abs(k15);
+                const D15 = -2 * h15;
+                const E15 = -4 * p15;
+                const F15 = (h15 * h15) + (4 * p15 * k15);
+                
+                const eqOrd15 = `(x ${signH15} ${absH15})^2 = ${4*p15}(y ${signK15} ${absK15})`;
+                const eqGen15 = `x^2 ${this.formatTerm(D15, 'x')} ${this.formatTerm(E15, 'y')} ${this.formatTerm(F15, '')} = 0`;
+                const eqGenWrong15_1 = `x^2 ${this.formatTerm(-D15, 'x')} ${this.formatTerm(E15, 'y')} ${this.formatTerm(F15, '')} = 0`;
+                const eqGenWrong15_2 = `x^2 ${this.formatTerm(D15, 'x')} ${this.formatTerm(-E15, 'y')} ${this.formatTerm(F15, '')} = 0`;
+                const eqGenWrong15_3 = `y^2 ${this.formatTerm(D15, 'y')} ${this.formatTerm(E15, 'x')} ${this.formatTerm(F15, '')} = 0`;
+                
+                questions.push({
+                    id: 15, type: "mcq",
+                    text: `Desarrolla y transforma la ecuación ordinaria $$ ${eqOrd15} $$ a su <strong>Forma General</strong>.`,
+                    options: this.shuffleArray([
+                        { text: `$$ ${eqGen15} $$`, isCorrect: true },
+                        { text: `$$ ${eqGenWrong15_1} $$`, isCorrect: false },
+                        { text: `$$ ${eqGenWrong15_2} $$`, isCorrect: false },
+                        { text: `$$ ${eqGenWrong15_3} $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 16: Extraer Vértice de Ordinaria
+                const h16 = this.getRandomInt(-6, 6, true);
+                const k16 = this.getRandomInt(-6, 6, true);
+                const p16 = this.getRandomInt(-4, 4, true);
+                const signH16 = h16 > 0 ? "-" : "+";
+                const signK16 = k16 > 0 ? "-" : "+";
+                questions.push({
+                    id: 16, type: "mcq",
+                    text: `Deduce las coordenadas del <strong>Vértice \\(V(h,k)\\)</strong> de la parábola dada por la ecuación $$ (y ${signK16} ${Math.abs(k16)})^2 = ${4*p16}(x ${signH16} ${Math.abs(h16)}) $$`,
+                    options: this.shuffleArray([
+                        { text: `$$ V(${h16}, ${k16}) $$`, isCorrect: true },
+                        { text: `$$ V(${-h16}, ${-k16}) $$`, isCorrect: false },
+                        { text: `$$ V(${k16}, ${h16}) $$`, isCorrect: false },
+                        { text: `$$ V(${-k16}, ${-h16}) $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 17: Coordenada X del Foco (Input numérico)
+                const h17 = this.getRandomInt(-5, 5, true);
+                const k17 = this.getRandomInt(-5, 5, true);
+                const p17 = this.getRandomInt(-4, 4, true);
+                const eqOrd17 = `(y ${k17 > 0 ? "-" : "+"} ${Math.abs(k17)})^2 = ${4*p17}(x ${h17 > 0 ? "-" : "+"} ${Math.abs(h17)})`;
+                questions.push({
+                    id: 17, type: "input",
+                    text: `Dada la parábola horizontal con ecuación $$ ${eqOrd17} $$, calcula numéricamente la <strong>coordenada X de su Foco</strong>.`,
+                    correctAnswer: h17 + p17
+                });
+
+                // Reactivo 18: Ecuación Paramétrica Algebraica
+                const p18 = this.getRandomInt(2, 5);
+                questions.push({
+                    id: 18, type: "mcq",
+                    text: `Selecciona el par de ecuaciones que representan la <strong>Forma Paramétrica</strong> algebraica de la parábola \\( y^2 = ${4*p18}x \\).`,
+                    options: this.shuffleArray([
+                        { text: `$$ x = ${p18}t^2, \\quad y = ${2*p18}t $$`, isCorrect: true },
+                        { text: `$$ x = ${2*p18}t^2, \\quad y = ${p18}t $$`, isCorrect: false },
+                        { text: `$$ x = ${p18}t, \\quad y = ${2*p18}t^2 $$`, isCorrect: false },
+                        { text: `$$ x = ${2*p18}t, \\quad y = ${p18}t^2 $$`, isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 19: Orientación desde la Forma General
+                const D19 = this.getRandomInt(2, 6) * (Math.random() > 0.5 ? 1 : -1);
+                const E19 = this.getRandomInt(2, 6); // E positivo
+                questions.push({
+                    id: 19, type: "mcq",
+                    text: `Analiza la ecuación general $$ x^2 ${this.formatTerm(D19, 'x')} ${this.formatTerm(E19, 'y')} - 15 = 0 $$. ¿Hacia dónde abre esta parábola?`,
+                    options: this.shuffleArray([
+                        { text: "Abre hacia abajo", isCorrect: true },
+                        { text: "Abre hacia arriba", isCorrect: false },
+                        { text: "Abre hacia la derecha", isCorrect: false },
+                        { text: "Abre hacia la izquierda", isCorrect: false }
+                    ])
+                });
+
+                // Reactivo 20: Valor absoluto de p (Input numérico)
+                const p20 = this.getRandomInt(3, 9);
+                questions.push({
+                    id: 20, type: "input",
+                    text: `Si la distancia medida entre el Vértice y el Foco de una parábola es de $$ ${p20} $$ unidades, ¿cuál es el valor de <strong>\\( |p| \\)</strong>?`,
+                    correctAnswer: p20
+                });
+
+                return questions;
+            }
+        };
+
+        // Instanciamos el banco de reactivos en el estado global para uso en los siguientes pasos
+        window.ExamState = {
+            questions: MathEngine.generateExamBank(),
+            isRendered: false
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Motor de Reactivos Combinado Inicializado. Banco de 20 preguntas generado.");
+        });
+
+    </script>
+    <script>
+        // --- INICIO ESTADO 1: Renderizado del Examen (DOM Dynamism) ---
+
+        function renderExam() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = ''; // Asegurar que el contenedor esté limpio
+
+            // Iterar sobre el banco de 20 preguntas
+            window.ExamState.questions.forEach((q, index) => {
+                let answerBlock = '';
+
+                // Renderizar Opciones Múltiples (Radio Buttons)
+                if (q.type === 'mcq') {
+                    answerBlock = `<div class="space-y-3 mt-5">`;
+                    q.options.forEach((opt, optIdx) => {
+                        answerBlock += `
+                            <div class="relative flex items-center p-3 rounded-lg border border-slate-200 hover:bg-indigo-50 hover:border-indigo-200 transition-colors cursor-pointer bg-white group">
+                                <div class="flex items-center h-5">
+                                    <input type="radio" id="q${index}-opt${optIdx}" name="question-${index}" value="${optIdx}" class="w-5 h-5 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-indigo-500 cursor-pointer print:border-black print:bg-white print:appearance-auto">
+                                </div>
+                                <div class="ml-4 w-full">
+                                    <label for="q${index}-opt${optIdx}" class="font-medium text-slate-700 cursor-pointer block w-full text-base md:text-lg print:text-black">
+                                        ${opt.text}
+                                    </label>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    answerBlock += `</div>`;
+                }
+                // Renderizar Entrada de Texto (Input Numérico Exacto)
+                else if (q.type === 'input') {
+                    answerBlock = `
+                        <div class="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-50 p-5 rounded-lg border border-slate-200 shadow-inner print:border-none print:shadow-none print:bg-transparent print:p-0">
+                            <label for="question-${index}" class="font-bold text-slate-700 text-lg uppercase tracking-wide print:text-black">
+                                Tu Respuesta:
+                            </label>
+                            <input type="number" id="question-${index}" name="question-${index}" class="border-2 border-slate-300 focus:border-indigo-600 focus:ring focus:ring-indigo-200 rounded-lg px-6 py-3 w-full sm:w-48 transition-all text-center text-xl font-bold text-indigo-900 shadow-sm print:border-black print:text-black print:border-b-[1px]" placeholder="Ingresa el valor">
+                        </div>
+                    `;
+                }
+
+                // Construir la tarjeta del reactivo
+                const cardHTML = `
+                    <article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 relative transition-all duration-300 hover:shadow-md" id="card-q${index}">
+                        <!-- Número de Pregunta -->
+                        <div class="absolute -top-5 -left-4 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold shadow-lg ring-4 ring-white print:static print:bg-transparent print:text-black print:w-auto print:h-auto print:border-none print:shadow-none print:inline-block print:text-lg">
+                            ${index + 1}.
+                        </div>
+                        
+                        <!-- Planteamiento de la Pregunta -->
+                        <div class="text-slate-800 text-lg md:text-xl font-medium leading-relaxed mt-2 print:text-black print:inline">
+                            ${q.text}
+                        </div>
+                        
+                        <!-- Bloque de Respuestas -->
+                        ${answerBlock}
+                        
+                        <!-- Feedback visual individual oculto (se usará en el Estado 2) -->
+                        <div id="feedback-q${index}" class="mt-4 hidden font-bold text-lg px-4 py-2 rounded-lg border"></div>
+                    </article>
+                `;
+
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            // Hacer visible el botón de calificar
+            document.getElementById('exam-controls').classList.remove('hidden');
+
+            // Invocar a KaTeX para que parsee y renderice todas las matemáticas inyectadas
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(container, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '\\(', right: '\\)', display: false }
+                    ],
+                    throwOnError: false
+                });
+                console.log("Interfaz del Examen renderizada exitosamente con KaTeX.");
+            } else {
+                console.error("KaTeX no está cargado. Asegúrate de tener conexión a internet.");
+            }
+
+            window.ExamState.isRendered = true;
+        }
+
+        // Auto-inicializar el Estado 1 tras cargar el DOM y las dependencias base
+        document.addEventListener("DOMContentLoaded", function () {
+            // Esperar dinámicamente a que KaTeX esté listo
+            const initExam = () => {
+                if (typeof renderMathInElement !== 'undefined') {
+                    if (!window.ExamState.isRendered) {
+                        renderExam();
+                    }
+                } else {
+                    setTimeout(initExam, 50);
+                }
+            };
+            initExam();
+        });
+
+        // --- FIN ESTADO 1 ---
+    </script>
+    <script type="module">
+        // --- INICIO ESTADO 2: Motor de Evaluación y Firebase v10 ---
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // Configuración de Firebase (Placeholder estándar)
+        const firebaseConfig = {
+            apiKey: "AIzaSy_AQUI_TU_API_KEY",
+            authDomain: "ptel-matematicas.firebaseapp.com",
+            projectId: "ptel-matematicas",
+            storageBucket: "ptel-matematicas.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const btnSubmit = document.getElementById('btn-submit');
+        const feedbackContainer = document.getElementById('feedback-container');
+
+        function evaluateExam(event) {
+            if (event) event.preventDefault();
+
+            let score = 0;
+            const total = window.ExamState.questions.length; // 20
+
+            window.ExamState.questions.forEach((q, index) => {
+                let isCorrect = false;
+                const card = document.getElementById(`card-q${index}`);
+                const feedbackBox = document.getElementById(`feedback-q${index}`);
+
+                if (q.type === 'mcq') {
+                    const radios = document.querySelectorAll(`input[name="question-${index}"]`);
+                    const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+
+                    if (selected) {
+                        const selectedIdx = parseInt(selected.value, 10);
+                        if (q.options[selectedIdx].isCorrect) {
+                            isCorrect = true;
+                        }
+                    }
+                    // Si deseas que los botones queden interactivos después (o imprimir sin que se vean 'disabled'), quita esto. 
+                    // Se deja para la WebApp original, en PDF imprimirán tal cual.
+                    radios.forEach(radio => radio.disabled = true);
+                } else if (q.type === 'input') {
+                    const inputEl = document.getElementById(`question-${index}`);
+                    const val = parseFloat(inputEl.value);
+
+                    if (!isNaN(val) && val === q.correctAnswer) {
+                        isCorrect = true;
+                    }
+                    inputEl.disabled = true;
+                }
+
+                if (isCorrect) {
+                    score++;
+                    card.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500', 'bg-emerald-50/20');
+                    card.classList.remove('border-slate-200');
+                    feedbackBox.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Respuesta Correcta
+                        </div>
+                    `;
+                    feedbackBox.className = 'mt-5 block font-bold text-lg px-5 py-3 rounded-xl border bg-emerald-100 border-emerald-300 text-emerald-800 shadow-sm print:bg-white print:border-black print:text-black';
+                } else {
+                    card.classList.add('ring-2', 'ring-red-400', 'border-red-400', 'bg-red-50/20');
+                    card.classList.remove('border-slate-200');
+
+                    let correctAnswerLabel = q.type === 'mcq'
+                        ? "Respuesta Correcta en Teoría"
+                        : `El valor numérico exacto esperado era: <strong>${q.correctAnswer}</strong>`;
+
+                    feedbackBox.innerHTML = `
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                Respuesta Incorrecta
+                            </div>
+                            <div class="text-sm font-normal mt-1 opacity-90">${correctAnswerLabel}</div>
+                        </div>
+                    `;
+                    feedbackBox.className = 'mt-5 block font-bold text-lg px-5 py-3 rounded-xl border bg-red-100 border-red-300 text-red-800 shadow-sm print:bg-white print:border-black print:text-black';
+                }
+            });
+
+            renderFinalFeedback(score, total);
+        }
+
+        async function renderFinalFeedback(score, total) {
+            document.getElementById('exam-controls').classList.add('hidden');
+            feedbackContainer.classList.remove('hidden');
+
+            const passed = score >= 14; // 70% de 20 aciertos
+
+            if (passed) {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-indigo-900 border-4 border-indigo-500 text-white p-8 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 print:border-[1px] print:border-black print:text-black print:bg-white print:p-4 print:shadow-none">
+                        <div>
+                            <h3 class="text-3xl font-extrabold mb-2 flex items-center gap-3 print:text-black">
+                                <svg class="w-8 h-8 text-emerald-400 print:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                                ¡Examen Global Aprobado!
+                            </h3>
+                            <p class="text-xl text-indigo-200 font-medium print:text-black">Obtuviste ${score} de ${total} aciertos.</p>
+                        </div>
+                        <div class="w-full md:w-auto text-center md:text-right flex flex-col gap-3">
+                            <div id="firebase-status" class="bg-indigo-800 bg-opacity-50 px-5 py-3 rounded-xl text-sm font-semibold text-emerald-300 animate-pulse border border-indigo-700 print:hidden">
+                                Sincronizando progreso con Firebase...
+                            </div>
+                            <button onclick="window.print()" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-colors text-sm uppercase tracking-wider print:hidden flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                Imprimir Calificación
+                            </button>
+                        </div>
+                    </div>
+                `;
+                await saveProgressToFirebase(score);
+                feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                feedbackContainer.innerHTML = `
+                    <div class="bg-red-50 border-4 border-red-300 text-red-900 p-8 rounded-2xl shadow-xl print:border-[1px] print:border-black print:bg-white print:p-4 print:shadow-none">
+                        <h3 class="text-3xl font-extrabold mb-3 print:text-black">Puntuación Insuficiente</h3>
+                        <p class="text-xl mb-6 font-medium print:text-black print:mb-2">Obtuviste ${score} de ${total} aciertos. Se requiere un mínimo del 70% (14 aciertos) para acreditar esta evaluación global.</p>
+                        <div class="bg-white p-5 rounded-xl border border-red-100 mb-6 shadow-sm print:hidden">
+                            <p class="text-red-700 font-semibold flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                Puedes intentarlo de nuevo. Las variables matemáticas cambiarán en el siguiente intento para ambas secciones.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center print:hidden">
+                            <button id="btn-hot-retry" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-colors text-lg uppercase tracking-wider w-full md:w-auto flex items-center justify-center gap-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                Generar Nuevo Examen Global
+                            </button>
+                            <button onclick="window.print()" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-colors text-lg uppercase tracking-wider w-full md:w-auto flex items-center justify-center gap-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                Imprimir Calificación
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('btn-hot-retry').addEventListener('click', hotRetryExam);
+                feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function hotRetryExam() {
+            window.ExamState.questions = MathEngine.generateExamBank();
+            feedbackContainer.classList.add('hidden');
+            feedbackContainer.innerHTML = '';
+            if (typeof renderExam === 'function') {
+                renderExam();
+            }
+            document.getElementById('main-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        async function saveProgressToFirebase(score) {
+            const statusElement = document.getElementById('firebase-status');
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    const progressRef = doc(db, "estudiantes", user.uid, "progreso_sesiones", "sesion_unidad_2");
+                    await setDoc(progressRef, {
+                        tema: "recta_y_parabola",
+                        score: score,
+                        total: 20,
+                        aprobado: true,
+                        tipo: "examen_global_unidad2",
+                        timestamp: serverTimestamp()
+                    });
+                    statusElement.innerHTML = "✅ Progreso global registrado exitosamente en tu expediente.";
+                    statusElement.classList.remove('animate-pulse', 'text-emerald-300', 'border-indigo-700');
+                    statusElement.classList.add('text-emerald-400', 'border-emerald-500');
+                } else {
+                    statusElement.innerHTML = "⚠ Examen completado localmente (Modo Invitado / Sin Auth).";
+                    statusElement.classList.remove('animate-pulse', 'text-emerald-300', 'border-indigo-700');
+                    statusElement.classList.add('text-amber-300', 'border-amber-500');
+                }
+            } catch (error) {
+                console.error("Error guardando en Firebase Firestore:", error);
+                statusElement.innerHTML = "❌ Fallo de conexión. No se pudo sincronizar el progreso.";
+                statusElement.classList.remove('animate-pulse', 'text-emerald-300', 'border-indigo-700');
+                statusElement.classList.add('text-red-300', 'border-red-500');
+            }
+        }
+
+        btnSubmit.addEventListener('click', evaluateExam);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("Firebase Auth: Estudiante autenticado ->", user.uid);
+            } else {
+                console.log("Firebase Auth: Operando sin sesión activa.");
+            }
+        });
+
+        // --- FIN ESTADO 2 ---
+    </script>
+</body>
+</html>

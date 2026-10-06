@@ -1070,20 +1070,28 @@
         document.getElementById('quiz-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            let score = 0;
+            // 1. Verify all questions are answered
             let allAnswered = true;
+            questionsData.forEach((q) => {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                }
+            });
 
+            if (!allAnswered) {
+                alert("Por favor responde todas las preguntas antes de enviar el examen.");
+                return;
+            }
+
+            let score = 0;
+
+            // 2. Grade the questions
             questionsData.forEach((q) => {
                 const selected = document.querySelector(`input[name="${q.id}"]:checked`);
                 const optionsList = document.querySelector(`input[name="${q.id}"]`).closest('.options-list');
                 const allLabels = optionsList.querySelectorAll('.option');
                 const feedbackEl = document.getElementById(`feedback-${q.id}`);
-
-                if (!selected) {
-                    allAnswered = false;
-                    return;
-                }
-
                 const selectedVal = parseInt(selected.value);
                 
                 // Disable further input
@@ -1113,11 +1121,6 @@
                 feedbackEl.classList.add('show');
             });
 
-            if (!allAnswered) {
-                alert("Por favor responde todas las preguntas antes de enviar el examen.");
-                return;
-            }
-
             // Hide submit button and show results
             document.getElementById('submit-btn').style.display = 'none';
             
@@ -1137,12 +1140,14 @@
                 MathJax.typesetPromise();
             }
 
-            // Scroll to results and then print
-            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Ensure iframe has focus (if running inside one) so print works
+            window.focus();
             
+            // We use a tiny timeout to let the DOM update (display: block) take effect before the browser freezes for the print dialog
             setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 window.print();
-            }, 800);
+            }, 100);
         });
     </script>
 </body>

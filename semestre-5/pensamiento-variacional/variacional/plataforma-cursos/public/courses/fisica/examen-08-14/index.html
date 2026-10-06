@@ -1062,7 +1062,7 @@
         });
 
         // Inform MathJax to re-render after dynamic content is added
-        if (window.MathJax) {
+        if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
             MathJax.typesetPromise();
         }
 
@@ -1136,7 +1136,7 @@
             resultsDiv.style.display = 'block';
 
             // Re-render math in feedback if needed
-            if (window.MathJax) {
+            if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
                 MathJax.typesetPromise();
             }
 

@@ -44,6 +44,14 @@
         <p class="text-slate-600 mt-3 text-sm sm:text-base">Resuelve las 5 ecuaciones. Necesitas al menos <strong>4 aciertos (80%)</strong> para aprobar. Todas las raíces son números enteros.</p>
     </section>
 
+    <!-- Ejemplos resueltos -->
+    <section id="ejemplos" class="w-full max-w-4xl mb-10">
+        <h2 class="text-xl md:text-2xl font-bold text-emerald-800 mb-1">Ejemplos resueltos paso a paso</h2>
+        <p class="text-slate-600 text-sm sm:text-base mb-4">Estudia estos 5 ejemplos antes de practicar. Toca cada uno para ver su desarrollo.</p>
+        <div id="ejemplos-container" class="flex flex-col gap-4"></div>
+    </section>
+
+    <h2 class="w-full max-w-4xl text-xl md:text-2xl font-bold text-emerald-800 mb-4">Práctica</h2>
     <main class="w-full max-w-4xl flex-grow flex flex-col gap-8 sm:gap-10 pt-3" id="practica-container"></main>
 
     <div id="controles-evaluacion" class="w-full max-w-4xl flex flex-col items-center mt-8 gap-3"></div>
@@ -291,7 +299,38 @@
             document.getElementById('practica-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
+        const EJEMPLOS = [
+            { a: 1, b: -5, c: 6, x1: 3, x2: 2, nota: 'Caso básico con a = 1 y raíces positivas.' },
+            { a: 1, b: 2, c: -15, x1: 3, x2: -5, nota: 'Raíces con signos distintos (c negativo).' },
+            { a: 2, b: -8, c: 6, x1: 3, x2: 1, nota: 'Coeficiente principal a = 2.' },
+            { a: 1, b: 0, c: -9, x1: 3, x2: -3, nota: 'Ecuación incompleta: b = 0.' },
+            { a: 3, b: 12, c: 9, x1: -1, x2: -3, nota: 'a = 3 y ambas raíces negativas.' }
+        ];
+
+        function renderEjemplos() {
+            const cont = document.getElementById('ejemplos-container');
+            cont.innerHTML = EJEMPLOS.map((eq, i) => `
+                <details class="group bg-white border border-emerald-200 rounded-2xl shadow-sm overflow-hidden" ${i === 0 ? 'open' : ''}>
+                    <summary class="cursor-pointer p-4 sm:p-5 flex items-center justify-between gap-3 hover:bg-emerald-50 transition-colors">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="bg-sky-600 text-white w-9 h-9 shrink-0 rounded-full flex items-center justify-center font-bold">E${i + 1}</span>
+                            <div class="min-w-0">
+                                <div class="text-lg sm:text-xl font-bold text-emerald-900 overflow-x-auto">\\( ${window.QuadraticApp.engine.formatQuadraticEq(eq.a, eq.b, eq.c)} \\)</div>
+                                <p class="text-xs sm:text-sm text-slate-500">${eq.nota}</p>
+                            </div>
+                        </div>
+                        <span class="text-emerald-700 transform group-open:rotate-180 transition-transform duration-300">▼</span>
+                    </summary>
+                    <div class="px-3 pb-4 sm:px-5 sm:pb-5">
+                        ${buildStepByStepPractice(eq)}
+                        <p class="mt-3 text-center font-bold text-emerald-800">Solución: \\( x_1 = ${eq.x1}, \\; x_2 = ${eq.x2} \\)</p>
+                    </div>
+                </details>`).join('');
+            typeset(cont);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            renderEjemplos();
             window.QuadraticApp.newSet(5);
             renderPracticaInteractiva();
             typeset(document.getElementById('teoria'));

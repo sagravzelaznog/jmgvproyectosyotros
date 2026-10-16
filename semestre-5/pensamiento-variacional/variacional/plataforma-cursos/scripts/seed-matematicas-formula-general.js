@@ -29,9 +29,9 @@ async function run() {
     </div>
     <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <iframe
-            src="/courses/matematicas-basicas/FORMULAGRAL/index.html?v=1"
+            src="/courses/matematicas-basicas/FORMULAGRAL/index.html?v=2"
             class="w-full"
-            style="min-height: 1600px; border: none;"
+            style="min-height: 2800px; border: none;"
             title="Fórmula General"
         ></iframe>
     </div>

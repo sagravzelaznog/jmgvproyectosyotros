@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecuaciones Cuadráticas: Fórmula General</title>
+    <meta name="description" content="Práctica interactiva para resolver ecuaciones cuadráticas con la fórmula general, con desarrollo paso a paso.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .katex-display { margin: .4em 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        @media (max-width: 480px) { .katex { font-size: 1.02em; } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-emerald-50/40 to-slate-100 text-slate-800 min-h-screen flex flex-col items-center px-3 py-4 sm:p-6 md:p-8">
+
+    <header class="w-full max-w-4xl text-center mb-6 md:mb-10 mt-2 md:mt-6 space-y-3">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600">
+            Fórmula General
+        </h1>
+        <p class="text-base sm:text-lg font-semibold text-slate-600">Ecuaciones Cuadráticas \( ax^2 + bx + c = 0 \)</p>
+    </header>
+
+    <!-- Teoría -->
+    <section id="teoria" class="w-full max-w-4xl bg-white border border-emerald-200 rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm mb-8">
+        <h2 class="text-xl md:text-2xl font-bold text-emerald-800 mb-3">¿Cómo se usa?</h2>
+        <p class="text-slate-600 mb-3 text-sm sm:text-base">Identifica los coeficientes \(a\), \(b\) y \(c\), sustitúyelos en la fórmula y calcula las dos raíces:</p>
+        <div class="bg-emerald-50 border border-emerald-100 rounded-xl py-3 px-2 text-lg sm:text-xl text-emerald-900">
+            $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+        </div>
+        <p class="text-slate-600 mt-3 text-sm sm:text-base">Resuelve las 5 ecuaciones. Necesitas al menos <strong>4 aciertos (80%)</strong> para aprobar. Todas las raíces son números enteros.</p>
+    </section>
+
+    <main class="w-full max-w-4xl flex-grow flex flex-col gap-8 sm:gap-10 pt-3" id="practica-container"></main>
+
+    <div id="controles-evaluacion" class="w-full max-w-4xl flex flex-col items-center mt-8 gap-3"></div>
+
+    <footer class="w-full max-w-4xl text-center mt-12 py-6 border-t border-slate-200 text-xs sm:text-sm text-slate-400 font-mono tracking-widest">
+        JMGV-PTEL 2026. TODOS LOS DERECHOS RESERVADOS.
+    </footer>
+
+    <!-- ESTADO 1: Motor matemático y generación de ejercicios -->
+    <script>
+        window.QuadraticApp = {
+            engine: {
+                randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; },
+                term(coef, varStr, isFirst) {
+                    if (coef === 0) return '';
+                    const sign = coef < 0 ? '-' : (isFirst ? '' : '+');
+                    const abs = Math.abs(coef);
+                    const num = (abs === 1 && varStr) ? '' : abs;
+                    return `${isFirst ? sign : ' ' + sign + ' '}${num}${varStr}`;
+                },
+                formatQuadraticEq(a, b, c) {
+                    let s = this.term(a, 'x^2', true);
+                    s += this.term(b, 'x', false);
+                    s += this.term(c, '', false);
+                    return `${s} = 0`;
+                },
+                generate() {
+                    let x1, x2;
+                    do { x1 = this.randInt(-9, 9); x2 = this.randInt(-9, 9); } while (x1 === x2);
+                    const a = Math.random() < 0.7 ? 1 : this.randInt(2, 3);
+                    return { a, b: -a * (x1 + x2), c: a * x1 * x2, x1, x2 };
+                }
+            },
+            practica: [],
+            newSet(n = 5) {
+                const seen = new Set();
+                this.practica = [];
+                while (this.practica.length < n) {
+                    const eq = this.engine.generate();
+                    const key = `${eq.a},${eq.b},${eq.c}`;
+                    if (!seen.has(key)) { seen.add(key); this.practica.push(eq); }
+                }
+            }
+        };
+    </script>
+
+    <!-- ESTADO 2: Renderizado de Práctica y Evaluación -->
+    <script>
+        const INPUT_CLASS = "practica-input border-2 border-slate-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 rounded-lg px-3 py-3 w-full min-w-0 transition-all text-center text-xl font-bold text-emerald-900 shadow-sm outline-none";
+
+        function typeset(el) {
+            if (typeof window.renderMathInElement === 'function') {
+                renderMathInElement(el, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '\\(', right: '\\)', display: false }
+                    ],
+                    throwOnError: false
+                });
+            } else {
+                setTimeout(() => typeset(el), 150);
+            }
+        }
+
+        function buildStepByStepPractice(eq) {
+            const { a, b, c, x1, x2 } = eq;
+            const minusB = -b, bSq = b * b, fourAC = 4 * a * c;
+            const disc = bSq - fourAC, sqrtDisc = Math.sqrt(disc), den = 2 * a;
+            const [r1, r2] = [(minusB + sqrtDisc) / den, (minusB - sqrtDisc) / den];
+
+            const paso1 = `a = ${a}, \\quad b = ${b}, \\quad c = ${c}`;
+            const paso2 = `x = \\frac{-(${b}) \\pm \\sqrt{(${b})^2 - 4(${a})(${c})}}{2(${a})}`;
+            const signDisc = fourAC < 0 ? "+" : "-";
+            const paso3_1 = `x = \\frac{${minusB} \\pm \\sqrt{${bSq} ${signDisc} ${Math.abs(fourAC)}}}{${den}}`;
+            const paso3_2 = `x = \\frac{${minusB} \\pm \\sqrt{${disc}}}{${den}} = \\frac{${minusB} \\pm ${sqrtDisc}}{${den}}`;
+            const paso4_1 = `x_1 = \\frac{${minusB} + ${sqrtDisc}}{${den}} = \\frac{${minusB + sqrtDisc}}{${den}} = ${r1}`;
+            const paso4_2 = `x_2 = \\frac{${minusB} - ${sqrtDisc}}{${den}} = \\frac{${minusB - sqrtDisc}}{${den}} = ${r2}`;
+
+            const step = (n, title, body) => `
+                <div>
+                    <p class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                        <span class="bg-emerald-200 text-emerald-900 w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-xs">${n}</span>
+                        ${title}
+                    </p>
+                    <div class="text-center w-full py-1 space-y-2">${body}</div>
+                </div>`;
+
+            return `
+                <div class="mt-4 p-3 sm:p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-sm md:text-base text-slate-800 space-y-5">
+                    ${step(1, 'Identificación y Sustitución', `$$ ${paso1} $$ $$ ${paso2} $$`)}
+                    <hr class="border-emerald-200">
+                    ${step(2, 'Discriminante y Raíz Exacta', `$$ ${paso3_1} $$ $$ ${paso3_2} $$`)}
+                    <hr class="border-emerald-200">
+                    ${step(3, 'Cálculo de Raíces', `$$ ${paso4_1} $$ $$ ${paso4_2} $$`)}
+                </div>`;
+        }
+
+        function renderPracticaInteractiva() {
+            const container = document.getElementById('practica-container');
+            container.innerHTML = '';
+
+            window.QuadraticApp.practica.forEach((eq, index) => {
+                const equationStr = window.QuadraticApp.engine.formatQuadraticEq(eq.a, eq.b, eq.c);
+                const cardHTML = `
+                    <article class="bg-white border border-emerald-200 rounded-2xl p-4 pt-8 sm:p-6 sm:pt-9 md:p-8 shadow-sm relative transition-all duration-300" id="practica-card-${index}">
+                        <div class="absolute -top-4 left-3 sm:-left-4 sm:-top-5 bg-emerald-600 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-lg sm:text-xl font-bold shadow-lg ring-4 ring-white">
+                            ${index + 1}
+                        </div>
+                        <div class="flex flex-col lg:flex-row items-stretch justify-between gap-5 lg:gap-8">
+                            <div class="text-xl sm:text-2xl md:text-3xl w-full lg:w-1/2 flex items-center justify-center py-4 sm:py-8 px-2 bg-emerald-50/50 rounded-xl border border-emerald-100 font-bold text-emerald-900 overflow-x-auto">
+                                $$ ${equationStr} $$
+                            </div>
+                            <div class="flex flex-col gap-4 w-full lg:w-1/2 bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-200 shadow-inner">
+                                <p class="text-xs sm:text-sm text-slate-500 font-semibold uppercase tracking-wider text-center">Ingresa las raíces (sin importar el orden)</p>
+                                <div class="flex items-center gap-3">
+                                    <label for="pr-x1-${index}" class="font-bold text-lg sm:text-xl text-slate-700 shrink-0 w-14 text-right">\\( x_1 = \\)</label>
+                                    <input type="number" inputmode="text" step="1" id="pr-x1-${index}" class="${INPUT_CLASS}" placeholder="?">
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <label for="pr-x2-${index}" class="font-bold text-lg sm:text-xl text-slate-700 shrink-0 w-14 text-right">\\( x_2 = \\)</label>
+                                    <input type="number" inputmode="text" step="1" id="pr-x2-${index}" class="${INPUT_CLASS}" placeholder="?">
+                                </div>
+                            </div>
+                        </div>
+                        <details class="mt-6 group hidden" id="details-practica-${index}">
+                            <summary class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-4 sm:py-4 sm:px-6 rounded-xl transition-colors flex justify-between items-center gap-3 shadow-md">
+                                <span class="text-sm sm:text-lg">Revelar desarrollo de la Fórmula General</span>
+                                <span class="transform group-open:rotate-180 transition-transform duration-300">▼</span>
+                            </summary>
+                            ${buildStepByStepPractice(eq)}
+                        </details>
+                    </article>`;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            document.getElementById('controles-evaluacion').innerHTML = `
+                <button id="btn-submit" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all text-white font-extrabold py-4 px-10 rounded-xl shadow-lg text-lg sm:text-xl w-full sm:w-auto uppercase tracking-wide">
+                    Calificar Respuestas
+                </button>
+                <p id="msg-incompleto" class="text-amber-600 font-semibold text-sm hidden">Completa ambas raíces en todas las ecuaciones antes de calificar.</p>
+                <div id="evaluation-feedback" class="mt-4 w-full text-center hidden"></div>`;
+            document.getElementById('btn-submit').addEventListener('click', evaluateExercises);
+
+            typeset(container);
+        }
+
+        function evaluateExercises() {
+            const total = window.QuadraticApp.practica.length;
+            const msg = document.getElementById('msg-incompleto');
+
+            // Validar que todo esté contestado ANTES de bloquear campos
+            for (let i = 0; i < total; i++) {
+                const v1 = document.getElementById(`pr-x1-${i}`).value.trim();
+                const v2 = document.getElementById(`pr-x2-${i}`).value.trim();
+                if (v1 === '' || v2 === '') {
+                    msg.classList.remove('hidden');
+                    document.getElementById(`practica-card-${i}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
+            msg.classList.add('hidden');
+
+            let correctCount = 0;
+            for (let i = 0; i < total; i++) {
+                const eq = window.QuadraticApp.practica[i];
+                const input1 = document.getElementById(`pr-x1-${i}`);
+                const input2 = document.getElementById(`pr-x2-${i}`);
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
+                const val1 = Number(input1.value), val2 = Number(input2.value);
+
+                card.classList.remove('ring-2', 'ring-emerald-400', 'border-emerald-400', 'ring-red-400', 'border-red-400');
+                const ok = (val1 === eq.x1 && val2 === eq.x2) || (val1 === eq.x2 && val2 === eq.x1);
+                const cls = ok ? ['border-emerald-500', 'bg-emerald-50', 'text-emerald-700'] : ['border-red-500', 'bg-red-50', 'text-red-700'];
+                [input1, input2].forEach(inp => { inp.className = INPUT_CLASS; inp.classList.add(...cls); inp.disabled = true; });
+                card.classList.add('ring-2', ok ? 'ring-emerald-400' : 'ring-red-400', ok ? 'border-emerald-400' : 'border-red-400');
+                if (ok) correctCount++;
+
+                details.classList.remove('hidden');
+                details.open = false;
+            }
+            renderFeedback(correctCount, total);
+        }
+
+        function renderFeedback(correctCount, total) {
+            const btnSubmit = document.getElementById('btn-submit');
+            const fb = document.getElementById('evaluation-feedback');
+            btnSubmit.classList.add('hidden');
+            fb.classList.remove('hidden');
+            const passed = correctCount >= 4;
+
+            if (passed) {
+                fb.innerHTML = `
+                    <div class="bg-emerald-100 border-2 border-emerald-300 text-emerald-900 p-5 sm:p-8 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">¡Excelente! Práctica aprobada</h3>
+                            <p class="text-base sm:text-lg">Acertaste ${correctCount} de ${total} ecuaciones usando la Fórmula General.</p>
+                        </div>
+                        <div class="flex flex-col gap-3 w-full md:w-auto">
+                            <div id="firebase-status" class="bg-white px-5 py-3 rounded-xl text-sm font-bold text-emerald-600 animate-pulse border border-emerald-200 text-center">Guardando progreso...</div>
+                            <button id="btn-new-set" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow transition-colors">Nuevas ecuaciones</button>
+                        </div>
+                    </div>`;
+                document.getElementById('btn-new-set').addEventListener('click', newSet);
+                document.dispatchEvent(new CustomEvent('progresoAprobado', { detail: { score: correctCount, total } }));
+            } else {
+                fb.innerHTML = `
+                    <div class="bg-red-50 border-2 border-red-300 text-red-900 p-5 sm:p-8 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-5">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl sm:text-3xl font-extrabold mb-2">Puntuación insuficiente</h3>
+                            <p class="text-base sm:text-lg">Obtuviste ${correctCount} de ${total}. Debes dominar al menos 4 ecuaciones (80%). Revisa los procedimientos revelados.</p>
+                        </div>
+                        <div class="flex flex-col gap-3 w-full md:w-auto">
+                            <button id="btn-hot-retry" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-colors whitespace-nowrap">Reintentar</button>
+                            <button id="btn-new-set" class="bg-white border border-red-300 text-red-700 font-bold py-3 px-6 rounded-xl hover:bg-red-100 transition-colors whitespace-nowrap">Nuevas ecuaciones</button>
+                        </div>
+                    </div>`;
+                document.getElementById('btn-hot-retry').addEventListener('click', hotRetry);
+                document.getElementById('btn-new-set').addEventListener('click', newSet);
+            }
+            fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function hotRetry() {
+            const total = window.QuadraticApp.practica.length;
+            for (let i = 0; i < total; i++) {
+                const card = document.getElementById(`practica-card-${i}`);
+                const details = document.getElementById(`details-practica-${i}`);
+                [`pr-x1-${i}`, `pr-x2-${i}`].forEach(id => {
+                    const inp = document.getElementById(id);
+                    inp.disabled = false; inp.value = ''; inp.className = INPUT_CLASS;
+                });
+                card.classList.remove('ring-2', 'ring-emerald-400', 'border-emerald-400', 'ring-red-400', 'border-red-400');
+                details.classList.add('hidden');
+                details.open = false;
+            }
+            document.getElementById('evaluation-feedback').classList.add('hidden');
+            document.getElementById('btn-submit').classList.remove('hidden');
+            document.getElementById('practica-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function newSet() {
+            window.QuadraticApp.newSet(5);
+            renderPracticaInteractiva();
+            document.getElementById('practica-card-0').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.QuadraticApp.newSet(5);
+            renderPracticaInteractiva();
+            typeset(document.getElementById('teoria'));
+            typeset(document.querySelector('header'));
+        });
+    </script>
+
+    <!-- Firebase v10 (persistencia) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user || null;
+            console.log(user ? `Sesión activa: ${user.uid}` : "Modo local (sin sesión activa).");
+        });
+
+        function setStatus(text, color) {
+            const el = document.getElementById('firebase-status');
+            if (!el) return;
+            el.textContent = text;
+            el.classList.remove('animate-pulse', 'text-emerald-600', 'text-amber-600', 'text-red-600');
+            el.classList.add(color);
+        }
+
+        document.addEventListener('progresoAprobado', async (e) => {
+            if (!currentUser) { setStatus("Evaluado localmente (inicia sesión para guardar).", 'text-amber-600'); return; }
+            try {
+                await setDoc(doc(db, "estudiantes", currentUser.uid, "progreso_sesiones", "sesion_formula_general"), {
+                    tema: "Ecuaciones Cuadráticas: Fórmula General",
+                    aciertos: e.detail.score,
+                    umbralAprobatorio: 4,
+                    resultado: "Aprobado",
+                    ultimaPractica: serverTimestamp()
+                }, { merge: true });
+                setStatus("✓ Progreso guardado en Firebase.", 'text-emerald-600');
+            } catch (err) {
+                console.error("Error Firestore:", err);
+                setStatus("✖ Error de conexión al guardar.", 'text-red-600');
+            }
+        });
+    </script>
+</body>
+</html>

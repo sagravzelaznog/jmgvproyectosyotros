@@ -15,25 +15,25 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 async function run() {
-  console.log('🚀 Iniciando subida de la lección: La Parábola y sus Elementos (PM3)...');
+  console.log('🚀 Iniciando subida de la lección: Tratado Integral de Fracciones...');
 
-  const courseId = 'pm3';
-  const moduleId = 'mod_geometria_analitica';
-  const lessonId = 'lesson_pm3_parabola';
+  const courseId = 'matematicas-basicas';
+  const moduleId = 'mod_aritmetica';
+  const lessonId = 'lesson_fracciones_integral';
   
   const htmlContent = `
 <div class="space-y-6">
-    <div class="bg-gradient-to-r from-indigo-900 to-purple-800 rounded-2xl p-8 text-white shadow-xl">
-        <h1 class="text-3xl font-bold mb-4">La Parábola y sus Elementos</h1>
-        <p class="text-indigo-100 text-lg">Analiza cada ecuación ordinaria dada. Deduce los parámetros algebraicos y calcula el Vértice, Foco, Lado Recto y Directriz.</p>
+    <div class="bg-gradient-to-r from-teal-900 to-emerald-800 rounded-2xl p-8 text-white shadow-xl">
+        <h1 class="text-3xl font-bold mb-4">Tratado Integral de Fracciones</h1>
+        <p class="text-emerald-100 text-lg">Una guía didáctica interactiva para dominar las fracciones, desde conceptos básicos hasta operaciones complejas.</p>
     </div>
     
     <div class="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <iframe 
-            src="/courses/pm3/parabola/index.html?v=1" 
+            src="/courses/matematicas-basicas/mat-fracciones/index.html" 
             class="w-full" 
             style="min-height: 900px; border: none;"
-            title="La Parábola y sus Elementos"
+            title="Tratado Integral de Fracciones"
         ></iframe>
     </div>
 </div>
@@ -43,17 +43,17 @@ async function run() {
     id: lessonId,
     courseId: courseId,
     moduleId: moduleId,
-    title: 'La Parábola y sus Elementos',
-    description: 'Aprende a analizar ecuaciones de la parábola y deduce sus elementos principales.',
+    title: 'Tratado Integral de Fracciones',
+    description: 'Navega por las definiciones, tipos y operaciones de fracciones.',
     content: htmlContent,
-    order: 8, // Basado en "Sesión 08" del titulo
+    order: 3,
     published: true,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
     updatedAt: admin.firestore.FieldValue.serverTimestamp()
   };
 
   await db.collection('Lessons').doc(lessonId).set(lessonData, { merge: true });
-  console.log('✅ Lección de Parábola creada exitosamente (Orden 8).');
+  console.log('✅ Lección de Fracciones creada exitosamente (Orden 3).');
 }
 
 run().catch(console.error);

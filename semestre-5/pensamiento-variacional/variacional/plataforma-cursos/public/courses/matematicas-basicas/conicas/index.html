@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Cónicas | Geometría Analítica</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0f172a',
+                        surface: '#1e293b',
+                        primary: '#6366f1',
+                        accent: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        /* Mobile-First Touch Target Optimization */
+        button,
+        input {
+            touch-action: manipulation;
+        }
+
+        .tab-active {
+            border-bottom-color: #6366f1;
+            color: #6366f1;
+            font-weight: 700;
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .tab-inactive {
+            border-bottom-color: transparent;
+            color: #94a3b8;
+        }
+
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Custom Scrollbar for hidden overflows */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* Fix details in Safari */
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-obsidian text-slate-200 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- App Header & Mobile Tabs -->
+    <header class="bg-surface sticky top-0 z-50 shadow-lg border-b border-slate-700/50">
+        <div class="px-4 py-3 flex items-center justify-between">
+            <h1 class="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                Master Cónicas</h1>
+            <div id="auth-status"
+                class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center border-2 border-slate-600"
+                title="Estado de Firebase">
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <nav class="flex overflow-x-auto hide-scrollbar" role="tablist">
+            <button id="tab-circ" onclick="switchTab('circunferencia')"
+                class="tab-active flex-1 min-w-[120px] py-4 px-2 text-sm text-center border-b-4 transition-all duration-200"
+                role="tab">Circunferencia</button>
+            <button id="tab-para" onclick="switchTab('parabola')"
+                class="tab-inactive flex-1 min-w-[120px] py-4 px-2 text-sm text-center border-b-4 transition-all duration-200"
+                role="tab">Parábola</button>
+            <button id="tab-elip" onclick="switchTab('elipse')"
+                class="tab-inactive flex-1 min-w-[120px] py-4 px-2 text-sm text-center border-b-4 transition-all duration-200"
+                role="tab">Elipse</button>
+            <button id="tab-hipe" onclick="switchTab('hiperbola')"
+                class="tab-inactive flex-1 min-w-[120px] py-4 px-2 text-sm text-center border-b-4 transition-all duration-200"
+                role="tab">Hipérbola</button>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-content" class="flex-1 w-full max-w-4xl mx-auto p-4 lg:p-8">
+        <div id="content-container" class="space-y-8 pb-20"></div>
+    </main>
+
+    <!-- Data Structure & Logic -->
+    <script>
+        const conicData = {
+            circunferencia: {
+                teoria: {
+                    definicion: "Lugar geométrico de los puntos que equidistan de un punto fijo llamado centro.",
+                    ecuaciones: [
+                        "Ordinaria: $$(x-h)^2 + (y-k)^2 = r^2$$",
+                        "General: $$x^2 + y^2 + Dx + Ey + F = 0$$"
+                    ],
+                    elementos: ["Centro $(h,k)$", "Radio $r$"]
+                },
+                ejemplos: [
+                    {
+                        titulo: "Ejemplo 1: De Ordinaria a General",
+                        pasos: [
+                            "Dada la ecuación: $$(x-2)^2 + (y-3)^2 = 16$$",
+                            "Identificamos Centro $(2,3)$ y Radio $r = \\sqrt{16} = 4$.",
+                            "Desarrollamos los binomios: $$(x^2 - 4x + 4) + (y^2 - 6y + 9) = 16$$",
+                            "Ordenamos y simplificamos: $$x^2 + y^2 - 4x - 6y + 13 - 16 = 0$$",
+                            "Ecuación General: $$x^2 + y^2 - 4x - 6y - 3 = 0$$"
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 2: De General a Ordinaria",
+                        pasos: [
+                            "Dada la ecuación: $$x^2 + y^2 + 2x - 8y - 8 = 0$$",
+                            "Agrupamos términos: $$(x^2 + 2x) + (y^2 - 8y) = 8$$",
+                            "Completamos cuadrados: $$(x^2 + 2x + 1) + (y^2 - 8y + 16) = 8 + 1 + 16$$",
+                            "Ecuación Ordinaria: $$(x+1)^2 + (y-4)^2 = 25$$",
+                            "Centro $(-1,4)$ y Radio $r = 5$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 3: Origen",
+                        pasos: [
+                            "Dada la ecuación: $$x^2 + y^2 = 9$$",
+                            "Al no tener términos en $x$ e $y$, el centro es el origen.",
+                            "Centro $(0,0)$ y Radio $r = 3$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 4: Fracciones",
+                        pasos: [
+                            "Dada: $$(x-0)^2 + (y+2)^2 = \\frac{25}{4}$$",
+                            "Centro $(0,-2)$. El radio es la raíz de $\\frac{25}{4}$.",
+                            "Radio $r = \\frac{5}{2} = 2.5$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 5: General con coeficiente",
+                        pasos: [
+                            "Dada: $$2x^2 + 2y^2 - 12x + 20y + 18 = 0$$",
+                            "Dividimos todo entre 2: $$x^2 + y^2 - 6x + 10y + 9 = 0$$",
+                            "Completamos cuadrados: $$(x-3)^2 + (y+5)^2 = -9 + 9 + 25$$",
+                            "Ordinaria: $$(x-3)^2 + (y+5)^2 = 25$$. Centro $(3,-5)$, $r=5$."
+                        ]
+                    }
+                ],
+                ejercicios: [
+                    { eq: "$$(x-4)^2 + (y-1)^2 = 36$$", ans_h: 4, ans_k: 1, ans_r: 6, pasos: "Centro $(4,1)$, Radio $r = \\sqrt{36} = 6$" },
+                    { eq: "$$(x+5)^2 + (y-2)^2 = 49$$", ans_h: -5, ans_k: 2, ans_r: 7, pasos: "Centro $(-5,2)$, Radio $r = \\sqrt{49} = 7$" },
+                    { eq: "$$x^2 + y^2 - 8x + 6y = 0$$", ans_h: 4, ans_k: -3, ans_r: 5, pasos: "$(x-4)^2 + (y+3)^2 = 16 + 9 = 25$. Centro $(4,-3)$, $r=5$" },
+                    { eq: "$$x^2 + (y+7)^2 = 81$$", ans_h: 0, ans_k: -7, ans_r: 9, pasos: "Centro $(0,-7)$, Radio $r = \\sqrt{81} = 9$" },
+                    { eq: "$$x^2 + y^2 + 10x - 4y + 20 = 0$$", ans_h: -5, ans_k: 2, ans_r: 3, pasos: "$(x+5)^2 + (y-2)^2 = -20 + 25 + 4 = 9$. Centro $(-5,2)$, $r=3$" }
+                ]
+            },
+            parabola: {
+                teoria: {
+                    definicion: "Lugar geométrico de los puntos que equidistan de un punto fijo (Foco) y una recta fija (Directriz).",
+                    ecuaciones: [
+                        "Vertical: $$(x-h)^2 = 4p(y-k)$$",
+                        "Horizontal: $$(y-k)^2 = 4p(x-h)$$"
+                    ],
+                    elementos: ["Vértice $V(h,k)$", "Foco $F$", "Parámetro $p$", "Lado Recto $LR = |4p|$", "Directriz"]
+                },
+                ejemplos: [
+                    {
+                        titulo: "Ejemplo 1: Vertical abre arriba",
+                        pasos: [
+                            "Dada: $$(x-1)^2 = 8(y-2)$$",
+                            "Vértice $(1,2)$. Forma $(x-h)^2 = 4p(y-k)$, entonces $4p=8 \\Rightarrow p=2$.",
+                            "Como la $x$ está al cuadrado y $p>0$, es vertical y abre hacia arriba.",
+                            "Foco: $F(1, 2+2) = (1,4)$. Directriz: $y = 2-2 \\Rightarrow y=0$.",
+                            "Lado Recto: $LR = |8| = 8$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 2: Horizontal abre izquierda",
+                        pasos: [
+                            "Dada: $$(y+3)^2 = -12(x-4)$$",
+                            "Vértice $(4,-3)$. $4p=-12 \\Rightarrow p=-3$.",
+                            "Horizontal (la $y$ al cuadrado). Abre a la izquierda ($p<0$).",
+                            "Foco: $F(4-3, -3) = (1,-3)$. Directriz: $x = 4 - (-3) \\Rightarrow x=7$.",
+                            "Lado Recto: $LR = |-12| = 12$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 3: De General a Ordinaria",
+                        pasos: [
+                            "Dada: $$x^2 - 4x - 12y - 32 = 0$$",
+                            "Dejamos $x$ de un lado: $$x^2 - 4x = 12y + 32$$",
+                            "Completamos el cuadrado de $x$: $$x^2 - 4x + 4 = 12y + 32 + 4$$",
+                            "$$(x-2)^2 = 12y + 36$$",
+                            "Factorizamos la derecha: $$(x-2)^2 = 12(y+3)$$",
+                            "Vértice $(2,-3)$, $4p=12 \\Rightarrow p=3$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 4: Vértice en el Origen",
+                        pasos: [
+                            "Dada: $$y^2 = 16x$$",
+                            "Vértice $(0,0)$. $4p=16 \\Rightarrow p=4$.",
+                            "Horizontal hacia la derecha. Foco $(4,0)$, Directriz $x=-4$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 5: Coeficiente principal no unitario",
+                        pasos: [
+                            "Dada: $$2y^2 - 8y + 8x + 24 = 0$$",
+                            "Dividimos entre 2: $$y^2 - 4y + 4x + 12 = 0$$",
+                            "Agrupamos y completamos: $$y^2 - 4y + 4 = -4x - 12 + 4$$",
+                            "$$(y-2)^2 = -4x - 8 \\Rightarrow (y-2)^2 = -4(x+2)$$",
+                            "Vértice $(-2,2)$, $4p=-4 \\Rightarrow p=-1$ (Abre izquierda)."
+                        ]
+                    }
+                ],
+                ejercicios: [
+                    { eq: "$$(x-3)^2 = 12(y-1)$$", ans_h: 3, ans_k: 1, ans_p: 3, ans_lr: 12, pasos: "Vértice $(3,1)$. $4p=12 \\Rightarrow p=3$. $LR=12$." },
+                    { eq: "$$(y+2)^2 = -16(x-5)$$", ans_h: 5, ans_k: -2, ans_p: -4, ans_lr: 16, pasos: "Vértice $(5,-2)$. $4p=-16 \\Rightarrow p=-4$. $LR=|-16|=16$." },
+                    { eq: "$$x^2 = -8(y+4)$$", ans_h: 0, ans_k: -4, ans_p: -2, ans_lr: 8, pasos: "Vértice $(0,-4)$. $4p=-8 \\Rightarrow p=-2$. $LR=|-8|=8$." },
+                    { eq: "$$y^2 - 6y - 8x + 25 = 0$$", ans_h: 2, ans_k: 3, ans_p: 2, ans_lr: 8, pasos: "$y^2-6y+9 = 8x-25+9 \\Rightarrow (y-3)^2 = 8(x-2)$. $V(2,3), p=2, LR=8$." },
+                    { eq: "$$x^2 + 10x - 20y + 65 = 0$$", ans_h: -5, ans_k: 2, ans_p: 5, ans_lr: 20, pasos: "$x^2+10x+25 = 20y-65+25 \\Rightarrow (x+5)^2 = 20(y-2)$. $V(-5,2), p=5, LR=20$." }
+                ]
+            },
+            elipse: {
+                teoria: {
+                    definicion: "Lugar geométrico de los puntos cuya suma de distancias a dos puntos fijos (Focos) es constante ($2a$).",
+                    ecuaciones: [
+                        "Horizontal: $$\\frac{(x-h)^2}{a^2} + \\frac{(y-k)^2}{b^2} = 1$$ $(a > b)$",
+                        "Vertical: $$\\frac{(x-h)^2}{b^2} + \\frac{(y-k)^2}{a^2} = 1$$ $(a > b)$"
+                    ],
+                    elementos: ["Centro $C(h,k)$", "Eje Mayor $2a$", "Eje Menor $2b$", "Distancia Focal $2c$", "Relación: $a^2 = b^2 + c^2$"]
+                },
+                ejemplos: [
+                    {
+                        titulo: "Ejemplo 1: Horizontal con centro en origen",
+                        pasos: [
+                            "Dada: $$\\frac{x^2}{25} + \\frac{y^2}{9} = 1$$",
+                            "Centro $(0,0)$. El mayor denominador está bajo $x$, es horizontal.",
+                            "$a^2 = 25 \\Rightarrow a=5$. Eje mayor $= 2(5) = 10$.",
+                            "$b^2 = 9 \\Rightarrow b=3$. Eje menor $= 2(3) = 6$.",
+                            "Calculamos $c$: $c = \\sqrt{a^2 - b^2} = \\sqrt{25 - 9} = \\sqrt{16} = 4$.",
+                            "Focos: $(\\pm 4, 0)$. Vértices: $(\\pm 5, 0)$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 2: Vertical desplazada",
+                        pasos: [
+                            "Dada: $$\\frac{(x-2)^2}{16} + \\frac{(y+1)^2}{169} = 1$$",
+                            "Centro $(2,-1)$. El mayor denominador está bajo $y$, es vertical.",
+                            "$a^2 = 169 \\Rightarrow a=13$. $b^2 = 16 \\Rightarrow b=4$.",
+                            "$c = \\sqrt{169 - 16} = \\sqrt{153}$.",
+                            "Eje mayor $= 26$. Eje menor $= 8$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 3: Ecuación General a Ordinaria",
+                        pasos: [
+                            "Dada: $$9x^2 + 25y^2 - 18x + 100y - 116 = 0$$",
+                            "Agrupamos y factorizamos coeficientes: $$9(x^2 - 2x) + 25(y^2 + 4y) = 116$$",
+                            "Completamos cuadrados: $$9(x^2 - 2x + 1) + 25(y^2 + 4y + 4) = 116 + 9(1) + 25(4)$$",
+                            "$$9(x-1)^2 + 25(y+2)^2 = 225$$",
+                            "Dividimos todo entre 225: $$\\frac{(x-1)^2}{25} + \\frac{(y+2)^2}{9} = 1$$",
+                            "Centro $(1,-2)$. $a=5, b=3, c=4$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 4: Lado Recto",
+                        pasos: [
+                            "Dada la elipse con $a=5$ y $b=3$.",
+                            "La fórmula del Lado Recto es $LR = \\frac{2b^2}{a}$.",
+                            "Sustituimos: $LR = \\frac{2(3^2)}{5} = \\frac{18}{5} = 3.6$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 5: Identificación de Ejes",
+                        pasos: [
+                            "Dada: $$16x^2 + 9y^2 = 144$$",
+                            "Dividimos entre 144: $$\\frac{x^2}{9} + \\frac{y^2}{16} = 1$$",
+                            "Vertical porque $16 > 9$. $a^2=16 \\Rightarrow a=4$, $b^2=9 \\Rightarrow b=3$."
+                        ]
+                    }
+                ],
+                ejercicios: [
+                    { eq: "$$\\frac{(x-1)^2}{25} + \\frac{(y-2)^2}{16} = 1$$", ans_h: 1, ans_k: 2, ans_a: 5, ans_b: 4, pasos: "Centro $(1,2)$, $a=\\sqrt{25}=5$, $b=\\sqrt{16}=4$" },
+                    { eq: "$$\\frac{(x+3)^2}{9} + \\frac{(y+4)^2}{25} = 1$$", ans_h: -3, ans_k: -4, ans_a: 5, ans_b: 3, pasos: "Centro $(-3,-4)$, $a=\\sqrt{25}=5$ (vertical), $b=\\sqrt{9}=3$" },
+                    { eq: "$$\\frac{x^2}{169} + \\frac{y^2}{25} = 1$$", ans_h: 0, ans_k: 0, ans_a: 13, ans_b: 5, pasos: "Centro $(0,0)$, $a=\\sqrt{169}=13$, $b=\\sqrt{25}=5$" },
+                    { eq: "$$16x^2 + 25y^2 - 32x - 150y - 159 = 0$$", ans_h: 1, ans_k: 3, ans_a: 5, ans_b: 4, pasos: "$16(x^2-2x+1) + 25(y^2-6y+9) = 159+16+225 \\Rightarrow \\frac{(x-1)^2}{25}+\\frac{(y-3)^2}{16}=1$. $C(1,3), a=5, b=4$." },
+                    { eq: "$$9x^2 + 16y^2 + 36x - 32y - 92 = 0$$", ans_h: -2, ans_k: 1, ans_a: 4, ans_b: 3, pasos: "$9(x^2+4x+4) + 16(y^2-2y+1) = 92+36+16 \\Rightarrow \\frac{(x+2)^2}{16}+\\frac{(y-1)^2}{9}=1$. $C(-2,1), a=4, b=3$." }
+                ]
+            },
+            hiperbola: {
+                teoria: {
+                    definicion: "Lugar geométrico de los puntos cuya diferencia de distancias a dos puntos fijos (Focos) en valor absoluto es constante ($2a$).",
+                    ecuaciones: [
+                        "Horizontal: $$\\frac{(x-h)^2}{a^2} - \\frac{(y-k)^2}{b^2} = 1$$",
+                        "Vertical: $$\\frac{(y-k)^2}{a^2} - \\frac{(x-h)^2}{b^2} = 1$$"
+                    ],
+                    elementos: ["Centro $C(h,k)$", "Eje Transverso $2a$", "Eje Conjugado $2b$", "Distancia Focal $2c$", "Relación: $c^2 = a^2 + b^2$"]
+                },
+                ejemplos: [
+                    {
+                        titulo: "Ejemplo 1: Horizontal en el Origen",
+                        pasos: [
+                            "Dada: $$\\frac{x^2}{16} - \\frac{y^2}{9} = 1$$",
+                            "Centro $(0,0)$. Como el término positivo es el de $x$, es una hipérbola horizontal.",
+                            "$a^2 = 16 \\Rightarrow a=4$. (Semieje transverso).",
+                            "$b^2 = 9 \\Rightarrow b=3$. (Semieje conjugado).",
+                            "Calculamos $c$: $c = \\sqrt{a^2 + b^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5$.",
+                            "Focos: $(\\pm 5, 0)$. Vértices transversos: $(\\pm 4, 0)$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 2: Vertical desplazada",
+                        pasos: [
+                            "Dada: $$\\frac{(y-2)^2}{25} - \\frac{(x+1)^2}{144} = 1$$",
+                            "El término positivo es el de $y$, por lo tanto, es vertical.",
+                            "El Centro se extrae cambiando los signos de $(x-h)$ e $(y-k)$: $C(-1,2)$.",
+                            "$a^2 = 25 \\Rightarrow a=5$ (Siempre bajo el término positivo).",
+                            "$b^2 = 144 \\Rightarrow b=12$.",
+                            "Calculamos la distancia focal: $c = \\sqrt{25 + 144} = \\sqrt{169} = 13$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 3: General a Ordinaria (Horizontal)",
+                        pasos: [
+                            "Dada: $$9x^2 - 16y^2 - 18x - 64y - 199 = 0$$",
+                            "Agrupamos y factorizamos: $$9(x^2 - 2x) - 16(y^2 + 4y) = 199$$",
+                            "Completamos cuadrados (¡cuidado con el signo negativo!):",
+                            "$$9(x^2 - 2x + 1) - 16(y^2 + 4y + 4) = 199 + 9(1) - 16(4)$$",
+                            "$$9(x-1)^2 - 16(y+2)^2 = 199 + 9 - 64$$",
+                            "$$9(x-1)^2 - 16(y+2)^2 = 144$$",
+                            "Dividimos todo entre 144: $$\\frac{(x-1)^2}{16} - \\frac{(y+2)^2}{9} = 1$$. Centro $(1,-2)$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 4: General a Ordinaria (Vertical)",
+                        pasos: [
+                            "Dada: $$25y^2 - 4x^2 + 150y + 16x + 109 = 0$$",
+                            "Ordenamos $y$ primero: $$25(y^2 + 6y) - 4(x^2 - 4x) = -109$$",
+                            "Completamos cuadrados: $$25(y^2 + 6y + 9) - 4(x^2 - 4x + 4) = -109 + 225 - 16$$",
+                            "$$25(y+3)^2 - 4(x-2)^2 = 100$$",
+                            "Dividimos todo entre 100: $$\\frac{(y+3)^2}{4} - \\frac{(x-2)^2}{25} = 1$$",
+                            "Centro $(2,-3)$. Es vertical, $a=2, b=5$."
+                        ]
+                    },
+                    {
+                        titulo: "Ejemplo 5: Hipérbola Equilátera",
+                        pasos: [
+                            "Dada: $$x^2 - y^2 - 8x + 10y - 25 = 0$$",
+                            "Agrupamos: $$(x^2 - 8x) - (y^2 - 10y) = 25$$",
+                            "Completamos: $$(x^2 - 8x + 16) - (y^2 - 10y + 25) = 25 + 16 - 25$$",
+                            "$$(x-4)^2 - (y-5)^2 = 16$$",
+                            "Dividimos entre 16: $$\\frac{(x-4)^2}{16} - \\frac{(y-5)^2}{16} = 1$$",
+                            "Cuando $a=b$, se llama hipérbola equilátera. Aquí $a=4, b=4$."
+                        ]
+                    }
+                ],
+                ejercicios: [
+                    { eq: "$$\\frac{(x-4)^2}{9} - \\frac{(y-1)^2}{16} = 1$$", ans_h: 4, ans_k: 1, ans_a: 3, ans_b: 4, pasos: "Término $x$ positivo (Horizontal). Centro $(4,1)$, $a=\\sqrt{9}=3$, $b=\\sqrt{16}=4$." },
+                    { eq: "$$\\frac{(y+3)^2}{25} - \\frac{(x+2)^2}{144} = 1$$", ans_h: -2, ans_k: -3, ans_a: 5, ans_b: 12, pasos: "Término $y$ positivo (Vertical). Centro $(-2,-3)$, $a=\\sqrt{25}=5$, $b=\\sqrt{144}=12$." },
+                    { eq: "$$16x^2 - 9y^2 - 32x - 54y - 209 = 0$$", ans_h: 1, ans_k: -3, ans_a: 3, ans_b: 4, pasos: "$16(x^2-2x+1) - 9(y^2+6y+9) = 209+16-81 \\Rightarrow \\frac{(x-1)^2}{9} - \\frac{(y+3)^2}{16} = 1$. $C(1,-3), a=3, b=4$." },
+                    { eq: "$$25y^2 - 4x^2 - 50y + 32x - 139 = 0$$", ans_h: 4, ans_k: 1, ans_a: 2, ans_b: 5, pasos: "$25(y^2-2y+1) - 4(x^2-8x+16) = 139+25-64 = 100 \\Rightarrow \\frac{(y-1)^2}{4} - \\frac{(x-4)^2}{25} = 1$. $C(4,1), a=2, b=5$." },
+                    { eq: "$$x^2 - y^2 + 10x + 12y - 2 = 0$$", ans_h: -5, ans_k: 6, ans_a: 3, ans_b: 3, pasos: "$(x^2+10x+25) - (y^2-12y+36) = 2+25-36 = -9 \\Rightarrow \\frac{(y-6)^2}{9} - \\frac{(x+5)^2}{9} = 1$. (Vertical Equilátera). $C(-5,6), a=3, b=3$." }
+                ]
+            }
+        };
+
+        // ==========================================
+        // RENDERIZADO DOM Y NAVEGACIÓN
+        // ==========================================
+        function renderContent(conicName) {
+            const data = conicData[conicName];
+            const container = document.getElementById('content-container');
+
+            let html = `
+                <!-- SECCIÓN DE TEORÍA -->
+                <section class="bg-surface rounded-2xl p-5 shadow-lg border border-slate-700/50 animate-fade-in">
+                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Teoría y Ecuaciones
+                    </h2>
+                    <p class="text-slate-300 leading-relaxed mb-5 text-sm md:text-base">${data.teoria.definicion}</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                        <div class="bg-obsidian/80 p-4 rounded-xl border border-slate-700/50">
+                            <h3 class="text-accent font-bold mb-3 text-xs uppercase tracking-widest">Formularios</h3>
+                            <ul class="space-y-4">
+                                ${data.teoria.ecuaciones.map(eq => `
+                                    <li class="overflow-x-auto hide-scrollbar pb-1 text-sm text-slate-200">${eq}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-obsidian/80 p-4 rounded-xl border border-slate-700/50">
+                            <h3 class="text-warning font-bold mb-3 text-xs uppercase tracking-widest">Elementos Clave</h3>
+                            <ul class="space-y-3">
+                                ${data.teoria.elementos.map(el => `
+                                    <li class="flex items-start gap-3 text-sm text-slate-300">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-warning mt-1.5 flex-shrink-0"></div>
+                                        <span class="overflow-x-auto hide-scrollbar pb-1">${el}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN DE EJEMPLOS GUIADOS -->
+                <section class="mt-8 animate-fade-in" style="animation-delay: 100ms;">
+                    <h2 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Ejemplos Guiados
+                    </h2>
+                    <div class="space-y-5">
+                        ${data.ejemplos.map((ej, index) => `
+                            <div class="bg-surface rounded-2xl p-5 shadow-lg border border-slate-700/50 relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-1 h-full bg-primary/80"></div>
+                                <h3 class="text-lg font-bold text-white mb-4 ml-1">${ej.titulo}</h3>
+                                <div class="space-y-4">
+                                    ${ej.pasos.map((paso, i) => `
+                                        <div class="flex gap-3">
+                                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-800 border border-slate-600 text-slate-300 flex items-center justify-center text-xs font-bold mt-0.5">${i + 1}</div>
+                                            <div class="text-slate-300 overflow-x-auto hide-scrollbar pb-2 text-sm md:text-base leading-relaxed w-full">${paso}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+                
+                <!-- CONTENEDOR PARA LA PRÁCTICA -->
+                <section id="practica-container" class="mt-8"></section>
+            `;
+
+            container.innerHTML = html;
+
+            renderMathInElement(container, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ],
+                throwOnError: false,
+                errorColor: "#ef4444"
+            });
+
+            renderPractica(conicName);
+        }
+
+        function switchTab(conicName) {
+            ['circunferencia', 'parabola', 'elipse', 'hiperbola'].forEach(tab => {
+                const btn = document.getElementById(`tab-${tab.substring(0, 4)}`);
+                if (tab === conicName) {
+                    btn.classList.replace('tab-inactive', 'tab-active');
+                    btn.setAttribute('aria-selected', 'true');
+                } else {
+                    btn.classList.replace('tab-active', 'tab-inactive');
+                    btn.setAttribute('aria-selected', 'false');
+                }
+            });
+            renderContent(conicName);
+        }
+
+        // ==========================================
+        // MOTOR DE PRÁCTICA Y EVALUACIÓN
+        // ==========================================
+        function generarInputsPractica(conicName, index) {
+            let campos = [];
+            if (conicName === 'circunferencia') {
+                campos = [{ id: 'h', label: 'h' }, { id: 'k', label: 'k' }, { id: 'r', label: 'r' }];
+            } else if (conicName === 'parabola') {
+                campos = [{ id: 'h', label: 'h' }, { id: 'k', label: 'k' }, { id: 'p', label: 'p' }, { id: 'lr', label: 'LR' }];
+            } else if (conicName === 'elipse' || conicName === 'hiperbola') {
+                campos = [{ id: 'h', label: 'h' }, { id: 'k', label: 'k' }, { id: 'a', label: 'a' }, { id: 'b', label: 'b' }];
+            }
+
+            return campos.map(c => `
+                <div class="flex flex-col">
+                    <label class="text-xs text-slate-400 font-bold mb-1 ml-1 text-center" for="input-${conicName}-${index}-${c.id}">${c.label}</label>
+                    <input type="number" step="any" id="input-${conicName}-${index}-${c.id}"
+                           class="bg-obsidian border border-slate-600 rounded-xl px-2 py-3 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all text-center text-lg w-full shadow-inner"
+                           placeholder="0">
+                </div>
+            `).join('');
+        }
+
+        function renderPractica(conicName) {
+            const data = conicData[conicName].ejercicios;
+            const container = document.getElementById('practica-container');
+
+            container.innerHTML = `
+                <div class="bg-surface rounded-2xl p-5 shadow-lg border border-slate-700/50 animate-fade-in">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-2xl font-bold text-accent flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Práctica y Evaluación
+                        </h2>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-6 border-b border-slate-700/50 pb-4">Ingresa los elementos para cada ecuación. Necesitas acertar 4 de 5 (80%) para aprobar y guardar tu progreso.</p>
+
+                    <div class="space-y-6">
+                        ${data.map((ej, i) => `
+                            <div class="bg-obsidian/40 rounded-xl p-4 border border-slate-700/50 relative" id="ejercicio-card-${i}">
+                                <div class="absolute top-2 left-2 bg-slate-800 text-slate-400 text-xs font-bold px-2 py-1 rounded-md">Q${i + 1}</div>
+                                <div class="mb-4 mt-2 text-center overflow-x-auto hide-scrollbar text-lg py-2">${ej.eq}</div>
+                                <div class="grid grid-cols-${conicName === 'circunferencia' ? '3' : '4'} gap-2 sm:gap-4 mb-4">
+                                    ${generarInputsPractica(conicName, i)}
+                                </div>
+                                <div id="feedback-${i}" class="min-h-[24px]"></div>
+                                
+                                <details class="group bg-slate-800/80 rounded-lg mt-2 border border-slate-700 hidden-details" id="solucion-${i}">
+                                    <summary class="cursor-pointer px-4 py-3 text-sm font-bold text-slate-300 flex justify-between items-center list-none select-none">
+                                        <span>Desarrollo Analítico Oculto</span>
+                                        <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </summary>
+                                    <div class="px-4 pb-4 pt-2 text-sm text-slate-300 border-t border-slate-700 overflow-x-auto hide-scrollbar bg-obsidian/50 rounded-b-lg">
+                                        ${ej.pasos}
+                                    </div>
+                                </details>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div id="resultado-final" class="hidden mt-6 p-4 rounded-xl text-center font-bold text-lg transition-all"></div>
+
+                    <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                        <button id="btn-evaluar" onclick="evaluarPractica('${conicName}')" class="flex-1 bg-gradient-to-r from-primary to-indigo-600 text-white font-bold py-4 rounded-xl shadow-[0_0_15px_rgba(99,102,241,0.4)] hover:shadow-[0_0_25px_rgba(99,102,241,0.6)] active:scale-[0.98] transition-all text-lg flex justify-center items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Calificar Ejercicios
+                        </button>
+                        <button onclick="renderPractica('${conicName}')" class="flex-1 bg-slate-700 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-slate-600 active:scale-[0.98] transition-all text-lg flex justify-center items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            Reintento en Caliente
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            renderMathInElement(container, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ]
+            });
+        }
+
+        async function evaluarPractica(conicName) {
+            const data = conicData[conicName].ejercicios;
+            let aciertos = 0;
+
+            // Validar que todo esté contestado ANTES de bloquear campos
+            const inputsCard = [...document.querySelectorAll('#practica-container input')];
+            const vacio = inputsCard.find(inp => inp.value.trim() === '');
+            if (vacio) {
+                const resVacio = document.getElementById('resultado-final');
+                resVacio.className = 'mt-6 p-4 rounded-xl text-center font-bold text-base border bg-warning/20 text-warning border-warning/50';
+                resVacio.textContent = 'Completa todos los campos de los 5 ejercicios antes de calificar.';
+                vacio.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                vacio.focus({ preventScroll: true });
+                return;
+            }
+
+            const btnEvaluar = document.getElementById('btn-evaluar');
+            btnEvaluar.disabled = true;
+            btnEvaluar.classList.add('opacity-50', 'cursor-not-allowed');
+
+            data.forEach((ej, i) => {
+                let isCorrect = true;
+                let campos = [];
+                if (conicName === 'circunferencia') campos = ['h', 'k', 'r'];
+                if (conicName === 'parabola') campos = ['h', 'k', 'p', 'lr'];
+                if (conicName === 'elipse' || conicName === 'hiperbola') campos = ['h', 'k', 'a', 'b'];
+
+                campos.forEach(c => {
+                    const inputEl = document.getElementById(`input-${conicName}-${i}-${c}`);
+                    const userVal = parseFloat(inputEl.value);
+                    const realVal = ej[`ans_${c}`];
+
+                    inputEl.classList.remove('border-slate-600', 'bg-obsidian', 'border-danger', 'bg-danger/10', 'border-accent', 'bg-accent/10');
+
+                    if (isNaN(userVal) || userVal !== realVal) {
+                        isCorrect = false;
+                        inputEl.classList.add('border-danger', 'bg-danger/20', 'text-red-200');
+                    } else {
+                        inputEl.classList.add('border-accent', 'bg-accent/20', 'text-green-200');
+                    }
+                    inputEl.disabled = true;
+                });
+
+                const feedback = document.getElementById(`feedback-${i}`);
+                const solucion = document.getElementById(`solucion-${i}`);
+
+                if (isCorrect) {
+                    aciertos++;
+                    feedback.innerHTML = `<span class="text-accent text-sm font-bold flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> ¡Elementos identificados correctamente!</span>`;
+                } else {
+                    feedback.innerHTML = `<span class="text-danger text-sm font-bold flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Hay errores. Revisa el procedimiento.</span>`;
+                }
+
+                solucion.open = true;
+            });
+
+            const resBox = document.getElementById('resultado-final');
+            resBox.classList.remove('hidden', 'bg-danger/20', 'text-danger', 'border-danger/50', 'bg-accent/20', 'text-accent', 'border-accent/50', 'bg-warning/20', 'text-warning', 'border-warning/50');
+            resBox.classList.add('border');
+
+            const scorePercent = (aciertos / 5) * 100;
+
+            if (aciertos >= 4) {
+                resBox.classList.add('bg-accent/20', 'text-accent', 'border-accent/50');
+                resBox.innerHTML = `🌟 ¡Excelente! Aprobaste con ${aciertos}/5 (${scorePercent}%). <span id="save-status" class="block text-sm font-semibold mt-1 opacity-90">Guardando progreso...</span>`;
+
+                let estado = 'local';
+                if (window.guardarProgresoFirebase) {
+                    estado = await window.guardarProgresoFirebase(conicName, scorePercent, aciertos);
+                }
+                const st = document.getElementById('save-status');
+                if (st) {
+                    st.textContent = estado === 'ok' ? '✓ Progreso guardado en tu cuenta.'
+                        : estado === 'error' ? '✖ No se pudo guardar el progreso (error de conexión).'
+                        : '⚠ Evaluado localmente (inicia sesión para guardar tu progreso).';
+                }
+            } else {
+                resBox.classList.add('bg-danger/20', 'text-danger', 'border-danger/50');
+                resBox.innerHTML = `⚠️ Puntuación: ${aciertos}/5 (${scorePercent}%). Necesitas 80% (4/5) para aprobar. Revisa los pasos y usa el "Reintento en Caliente".`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('circunferencia');
+        });
+    </script>
+
+    <!-- ========================================== -->
+    <!-- FIREBASE SDK V10 MODULAR                   -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWi_ko-0i-esAuNiO5EIQe-gThnQ1-iaM",
+            authDomain: "calculointegral-2601b.firebaseapp.com",
+            projectId: "calculointegral-2601b",
+            storageBucket: "calculointegral-2601b.firebasestorage.app",
+            messagingSenderId: "818910932073",
+            appId: "1:818910932073:web:b7e2e4bbd4033d250386f8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // IMPORTANTE: no se usa signInAnonymously. La app corre dentro de la plataforma (mismo origen),
+        // así que reutiliza la sesión del alumno; un login anónimo la reemplazaría.
+        onAuthStateChanged(auth, (user) => {
+            window.currentUserUID = user ? user.uid : null;
+            const statusIcon = document.getElementById('auth-status');
+            if (statusIcon && user) {
+                statusIcon.classList.replace('bg-slate-700', 'bg-accent/20');
+                statusIcon.classList.replace('border-slate-600', 'border-accent');
+                statusIcon.querySelector('svg').classList.replace('text-slate-400', 'text-accent');
+            }
+            console.log(user ? `Sesión activa: ${user.uid}` : 'Modo local (sin sesión activa).');
+        });
+
+        // Devuelve 'ok' | 'local' | 'error'
+        window.guardarProgresoFirebase = async (moduloId, score, aciertos) => {
+            if (!window.currentUserUID) return 'local';
+            try {
+                const ref = doc(db, "estudiantes", window.currentUserUID, "progreso_sesiones", `sesion_conicas_${moduloId}`);
+                await setDoc(ref, {
+                    tema: `Cónicas: ${moduloId}`,
+                    aciertos: aciertos,
+                    calificacion: score,
+                    umbralAprobatorio: 4,
+                    resultado: "Aprobado",
+                    ultimaPractica: serverTimestamp()
+                }, { merge: true });
+                return 'ok';
+            } catch (error) {
+                console.error("[Firebase] Error al guardar progreso:", error);
+                return 'error';
+            }
+        };
+    </script>
+</body>
+
+</html>
